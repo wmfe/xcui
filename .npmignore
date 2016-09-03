@@ -1,0 +1,16 @@
+build/
+demo/
+node_modules/
+examples/
+test/
+/src/*.vue
+/src/*.js
+/src/*.html
+/src/assets/
+/src/demos/
+favicon.ico
+logo.png
+CNAME
+circle.yml
+bower.json
+/assets/
