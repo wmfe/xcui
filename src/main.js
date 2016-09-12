@@ -13,7 +13,6 @@ import Paginations from './demos/paginations';
 import Loading from './demos/loading';
 import Popover from './demos/popover';
 import Autocomplete from './demos/autocomplete';
-import EchartsDemo from './demos/echarts';
 import TagDemo from './demos/tag';
 import datepicker from './demos/datepicker';
 import Select from './demos/select.vue';
@@ -47,11 +46,6 @@ router.map({
             '/component/autocomplete': {
                 component(resolve) {
                     resolve(Autocomplete);
-                }
-            },
-            '/component/echarts': {
-                component(resolve) {
-                    resolve(EchartsDemo);
                 }
             },
             '/component/tag': {
