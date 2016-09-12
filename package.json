@@ -47,7 +47,6 @@
     "connect-history-api-fallback": "^1.1.0",
     "copy-webpack-plugin": "^1.1.1",
     "css-loader": "^0.23.0",
-    "echarts": "^3.2.2",
     "eslint": "^2.5.1",
     "eslint-config-standard": "^5.1.0",
     "eslint-friendly-formatter": "^1.2.2",
