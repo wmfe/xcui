@@ -40,7 +40,7 @@
 |-----|-----|-----|-----|----|
 |max-value|Number|100|最大值|可选|
 |min-value|Number|1|最小值|可选|
-|default-value|String|空字符串|默认显示数值|可选|
+|input-value|String|空字符串|默认显示数值|可选|
 |step| Number| 1|增减步长|可选|
 |is-disable|Boolean|false|是否禁用键盘输入|可选|
 |class-name| String|空字符串|自定义样式|可选|
