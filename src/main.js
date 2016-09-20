@@ -17,6 +17,7 @@ import TagDemo from './demos/tag';
 import datepicker from './demos/datepicker';
 import Select from './demos/select.vue';
 import Toaster from './demos/toaster';
+import InputNumber from './demos/inputNumber';
 
 Vue.use(Router);
 Vue.use(VueResource);
@@ -71,6 +72,11 @@ router.map({
             '/component/toaster': {
                 component(resolve) {
                     resolve(Toaster);
+                }
+            },
+            '/component/inputNumber': {
+                component(resolve) {
+                    resolve(InputNumber);
                 }
             }
         }
