@@ -30,6 +30,9 @@
             <li>
                  <a v-link="{ path: '/component/toaster' }" href="javascript:;">Toaster</a>
             </li>
+            <li>
+                 <a v-link="{ path: '/component/inputNumber' }" href="javascript:;">InputNumber</a>
+            </li>
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
