@@ -92,7 +92,7 @@
                 this.getLocalSug();
             },
             dataText() {
-                this.onInput()
+                this.onInput();
             }
         },
         methods: {
