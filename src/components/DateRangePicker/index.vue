@@ -486,15 +486,25 @@
                     if (me.value > me.otherValue) {
                         me.otherValue = me.value;
                     }
-                    else if (me.otherValue.split(me.sep)[1] > monthEnd + 1) {
+                    else if (me.getYearMonth(me.otherValue) > (me.getYearMonth(me.value) + 1)) {
                         monthEnd = monthEnd + 1;
                     }
                 }
-                else if (me.right && me.value < me.otherValue) {
-                    me.otherValue = me.value;
+                else if (me.right) {
+                    if (me.value < me.otherValue) {
+                        me.otherValue = me.value;
+                    }
+                    else if (me.getYearMonth(me.value) > (me.getYearMonth(me.otherValue) + 1)) {
+                        monthStar = monthStar - 1;
+                    }
                 }
                 me.$parent.renderStar = me.output([me.year, monthStar, params.day, me.hour, me.minute, me.second]);
                 me.$parent.renderEnd = me.output([me.year, monthEnd, params.day, me.hour, me.minute, me.second]);
+            },
+            getYearMonth(date) {
+                let me = this;
+                let dates = date.split(me.sep);
+                return dates[0] * 12 + dates[1];
             },
             getValueParams(timeCur) {
                 let me = this;
@@ -552,12 +562,24 @@
                             otherTime = me.output([me.year, month, me.day, me.hour, me.minute, me.second]);
                             otherTime = otherTime > me.otherValue ? me.otherValue : otherTime > me.end ? me.end : otherTime;
                         }
+                        else {
+                            let bg = me.begin;
+                            month = me.month - me.dateLimit.months;
+                            otherTime = me.output([me.year, month, me.day, me.hour, me.minute, me.second]);
+                            otherTime = otherTime < me.otherValue ? me.otherValue : otherTime < bg ? bg : otherTime;
+                        }
                     }
                     else if (this.dateLimit.hasOwnProperty('days')) {
                         let day = me.day + me.dateLimit.days;
                         if (!me.right) {
                             otherTime = me.output([me.year, me.month, day, me.hour, me.minute, me.second]);
                             otherTime = otherTime > me.otherValue ? me.otherValue : otherTime > me.end ? me.end : otherTime;
+                        }
+                        else {
+                            let bg = me.begin;
+                            day = me.day - me.dateLimit.days;
+                            otherTime = me.output([me.year, me.month, day, me.hour, me.minute, me.second]);
+                            otherTime = otherTime < me.otherValue ? me.otherValue : otherTime < bg ? bg : otherTime;
                         }
                     }
                 }
