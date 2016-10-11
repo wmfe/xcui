@@ -73,6 +73,9 @@
     | show | Boolean | false | 控制日历选择框显示隐藏 | 双向绑定 | 必选 |
     | value | String | 无 | 默认日期 | 双向绑定 | 可选 |
     | type| String | date | date: 日历  datetime: 日期＋时间 time: 时间| 否 | 可选 |
+    | hourRange | Number | 1 | 小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12） | 否 | 可选 |
+    | minuteRange | Number | 1 | 分可选值设置（例如：值为 20 时，分可选值为 20，40，60） | 否 | 可选 |
+    | secondRange | Number | 1 | 秒可选值设置（例如：值为 20 时，分可选值为 20，40，60） | 否 | 可选 |
     | btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
     | inputClass | Array | 无 | 日历input输入框的样式，class名字 | 否 | 可选 |
 </template>
