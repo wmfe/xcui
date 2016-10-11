@@ -15,6 +15,7 @@ import Popover from './demos/popover';
 import Autocomplete from './demos/autocomplete';
 import TagDemo from './demos/tag';
 import datepicker from './demos/datepicker';
+import daterangepicker from './demos/daterangepicker';
 import Select from './demos/select.vue';
 import Toaster from './demos/toaster';
 import InputNumber from './demos/inputNumber';
@@ -57,6 +58,11 @@ router.map({
             '/component/datepicker': {
                 component(resolve) {
                     resolve(datepicker);
+                }
+            },
+            '/component/daterangepicker': {
+                component(resolve) {
+                    resolve(daterangepicker);
                 }
             },
             '/component/select': {

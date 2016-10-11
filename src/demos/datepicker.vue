@@ -14,6 +14,7 @@
                   :value.sync = "date.value"
                   :sep = 'date.sep'
                   :type="date.type"
+                  :x="date.x"
                   ></datepicker>
         </example>
         <example title="日历+时间选择">
@@ -32,7 +33,6 @@
                 <datepicker
                       :value.sync = "time.value"
                       :btn-show="datetime.btnShow"
-                      :sep = 'time.sep'
                       :type="time.type"
                       ></datepicker>
             </div>
