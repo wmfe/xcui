@@ -68,6 +68,7 @@
     | hourRange | Number | 1 | 小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12） | 否 | 可选 |
     | minuteRange | Number | 1 | 分可选值设置（例如：值为 20 时，分可选值为 20，40，60） | 否 | 可选 |
     | secondRange | Number | 1 | 秒可选值设置（例如：值为 20 时，分可选值为 20，40，60） | 否 | 可选 |
+    | dateLimit | object | null | 可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天| 否 | 可选 |
     | color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 否 | 可选 |
 
     ### 时间选择 type: time
@@ -102,12 +103,12 @@ export default {
             datetime: {
                 show: false,
                 type: 'datetime',
-                value: '2016-09-08 00:02:03 至 2016-10-08 00:00:00',
+                value: '2016-09-08 00:02:03 至 2016-09-13 00:00:00',
                 sep: '-',
                 begin: '2015-12-20',
                 end: '2016-11-20',
                 dateLimit: {
-                    months: 1
+                    days: 5
                 },
                 color: '#f00'
             },

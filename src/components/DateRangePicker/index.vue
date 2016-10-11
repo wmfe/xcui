@@ -570,14 +570,14 @@
                         }
                     }
                     else if (this.dateLimit.hasOwnProperty('days')) {
-                        let day = me.day + me.dateLimit.days;
+                        let day = parseInt(me.day, 10) + me.dateLimit.days;
                         if (!me.right) {
                             otherTime = me.output([me.year, me.month, day, me.hour, me.minute, me.second]);
                             otherTime = otherTime > me.otherValue ? me.otherValue : otherTime > me.end ? me.end : otherTime;
                         }
                         else {
                             let bg = me.begin;
-                            day = me.day - me.dateLimit.days;
+                            day = parseInt(me.day, 10) - me.dateLimit.days;
                             otherTime = me.output([me.year, me.month, day, me.hour, me.minute, me.second]);
                             otherTime = otherTime < me.otherValue ? me.otherValue : otherTime < bg ? bg : otherTime;
                         }
