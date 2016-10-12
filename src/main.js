@@ -18,6 +18,7 @@ import datepicker from './demos/datepicker';
 import daterangepicker from './demos/daterangepicker';
 import Select from './demos/select.vue';
 import Toaster from './demos/toaster';
+import Modal from './demos/modal';
 import InputNumber from './demos/inputNumber';
 
 Vue.use(Router);
@@ -78,6 +79,11 @@ router.map({
             '/component/toaster': {
                 component(resolve) {
                     resolve(Toaster);
+                }
+            },
+            '/component/modal': {
+                component(resolve) {
+                    resolve(Modal);
                 }
             },
             '/component/inputNumber': {

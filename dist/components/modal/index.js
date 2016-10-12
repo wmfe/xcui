@@ -29,52 +29,17 @@
             value: true
         });
         exports.default = {
-            name: "xcui-tag",
-            props: {
-                text: {
-                    type: String,
-                    "default": ""
-                },
-                closeable: {
-                    type: Boolean,
-                    "default": false
-                },
-                disabled: {
-                    type: Boolean,
-                    "default": false
-                },
-                showTag: {
-                    type: Boolean,
-                    "default": true
-                },
-                classname: {
-                    type: String,
-                    "default": ""
-                },
-                key: {
-                    type: String,
-                    "default": ""
-                },
-                aftercloseisshow: {
-                    type: Boolean,
-                    "default": false,
-                    twoway: true
-                }
+            data: function data() {
+                return {};
             },
-            methods: {
-                onCloseClick: function onCloseClick() {
-                    this.$emit("close");
-                    if (this.aftercloseisshow === false) {
-                        this.showTag = false;
-                    }
-                },
-                onClick: function onClick() {
-                    this.$emit("click");
-                }
-            }
+            computed: {},
+            ready: function ready() {},
+            attached: function attached() {},
+            methods: {},
+            components: {}
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class="xcui-tag {{disabled?\'xcui-disabled\':\'\'}}" @click=onClick v-if=showTag _v-7390f4ba=""> <div class="{{classname!=\'\' ? classname : \'\'}}" _v-7390f4ba=""> <span class=xcui-tag-text _v-7390f4ba=""><slot _v-7390f4ba=""></slot>{{text}}<span _v-7390f4ba=""> <i class=xcui-cross v-if=closeable @click.stop=onCloseClick _v-7390f4ba=""></i> </span></span></div> </div> ';
+        module.exports = " ";
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(2);
