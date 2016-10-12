@@ -15,7 +15,7 @@ module.exports = {
         'indent': [2, 4, { "SwitchCase": 1 }],
         'comma-dangle': 2,
         'no-debugger': 2,
-        'no-console': 1,
+        'no-console': 0,
         'no-constant-condition': 1,
         'comma-dangle': 2,
         'no-debugger': 2,

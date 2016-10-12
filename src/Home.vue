@@ -22,6 +22,9 @@
                 <a v-link="{ path: '/component/datepicker' }" href="javascript:;">DatePicker</a>
             </li>
             <li>
+                <a v-link="{ path: '/component/daterangepicker' }" href="javascript:;">DateRangePicker</a>
+            </li>
+            <li>
                 <a v-link="{ path: '/component/select' }" href="javascript:;">Select</a>
             </li>
             <li>
@@ -32,6 +35,9 @@
             </li>
             <li>
                  <a v-link="{ path: '/component/modal' }" href="javascript:;">Modal</a>
+            </li>
+            <li>
+                 <a v-link="{ path: '/component/inputNumber' }" href="javascript:;">InputNumber</a>
             </li>
         </ul>
     </div>
