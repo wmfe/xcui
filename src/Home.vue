@@ -36,6 +36,12 @@
             <li>
                  <a v-link="{ path: '/component/inputNumber' }" href="javascript:;">InputNumber</a>
             </li>
+            <li>
+                <a v-link="{ path: '/component/progress' }" href="javascript:;">Progress</a>
+            </li>
+            <li>
+                <a v-link="{ path: '/component/pageloading' }" href="javascript:;">PageLoading</a>
+            </li>
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
