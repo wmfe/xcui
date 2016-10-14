@@ -1,11 +1,8 @@
 <template>
-  <div id="wrapper">
+  <div id="wrapper" class="row">
     <!-- sidebar-wrapper -->
-    <div id="sidebar-wrapper">
+    <div id="sidebar-wrapper" class="col-md-2">
         <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">XCUI Components</a>
-            </li>
             <li>
                 <a v-link="{ path: '/component/paginations' }" href="javascript:;">Paginations</a>
             </li>
@@ -46,14 +43,13 @@
     </div>
     <!-- /#sidebar-wrapper -->
     <!-- Page Content -->
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" class="col-md-10">
        <router-view
       transition="xcui-fade"
       transition-mode="out-in"></router-view>
     </div>
     <!-- /#page-content-wrapper -->
   </div>
-
 </template>
 
 <script>

@@ -179,7 +179,6 @@
                 }
             },
             deactivate() {
-                console.log('deactivate');
                 if (!this.isOpen) {
                     return;
                 }
@@ -450,7 +449,7 @@
         z-index: 10;
         &-open {
             .xcui-select-selection {
-                border-color: #57c5f7 !important;
+                border-color: #66afe9 !important;
                 outline: 0;
                 box-shadow: 0 0 0 2px #2db7f533;
             }
