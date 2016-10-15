@@ -14,30 +14,27 @@
     <demo>
         <example title="日历选择">
             <daterangepicker
-                  :show.sync="date.show"
                   :value.sync = "date.value"
                   :sep = 'date.sep'
                   :type="date.type"
                   :begin="date.begin"
-                  :end.sync="date.end"
+                  :end="date.end"
                   :date-limit="date.dateLimit"
                   ></daterangepicker>
         </example>
         <example title="日期 + 时间选择">
             <daterangepicker
-                  :show.sync="datetime.show"
                   :value.sync = "datetime.value"
                   :sep = 'datetime.sep'
                   :type="datetime.type"
                   :begin="datetime.begin"
-                  :end.sync="datetime.end"
+                  :end="datetime.end"
                   :date-limit="datetime.dateLimit"
                   :btn-show="datetime.btnShow"
                   ></daterangepicker>
         </example>
         <example title="时间选择">
             <daterangepicker
-                  :show.sync="time.show"
                   :value.sync = "time.value"
                   :type="time.type"
                   :input-class="time.inputClass"
@@ -51,8 +48,7 @@
 
     | 名字 | 类型 | 默认 | 描述 | 是否双向绑定 | 是否必选 |
     |-----|-----|-----|-----|----|----|
-    | show | Boolean | false | 控制日历选择框显示隐藏 | 双向绑定 | 必选 |
-    | value | String | 无 | 默认日期 | 双向绑定 | 可选 |
+    | value | String | 无 | 默认日期 | 双向绑定 | 必选 |
     | type| String | date | date: 日历  datetime: 日期＋时间 time: 时间| 否 | 可选 |
     | sep | String | - | 日期格式设置 例如：2016-08-06 | 否 | 可选 |
     | begin | String | 无 | 可选日期范围的开始时间 | 否 | 可选|
@@ -86,7 +82,6 @@ export default {
     data() {
         return {
             date: {
-                show: false,
                 type: 'date',
                 value: '2016-09-08 至 2016-10-08',
                 sep: '-',
@@ -98,7 +93,6 @@ export default {
                 color: '#f00'
             },
             datetime: {
-                show: false,
                 type: 'datetime',
                 value: '2016-09-08 00:02:03 至 2016-09-13 00:00:00',
                 sep: '-',
@@ -111,7 +105,6 @@ export default {
                 btnShow: true
             },
             time: {
-                show: false,
                 type: 'time',
                 value: '04:02:03 至 00:02:03',
                 inputClass: ['col-md-6'],
