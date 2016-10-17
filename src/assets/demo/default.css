@@ -1,9 +1,9 @@
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
-article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary {
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
     display: block
 }
 
-audio,canvas,video {
+audio, canvas, video {
     display: inline-block
 }
 
@@ -12,7 +12,7 @@ audio:not([controls]) {
     height: 0
 }
 
-[hidden],template {
+[hidden], template {
     display: none
 }
 
@@ -34,7 +34,7 @@ a:focus {
     outline: thin dotted
 }
 
-a:active,a:hover {
+a:active, a:hover {
     outline: 0
 }
 
@@ -47,7 +47,7 @@ abbr[title] {
     border-bottom: 1px dotted
 }
 
-b,strong {
+b, strong {
     font-weight: bold
 }
 
@@ -66,11 +66,10 @@ mark {
     color: #000
 }
 
-code,kbd,pre,samp {
-    font-family: monospace,serif;
+code, kbd, pre, samp {
+    font-family: monospace, serif;
     font-size: 1em
 }
-
 
 q {
     quotes: "\201C" "\201D" "\2018" "\2019"
@@ -80,7 +79,7 @@ small {
     font-size: 80%
 }
 
-sub,sup {
+sub, sup {
     font-size: 75%;
     line-height: 0;
     position: relative;
@@ -118,30 +117,30 @@ legend {
     padding: 0
 }
 
-button,input,select,textarea {
+button, input, select, textarea {
     font-family: inherit;
     font-size: 100%;
     margin: 0
 }
 
-button,input {
+button, input {
     line-height: normal
 }
 
-button,select {
+button, select {
     text-transform: none
 }
 
-button,html input[type="button"],input[type="reset"],input[type="submit"] {
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
     -webkit-appearance: button;
     cursor: pointer
 }
 
-button[disabled],html input[disabled] {
+button[disabled], html input[disabled] {
     cursor: default
 }
 
-input[type="checkbox"],input[type="radio"] {
+input[type="checkbox"], input[type="radio"] {
     box-sizing: border-box;
     padding: 0
 }
@@ -153,11 +152,11 @@ input[type="search"] {
     box-sizing: content-box
 }
 
-input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration {
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none
 }
 
-button::-moz-focus-inner,input::-moz-focus-inner {
+button::-moz-focus-inner, input::-moz-focus-inner {
     border: 0;
     padding: 0
 }
@@ -172,7 +171,7 @@ table {
     border-spacing: 0
 }
 
-*,*:before,*:after {
+*, *:before, *:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box
@@ -180,18 +179,18 @@ table {
 
 html {
     font-size: 62.5%;
-    -webkit-tap-highlight-color: rgba(0,0,0,0)
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 }
 
 body {
-    font-family:"Source Sans Pro", "Microsoft Yahei", sans-serif;
+    font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
     font-size: 15px;
     line-height: 1.45;
     color: #3f3f3f;
     background-color: #f6f6f6
 }
 
-input,button,select,textarea {
+input, button, select, textarea {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit
@@ -202,7 +201,7 @@ a {
     text-decoration: none
 }
 
-a:hover,a:focus {
+a:hover, a:focus {
     color: #216da3;
     text-decoration: underline
 }
@@ -248,7 +247,7 @@ hr {
     margin-top: 21px;
     margin-bottom: 21px;
     border: 0;
-    border-top: 1px solid rgba(128,128,128,0.1)
+    border-top: 1px solid rgba(128, 128, 128, 0.1)
 }
 
 .sr-only {
@@ -262,58 +261,58 @@ hr {
     border: 0
 }
 
-h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: inherit;
     font-weight: 300;
     line-height: 1.1;
     color: inherit
 }
 
-h1 small,h2 small,h3 small,h4 small,h5 small,h6 small,.h1 small,.h2 small,.h3 small,.h4 small,.h5 small,.h6 small,h1 .small,h2 .small,h3 .small,h4 .small,h5 .small,h6 .small,.h1 .small,.h2 .small,.h3 .small,.h4 .small,.h5 .small,.h6 .small {
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
     font-weight: normal;
     line-height: 1;
     color: #999
 }
 
-h1,h2,h3 {
+h1, h2, h3 {
     margin-top: 21px;
     margin-bottom: 10.5px
 }
 
-h1 small,h2 small,h3 small,h1 .small,h2 .small,h3 .small {
+h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
     font-size: 65%
 }
 
-h4,h5,h6 {
+h4, h5, h6 {
     margin-top: 10.5px;
     margin-bottom: 10.5px
 }
 
-h4 small,h5 small,h6 small,h4 .small,h5 .small,h6 .small {
+h4 small, h5 small, h6 small, h4 .small, h5 .small, h6 .small {
     font-size: 75%
 }
 
-h1,.h1 {
+h1, .h1 {
     font-size: 39px
 }
 
-h2,.h2 {
+h2, .h2 {
     font-size: 32px
 }
 
-h3,.h3 {
+h3, .h3 {
     font-size: 26px
 }
 
-h4,.h4 {
+h4, .h4 {
     font-size: 19px
 }
 
-h5,.h5 {
+h5, .h5 {
     font-size: 15px
 }
 
-h6,.h6 {
+h6, .h6 {
     font-size: 13px
 }
 
@@ -330,11 +329,11 @@ p {
 
 @media (min-width: 768px) {
     .lead {
-        font-size:22.5px
+        font-size: 22.5px
     }
 }
 
-small,.small {
+small, .small {
     font-size: 85%
 }
 
@@ -404,12 +403,12 @@ cite {
     border-bottom: 1px solid #f6f6f6
 }
 
-ul,ol {
+ul, ol {
     margin-top: 0;
     margin-bottom: 10.5px
 }
 
-ul ul,ol ul,ul ol,ol ol {
+ul ul, ol ul, ul ol, ol ol {
     margin-bottom: 0
 }
 
@@ -423,13 +422,13 @@ ul ul,ol ul,ul ol,ol ol {
     list-style: none
 }
 
-.list-inline>li {
+.list-inline > li {
     display: inline-block;
     padding-left: 5px;
     padding-right: 5px
 }
 
-.list-inline>li:first-child {
+.list-inline > li:first-child {
     padding-left: 0
 }
 
@@ -438,7 +437,7 @@ dl {
     margin-bottom: 21px
 }
 
-dt,dd {
+dt, dd {
     line-height: 1.45
 }
 
@@ -452,7 +451,7 @@ dd {
 
 @media (min-width: 768px) {
     .dl-horizontal dt {
-        float:left;
+        float: left;
         width: 160px;
         clear: left;
         text-align: right;
@@ -465,7 +464,7 @@ dd {
         margin-left: 180px
     }
 
-    .dl-horizontal dd:before,.dl-horizontal dd:after {
+    .dl-horizontal dd:before, .dl-horizontal dd:after {
         content: " ";
         display: table
     }
@@ -474,7 +473,7 @@ dd {
         clear: both
     }
 
-    .dl-horizontal dd:before,.dl-horizontal dd:after {
+    .dl-horizontal dd:before, .dl-horizontal dd:after {
         content: " ";
         display: table
     }
@@ -484,7 +483,7 @@ dd {
     }
 }
 
-abbr[title],abbr[data-original-title] {
+abbr[title], abbr[data-original-title] {
     cursor: help;
     border-bottom: 1px dotted #999
 }
@@ -497,7 +496,7 @@ abbr[title],abbr[data-original-title] {
 blockquote {
     padding: 10.5px 21px;
     margin: 0 0 21px;
-    border-left: 5px solid rgba(128,128,128,0.075)
+    border-left: 5px solid rgba(128, 128, 128, 0.075)
 }
 
 blockquote p {
@@ -510,36 +509,36 @@ blockquote p:last-child {
     margin-bottom: 0
 }
 
-blockquote small,blockquote .small {
+blockquote small, blockquote .small {
     display: block;
     line-height: 1.45;
     color: #999
 }
 
-blockquote small:before,blockquote .small:before {
+blockquote small:before, blockquote .small:before {
     content: '\2014 \00A0'
 }
 
 blockquote.pull-right {
     padding-right: 15px;
     padding-left: 0;
-    border-right: 5px solid rgba(128,128,128,0.075);
+    border-right: 5px solid rgba(128, 128, 128, 0.075);
     border-left: 0
 }
 
-blockquote.pull-right p,blockquote.pull-right small,blockquote.pull-right .small {
+blockquote.pull-right p, blockquote.pull-right small, blockquote.pull-right .small {
     text-align: right
 }
 
-blockquote.pull-right small:before,blockquote.pull-right .small:before {
+blockquote.pull-right small:before, blockquote.pull-right .small:before {
     content: ''
 }
 
-blockquote.pull-right small:after,blockquote.pull-right .small:after {
+blockquote.pull-right small:after, blockquote.pull-right .small:after {
     content: '\00A0 \2014'
 }
 
-blockquote:before,blockquote:after {
+blockquote:before, blockquote:after {
     content: ""
 }
 
@@ -549,15 +548,15 @@ address {
     line-height: 1.45
 }
 
-code,kbd,pre,samp {
-    font-family: "Source Code Pro",monospace
+code, kbd, pre, samp {
+    font-family: "Source Code Pro", monospace
 }
 
 code {
     padding: 2px 4px;
     font-size: 90%;
     color: #3f3f3f;
-    background-color: rgba(128,128,128,0.075);
+    background-color: rgba(128, 128, 128, 0.075);
     white-space: nowrap;
     border-radius: 4px
 }
@@ -571,8 +570,8 @@ pre {
     word-break: break-all;
     word-wrap: break-word;
     color: #333;
-    background-color: rgba(128,128,128,0.05);
-    border: 1px solid rgba(128,128,128,0.075);
+    background-color: rgba(128, 128, 128, 0.05);
+    border: 1px solid rgba(128, 128, 128, 0.075);
     border-radius: 4px
 }
 
@@ -585,17 +584,15 @@ pre code {
     border-radius: 0
 }
 
-
-
 @font-face {
     font-family: 'fontello';
     src: url('../font/fontello.eot?30431834');
-    src: url('../font/fontello.eot?30431834#iefix') format('embedded-opentype'),url('../font/fontello.woff?30431834') format('woff'),url('../font/fontello.ttf?30431834') format('truetype'),url('../font/fontello.svg?30431834#fontello') format('svg');
+    src: url('../font/fontello.eot?30431834#iefix') format('embedded-opentype'), url('../font/fontello.woff?30431834') format('woff'), url('../font/fontello.ttf?30431834') format('truetype'), url('../font/fontello.svg?30431834#fontello') format('svg');
     font-weight: normal;
     font-style: normal
 }
 
-[class^="icon-"]:before,[class*=" icon-"]:before {
+[class^="icon-"]:before, [class*=" icon-"]:before {
     font-family: "fontello";
     font-style: normal;
     font-weight: normal;
@@ -635,7 +632,7 @@ pre code {
     color: #066
 }
 
-.pun,.opn,.clo {
+.pun, .opn, .clo {
     color: #660
 }
 
@@ -651,7 +648,7 @@ pre code {
     color: #080
 }
 
-.dec,.var {
+.dec, .var {
     color: #606
 }
 
@@ -669,17 +666,17 @@ ol.linenums {
     margin-bottom: 0
 }
 
-li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 {
+li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     list-style-type: none
 }
 
-li.L1,li.L3,li.L5,li.L7,li.L9 {
+li.L1, li.L3, li.L5, li.L7, li.L9 {
     background: #eee
 }
 
 @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg#fontello') format('svg'),url('./font/fontello.woff') format('woff');
+    src: url('../font/fontello.svg#fontello') format('svg'), url('./font/fontello.woff') format('woff');
     font-weight: normal;
     font-style: normal
 }
@@ -688,56 +685,56 @@ li.L1,li.L3,li.L5,li.L7,li.L9 {
     font-family: 'Source Sans Pro';
     font-style: normal;
     font-weight: 300;
-    src: local('Source Sans Pro Light'),local('SourceSansPro-Light'),url("./font/SourceSansPro-Light-webfont.woff") format('woff')
+    src: local('Source Sans Pro Light'), local('SourceSansPro-Light'), url("./font/SourceSansPro-Light-webfont.woff") format('woff')
 }
 
 @font-face {
     font-family: 'Source Sans Pro';
     font-style: normal;
     font-weight: 400;
-    src: local('Source Sans Pro'),local('SourceSansPro'),url("./font/SourceSansPro-Regular-webfont.woff") format('woff')
+    src: local('Source Sans Pro'), local('SourceSansPro'), url("./font/SourceSansPro-Regular-webfont.woff") format('woff')
 }
 
 @font-face {
     font-family: 'Source Sans Pro';
     font-style: normal;
     font-weight: 700;
-    src: local('Source Sans Pro Bold'),local('SourceSansPro-Bold'),url("./font/SourceSansPro-Bold-webfont.woff") format('woff')
+    src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url("./font/SourceSansPro-Bold-webfont.woff") format('woff')
 }
 
 @font-face {
     font-family: 'Source Sans Pro';
     font-style: italic;
     font-weight: 300;
-    src: local('Source Sans Pro Light Italic'),local('SourceSansProLight-Italic'),url("./font/SourceSansPro-LightItalic-webfont.woff") format('woff')
+    src: local('Source Sans Pro Light Italic'), local('SourceSansProLight-Italic'), url("./font/SourceSansPro-LightItalic-webfont.woff") format('woff')
 }
 
 @font-face {
     font-family: 'Source Sans Pro';
     font-style: italic;
     font-weight: 400;
-    src: local('Source Sans Pro Italic'),local('SourceSansPro-Italic'),url("./font/SourceSansPro-Italic-webfont.woff") format('woff')
+    src: local('Source Sans Pro Italic'), local('SourceSansPro-Italic'), url("./font/SourceSansPro-Italic-webfont.woff") format('woff')
 }
 
 @font-face {
     font-family: 'Source Sans Pro';
     font-style: italic;
     font-weight: 700;
-    src: local('Source Sans Pro Bold Italic'),local('SourceSansPro-BoldItalic'),url("./font/SourceSansPro-BoldItalic-webfont.woff") format('woff')
+    src: local('Source Sans Pro Bold Italic'), local('SourceSansPro-BoldItalic'), url("./font/SourceSansPro-BoldItalic-webfont.woff") format('woff')
 }
 
 @font-face {
     font-family: 'Source Code Pro';
     font-style: normal;
     font-weight: 400;
-    src: local('Source Code Pro'),local('SourceCodePro-Regular'),url("./font/SourceCodePro-Regular-webfont.woff") format('woff')
+    src: local('Source Code Pro'), local('SourceCodePro-Regular'), url("./font/SourceCodePro-Regular-webfont.woff") format('woff')
 }
 
 @font-face {
     font-family: 'Source Code Pro';
     font-style: normal;
     font-weight: 700;
-    src: local('Source Code Pro Bold'),local('SourceCodePro-Bold'),url("./font/SourceCodePro-Bold-webfont.woff") format('woff')
+    src: local('Source Code Pro Bold'), local('SourceCodePro-Bold'), url("./font/SourceCodePro-Bold-webfont.woff") format('woff')
 }
 
 .container {
@@ -773,7 +770,7 @@ h6 {
     font-size: .85em
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1, h2, h3, h4, h5, h6 {
     margin: 30px 0;
     text-align: start;
     font-weight: bold;
@@ -783,7 +780,7 @@ pre {
     word-break: break-word
 }
 
-p,pre,pre.prettyprint,blockquote {
+p, pre, pre.prettyprint, blockquote {
     margin: 0 0 1.1em
 }
 
@@ -795,34 +792,34 @@ img {
     max-width: 100%
 }
 
-.sequence-diagram,.flow-chart {
+.sequence-diagram, .flow-chart {
     text-align: center;
     margin-bottom: 1.1em
 }
 
-.sequence-diagram text,.flow-chart text {
+.sequence-diagram text, .flow-chart text {
     font-size: 15px !important;
-    font-family: "Source Sans Pro",sans-serif !important
+    font-family: "Source Sans Pro", sans-serif !important
 }
 
-.sequence-diagram [fill="#ffffff"],.flow-chart [fill="#ffffff"] {
+.sequence-diagram [fill="#ffffff"], .flow-chart [fill="#ffffff"] {
     fill: #f6f6f6
 }
 
-.sequence-diagram [stroke="#000000"],.flow-chart [stroke="#000000"] {
+.sequence-diagram [stroke="#000000"], .flow-chart [stroke="#000000"] {
     stroke: #3f3f3f
 }
 
-.sequence-diagram text[stroke="#000000"],.flow-chart text[stroke="#000000"] {
+.sequence-diagram text[stroke="#000000"], .flow-chart text[stroke="#000000"] {
     stroke: none
 }
 
-.sequence-diagram [fill="#000"],.flow-chart [fill="#000"],.sequence-diagram [fill="#000000"],.flow-chart [fill="#000000"],.sequence-diagram [fill="black"],.flow-chart [fill="black"] {
+.sequence-diagram [fill="#000"], .flow-chart [fill="#000"], .sequence-diagram [fill="#000000"], .flow-chart [fill="#000000"], .sequence-diagram [fill="black"], .flow-chart [fill="black"] {
     fill: #3f3f3f
 }
 
-code,pre {
-    font-family: "Source Code Pro",monospace;
+code, pre {
+    font-family: "Source Code Pro", monospace;
     font-size: .9em
 }
 
@@ -830,18 +827,18 @@ code {
     white-space: normal
 }
 
-pre,pre.prettyprint {
+pre, pre.prettyprint {
     text-align: start;
     border: 0;
     padding: 10px 20px;
     border-radius: 5px
 }
 
-pre code,pre.prettyprint code {
+pre code, pre.prettyprint code {
     background-color: transparent !important
 }
 
-dt,dd {
+dt, dd {
     margin-top: 5px;
     margin-bottom: 5px
 }
@@ -854,7 +851,7 @@ table {
     margin-bottom: 20px
 }
 
-table th,table td {
+table th, table td {
     padding: 8px;
     line-height: 20px;
     vertical-align: top;
@@ -869,17 +866,17 @@ table thead th {
     vertical-align: bottom
 }
 
-table caption+thead tr:first-child th,table caption+thead tr:first-child td,table colgroup+thead tr:first-child th,table colgroup+thead tr:first-child td,table thead:first-child tr:first-child th,table thead:first-child tr:first-child td {
+table caption + thead tr:first-child th, table caption + thead tr:first-child td, table colgroup + thead tr:first-child th, table colgroup + thead tr:first-child td, table thead:first-child tr:first-child th, table thead:first-child tr:first-child td {
     border-top: 0
 }
 
-table tbody+tbody {
+table tbody + tbody {
     border-top: 2px solid #ddd
 }
 
 blockquote {
     border-left-width: 10px;
-    background-color: rgba(128,128,128,0.05);
+    background-color: rgba(128, 128, 128, 0.05);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     padding: 15px 20px
@@ -891,23 +888,23 @@ blockquote p {
     line-height: 1.45
 }
 
-blockquote ul:last-child,blockquote ol:last-child {
+blockquote ul:last-child, blockquote ol:last-child {
     margin-bottom: 0
 }
 
-ul,ol {
+ul, ol {
     margin-bottom: 1.1em
 }
 
-ul ul,ol ul,ul ol,ol ol {
+ul ul, ol ul, ul ol, ol ol {
     margin-bottom: 1.1em
 }
 
 kbd {
     padding: .1em .6em;
-    border: 1px solid rgba(63,63,63,0.25);
-    -webkit-box-shadow: 0 1px 0 rgba(63,63,63,0.25);
-    box-shadow: 0 1px 0 rgba(63,63,63,0.25);
+    border: 1px solid rgba(63, 63, 63, 0.25);
+    -webkit-box-shadow: 0 1px 0 rgba(63, 63, 63, 0.25);
+    box-shadow: 0 1px 0 rgba(63, 63, 63, 0.25);
     font-size: .7em;
     font-family: sans-serif;
     background-color: #fff;
@@ -930,7 +927,7 @@ kbd {
     font-size: .8em
 }
 
-[class^="icon-"],[class*=" icon-"] {
+[class^="icon-"], [class*=" icon-"] {
     display: inline-block;
     line-height: 1.35em;
     vertical-align: middle;
@@ -968,11 +965,11 @@ kbd {
     margin-right: .3em
 }
 
-.icon-comment-alt,.icon-chat {
+.icon-comment-alt, .icon-chat {
     font-size: 92%
 }
 
-.icon-comment-alt:before,.icon-chat:before {
+.icon-comment-alt:before, .icon-chat:before {
     margin-left: .1em;
     margin-right: .4em
 }
@@ -987,7 +984,7 @@ kbd {
     font-size: 104%
 }
 
-[class^="icon-provider-"],[class*=" icon-provider-"] {
+[class^="icon-provider-"], [class*=" icon-provider-"] {
     background-image: url("../img/icons.png");
     width: 18px;
     height: 16px;
@@ -995,16 +992,16 @@ kbd {
     margin-left: 2px
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2),only screen and (min--moz-device-pixel-ratio:2),only screen and (-o-min-device-pixel-ratio:2/1),only screen and (min-device-pixel-ratio:2),only screen and (min-resolution:192dpi),only screen and (min-resolution:2dppx) {
-    [class^="icon-provider-"],[class*=" icon-provider-"] {
-        background-image:url("../img/icons2x.png");
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+    [class^="icon-provider-"], [class*=" icon-provider-"] {
+        background-image: url("../img/icons2x.png");
         background-size: 256px 16px
     }
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2),only screen and (min--moz-device-pixel-ratio:2),only screen and (-o-min-device-pixel-ratio:2/1),only screen and (min-device-pixel-ratio:2),only screen and (min-resolution:192dpi),only screen and (min-resolution:2dppx) {
-    [class^="icon-provider-"],[class*=" icon-provider-"] {
-        background-image:url("../img/icons2x.png");
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+    [class^="icon-provider-"], [class*=" icon-provider-"] {
+        background-image: url("../img/icons2x.png");
         background-size: 256px 16px
     }
 }
@@ -1013,7 +1010,7 @@ kbd {
     background-position: 0 0
 }
 
-.icon-provider-gdrive,.icon-provider-gdrivesec,.icon-provider-gdriveter {
+.icon-provider-gdrive, .icon-provider-gdrivesec, .icon-provider-gdriveter {
     background-position: -18px 0
 }
 
@@ -1021,11 +1018,11 @@ kbd {
     background-position: -37px 0
 }
 
-.icon-provider-github,.icon-provider-gist {
+.icon-provider-github, .icon-provider-gist {
     background-position: -54px 0
 }
 
-.icon-provider-blogger,.icon-provider-bloggerpage {
+.icon-provider-blogger, .icon-provider-bloggerpage {
     background-position: -72px 0
 }
 
@@ -1049,11 +1046,11 @@ kbd {
     background-position: -162px 0
 }
 
-body.rtl #wmd-input,body.rtl #preview-contents,body.rtl .input-file-title,body.rtl .search-bar input,body.rtl .modal-document-manager input,body.rtl .comments-popover,body.rtl .container {
+body.rtl #wmd-input, body.rtl #preview-contents, body.rtl .input-file-title, body.rtl .search-bar input, body.rtl .modal-document-manager input, body.rtl .comments-popover, body.rtl .container {
     direction: rtl
 }
 
-.alertify,.alertify-show,.alertify-log {
+.alertify, .alertify-show, .alertify-log {
     -webkit-transition: all 500ms cubic-bezier(.175, .885, .32, 1.275);
     -moz-transition: all 500ms cubic-bezier(.175, .885, .32, 1.275);
     -ms-transition: all 500ms cubic-bezier(.175, .885, .32, 1.275);
@@ -1108,7 +1105,7 @@ body.rtl #wmd-input,body.rtl #preview-contents,body.rtl .input-file-title,body.r
     display: none
 }
 
-:root *>.alertify-hidden {
+:root * > .alertify-hidden {
     display: block;
     visibility: hidden
 }
@@ -1180,8 +1177,8 @@ body.rtl #wmd-input,body.rtl #preview-contents,body.rtl .input-file-title,body.r
 }
 
 @media only screen and (max-width: 680px) {
-    .alertify,.alertify-logs {
-        width:90%;
+    .alertify, .alertify-logs {
+        width: 90%;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box
@@ -1193,8 +1190,8 @@ body.rtl #wmd-input,body.rtl #preview-contents,body.rtl .input-file-title,body.r
     }
 }
 
-.alertify,.alertify-log {
-    font-family: "Source Sans Pro",sans-serif
+.alertify, .alertify-log {
+    font-family: "Source Sans Pro", sans-serif
 }
 
 .alertify {
@@ -1247,8 +1244,8 @@ body.rtl #wmd-input,body.rtl #preview-contents,body.rtl .input-file-title,body.r
 .alertify-text:focus:focus {
     border-color: #66afe9;
     outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6)
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.6)
 }
 
 .alertify-text:focus:focus {
@@ -1259,7 +1256,7 @@ body.rtl #wmd-input,body.rtl #preview-contents,body.rtl .input-file-title,body.r
 }
 
 .alertify-text:focus:focus {
-    border-color: rgba(79,161,219,0.5);
+    border-color: rgba(79, 161, 219, 0.5);
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.025), 0 0 12px -1px #4fa1db;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.025), 0 0 12px -1px #4fa1db
@@ -1277,7 +1274,7 @@ body.rtl #wmd-input,body.rtl #preview-contents,body.rtl .input-file-title,body.r
     margin-left: 10px
 }
 
-.alertify-button-cancel,.alertify-button-ok {
+.alertify-button-cancel, .alertify-button-ok {
     display: inline-block;
     margin-bottom: 0;
     font-weight: normal;
@@ -1298,43 +1295,43 @@ body.rtl #wmd-input,body.rtl #preview-contents,body.rtl .input-file-title,body.r
     user-select: none
 }
 
-.alertify-button-cancel:focus,.alertify-button-ok:focus {
+.alertify-button-cancel:focus, .alertify-button-ok:focus {
     outline: thin dotted;
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px
 }
 
-.alertify-button-cancel:hover,.alertify-button-ok:hover,.alertify-button-cancel:focus,.alertify-button-ok:focus {
+.alertify-button-cancel:hover, .alertify-button-ok:hover, .alertify-button-cancel:focus, .alertify-button-ok:focus {
     color: #3f3f3f;
     text-decoration: none
 }
 
-.alertify-button-cancel:active,.alertify-button-ok:active,.alertify-button-cancel.active,.alertify-button-ok.active {
+.alertify-button-cancel:active, .alertify-button-ok:active, .alertify-button-cancel.active, .alertify-button-ok.active {
     outline: 0;
     background-image: none;
-    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
-    box-shadow: inset 0 3px 5px rgba(0,0,0,0.125)
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
 }
 
 .alertify-button-cancel {
     color: #3f3f3f;
     background-color: #fff;
-    border-color: rgba(238,238,238,0.75)
+    border-color: rgba(238, 238, 238, 0.75)
 }
 
-.alertify-button-cancel:hover,.alertify-button-cancel:focus,.alertify-button-cancel:active,.alertify-button-cancel.active,.open .dropdown-toggle.alertify-button-cancel {
+.alertify-button-cancel:hover, .alertify-button-cancel:focus, .alertify-button-cancel:active, .alertify-button-cancel.active, .open .dropdown-toggle.alertify-button-cancel {
     color: #3f3f3f;
     background-color: #ebebeb;
-    border-color: rgba(207,207,207,0.75)
+    border-color: rgba(207, 207, 207, 0.75)
 }
 
-.alertify-button-cancel:active,.alertify-button-cancel.active,.open .dropdown-toggle.alertify-button-cancel {
+.alertify-button-cancel:active, .alertify-button-cancel.active, .open .dropdown-toggle.alertify-button-cancel {
     background-image: none
 }
 
-.alertify-button-cancel.disabled,.alertify-button-cancel[disabled],fieldset[disabled] .alertify-button-cancel,.alertify-button-cancel.disabled:hover,.alertify-button-cancel[disabled]:hover,fieldset[disabled] .alertify-button-cancel:hover,.alertify-button-cancel.disabled:focus,.alertify-button-cancel[disabled]:focus,fieldset[disabled] .alertify-button-cancel:focus,.alertify-button-cancel.disabled:active,.alertify-button-cancel[disabled]:active,fieldset[disabled] .alertify-button-cancel:active,.alertify-button-cancel.disabled.active,.alertify-button-cancel[disabled].active,fieldset[disabled] .alertify-button-cancel.active {
+.alertify-button-cancel.disabled, .alertify-button-cancel[disabled], fieldset[disabled] .alertify-button-cancel, .alertify-button-cancel.disabled:hover, .alertify-button-cancel[disabled]:hover, fieldset[disabled] .alertify-button-cancel:hover, .alertify-button-cancel.disabled:focus, .alertify-button-cancel[disabled]:focus, fieldset[disabled] .alertify-button-cancel:focus, .alertify-button-cancel.disabled:active, .alertify-button-cancel[disabled]:active, fieldset[disabled] .alertify-button-cancel:active, .alertify-button-cancel.disabled.active, .alertify-button-cancel[disabled].active, fieldset[disabled] .alertify-button-cancel.active {
     background-color: #fff;
-    border-color: rgba(238,238,238,0.75)
+    border-color: rgba(238, 238, 238, 0.75)
 }
 
 .alertify-button-cancel .badge {
@@ -1345,22 +1342,22 @@ body.rtl #wmd-input,body.rtl #preview-contents,body.rtl .input-file-title,body.r
 .alertify-button-ok {
     color: #fff;
     background-color: #4fa1db;
-    border-color: rgba(128,128,128,0.05)
+    border-color: rgba(128, 128, 128, 0.05)
 }
 
-.alertify-button-ok:hover,.alertify-button-ok:focus,.alertify-button-ok:active,.alertify-button-ok.active,.open .dropdown-toggle.alertify-button-ok {
+.alertify-button-ok:hover, .alertify-button-ok:focus, .alertify-button-ok:active, .alertify-button-ok.active, .open .dropdown-toggle.alertify-button-ok {
     color: #fff;
     background-color: #2d8fd4;
-    border-color: rgba(97,97,97,0.05)
+    border-color: rgba(97, 97, 97, 0.05)
 }
 
-.alertify-button-ok:active,.alertify-button-ok.active,.open .dropdown-toggle.alertify-button-ok {
+.alertify-button-ok:active, .alertify-button-ok.active, .open .dropdown-toggle.alertify-button-ok {
     background-image: none
 }
 
-.alertify-button-ok.disabled,.alertify-button-ok[disabled],fieldset[disabled] .alertify-button-ok,.alertify-button-ok.disabled:hover,.alertify-button-ok[disabled]:hover,fieldset[disabled] .alertify-button-ok:hover,.alertify-button-ok.disabled:focus,.alertify-button-ok[disabled]:focus,fieldset[disabled] .alertify-button-ok:focus,.alertify-button-ok.disabled:active,.alertify-button-ok[disabled]:active,fieldset[disabled] .alertify-button-ok:active,.alertify-button-ok.disabled.active,.alertify-button-ok[disabled].active,fieldset[disabled] .alertify-button-ok.active {
+.alertify-button-ok.disabled, .alertify-button-ok[disabled], fieldset[disabled] .alertify-button-ok, .alertify-button-ok.disabled:hover, .alertify-button-ok[disabled]:hover, fieldset[disabled] .alertify-button-ok:hover, .alertify-button-ok.disabled:focus, .alertify-button-ok[disabled]:focus, fieldset[disabled] .alertify-button-ok:focus, .alertify-button-ok.disabled:active, .alertify-button-ok[disabled]:active, fieldset[disabled] .alertify-button-ok:active, .alertify-button-ok.disabled.active, .alertify-button-ok[disabled].active, fieldset[disabled] .alertify-button-ok.active {
     background-color: #4fa1db;
-    border-color: rgba(128,128,128,0.05)
+    border-color: rgba(128, 128, 128, 0.05)
 }
 
 .alertify-button-ok .badge {
@@ -1373,7 +1370,7 @@ body.rtl #wmd-input,body.rtl #preview-contents,body.rtl .input-file-title,body.r
     padding: 8px 14px;
     border-radius: 4px;
     color: #3a8abf;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     border: 1px solid #bce8f1
 }
 
@@ -1425,11 +1422,11 @@ body.rtl #wmd-input,body.rtl #preview-contents,body.rtl .input-file-title,body.r
     float: right
 }
 
-.popover[class*="tour-"] .popover-navigation *[data-role=prev],.popover[class*="tour-"] .popover-navigation *[data-role=next],.popover[class*="tour-"] .popover-navigation *[data-role=end] {
+.popover[class*="tour-"] .popover-navigation *[data-role=prev], .popover[class*="tour-"] .popover-navigation *[data-role=next], .popover[class*="tour-"] .popover-navigation *[data-role=end] {
     cursor: pointer
 }
 
-.popover[class*="tour-"] .popover-navigation *[data-role=prev].disabled,.popover[class*="tour-"] .popover-navigation *[data-role=next].disabled,.popover[class*="tour-"] .popover-navigation *[data-role=end].disabled {
+.popover[class*="tour-"] .popover-navigation *[data-role=prev].disabled, .popover[class*="tour-"] .popover-navigation *[data-role=next].disabled, .popover[class*="tour-"] .popover-navigation *[data-role=end].disabled {
     cursor: default
 }
 
@@ -1452,7 +1449,7 @@ div.jGrowl {
     position: absolute
 }
 
-body>div.jGrowl {
+body > div.jGrowl {
     position: fixed
 }
 
@@ -1482,18 +1479,19 @@ div.jGrowl.center {
     left: 25%
 }
 
-div.center div.jGrowl-notification,div.center div.jGrowl-closer {
+div.center div.jGrowl-notification, div.center div.jGrowl-closer {
     margin-left: auto;
     margin-right: auto
 }
 
-div.jGrowl div.jGrowl-notification,div.jGrowl div.jGrowl-closer {
+div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
     background-color: #000;
-    zoom:1;width: 235px;
+    zoom: 1;
+    width: 235px;
     padding: 10px;
     margin-top: 5px;
     margin-bottom: 5px;
-    font-family: Tahoma,Arial,Helvetica,sans-serif;
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
     font-size: 1em;
     text-align: left;
     display: none;
@@ -1505,7 +1503,7 @@ div.jGrowl div.jGrowl-notification {
     min-height: 40px
 }
 
-div.jGrowl div.jGrowl-notification,div.jGrowl div.jGrowl-closer {
+div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
     margin: 10px
 }
 
@@ -1546,35 +1544,33 @@ body {
     outline: none !important
 }
 
-
 @font-face {
     font-family: 'PT Sans';
     font-style: normal;
     font-weight: 400;
-    src: local('PT Sans'),local('PTSans'),url("../font/PTSans-Regular-webfont.woff") format('woff')
+    src: local('PT Sans'), local('PTSans'), url("../font/PTSans-Regular-webfont.woff") format('woff')
 }
 
 @font-face {
     font-family: 'PT Sans';
     font-style: normal;
     font-weight: 700;
-    src: local('PT Sans Bold'),local('PTSans-Bold'),url("../font/PTSans-Bold-webfont.woff") format('woff')
+    src: local('PT Sans Bold'), local('PTSans-Bold'), url("../font/PTSans-Bold-webfont.woff") format('woff')
 }
 
 @font-face {
     font-family: 'PT Sans';
     font-style: italic;
     font-weight: 400;
-    src: local('PT Sans Italic'),local('PTSans-Italic'),url("../font/PTSans-Italic-webfont.woff") format('woff')
+    src: local('PT Sans Italic'), local('PTSans-Italic'), url("../font/PTSans-Italic-webfont.woff") format('woff')
 }
 
 @font-face {
     font-family: 'PT Sans';
     font-style: italic;
     font-weight: 700;
-    src: local('PT Sans Bold Italic'),local('PTSans-BoldItalic'),url("../font/PTSans-BoldItalic-webfont.woff") format('woff')
+    src: local('PT Sans Bold Italic'), local('PTSans-BoldItalic'), url("../font/PTSans-BoldItalic-webfont.woff") format('woff')
 }
-
 
 @media print {
     * {
@@ -1582,16 +1578,16 @@ body {
         box-shadow: none !important
     }
 
-    html,body {
+    html, body {
         background: transparent !important;
         overflow: visible !important
     }
 
-    .layout-wrapper-l1>*,.layout-wrapper-l2>*,.layout-wrapper-l3>*,.preview-panel>* {
+    .layout-wrapper-l1 > *, .layout-wrapper-l2 > *, .layout-wrapper-l3 > *, .preview-panel > * {
         display: none !important
     }
 
-    .layout-wrapper-l1,.layout-wrapper-l2,.layout-wrapper-l3,.preview-panel,.preview-container {
+    .layout-wrapper-l1, .layout-wrapper-l2, .layout-wrapper-l3, .preview-panel, .preview-container {
         background: transparent !important;
         display: block !important;
         position: static !important;

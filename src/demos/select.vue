@@ -16,14 +16,12 @@
                      @select="onSelect2"
                      :options="dataSource2">
         </xcui-select>
-        基本模式
     </example>
     <example title="single - 基本模式 options(Object)">
         <xcui-select class-name="select-demo" placeholder="Select one"
                      @change="selectChange"
                      @select="onSelect"
                      :options="dataSource"></xcui-select>
-        基本模式
     </example>
     <example title="自定义label的字段(label='text')">
         <xcui-select class-name="select-demo" placeholder="Select one"
@@ -53,7 +51,6 @@
         <xcui-select class-name="select-demo" placeholder="Select one"
                      :custom-label="reRenderLabel"
                      @change="selectChange2" :options="dataSource"></xcui-select>
-        定制option label展现内容
     </example>
     <example title="定制 option list(option-partial && Vue.partial)">
         <xcui-select class-name="select-demo" placeholder="Select one"
