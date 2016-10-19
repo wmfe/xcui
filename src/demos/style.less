@@ -1,5 +1,4 @@
 #wrapper {
-    padding-left: 0;
     -webkit-transition: all .5s ease;
     -moz-transition: all .5s ease;
     -o-transition: all .5s ease;
@@ -7,21 +6,38 @@
     .toggled {
         padding-left: 250px;
     }
+    &.row{
+        margin-left:0;
+        margin-right:0;
+        padding:20px 40px;
+    }
 }
-
+#header{
+    height:50px;
+    background:#fff;
+    padding-left:50px;
+    border-bottom: 1px solid #f1f1f1;
+    .logo{
+        line-height:50px;
+        font-size:22px;
+        color:#46C3C1;
+    }
+}
 #sidebar-wrapper {
     z-index: 1000;
-    position: fixed;
-    left: 250px;
-    width: 0;
+    //position: fixed;
+    //left: 250px;
+    display: inline-block;
     height: 100%;
-    margin-left: -250px;
-    overflow-y: auto;
+    //margin-left: -250px;
+    // overflow-y: auto;
+    overflow-x:hidden;
     background: #46C3C1;
     -webkit-transition: all .5s ease;
     -moz-transition: all .5s ease;
     -o-transition: all .5s ease;
     transition: all .5s ease;
+    padding:0;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -29,26 +45,27 @@
 }
 
 #page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 15px;
-
+    //width: 100%;
+    //position: absolute;
+    //padding: 15px;
+    background:#fff;
+    //display: inline-block;
 }
 
 #wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -250px;
+    //position: absolute;
+   // margin-right: -250px;
 }
 
 /* Sidebar Styles */
 
 .sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 250px;
+    //position: absolute;
+    //top: 0;
     margin: 0;
     padding: 0;
     list-style: none;
+    overflow-x: hidden!important;
     li {
         text-indent: 20px;
         line-height: 40px;
@@ -65,55 +82,56 @@
             &.focus {
                 text-decoration: none;
             }
-            &.v-link-active{
-                background:#fff;
-                color:#46C3C1;
+            &.v-link-active {
+                background: #fff;
+                color: #46C3C1;
             }
         }
     }
-}
-
-.sidebar-nav {
     .sidebar-brand {
         height: 65px;
         font-size: 18px;
         line-height: 60px;
         a {
-            color: #fff;
+            color: #46C3C1;
+            background:#fff;
             :hover {
                 color: #fff;
-                background: none;
+                background: #46C3C1;
             }
         }
+
     }
+
 }
 
+
 @media (min-width: 768px) {
-    #wrapper {
-        padding-left: 250px;
-    }
-
-    #wrapper.toggled {
-        padding-left: 0;
-    }
-
-    #sidebar-wrapper {
-        width: 250px;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
-
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
-
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
+    //#wrapper {
+    //    //padding-left: 250px;
+    //}
+    //
+    //#wrapper.toggled {
+    //    padding-left: 0;
+    //}
+    //
+    //#sidebar-wrapper {
+    //    width: 250px;
+    //}
+    //
+    //#wrapper.toggled #sidebar-wrapper {
+    //    width: 0;
+    //}
+    //
+    //#page-content-wrapper {
+    //    padding: 20px;
+    //    position: relative;
+    //}
+    //
+    //#wrapper.toggled #page-content-wrapper {
+    //    position: relative;
+    //    //margin-right: 0;
+    //}
 }
 
 // for xcui demo
