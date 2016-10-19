@@ -14,7 +14,6 @@
                   :value.sync = "date.value"
                   :sep = 'date.sep'
                   :type="date.type"
-                  :x="date.x"
                   ></datepicker>
         </example>
         <example title="日历+时间选择">
@@ -49,16 +48,14 @@
     | value | String | 无 | 默认日期 | 双向绑定 | 可选 |
     | type| String | date | date:日历  datetime:日历＋时间 time:时间 | 否 | 可选 |
     | sep | String | - | 日期格式设置 例如：2016-08-06 | 否 | 可选 |
-    | x | Number | 0 | 日历定位的 left 值  | 否 | 可选 |
-    | y | Number | 38 | 日历定位的 top 值 | 否 | 可选 |
     | begin | String | 无 | 单选日历，可选日期范围的开始时间 | 否 | 可选|
     | end | String | 无 | 单选日历，可选日期范围的结束时间 | 否 | 可选|
     | hourRange | Number | 1 | 小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12） | 否 | 可选 |
     | minuteRange | Number | 1 | 分可选值设置（例如：值为 20 时，分可选值为 20，40，60） | 否 | 可选 |
     | secondRange | Number | 1 | 秒可选值设置（例如：值为 20 时，分可选值为 20，40，60） | 否 | 可选 |
     | color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 否 | 可选 |
-    | btn-show | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
-    | input-class | Array | 无 | 日历input输入框的样式，class名字 | 否 | 可选 |
+    | btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
+    | inputClass | Array | 无 | 日历input输入框的样式，class名字 | 否 | 可选 |
 </template>
 <script>
 import datepicker from '../components/datepicker';

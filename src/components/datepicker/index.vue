@@ -4,8 +4,7 @@
         <div @click.stop=""
              @touchstart.stop=""
              class="calendar"
-             v-show="show"
-             :style="{'left':x+'px','top':y+'px'}">
+             v-show="show">
             <div class="calendar-tools" v-if="type!='time'">
                 <i class="glyphicon glyphicon-chevron-left float left"
                    @click="prev"></i>
@@ -104,14 +103,6 @@
                 type: String,
                 twoWay: true,
                 default: ''
-            },
-            x: {
-                type: Number,
-                default: 0
-            },
-            y: {
-                type: Number,
-                default: 38
             },
             begin: {
                 type: String,
@@ -534,6 +525,8 @@
         background: #fff;
         position: absolute;
         z-index:9999;
+        left:0;
+        top:38px;
         border: 1px solid #DEDEDE;
         border-radius: 2px;
         opacity: .95;
