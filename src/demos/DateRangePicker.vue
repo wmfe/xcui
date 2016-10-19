@@ -43,7 +43,7 @@
         </example>
     </demo>
     
-    ### 日历选择，日期＋世界选择 type: date、datetime
+    ### 日历选择，日期＋时间选择 type: date、datetime
     #### Props
 
     | 名字 | 类型 | 默认 | 描述 | 是否双向绑定 | 是否必选 |
