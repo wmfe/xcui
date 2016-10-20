@@ -81,7 +81,8 @@
                                 next();
                             }, speed);
                         }, speed);
-                    } else {
+                    }
+                    else {
                         setTimeout(next, speed);
                     }
                 });
@@ -145,7 +146,6 @@
                 let bar = progress.querySelector(this.barSelector);
                 let perc = fromStart ? '-100' : this.toBarPerc(this.status || 0);
                 let parent = document.querySelector(this.parent);
-                let spinner;
 
                 this.css(bar, {
                     transition: 'all 0 linear',
@@ -173,9 +173,11 @@
 
                 if (this.positionUsing === 'translate3d') {
                     barCSS = { transform: 'translate3d(' + this.toBarPerc(n) + '%,0,0)' };
-                } else if (this.positionUsing === 'translate') {
+                }
+                else if (this.positionUsing === 'translate') {
                     barCSS = { transform: 'translate(' + this.toBarPerc(n) + '%,0)' };
-                } else {
+                }
+                else {
                     barCSS = { 'margin-left': this.toBarPerc(n) + '%' };
                 }
 
@@ -228,12 +230,15 @@
 
                     if (args.length === 0) {
                         for (prop in properties) {
-                            value = properties[prop];
-                            if (value !== undefined && properties.hasOwnProperty(prop)) {
-                                applyCss(element, prop, value);
+                            if (properties.hasOwnProperty(prop)) {
+                                value = properties[prop];
+                                if (value !== undefined && properties.hasOwnProperty(prop)) {
+                                    applyCss(element, prop, value);
+                                }
                             }
                         }
-                    } else {
+                    }
+                    else {
                         applyCss(element, args[1], args[2]);
                     }
                 };
@@ -255,9 +260,6 @@
 
                 element.className = newList.substring(1, newList.length - 1);
             },
-            classList(element) {
-                return (' ' + (element && element.className || '') + ' ').replace(/\s+/gi, ' ');
-            },
             getPositioningCSS() {
                 let bodyStyle = document.body.style;
 
@@ -265,23 +267,27 @@
 
                 if ('WebkitTransform' in bodyStyle) {
                     vendorPrefix = 'Webkit';
-                } else if ('MozTransform' in bodyStyle) {
+                }
+                else if ('MozTransform' in bodyStyle) {
                     vendorPrefix = 'Moz';
-                } else if ('msTransform' in bodyStyle) {
+                }
+                else if ('msTransform' in bodyStyle) {
                     vendorPrefix = 'ms';
-                } else if ('OTransform' in bodyStyle) {
+                }
+                else if ('OTransform' in bodyStyle) {
                     vendorPrefix = 'O';
-                } else {
+                }
+                else {
                     vendorPrefix = '';
                 };
 
                 if (vendorPrefix + 'Perspective' in bodyStyle) {
                     return 'translate3d';
-                } else if (vendorPrefix + 'Transform' in bodyStyle) {
-                    return 'translate';
-                } else {
-                    return 'margin';
                 }
+                else if (vendorPrefix + 'Transform' in bodyStyle) {
+                    return 'translate';
+                }
+                return 'margin';
             },
             toBarPerc(n) {
                 return (-1 + n) * 100;
@@ -306,11 +312,8 @@
             removeElement(element) {
                 element && element.parentNode && element.parentNode.removeChild(element);
             },
-            toBarPerc(n) {
-                return (-1 + n) * 100;
-            },
             hasClass(element, name) {
-                var list = typeof element === 'string' ? element : this.classList(element);
+                let list = typeof element === 'string' ? element : this.classList(element);
                 return list.indexOf(' ' + name + ' ') >= 0;
             },
             classList(element) {
@@ -324,31 +327,35 @@
 
                 if (!n) {
                     return this.start();
-                } else if (n > 1) {
-                    return;
-                } else {
-                    if (typeof amount !== 'number') {
-                        if (n >= 0 && n < 0.25) {
-                            // Start out between 3 - 6% increments
-                            amount = (Math.random() * (5 - 3 + 1) + 3) / 100;
-                        } else if (n >= 0.25 && n < 0.65) {
-                            // increment between 0 - 3%
-                            amount = (Math.random() * 3) / 100;
-                        } else if (n >= 0.65 && n < 0.9) {
-                            // increment between 0 - 2%
-                            amount = (Math.random() * 2) / 100;
-                        } else if (n >= 0.9 && n < 0.99) {
-                            // finally, increment it .5 %
-                            amount = 0.005;
-                        } else {
-                            // after 99%, don't increment:
-                            amount = 0;
-                        }
-                    }
-
-                    n = this.clamp(n + amount, 0, 0.994);
-                    return this.set(n);
                 }
+                else if (n > 1) {
+                    return;
+                }
+                if (typeof amount !== 'number') {
+                    if (n >= 0 && n < 0.25) {
+                        // Start out between 3 - 6% increments
+                        amount = (Math.random() * (5 - 3 + 1) + 3) / 100;
+                    }
+                    else if (n >= 0.25 && n < 0.65) {
+                        // increment between 0 - 3%
+                        amount = (Math.random() * 3) / 100;
+                    }
+                    else if (n >= 0.65 && n < 0.9) {
+                        // increment between 0 - 2%
+                        amount = (Math.random() * 2) / 100;
+                    }
+                    else if (n >= 0.9 && n < 0.99) {
+                        // finally, increment it .5 %
+                        amount = 0.005;
+                    }
+                    else {
+                        // after 99%, don't increment:
+                        amount = 0;
+                    }
+                }
+
+                n = this.clamp(n + amount, 0, 0.994);
+                return this.set(n);
             }
         }
     };
