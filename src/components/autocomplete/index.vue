@@ -13,7 +13,7 @@
                 @keyDown.up="changeCurrent(-1)"
                 @keyDown.down="changeCurrent(1)"
                 @keyDown.enter="onBlur">
-        <ul class="xcui-suggestion-list dropdown-menu" :class="{'show':show}">
+        <ul class="xcui-suggestion-list dropdown-menu" :class="{'xcui-show':show}">
             <li v-for="(index,item) in list" :class="{'current' : currentIndex==index}">
                 <a href="javascript:void(0)" @click="setItem(item)">
                     {{item.text}}
@@ -183,6 +183,9 @@
     .xcui-suggestion{
         position:relative;
         width:100%;
+        .xcui-show{
+            display:block;
+        }
         .xcui-suggestion-list{
             min-width:100%;
             li{
