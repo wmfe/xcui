@@ -20,6 +20,8 @@ import Select from './demos/select.vue';
 import Toaster from './demos/toaster';
 import Modal from './demos/modal';
 import InputNumber from './demos/inputNumber';
+import Progress from './demos/progress';
+import PageLoading from './demos/pageloading';
 
 Vue.use(Router);
 Vue.use(VueResource);
@@ -89,6 +91,16 @@ router.map({
             '/component/inputNumber': {
                 component(resolve) {
                     resolve(InputNumber);
+                }
+            },
+            '/component/progress': {
+                component(resolve) {
+                    resolve(Progress);
+                }
+            },
+            '/component/pageloading': {
+                component(resolve) {
+                    resolve(PageLoading);
                 }
             }
         }

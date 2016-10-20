@@ -11,6 +11,7 @@ import Toaster from './toaster';
 import Select from './select';
 import Loading from './loading';
 import Modal from './modal';
+import Progress from './progress';
 
 const xcui = {
     Pagination,
@@ -21,7 +22,8 @@ const xcui = {
     Toaster,
     Select,
     Loading,
-    Modal
+    Modal,
+    Progress
 };
 
 module.exports = xcui;
