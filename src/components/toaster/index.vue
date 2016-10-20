@@ -55,7 +55,8 @@ export default {
                 });
                 this.timers = [];
                 this.close();
-            } else {
+            }
+            else {
                 this.show = false;
             }
         }
