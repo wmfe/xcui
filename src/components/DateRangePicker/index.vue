@@ -1,50 +1,57 @@
 
 <template>
-    <!-- 双日历 -->
-    <div @click.stop=""
-         @touchstart.stop=""
-         class="calendar double-calendar"
-         v-show="show"
-         :style="{'left':x+'px','top':y+'px'}">
-         <div class="clearfix">
-             <div class="double-calendar-left">
-                <calendar
-                    :type="type"
-                    :value.sync="beginCalenderVal"
-                    :sep="sep"
-                    :other-value.sync="endCalenderVal"
-                    :begin="begin"
-                    :end="end"
-                    :hour-range="hourRange"
-                    :minute-range="minuteRange"
-                    :second-range="secondRange"
-                    :color="color"
-                    :date-limit="dateLimit"
-                    :render-star="renderStar"></calendar>
+    <div class="bg-pr" :class="inputClass">
+        <input class="form-control col-md-3" type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
+        <!-- 双日历 -->
+        <div @click.stop=""
+             @touchstart.stop=""
+             class="calendar double-calendar"
+             v-show="show">
+             <div class="clearfix">
+                 <div class="double-calendar-left">
+                    <calendar
+                        :type="type"
+                        :value.sync="beginCalenderVal"
+                        :sep="sep"
+                        :other-value.sync="endCalenderVal"
+                        :begin="begin"
+                        :end="end"
+                        :hour-range="hourRange"
+                        :minute-range="minuteRange"
+                        :second-range="secondRange"
+                        :color="color"
+                        :date-limit="dateLimit"
+                        :render-star="renderStar"></calendar>
+                 </div>
+                 <div class="double-calendar-right">
+                    <calendar
+                        :type="type"
+                        :value.sync="endCalenderVal"
+                        :sep="sep"
+                        :other-value.sync="beginCalenderVal"
+                        :right="true"
+                        :begin="begin"
+                        :end="end"
+                        :hour-range="hourRange"
+                        :minute-range="minuteRange"
+                        :second-range="secondRange"
+                        :color="color"
+                        :date-limit="dateLimit"
+                        :render-end="renderEnd"></calendar>
+                 </div>
              </div>
-             <div class="double-calendar-right">
-                <calendar
-                    :type="type"
-                    :value.sync="endCalenderVal"
-                    :sep="sep"
-                    :other-value.sync="beginCalenderVal"
-                    :right="true"
-                    :begin="begin"
-                    :end="end"
-                    :hour-range="hourRange"
-                    :minute-range="minuteRange"
-                    :second-range="secondRange"
-                    :color="color"
-                    :date-limit="dateLimit"
-                    :render-end="renderEnd"></calendar>
+             <div class="calendar-button">
+                <button @click="ok" :style="{'background':color}">确定</button>
+                <button @click="cancel" class="cancel">取消</button>
              </div>
-         </div>
-         <div class="calendar-button">
-            <button @click="ok" :style="{'background':color}">确定</button>
-            <button @click="cancel" class="cancel">取消</button>
-         </div>
+        </div>
+        <!-- end 双日历 -->
+        <span class="input-group-btn" v-if="btnShow" @click="showCalendar" >
+            <button class="btn btn-default">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </button>
+        </span>
     </div>
-    <!-- end 双日历 -->
 </template>
 <script>
     let calendar = {
@@ -73,7 +80,7 @@
                                 v-for="(k2,child) in day"
                                 :class="{'today':child.today,'range':child.range,'disabled':child.disabled}"
                                 :style="{'background':color&&child.today?color:''}"
-                                @click="select(k1,k2,day,$event)">
+                                @click="select(k1,k2,$event)">
                                 {{child.day}}
                                 </td>
                             </tr>
@@ -176,9 +183,9 @@
                 year: '',
                 month: '',
                 day: '',
+                days: [],
                 weeks: ['日', '一', '二', '三', '四', '五', '六'],
                 months: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
-                days: [],
                 today: [],
                 hour: '00',
                 hourList: [],
@@ -327,13 +334,14 @@
                 }
                 me.days = temp;
             },
-            select(k1, k2, day, e) {
+            select(k1, k2, e) {
                 if (e !== undefined) {
                     e.stopPropagation();
                 }
                 let me = this;
                 // 取消上次选中
-                if (me.today.length > 0) {
+                let va = me.getValueParams(me.value);
+                if (me.today.length > 0 && me.month === va.month && me.year === va.year) {
                     me.days[me.today[0]][me.today[1]].today = false;
                 }
                 // 设置当前选中天
@@ -555,31 +563,32 @@
             bindLimitDate() {
                 let me = this;
                 let otherTime = me.otherValue;
+                let ov = me.otherValue;
                 if (me.dateLimit) {
                     if (me.dateLimit.hasOwnProperty('months')) {
                         let month = me.month + me.dateLimit.months;
                         if (!me.right) {
                             otherTime = me.output([me.year, month, me.day, me.hour, me.minute, me.second]);
-                            otherTime = otherTime > me.otherValue ? me.otherValue : otherTime > me.end ? me.end : otherTime;
+                            otherTime = otherTime > me.end ? me.end : otherTime;
                         }
                         else {
                             let bg = me.begin;
                             month = me.month - me.dateLimit.months;
                             otherTime = me.output([me.year, month, me.day, me.hour, me.minute, me.second]);
-                            otherTime = otherTime < me.otherValue ? me.otherValue : otherTime < bg ? bg : otherTime;
+                            otherTime = otherTime < ov ? ov : otherTime < bg ? bg : otherTime;
                         }
                     }
                     else if (this.dateLimit.hasOwnProperty('days')) {
                         let day = parseInt(me.day, 10) + me.dateLimit.days;
                         if (!me.right) {
                             otherTime = me.output([me.year, me.month, day, me.hour, me.minute, me.second]);
-                            otherTime = otherTime > me.otherValue ? me.otherValue : otherTime > me.end ? me.end : otherTime;
+                            otherTime = otherTime > me.end ? me.end : otherTime;
                         }
                         else {
                             let bg = me.begin;
                             day = parseInt(me.day, 10) - me.dateLimit.days;
                             otherTime = me.output([me.year, me.month, day, me.hour, me.minute, me.second]);
-                            otherTime = otherTime < me.otherValue ? me.otherValue : otherTime < bg ? bg : otherTime;
+                            otherTime = otherTime < ov ? ov : otherTime < bg ? bg : otherTime;
                         }
                     }
                 }
@@ -603,14 +612,6 @@
                 type: String,
                 twoWay: true,
                 default: ''
-            },
-            x: {
-                type: Number,
-                default: 0
-            },
-            y: {
-                type: Number,
-                default: 38
             },
             begin: {
                 type: String,
@@ -643,6 +644,16 @@
             dateLimit: {
                 type: Object,
                 default: null
+            },
+            inputClass: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            },
+            btnShow: {
+                type: Boolean,
+                default: false
             }
         },
         components: {
@@ -657,6 +668,9 @@
             };
         },
         created() {
+            if (this.btnShow) {
+                this.inputClass.push('input-group');
+            }
             if (this.value !== '') {
                 let values = this.value.split('至');
                 this.beginCalenderVal = values[0].trim();
@@ -675,32 +689,18 @@
             cancel() {
                 this.show = false;
             },
-            getChangeDate(val, type, num) {
+            showCalendar(e) {
                 let me = this;
-                if (this.type === 'datetime') {
-                    let vals = val.split(' ');
-                    let date = vals[0].split(me.sep);
-                    let time = vals[1];
-                    return me.typeDate(date, type, num) + ' ' + time;
-                }
-                else if (this.type === 'date') {
-                    let date = val.split(me.sep);
-                    return me.typeDate(date, type, num);
-                }
-            },
-            typeDate(date, type, num) {
-                let year = date[0];
-                let month = date[1];
-                let day = date[2];
-                if (type === 'months') {
-                    month = parseInt(month, 10) + parseInt(num, 10);
-                    month = month > 10 ? month : '0' + day;
-                }
-                else if (type === 'day') {
-                    day = parseInt(day, 10) + parseInt(num, 10);
-                    day = day > 10 ? day : '0' + day;
-                }
-                return year + this.sep + month + this.sep + day;
+                e.stopPropagation();
+                me.show = true;
+                let bindHide = function (e) {
+                    e.stopPropagation();
+                    me.show = false;
+                    document.removeEventListener('click', bindHide, false);
+                };
+                setTimeout(function () {
+                    document.addEventListener('click', bindHide, false);
+                }, 500);
             }
         }
     };
@@ -720,6 +720,8 @@
         border-radius: 2px;
         opacity: .95;
         transition: all .5s ease;
+        left:0;
+        top:38px;
         &-enter{
             .calendar-leave{
                 opacity: 0;
@@ -946,5 +948,15 @@
         visibility: hidden;
         content: '';
         clear: both;
+    }
+    .bg-pr{
+        position:relative;
+    }
+    .btn-default {
+        color: #666;
+        border: #ccc solid 1px;
+        background-color: #fff;
+        margin-left: -1px;
+        border-radius: 0 4px 4px 0;
     }
 </style>
