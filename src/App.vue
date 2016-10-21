@@ -1,13 +1,24 @@
 <template>
   <div>
       <div id="header">
-          <a href="#" class="logo">XCUI Components</a>
+          <a href="#" class="logo">
+            <img src={{logoUrl}}>
+              XCUI Components
+          </a>
       </div>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+    import logoUrl from './assets/logo_nobg_32x32@2x.png';
+    export default {
+        data() {
+            return {
+                logoUrl: logoUrl
+            };
+        }
+    };
 </script>
 
 <style lang="less">
