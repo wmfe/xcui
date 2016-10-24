@@ -1,13 +1,13 @@
 <template lang="html">
     <div class="xcui-modal-wrapper" v-show="show">
         <div class="xcui-modal-mask" @click="maskClose" v-el:modal-mask></div>
-        <div class="xcui-modal" tabindex="-1" @keydown.esc="close" :style="style" :class="[sizeClass,className]">
+        <div class="xcui-modal" tabindex="-1" @keydown.esc="cancel" :style="style" :class="[sizeClass,className]">
             <div class="xcui-modal-header" v-if="showHeader">
                 <slot name="header">
                     <span class="xcui-modal-title">{{title}}</span>
                 </slot>
                 <slot name="close">
-                    <i class="xcui-modal-header-close glyphicon glyphicon-remove" @click="close" v-if="showCloseButton"></i>
+                    <i class="xcui-modal-header-close glyphicon glyphicon-remove" @click="cancel" v-if="showCloseButton"></i>
                 </slot>
             </div>
             <div class="xcui-modal-body">
@@ -69,6 +69,14 @@ export default {
         cancelText: {
             type: String,
             default: '取消'
+        },
+        onOk: {
+            type: Function,
+            default: () => {}
+        },
+        onCancel: {
+            type: Function,
+            default: () => {}
         }
     },
     computed: {
@@ -82,16 +90,20 @@ export default {
         },
         maskClose() {
             if (this.maskClosable) {
-                this.close();
+                this.cancel();
             }
         },
         ok() {
-            typeof this.onOk === 'function' && this.onOk();
-            this.close();
+            let noClose = typeof this.onOk === 'function' && this.onOk();
+            if (!noClose) {
+                this.close();
+            }
         },
         cancel() {
-            typeof this.onCancel === 'function' && this.onCancel();
-            this.close();
+            let noClose = typeof this.onCancel === 'function' && this.onCancel();
+            if (!noClose) {
+                this.close();
+            }
         }
     }
 };

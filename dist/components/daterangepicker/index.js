@@ -22,23 +22,22 @@
         __webpack_require__.p = "";
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
-        module.exports = __webpack_require__(4);
-    }, function(module, exports) {
+        module.exports = __webpack_require__(8);
+    }, function(module, exports, __webpack_require__) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
-        var calendar = {
-            template: '<div class="calendar-tools" v-if="type!=\'time\'">\n                    <i class="glyphicon glyphicon-chevron-left float left"\n                       @click="prev"></i>\n                    <i class="glyphicon glyphicon-chevron-right float right"\n                   @click="next"></i>\n                    <div class="calendar-tit">\n                        <span @click="changeTitSelect(year, \'year\')">\n                            <input v-model="year" class="calendar-tit-year" type="text" \n                                @change="changeTitSelect(year,\'year\')"/>年\n                        </span>\n                        <span class="calendar-tit-month" @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span>\n                    </div>\n                </div>\n                <div v-show="dataTableShow">\n                    <table cellpadding="5" v-if="type!=\'time\'">\n                        <thead>\n                            <tr>\n                                <td v-for="week in weeks" class="week">{{week}}</td>\n                            </tr>\n                        </thead>\n                        <tr v-for="(k1,day) in days">\n                            <td\n                            v-for="(k2,child) in day"\n                            :class="{\'today\':child.today,\'range\':child.range,\'disabled\':child.disabled}"\n                            :style="{\'background\':color&&child.today?color:\'\'}"\n                            @click="select(k1,k2,day,$event)">\n                            {{child.day}}\n                            </td>\n                        </tr>\n                    </table>\n                    <div class="calendar-time" v-show="type==\'datetime\' || type==\'time\'">\n                        <div class="timer clearfix">\n                            <div class="timer-item">\n                                <label @click="dropTimeList(\'hour\')">{{hour}}</label>:\n                                <ul class="drop-down" v-show="hourListShow">\n                                    <li v-for="item in hourList" \n                                        @click="selectTimeItem($event,\'hour\')">{{item}}</li>\n                                </ul>\n                            </div>\n                            <div class="timer-item">\n                                <label @click="dropTimeList(\'minute\')">{{minute}}</label>:\n                                <ul class="drop-down" v-show="minuteListShow">\n                                    <li v-for="item in minuteList" \n                                        @click="selectTimeItem($event,\'minute\')">{{item}}</li>\n                                </ul>\n                            </div>\n                            <div class="timer-item">\n                                <label @click="dropTimeList(\'second\')">{{second}}</label>\n                                <ul class="drop-down" v-show="secondListShow">\n                                    <li v-for="item in secondList" \n                                        @click="selectTimeItem($event,\'second\')">{{item}}</li>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <table cellpadding="6" v-show="yearTableShow">\n                    <tr v-show="selectRangeShow">\n                        <td colspan ="3">{{selectRange}}</td>\n                    </tr>\n                    <tr v-for="selects in selectRangeList">\n                        <td v-for="select in selects" @click="selectItem(select)">{{select}}</td>\n                    </tr>\n                </table>',
+        var _calendarMixins = __webpack_require__(3);
+        var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                "default": obj
+            };
+        }
+        exports.default = {
+            mixins: [ _calendarMixins2.default ],
             props: {
-                type: {
-                    type: String,
-                    "default": "date"
-                },
-                value: {
-                    type: String,
-                    "default": ""
-                },
                 otherValue: {
                     type: String,
                     "default": ""
@@ -47,9 +46,201 @@
                     type: Boolean,
                     "default": false
                 },
-                sep: {
+                renderStar: {
                     type: String,
-                    "default": "-"
+                    "default": ""
+                },
+                renderEnd: {
+                    type: String,
+                    "default": ""
+                },
+                dateLimit: {
+                    type: Object,
+                    "default": null
+                }
+            },
+            watch: {
+                renderStar: function renderStar(val) {
+                    if (val === "" || this.right) {
+                        return false;
+                    }
+                    var params = this.getValueParams(val);
+                    this.year = params.year;
+                    this.month = params.month;
+                    this.render(params.year, params.month);
+                },
+                renderEnd: function renderEnd(val) {
+                    if (val === "" || !this.right) {
+                        return false;
+                    }
+                    var params = this.getValueParams(val);
+                    this.year = params.year;
+                    this.month = params.month;
+                    this.render(params.year, params.month);
+                }
+            },
+            methods: {
+                renderElse: function renderElse(y, m, i, temp, line) {
+                    var me = this;
+                    var today = y + me.sep + me.zero(m + 1) + me.sep + me.zero(i);
+                    var otherDate = me.otherValue.substring(0, 10);
+                    var value = me.value.substring(0, 10);
+                    if (today < me.begin || today > me.end) {
+                        temp[line].push({
+                            day: i,
+                            disabled: true,
+                            range: false
+                        });
+                    } else if (!me.right && today > value && today <= otherDate) {
+                        temp[line].push({
+                            day: i,
+                            disabled: false,
+                            range: true
+                        });
+                    } else if (me.right && today < value && today >= otherDate) {
+                        temp[line].push({
+                            day: i,
+                            disabled: false,
+                            range: true
+                        });
+                    } else if (me.right && today < otherDate) {
+                        temp[line].push({
+                            day: i,
+                            disabled: true,
+                            range: false
+                        });
+                    } else {
+                        temp[line].push({
+                            day: i,
+                            today: false,
+                            range: false
+                        });
+                    }
+                },
+                select: function select(k1, k2, e) {
+                    if (e !== undefined) {
+                        e.stopPropagation();
+                    }
+                    var me = this;
+                    var va = me.getValueParams(me.value);
+                    if (me.today.length > 0 && me.month === va.month && me.year === va.year) {
+                        me.days[me.today[0]][me.today[1]].today = false;
+                    }
+                    me.days[k1][k2].today = true;
+                    me.days[k1][k2].range = false;
+                    me.day = this.zero(me.days[k1][k2].day);
+                    me.today = [ k1, k2 ];
+                    me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+                    me.otherValue = me.bindLimitDate();
+                    me.changeOtherCalender();
+                },
+                selectTimeItem: function selectTimeItem(e, type) {
+                    var me = this;
+                    switch (type) {
+                      case "hour":
+                        me.hour = e.target.innerText;
+                        me.hourListShow = false;
+                        break;
+
+                      case "minute":
+                        me.minute = e.target.innerText;
+                        me.minuteListShow = false;
+                        break;
+
+                      case "second":
+                        me.second = e.target.innerText;
+                        me.secondListShow = false;
+                        break;
+
+                      default:                    }
+                    me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+                },
+                changeOtherCalender: function changeOtherCalender() {
+                    var me = this;
+                    var params = me.getValueParams(me.value);
+                    var monthStar = me.month;
+                    var monthEnd = me.month;
+                    if (!me.right) {
+                        if (me.value > me.otherValue) {
+                            me.otherValue = me.value;
+                        } else if (me.getYearMonth(me.otherValue) > me.getYearMonth(me.value) + 1) {
+                            monthEnd = monthEnd + 1;
+                        }
+                    } else if (me.right) {
+                        if (me.value < me.otherValue) {
+                            me.otherValue = me.value;
+                        } else if (me.getYearMonth(me.value) > me.getYearMonth(me.otherValue) + 1) {
+                            monthStar = monthStar - 1;
+                        }
+                    }
+                    me.$parent.renderStar = me.output([ me.year, monthStar, params.day, me.hour, me.minute, me.second ]);
+                    me.$parent.renderEnd = me.output([ me.year, monthEnd, params.day, me.hour, me.minute, me.second ]);
+                },
+                getYearMonth: function getYearMonth(date) {
+                    var me = this;
+                    var dates = date.split(me.sep);
+                    return dates[0] * 12 + dates[1];
+                },
+                bindLimitDate: function bindLimitDate() {
+                    var me = this;
+                    var otherTime = me.otherValue;
+                    var ov = me.otherValue;
+                    if (me.dateLimit) {
+                        if (me.dateLimit.hasOwnProperty("months")) {
+                            var month = me.month + me.dateLimit.months;
+                            if (!me.right) {
+                                otherTime = me.output([ me.year, month, me.day, me.hour, me.minute, me.second ]);
+                                otherTime = otherTime > me.end ? me.end : otherTime;
+                            } else {
+                                var bg = me.begin;
+                                month = me.month - me.dateLimit.months;
+                                otherTime = me.output([ me.year, month, me.day, me.hour, me.minute, me.second ]);
+                                otherTime = otherTime < ov ? ov : otherTime < bg ? bg : otherTime;
+                            }
+                        } else if (this.dateLimit.hasOwnProperty("days")) {
+                            var day = parseInt(me.day, 10) + me.dateLimit.days;
+                            if (!me.right) {
+                                otherTime = me.output([ me.year, me.month, day, me.hour, me.minute, me.second ]);
+                                otherTime = otherTime > me.end ? me.end : otherTime;
+                            } else {
+                                var _bg = me.begin;
+                                day = parseInt(me.day, 10) - me.dateLimit.days;
+                                otherTime = me.output([ me.year, me.month, day, me.hour, me.minute, me.second ]);
+                                otherTime = otherTime < ov ? ov : otherTime < _bg ? _bg : otherTime;
+                            }
+                        }
+                    }
+                    return otherTime;
+                }
+            }
+        };
+    }, function(module, exports, __webpack_require__) {
+        "use strict";
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+        var _calendar = __webpack_require__(7);
+        var _calendar2 = _interopRequireDefault(_calendar);
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                "default": obj
+            };
+        }
+        exports.default = {
+            props: {
+                show: {
+                    type: Boolean,
+                    twoWay: true,
+                    "default": false
+                },
+                type: {
+                    type: String,
+                    "default": "date"
+                },
+                value: {
+                    type: String,
+                    twoWay: true,
+                    "default": ""
                 },
                 begin: {
                     type: String,
@@ -71,21 +262,120 @@
                     type: Number,
                     "default": 1
                 },
+                sep: {
+                    type: String,
+                    "default": "-"
+                },
                 color: {
-                    type: String,
-                    "default": ""
-                },
-                renderStar: {
-                    type: String,
-                    "default": ""
-                },
-                renderEnd: {
                     type: String,
                     "default": ""
                 },
                 dateLimit: {
                     type: Object,
                     "default": null
+                },
+                inputClass: {
+                    type: Array,
+                    "default": function _default() {
+                        return [];
+                    }
+                },
+                btnShow: {
+                    type: Boolean,
+                    "default": false
+                }
+            },
+            components: {
+                calendar: _calendar2.default
+            },
+            data: function data() {
+                return {
+                    beginCalenderVal: "",
+                    endCalenderVal: "",
+                    renderStar: "",
+                    renderEnd: ""
+                };
+            },
+            created: function created() {
+                if (this.btnShow) {
+                    this.inputClass.push("input-group");
+                }
+                if (this.value !== "") {
+                    var values = this.value.split("至");
+                    this.beginCalenderVal = values[0].trim();
+                    this.endCalenderVal = values[1].trim();
+                    if (this.type === "datetime") {
+                        this.beginCalenderVal = this.beginCalenderVal + " 00:00:00";
+                        this.endCalenderVal = this.endCalenderVal + " 00:00:00";
+                    }
+                }
+            },
+            methods: {
+                ok: function ok() {
+                    this.value = this.beginCalenderVal + " 至 " + this.endCalenderVal;
+                    this.show = false;
+                },
+                cancel: function cancel() {
+                    this.show = false;
+                },
+                showCalendar: function showCalendar(e) {
+                    var me = this;
+                    e.stopPropagation();
+                    me.show = true;
+                    var bindHide = function bindHide(e) {
+                        e.stopPropagation();
+                        me.show = false;
+                        document.removeEventListener("click", bindHide, false);
+                    };
+                    setTimeout(function() {
+                        document.addEventListener("click", bindHide, false);
+                    }, 500);
+                }
+            }
+        };
+    }, function(module, exports) {
+        "use strict";
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+        exports.default = {
+            props: {
+                type: {
+                    type: String,
+                    "default": "date"
+                },
+                value: {
+                    type: String,
+                    twoWay: true,
+                    "default": ""
+                },
+                begin: {
+                    type: String,
+                    "default": ""
+                },
+                end: {
+                    type: String,
+                    "default": ""
+                },
+                hourRange: {
+                    type: [ Number, String ],
+                    "default": 1
+                },
+                minuteRange: {
+                    type: Number,
+                    "default": 1
+                },
+                secondRange: {
+                    type: Number,
+                    "default": 1
+                },
+                sep: {
+                    type: String,
+                    "default": "-"
+                },
+                color: {
+                    type: String,
+                    "default": ""
                 }
             },
             data: function data() {
@@ -94,9 +384,9 @@
                     year: "",
                     month: "",
                     day: "",
+                    days: [],
                     weeks: [ "日", "一", "二", "三", "四", "五", "六" ],
                     months: [ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" ],
-                    days: [],
                     today: [],
                     hour: "00",
                     hourList: [],
@@ -110,13 +400,15 @@
                     yearTableShow: false,
                     selectRangeList: [],
                     selectRangeShow: true,
-                    selectRange: "",
-                    currentTimeBtnShow: true
+                    selectRange: ""
                 };
             },
             created: function created() {
                 var me = this;
                 var now = me.getCurrentParams();
+                if (this.btnShow) {
+                    this.inputClass.push("input-group");
+                }
                 if (me.value !== "") {
                     var params = me.getValueParams(me.value);
                     me.year = params.year;
@@ -150,27 +442,10 @@
                     me.render(me.year, me.month);
                 }
             },
-            watch: {
-                renderStar: function renderStar(val) {
-                    if (val === "" || this.right) {
-                        return false;
-                    }
-                    var params = this.getValueParams(val);
-                    this.year = params.year;
-                    this.month = params.month;
-                    this.render(params.year, params.month);
-                },
-                renderEnd: function renderEnd(val) {
-                    if (val === "" || !this.right) {
-                        return false;
-                    }
-                    var params = this.getValueParams(val);
-                    this.year = params.year;
-                    this.month = params.month;
-                    this.render(params.year, params.month);
-                }
-            },
             methods: {
+                zero: function zero(n) {
+                    return n < 10 && String(n).length === 1 ? "0" + n : n;
+                },
                 render: function render(y, m) {
                     var me = this;
                     var firstDayOfMonth = new Date(y, m, 1).getDay();
@@ -182,6 +457,7 @@
                     var date = new Date();
                     var currentTime = Number(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
                     me.year = y;
+                    me.currentMonth = me.months[m];
                     for (var i = 1; i <= lastDateOfMonth; i++) {
                         var dow = new Date(y, m, i).getDay();
                         var chk = new Date();
@@ -190,6 +466,7 @@
                         var year = params.year === me.year;
                         var month = params.month === me.month;
                         var day = params.day === i;
+                        var seletSplit4 = me.begin !== undefined || me.end !== undefined;
                         if (dow === 0) {
                             temp[line] = [];
                         } else if (i === 1) {
@@ -203,7 +480,7 @@
                                 k++;
                             }
                         }
-                        if (year && month && day) {
+                        if (year && month && day && seletSplit4) {
                             temp[line].push({
                                 day: i,
                                 today: true
@@ -216,40 +493,7 @@
                             });
                             me.today = [ line, temp[line].length - 1 ];
                         } else {
-                            var today = y + me.sep + me.zero(m + 1) + me.sep + me.zero(i);
-                            var otherDate = me.otherValue.substring(0, 10);
-                            var value = me.value.substring(0, 10);
-                            if (today < me.begin || today > me.end) {
-                                temp[line].push({
-                                    day: i,
-                                    disabled: true,
-                                    range: false
-                                });
-                            } else if (!me.right && today > value && today <= otherDate) {
-                                temp[line].push({
-                                    day: i,
-                                    disabled: false,
-                                    range: true
-                                });
-                            } else if (me.right && today < value && today >= otherDate) {
-                                temp[line].push({
-                                    day: i,
-                                    disabled: false,
-                                    range: true
-                                });
-                            } else if (me.right && today < otherDate) {
-                                temp[line].push({
-                                    day: i,
-                                    disabled: true,
-                                    range: false
-                                });
-                            } else {
-                                temp[line].push({
-                                    day: i,
-                                    today: false,
-                                    range: false
-                                });
-                            }
+                            me.renderElse(y, m, i, temp, line, currentTime);
                         }
                         if (dow === 6) {
                             line++;
@@ -265,22 +509,6 @@
                         }
                     }
                     me.days = temp;
-                },
-                select: function select(k1, k2, day, e) {
-                    if (e !== undefined) {
-                        e.stopPropagation();
-                    }
-                    var me = this;
-                    if (me.today.length > 0) {
-                        me.days[me.today[0]][me.today[1]].today = false;
-                    }
-                    me.days[k1][k2].today = true;
-                    me.days[k1][k2].range = false;
-                    me.day = this.zero(me.days[k1][k2].day);
-                    me.today = [ k1, k2 ];
-                    me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
-                    me.otherValue = me.bindLimitDate();
-                    me.changeOtherCalender();
                 },
                 prev: function prev(e) {
                     e.stopPropagation();
@@ -302,7 +530,7 @@
                     } else {
                         me.month = parseInt(me.month, 10) + 1;
                     }
-                    this.render(me.year, me.month);
+                    me.render(me.year, me.month);
                 },
                 changeTitSelect: function changeTitSelect(year, type) {
                     if (type === "year") {
@@ -328,15 +556,15 @@
                     } else if (select === "》") {
                         this.changeTitSelect(parseInt(me.selectRange.split("~")[0].trim(), 10) + 10, "year");
                     } else if (select > 12) {
-                        me.year = select;
-                        me.render(me.year, me.month);
-                        me.dataTableShow = true;
-                        me.yearTableShow = false;
+                        this.year = select;
+                        this.render(me.year, me.month);
+                        this.dataTableShow = true;
+                        this.yearTableShow = false;
                     } else {
-                        me.month = parseInt(select, 10) - 1;
-                        me.render(me.year, me.month);
-                        me.dataTableShow = true;
-                        me.yearTableShow = false;
+                        this.month = parseInt(select, 10) - 1;
+                        this.render(me.year, me.month);
+                        this.dataTableShow = true;
+                        this.yearTableShow = false;
                     }
                 },
                 dropTimeList: function dropTimeList(type) {
@@ -378,10 +606,7 @@
                         break;
 
                       default:                    }
-                    me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
-                },
-                zero: function zero(n) {
-                    return n < 10 && String(n).length === 1 ? "0" + n : n;
+                    me.selectValue = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
                 },
                 output: function output(args) {
                     var me = this;
@@ -406,32 +631,6 @@
                     if (me.type === "date") {
                         return args[0] + me.sep + args1 + me.sep + args2;
                     }
-                },
-                changeOtherCalender: function changeOtherCalender() {
-                    var me = this;
-                    var params = me.getValueParams(me.value);
-                    var monthStar = me.month;
-                    var monthEnd = me.month;
-                    if (!me.right) {
-                        if (me.value > me.otherValue) {
-                            me.otherValue = me.value;
-                        } else if (me.getYearMonth(me.otherValue) > me.getYearMonth(me.value) + 1) {
-                            monthEnd = monthEnd + 1;
-                        }
-                    } else if (me.right) {
-                        if (me.value < me.otherValue) {
-                            me.otherValue = me.value;
-                        } else if (me.getYearMonth(me.value) > me.getYearMonth(me.otherValue) + 1) {
-                            monthStar = monthStar - 1;
-                        }
-                    }
-                    me.$parent.renderStar = me.output([ me.year, monthStar, params.day, me.hour, me.minute, me.second ]);
-                    me.$parent.renderEnd = me.output([ me.year, monthEnd, params.day, me.hour, me.minute, me.second ]);
-                },
-                getYearMonth: function getYearMonth(date) {
-                    var me = this;
-                    var dates = date.split(me.sep);
-                    return dates[0] * 12 + dates[1];
                 },
                 getValueParams: function getValueParams(timeCur) {
                     var me = this;
@@ -475,160 +674,27 @@
                         minute: this.zero(date.getMinutes()),
                         second: this.zero(date.getSeconds())
                     };
-                },
-                bindLimitDate: function bindLimitDate() {
-                    var me = this;
-                    var otherTime = me.otherValue;
-                    if (me.dateLimit) {
-                        if (me.dateLimit.hasOwnProperty("months")) {
-                            var month = me.month + me.dateLimit.months;
-                            if (!me.right) {
-                                otherTime = me.output([ me.year, month, me.day, me.hour, me.minute, me.second ]);
-                                otherTime = otherTime > me.otherValue ? me.otherValue : otherTime > me.end ? me.end : otherTime;
-                            } else {
-                                var bg = me.begin;
-                                month = me.month - me.dateLimit.months;
-                                otherTime = me.output([ me.year, month, me.day, me.hour, me.minute, me.second ]);
-                                otherTime = otherTime < me.otherValue ? me.otherValue : otherTime < bg ? bg : otherTime;
-                            }
-                        } else if (this.dateLimit.hasOwnProperty("days")) {
-                            var day = parseInt(me.day, 10) + me.dateLimit.days;
-                            if (!me.right) {
-                                otherTime = me.output([ me.year, me.month, day, me.hour, me.minute, me.second ]);
-                                otherTime = otherTime > me.otherValue ? me.otherValue : otherTime > me.end ? me.end : otherTime;
-                            } else {
-                                var _bg = me.begin;
-                                day = parseInt(me.day, 10) - me.dateLimit.days;
-                                otherTime = me.output([ me.year, me.month, day, me.hour, me.minute, me.second ]);
-                                otherTime = otherTime < me.otherValue ? me.otherValue : otherTime < _bg ? _bg : otherTime;
-                            }
-                        }
-                    }
-                    return otherTime;
-                }
-            }
-        };
-        exports.default = {
-            props: {
-                show: {
-                    type: Boolean,
-                    twoWay: true,
-                    "default": false
-                },
-                type: {
-                    type: String,
-                    "default": "date"
-                },
-                value: {
-                    type: String,
-                    twoWay: true,
-                    "default": ""
-                },
-                x: {
-                    type: Number,
-                    "default": 0
-                },
-                y: {
-                    type: Number,
-                    "default": 38
-                },
-                begin: {
-                    type: String,
-                    "default": ""
-                },
-                end: {
-                    type: String,
-                    "default": ""
-                },
-                hourRange: {
-                    type: Number,
-                    "default": 1
-                },
-                minuteRange: {
-                    type: Number,
-                    "default": 1
-                },
-                secondRange: {
-                    type: Number,
-                    "default": 1
-                },
-                sep: {
-                    type: String,
-                    "default": "-"
-                },
-                color: {
-                    type: String,
-                    "default": ""
-                },
-                dateLimit: {
-                    type: Object,
-                    "default": null
-                }
-            },
-            components: {
-                calendar: calendar
-            },
-            data: function data() {
-                return {
-                    beginCalenderVal: "",
-                    endCalenderVal: "",
-                    renderStar: "",
-                    renderEnd: ""
-                };
-            },
-            created: function created() {
-                if (this.value !== "") {
-                    var values = this.value.split("至");
-                    this.beginCalenderVal = values[0].trim();
-                    this.endCalenderVal = values[1].trim();
-                    if (this.type === "datetime") {
-                        this.beginCalenderVal = this.beginCalenderVal + " 00:00:00";
-                        this.endCalenderVal = this.endCalenderVal + " 00:00:00";
-                    }
-                }
-            },
-            methods: {
-                ok: function ok() {
-                    this.value = this.beginCalenderVal + " 至 " + this.endCalenderVal;
-                    this.show = false;
-                },
-                cancel: function cancel() {
-                    this.show = false;
-                },
-                getChangeDate: function getChangeDate(val, type, num) {
-                    var me = this;
-                    if (this.type === "datetime") {
-                        var vals = val.split(" ");
-                        var date = vals[0].split(me.sep);
-                        var time = vals[1];
-                        return me.typeDate(date, type, num) + " " + time;
-                    } else if (this.type === "date") {
-                        var _date = val.split(me.sep);
-                        return me.typeDate(_date, type, num);
-                    }
-                },
-                typeDate: function typeDate(date, type, num) {
-                    var year = date[0];
-                    var month = date[1];
-                    var day = date[2];
-                    if (type === "months") {
-                        month = parseInt(month, 10) + parseInt(num, 10);
-                        month = month > 10 ? month : "0" + day;
-                    } else if (type === "day") {
-                        day = parseInt(day, 10) + parseInt(num, 10);
-                        day = day > 10 ? day : "0" + day;
-                    }
-                    return year + this.sep + month + this.sep + day;
                 }
             }
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div @click.stop=\"\" @touchstart.stop=\"\" class=\"calendar double-calendar\" v-show=show :style=\"{'left':x+'px','top':y+'px'}\"> <div class=clearfix> <div class=double-calendar-left> <calendar :type=type :value.sync=beginCalenderVal :sep=sep :other-value.sync=endCalenderVal :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-star=renderStar></calendar> </div> <div class=double-calendar-right> <calendar :type=type :value.sync=endCalenderVal :sep=sep :other-value.sync=beginCalenderVal :right=true :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-end=renderEnd></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style=\"{'background':color}\">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> ";
+        module.exports = ' <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"> <input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年 </span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'range\':child.range,\'disabled\':child.disabled}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\' || type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> </div> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> ';
+    }, function(module, exports) {
+        module.exports = ' <div class=bg-pr :class=inputClass> <input class="form-control col-md-3" type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class="calendar double-calendar" v-show=show> <div class=clearfix> <div class=double-calendar-left> <calendar :type=type :value.sync=beginCalenderVal :sep=sep :other-value.sync=endCalenderVal :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-star=renderStar></calendar> </div> <div class=double-calendar-right> <calendar :type=type :value.sync=endCalenderVal :sep=sep :other-value.sync=beginCalenderVal :right=true :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-end=renderEnd></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(3);
+        __vue_template__ = __webpack_require__(5);
+        module.exports = __vue_script__ || {};
+        if (module.exports.__esModule) module.exports = module.exports.default;
+        if (__vue_template__) {
+            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+        }
+    }, function(module, exports, __webpack_require__) {
+        var __vue_script__, __vue_template__;
+        __webpack_require__(4);
+        __vue_script__ = __webpack_require__(2);
+        __vue_template__ = __webpack_require__(6);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
         if (__vue_template__) {

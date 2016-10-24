@@ -29,17 +29,90 @@
             value: true
         });
         exports.default = {
-            data: function data() {
-                return {};
+            name: "xcui-modal",
+            props: {
+                title: {
+                    type: String,
+                    "default": "提示"
+                },
+                show: {
+                    type: Boolean,
+                    "default": false
+                },
+                style: {
+                    type: Object
+                },
+                size: {
+                    type: String,
+                    "default": "middle"
+                },
+                className: {
+                    type: String,
+                    "default": ""
+                },
+                showHeader: {
+                    type: Boolean,
+                    "default": true
+                },
+                showFooter: {
+                    type: Boolean,
+                    "default": true
+                },
+                showCloseButton: {
+                    type: Boolean,
+                    "default": true
+                },
+                maskClosable: {
+                    type: Boolean,
+                    "default": true
+                },
+                okText: {
+                    type: String,
+                    "default": "确定"
+                },
+                cancelText: {
+                    type: String,
+                    "default": "取消"
+                },
+                onOk: {
+                    type: Function,
+                    "default": function _default() {}
+                },
+                onCancel: {
+                    type: Function,
+                    "default": function _default() {}
+                }
             },
-            computed: {},
-            ready: function ready() {},
-            attached: function attached() {},
-            methods: {},
-            components: {}
+            computed: {
+                sizeClass: function sizeClass() {
+                    return "xcui-modal-size-" + this.size;
+                }
+            },
+            methods: {
+                close: function close(e) {
+                    this.show = false;
+                },
+                maskClose: function maskClose() {
+                    if (this.maskClosable) {
+                        this.cancel();
+                    }
+                },
+                ok: function ok() {
+                    var noClose = typeof this.onOk === "function" && this.onOk();
+                    if (!noClose) {
+                        this.close();
+                    }
+                },
+                cancel: function cancel() {
+                    var noClose = typeof this.onCancel === "function" && this.onCancel();
+                    if (!noClose) {
+                        this.close();
+                    }
+                }
+            }
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = " ";
+        module.exports = ' <div class=xcui-modal-wrapper v-show=show> <div class=xcui-modal-mask @click=maskClose v-el:modal-mask></div> <div class=xcui-modal tabindex=-1 @keydown.esc=cancel :style=style :class=[sizeClass,className]> <div class=xcui-modal-header v-if=showHeader> <slot name=header> <span class=xcui-modal-title>{{title}}</span> </slot> <slot name=close> <i class="xcui-modal-header-close glyphicon glyphicon-remove" @click=cancel v-if=showCloseButton></i> </slot> </div> <div class=xcui-modal-body> <slot></slot> </div> <div class=xcui-modal-footer v-if=showFooter> <slot name=footer> <button type=button name=button @click=ok class="btn xcui-btn btn-primary">{{okText}}</button> <button type=button name=button @click=cancel class="btn btn-default">{{cancelText}}</button> </slot> </div> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(2);

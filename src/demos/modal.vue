@@ -11,7 +11,8 @@
         <button class="btn btn-default" @click="this.modal1 = true">显示对话框</button>
         <xcui-modal
         :show.sync="modal1"
-        title="基础弹窗">
+        title="基础弹窗"
+        :on-ok="modal1OK">
         <div>XCUI，做有品质的外卖UI</div>
         </xcui-modal>
         <div>通过控制show来显示/隐藏对话框，需要将show设置为.sync双向绑定</div>
@@ -107,8 +108,8 @@
 ## Events
 | 名字 | 描述 | 是否必选 |
 |-----|-----|----|
-|on-ok|点击确定的回调函数|可选|
-|on-cancel|点击取消和右上角关闭的回调函数|可选|
+|on-ok|点击确定的回调函数。回调函数如果返回真值(true)，则不再关闭对话框；如果返回假值(false)或不返回，则默认执行on-ok后关闭对话框|可选|
+|on-cancel|点击取消和右上角关闭的回调函数。回调函数如果返回真值(true)，则不再关闭对话框；如果返回假值(false)或不返回，则默认执行on-cancel后关闭对话框|可选|
 
 ## Slot
 | 名字 | 描述 |
@@ -117,10 +118,10 @@
 |footer|自定义页脚内容|
 |close|自定义右上角关闭按钮|
 |-|对话框的主体内容|
+
 </template>
 <script>
 import xcuiModal from '../components/modal';
-console.log('Modal', xcuiModal);
 
 let ModalDemo = {
     components: {
@@ -139,6 +140,11 @@ let ModalDemo = {
             modal9: false,
             modal10: false
         };
+    },
+    methods: {
+        modal1OK() {
+            console.log('modal1OK');
+        }
     }
 };
 

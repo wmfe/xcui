@@ -22,8 +22,8 @@ const xcui = {
     Toaster,
     Select,
     Loading,
-    Modal,
-    Progress
+    Progress,
+    Modal
 };
 
 module.exports = xcui;
