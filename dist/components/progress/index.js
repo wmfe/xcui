@@ -29,48 +29,32 @@
             value: true
         });
         exports.default = {
-            name: "xcui-toaster",
+            name: "xcui-progress",
             props: {
-                options: {
-                    type: Object,
-                    "default": function _default() {
-                        return {};
-                    }
-                }
-            },
-            data: function data() {
-                return {
-                    timers: [],
-                    show: false
-                };
-            },
-            methods: {
-                close: function close() {
-                    var _this = this;
-                    var t = setTimeout(function() {
-                        _this.show = false;
-                        _this.options = {};
-                    }, this.options.duration || 2e3);
-                    this.timers.push(t);
-                }
-            },
-            watch: {
-                options: function options() {
-                    if (this.options.content) {
-                        this.show = true;
-                        this.timers.forEach(function(timer) {
-                            window.clearTimeout(timer);
-                        });
-                        this.timers = [];
-                        this.close();
-                    } else {
-                        this.show = false;
-                    }
+                percent: {
+                    type: Number,
+                    "default": 0
+                },
+                percentInfo: {
+                    type: String,
+                    "default": ""
+                },
+                infoClassName: {
+                    type: String,
+                    "default": "xcui-progress-info"
+                },
+                showInfo: {
+                    type: Boolean,
+                    "default": false
+                },
+                height: {
+                    type: Number,
+                    "default": 10
                 }
             }
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div class=toaster :class=\"{\n    'text-info': options.type === 'info' || options.type == undefined,\n    'text-success': options.type === 'success',\n    'text-danger': options.type === 'error',\n    'text-warning': options.type === 'warning'\n}\" v-show=show> <span class=\"toaster-icon glyphicon\" :class=\"{\n        'glyphicon-info-sign': options.type === 'info' || options.type == undefined,\n        'glyphicon-ok': options.type === 'success',\n        'glyphicon-remove': options.type === 'error',\n        'glyphicon-warning-sign': options.type === 'warning'\n    }\"></span> <p class=toaster-desc> {{options.content}} </p> </div> ";
+        module.exports = " <div class=xcui-progress> <div class=xcui-progress-container> <div class=xcui-progress-outer> <div class=xcui-progress-inner :style=\"{width:percent+'%',height:height+'px'}\"></div> </div> </div> <div :class=\"'infoClassName',!showInfo ? 'hidden':''\"> {{percentInfo}} </div> <div> </div></div>";
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(2);

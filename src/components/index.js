@@ -10,6 +10,7 @@ import Tag from './tag';
 import Toaster from './toaster';
 import Select from './select';
 import Loading from './loading';
+import Modal from './modal';
 import Progress from './progress';
 
 const xcui = {
@@ -21,7 +22,8 @@ const xcui = {
     Toaster,
     Select,
     Loading,
-    Progress
+    Progress,
+    Modal
 };
 
 module.exports = xcui;
