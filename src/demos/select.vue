@@ -216,34 +216,6 @@
     .select-demo{
         width:200px;
     }
-    .xcui-demo-container{
-        background: #fff !important;
-        h3{
-            border-left:4px solid #46C3C1;
-            text-indent:.5em;
-        }
-    }
-    .xcui-demo-wrap,.xcui-code-wrap{
-        width:100%!important;
-        pre{
-            overflow: hidden !important;
-        }
-    }
-    .xcui-code-wrap{
-        margin-top:20px;
-    }
-    pre{
-        display: block;
-        font-size: 13px;
-        line-height: 1.42857143;
-        color: #333;
-        word-break: break-all;
-        word-wrap: break-word;
-        background-color: #f5f5f5;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        white-space: pre-wrap;
-    }
 </style>
 <script>
     import Vue from 'vue';

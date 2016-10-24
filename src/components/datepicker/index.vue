@@ -36,21 +36,21 @@
                 <div class="calendar-time" v-show="type=='datetime'|| type=='time'">
                     <div  class="timer clearfix">
                         <div class="timer-item">
-                            <label @click="dropHourList">{{hour}}</label>:
+                            <label @click="dropTimeList('hour')">{{hour}}</label>:
                             <ul class="drop-down" v-show="hourListShow">
-                                <li v-for="item in hourList" @click="selectHourItem">{{item}}</li>
+                                <li v-for="item in hourList" @click="selectTimeItem($event,'hour')">{{item}}</li>
                             </ul>
                         </div>
                         <div class="timer-item">
-                            <label @click="dropMinuteList">{{minute}}</label>:
+                            <label @click="dropTimeList('minute')">{{minute}}</label>:
                             <ul class="drop-down" v-show="minuteListShow">
-                                <li v-for="item in minuteList" @click="selectMinuteItem">{{item}}</li>
+                                <li v-for="item in minuteList" @click="selectTimeItem($event,'minute')">{{item}}</li>
                             </ul>
                         </div>
                         <div class="timer-item">
-                            <label @click="dropSecondList">{{second}}</label>
+                            <label @click="dropTimeList('second')">{{second}}</label>
                             <ul class="drop-down" v-show="secondListShow">
-                                <li v-for="item in secondList" @click="selectSecondItem">{{item}}</li>
+                                <li v-for="item in secondList" @click="selectTimeItem($event,'second')">{{item}}</li>
                             </ul>
                         </div>
                         <div class="timer-item">
@@ -81,9 +81,10 @@
         </span>
     </div>
 </template>
-
 <script>
+    import CalendarMixins from '../daterangepicker/calendarMixins.js';
     export default {
+        mixins: [CalendarMixins],
         props: {
             btnShow: {
                 type: Boolean,
@@ -94,207 +95,23 @@
                 default: function () {
                     return [];
                 }
-            },
-            type: {
-                type: String,
-                default: 'date'
-            },
-            value: {
-                type: String,
-                twoWay: true,
-                default: ''
-            },
-            begin: {
-                type: String,
-                default: ''
-            },
-            end: {
-                type: String,
-                default: ''
-            },
-            hourRange: {
-                type: Number,
-                default: 1
-            },
-            minuteRange: {
-                type: Number,
-                default: 1
-            },
-            secondRange: {
-                type: Number,
-                default: 1
-            },
-            sep: {
-                type: String,
-                default: '-'
-            },
-            color: {
-                type: String,
-                default: ''
             }
         },
         data() {
             return {
                 show: false,
-                year: 0,
-                month: 0,
-                day: 0,
-                hour: '00',
-                hourList: [],
-                hourListShow: false,
-                minute: '00',
-                minuteList: [],
-                minuteListShow: false,
-                second: '00',
-                secondList: [],
-                secondListShow: false,
-                days: [],
-                today: [],
                 currentMonth: Number,
-                weeks: ['日', '一', '二', '三', '四', '五', '六'],
-                months: [],
-                dataTableShow: true,
-                yearTableShow: false,
-                selectRangeList: [],
-                selectRangeShow: true,
-                selectRange: '',
-                currentTimeBtnShow: true,
-                selectValue: ''
+                selectValue: '',
+                currentTimeBtnShow: true
             };
         },
-        created() {
-            let now = new Date();
-            let me = this;
-            if (this.btnShow) {
-                this.inputClass.push('input-group');
-            }
-            if (this.value !== '') {
-                if (this.value.indexOf('-') !== -1) {
-                    this.sep = '-';
-                }
-                if (this.value.indexOf('.') !== -1) {
-                    this.sep = '.';
-                }
-                if (this.type === 'date') {
-                    let split = this.value.split(me.sep);
-                    this.year = parseInt(split[0], 10);
-                    this.month = parseInt(split[1], 10) - 1;
-                    this.day = parseInt(split[2], 10);
-                }
-                else if (this.type === 'datetime') {
-                    let split = this.value.split(' ');
-                    let splitDate = split[0].split(me.sep);
-                    this.year = parseInt(splitDate[0], 10);
-                    this.month = parseInt(splitDate[1], 10) - 1;
-                    this.day = parseInt(splitDate[2], 10);
-                    if (split.length > 1) {
-                        let splitTime = split[1].split(':');
-                        this.hour = splitTime[0];
-                        this.minute = splitTime[1];
-                        this.second = splitTime[2];
-                    }
-                }
-            }
-            else {
-                this.year = now.getFullYear();
-                this.month = now.getMonth();
-                this.day = now.getDate();
-                this.hour = this.zero(now.getHours());
-                this.minute = this.zero(now.getMinutes());
-                this.second = this.zero(now.getSeconds());
-            }
-            for (let i = 0; i < 60; i++) {
-                let item = i;
-                if (i % this.minuteRange === 0) {
-                    if (i < 10) {
-                        item = '0' + i;
-                    }
-                    this.minuteList.push(item);
-                }
-                if (i % this.secondRange === 0) {
-                    if (i < 10) {
-                        item = '0' + i;
-                    }
-                    this.secondList.push(item);
-                }
-            }
-            for (let i = 1; i < 13; i++) {
-                let item = i;
-                if (i % this.hourRange === 0) {
-                    if (i < 10) {
-                        item = '0' + i;
-                    }
-                    this.hourList.push(item);
-                }
-                this.months.push(i);
-            }
-            this.render(me.year, me.month);
-        },
         methods: {
-            zero(n) {
-                return n < 10 && String(n).length === 1 ? '0' + n : n;
-            },
-            render(y, m) {
+            renderElse(y, m, i, temp, line, currentTime) {
                 let me = this;
-                let firstDayOfMonth = new Date(y, m, 1).getDay();// 当月第一天
-                let lastDateOfMonth = new Date(y, m + 1, 0).getDate();// 当月最后一天
-                let lastDayOfLastMonth = new Date(y, m, 0).getDate();// 最后一月的最后一天
-                let seletSplit = me.value.split(' ')[0].split(me.sep);
-                let i;
-                let line = 0;
-                let temp = [];
-                let date = new Date();
-                let currentTime = Number(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
-                me.year = y;
-                me.currentMonth = me.months[m];
-                for (i = 1; i <= lastDateOfMonth; i++) {
-                    let dow = new Date(y, m, i).getDay();
-                    let chk = new Date();
-                    let chkY = chk.getFullYear();
-                    let chkM = chk.getMonth();
-                    let seletSplit1 = (parseInt(seletSplit[0], 10) === me.year);
-                    let seletSplit2 = (parseInt(seletSplit[1], 10) - 1 === me.month);
-                    let seletSplit3 = (parseInt(seletSplit[2], 10) === i);
-                    let seletSplit4 = (me.begin !== undefined || me.end !== undefined);
-                    // 第一行
-                    if (dow === 0) {
-                        temp[line] = [];
-                    }
-                    else if (i === 1) {
-                        temp[line] = [];
-                        let k = lastDayOfLastMonth - firstDayOfMonth + 1;
-                        for (let j = 0; j < firstDayOfMonth; j++) {
-                            temp[line].push({day: k, disabled: true});
-                            k++;
-                        }
-                    }
-                    if (seletSplit1 && seletSplit2 && seletSplit3 && seletSplit4) {
-                        temp[line].push({day: i, today: true});
-                        me.today = [line, temp[line].length - 1];// 当天
-                    }
-                    else if (chkY === me.year && chkM === me.month && i === me.day && me.value === undefined) {
-                        temp[line].push({day: i, today: true});
-                        me.today = [line, temp[line].length - 1];
-                    }
-                    else {
-                        let thisTime = Number(new Date(me.year, me.month, i));
-                        let options = {day: i, today: false};
-                        options = me.bindSingerTime(thisTime, currentTime, options);
-                        temp[line].push(options);
-                    }
-                    // 最后一行
-                    if (dow === 6) {
-                        line++;
-                    }
-                    else if (i === lastDateOfMonth) {
-                        let k = 1;
-                        for (dow; dow < 6; dow++) {
-                            temp[line].push({day: k, disabled: true});
-                            k++;
-                        }
-                    }
-                }// end for
-                me.days = temp;
+                let thisTime = Number(new Date(me.year, me.month, i));
+                let options = {day: i, today: false};
+                options = me.bindSingerTime(thisTime, currentTime, options);
+                temp[line].push(options);
             },
             // 1.判断begin和end的日期
             bindSingerTime(thisTime, currentTime, options) {
@@ -327,6 +144,25 @@
                 }
                 return options;
             },
+            select(k1, k2, e) {
+                if (e !== undefined) {
+                    e.stopPropagation();
+                }
+                let me = this;
+                // 取消上次选中
+                if (this.today.length > 0) {
+                    this.days[this.today[0]][this.today[1]].today = false;
+                }
+                // 设置当前选中天
+                this.days[k1][k2].today = true;
+                this.day = me.zero(me.days[k1][k2].day);
+                this.today = [k1, k2];
+                this.selectValue = this.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+                if (this.type === 'date') {
+                    this.value = this.selectValue;
+                    this.showFalse();
+                }
+            },
             currentTime() {
                 let date = new Date();
                 let year = date.getFullYear();
@@ -353,51 +189,8 @@
                 this.minuteListShow = false;
                 this.secondListShow = false;
             },
-            prev(e) {
-                e.stopPropagation();
-                let me = this;
-                if (me.month === 0) {
-                    me.month = 11;
-                    me.year = me.year - 1;
-                }
-                else {
-                    me.month = parseInt(me.month, 10) - 1;
-                }
-                me.render(me.year, me.month);
-            },
-            next(e) {
-                e.stopPropagation();
-                let me = this;
-                if (me.month === 11) {
-                    me.month = 0;
-                    me.year = me.year + 1;
-                }
-                else {
-                    me.month = parseInt(me.month, 10) + 1;
-                }
-                me.render(me.year, me.month);
-            },
-            select(k1, k2, e) {
-                if (e !== undefined) {
-                    e.stopPropagation();
-                }
-                let me = this;
-                // 取消上次选中
-                if (this.today.length > 0) {
-                    this.days[this.today[0]][this.today[1]].today = false;
-                }
-                // 设置当前选中天
-                this.days[k1][k2].today = true;
-                this.day = me.zero(me.days[k1][k2].day);
-                this.today = [k1, k2];
-                this.selectValue = this.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-                if (this.type === 'date') {
-                    this.value = this.selectValue;
-                    this.showFalse();
-                }
-            },
             ok() {
-                this.value = this.selectValue;
+                this.value = this.selectValue !== '' ? this.selectValue : this.value;
                 this.showFalse();
             },
             cancel() {
@@ -408,94 +201,6 @@
                 this.minuteListShow = false;
                 this.secondListShow = false;
                 this.show = false;
-            },
-            // 格式化输出
-            output(args) {
-                let me = this;
-                if (me.type === 'time') {
-                    return me.zero(args[3]) + ':' + me.zero(args[4]) + ':' + me.zero(args[5]);
-                }
-                if (me.type === 'datetime') {
-                    let args1 = me.zero(args[1] + 1);
-                    let args2 = me.zero(args[2]);
-                    let args3 = me.zero(args[3]);
-                    let args4 = me.zero(args[4]);
-                    let args5 = me.zero(args[5]);
-                    return args[0] + me.sep + args1 + me.sep + args2 + ' ' + args3 + ':' + args4 + ':' + args5;
-                }
-                if (me.type === 'date') {
-                    return args[0] + me.sep + me.zero(args[1] + 1) + me.sep + me.zero(args[2]);
-                }
-            },
-            dropHourList() {
-                this.hourListShow = true;
-                this.secondListShow = false;
-                this.minuteListShow = false;
-            },
-            selectHourItem(e) {
-                this.hour = e.target.innerText;
-                this.hourListShow = false;
-            },
-            dropMinuteList() {
-                this.hourListShow = false;
-                this.secondListShow = false;
-                this.minuteListShow = true;
-            },
-            selectMinuteItem(e) {
-                this.minute = e.target.innerText;
-                this.minuteListShow = false;
-            },
-            dropSecondList() {
-                this.hourListShow = false;
-                this.minuteListShow = false;
-                this.secondListShow = true;
-            },
-            selectSecondItem(e) {
-                this.second = e.target.innerText;
-                this.secondListShow = false;
-            },
-            changeTitSelect(year, type) {
-                if (type === 'year') {
-                    let startYear = parseInt(year / 10, 10) * 10;
-                    let years1 = ['《', startYear, startYear + 1];
-                    let years2 = [startYear + 2, startYear + 3, startYear + 4];
-                    let years3 = [startYear + 5, startYear + 6, startYear + 7];
-                    let years4 = [startYear + 8, startYear + 9, '》'];
-                    this.selectRange = startYear + ' ~ ' + (startYear + 9);
-                    this.selectRangeList = [years1, years2, years3, years4];
-                    this.selectRangeShow = true;
-                }
-                else {
-                    this.selectRangeList = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]];
-                    this.selectRangeShow = false;
-                }
-                this.dataTableShow = false;
-                this.yearTableShow = true;
-            },
-            selectItem(select) {
-                let me = this;
-                if (select === '《') {
-                    this.changeTitSelect(parseInt(me.selectRange.split('~')[0].trim(), 10) - 10, 'year');
-                }
-                else if (select === '》') {
-                    this.changeTitSelect(parseInt(me.selectRange.split('~')[0].trim(), 10) + 10, 'year');
-                }
-                else if (select > 12) {
-                    // select为年
-                    this.year = select;
-                    this.selectValue = this.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-                    this.render(me.year, me.month);
-                    this.dataTableShow = true;
-                    this.yearTableShow = false;
-                }
-                else {
-                    // select为月
-                    this.month = parseInt(select, 10) - 1;
-                    this.selectValue = this.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-                    this.render(me.year, me.month);
-                    this.dataTableShow = true;
-                    this.yearTableShow = false;
-                }
             },
             showCalendar(e) {
                 let me = this;

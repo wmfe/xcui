@@ -1,5 +1,5 @@
 <template>
-    <div class="xcui-top-progress">
+    <div class="xcui-pageloading">
         <div class="bar" role="bar">
             <div class="peg"></div>
             <div class="spinner" role="spinner"> </div>
@@ -10,7 +10,7 @@
 
 <script>
     export default {
-        name: 'xcui-progress',
+        name: 'xcui-pageloading',
         data() {
             return {
                 easing: 'linear',
@@ -134,13 +134,13 @@
             })(),
             render(fromStart) {
                 if (this.isRendered()) {
-                    return document.getElementById('nprogress');
+                    return document.getElementById('xcui-pageloading');
                 }
 
-                this.addClass(document.documentElement, 'nprogress-busy');
+                this.addClass(document.documentElement, 'xcui-pageloading-busy');
 
                 let progress = document.createElement('div');
-                progress.id = 'nprogress';
+                progress.id = 'xcui-pageloading';
                 progress.innerHTML = this.template;
 
                 let bar = progress.querySelector(this.barSelector);
@@ -153,7 +153,7 @@
                 });
 
                 if (parent !== document.body) {
-                    this.addClass(parent, 'nprogress-custom-parent');
+                    this.addClass(parent, 'xcui-pageloading-custom-parent');
                 }
 
                 parent.appendChild(progress);
@@ -244,9 +244,9 @@
                 };
             })(),
             remove() {
-                this.removeClass(document.documentElement, 'nprogress-busy');
-                this.removeClass(document.querySelector(this.parent), 'nprogress-custom-parent');
-                let progress = document.getElementById('nprogress');
+                this.removeClass(document.documentElement, 'xcui-pageloading-busy');
+                this.removeClass(document.querySelector(this.parent), 'xcui-pageloading-custom-parent');
+                let progress = document.getElementById('xcui-pageloading');
                 progress && this.removeElement(progress);
             },
             removeClass(element) {
@@ -296,7 +296,7 @@
                 return typeof this.status === 'number';
             },
             isRendered() {
-                return !!document.getElementById('nprogress');
+                return !!document.getElementById('xcui-pageloading');
             },
             addClass(element, name) {
                 let oldList = this.classList(element);
@@ -363,7 +363,7 @@
 
 <style lang="less">
 
-#nprogress{
+#xcui-pageloading{
     .bar{
         background: #29d;
         position: fixed;
@@ -385,10 +385,6 @@
         -webkit-transform: rotate(3deg) translate(0px, -4px);
         -ms-transform: rotate(3deg) translate(0px, -4px);
         transform: rotate(3deg) translate(0px, -4px);
-    }
-
-    .spinner-icon {
-
     }
 }
 
