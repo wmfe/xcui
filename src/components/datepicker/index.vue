@@ -449,9 +449,6 @@
     }
     .btn-default {
         color: #666;
-        border: #ccc solid 1px;
-        background-color: #fff;
-        margin-left:-1px;
         border-radius: 0 4px 4px 0;
     }
 </style>
