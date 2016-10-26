@@ -1,5 +1,5 @@
 <template>
-	<div class="xcui-tag {{disabled?'xcui-disabled':''}}" @click="onClick" v-if="showTag" >
+	<div :class="['xcui-tag', disabled ? ' xcui-disabled':'']" @click="onClick" v-if="showTag" >
         <div class="{{classname!='' ? classname : ''}}" >
 		<span class="xcui-tag-text"><slot></slot>{{text}}<span>
         <i class="xcui-cross" v-if="closeable" @click.stop="onCloseClick"></i>
@@ -55,7 +55,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 	.xcui-tag{
 	    display: inline-block;
 	    line-height: 25px;
@@ -66,7 +66,6 @@ export default {
 	    font-size: 12px;
 	    vertical-align: middle;
 	    opacity: 1;
-	    overflow: hidden;
 	    margin: 2px 4px 2px 0;
 	    cursor: pointer;
 

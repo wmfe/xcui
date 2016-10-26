@@ -76,6 +76,11 @@ export default {
 .define-class{
     background:#ffab47;
     color:#fff;
+    border-radius: 6px;
+}
+
+.define-class:hover{
+    background:red;
 }
 </style>
 
