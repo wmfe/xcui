@@ -45,12 +45,12 @@
 | 名字          | 类型    | 默认              | 描述                                                              | 可选范围            | 是否必选 |
 |---------------|---------|-------------------|-------------------------------------------------------------------|---------------------|----------|
 | type          | String  | standard          | 控制样式选择                                                      | standard,mini       | 可选     |
-| currentPageNo | Number  | 1                 | 当前页码                                                          | >0                  | 可选     |
-| total         | Number  | 0                 | 总条数                                                            | >0                  | 必选     |
+| currentPageNo | Number  | 1                 | 当前页码                                                          | > 0                 | 可选     |
+| total         | Number  | 0                 | 总条数                                                            | >= 0                | 必选     |
 | pageSize      | Number  | 20                | 每页条数                                                          | 取自`pageSizeRange` | 可选     |
 | withPageSize  | Boolean | true              | 是否展示`pageSize`设置挂件                                        |                     | 可选     |
 | pageSizeRange | Array   | [10, 20, 50, 100] | `pageSize`设置挂件的下拉菜单选项范围 `withPageSize`为 true 时生效 |                     | 可选     |
-| rangeLength   | Number  | 10                | 页码按钮的展示个数                                                |                     | 可选     |
+| rangeLength   | Number  | 10                | 页码按钮的展示个数                                                | > 1                 | 可选     |
 </template>
 
 <script>
