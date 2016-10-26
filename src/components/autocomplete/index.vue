@@ -8,7 +8,6 @@
                 :placeholder="placeholder"
                 v-model="dataText"
                 @focus="onInput"
-                @input="onInput"
                 @blur="onBlur"
                 @keyDown.up="changeCurrent(-1)"
                 @keyDown.down="changeCurrent(1)"
@@ -20,6 +19,9 @@
                 </a>
             </li>
         </ul>
+        <button @click="clearText" type="button"
+        title="点击清除输入内容" class="close" tabindex="-1"
+        style="position: absolute; right: 8px; top: 4px;">×</button>
     </div>
 </template>
 
@@ -81,17 +83,20 @@
         },
         computed: {
             show() {
-                return this.list.length > 0;
+                return this.list.length > 0 && this.$el.getElementsByTagName('input')[0] === document.activeElement;
             }
         },
         watch: {
             suggestions() {
                 this.arrangeLocalList();
                 this.getLocalSug();
+            },
+            dataText() {
+                this.onInput();
             }
         },
         methods: {
-            onInput(e) {
+            onInput() {
                 this.currentIndex = -1;
                 this.getLocalSug();
                 this.autoSetItem();
@@ -171,6 +176,10 @@
             },
             isArray(arr) {
                 return Object.prototype.toString.call(arr) === '[object Array]';
+            },
+            clearText() {
+                this.dataText = '';
+                this.dataValue = '';
             }
         },
         ready() {
@@ -188,6 +197,8 @@
         }
         .xcui-suggestion-list{
             min-width:100%;
+            max-height: 400px;
+            overflow: auto;
             li{
                 &.current{
                     background:#ddd;
