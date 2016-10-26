@@ -15,8 +15,13 @@ import Popover from './demos/popover';
 import Autocomplete from './demos/autocomplete';
 import TagDemo from './demos/tag';
 import datepicker from './demos/datepicker';
+import daterangepicker from './demos/daterangepicker';
 import Select from './demos/select.vue';
 import Toaster from './demos/toaster';
+import Modal from './demos/modal';
+import InputNumber from './demos/inputNumber';
+import Progress from './demos/progress';
+import PageLoading from './demos/pageloading';
 
 Vue.use(Router);
 Vue.use(VueResource);
@@ -58,6 +63,11 @@ router.map({
                     resolve(datepicker);
                 }
             },
+            '/component/daterangepicker': {
+                component(resolve) {
+                    resolve(daterangepicker);
+                }
+            },
             '/component/select': {
                 component(resolve) {
                     resolve(Select);
@@ -71,6 +81,26 @@ router.map({
             '/component/toaster': {
                 component(resolve) {
                     resolve(Toaster);
+                }
+            },
+            '/component/modal': {
+                component(resolve) {
+                    resolve(Modal);
+                }
+            },
+            '/component/inputNumber': {
+                component(resolve) {
+                    resolve(InputNumber);
+                }
+            },
+            '/component/progress': {
+                component(resolve) {
+                    resolve(Progress);
+                }
+            },
+            '/component/pageloading': {
+                component(resolve) {
+                    resolve(PageLoading);
                 }
             }
         }

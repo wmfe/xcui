@@ -46,9 +46,10 @@
                     v-if="filteredOptions.length<1 && searchEmptyText"
                     v-text="searchEmptyText">
                 </li>
-                <template v-if="!optgroup && filteredOptions.length>0"
+                <template
                           v-for="item in filteredOptions">
                     <li class="xcui-select-menu-item"
+                        v-if="!optgroup"
                         track-by="$index"
                         tabindex="1"
                         :class="{'xcui-select-menu-item-selected': isSelected(item), 'xcui-select-menu-item-key': $index === selectIndex,'disabled': item.disable}"
@@ -60,9 +61,9 @@
                         <span v-else v-text="getOptionLabel(item)"></span>
                     </li>
                 </template>
-                <template v-if="optgroup && filteredOptions.length>0"
-                          v-for="item in filteredOptions">
-                    <li class="xcui-select-menu-group">
+                <template
+                    v-for="item in filteredOptions">
+                    <li class="xcui-select-menu-group" v-if="optgroup">
                         <div class="xcui-select-menu-group-title">{{item.name}}</div>
                         <ul>
                             <template v-for="option in item.options">
@@ -174,12 +175,12 @@
                         this.searchValue = '';
                     }
                     this.$els.search.focus();
-                } else {
+                }
+                else {
                     this.$el.focus();
                 }
             },
             deactivate() {
-                console.log('deactivate');
                 if (!this.isOpen) {
                     return;
                 }
@@ -192,7 +193,8 @@
             toggle(key) {
                 if (!this.isOpen) {
                     this.activate();
-                } else {
+                }
+                else {
                     this.deactivate();
                 }
             },
@@ -200,14 +202,13 @@
                 if (option !== null && typeof option === 'object') {
                     if (this.customLabel) {
                         return this.customLabel(option);
-                    } else {
-                        if (this.label && option[this.label]) {
-                            return option[this.label];
-                        } else if (option.label) {
-                            return option.label;
-                        }
                     }
-                } else { return option; }
+                    else if (this.label && option[this.label]) {
+                        return option[this.label];
+                    }
+                    return option.label;
+                }
+                return option;
             },
             optgroupSelect(parentIndex, index, option) {
                 if (this.selectIndex === (parentIndex + '-' + index)
@@ -222,7 +223,9 @@
             },
             select(option) {
                 const isSelected = this.isSelected(option);
-                if (!option || option.disable) { return; }
+                if (!option || option.disable) {
+                    return;
+                }
                 if (this.multiple) {
                     let optionValue = option;
                     if (typeof option === 'object') {
@@ -230,13 +233,17 @@
                     }
                     if (isSelected) {
                         this.removeOption(optionValue);
-                    } else {
+                    }
+                    else {
                         if (this.multipleMax > this.value.length) {
                             this.value.push(optionValue);
                         }
                     }
-                } else {
-                    if (isSelected) { return; }
+                }
+                else {
+                    if (isSelected) {
+                        return;
+                    }
                     this.value = isSelected ? null : option;
                 }
                 this.$emit('change', deepClone(this.value));
@@ -261,13 +268,13 @@
                 if (this.multiple) {
                     if (typeof option === 'object') {
                         return this.value.indexOf(option[me.label] || option.label) > -1;
-                    } else {
-                        return this.value.indexOf(option) > -1;
                     }
+                    return this.value.indexOf(option) > -1;
                 }
                 if (this.value === option && !option.disable) {
                     return true;
-                } else { return false; }
+                }
+                return false;
             },
             removeOption(option) {
                 if (this.value.length === 0) {
@@ -275,7 +282,6 @@
                 }
                 if (typeof option === 'object') {
                     this.values.map(e => {
-                        console.log(e === option);
                     });
                 }
                 this.value.$remove(option);
@@ -369,11 +375,11 @@
                 }
                 if (typeof this.value === 'string') {
                     return this.value;
-                } else if (this.label) {
-                    return this.value[this.label];
-                } else {
-                    return this.value.label || '';
                 }
+                else if (this.label) {
+                    return this.value[this.label];
+                }
+                return this.value.label || '';
             },
             getDropDownHeight() {
                 let list = this.$els.list;
@@ -431,7 +437,8 @@
                     this.value = this.selected;
                     let indexs = this.optgroupDefaultIndex;
                     this.selectIndex = indexs.join('-');
-                } else {
+                }
+                else {
                     this.value = this.selected;
                 }
             }
@@ -450,7 +457,7 @@
         z-index: 10;
         &-open {
             .xcui-select-selection {
-                border-color: #57c5f7 !important;
+                border-color: #66afe9 !important;
                 outline: 0;
                 box-shadow: 0 0 0 2px #2db7f533;
             }
@@ -471,8 +478,9 @@
             box-sizing: border-box;
             display: block;
             background-color: #fff;
-            border-radius: 6px;
-            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 2px 6px;
             -webkit-transition: all .3s cubic-bezier(.645, .045, .355, 1);
             transition: all .3s cubic-bezier(.645, .045, .355, 1);
             &-rendered {
@@ -481,7 +489,7 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
-                padding-left: 8px;
+                /*padding-left: 8px;*/
                 padding-right: 24px;
                 line-height: 26px;
             }
@@ -495,9 +503,9 @@
         }
         &-menu-dropdown {
             background-color: #fff;
-            border: 1px solid #d9d9d9;
-            box-shadow: 0 1px 6px #63636333;
-            border-radius: 6px;
+            //border: 1px solid #d9d9d9;
+            /*box-shadow: 0 1px 6px #63636333;*/
+            border-radius: 4px;
             box-sizing: border-box;
             z-index: 1050;
             /*left: -9999px;*/
@@ -510,6 +518,9 @@
             overflow:hidden;
             font-size: 12px;
             max-height: 200px;
+            border: 1px solid rgba(0,0,0,.15);
+            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+
         }
         &-menu ,&-menu-group{
             outline: none;
@@ -523,7 +534,7 @@
                 display: block;
                 padding: 7px 15px;
                 font-weight: 400;
-                color: #666;
+                color: #262626;
                 cursor: pointer;
                 white-space: nowrap;
                 text-overflow: ellipsis;
@@ -540,9 +551,9 @@
                     cursor: not-allowed !important;
                 }
                 &-selected {
-                    background-color: #f7f7f7;
+                    background-color: #337ab7;
                     font-weight: 700;
-                    color: #666;
+                    color: #fff;
                     &:after {
                         font-family: 'Glyphicons Halflings';
                         content: "\e013";
@@ -558,13 +569,13 @@
                     }
                 }
                 &:hover {
-                    background-color: #eaf8fe;
+                    background-color: #f5f5f5;
                 }
                 &-partial {
                     background: red;
                 }
                 &-key {
-                    background-color: #eaf8fe;
+                    background-color: #f5f5f5;
                 }
             }
         }
@@ -577,9 +588,9 @@
             &-item{
                 padding-left:20px;
                 &-selected {
-                    background-color: #f7f7f7;
+                    background-color: #337ab7;
                     font-weight: 700;
-                    color: #666;
+                    color: #fff;
                     &:after {
                         font-family: 'Glyphicons Halflings';
                         content: "\e013";
@@ -614,7 +625,7 @@
         .xcui-select-arrow {
             position: absolute;
             right: 10px;
-            top: 8px;
+            top: 10px;
             color: #ccc;
         }
 
