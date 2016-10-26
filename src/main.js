@@ -9,7 +9,7 @@ import VueResource from 'vue-resource';
 import App from './App';
 import Home from './Home';
 import Homecontent from './demos/homeContent';
-import Paginations from './demos/paginations';
+import Pagination from './demos/pagination';
 import Loading from './demos/loading';
 import Popover from './demos/popover';
 import Autocomplete from './demos/autocomplete';
@@ -38,9 +38,9 @@ router.map({
                     resolve(Homecontent);
                 }
             },
-            '/component/paginations': {
+            '/component/pagination': {
                 component(resolve) {
-                    resolve(Paginations);
+                    resolve(Pagination);
                 }
             },
             '/component/popover': {

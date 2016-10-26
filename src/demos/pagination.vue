@@ -12,7 +12,7 @@
                 <xcui-pagination
                     type="mini"
             @go-to-page="turnToPage"
-                    :current-page-no.sync="currentPageNum"
+                    :current-page-no.sync="currentPageNo"
                     :total="total"
                     :page-size.sync="pageSize"
                     ></xcui-pagination>
@@ -32,7 +32,7 @@
         </table>
         <xcui-pagination
             @go-to-page="turnToPage"
-            :current-page-no.sync="currentPageNum"
+            :current-page-no.sync="currentPageNo"
             :total="total"
             :page-size.sync="pageSize"
             ></xcui-pagination>
@@ -62,7 +62,7 @@ export default {
     },
     data() {
         return {
-            currentPageNum: 1,
+            currentPageNo: 1,
             pageSize: 10,
             list: [],
             total: 0

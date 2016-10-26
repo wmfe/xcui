@@ -4,7 +4,7 @@
     <div id="sidebar-wrapper" class="col-md-2">
         <ul class="sidebar-nav">
             <li>
-                <a v-link="{ path: '/component/paginations' }" href="javascript:;">Paginations</a>
+                <a v-link="{ path: '/component/pagination' }" href="javascript:;">Pagination</a>
             </li>
             <li>
                 <a v-link="{ path: '/component/autocomplete' }" href="javascript:;">Autocomplete</a>
