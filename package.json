@@ -31,7 +31,7 @@
     "array-shuffle": "^1.0.0",
     "countup": "^1.6.1",
     "fuzzysearch": "^1.0.3",
-    "xcui-demo-loader": "^0.1.3"
+    "xcui-demo-loader": "^0.1.4"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",
