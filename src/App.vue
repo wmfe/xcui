@@ -2,7 +2,7 @@
   <div>
       <div id="header">
           <a href="#" class="logo">
-            <img src={{logoUrl}}>
+            <img :src="logoUrl">
               XCUI Components
           </a>
       </div>
