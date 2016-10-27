@@ -454,7 +454,6 @@
                     }
                 },
                 deactivate: function deactivate() {
-                    console.log("deactivate");
                     if (!this.isOpen) {
                         return;
                     }
@@ -475,16 +474,12 @@
                     if (option !== null && (typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
                         if (this.customLabel) {
                             return this.customLabel(option);
-                        } else {
-                            if (this.label && option[this.label]) {
-                                return option[this.label];
-                            } else if (option.label) {
-                                return option.label;
-                            }
+                        } else if (this.label && option[this.label]) {
+                            return option[this.label];
                         }
-                    } else {
-                        return option;
+                        return option.label;
                     }
+                    return option;
                 },
                 optgroupSelect: function optgroupSelect(parentIndex, index, option) {
                     if (this.selectIndex === parentIndex + "-" + index && this.value === option) {
@@ -534,24 +529,20 @@
                     if (this.multiple) {
                         if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
                             return this.value.indexOf(option[me.label] || option.label) > -1;
-                        } else {
-                            return this.value.indexOf(option) > -1;
                         }
+                        return this.value.indexOf(option) > -1;
                     }
                     if (this.value === option && !option.disable) {
                         return true;
-                    } else {
-                        return false;
                     }
+                    return false;
                 },
                 removeOption: function removeOption(option) {
                     if (this.value.length === 0) {
                         return;
                     }
                     if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
-                        this.values.map(function(e) {
-                            console.log(e === option);
-                        });
+                        this.values.map(function(e) {});
                     }
                     this.value.$remove(option);
                     this.$emit("remove", (0, _deepClone2.default)(option));
@@ -647,9 +638,8 @@
                         return this.value;
                     } else if (this.label) {
                         return this.value[this.label];
-                    } else {
-                        return this.value.label || "";
                     }
+                    return this.value.label || "";
                 },
                 getDropDownHeight: function getDropDownHeight() {
                     var list = this.$els.list;
@@ -1223,7 +1213,7 @@
         }
         module.exports = fuzzysearch;
     }, function(module, exports) {
-        module.exports = ' <div tabindex=0 :class=getWrapCls @focus=activate() @blur="showSearch ? false : deactivate()" @keydown.enter.stop.prevent.self=enterSearchValue()> <div class=xcui-select-selection> <div class=xcui-select-selection-rendered @mousedown.stop=toggle()> <input type=text name=search v-el:search autocomplete=off class=xcui-select-search-input v-if=showSearch v-model=searchValue @focus.prevent=activate() @blur.prevent=deactivate() @keyup.down=keyNext() @keyup.up=keyPrev() @keydown.enter.stop.prevent.self=enterSearchValue() @change.prevent.stop="" :placeholder=placeholder> <span class=xcui-select-selection-text v-if=!showSearch v-text="currentOptionLabel || placeholder"> </span> <i class="glyphicon xcui-select-arrow" @mousedown.prevent.stop=toggle() :class="{\'glyphicon-triangle-bottom\':(!isOpen),\'glyphicon-triangle-top\':(isOpen)}"></i> </div> </div> <div class=xcui-select-menu-dropdown v-show="(isOpen && filteredOptions.length>0) || (isOpen && multiple)"> <ul v-el:list aria-activedescendant class=xcui-select-menu> <li class=xcui-select-menu-item v-if="multiple && multipleMax === value.length"> 最多可选{{multipleMax}}项! </li> <li class=xcui-select-menu-item v-if="filteredOptions.length<1 && searchEmptyText" v-text=searchEmptyText> </li> <template v-if="!optgroup && filteredOptions.length>0" v-for="item in filteredOptions"> <li class=xcui-select-menu-item track-by=$index tabindex=1 :class="{\'xcui-select-menu-item-selected\': isSelected(item), \'xcui-select-menu-item-key\': $index === selectIndex,\'disabled\': item.disable}" @mouseenter.prevent.stop.self=indexSet($index) @mousedown.prevent.stop.self=select(item)> <partial :name=optionPartial class=xcui-select-menu-item-partial v-if=optionPartial.length></partial> <span v-else v-text=getOptionLabel(item)></span> </li> </template> <template v-if="optgroup && filteredOptions.length>0" v-for="item in filteredOptions"> <li class=xcui-select-menu-group> <div class=xcui-select-menu-group-title>{{item.name}}</div> <ul> <template v-for="option in item.options"> <li class=xcui-select-menu-group-item :class="{\'xcui-select-menu-group-item-selected\': isSelected(option,$parent.$index,$index), \'disabled\': option.disable}" @mousedown.prevent.stop.self=optgroupSelect($parent.$index,$index,option)> <partial :name=optionPartial class=xcui-select-menu-item-partial v-if=optionPartial.length></partial> <span v-else v-text=getOptionLabel(option)></span> </li> </template> </ul> </li> </template> </ul> </div> </div> ';
+        module.exports = ' <div tabindex=0 :class=getWrapCls @focus=activate() @blur="showSearch ? false : deactivate()" @keydown.enter.stop.prevent.self=enterSearchValue()> <div class=xcui-select-selection> <div class=xcui-select-selection-rendered @mousedown.stop=toggle()> <input type=text name=search v-el:search autocomplete=off class=xcui-select-search-input v-if=showSearch v-model=searchValue @focus.prevent=activate() @blur.prevent=deactivate() @keyup.down=keyNext() @keyup.up=keyPrev() @keydown.enter.stop.prevent.self=enterSearchValue() @change.prevent.stop="" :placeholder=placeholder> <span class=xcui-select-selection-text v-if=!showSearch v-text="currentOptionLabel || placeholder"> </span> <i class="glyphicon xcui-select-arrow" @mousedown.prevent.stop=toggle() :class="{\'glyphicon-triangle-bottom\':(!isOpen),\'glyphicon-triangle-top\':(isOpen)}"></i> </div> </div> <div class=xcui-select-menu-dropdown v-show="(isOpen && filteredOptions.length>0) || (isOpen && multiple)"> <ul v-el:list aria-activedescendant class=xcui-select-menu> <li class=xcui-select-menu-item v-if="multiple && multipleMax === value.length"> 最多可选{{multipleMax}}项! </li> <li class=xcui-select-menu-item v-if="filteredOptions.length<1 && searchEmptyText" v-text=searchEmptyText> </li> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-item v-if=!optgroup track-by=$index tabindex=1 :class="{\'xcui-select-menu-item-selected\': isSelected(item), \'xcui-select-menu-item-key\': $index === selectIndex,\'disabled\': item.disable}" @mouseenter.prevent.stop.self=indexSet($index) @mousedown.prevent.stop.self=select(item)> <partial :name=optionPartial class=xcui-select-menu-item-partial v-if=optionPartial.length></partial> <span v-else v-text=getOptionLabel(item)></span> </li> </template> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-group v-if=optgroup> <div class=xcui-select-menu-group-title>{{item.name}}</div> <ul> <template v-for="option in item.options"> <li class=xcui-select-menu-group-item :class="{\'xcui-select-menu-group-item-selected\': isSelected(option,$parent.$index,$index), \'disabled\': option.disable}" @mousedown.prevent.stop.self=optgroupSelect($parent.$index,$index,option)> <partial :name=optionPartial class=xcui-select-menu-item-partial v-if=optionPartial.length></partial> <span v-else v-text=getOptionLabel(option)></span> </li> </template> </ul> </li> </template> </ul> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(75);

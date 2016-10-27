@@ -5,7 +5,7 @@
                  <div class="xcui-progress-inner" :style="{width:percent+'%',height:height+'px'}"></div>
             </div>
         </div>
-        <div :class="infoClassName" :class={'hidden':!showInfo} >
+        <div :class="['infoClassName',!showInfo ? 'hidden':'']" >
             {{percentInfo}}
         </div>
     <div>
@@ -14,18 +14,6 @@
 <script>
     export default {
         name: 'xcui-progress',
-        data() {
-            return {
-                easing: 'linear',
-                positionUsing: '',
-                status: null,
-                showSpinner: true,
-                template: '<div class="bar" role="bar"><div class="peg"></div></div>',
-                spinnerSelector: '[role="spinner"]',
-                parent: 'body',
-                barSelector: '[role="bar"]'
-            };
-        },
         props: {
             percent: {
                 type: Number,

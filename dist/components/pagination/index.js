@@ -30,26 +30,33 @@
         });
         exports.default = {
             props: {
-                total: {
-                    type: [ Number, String ],
-                    "default": 0
-                },
-                pageSize: {
-                    type: Number,
-                    "default": 20
+                type: {
+                    type: String,
+                    "default": "standard"
                 },
                 currentPageNo: {
                     type: Number,
                     "default": 1
                 },
+                total: Number,
+                pageSize: {
+                    type: Number,
+                    "default": 20
+                },
+                "class": String,
+                withPageSize: {
+                    type: Boolean,
+                    "default": true
+                },
+                pageSizeRange: {
+                    type: Array,
+                    "default": function _default() {
+                        return [ 10, 20, 50, 100 ];
+                    }
+                },
                 rangeLength: {
                     type: Number,
                     "default": 10
-                }
-            },
-            watch: {
-                currentPageNo: function currentPageNo(val) {
-                    this.$dispatch("turnToPage", val);
                 }
             },
             computed: {
@@ -90,24 +97,32 @@
                     return result;
                 }
             },
+            watch: {
+                pageSize: function pageSize(val) {
+                    this.$emit("change-pagesize", this.pageSize);
+                    this.$emit("go-to-page", 1, this.currentPageNo);
+                }
+            },
             methods: {
                 turnToPage: function turnToPage(pageNo) {
-                    this.currentPageNo = pageNo;
+                    if (pageNo > 0 && pageNo <= this.totalPageCount) {
+                        this.$emit("go-to-page", pageNo, this.currentPageNo);
+                        this.currentPageNo = pageNo;
+                    }
                 },
                 prev: function prev() {
-                    if (this.currentPageNo - 1 > 0) {
-                        this.currentPageNo -= 1;
-                    }
+                    this.turnToPage(this.currentPageNo - 1);
                 },
                 next: function next() {
-                    if (this.currentPageNo + 1 <= this.totalPageCount) {
-                        this.currentPageNo += 1;
-                    }
+                    this.turnToPage(this.currentPageNo + 1);
+                },
+                isActive: function isActive(number) {
+                    return number + this.getRangePage.begin === this.currentPageNo;
                 }
             }
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class=pagination-wrap _v-80e12120=""> <button @click=prev class="btn btn-default" :class="{\'disabled\': currentPageNo <= 1}" _v-80e12120="">上一页</button> <ul class=pagination _v-80e12120=""> <li v-if="getRangePage.begin > 1" _v-80e12120=""> <a href=javascript:void(0); @click=turnToPage(1) _v-80e12120="">1</a> </li> <li v-if="getRangePage.begin > 1" _v-80e12120=""> <a href=javascript:void(0) _v-80e12120="">...</a> </li> <li v-for="number in (getRangePage.end - getRangePage.begin + 1)" :class="{\'active\':number + getRangePage.begin == currentPageNo}" _v-80e12120=""> <a href=javascript:void(0); v-text="number + getRangePage.begin" @click="turnToPage(number + getRangePage.begin)" _v-80e12120=""></a> </li> <li v-if="getRangePage.end < totalPageCount" _v-80e12120=""> <a href=javascript:void(0) _v-80e12120="">...</a> </li> <li v-if="getRangePage.end < totalPageCount" _v-80e12120=""> <a href=javascript:void(0); v-text=totalPageCount @click=turnToPage(totalPageCount) _v-80e12120=""></a> </li> </ul> <button @click=next class="btn btn-default" :class="{\'disabled\': currentPageNo >= totalPageCount}" _v-80e12120="">下一页</button> </div> ';
+        module.exports = ' <div class="v-pagination-wrap {{ class || \'\' }}" _v-c511d966=""> <template v-if="type === \'standard\' "> <div class=row _v-c511d966=""> <div v-if=withPageSize class="v-pagination-page-size col-md-6" _v-c511d966=""> 共<span v-text=total _v-c511d966=""></span>条 &nbsp;&nbsp; 每页 <select v-model=pageSize _v-c511d966=""> <option v-for="opt in pageSizeRange" :value=opt v-text=opt _v-c511d966="">1</option> </select> 条 </div> <div class="v-pagination-standard col-md-6 text-right" _v-c511d966=""> <button @click=prev class="btn btn-default" :class="{\'disabled\': currentPageNo == 1}" _v-c511d966="">上一页</button> <ul class=pagination _v-c511d966=""> <li v-if="getRangePage.begin > 1" _v-c511d966=""> <a href=javascript:void(0); @click=turnToPage(1) _v-c511d966="">1</a> </li> <li v-if="getRangePage.begin > 1" _v-c511d966=""> <a class=apostrophe _v-c511d966="">...</a> </li> <li v-for="number in (getRangePage.end - getRangePage.begin + 1)" :class="{\'active\': isActive(number)}" _v-c511d966=""> <a v-if=isActive(number) href=javascript:void(0); v-text="number + getRangePage.begin" _v-c511d966=""></a> <a v-else="" href=javascript:void(0); v-text="number + getRangePage.begin" @click="turnToPage(number + getRangePage.begin)" _v-c511d966=""></a> </li> <li v-if="getRangePage.end < totalPageCount" _v-c511d966=""> <a class=apostrophe _v-c511d966="">...</a> </li> <li v-if="getRangePage.end < totalPageCount" _v-c511d966=""> <a href=javascript:void(0); v-text=totalPageCount @click=turnToPage(totalPageCount) _v-c511d966=""></a> </li> </ul> <button @click=next class="btn btn-default" :class="{\'disabled\': currentPageNo == totalPageCount}" _v-c511d966="">下一页</button> </div> </div> </template> <div v-else="" class=v-pagination-mini _v-c511d966=""> <span _v-c511d966="">共<span v-text=total _v-c511d966=""></span>条</span> <button class="btn btn-default prev-trigger" :class="{\'disabled\': currentPageNo < 2}" @click=prev _v-c511d966=""> <span class=caret _v-c511d966=""></span> </button> <span v-text=currentPageNo _v-c511d966=""></span>/<span v-text=totalPageCount _v-c511d966=""></span> <button class="btn btn-default next-trigger" :class="{\'disabled\': currentPageNo == totalPageCount}" @click=next _v-c511d966=""> <span class=caret _v-c511d966=""></span> </button> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(2);

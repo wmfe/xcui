@@ -175,7 +175,8 @@
                         this.searchValue = '';
                     }
                     this.$els.search.focus();
-                } else {
+                }
+                else {
                     this.$el.focus();
                 }
             },
@@ -192,7 +193,8 @@
             toggle(key) {
                 if (!this.isOpen) {
                     this.activate();
-                } else {
+                }
+                else {
                     this.deactivate();
                 }
             },
@@ -200,14 +202,13 @@
                 if (option !== null && typeof option === 'object') {
                     if (this.customLabel) {
                         return this.customLabel(option);
-                    } else {
-                        if (this.label && option[this.label]) {
-                            return option[this.label];
-                        } else if (option.label) {
-                            return option.label;
-                        }
                     }
-                } else { return option; }
+                    else if (this.label && option[this.label]) {
+                        return option[this.label];
+                    }
+                    return option.label;
+                }
+                return option;
             },
             optgroupSelect(parentIndex, index, option) {
                 if (this.selectIndex === (parentIndex + '-' + index)
@@ -222,7 +223,9 @@
             },
             select(option) {
                 const isSelected = this.isSelected(option);
-                if (!option || option.disable) { return; }
+                if (!option || option.disable) {
+                    return;
+                }
                 if (this.multiple) {
                     let optionValue = option;
                     if (typeof option === 'object') {
@@ -230,13 +233,17 @@
                     }
                     if (isSelected) {
                         this.removeOption(optionValue);
-                    } else {
+                    }
+                    else {
                         if (this.multipleMax > this.value.length) {
                             this.value.push(optionValue);
                         }
                     }
-                } else {
-                    if (isSelected) { return; }
+                }
+                else {
+                    if (isSelected) {
+                        return;
+                    }
                     this.value = isSelected ? null : option;
                 }
                 this.$emit('change', deepClone(this.value));
@@ -261,13 +268,13 @@
                 if (this.multiple) {
                     if (typeof option === 'object') {
                         return this.value.indexOf(option[me.label] || option.label) > -1;
-                    } else {
-                        return this.value.indexOf(option) > -1;
                     }
+                    return this.value.indexOf(option) > -1;
                 }
                 if (this.value === option && !option.disable) {
                     return true;
-                } else { return false; }
+                }
+                return false;
             },
             removeOption(option) {
                 if (this.value.length === 0) {
@@ -275,7 +282,6 @@
                 }
                 if (typeof option === 'object') {
                     this.values.map(e => {
-                        console.log(e === option);
                     });
                 }
                 this.value.$remove(option);
@@ -369,11 +375,11 @@
                 }
                 if (typeof this.value === 'string') {
                     return this.value;
-                } else if (this.label) {
-                    return this.value[this.label];
-                } else {
-                    return this.value.label || '';
                 }
+                else if (this.label) {
+                    return this.value[this.label];
+                }
+                return this.value.label || '';
             },
             getDropDownHeight() {
                 let list = this.$els.list;
@@ -431,7 +437,8 @@
                     this.value = this.selected;
                     let indexs = this.optgroupDefaultIndex;
                     this.selectIndex = indexs.join('-');
-                } else {
+                }
+                else {
                     this.value = this.selected;
                 }
             }
