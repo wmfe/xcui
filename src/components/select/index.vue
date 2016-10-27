@@ -50,11 +50,10 @@
                           v-for="item in filteredOptions">
                     <li class="xcui-select-menu-item"
                         v-if="!optgroup"
-                        track-by="$index"
                         tabindex="1"
                         :class="{'xcui-select-menu-item-selected': isSelected(item), 'xcui-select-menu-item-key': $index === selectIndex,'disabled': item.disable}"
                         @mouseenter.prevent.stop.self="indexSet($index)"
-                        @mousedown.prevent.stop.self="select(item)">
+                        @mousedown.prevent="select(item)">
                         <partial :name="optionPartial"
                                  class="xcui-select-menu-item-partial"
                                  v-if="optionPartial.length"></partial>
@@ -84,7 +83,7 @@
     </div>
 </template>
 <script>
-    import deepClone from '../../utils/deepClone.js';
+    import clone from 'clone';
     import fuzzysearch from 'fuzzysearch';
     export default {
         name: 'xcui-select',
@@ -161,7 +160,7 @@
                 searchValue: '',
                 isOpen: false,
                 selectIndex: 0,
-                value: this.selected ? deepClone(this.selected) : this.multiple ? [] : null
+                value: this.selected ? clone(this.selected) : this.multiple ? [] : null
             };
         },
         methods: {
@@ -173,6 +172,7 @@
                 if (this.showSearch) {
                     if (this.clearOnSelect) {
                         this.searchValue = '';
+                        this.options = [];
                     }
                     this.$els.search.focus();
                 }
@@ -217,8 +217,8 @@
                 }
                 this.value = option;
                 this.selectIndex = (parentIndex + '-' + index);
-                this.$emit('change', deepClone(this.value), parentIndex, index);
-                this.$emit('select', deepClone(this.value), parentIndex, index);
+                this.$emit('change', clone(this.value), parentIndex, index);
+                this.$emit('select', clone(this.value), parentIndex, index);
                 this.closeAfterSelect && this.deactivate();
             },
             select(option) {
@@ -246,8 +246,8 @@
                     }
                     this.value = isSelected ? null : option;
                 }
-                this.$emit('change', deepClone(this.value));
-                this.$emit('select', deepClone(this.value));
+                this.$emit('change', clone(this.value));
+                this.$emit('select', clone(this.value));
                 this.closeAfterSelect && this.deactivate();
             },
             /**
@@ -271,6 +271,12 @@
                     }
                     return this.value.indexOf(option) > -1;
                 }
+                if (this.showSearch) {
+                    if (typeof option === 'object') {
+                        return this.searchValue === option[me.label];
+                    }
+                    return this.searchValue === option;
+                }
                 if (this.value === option && !option.disable) {
                     return true;
                 }
@@ -285,7 +291,7 @@
                     });
                 }
                 this.value.$remove(option);
-                this.$emit('remove', deepClone(option));
+                this.$emit('remove', clone(option));
             },
             indexSet(parentIndex, index) {
                 if (this.optgroup) {
@@ -359,8 +365,12 @@
             },
             filteredOptions() {
                 let value = this.searchValue;
+                let me = this;
                 if (this.showSearch && this.options.length) {
                     return this.options.filter(function (item) {
+                        if (typeof item !== 'string') {
+                            return fuzzysearch(value, item[me.label || 'label']);
+                        }
                         return fuzzysearch(value, item);
                     });
                 }
