@@ -24,9 +24,11 @@
         </example>
         <example title="日期 + 时间选择">
             <daterangepicker
+                  type="datetime"
+                  class-name="class-name"
+                  color="pink"
                   :value.sync = "datetime.value"
                   :sep = 'datetime.sep'
-                  :type="datetime.type"
                   :begin="datetime.begin"
                   :end="datetime.end"
                   :date-limit="datetime.dateLimit"
@@ -117,3 +119,8 @@ export default {
     }
 };
 </script>
+<style lang="less">
+    .class-name{
+        width:400px;
+    }
+</style>

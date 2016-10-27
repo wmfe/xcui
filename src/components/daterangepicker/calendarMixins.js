@@ -22,21 +22,19 @@ export default {
             default: 1
         },
         minuteRange: {
-            type: Number,
+            type: [Number, String],
             default: 1
         },
         secondRange: {
-            type: Number,
+            type: [Number, String],
             default: 1
         },
         sep: {
             type: String,
             default: '-'
         },
-        color: {
-            type: String,
-            default: ''
-        }
+        color: String,
+        className: String
     },
     data() {
         return {
@@ -66,9 +64,7 @@ export default {
     created() {
         let me = this;
         let now = me.getCurrentParams();
-        if (this.btnShow) {
-            this.inputClass.push('input-group');
-        }
+        this.initialValue = this.value;
         if (me.value !== '') {
             let params = me.getValueParams(me.value);
             me.year = params.year;
@@ -85,6 +81,7 @@ export default {
             me.hour = now.hour;
             me.minute = now.minute;
             me.second = now.second;
+            me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
         }
         for (let i = 0; i < 60; i++) {
             if (i % me.minuteRange === 0) {
@@ -94,7 +91,7 @@ export default {
                 me.secondList.push(me.zero(i));
             }
         }
-        for (let i = 1; i < 24; i++) {
+        for (let i = 0; i < 24; i++) {
             if (i % me.hourRange === 0) {
                 me.hourList.push(me.zero(i));
             }
@@ -136,7 +133,7 @@ export default {
                     temp[line] = [];
                     let k = lastDayOfLastMonth - firstDayOfMonth + 1;
                     for (let j = 0; j < firstDayOfMonth; j++) {
-                        temp[line].push({day: k, disabled: true});
+                        temp[line].push({day: k, disabled: true, today: false});
                         k++;
                     }
                 }
@@ -158,7 +155,7 @@ export default {
                 else if (i === lastDateOfMonth) {
                     let k = 1;
                     for (dow; dow < 6; dow++) {
-                        temp[line].push({day: k, disabled: true});
+                        temp[line].push({day: k, disabled: true, today: false});
                         k++;
                     }
                 }
@@ -168,25 +165,15 @@ export default {
         prev(e) {
             e.stopPropagation();
             let me = this;
-            if (me.month === 0) {
-                me.month = 11;
-                me.year = me.year - 1;
-            }
-            else {
-                me.month = parseInt(me.month, 10) - 1;
-            }
+            me.month -= 1;
+            me.outputMonth(me.month);
             me.render(me.year, me.month);
         },
         next(e) {
             e.stopPropagation();
             let me = this;
-            if (me.month === 11) {
-                me.month = 0;
-                me.year = me.year + 1;
-            }
-            else {
-                me.month = parseInt(me.month, 10) + 1;
-            }
+            me.month += 1;
+            me.outputMonth(me.month);
             me.render(me.year, me.month);
         },
         changeTitSelect(year, type) {
@@ -265,7 +252,7 @@ export default {
                     break;
                 default:
             };
-            me.selectValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+            me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
         },
         // 格式化输出
         output(args) {
@@ -291,6 +278,18 @@ export default {
             }
             if (me.type === 'date') {
                 return args[0] + me.sep + args1 + me.sep + args2;
+            }
+        },
+        // 处理month的边缘case
+        outputMonth(val) {
+            val = Number(val);
+            if (val === -1) {
+                this.month = 11;
+                this.year -= 1;
+            }
+            else if (val === 12) {
+                this.month = 0;
+                this.year += 1;
             }
         },
         getValueParams(timeCur) {

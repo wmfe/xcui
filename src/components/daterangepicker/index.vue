@@ -1,6 +1,7 @@
 
 <template>
-    <div class="bg-pr" :class="inputClass">
+<div class="xcui-datarangepicker" :class="className">
+    <div :class="{'input-group':btnShow}">
         <input class="form-control col-md-3" type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
         <!-- 双日历 -->
         <div @click.stop=""
@@ -52,6 +53,7 @@
             </button>
         </span>
     </div>
+</div>
 </template>
 <script>
     import calendar from './calendar';
@@ -103,12 +105,7 @@
                 type: Object,
                 default: null
             },
-            inputClass: {
-                type: Array,
-                default: function () {
-                    return [];
-                }
-            },
+            className: String,
             btnShow: {
                 type: Boolean,
                 default: false
@@ -126,16 +123,29 @@
             };
         },
         created() {
-            if (this.btnShow) {
-                this.inputClass.push('input-group');
-            }
             if (this.value !== '') {
                 let values = this.value.split('至');
                 this.beginCalenderVal = values[0].trim();
                 this.endCalenderVal = values[1].trim();
+                if (this.beginCalenderVal > this.endCalenderVal) {
+                    this.endCalenderVal = this.beginCalenderVal;
+                    this.value = this.beginCalenderVal + ' 至 ' + this.endCalenderVal;
+                }
                 if (this.type === 'datetime') {
                     this.beginCalenderVal = this.beginCalenderVal + ' 00:00:00';
                     this.endCalenderVal = this.endCalenderVal + ' 00:00:00';
+                }
+            }
+        },
+        watch: {
+            beginCalenderVal(val) {
+                if (val > this.endCalenderVal) {
+                    this.endCalenderVal = val;
+                }
+            },
+            endCalenderVal(val) {
+                if (val < this.beginCalenderVal) {
+                    this.beginCalenderVal = val;
                 }
             }
         },
@@ -165,10 +175,11 @@
 </script>
  
 <style lang="less">
+.xcui-datarangepicker{
     @base-color:#46c3c1;
     @base-size:14px;
     @tit-color:#333;
-
+    position:relative;
     .calendar{
         width: 240px;
         padding: 10px;
@@ -269,10 +280,8 @@
                     pointer-events:none !important;
                     cursor: default !important;
                 }
-                &.disabled{
+                &.off{
                     color: #c0c0c0;
-                    pointer-events: none !important;
-                    cursor: default !important;
                 }
                 &.today{
                     background-color: @base-color;
@@ -414,4 +423,5 @@
         color: #666;
         border-radius: 0 4px 4px 0;
     }
+}
 </style>

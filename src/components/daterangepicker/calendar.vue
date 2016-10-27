@@ -21,7 +21,7 @@
             <tr v-for="(k1,day) in days">
                 <td
                 v-for="(k2,child) in day"
-                :class="{'today':child.today,'range':child.range,'disabled':child.disabled}"
+                :class="{'today':child.today,'range':child.range,'off':child.disabled}"
                 :style="{'background':color&&child.today?color:''}"
                 @click="select(k1,k2,$event)">
                 {{child.day}}
@@ -134,38 +134,29 @@
                     e.stopPropagation();
                 }
                 let me = this;
+                let daySeleted = me.days[k1][k2];
                 // 取消上次选中
                 let va = me.getValueParams(me.value);
                 if (me.today.length > 0 && me.month === va.month && me.year === va.year) {
                     me.days[me.today[0]][me.today[1]].today = false;
                 }
                 // 设置当前选中天
-                me.days[k1][k2].today = true;
-                me.days[k1][k2].range = false;
+                daySeleted.today = true;
+                daySeleted.range = false;
                 me.day = this.zero(me.days[k1][k2].day);
                 me.today = [k1, k2];
-                me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+                if (daySeleted.disabled) {
+                    me.month = k1 === 0 ? (me.month - 1) : (me.month + 1);
+                    me.outputMonth(me.month);
+                    me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+                    me.render(me.year, me.month);
+                }
+                else {
+                    me.today = [k1, k2];
+                    me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+                }
                 me.otherValue = me.bindLimitDate();
                 me.changeOtherCalender();
-            },
-            selectTimeItem(e, type) {
-                let me = this;
-                switch (type) {
-                    case 'hour' :
-                        me.hour = e.target.innerText;
-                        me.hourListShow = false;
-                        break;
-                    case 'minute':
-                        me.minute = e.target.innerText;
-                        me.minuteListShow = false;
-                        break;
-                    case 'second':
-                        me.second = e.target.innerText;
-                        me.secondListShow = false;
-                        break;
-                    default:
-                };
-                me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
             },
             changeOtherCalender() {
                 let me = this;

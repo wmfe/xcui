@@ -5,7 +5,8 @@
 import Pagination from './pagination';
 import PopoverTooltip from './popover';
 import Autocomplete from './autocomplete';
-import Datepicker from './datepicker';
+import DatePicker from './datepicker';
+import DateRangePicker from './daterangepicker';
 import Tag from './tag';
 import Toaster from './toaster';
 import Select from './select';
@@ -16,7 +17,8 @@ const xcui = {
     Pagination,
     PopoverTooltip,
     Autocomplete,
-    Datepicker,
+    DatePicker,
+    DateRangePicker,
     Tag,
     Toaster,
     Select,
