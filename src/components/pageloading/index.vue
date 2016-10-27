@@ -2,15 +2,13 @@
     <div class="xcui-pageloading">
         <div class="bar" role="bar">
             <div class="peg"></div>
-            <div class="spinner" role="spinner"> </div>
-            <div class="spinner-icon"></div>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'xcui-pageloading',
+        name: 'xcui-page-loading',
         data() {
             return {
                 easing: 'linear',
@@ -22,10 +20,6 @@
             };
         },
         props: {
-            active: {
-                type: Boolean,
-                default: false
-            },
             minimum: {
                 type: Number,
                 default: 0.08
