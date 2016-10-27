@@ -21,7 +21,7 @@
             <tr v-for="(k1,day) in days">
                 <td
                 v-for="(k2,child) in day"
-                :class="{'today':child.today,'range':child.range,'off':child.disabled}"
+                :class="{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right}"
                 :style="{'background':color&&child.today?color:''}"
                 @click="select(k1,k2,$event)">
                 {{child.day}}

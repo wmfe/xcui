@@ -292,6 +292,14 @@
                         color:#fff;
                     }
                 }
+                &.todayleft{
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+                &.todayright{
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
                 &.range{
                     background:#e2eff5;
                 }

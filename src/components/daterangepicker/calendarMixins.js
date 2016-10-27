@@ -106,9 +106,9 @@ export default {
         },
         render(y, m) {
             let me = this;
-            let firstDayOfMonth = new Date(y, m, 1).getDay();// 当月第一天
-            let lastDateOfMonth = new Date(y, m + 1, 0).getDate();// 当月最后一天
-            let lastDayOfLastMonth = new Date(y, m, 0).getDate();// 前一个月的最后一天
+            me.firstDayOfMonth = new Date(y, m, 1).getDay();// 当月第一天
+            me.lastDateOfMonth = new Date(y, m + 1, 0).getDate();// 当月最后一天
+            me.lastDayOfLastMonth = new Date(y, m, 0).getDate();// 前一个月的最后一天
             let params = me.getValueParams(me.value);
             let line = 0;
             let temp = [];
@@ -116,7 +116,7 @@ export default {
             let currentTime = Number(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
             me.year = y;
             me.currentMonth = me.months[m];
-            for (let i = 1; i <= lastDateOfMonth; i++) {
+            for (let i = 1; i <= me.lastDateOfMonth; i++) {
                 let dow = new Date(y, m, i).getDay();
                 let chk = new Date();
                 let chkY = chk.getFullYear();
@@ -131,8 +131,8 @@ export default {
                 }
                 else if (i === 1) {
                     temp[line] = [];
-                    let k = lastDayOfLastMonth - firstDayOfMonth + 1;
-                    for (let j = 0; j < firstDayOfMonth; j++) {
+                    let k = me.lastDayOfLastMonth - me.firstDayOfMonth + 1;
+                    for (let j = 0; j < me.firstDayOfMonth; j++) {
                         temp[line].push({day: k, disabled: true, today: false});
                         k++;
                     }
@@ -152,7 +152,7 @@ export default {
                 if (dow === 6) {
                     line++;
                 }
-                else if (i === lastDateOfMonth) {
+                else if (i === me.lastDateOfMonth) {
                     let k = 1;
                     for (dow; dow < 6; dow++) {
                         temp[line].push({day: k, disabled: true, today: false});

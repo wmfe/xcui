@@ -169,17 +169,26 @@
             }
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class="xcui-suggestion {{className}}" _v-019e0c3e=""> <input type=text class="form-control xcui-suggestion-input" :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @focus=onInput @input=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter=onBlur _v-019e0c3e=""> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'show\':show}" _v-019e0c3e=""> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}" _v-019e0c3e=""> <a href=javascript:void(0) @click=setItem(item) _v-019e0c3e=""> {{item.text}} </a> </li> </ul> </div> ';
+        module.exports = ' <div class="xcui-suggestion {{className}}" _v-a69ea322=""> <input type=text class="form-control xcui-suggestion-input" :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @focus=onInput @input=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter=onBlur _v-a69ea322=""> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'xcui-show\':show}" _v-a69ea322=""> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}" _v-a69ea322=""> <a href=javascript:void(0) @click=setItem(item) _v-a69ea322=""> {{item.text}} </a> </li> </ul> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
         __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(3);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     } ]);
 });
 
