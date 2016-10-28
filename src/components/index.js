@@ -12,6 +12,7 @@ import Select from './select';
 import Loading from './loading';
 import Modal from './modal';
 import Progress from './progress';
+import inputNumber from './inputNumber';
 
 const xcui = {
     Pagination,
@@ -23,7 +24,8 @@ const xcui = {
     Select,
     Loading,
     Progress,
-    Modal
+    Modal,
+    inputNumber
 };
 
 module.exports = xcui;
