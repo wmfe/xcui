@@ -23,16 +23,20 @@
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(8);
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = ' <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"> <input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年 </span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'range\':child.range,\'off\':child.disabled,\'todayleft\':!right,\'todayright\':right,\'prev\':child.prev}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\' || type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> </div> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> ';
+    }, function(module, exports) {
+        module.exports = ' <div class=xcui-datarangepicker :class=className> <div :class="{\'input-group\':btnShow}"> <input class="form-control col-md-3" type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class="calendar double-calendar" v-show=show> <div class=clearfix> <div class=double-calendar-left> <calendar :type=type :value.sync=beginCalenderVal :sep=sep :other-value.sync=endCalenderVal :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-star=renderStar></calendar> </div> <div class=double-calendar-right> <calendar :type=type :value.sync=endCalenderVal :sep=sep :other-value.sync=beginCalenderVal :right=true :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-end=renderEnd></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
-        var _calendarMixins = __webpack_require__(3);
+        var _calendarMixins = __webpack_require__(6);
         var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = {
@@ -40,23 +44,23 @@
             props: {
                 otherValue: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 right: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 renderStar: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 renderEnd: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 dateLimit: {
                     type: Object,
-                    "default": null
+                    default: null
                 }
             },
             watch: {
@@ -121,39 +125,32 @@
                     if (e !== undefined) {
                         e.stopPropagation();
                     }
+                    if (e.target.className === "off todayright prev") {
+                        return false;
+                    }
                     var me = this;
+                    var daySeleted = me.days[k1][k2];
                     var va = me.getValueParams(me.value);
                     if (me.today.length > 0 && me.month === va.month && me.year === va.year) {
                         me.days[me.today[0]][me.today[1]].today = false;
                     }
-                    me.days[k1][k2].today = true;
-                    me.days[k1][k2].range = false;
+                    daySeleted.today = true;
+                    daySeleted.range = false;
                     me.day = this.zero(me.days[k1][k2].day);
                     me.today = [ k1, k2 ];
-                    me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+                    if (daySeleted.disabled) {
+                        me.month = k1 === 0 ? me.month - 1 : me.month + 1;
+                        var om = me.outputMonth(me.month, me.year);
+                        me.year = om.y;
+                        me.month = om.m;
+                        me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+                        me.render(me.year, me.month);
+                    } else {
+                        me.today = [ k1, k2 ];
+                        me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+                    }
                     me.otherValue = me.bindLimitDate();
                     me.changeOtherCalender();
-                },
-                selectTimeItem: function selectTimeItem(e, type) {
-                    var me = this;
-                    switch (type) {
-                      case "hour":
-                        me.hour = e.target.innerText;
-                        me.hourListShow = false;
-                        break;
-
-                      case "minute":
-                        me.minute = e.target.innerText;
-                        me.minuteListShow = false;
-                        break;
-
-                      case "second":
-                        me.second = e.target.innerText;
-                        me.secondListShow = false;
-                        break;
-
-                      default:                    }
-                    me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
                 },
                 changeOtherCalender: function changeOtherCalender() {
                     var me = this;
@@ -183,34 +180,97 @@
                 },
                 bindLimitDate: function bindLimitDate() {
                     var me = this;
-                    var otherTime = me.otherValue;
-                    var ov = me.otherValue;
-                    if (me.dateLimit) {
-                        if (me.dateLimit.hasOwnProperty("months")) {
-                            var month = me.month + me.dateLimit.months;
-                            if (!me.right) {
-                                otherTime = me.output([ me.year, month, me.day, me.hour, me.minute, me.second ]);
-                                otherTime = otherTime > me.end ? me.end : otherTime;
-                            } else {
-                                var bg = me.begin;
-                                month = me.month - me.dateLimit.months;
-                                otherTime = me.output([ me.year, month, me.day, me.hour, me.minute, me.second ]);
-                                otherTime = otherTime < ov ? ov : otherTime < bg ? bg : otherTime;
+                    var oValue = me.otherValue;
+                    var ovs = me.getValueParams(oValue);
+                    var bg = me.begin;
+                    var ed = me.end;
+                    var y = ovs.year;
+                    var m = ovs.month;
+                    var d = ovs.day;
+                    var meValue = me.year + me.sep + me.zero(me.month + 1) + me.sep + me.zero(me.day);
+                    var meDate = new Date(me.year, me.month, me.day).getDate();
+                    var AddDayCount = 0;
+                    var params = null;
+                    var otherTime = "";
+                    if (me.right) {
+                        if (me.dateLimit && me.dateLimit.hasOwnProperty("months")) {
+                            for (var i1 = 0; i1 < me.dateLimit.months; i1++) {
+                                AddDayCount += new Date(y, m + i1 + 1, 0).getDate();
                             }
                         } else if (this.dateLimit.hasOwnProperty("days")) {
-                            var day = parseInt(me.day, 10) + me.dateLimit.days;
-                            if (!me.right) {
-                                otherTime = me.output([ me.year, me.month, day, me.hour, me.minute, me.second ]);
-                                otherTime = otherTime > me.end ? me.end : otherTime;
-                            } else {
-                                var _bg = me.begin;
-                                day = parseInt(me.day, 10) - me.dateLimit.days;
-                                otherTime = me.output([ me.year, me.month, day, me.hour, me.minute, me.second ]);
-                                otherTime = otherTime < ov ? ov : otherTime < _bg ? _bg : otherTime;
+                            AddDayCount += me.dateLimit.days;
+                        }
+                        if (meValue > me.getDataStr(AddDayCount, oValue).val) {
+                            AddDayCount = 0;
+                            var diffDate = 0;
+                            if (me.dateLimit && me.dateLimit.hasOwnProperty("months")) {
+                                var limitMonth = me.dateLimit.months;
+                                for (var i2 = 0; i2 < limitMonth; i2++) {
+                                    var count = meDate === me.lastDateOfMonth ? 0 : 1;
+                                    var nextMaxDate = new Date(y, m - i2 + count, 0).getDate();
+                                    AddDayCount -= nextMaxDate;
+                                }
+                                diffDate = meDate - new Date(y, m - limitMonth + 1, 0).getDate();
+                                if (meDate !== me.lastDateOfMonth && diffDate > 0) {
+                                    AddDayCount += diffDate;
+                                }
+                            } else if (this.dateLimit.hasOwnProperty("days")) {
+                                AddDayCount -= me.dateLimit.days;
                             }
+                            params = me.getDataStr(AddDayCount, meValue);
+                            y = params.y;
+                            m = params.m;
+                            d = params.d;
+                        }
+                    } else {
+                        if (me.dateLimit && me.dateLimit.hasOwnProperty("months")) {
+                            for (var k1 = 0; k1 < me.dateLimit.months; k1++) {
+                                AddDayCount -= new Date(y, m - k1, 0).getDate();
+                            }
+                        } else if (this.dateLimit.hasOwnProperty("days")) {
+                            AddDayCount -= me.dateLimit.days;
+                        }
+                        if (meValue < me.getDataStr(AddDayCount, oValue).val || meValue > oValue) {
+                            AddDayCount = 0;
+                            var diffDate2 = 0;
+                            if (me.dateLimit && me.dateLimit.hasOwnProperty("months")) {
+                                var _limitMonth = me.dateLimit.months;
+                                for (var k2 = 0; k2 < _limitMonth; k2++) {
+                                    var count2 = meDate === me.lastDateOfMonth ? 2 : 1;
+                                    var nextMaxDate2 = new Date(me.year, me.month + k2 + count2, 0).getDate();
+                                    AddDayCount += nextMaxDate2;
+                                }
+                                diffDate2 = meDate - new Date(me.year, me.month + _limitMonth + 1, 0).getDate();
+                                if (meDate !== me.lastDateOfMonth && diffDate2 > 0) {
+                                    AddDayCount -= diffDate2;
+                                }
+                            } else if (this.dateLimit.hasOwnProperty("days")) {
+                                AddDayCount += me.dateLimit.days;
+                            }
+                            params = me.getDataStr(AddDayCount, meValue);
+                            y = params.y;
+                            m = params.m;
+                            d = params.d;
                         }
                     }
+                    otherTime = me.output([ y, m, d, me.hour, me.minute, me.second ]);
+                    otherTime = otherTime < bg ? bg : otherTime > ed ? ed : otherTime;
                     return otherTime;
+                },
+                getDataStr: function getDataStr(AddDayCount, nowDate) {
+                    var date = new Date(nowDate);
+                    date.setDate(date.getDate() + AddDayCount);
+                    var y = date.getFullYear();
+                    var m = date.getMonth() + 1;
+                    var d = date.getDate();
+                    m = this.zero(m);
+                    d = this.zero(d);
+                    return {
+                        val: y + this.sep + m + this.sep + d,
+                        y: y,
+                        m: parseInt(m, 10) - 1,
+                        d: parseInt(d, 10)
+                    };
                 }
             }
         };
@@ -223,66 +283,62 @@
         var _calendar2 = _interopRequireDefault(_calendar);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = {
+            name: "xcui-datarangepicker",
             props: {
                 show: {
                     type: Boolean,
                     twoWay: true,
-                    "default": false
+                    default: false
                 },
                 type: {
                     type: String,
-                    "default": "date"
+                    default: "date"
                 },
                 value: {
                     type: String,
                     twoWay: true,
-                    "default": ""
+                    default: ""
                 },
                 begin: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 end: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 hourRange: {
                     type: Number,
-                    "default": 1
+                    default: 1
                 },
                 minuteRange: {
                     type: Number,
-                    "default": 1
+                    default: 1
                 },
                 secondRange: {
                     type: Number,
-                    "default": 1
+                    default: 1
                 },
                 sep: {
                     type: String,
-                    "default": "-"
+                    default: "-"
                 },
                 color: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 dateLimit: {
                     type: Object,
-                    "default": null
+                    default: null
                 },
-                inputClass: {
-                    type: Array,
-                    "default": function _default() {
-                        return [];
-                    }
-                },
+                className: String,
                 btnShow: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 }
             },
             components: {
@@ -297,16 +353,25 @@
                 };
             },
             created: function created() {
-                if (this.btnShow) {
-                    this.inputClass.push("input-group");
-                }
                 if (this.value !== "") {
                     var values = this.value.split("至");
                     this.beginCalenderVal = values[0].trim();
                     this.endCalenderVal = values[1].trim();
-                    if (this.type === "datetime") {
-                        this.beginCalenderVal = this.beginCalenderVal + " 00:00:00";
-                        this.endCalenderVal = this.endCalenderVal + " 00:00:00";
+                    if (this.beginCalenderVal > this.endCalenderVal) {
+                        this.endCalenderVal = this.beginCalenderVal;
+                        this.value = this.beginCalenderVal + " 至 " + this.endCalenderVal;
+                    }
+                }
+            },
+            watch: {
+                beginCalenderVal: function beginCalenderVal(val) {
+                    if (val > this.endCalenderVal) {
+                        this.endCalenderVal = val;
+                    }
+                },
+                endCalenderVal: function endCalenderVal(val) {
+                    if (val < this.beginCalenderVal) {
+                        this.beginCalenderVal = val;
                     }
                 }
             },
@@ -342,41 +407,39 @@
             props: {
                 type: {
                     type: String,
-                    "default": "date"
+                    default: "date"
                 },
                 value: {
                     type: String,
                     twoWay: true,
-                    "default": ""
+                    default: ""
                 },
                 begin: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 end: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 hourRange: {
                     type: [ Number, String ],
-                    "default": 1
+                    default: 1
                 },
                 minuteRange: {
-                    type: Number,
-                    "default": 1
+                    type: [ Number, String ],
+                    default: 1
                 },
                 secondRange: {
-                    type: Number,
-                    "default": 1
+                    type: [ Number, String ],
+                    default: 1
                 },
                 sep: {
                     type: String,
-                    "default": "-"
+                    default: "-"
                 },
-                color: {
-                    type: String,
-                    "default": ""
-                }
+                color: String,
+                className: String
             },
             data: function data() {
                 return {
@@ -406,9 +469,7 @@
             created: function created() {
                 var me = this;
                 var now = me.getCurrentParams();
-                if (this.btnShow) {
-                    this.inputClass.push("input-group");
-                }
+                this.initialValue = this.value;
                 if (me.value !== "") {
                     var params = me.getValueParams(me.value);
                     me.year = params.year;
@@ -424,6 +485,7 @@
                     me.hour = now.hour;
                     me.minute = now.minute;
                     me.second = now.second;
+                    me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
                 }
                 for (var i = 0; i < 60; i++) {
                     if (i % me.minuteRange === 0) {
@@ -433,7 +495,7 @@
                         me.secondList.push(me.zero(i));
                     }
                 }
-                for (var _i = 1; _i < 24; _i++) {
+                for (var _i = 0; _i < 24; _i++) {
                     if (_i % me.hourRange === 0) {
                         me.hourList.push(me.zero(_i));
                     }
@@ -448,9 +510,9 @@
                 },
                 render: function render(y, m) {
                     var me = this;
-                    var firstDayOfMonth = new Date(y, m, 1).getDay();
-                    var lastDateOfMonth = new Date(y, m + 1, 0).getDate();
-                    var lastDayOfLastMonth = new Date(y, m, 0).getDate();
+                    me.firstDayOfMonth = new Date(y, m, 1).getDay();
+                    me.lastDateOfMonth = new Date(y, m + 1, 0).getDate();
+                    me.lastDayOfLastMonth = new Date(y, m, 0).getDate();
                     var params = me.getValueParams(me.value);
                     var line = 0;
                     var temp = [];
@@ -458,7 +520,7 @@
                     var currentTime = Number(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
                     me.year = y;
                     me.currentMonth = me.months[m];
-                    for (var i = 1; i <= lastDateOfMonth; i++) {
+                    for (var i = 1; i <= me.lastDateOfMonth; i++) {
                         var dow = new Date(y, m, i).getDay();
                         var chk = new Date();
                         var chkY = chk.getFullYear();
@@ -471,11 +533,12 @@
                             temp[line] = [];
                         } else if (i === 1) {
                             temp[line] = [];
-                            var k = lastDayOfLastMonth - firstDayOfMonth + 1;
-                            for (var j = 0; j < firstDayOfMonth; j++) {
+                            var k = me.lastDayOfLastMonth - me.firstDayOfMonth + 1;
+                            for (var j = 0; j < me.firstDayOfMonth; j++) {
                                 temp[line].push({
                                     day: k,
-                                    disabled: true
+                                    disabled: true,
+                                    prev: true
                                 });
                                 k++;
                             }
@@ -497,12 +560,13 @@
                         }
                         if (dow === 6) {
                             line++;
-                        } else if (i === lastDateOfMonth) {
+                        } else if (i === me.lastDateOfMonth) {
                             var _k = 1;
                             for (dow; dow < 6; dow++) {
                                 temp[line].push({
                                     day: _k,
-                                    disabled: true
+                                    disabled: true,
+                                    today: false
                                 });
                                 _k++;
                             }
@@ -513,23 +577,19 @@
                 prev: function prev(e) {
                     e.stopPropagation();
                     var me = this;
-                    if (me.month === 0) {
-                        me.month = 11;
-                        me.year = me.year - 1;
-                    } else {
-                        me.month = parseInt(me.month, 10) - 1;
-                    }
+                    me.month -= 1;
+                    var om = me.outputMonth(me.month, me.year);
+                    me.year = om.y;
+                    me.month = om.m;
                     me.render(me.year, me.month);
                 },
                 next: function next(e) {
                     e.stopPropagation();
                     var me = this;
-                    if (me.month === 11) {
-                        me.month = 0;
-                        me.year = me.year + 1;
-                    } else {
-                        me.month = parseInt(me.month, 10) + 1;
-                    }
+                    me.month += 1;
+                    var om = me.outputMonth(me.month, me.year);
+                    me.year = om.y;
+                    me.month = om.m;
                     me.render(me.year, me.month);
                 },
                 changeTitSelect: function changeTitSelect(year, type) {
@@ -606,7 +666,7 @@
                         break;
 
                       default:                    }
-                    me.selectValue = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+                    me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
                 },
                 output: function output(args) {
                     var me = this;
@@ -631,6 +691,21 @@
                     if (me.type === "date") {
                         return args[0] + me.sep + args1 + me.sep + args2;
                     }
+                },
+                outputMonth: function outputMonth(month, year) {
+                    var m = Number(month);
+                    var y = Number(year);
+                    if (m === -1) {
+                        m = 11;
+                        y -= 1;
+                    } else if (m === 12) {
+                        m = 0;
+                        y += 1;
+                    }
+                    return {
+                        y: y,
+                        m: m
+                    };
                 },
                 getValueParams: function getValueParams(timeCur) {
                     var me = this;
@@ -677,29 +752,43 @@
                 }
             }
         };
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"> <input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年 </span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'range\':child.range,\'disabled\':child.disabled}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\' || type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> </div> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> ';
-    }, function(module, exports) {
-        module.exports = ' <div class=bg-pr :class=inputClass> <input class="form-control col-md-3" type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class="calendar double-calendar" v-show=show> <div class=clearfix> <div class=double-calendar-left> <calendar :type=type :value.sync=beginCalenderVal :sep=sep :other-value.sync=endCalenderVal :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-star=renderStar></calendar> </div> <div class=double-calendar-right> <calendar :type=type :value.sync=endCalenderVal :sep=sep :other-value.sync=beginCalenderVal :right=true :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-end=renderEnd></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(5);
+        var __vue_styles__ = {};
+        __vue_script__ = __webpack_require__(4);
+        __vue_template__ = __webpack_require__(2);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        __webpack_require__(4);
-        __vue_script__ = __webpack_require__(2);
-        __vue_template__ = __webpack_require__(6);
+        var __vue_styles__ = {};
+        __webpack_require__(1);
+        __vue_script__ = __webpack_require__(5);
+        __vue_template__ = __webpack_require__(3);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     } ]);
 });
 
