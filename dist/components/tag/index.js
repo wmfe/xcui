@@ -74,7 +74,7 @@
             }
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class="xcui-tag {{disabled?\'xcui-disabled\':\'\'}}" @click=onClick v-if=showTag _v-69613ae0=""> <div class="{{classname!=\'\' ? classname : \'\'}}" _v-69613ae0=""> <span class=xcui-tag-text _v-69613ae0=""><slot _v-69613ae0=""></slot>{{text}}<span _v-69613ae0=""> <i class=xcui-cross v-if=closeable @click.stop=onCloseClick _v-69613ae0=""></i> </span></span></div> </div> ';
+        module.exports = ' <div class="xcui-tag {{disabled?\'xcui-disabled\':\'\'}}" @click=onClick v-if=showTag _v-7390f4ba=""> <div class="{{classname!=\'\' ? classname : \'\'}}" _v-7390f4ba=""> <span class=xcui-tag-text _v-7390f4ba=""><slot _v-7390f4ba=""></slot>{{text}}<span _v-7390f4ba=""> <i class=xcui-cross v-if=closeable @click.stop=onCloseClick _v-7390f4ba=""></i> </span></span></div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(2);

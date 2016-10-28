@@ -16,14 +16,12 @@
                      @select="onSelect2"
                      :options="dataSource2">
         </xcui-select>
-        基本模式
     </example>
     <example title="single - 基本模式 options(Object)">
         <xcui-select class-name="select-demo" placeholder="Select one"
                      @change="selectChange"
                      @select="onSelect"
                      :options="dataSource"></xcui-select>
-        基本模式
     </example>
     <example title="自定义label的字段(label='text')">
         <xcui-select class-name="select-demo" placeholder="Select one"
@@ -53,7 +51,6 @@
         <xcui-select class-name="select-demo" placeholder="Select one"
                      :custom-label="reRenderLabel"
                      @change="selectChange2" :options="dataSource"></xcui-select>
-        定制option label展现内容
     </example>
     <example title="定制 option list(option-partial && Vue.partial)">
         <xcui-select class-name="select-demo" placeholder="Select one"
@@ -218,34 +215,6 @@
 <style lang="less" scoped>
     .select-demo{
         width:200px;
-    }
-    .xcui-demo-container{
-        background: #fff !important;
-        h3{
-            border-left:4px solid #46C3C1;
-            text-indent:.5em;
-        }
-    }
-    .xcui-demo-wrap,.xcui-code-wrap{
-        width:100%!important;
-        pre{
-            overflow: hidden !important;
-        }
-    }
-    .xcui-code-wrap{
-        margin-top:20px;
-    }
-    pre{
-        display: block;
-        font-size: 13px;
-        line-height: 1.42857143;
-        color: #333;
-        word-break: break-all;
-        word-wrap: break-word;
-        background-color: #f5f5f5;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        white-space: pre-wrap;
     }
 </style>
 <script>
@@ -431,7 +400,6 @@
             let me = this;
             setTimeout(function () {
                 me.optgroupDefaultValue = '11';
-                console.log('???');
             }, 1000);
         },
         methods: {
@@ -474,7 +442,8 @@
                     this.asyncSearchSource = emails.map(function (item) {
                         return v + '@' + item;
                     });
-                } else {
+                }
+                else {
                     this.asyncSearchSource = [];
                 }
             },
@@ -487,7 +456,8 @@
                 jsonp(`http://suggest.taobao.com/sug?code=utf-8&q=${v}`, (err, d) => {
                     if (err) {
                         me.serverSearchSource = [];
-                    } else {
+                    }
+                    else {
                         me.serverSearchSource = d.result.map(v => {
                             return v[0];
                         });

@@ -1,11 +1,8 @@
 <template>
-  <div id="wrapper">
+  <div id="wrapper" class="row">
     <!-- sidebar-wrapper -->
-    <div id="sidebar-wrapper">
+    <div id="sidebar-wrapper" class="col-md-2">
         <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">XCUI Components</a>
-            </li>
             <li>
                 <a v-link="{ path: '/component/paginations' }" href="javascript:;">Paginations</a>
             </li>
@@ -22,6 +19,9 @@
                 <a v-link="{ path: '/component/datepicker' }" href="javascript:;">DatePicker</a>
             </li>
             <li>
+                <a v-link="{ path: '/component/daterangepicker' }" href="javascript:;">DateRangePicker</a>
+            </li>
+            <li>
                 <a v-link="{ path: '/component/select' }" href="javascript:;">Select</a>
             </li>
             <li>
@@ -30,18 +30,29 @@
             <li>
                  <a v-link="{ path: '/component/toaster' }" href="javascript:;">Toaster</a>
             </li>
+            <li>
+                 <a v-link="{ path: '/component/modal' }" href="javascript:;">Modal</a>
+            </li>
+            <li>
+                 <a v-link="{ path: '/component/inputNumber' }" href="javascript:;">InputNumber</a>
+            </li>
+            <li>
+                <a v-link="{ path: '/component/progress' }" href="javascript:;">Progress</a>
+            </li>
+            <li>
+                <a v-link="{ path: '/component/pageloading' }" href="javascript:;">PageLoading</a>
+            </li>
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
     <!-- Page Content -->
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" class="col-md-10">
        <router-view
       transition="xcui-fade"
       transition-mode="out-in"></router-view>
     </div>
     <!-- /#page-content-wrapper -->
   </div>
-
 </template>
 
 <script>

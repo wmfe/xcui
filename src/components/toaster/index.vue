@@ -1,10 +1,10 @@
 <template>
     <div class="toaster"
     :class="{
-        'btn-info': options.type === 'info' || options.type == undefined,
-        'btn-success': options.type === 'success',
-        'btn-danger': options.type === 'error',
-        'btn-warning': options.type === 'warning'
+        'text-info': options.type === 'info' || options.type == undefined,
+        'text-success': options.type === 'success',
+        'text-danger': options.type === 'error',
+        'text-warning': options.type === 'warning'
     }" v-show="show">
         <span class="toaster-icon glyphicon"
         :class="{
@@ -55,7 +55,8 @@ export default {
                 });
                 this.timers = [];
                 this.close();
-            } else {
+            }
+            else {
                 this.show = false;
             }
         }
@@ -70,12 +71,13 @@ export default {
     text-align:center;
     box-shadow: 0 1px 8px hsla(0,0%,39%,.2);
     padding:5px 10px;
-    color:#000;
+    //color:#000;
     font-size:16px;
     z-index:1000;
     position:fixed;
     top: 150px;
     left:~"calc(50% - 150px)";
+      background: #fff;
     .toaster-icon{
         vertical-align: middle;
     }
