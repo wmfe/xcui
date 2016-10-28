@@ -176,17 +176,30 @@
             }
         };
     }, function(module, exports) {}, function(module, exports) {
+<<<<<<< HEAD
         module.exports = ' <div class="xcui-suggestion {{className}}" _v-042c2cdb=""> <input type=text class="form-control xcui-suggestion-input" :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @focus=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter=onBlur _v-042c2cdb=""> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'xcui-show\':show}" _v-042c2cdb=""> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}" _v-042c2cdb=""> <a href=javascript:void(0) @click=setItem(item) _v-042c2cdb=""> {{item.text}} </a> </li> </ul> <button @click=clearText type=button title=点击清除输入内容 class=close tabindex=-1 style="position: absolute; right: 8px; top: 4px" _v-042c2cdb="">×</button> </div> ';
+=======
+        module.exports = ' <div class="xcui-suggestion {{className}}" _v-a69ea322=""> <input type=text class="form-control xcui-suggestion-input" :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @focus=onInput @input=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter=onBlur _v-a69ea322=""> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'xcui-show\':show}" _v-a69ea322=""> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}" _v-a69ea322=""> <a href=javascript:void(0) @click=setItem(item) _v-a69ea322=""> {{item.text}} </a> </li> </ul> </div> ';
+>>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
         __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(3);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     } ]);
 });
 

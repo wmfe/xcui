@@ -24,9 +24,11 @@
         </example>
         <example title="日期 + 时间选择">
             <daterangepicker
+                  type="datetime"
+                  class-name="class-name"
+                  color="pink"
                   :value.sync = "datetime.value"
                   :sep = 'datetime.sep'
-                  :type="datetime.type"
                   :begin="datetime.begin"
                   :end="datetime.end"
                   :date-limit="datetime.dateLimit"
@@ -97,7 +99,7 @@ export default {
                 value: '2016-09-08 00:02:03 至 2016-09-13 00:00:00',
                 sep: '-',
                 begin: '2015-12-20',
-                end: '2016-11-20',
+                end: '2017-11-20',
                 dateLimit: {
                     days: 5
                 },
@@ -117,3 +119,8 @@ export default {
     }
 };
 </script>
+<style lang="less">
+    .class-name{
+        width:400px;
+    }
+</style>

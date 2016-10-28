@@ -22,21 +22,19 @@ export default {
             default: 1
         },
         minuteRange: {
-            type: Number,
+            type: [Number, String],
             default: 1
         },
         secondRange: {
-            type: Number,
+            type: [Number, String],
             default: 1
         },
         sep: {
             type: String,
             default: '-'
         },
-        color: {
-            type: String,
-            default: ''
-        }
+        color: String,
+        className: String
     },
     data() {
         return {
@@ -66,9 +64,7 @@ export default {
     created() {
         let me = this;
         let now = me.getCurrentParams();
-        if (this.btnShow) {
-            this.inputClass.push('input-group');
-        }
+        this.initialValue = this.value;
         if (me.value !== '') {
             let params = me.getValueParams(me.value);
             me.year = params.year;
@@ -85,6 +81,7 @@ export default {
             me.hour = now.hour;
             me.minute = now.minute;
             me.second = now.second;
+            me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
         }
         for (let i = 0; i < 60; i++) {
             if (i % me.minuteRange === 0) {
@@ -94,7 +91,7 @@ export default {
                 me.secondList.push(me.zero(i));
             }
         }
-        for (let i = 1; i < 24; i++) {
+        for (let i = 0; i < 24; i++) {
             if (i % me.hourRange === 0) {
                 me.hourList.push(me.zero(i));
             }
@@ -109,9 +106,9 @@ export default {
         },
         render(y, m) {
             let me = this;
-            let firstDayOfMonth = new Date(y, m, 1).getDay();// 当月第一天
-            let lastDateOfMonth = new Date(y, m + 1, 0).getDate();// 当月最后一天
-            let lastDayOfLastMonth = new Date(y, m, 0).getDate();// 前一个月的最后一天
+            me.firstDayOfMonth = new Date(y, m, 1).getDay();// 当月第一天
+            me.lastDateOfMonth = new Date(y, m + 1, 0).getDate();// 当月最后一天
+            me.lastDayOfLastMonth = new Date(y, m, 0).getDate();// 前一个月的最后一天
             let params = me.getValueParams(me.value);
             let line = 0;
             let temp = [];
@@ -119,7 +116,7 @@ export default {
             let currentTime = Number(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
             me.year = y;
             me.currentMonth = me.months[m];
-            for (let i = 1; i <= lastDateOfMonth; i++) {
+            for (let i = 1; i <= me.lastDateOfMonth; i++) {
                 let dow = new Date(y, m, i).getDay();
                 let chk = new Date();
                 let chkY = chk.getFullYear();
@@ -134,9 +131,9 @@ export default {
                 }
                 else if (i === 1) {
                     temp[line] = [];
-                    let k = lastDayOfLastMonth - firstDayOfMonth + 1;
-                    for (let j = 0; j < firstDayOfMonth; j++) {
-                        temp[line].push({day: k, disabled: true});
+                    let k = me.lastDayOfLastMonth - me.firstDayOfMonth + 1;
+                    for (let j = 0; j < me.firstDayOfMonth; j++) {
+                        temp[line].push({day: k, disabled: true, prev: true});
                         k++;
                     }
                 }
@@ -155,10 +152,10 @@ export default {
                 if (dow === 6) {
                     line++;
                 }
-                else if (i === lastDateOfMonth) {
+                else if (i === me.lastDateOfMonth) {
                     let k = 1;
                     for (dow; dow < 6; dow++) {
-                        temp[line].push({day: k, disabled: true});
+                        temp[line].push({day: k, disabled: true, today: false});
                         k++;
                     }
                 }
@@ -168,25 +165,19 @@ export default {
         prev(e) {
             e.stopPropagation();
             let me = this;
-            if (me.month === 0) {
-                me.month = 11;
-                me.year = me.year - 1;
-            }
-            else {
-                me.month = parseInt(me.month, 10) - 1;
-            }
+            me.month -= 1;
+            let om = me.outputMonth(me.month, me.year);
+            me.year = om.y;
+            me.month = om.m;
             me.render(me.year, me.month);
         },
         next(e) {
             e.stopPropagation();
             let me = this;
-            if (me.month === 11) {
-                me.month = 0;
-                me.year = me.year + 1;
-            }
-            else {
-                me.month = parseInt(me.month, 10) + 1;
-            }
+            me.month += 1;
+            let om = me.outputMonth(me.month, me.year);
+            me.year = om.y;
+            me.month = om.m;
             me.render(me.year, me.month);
         },
         changeTitSelect(year, type) {
@@ -265,7 +256,7 @@ export default {
                     break;
                 default:
             };
-            me.selectValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+            me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
         },
         // 格式化输出
         output(args) {
@@ -292,6 +283,23 @@ export default {
             if (me.type === 'date') {
                 return args[0] + me.sep + args1 + me.sep + args2;
             }
+        },
+        // 处理month的边缘case
+        outputMonth(month, year) {
+            let m = Number(month);
+            let y = Number(year);
+            if (m === -1) {
+                m = 11;
+                y -= 1;
+            }
+            else if (m === 12) {
+                m = 0;
+                y += 1;
+            }
+            return {
+                y: y,
+                m: m
+            };
         },
         getValueParams(timeCur) {
             let me = this;

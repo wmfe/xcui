@@ -11,28 +11,30 @@
     <demo>
         <example title="日历选择">
             <datepicker
+                  type="date"
                   :value.sync = "date.value"
                   :sep = 'date.sep'
-                  :type="date.type"
                   ></datepicker>
         </example>
         <example title="日历+时间选择">
             <datepicker
+                  type="datetime"
+                  class-name="class-name"
+                  color="pink"
                   :value.sync = "datetime.value"
-                  :btn-show = "datetime.btnShow"
-                  :sep = 'datetime.sep'
-                  :type="datetime.type"
-                  :color="datetime.color"
-                  :btn-show="datetime.btnShow"
-                  :input-class = "datetime.inputClass"
+                  :btn-show = "true"
+                  :sep = "'~'"
+                  :hour-range = "'3'"
+                  :begin="datetime.begin"
+                  :end="datetime.end"
                   ></datepicker>
         </example>
         <example title="时间选择">
             <div class="input-group">
                 <datepicker
+                      type="time"
                       :value.sync = "time.value"
                       :btn-show="datetime.btnShow"
-                      :type="time.type"
                       ></datepicker>
             </div>
         </example>
@@ -53,9 +55,9 @@
     | hourRange | Number | 1 | 小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12） | 否 | 可选 |
     | minuteRange | Number | 1 | 分可选值设置（例如：值为 20 时，分可选值为 20，40，60） | 否 | 可选 |
     | secondRange | Number | 1 | 秒可选值设置（例如：值为 20 时，分可选值为 20，40，60） | 否 | 可选 |
-    | color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 否 | 可选 |
+    | color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 静态属性 | 可选 |
     | btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
-    | inputClass | Array | 无 | 日历input输入框的样式，class名字 | 否 | 可选 |
+    | class-name | String | 无 | 日历样式，class名字 |  静态属性 | 可选 |
 </template>
 <script>
 import datepicker from '../components/datepicker';
@@ -63,24 +65,17 @@ export default {
     data() {
         return {
             date: {
-                show: false,
-                type: 'date',
                 value: '2016-02-01',
                 sep: '-',
                 begin: '2015-12-20',
                 end: '2016-09-09'
             },
             datetime: {
-                show: false,
-                type: 'datetime',
-                value: '2016-02-01',
-                color: 'pink',
-                btnShow: true,
-                inputClass: ['col-md-6']
+                value: '2016~02~01 00:00:00',
+                begin: '2015~02~01 00:00:00',
+                end: '2017~02~01 00:00:00'
             },
             time: {
-                show: false,
-                type: 'time',
                 value: ''
             }
         };
@@ -90,3 +85,8 @@ export default {
     }
 };
 </script>
+<style lang="less">
+    .class-name{
+        width:200px;
+    }
+</style>
