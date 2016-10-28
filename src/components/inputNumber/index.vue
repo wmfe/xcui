@@ -16,6 +16,7 @@
 </template>
 <script>
 export default {
+    name: 'xcui-inputnumber',
     props: {
         maxValue: {
             type: Number

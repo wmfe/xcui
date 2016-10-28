@@ -26,8 +26,8 @@
 </template>
 
 <script>
-
     export default {
+        name: 'xcui-autocomplete',
         data() {
             return {
                 list: [],

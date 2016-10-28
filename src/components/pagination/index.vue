@@ -60,6 +60,7 @@
 
 <script>
 export default {
+    name: 'xcui-pagination',
     props: {
         'type': {
             type: String,
