@@ -13,6 +13,9 @@
                 <a v-link="{ path: '/component/popover' }" href="javascript:;">Popover</a>
             </li>
             <li>
+                <a v-link="{ path: '/component/tooltip' }" href="javascript:;">Tooltip</a>
+            </li>
+            <li>
                 <a v-link="{ path: '/component/tag' }" href="javascript:;">Tag</a>
             </li>
             <li>
