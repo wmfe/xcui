@@ -74,17 +74,30 @@
             }
         };
     }, function(module, exports) {}, function(module, exports) {
+<<<<<<< HEAD
         module.exports = ' <div class="xcui-tag {{disabled?\'xcui-disabled\':\'\'}}" @click=onClick v-if=showTag _v-7390f4ba=""> <div class="{{classname!=\'\' ? classname : \'\'}}" _v-7390f4ba=""> <span class=xcui-tag-text _v-7390f4ba=""><slot _v-7390f4ba=""></slot>{{text}}<span _v-7390f4ba=""> <i class=xcui-cross v-if=closeable @click.stop=onCloseClick _v-7390f4ba=""></i> </span></span></div> </div> ';
+=======
+        module.exports = ' <div class="xcui-tag {{disabled?\'xcui-disabled\':\'\'}}" @click=onClick v-if=showTag _v-80ab696e=""> <div class="{{classname!=\'\' ? classname : \'\'}}" _v-80ab696e=""> <span class=xcui-tag-text _v-80ab696e=""><slot _v-80ab696e=""></slot>{{text}}<span _v-80ab696e=""> <i class=xcui-cross v-if=closeable @click.stop=onCloseClick _v-80ab696e=""></i> </span></span></div> </div> ';
+>>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
         __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(3);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     } ]);
 });
 

@@ -125,17 +125,38 @@
             ready: function ready() {}
         };
     }, function(module, exports) {}, function(module, exports) {
+<<<<<<< HEAD
         module.exports = ' <div v-el:outer="" class=outer :class=size _v-6042a108=""> <div class=up-down-wrap _v-6042a108=""> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue _v-6042a108=""> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue _v-6042a108=""> </a> </div> <div class=input-wrap _v-6042a108=""> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className _v-6042a108=""> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+=======
+        module.exports = ' <div v-el:outer="" class=outer :class=size _v-bc4f67bc=""> <div class=up-down-wrap _v-bc4f67bc=""> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue _v-bc4f67bc=""> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue _v-bc4f67bc=""> </a> </div> <div class=input-wrap _v-bc4f67bc=""> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className _v-bc4f67bc=""> </div> </div> ';
+    }, function(module, exports, __webpack_require__) {
+        var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
+>>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
         __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(3);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+<<<<<<< HEAD
         if (__vue_template__) {
             (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
         }
+=======
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
+        if (__vue_template__) {
+            __vue_options__.template = __vue_template__;
+        }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
+>>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
     } ]);
 });
 
