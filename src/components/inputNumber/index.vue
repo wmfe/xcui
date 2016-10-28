@@ -44,8 +44,7 @@ export default {
             default: 'large'
         },
         inputValue: {
-            type: String,
-            default: ''
+            type: Number
         }
     },
     data() {
@@ -55,7 +54,7 @@ export default {
     },
     methods: {
         changeValue(event) {
-            if (this.isAvailbale(event.keyCode)) {
+            if (this.isAvailbale(event.keyCode) && this.isNumber(this.inputValue + '')) {
                 this.inputValue = this.limitValue(this.inputValue) + '';
             }
             else {
@@ -83,17 +82,15 @@ export default {
             if (keyCode >= 96 && keyCode <= 105) {
                 return true;
             }
-            // Backspace, del, 左右方向键
-            if (keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 39) {
+            // Backspace, del, 左右方向键,负号
+            if (keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 39 || keyCode === 189) {
                 return true;
             }
             return false;
         },
         isNumber(num) {
-            if (window.parseInt(num) === window.Number(num)) {
-                return true;
-            }
-            return false;
+            let result = /^(-)?\d*$/.test(num);
+            return result;
         },
         upValue(e) {
             if (this.isNumber(this.inputValue)) {
@@ -145,8 +142,9 @@ export default {
         input{
             padding-left: 5px;
             float: right;
-            background-color: white;
+            background-color: #ffffff;
             border: none;
+            padding-right: 20px;
             &:focus{
                 outline: none !important;
             }
@@ -169,7 +167,7 @@ export default {
             display: block;
         }
         a:link,a:visited{
-            color: #fff;
+            color: transparent;
             text-decoration: none;
         }
         a:hover,a:active{
@@ -187,7 +185,7 @@ export default {
         }
     }
     .up-down-wrap{
-        height: 40px !important;
+        height: 100% !important;
         .up-wrap{
             margin-top: 4px !important;
         }
@@ -197,7 +195,7 @@ export default {
     }
 }
 .normal{
-    height: 30px !important;
+    height: 100% !important;
     vertical-align: middle;
     .input-wrap{
         input{

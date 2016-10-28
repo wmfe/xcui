@@ -5,7 +5,7 @@
                  <div class="xcui-progress-inner" :style="{width:percent+'%',height:height+'px'}"></div>
             </div>
         </div>
-        <div :class="'infoClassName',!showInfo ? 'hidden':''" >
+        <div :class="['infoClassName',!showInfo ? 'hidden':'']" >
             {{percentInfo}}
         </div>
     <div>

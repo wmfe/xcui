@@ -1,16 +1,19 @@
 /**
  * @file index.js
  */
-import Pagination from './pagination';
-import PopoverTooltip from './popover';
 import Autocomplete from './autocomplete';
 import Datepicker from './datepicker';
-import Tag from './tag';
-import Toaster from './toaster';
-import Select from './select';
+import DateRangePicker from './DateRangePicker';
+import inputNumber from './inputNumber';
 import Loading from './loading';
 import Modal from './modal';
+import PageLoading from './pageloading';
+import Pagination from './pagination';
+import PopoverTooltip from './popover';
 import Progress from './progress';
+import Select from './select';
+import Tag from './tag';
+import Toaster from './toaster';
 
 import xcuiInstall from './install.js';
 const install = (Vue) => {
@@ -20,16 +23,20 @@ const install = (Vue) => {
 };
 
 const xcui = {
-    Pagination,
-    PopoverTooltip,
+    version: '1.0.0-alpha',
     Autocomplete,
     Datepicker,
+    DateRangePicker,
+    inputNumber,
+    Loading,
+    Modal,
+    PageLoading,
+    Pagination,
+    PopoverTooltip,
+    Progress,
+    Select,
     Tag,
     Toaster,
-    Select,
-    Loading,
-    Progress,
-    Modal,
 
     install,
     xcuiInstall
