@@ -13,7 +13,7 @@ module.exports = {
         publicPath: './',
         filename: 'xcui.js',
         library: 'xcui',
-        libraryTarget: 'commonjs2'
+        libraryTarget: 'umd'
     },
     resolve: {
         extensions: ['', '.js', '.vue'],
