@@ -26,7 +26,7 @@
         <Modal
         :show.sync="modal2"
         title="自定义页头（有slot则无效）">
-        <span slot="header" class="Modal-demo-title">不一样的页头</span>
+        <span slot="header" class="xcui-modal-demo-title">不一样的页头</span>
         <div>我跟你不一样，我有你没有的头脑</div>
         </Modal>
         <Modal
