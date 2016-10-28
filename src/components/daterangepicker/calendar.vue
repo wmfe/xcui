@@ -21,7 +21,7 @@
             <tr v-for="(k1,day) in days">
                 <td
                 v-for="(k2,child) in day"
-                :class="{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right}"
+                :class="{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right,'prev':child.prev}"
                 :style="{'background':color&&child.today?color:''}"
                 @click="select(k1,k2,$event)">
                 {{child.day}}
@@ -133,6 +133,9 @@
                 if (e !== undefined) {
                     e.stopPropagation();
                 }
+                if (e.target.className === 'off todayright prev') {
+                    return false;
+                }
                 let me = this;
                 let daySeleted = me.days[k1][k2];
                 // 取消上次选中
@@ -147,7 +150,9 @@
                 me.today = [k1, k2];
                 if (daySeleted.disabled) {
                     me.month = k1 === 0 ? (me.month - 1) : (me.month + 1);
-                    me.outputMonth(me.month);
+                    let om = me.outputMonth(me.month, me.year);
+                    me.year = om.y;
+                    me.month = om.m;
                     me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
                     me.render(me.year, me.month);
                 }
@@ -189,37 +194,102 @@
             },
             bindLimitDate() {
                 let me = this;
-                let otherTime = me.otherValue;
-                let ov = me.otherValue;
-                if (me.dateLimit) {
-                    if (me.dateLimit.hasOwnProperty('months')) {
-                        let month = me.month + me.dateLimit.months;
-                        if (!me.right) {
-                            otherTime = me.output([me.year, month, me.day, me.hour, me.minute, me.second]);
-                            otherTime = otherTime > me.end ? me.end : otherTime;
-                        }
-                        else {
-                            let bg = me.begin;
-                            month = me.month - me.dateLimit.months;
-                            otherTime = me.output([me.year, month, me.day, me.hour, me.minute, me.second]);
-                            otherTime = otherTime < ov ? ov : otherTime < bg ? bg : otherTime;
+                let oValue = me.otherValue;
+                let ovs = me.getValueParams(oValue);
+                let bg = me.begin;
+                let ed = me.end;
+                let y = ovs.year;
+                let m = ovs.month;
+                let d = ovs.day;
+                let meValue = me.year + me.sep + me.zero(me.month + 1) + me.sep + me.zero(me.day);
+                let meDate = new Date(me.year, me.month, me.day).getDate();
+                let AddDayCount = 0;
+                let params = null;
+                let otherTime = '';
+                if (me.right) {
+                    if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
+                        for (let i1 = 0; i1 < me.dateLimit.months; i1++) {
+                            AddDayCount += new Date(y, (m + i1 + 1), 0).getDate();
                         }
                     }
                     else if (this.dateLimit.hasOwnProperty('days')) {
-                        let day = parseInt(me.day, 10) + me.dateLimit.days;
-                        if (!me.right) {
-                            otherTime = me.output([me.year, me.month, day, me.hour, me.minute, me.second]);
-                            otherTime = otherTime > me.end ? me.end : otherTime;
+                        AddDayCount += me.dateLimit.days;
+                    }
+                    if (meValue > me.getDataStr(AddDayCount, oValue).val) {
+                        AddDayCount = 0;
+                        let diffDate = 0;
+                        if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
+                            let limitMonth = me.dateLimit.months;
+                            for (let i2 = 0; i2 < limitMonth; i2++) {
+                                let count = meDate === me.lastDateOfMonth ? 0 : 1;
+                                let nextMaxDate = new Date(y, (m - i2 + count), 0).getDate();
+                                AddDayCount -= nextMaxDate;
+                            }
+                            diffDate = meDate - new Date(y, (m - limitMonth + 1), 0).getDate();
+                            if (meDate !== me.lastDateOfMonth && diffDate > 0) {
+                                AddDayCount += diffDate;
+                            }
                         }
-                        else {
-                            let bg = me.begin;
-                            day = parseInt(me.day, 10) - me.dateLimit.days;
-                            otherTime = me.output([me.year, me.month, day, me.hour, me.minute, me.second]);
-                            otherTime = otherTime < ov ? ov : otherTime < bg ? bg : otherTime;
+                        else if (this.dateLimit.hasOwnProperty('days')) {
+                            AddDayCount -= me.dateLimit.days;
                         }
+                        params = me.getDataStr(AddDayCount, meValue);
+                        y = params.y;
+                        m = params.m;
+                        d = params.d;
                     }
                 }
+                else {
+                    if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
+                        for (let k1 = 0; k1 < me.dateLimit.months; k1++) {
+                            AddDayCount -= new Date(y, (m - k1), 0).getDate();
+                        }
+                    }
+                    else if (this.dateLimit.hasOwnProperty('days')) {
+                        AddDayCount -= me.dateLimit.days;
+                    }
+                    if (meValue < me.getDataStr(AddDayCount, oValue).val || meValue > oValue) {
+                        AddDayCount = 0;
+                        let diffDate2 = 0;
+                        if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
+                            let limitMonth = me.dateLimit.months;
+                            for (let k2 = 0; k2 < limitMonth; k2++) {
+                                let count2 = (meDate === me.lastDateOfMonth ? 2 : 1);
+                                let nextMaxDate2 = new Date(me.year, (me.month + k2 + count2), 0).getDate();
+                                AddDayCount += nextMaxDate2;
+                            }
+                            diffDate2 = meDate - new Date(me.year, (me.month + limitMonth + 1), 0).getDate();
+                            if (meDate !== me.lastDateOfMonth && diffDate2 > 0) {
+                                AddDayCount -= diffDate2;
+                            }
+                        }
+                        else if (this.dateLimit.hasOwnProperty('days')) {
+                            AddDayCount += me.dateLimit.days;
+                        }
+                        params = me.getDataStr(AddDayCount, meValue);
+                        y = params.y;
+                        m = params.m;
+                        d = params.d;
+                    }
+                }
+                otherTime = me.output([y, m, d, me.hour, me.minute, me.second]);
+                otherTime = otherTime < bg ? bg : (otherTime > ed ? ed : otherTime);
                 return otherTime;
+            },
+            getDataStr(AddDayCount, nowDate) {
+                let date = new Date(nowDate);
+                date.setDate(date.getDate() + AddDayCount);
+                let y = date.getFullYear();
+                let m = date.getMonth() + 1;
+                let d = date.getDate();
+                m = this.zero(m);
+                d = this.zero(d);
+                return {
+                    val: y + this.sep + m + this.sep + d,
+                    y: y,
+                    m: parseInt(m, 10) - 1,
+                    d: parseInt(d, 10)
+                };
             }
         }
     };

@@ -58,6 +58,7 @@
 <script>
     import calendar from './calendar';
     export default {
+        name: 'xcui-datarangepicker',
         props: {
             show: {
                 type: Boolean,
@@ -130,10 +131,6 @@
                 if (this.beginCalenderVal > this.endCalenderVal) {
                     this.endCalenderVal = this.beginCalenderVal;
                     this.value = this.beginCalenderVal + ' 至 ' + this.endCalenderVal;
-                }
-                if (this.type === 'datetime') {
-                    this.beginCalenderVal = this.beginCalenderVal + ' 00:00:00';
-                    this.endCalenderVal = this.endCalenderVal + ' 00:00:00';
                 }
             }
         },

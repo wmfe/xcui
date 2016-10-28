@@ -87,6 +87,7 @@
     import CalendarMixins from '../daterangepicker/calendarMixins.js';
     export default {
         mixins: [CalendarMixins],
+        name: 'xcui-datapicker',
         props: {
             btnShow: {
                 type: Boolean,
@@ -152,7 +153,9 @@
                 me.day = me.zero(daySeleted.day);
                 if (daySeleted.disabled) {
                     me.month = k1 === 0 ? (me.month - 1) : (me.month + 1);
-                    me.outputMonth(me.month);
+                    let om = me.outputMonth(me.month, me.year);
+                    me.year = om.y;
+                    me.month = om.m;
                     me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
                     me.render(me.year, me.month);
                 }

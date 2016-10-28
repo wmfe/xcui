@@ -133,7 +133,7 @@ export default {
                     temp[line] = [];
                     let k = me.lastDayOfLastMonth - me.firstDayOfMonth + 1;
                     for (let j = 0; j < me.firstDayOfMonth; j++) {
-                        temp[line].push({day: k, disabled: true, today: false});
+                        temp[line].push({day: k, disabled: true, prev: true});
                         k++;
                     }
                 }
@@ -166,14 +166,18 @@ export default {
             e.stopPropagation();
             let me = this;
             me.month -= 1;
-            me.outputMonth(me.month);
+            let om = me.outputMonth(me.month, me.year);
+            me.year = om.y;
+            me.month = om.m;
             me.render(me.year, me.month);
         },
         next(e) {
             e.stopPropagation();
             let me = this;
             me.month += 1;
-            me.outputMonth(me.month);
+            let om = me.outputMonth(me.month, me.year);
+            me.year = om.y;
+            me.month = om.m;
             me.render(me.year, me.month);
         },
         changeTitSelect(year, type) {
@@ -281,16 +285,21 @@ export default {
             }
         },
         // 处理month的边缘case
-        outputMonth(val) {
-            val = Number(val);
-            if (val === -1) {
-                this.month = 11;
-                this.year -= 1;
+        outputMonth(month, year) {
+            let m = Number(month);
+            let y = Number(year);
+            if (m === -1) {
+                m = 11;
+                y -= 1;
             }
-            else if (val === 12) {
-                this.month = 0;
-                this.year += 1;
+            else if (m === 12) {
+                m = 0;
+                y += 1;
             }
+            return {
+                y: y,
+                m: m
+            };
         },
         getValueParams(timeCur) {
             let me = this;
