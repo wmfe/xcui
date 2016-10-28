@@ -31,6 +31,7 @@
             value: true
         });
         exports.default = {
+            name: "xcui-autocomplete",
             data: function data() {
                 return {
                     list: [],
@@ -177,6 +178,11 @@
                 this.arrangeLocalList();
             }
         };
+<<<<<<< HEAD
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = ' <div class="xcui-suggestion {{className}}"> <input type=text class="form-control xcui-suggestion-input" :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @focus=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter=onBlur> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'xcui-show\':show}"> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}"> <a href=javascript:void(0) @click=setItem(item)> {{item.text}} </a> </li> </ul> <button @click=clearText type=button title=点击清除输入内容 class=close tabindex=-1 style="position: absolute; right: 8px; top: 4px">×</button> </div> ';
+=======
+>>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};

@@ -31,6 +31,7 @@
             value: true
         });
         exports.default = {
+            name: "xcui-pagination",
             props: {
                 type: {
                     type: String,
@@ -123,6 +124,11 @@
                 }
             }
         };
+<<<<<<< HEAD
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = ' <div class="v-pagination-wrap {{ class || \'\' }}"> <template v-if="type === \'standard\' "> <div class=row> <div v-if=withPageSize class="v-pagination-page-size col-md-6"> 共<span v-text=total></span>条 &nbsp;&nbsp; 每页 <select v-model=pageSize> <option v-for="opt in pageSizeRange" :value=opt v-text=opt>1</option> </select> 条 </div> <div class="v-pagination-standard col-md-6 text-right"> <button @click=prev class="btn btn-default" :class="{\'disabled\': currentPageNo == 1}">上一页</button> <ul class=pagination> <li v-if="getRangePage.begin > 1"> <a href=javascript:void(0); @click=turnToPage(1)>1</a> </li> <li v-if="getRangePage.begin > 1"> <a class=apostrophe>...</a> </li> <li v-for="number in (getRangePage.end - getRangePage.begin + 1)" :class="{\'active\': isActive(number)}"> <a v-if=isActive(number) href=javascript:void(0); v-text="number + getRangePage.begin"></a> <a v-else href=javascript:void(0); v-text="number + getRangePage.begin" @click="turnToPage(number + getRangePage.begin)"></a> </li> <li v-if="getRangePage.end < totalPageCount"> <a class=apostrophe>...</a> </li> <li v-if="getRangePage.end < totalPageCount"> <a href=javascript:void(0); v-text=totalPageCount @click=turnToPage(totalPageCount)></a> </li> </ul> <button @click=next class="btn btn-default" :class="{\'disabled\': currentPageNo == totalPageCount}">下一页</button> </div> </div> </template> <div v-else class=v-pagination-mini> <span>共<span v-text=total></span>条</span> <button class="btn btn-default prev-trigger" :class="{\'disabled\': currentPageNo < 2}" @click=prev> <span class=caret></span> </button> <span v-text=currentPageNo></span>/<span v-text=totalPageCount></span> <button class="btn btn-default next-trigger" :class="{\'disabled\': currentPageNo == totalPageCount}" @click=next> <span class=caret></span> </button> </div> </div> ';
+=======
+>>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};

@@ -331,6 +331,11 @@
                 }
             }
         };
+<<<<<<< HEAD
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = " <div class=xcui-pageloading> <div class=bar role=bar> <div class=peg></div> </div> </div> ";
+=======
+>>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};

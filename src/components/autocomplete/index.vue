@@ -26,8 +26,8 @@
 </template>
 
 <script>
-
     export default {
+        name: 'xcui-autocomplete',
         data() {
             return {
                 list: [],
@@ -188,7 +188,7 @@
     };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
     .xcui-suggestion{
         position:relative;
         width:100%;

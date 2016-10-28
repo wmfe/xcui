@@ -23,18 +23,29 @@
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(5);
+<<<<<<< HEAD
+=======
     }, function(module, exports) {}, function(module, exports) {
         module.exports = " <div v-el:outer style=\"position:relative; display: inline-block\" class=xcui-tooltip> <span v-el:trigger> <slot> </slot> </span> <div class=tooltip v-bind:class=\"{\n            'top':    placement === 'top',\n            'left':   placement === 'left',\n            'right':  placement === 'right',\n            'bottom': placement === 'bottom'\n        }\" v-el:popover v-show=show :transition=effect role=tooltip> <div class=tooltip-arrow></div> <div class=tooltip-inner :class=tooltipClass> <slot name=content> {{{content}}} </slot> </div> </div> </div> ";
+>>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
     }, function(module, exports, __webpack_require__) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
+<<<<<<< HEAD
+        var _popoverMixins = __webpack_require__(2);
+        var _popoverMixins2 = _interopRequireDefault(_popoverMixins);
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                "default": obj
+=======
         var _popoverMixins = __webpack_require__(4);
         var _popoverMixins2 = _interopRequireDefault(_popoverMixins);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
                 default: obj
+>>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
             };
         }
         exports.default = {
@@ -43,6 +54,25 @@
             props: {
                 trigger: {
                     type: String,
+<<<<<<< HEAD
+                    "default": "hover"
+                },
+                effect: {
+                    type: String,
+                    "default": "scale"
+                },
+                tooltipClass: {
+                    type: String,
+                    "default": ""
+                },
+                titleClass: {
+                    type: String,
+                    "default": "scale"
+                },
+                contentClass: {
+                    type: String,
+                    "default": "scale"
+=======
                     default: "hover"
                 },
                 effect: {
@@ -60,6 +90,7 @@
                 contentClass: {
                     type: String,
                     default: "scale"
+>>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
                 }
             }
         };
@@ -91,11 +122,19 @@
             props: {
                 trigger: {
                     type: String,
+<<<<<<< HEAD
+                    "default": "click"
+                },
+                effect: {
+                    type: String,
+                    "default": "fadein"
+=======
                     default: "click"
                 },
                 effect: {
                     type: String,
                     default: "fadein"
+>>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
                 },
                 title: {
                     type: String
@@ -191,6 +230,20 @@
                 }
             }
         };
+<<<<<<< HEAD
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = " <div v-el:outer style=\"position:relative; display: inline-block\" class=xcui-tooltip> <span v-el:trigger> <slot> </slot> </span> <div class=tooltip v-bind:class=\"{\n            'top':    placement === 'top',\n            'left':   placement === 'left',\n            'right':  placement === 'right',\n            'bottom': placement === 'bottom'\n        }\" v-el:popover v-show=show :transition=effect role=tooltip> <div class=tooltip-arrow></div> <div class=tooltip-inner :class=tooltipClass> <slot name=content> {{{content}}} </slot> </div> </div> </div> ";
+    }, function(module, exports, __webpack_require__) {
+        var __vue_script__, __vue_template__;
+        __webpack_require__(3);
+        __vue_script__ = __webpack_require__(1);
+        __vue_template__ = __webpack_require__(4);
+        module.exports = __vue_script__ || {};
+        if (module.exports.__esModule) module.exports = module.exports.default;
+        if (__vue_template__) {
+            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+        }
+=======
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};
@@ -210,6 +263,7 @@
                 return module;
             };
         });
+>>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
     } ]);
 });
 
