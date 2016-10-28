@@ -1,7 +1,6 @@
 /**
  * @file index.js
  */
-
 import Pagination from './pagination';
 import PopoverTooltip from './popover';
 import Autocomplete from './autocomplete';
@@ -13,6 +12,13 @@ import Loading from './loading';
 import Modal from './modal';
 import Progress from './progress';
 
+import xcuiInstall from './install.js';
+const install = (Vue) => {
+    if (install.installed) return;
+
+    Vue.use(xcuiInstall);
+};
+
 const xcui = {
     Pagination,
     PopoverTooltip,
@@ -23,7 +29,10 @@ const xcui = {
     Select,
     Loading,
     Progress,
-    Modal
+    Modal,
+
+    install,
+    xcuiInstall
 };
 
 module.exports = xcui;
