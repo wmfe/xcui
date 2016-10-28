@@ -117,7 +117,7 @@ export default {
     }
 };
 </script>
-<style lang="less" scoped>
+<style lang="less">
 
 .outer{
     overflow: hidden;

@@ -218,8 +218,8 @@
         }
     };
 </script>
- 
-<style lang="less" scoped>
+
+<style lang="less">
     @base-color:#46c3c1;
     @base-size:14px;
     @tit-color:#333;

@@ -188,7 +188,7 @@
     };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
     .xcui-suggestion{
         position:relative;
         width:100%;

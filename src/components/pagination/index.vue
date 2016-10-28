@@ -162,7 +162,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .v-pagination-wrap{
     -webkit-user-select: none;
     // standard
