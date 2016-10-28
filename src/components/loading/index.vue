@@ -14,7 +14,7 @@ export default {
         },
         'type': {
             type: String,
-            default: 'load1'
+            default: 'load2'
         },
         'classname': {
             type: String,
@@ -41,8 +41,6 @@ export default {
         display: block;
         top: 0;
         left: 0;
-        bottom: 0;
-        right: 0;
         width: 100%;
         height: 100%;
         position: absolute;
@@ -50,17 +48,22 @@ export default {
         background:@background;
     }
 
+    .loader{
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
 /*loading-1********************/
 
     .load1 {
     .loader {
+        top: 40%;
         color:@foreground;
         font-size:13px;
-        margin:20% auto;
         width:1em;
         height:1em;
         border-radius:50%;
-        position:relative;
         text-indent:-9999em;
         -webkit-animation:load1 1.3s infinite linear;
         animation:load1 1.3s infinite linear;
@@ -170,6 +173,7 @@ export default {
     .load2 {
 
     .loader {
+        top: 30%;
         color:@foreground;
         font-size:60px;
         text-indent:-9999em;
@@ -177,8 +181,6 @@ export default {
         width:1em;
         height:1em;
         border-radius:50%;
-        margin:20% auto;
-        position:relative;
         -webkit-transform: translateZ(0);
         -ms-transform: translateZ(0);
         transform: translateZ(0);
@@ -261,6 +263,7 @@ export default {
     .loader,
     .loader:before,
     .loader:after {
+        top: 20%;
         border-radius:50%;
         width:1.5em;
         height:1.5em;
@@ -273,8 +276,6 @@ export default {
     .loader {
         color:@foreground;
         font-size:10px;
-        margin:20% auto;
-        position:relative;
         text-indent:-9999em;
         -webkit-transform: translateZ(0);
         -ms-transform: translateZ(0);
