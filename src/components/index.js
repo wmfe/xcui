@@ -3,7 +3,7 @@
  */
 import Autocomplete from './autocomplete';
 import Datepicker from './datepicker';
-import DateRangePicker from './DateRangePicker';
+import DateRangePicker from './daterangepicker';
 import InputNumber from './inputNumber';
 import Loading from './loading';
 import Modal from './modal';
