@@ -23,24 +23,27 @@
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(5);
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = ' <div class="xcui-datapicker {{className}}"> <div :class="{\'input-group\':btnShow,\'bg-pr\':!btnShow}"> <input class=form-control type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class=calendar v-show=show> <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"><input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年</span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'off\':child.disabled}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} <div class=lunar v-if=showLunar>{{child.lunar}}</div> </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\'|| type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> <div class=timer-item> <div class=timer-item-current @click=currentTime :style="{\'color\':color}">当前</div> </div> </div> </div> <div class=calendar-button v-show="type==\'datetime\'|| type==\'time\' || range"> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
-        var _calendarMixins = __webpack_require__(2);
+        var _calendarMixins = __webpack_require__(4);
         var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = {
             mixins: [ _calendarMixins2.default ],
+            name: "xcui-datapicker",
             props: {
                 btnShow: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 }
             },
             data: function data() {
@@ -76,45 +79,6 @@
                             me.currentTimeBtnShow = false;
                         }
                     }
-<<<<<<< HEAD
-                }
-            },
-            data: function data() {
-                return {
-                    show: false,
-                    currentMonth: Number,
-                    selectValue: "",
-                    currentTimeBtnShow: true
-                };
-            },
-            methods: {
-                renderElse: function renderElse(y, m, i, temp, line, currentTime) {
-                    var me = this;
-                    var thisTime = Number(new Date(me.year, me.month, i));
-                    var options = {
-                        day: i,
-                        today: false
-                    };
-                    options = me.bindSingerTime(thisTime, currentTime, options);
-                    temp[line].push(options);
-                },
-                bindSingerTime: function bindSingerTime(thisTime, currentTime, options) {
-                    var me = this;
-                    if (me.begin !== undefined) {
-                        var beginSplit = me.begin.split(me.sep);
-                        var beginSplit1 = parseInt(beginSplit[0], 10);
-                        var beginSplit2 = parseInt(beginSplit[1], 10) - 1;
-                        var beginSplit3 = parseInt(beginSplit[2], 10);
-                        var beginTime = Number(new Date(beginSplit1, beginSplit2, beginSplit3));
-                        if (beginTime > thisTime) {
-                            options.disabled = true;
-                        }
-                        if (beginTime > currentTime) {
-                            me.currentTimeBtnShow = false;
-                        }
-                    }
-=======
->>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
                     if (me.end !== undefined) {
                         var endSplit = me.end.split(me.sep);
                         var endSplit1 = parseInt(endSplit[0], 10);
@@ -129,57 +93,6 @@
                         }
                     }
                     return options;
-<<<<<<< HEAD
-                },
-                select: function select(k1, k2, e) {
-                    if (e !== undefined) {
-                        e.stopPropagation();
-                    }
-                    var me = this;
-                    if (this.today.length > 0) {
-                        this.days[this.today[0]][this.today[1]].today = false;
-                    }
-                    this.days[k1][k2].today = true;
-                    this.day = me.zero(me.days[k1][k2].day);
-                    this.today = [ k1, k2 ];
-                    this.selectValue = this.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
-                    if (this.type === "date") {
-                        this.value = this.selectValue;
-                        this.showFalse();
-                    }
-                },
-                currentTime: function currentTime() {
-                    var date = new Date();
-                    var year = date.getFullYear();
-                    var month = date.getMonth();
-                    var hour = this.zero(date.getHours());
-                    var day = this.zero(date.getDate());
-                    var minute = this.zero(date.getMinutes());
-                    var second = this.zero(date.getSeconds());
-                    var me = this;
-                    var value = this.value;
-                    this.year = year;
-                    this.month = month;
-                    this.day = day;
-                    this.hour = hour;
-                    this.minute = minute;
-                    this.second = second;
-                    this.selectValue = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
-                    this.value = this.selectValue;
-                    if (this.currentTimeBtnShow) {
-                        this.render(year, month);
-                    }
-                    this.value = value;
-                    this.hourListShow = false;
-                    this.minuteListShow = false;
-                    this.secondListShow = false;
-                },
-                ok: function ok() {
-                    this.value = this.selectValue !== "" ? this.selectValue : this.value;
-                    this.showFalse();
-                },
-                cancel: function cancel() {
-=======
                 },
                 select: function select(k1, k2, e) {
                     var me = this;
@@ -192,7 +105,9 @@
                     me.day = me.zero(daySeleted.day);
                     if (daySeleted.disabled) {
                         me.month = k1 === 0 ? me.month - 1 : me.month + 1;
-                        me.outputMonth(me.month);
+                        var om = me.outputMonth(me.month, me.year);
+                        me.year = om.y;
+                        me.month = om.m;
                         me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
                         me.render(me.year, me.month);
                     } else {
@@ -232,7 +147,6 @@
                 },
                 cancel: function cancel() {
                     this.value = this.initialValue === "" ? this.value : this.initialValue;
->>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
                     this.showFalse();
                 },
                 showFalse: function showFalse() {
@@ -265,36 +179,36 @@
             props: {
                 type: {
                     type: String,
-                    "default": "date"
+                    default: "date"
                 },
                 value: {
                     type: String,
                     twoWay: true,
-                    "default": ""
+                    default: ""
                 },
                 begin: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 end: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 hourRange: {
                     type: [ Number, String ],
-                    "default": 1
+                    default: 1
                 },
                 minuteRange: {
                     type: [ Number, String ],
-                    "default": 1
+                    default: 1
                 },
                 secondRange: {
                     type: [ Number, String ],
-                    "default": 1
+                    default: 1
                 },
                 sep: {
                     type: String,
-                    "default": "-"
+                    default: "-"
                 },
                 color: String,
                 className: String
@@ -327,13 +241,7 @@
             created: function created() {
                 var me = this;
                 var now = me.getCurrentParams();
-<<<<<<< HEAD
-                if (this.btnShow) {
-                    this.inputClass.push("input-group");
-                }
-=======
                 this.initialValue = this.value;
->>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
                 if (me.value !== "") {
                     var params = me.getValueParams(me.value);
                     me.year = params.year;
@@ -349,10 +257,7 @@
                     me.hour = now.hour;
                     me.minute = now.minute;
                     me.second = now.second;
-<<<<<<< HEAD
-=======
                     me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
->>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
                 }
                 for (var i = 0; i < 60; i++) {
                     if (i % me.minuteRange === 0) {
@@ -362,11 +267,7 @@
                         me.secondList.push(me.zero(i));
                     }
                 }
-<<<<<<< HEAD
-                for (var _i = 1; _i < 24; _i++) {
-=======
                 for (var _i = 0; _i < 24; _i++) {
->>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
                     if (_i % me.hourRange === 0) {
                         me.hourList.push(me.zero(_i));
                     }
@@ -381,9 +282,9 @@
                 },
                 render: function render(y, m) {
                     var me = this;
-                    var firstDayOfMonth = new Date(y, m, 1).getDay();
-                    var lastDateOfMonth = new Date(y, m + 1, 0).getDate();
-                    var lastDayOfLastMonth = new Date(y, m, 0).getDate();
+                    me.firstDayOfMonth = new Date(y, m, 1).getDay();
+                    me.lastDateOfMonth = new Date(y, m + 1, 0).getDate();
+                    me.lastDayOfLastMonth = new Date(y, m, 0).getDate();
                     var params = me.getValueParams(me.value);
                     var line = 0;
                     var temp = [];
@@ -391,7 +292,7 @@
                     var currentTime = Number(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
                     me.year = y;
                     me.currentMonth = me.months[m];
-                    for (var i = 1; i <= lastDateOfMonth; i++) {
+                    for (var i = 1; i <= me.lastDateOfMonth; i++) {
                         var dow = new Date(y, m, i).getDay();
                         var chk = new Date();
                         var chkY = chk.getFullYear();
@@ -404,12 +305,12 @@
                             temp[line] = [];
                         } else if (i === 1) {
                             temp[line] = [];
-                            var k = lastDayOfLastMonth - firstDayOfMonth + 1;
-                            for (var j = 0; j < firstDayOfMonth; j++) {
+                            var k = me.lastDayOfLastMonth - me.firstDayOfMonth + 1;
+                            for (var j = 0; j < me.firstDayOfMonth; j++) {
                                 temp[line].push({
                                     day: k,
                                     disabled: true,
-                                    today: false
+                                    prev: true
                                 });
                                 k++;
                             }
@@ -431,7 +332,7 @@
                         }
                         if (dow === 6) {
                             line++;
-                        } else if (i === lastDateOfMonth) {
+                        } else if (i === me.lastDateOfMonth) {
                             var _k = 1;
                             for (dow; dow < 6; dow++) {
                                 temp[line].push({
@@ -449,14 +350,18 @@
                     e.stopPropagation();
                     var me = this;
                     me.month -= 1;
-                    me.outputMonth(me.month);
+                    var om = me.outputMonth(me.month, me.year);
+                    me.year = om.y;
+                    me.month = om.m;
                     me.render(me.year, me.month);
                 },
                 next: function next(e) {
                     e.stopPropagation();
                     var me = this;
                     me.month += 1;
-                    me.outputMonth(me.month);
+                    var om = me.outputMonth(me.month, me.year);
+                    me.year = om.y;
+                    me.month = om.m;
                     me.render(me.year, me.month);
                 },
                 changeTitSelect: function changeTitSelect(year, type) {
@@ -533,11 +438,7 @@
                         break;
 
                       default:                    }
-<<<<<<< HEAD
-                    me.selectValue = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
-=======
                     me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
->>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
                 },
                 output: function output(args) {
                     var me = this;
@@ -563,19 +464,21 @@
                         return args[0] + me.sep + args1 + me.sep + args2;
                     }
                 },
-<<<<<<< HEAD
-=======
-                outputMonth: function outputMonth(val) {
-                    val = Number(val);
-                    if (val === -1) {
-                        this.month = 11;
-                        this.year -= 1;
-                    } else if (val === 12) {
-                        this.month = 0;
-                        this.year += 1;
+                outputMonth: function outputMonth(month, year) {
+                    var m = Number(month);
+                    var y = Number(year);
+                    if (m === -1) {
+                        m = 11;
+                        y -= 1;
+                    } else if (m === 12) {
+                        m = 0;
+                        y += 1;
                     }
+                    return {
+                        y: y,
+                        m: m
+                    };
                 },
->>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
                 getValueParams: function getValueParams(timeCur) {
                     var me = this;
                     var params = {};
@@ -621,20 +524,12 @@
                 }
             }
         };
-    }, function(module, exports) {}, function(module, exports) {
-<<<<<<< HEAD
-        module.exports = ' <div class=bg-pr :class=inputClass _v-1ee1d222=""> <input class=form-control type=text v-model=value placeholder=请输入日期 @click=showCalendar _v-1ee1d222=""> <div @click.stop="" @touchstart.stop="" class=calendar v-show=show _v-1ee1d222=""> <div class=calendar-tools v-if="type!=\'time\'" _v-1ee1d222=""> <i class="glyphicon glyphicon-chevron-left float left" @click=prev _v-1ee1d222=""></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next _v-1ee1d222=""></i> <div class=calendar-tit _v-1ee1d222=""> <span @click="changeTitSelect(year, \'year\')" _v-1ee1d222=""><input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')" _v-1ee1d222="">年</span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')" _v-1ee1d222="">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow _v-1ee1d222=""> <table cellpadding=5 v-if="type!=\'time\'" _v-1ee1d222=""> <thead _v-1ee1d222=""> <tr _v-1ee1d222=""> <td v-for="week in weeks" class=week _v-1ee1d222="">{{week}}</td> </tr> </thead> <tbody _v-1ee1d222=""><tr v-for="(k1,day) in days" _v-1ee1d222=""> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'disabled\':child.disabled}" :style="{\'background\':color&amp;&amp;child.today?color:\'\'}" @click=select(k1,k2,$event) _v-1ee1d222=""> {{child.day}} <div class=lunar v-if=showLunar _v-1ee1d222="">{{child.lunar}}</div> </td> </tr> </tbody></table> <div class=calendar-time v-show="type==\'datetime\'|| type==\'time\'" _v-1ee1d222=""> <div class="timer clearfix" _v-1ee1d222=""> <div class=timer-item _v-1ee1d222=""> <label @click="dropTimeList(\'hour\')" _v-1ee1d222="">{{hour}}</label>: <ul class=drop-down v-show=hourListShow _v-1ee1d222=""> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')" _v-1ee1d222="">{{item}}</li> </ul> </div> <div class=timer-item _v-1ee1d222=""> <label @click="dropTimeList(\'minute\')" _v-1ee1d222="">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow _v-1ee1d222=""> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')" _v-1ee1d222="">{{item}}</li> </ul> </div> <div class=timer-item _v-1ee1d222=""> <label @click="dropTimeList(\'second\')" _v-1ee1d222="">{{second}}</label> <ul class=drop-down v-show=secondListShow _v-1ee1d222=""> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')" _v-1ee1d222="">{{item}}</li> </ul> </div> <div class=timer-item _v-1ee1d222=""> <div class=timer-item-current @click=currentTime :style="{\'color\':color}" _v-1ee1d222="">当前</div> </div> </div> </div> <div class=calendar-button v-show="type==\'datetime\'|| type==\'time\' || range" _v-1ee1d222=""> <button @click=ok :style="{\'background\':color}" _v-1ee1d222="">确定</button> <button @click=cancel class=cancel _v-1ee1d222="">取消</button> </div> </div> <table cellpadding=6 v-show=yearTableShow _v-1ee1d222=""> <tbody _v-1ee1d222=""><tr v-show=selectRangeShow _v-1ee1d222=""> <td colspan=3 _v-1ee1d222="">{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList" _v-1ee1d222=""> <td v-for="select in selects" @click=selectItem(select) _v-1ee1d222="">{{select}}</td> </tr> </tbody></table> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar _v-1ee1d222=""> <button class="btn btn-default" _v-1ee1d222=""> <span class="glyphicon glyphicon-calendar" _v-1ee1d222=""></span> </button> </span> </div> ';
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
-=======
-        module.exports = ' <div class="xcui-datapicker {{className}}"> <div :class="{\'input-group\':btnShow,\'bg-pr\':!btnShow}"> <input class=form-control type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class=calendar v-show=show> <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"><input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年</span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'off\':child.disabled}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} <div class=lunar v-if=showLunar>{{child.lunar}}</div> </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\'|| type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> <div class=timer-item> <div class=timer-item-current @click=currentTime :style="{\'color\':color}">当前</div> </div> </div> </div> <div class=calendar-button v-show="type==\'datetime\'|| type==\'time\' || range"> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};
->>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
-        __webpack_require__(3);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(4);
+        __webpack_require__(1);
+        __vue_script__ = __webpack_require__(3);
+        __vue_template__ = __webpack_require__(2);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
         var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;

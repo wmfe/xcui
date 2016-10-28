@@ -23,13 +23,15 @@
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(4);
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = " <div class=xcui-pageloading> <div class=bar role=bar> <div class=peg></div> </div> </div> ";
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
         exports.default = {
-            name: "xcui-pageloading",
+            name: "xcui-page-loading",
             data: function data() {
                 return {
                     easing: "linear",
@@ -41,25 +43,21 @@
                 };
             },
             props: {
-                active: {
-                    type: Boolean,
-                    "default": false
-                },
                 minimum: {
                     type: Number,
-                    "default": .08
+                    default: .08
                 },
                 speed: {
                     type: Number,
-                    "default": 350
+                    default: 350
                 },
                 trickle: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 },
                 trickleSpeed: {
                     type: Boolean,
-                    "default": 250
+                    default: 250
                 }
             },
             methods: {
@@ -333,24 +331,14 @@
                 }
             }
         };
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div class=xcui-pageloading> <div class=bar role=bar> <div class=peg></div> <div class=spinner role=spinner> </div> <div class=spinner-icon></div> </div> </div> ";
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-<<<<<<< HEAD
-=======
         var __vue_styles__ = {};
->>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
-        __webpack_require__(2);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(3);
+        __webpack_require__(1);
+        __vue_script__ = __webpack_require__(3);
+        __vue_template__ = __webpack_require__(2);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
-<<<<<<< HEAD
-        if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
-        }
-=======
         var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
             __vue_options__.template = __vue_template__;
@@ -362,7 +350,6 @@
                 return module;
             };
         });
->>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
     } ]);
 });
 

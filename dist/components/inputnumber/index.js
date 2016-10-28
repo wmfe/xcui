@@ -23,6 +23,8 @@
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(4);
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = ' <div v-el:outer="" class=outer :class=size _v-9ee36d2c=""> <div class=up-down-wrap _v-9ee36d2c=""> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue _v-9ee36d2c=""> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue _v-9ee36d2c=""> </a> </div> <div class=input-wrap _v-9ee36d2c=""> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className _v-9ee36d2c=""> </div> </div> ';
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -38,27 +40,26 @@
                 },
                 step: {
                     type: Number,
-                    "default": 1
+                    default: 1
                 },
                 isDisable: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 className: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 textTips: {
                     type: String,
-                    "default": "请输入范围内整数"
+                    default: "请输入范围内整数"
                 },
                 size: {
                     type: String,
-                    "default": "large"
+                    default: "large"
                 },
                 inputValue: {
-                    type: String,
-                    "default": ""
+                    type: Number
                 }
             },
             data: function data() {
@@ -66,7 +67,7 @@
             },
             methods: {
                 changeValue: function changeValue(event) {
-                    if (this.isAvailbale(event.keyCode)) {
+                    if (this.isAvailbale(event.keyCode) && this.isNumber(this.inputValue + "")) {
                         this.inputValue = this.limitValue(this.inputValue) + "";
                     } else {
                         this.inputValue = "";
@@ -91,16 +92,14 @@
                     if (keyCode >= 96 && keyCode <= 105) {
                         return true;
                     }
-                    if (keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 39) {
+                    if (keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 39 || keyCode === 189) {
                         return true;
                     }
                     return false;
                 },
                 isNumber: function isNumber(num) {
-                    if (window.parseInt(num) === window.Number(num)) {
-                        return true;
-                    }
-                    return false;
+                    var result = /^(-)?\d*$/.test(num);
+                    return result;
                 },
                 upValue: function upValue(e) {
                     if (this.isNumber(this.inputValue)) {
@@ -124,27 +123,14 @@
             },
             ready: function ready() {}
         };
-    }, function(module, exports) {}, function(module, exports) {
-<<<<<<< HEAD
-        module.exports = ' <div v-el:outer="" class=outer :class=size _v-6042a108=""> <div class=up-down-wrap _v-6042a108=""> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue _v-6042a108=""> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue _v-6042a108=""> </a> </div> <div class=input-wrap _v-6042a108=""> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className _v-6042a108=""> </div> </div> ';
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
-=======
-        module.exports = ' <div v-el:outer="" class=outer :class=size _v-bc4f67bc=""> <div class=up-down-wrap _v-bc4f67bc=""> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue _v-bc4f67bc=""> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue _v-bc4f67bc=""> </a> </div> <div class=input-wrap _v-bc4f67bc=""> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className _v-bc4f67bc=""> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};
->>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
-        __webpack_require__(2);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(3);
+        __webpack_require__(1);
+        __vue_script__ = __webpack_require__(3);
+        __vue_template__ = __webpack_require__(2);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
-<<<<<<< HEAD
-        if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
-        }
-=======
         var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
             __vue_options__.template = __vue_template__;
@@ -156,7 +142,6 @@
                 return module;
             };
         });
->>>>>>> d2008d92301748f4f8639e16c90f90c5a05b607b
     } ]);
 });
 

@@ -24,7 +24,7 @@
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(5);
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div v-el:outer style=\"position:relative; display: inline-block\" class=xcui-popover> <span v-el:trigger> <slot> </slot> </span> <div class=popover v-bind:class=\"{\n      'top':placement === 'top',\n      'left':placement === 'left',\n      'right':placement === 'right',\n      'bottom':placement === 'bottom'\n      }\" v-el:popover v-show=show :transition=effect> <div class=arrow></div> <div class=popover-title :class=titleClass v-show=title> <slot name=title> {{title}} </slot> </div> <div class=popover-content :class=contentClass> <slot name=content> {{{content}}} </slot> </div> </div> </div> ";
+        module.exports = " <div v-el:outer style=\"position:relative; display: inline-block\" class=xcui-tooltip> <span v-el:trigger> <slot> </slot> </span> <div class=tooltip v-bind:class=\"{\n            'top':    placement === 'top',\n            'left':   placement === 'left',\n            'right':  placement === 'right',\n            'bottom': placement === 'bottom'\n        }\" v-el:popover v-show=show :transition=effect role=tooltip> <div class=tooltip-arrow></div> <div class=tooltip-inner :class=tooltipClass> <slot name=content> {{{content}}} </slot> </div> </div> </div> ";
     }, function(module, exports, __webpack_require__) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -38,7 +38,7 @@
             };
         }
         exports.default = {
-            name: "xcui-popover",
+            name: "xcui-tooltip",
             mixins: [ _popoverMixins2.default ],
             props: {
                 trigger: {

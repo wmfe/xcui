@@ -23,6 +23,8 @@
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(4);
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = " <div class=toaster :class=\"{\n    'text-info': options.type === 'info' || options.type == undefined,\n    'text-success': options.type === 'success',\n    'text-danger': options.type === 'error',\n    'text-warning': options.type === 'warning'\n}\" v-show=show> <span class=\"toaster-icon glyphicon\" :class=\"{\n        'glyphicon-info-sign': options.type === 'info' || options.type == undefined,\n        'glyphicon-ok': options.type === 'success',\n        'glyphicon-remove': options.type === 'error',\n        'glyphicon-warning-sign': options.type === 'warning'\n    }\"></span> <p class=toaster-desc> {{options.content}} </p> </div> ";
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -33,7 +35,7 @@
             props: {
                 options: {
                     type: Object,
-                    "default": function _default() {
+                    default: function _default() {
                         return {};
                     }
                 }
@@ -69,14 +71,12 @@
                 }
             }
         };
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div class=toaster :class=\"{\n    'text-info': options.type === 'info' || options.type == undefined,\n    'text-success': options.type === 'success',\n    'text-danger': options.type === 'error',\n    'text-warning': options.type === 'warning'\n}\" v-show=show> <span class=\"toaster-icon glyphicon\" :class=\"{\n        'glyphicon-info-sign': options.type === 'info' || options.type == undefined,\n        'glyphicon-ok': options.type === 'success',\n        'glyphicon-remove': options.type === 'error',\n        'glyphicon-warning-sign': options.type === 'warning'\n    }\"></span> <p class=toaster-desc> {{options.content}} </p> </div> ";
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};
-        __webpack_require__(2);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(3);
+        __webpack_require__(1);
+        __vue_script__ = __webpack_require__(3);
+        __vue_template__ = __webpack_require__(2);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
         var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
