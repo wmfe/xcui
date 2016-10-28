@@ -267,7 +267,7 @@
   };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
     .block-item {
         margin:0 30px 50px;
         float:left;

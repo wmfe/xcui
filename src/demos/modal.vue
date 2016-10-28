@@ -127,13 +127,17 @@
 
 XCUI为Modal提供了便捷的调用方式。在Vue.prototype中添加了快捷的方法：$Modal.show,$Modal.close, $confirm和$alert。因此，在Vue实例代码中，可以使用this.$Modal等方法快捷地创建一个对话框。
 但需要在调用这些全局方法之前，先在项目中引入XCUI或xcuiInstall，并调用Vue.use安装。
+
 引入方式一：
+
 ```js
 import Vue from 'vue'
 import XCUI from 'xcui' // 全局引入
 Vue.use(XCUI)
 ```
+
 引入方式二：
+
 ```js
 import Vue from 'vue'
 import {xcuiInstall} from 'xcui'
@@ -142,16 +146,48 @@ Vue.use(xcuiInstall)
 做好以上准备工作后，即可在组件任何位置调用vm.$confirm等来隐式地创建一个对话框了。
 
 1. **this.$Modal.show(options)**
+
+| 参数 | 类型 | 默认 | 描述 | 是否必选 |
+|-----|-----|-----|-----|----|
+|options|Object|-|对话框的参数，属性同props|**必选**|
+
 2. **this.$Modal.close()**
+
+`$Modal.close()`提供隐式地关闭对话框全局实例的能力。
+
 3. **this.$confirm(title, content, onOk, onCancel, isRawHTML)** 或 **this.$confirm(options, isRawHTML)**
+
+写法1：
+| 参数 | 类型 | 默认 | 描述 | 是否必选 |
+|-----|-----|-----|-----|----|
+|title|String|-|对话框的标题|可选|
+|content|String|-|对话框的内容，可通过isRawHTML指定是否解析为原生HTML|可选|
+|onOk|Function|-|点击确定按钮的回调函数|可选|
+|onCancel|Function|-|点击取消按钮或关闭按钮的回调函数|可选|
+|options|Object|-|对content(String)是否解析为原生HTML|可选|
+
+写法2：
+| 参数 | 类型 | 默认 | 描述 | 是否必选 |
+|-----|-----|-----|-----|----|
+|options|Object|-|对话框的参数，属性同props|**必选**|
+|isRawHTML|Boolean|false|对options.content(String)是否解析为原生HTML|可选|
+
+
 4. **this.$alert(content, onOk)**
+
+| 参数 | 类型 | 默认 | 描述 | 是否必选 |
+|-----|-----|-----|-----|----|
+|content|String|-|对话框的内容|**必选**|
+|onOk|Function|-|点击确定按钮的回调函数|可选|
+
 </template>
 <script>
-import Modal from '../components/modal';
-import xcuiInstall from '../components/install.js';
 import Vue from 'vue';
-Vue.use(xcuiInstall);
-window.Vue = Vue;
+import XCUI from '../components/index.js';
+Vue.use(XCUI);
+let Modal = XCUI.Modal;
+// window.XCUI = XCUI;
+// window.Vue = Vue;
 let ModalDemo = {
     components: {
         Modal

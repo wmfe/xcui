@@ -41,10 +41,6 @@
                 };
             },
             props: {
-                active: {
-                    type: Boolean,
-                    "default": false
-                },
                 minimum: {
                     type: Number,
                     "default": .08
@@ -334,7 +330,7 @@
             }
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div class=xcui-pageloading> <div class=bar role=bar> <div class=peg></div> <div class=spinner role=spinner> </div> <div class=spinner-icon></div> </div> </div> ";
+        module.exports = " <div class=xcui-pageloading> <div class=bar role=bar> <div class=peg></div> </div> </div> ";
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(2);

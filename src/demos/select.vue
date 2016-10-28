@@ -212,7 +212,7 @@
 [Keen-UI - select](https://josephuspaye.github.io/Keen-UI/#/ui-select-docs)
 [http://amazeui.org/javascript/selected](http://amazeui.org/javascript/selected)
 </template>
-<style lang="less" scoped>
+<style lang="less">
     .select-demo{
         width:200px;
     }

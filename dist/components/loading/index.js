@@ -37,7 +37,7 @@
                 },
                 type: {
                     type: String,
-                    "default": "load1"
+                    "default": "load2"
                 },
                 classname: {
                     type: String,
@@ -55,7 +55,7 @@
             methods: {}
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname] _v-df3ce176=""> <div class=loader :style="{\'color\' : color}" _v-df3ce176=""></div> </div> ';
+        module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname]> <div class=loader :style="{\'color\' : color}"></div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(2);

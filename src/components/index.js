@@ -17,9 +17,11 @@ import Toaster from './toaster';
 import Tooltip from './tooltip';
 
 import xcuiInstall from './install.js';
-const install = (Vue) => {
-    if (install.installed) return;
 
+const install = (Vue) => {
+    if (install.installed) {
+        return;
+    }
     Vue.component(Autocomplete.name, Autocomplete);
     Vue.component(Datepicker.name, Datepicker);
     Vue.component(DateRangePicker.name, DateRangePicker);
@@ -43,7 +45,7 @@ const xcui = {
     Autocomplete,
     Datepicker,
     DateRangePicker,
-    inputNumber,
+    InputNumber,
     Loading,
     Modal,
     PageLoading,
