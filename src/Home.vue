@@ -4,6 +4,9 @@
     <div id="sidebar-wrapper" class="col-md-2">
         <ul class="sidebar-nav">
             <li>
+                <a v-link="{ path: '/home' }" href="javascript:;">关于XCUI</a>
+            </li>
+            <li>
                 <a v-link="{ path: '/component/datepicker' }" href="javascript:;">DatePicker</a>
             </li>
             <li>
@@ -61,11 +64,17 @@
 
 <script>
 const version = require('../package.json').version;
+
 export default {
     data() {
         return {
             version: version
         };
+    },
+    ready() {
+        this.$route.router.go({
+            name: 'home'
+        });
     }
 };
 

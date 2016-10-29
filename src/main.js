@@ -34,7 +34,8 @@ router.map({
     '/': {
         component: Home,
         subRoutes: {
-            '/': {
+            '/home': {
+                name: 'home',
                 component(resolve) {
                     resolve(Homecontent);
                 }

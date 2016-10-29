@@ -1,5 +1,5 @@
 <template lang="md">
-# xcui-select
+# Select多功能选择框
 
 
 ## 使用场景
