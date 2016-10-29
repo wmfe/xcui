@@ -4,13 +4,35 @@
     <div id="sidebar-wrapper" class="col-md-2">
         <ul class="sidebar-nav">
             <li>
+                <a v-link="{ path: '/component/datepicker' }" href="javascript:;">DatePicker</a>
+            </li>
+            <li>
+                <a v-link="{ path: '/component/daterangepicker' }" href="javascript:;">DateRangePicker</a>
+            </li>
+            <li>
+                 <a v-link="{ path: '/component/inputNumber' }" href="javascript:;">InputNumber</a>
+            </li>
+            <li>
+                 <a v-link="{ path: '/component/loading' }" href="javascript:;">Loading</a>
+            </li>
+            
+            <li>
+                 <a v-link="{ path: '/component/modal' }" href="javascript:;">Modal</a>
+            </li>
+            <li>
+                <a v-link="{ path: '/component/suggestion' }" href="javascript:;">Suggestion</a>
+            </li>
+            <li>
                 <a v-link="{ path: '/component/paginations' }" href="javascript:;">Paginations</a>
             </li>
             <li>
-                <a v-link="{ path: '/component/autocomplete' }" href="javascript:;">Autocomplete</a>
+                <a v-link="{ path: '/component/popover' }" href="javascript:;">Popover</a>
             </li>
             <li>
-                <a v-link="{ path: '/component/popover' }" href="javascript:;">Popover</a>
+                <a v-link="{ path: '/component/progress' }" href="javascript:;">Progress</a>
+            </li>
+            <li>
+                <a v-link="{ path: '/component/pageloading' }" href="javascript:;">PageLoading</a>
             </li>
             <li>
                 <a v-link="{ path: '/component/tooltip' }" href="javascript:;">Tooltip</a>
@@ -19,31 +41,10 @@
                 <a v-link="{ path: '/component/tag' }" href="javascript:;">Tag</a>
             </li>
             <li>
-                <a v-link="{ path: '/component/datepicker' }" href="javascript:;">DatePicker</a>
-            </li>
-            <li>
-                <a v-link="{ path: '/component/daterangepicker' }" href="javascript:;">DateRangePicker</a>
-            </li>
-            <li>
-                <a v-link="{ path: '/component/select' }" href="javascript:;">Select</a>
-            </li>
-            <li>
-                 <a v-link="{ path: '/component/loading' }" href="javascript:;">Loading</a>
-            </li>
-            <li>
                  <a v-link="{ path: '/component/toaster' }" href="javascript:;">Toaster</a>
             </li>
             <li>
-                 <a v-link="{ path: '/component/modal' }" href="javascript:;">Modal</a>
-            </li>
-            <li>
-                 <a v-link="{ path: '/component/inputNumber' }" href="javascript:;">InputNumber</a>
-            </li>
-            <li>
-                <a v-link="{ path: '/component/progress' }" href="javascript:;">Progress</a>
-            </li>
-            <li>
-                <a v-link="{ path: '/component/pageloading' }" href="javascript:;">PageLoading</a>
+                <a v-link="{ path: '/component/select' }" href="javascript:;">Select</a>
             </li>
         </ul>
     </div>

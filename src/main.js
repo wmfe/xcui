@@ -13,7 +13,7 @@ import Paginations from './demos/paginations';
 import Loading from './demos/loading';
 import Popover from './demos/popover';
 import Tooltip from './demos/tooltip';
-import Autocomplete from './demos/autocomplete';
+import Suggestion from './demos/suggestion';
 import TagDemo from './demos/tag';
 import datepicker from './demos/datepicker';
 import daterangepicker from './demos/daterangepicker';
@@ -54,9 +54,9 @@ router.map({
                     resolve(Tooltip);
                 }
             },
-            '/component/autocomplete': {
+            '/component/suggestion': {
                 component(resolve) {
-                    resolve(Autocomplete);
+                    resolve(Suggestion);
                 }
             },
             '/component/tag': {
