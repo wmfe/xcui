@@ -24,7 +24,7 @@
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(4);
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div v-el:outer="" class=outer :class=size _v-9ee36d2c=""> <div class=up-down-wrap _v-9ee36d2c=""> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue _v-9ee36d2c=""> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue _v-9ee36d2c=""> </a> </div> <div class=input-wrap _v-9ee36d2c=""> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className _v-9ee36d2c=""> </div> </div> ';
+        module.exports = ' <div v-el:outer class=outer :class=size> <div class=up-down-wrap> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue> </a> </div> <div class=input-wrap> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className /> </div> </div> ';
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -124,11 +124,6 @@
             },
             ready: function ready() {}
         };
-<<<<<<< HEAD
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div v-el:outer class=outer :class=size> <div class=up-down-wrap> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue> </a> </div> <div class=input-wrap> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className /> </div> </div> ';
-=======
->>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};
