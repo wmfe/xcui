@@ -46,75 +46,83 @@
 
 	'use strict';
 
-	var _vue = __webpack_require__(4);
+	var _vue = __webpack_require__(5);
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _vueRouter = __webpack_require__(6);
+	var _vueRouter = __webpack_require__(7);
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-	var _vueResource = __webpack_require__(7);
+	var _vueResource = __webpack_require__(8);
 
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 
-	var _App = __webpack_require__(8);
+	var _App = __webpack_require__(9);
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Home = __webpack_require__(15);
+	var _Home = __webpack_require__(17);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _homeContent = __webpack_require__(21);
+	var _homeContent = __webpack_require__(23);
 
 	var _homeContent2 = _interopRequireDefault(_homeContent);
 
-	var _paginations = __webpack_require__(24);
+	var _paginations = __webpack_require__(26);
 
 	var _paginations2 = _interopRequireDefault(_paginations);
 
-	var _loading = __webpack_require__(34);
+	var _loading = __webpack_require__(36);
 
 	var _loading2 = _interopRequireDefault(_loading);
 
-	var _popover = __webpack_require__(44);
+	var _popover = __webpack_require__(46);
 
 	var _popover2 = _interopRequireDefault(_popover);
 
-	var _autocomplete = __webpack_require__(57);
+	var _tooltip = __webpack_require__(58);
 
-	var _autocomplete2 = _interopRequireDefault(_autocomplete);
+	var _tooltip2 = _interopRequireDefault(_tooltip);
 
-	var _tag = __webpack_require__(67);
+	var _suggestion = __webpack_require__(68);
+
+	var _suggestion2 = _interopRequireDefault(_suggestion);
+
+	var _tag = __webpack_require__(78);
 
 	var _tag2 = _interopRequireDefault(_tag);
 
-	var _datepicker = __webpack_require__(77);
+	var _datepicker = __webpack_require__(88);
 
 	var _datepicker2 = _interopRequireDefault(_datepicker);
 
-	var _daterangepicker = __webpack_require__(85);
+	var _dateRangePicker = __webpack_require__(99);
 
-	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
+	var _dateRangePicker2 = _interopRequireDefault(_dateRangePicker);
 
-	var _select = __webpack_require__(95);
+	var _select = __webpack_require__(112);
 
 	var _select2 = _interopRequireDefault(_select);
 
-	var _toaster = __webpack_require__(183);
+	var _toaster = __webpack_require__(200);
 
 	var _toaster2 = _interopRequireDefault(_toaster);
 
-	var _inputNumber = __webpack_require__(191);
+	var _modal = __webpack_require__(208);
+
+	var _modal2 = _interopRequireDefault(_modal);
+
+	var _inputNumber = __webpack_require__(236);
 
 	var _inputNumber2 = _interopRequireDefault(_inputNumber);
 
-	var _progress = __webpack_require__(201);
+	var _progress = __webpack_require__(241);
 
 	var _progress2 = _interopRequireDefault(_progress);
 
-	var _pageloading = __webpack_require__(211);
+	var _pageloading = __webpack_require__(246);
 
 	var _pageloading2 = _interopRequireDefault(_pageloading);
 
@@ -130,7 +138,8 @@
 	    '/': {
 	        component: _Home2.default,
 	        subRoutes: {
-	            '/': {
+	            '/home': {
+	                name: 'home',
 	                component: function component(resolve) {
 	                    resolve(_homeContent2.default);
 	                }
@@ -145,9 +154,14 @@
 	                    resolve(_popover2.default);
 	                }
 	            },
-	            '/component/autocomplete': {
+	            '/component/tooltip': {
 	                component: function component(resolve) {
-	                    resolve(_autocomplete2.default);
+	                    resolve(_tooltip2.default);
+	                }
+	            },
+	            '/component/suggestion': {
+	                component: function component(resolve) {
+	                    resolve(_suggestion2.default);
 	                }
 	            },
 	            '/component/tag': {
@@ -162,7 +176,7 @@
 	            },
 	            '/component/daterangepicker': {
 	                component: function component(resolve) {
-	                    resolve(_daterangepicker2.default);
+	                    resolve(_dateRangePicker2.default);
 	                }
 	            },
 	            '/component/select': {
@@ -178,6 +192,11 @@
 	            '/component/toaster': {
 	                component: function component(resolve) {
 	                    resolve(_toaster2.default);
+	                }
+	            },
+	            '/component/modal': {
+	                component: function component(resolve) {
+	                    resolve(_modal2.default);
 	                }
 	            },
 	            '/component/inputNumber': {
@@ -205,7 +224,8 @@
 /* 1 */,
 /* 2 */,
 /* 3 */,
-/* 4 */
+/* 4 */,
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -10446,10 +10466,10 @@
 	}, 0);
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -10635,7 +10655,7 @@
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -13349,7 +13369,7 @@
 	}));
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	/*!
@@ -14872,18 +14892,18 @@
 	module.exports = plugin;
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(9)
-	__vue_script__ = __webpack_require__(13)
+	__webpack_require__(10)
+	__vue_script__ = __webpack_require__(14)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(14)
+	__vue_template__ = __webpack_require__(16)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -14908,16 +14928,16 @@
 	})()}
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(10);
+	var content = __webpack_require__(11);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -14934,21 +14954,21 @@
 	}
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".xcui .xcui-fade-transition {\n  opacity: 1;\n  -webkit-transition: opacity linear 0.2s;\n  transition: opacity linear 0.2s;\n}\n.xcui .xcui-fade-enter,\n.xcui .xcui-fade-leave {\n  opacity: 0;\n}\n.xcui .xcui-dialog-transition {\n  opacity: 1;\n  -webkit-transition-duration: .4s;\n          transition-duration: .4s;\n  -webkit-transform: translate(-50%, -50%) scale(1) !important;\n          transform: translate(-50%, -50%) scale(1) !important;\n  -webkit-transition-property: opacity, -webkit-transform!important;\n  transition-property: opacity, -webkit-transform!important;\n  transition-property: transform, opacity!important;\n  transition-property: transform, opacity, -webkit-transform!important;\n}\n.xcui .xcui-dialog-enter,\n.xcui .xcui-dialog-leave {\n  opacity: 0;\n}\n.xcui .xcui-dialog-enter {\n  -webkit-transform: translate(-50%, -50%) scale(1.185) !important;\n          transform: translate(-50%, -50%) scale(1.185) !important;\n}\n.xcui .xcui-dialog-leave {\n  -webkit-transform: translate(-50%, -50%) scale(1) !important;\n          transform: translate(-50%, -50%) scale(1) !important;\n}\n", ""]);
+	exports.push([module.id, ".xcui .xcui-fade-transition {\n  opacity: 1;\n  -webkit-transition: opacity linear 0.2s;\n  transition: opacity linear 0.2s;\n}\n.xcui .xcui-fade-enter,\n.xcui .xcui-fade-leave {\n  opacity: 0;\n}\n.xcui .xcui-dialog-transition {\n  opacity: 1;\n  -webkit-transition-duration: .4s;\n          transition-duration: .4s;\n  -webkit-transform: translate(-50%, -50%) scale(1) !important;\n          transform: translate(-50%, -50%) scale(1) !important;\n  -webkit-transition-property: opacity, -webkit-transform!important;\n  transition-property: opacity, -webkit-transform!important;\n  transition-property: transform, opacity!important;\n  transition-property: transform, opacity, -webkit-transform!important;\n}\n.xcui .xcui-dialog-enter,\n.xcui .xcui-dialog-leave {\n  opacity: 0;\n}\n.xcui .xcui-dialog-enter {\n  -webkit-transform: translate(-50%, -50%) scale(1.185) !important;\n          transform: translate(-50%, -50%) scale(1.185) !important;\n}\n.xcui .xcui-dialog-leave {\n  -webkit-transform: translate(-50%, -50%) scale(1) !important;\n          transform: translate(-50%, -50%) scale(1) !important;\n}\n#header {\n  height: 50px;\n  background: #FF2D4B;\n  padding-left: 50px;\n  border-bottom: 1px solid #f1f1f1;\n}\n#header .logo {\n  font-size: 22px;\n  line-height: 50px;\n  height: 50px;\n  display: inline-block;\n  color: #fff;\n}\n#header .logo:hover {\n  text-decoration: none;\n}\n#header .logo img {\n  width: 32px;\n  height: 32px;\n  margin-top: -8px;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	/*
@@ -15004,7 +15024,7 @@
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -15226,30 +15246,54 @@
 
 
 /***/ },
-/* 13 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-/***/ },
 /* 14 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "\n<div>\n    <div id=\"header\">\n        <a href=\"#\" class=\"logo\">XCUI Components</a>\n    </div>\n  <router-view></router-view>\n</div>\n";
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _logo_nobg_32x322x = __webpack_require__(15);
+
+	var _logo_nobg_32x322x2 = _interopRequireDefault(_logo_nobg_32x322x);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    data: function data() {
+	        return {
+	            logoUrl: _logo_nobg_32x322x2.default
+	        };
+	    }
+	};
 
 /***/ },
 /* 15 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAADOJJREFUeAHtWwl0FeUV/uateUkIgSwGAhIwLAZlt9FKFbBStdYFRauWg2iPskkAqUcQNIALbsgiKiitAlqPqLgUFUGJFVE8YEXZyhaWBBOJCZCNl7dMv5thMi/JW7Ogod5z3vtn5l/vN/e/9/73/wf4Pyfl5+ZfVVUFg2eaZRxKTrb7dI+nSQBQs7NNWLe/A2ItfeDx9oaitIPVEge7LRox0fbq1GGLgtVq43MrbDb+qlM7LBYFFrMLbo8HVVVeOKtcOFnlhMvtREUFr51O3lfxeSWfVcHD525PBbxqMczmfKg4CAVH4CwthCOlRPlwoTMSEBsEgNrnungkxV9HhoYguW17ZKSno2fXJHRLi0bqWYAjKpIxNKysm8JyogwoKgF+OlaFwqIyFBSVI6/gGNMinCg9jvLKMrg8x6CoO+HBHv4+V3JePunbYdgAqBcNdyAuZhLaJQ/CkIv6Y1BmW3Rs59vWL/e6+DgIjIq7p5ejwpGifLe8POzBqoNuj1KHjnpOfeT5vWphEadsC6aCo6o6dOSdvsxbfG/qXquDR/ZE55TlWJTdF1H2utkt7/6sRGpa04Uc+FJ98AEBUC+95XL8PvMlTBtztl74jEhjo5N8+fALgDoo24Ku7ofOOOaF847tU3wBMPne1Fxbcm/FjLGZNfdn0kX3tFTRazpL/gGw266mhvcrHXrFFptmpCfAhjR9/PUAqHZq+vbsrhcImZ6k37FoBeD1hizaZAVUFZi1EPhmW+RNpqY4YDKdq1esBwA2Hs7A4Mx0vUDI1O0Btu4C7poOVEbkhIVs2m8B6ePuGcD2PUCHBvgh7emoub299LbrA2BSr0S/jGi9QNB0wizggbnAnClABR2sO+4HjhQGrdKozIKjwJ1TgeOlwIIHNeAvGAaIRIRLDppzsylVL14fAKu1L+Lj9Hz/qXhWX3xD5scCMqjZi4BnOSATmxs7E9jcANH035Px9D87gDEPaVPtWaa7c4HFrwOP3gv88CMg+eGS3dJKL1ofgIT4ZD0zYPrjT2R4ObBpK/BcNt86ByAgLKRoxlJ4pj4FvPFBwOoRZ6z6GLj/SSDKxj4I9K59wPxlnAp/Bs7rCtw7B1idE36zDkesXrgWANUKsHuXTnqm33Q0B9Aqhp3So3xllSYJviAsoC4Qj2vu34HHFvttIqKHTy8FnuSvbWtN7OsyP34WcDZ1wcjrgWtHa4ujUB0ktqkR8VoA4KsDZ6NXd2qJIHRWAjBhNtCODtVUdhgIhPQ04E1KwT0coKzcIiWPF5j8KPDq+0AnMihz3h/zXfm+5GX8jVKQ1gFIbBO6p/i4mkK1ATBZeqNrWs388NtS9gR2Eh8eCOdSPD/7GvjrNKDkuN/m/D4sq9DqrNsIdE8LzvzkO7SxyBL8aSrIcKht61bq8OFmKVobAK+3DzoEFwAGO4B5nOt2zsesMCShVw/a6x2a6RLFFYpy86jpCdgWKtKetMbB3rwwn/WIphjnc0yWap5C9cDpFG/DESeVVV0AzKbOYQUzxJQI2h6VA3g49HQ4vxvFdz8wimYymLJavwkYlw3s3AvceEV4zJeWapYgrkavhQYgsY0d0YnVkl5bAmIc1DRhkuiAGeO0qEwgEHLz6SW+Cgw4X2u0tJzAUaGt+Xf9TjaKWZ0rgQstTwDbsJnWZoWh7UXhyZyfNEoDXnyOyZz/6XwWCTns0fB4HFKlNgBRURHAyNr9MrTByUD8gfASxVPEftk7xvAkhCVa/fAPxjNRknOWAGUESKdtu/lmXwBuukozdb7MT2S7+w4BI64Dhlyo1wg/tdvNjEX6ASCxTY12DLu1G/4ADONv/2EDhGmjgRff0HyDg0c4VTy1mxM/4tMvjWfbKfL6mzeegoFQWpKPgPF0ruTNy5wX5nfuA4YOpKIc7ls6/Gu71Qy1Kkoq1EgAA10KUpKSw2/Fp+QUiuElA7S3LZLQIYXS0RNY/xVw7IRPQZ/L/XnGjSi+QKZSfP48Stj4ERrAcp/Zm+BONOpHemWzKfAqVqlWAwAGXhtLB4YeTgPpKSrFAWRaRH7YeCCHzAcl1ciVBVUwknxRoMK8KNT50xnaojVqKLk9JobU6Wj4AhDTOhEpjQBATNB8OisZ6UBpGe1+gDevDzqZDpVOl15AFzoI9i4XGPYGpI5Yn8bGJ1XyrmqoGxJgtrVHUlu7PqYGpeIiy+IkLTV09SQfAJLaEoBqnRS4XjLd61kU+5SkwGXCzZFNGFWpFjsDAAWdkBAfbhOBy3XpCGRnMfbWLnAZyXl3Lef9KdF/7X3gKK1DIJK2ZowFfts3UInInjudFbCanVLJ4lOzS1h+tE+FgJdiHmdP4kpxBZVgKdfvnA4x0fTpKRkSQRIT9z1/9z3B5fNtwIp3NUvRrTOBowKVOuV0h+PoqyTRMF1zGXBREzEvgy4p5faackwuDQDcnmREhxBDqREuCQgvPaqVljdtotKSeIGQLKMXLqOi3MTYwfe0/2T20t9o85vbhs1Ox0+4UFFElH2VoMnUuPkfbNSiIHXmpZyYsQdpKUSZiZkUGy/r/NPBvPR/rNQFa79KuTR0gLkZAZCefEk0+kMLqImpjVOo3A7RWZKAyumio8XF+la8AYBiOg2yRw6LOfVknX8wX3Nz33yWuqED8P6ntCDPnx4IDhuBSwMAi7n5Adh7UFsW7zkE3PxHbVEjqzhxbGRB8/bHwPRnmh+E42XV8186MgAwNzMAX38HTJnDNUMePcXL6daONBiVKNOCGYDEDlav11xeiQg1F1VV+QHAbm0+JfhBDu34PIo95/rQixngvLs+axLKkiizhLXEOoyhUuRhkSanCuo+r3ev3q4hAdEOm/6wSdN/vAU8vkQLXV/cj4HSKYGbP4dO1ANjGGDhmuyrb7nae0CLNwSuEXnO9j0ueoGf6BUNAKzNIAEzFwIv/FNbF2T24lynmIciCZ5M5PSIbw18u0OLDYrkNBV9s+MnrlU4HzXyAcBiOEV6bkNTWdqOywbeWcftspNAb87tRTNlRya8Fq+4BLh9GP2EKC2UJjtQEiNsCtq8bZfy5cpqH0CaM0Ykp7eaguTgkgQ1P99suLfzpkfu5NxxA3Dl7zQHSuIFstnyHk1lYymv4LBvEwYANlvjJUAiNbJ3p29TdWqv7Rs2dJE1MwsQvSFUQOfpicW0Fq9o9w3533fIxWN8H/pWNQDwlQbfEuFei6af/Bjw31ythixxp1LbRxqwrNufSE9fBlqETpRr8cX7Hm/Ydvzq9QdQ6H5Pa0z7NwAw+zrrvkXCuJ7Ht/IIvbj8Aq1wjIOScCOXr/3DqByiiJWC+QynVI/OWkExjWs20KGimRSTFglt2LKr7hE5AwCTYlyH26gou0l0a5etYhSIb0fIzIXPn4YAt16j3TfFv+wLyo6UHMIUku3wTTSTMt0OnwJdywn8n18o2+pr6xYwmFYUthoBSXhblN0nG2sHNAfyrU+jLW9qyuhKy/IXbswyrqCTRJPvoXWRLbRQtPTN3TC3WlK3mAGAhIkioVsmGcpOr9eXMQAR1+aiqwcDN1xZewtMwvHiZR4tDtyri5K6ccsGf+eIfQHwBm7BT05dzd6jC219NgfXeGPipzfj0eRRwMABxr1cSfRIgAhEqz7Oh7Nytr9sAwBVjczxlrmuk4StZtFkyeGI00ESGT6vm9GTnPsJZG1ENy1d+ZGS8/oBo4JxZbyuykrKSQS05GEtrCXxO1F6Pc6JoHIji4plmEsQxM0WibuJ06KuROpdzFm8CwUevp0QpN41/bMWfAza/9B35Zarl40cF4x1YwpUuZzBCra4PNl/zJr1rvLJK0FjbQYAFbJqOUNIQu83TdiNuLIRoTgyAKh0RuhWhWr6Z8qXxdjNWVtRYu6nrFwZ0rQbAFRVnXLlfqaBN0W3eQUe3DJxNVy2zLoub6DmDSvgdlOdt2Ba+eGPPJOwQln78r2RcGEAYLJ8j0IqDglQtiTautOF7IWfo6IsS1m7fFukQzcAUJVP8faaMoy5lXHqFkBfbKnEkje+xpGCJcq6Za81dMSKb0V1yIjR3Iy8HlcN7o+B/RMgO72/JJJzRf9an8vQ+RYen5lPxjc0dni1ANAbUzNvi0Nr61Vc2l5OD6sj+pzbGX0yUvldoCPktrfeSFOkssDZsbccH+Tsx7Y9O/jh5EeoKH5L+eK9JtNXfgGoO/bqb4iiDp0Dr2cAVH51FWVLQlxsPI/LJvNkaQKP1sTyOobb6/bqM72yyxzORqfYawlq/HBUwuaV3DcowYEjRdh7IJ8nSwsYv98Cky1HWfPi9rpjaqr7sAAI1ln1B5V2WwKirO3gRkfuAqdC9SQy9t4GZkW+zjAxgGHimR72xZ/C7zfdHn4C6znJT9hKGCkuJLDyVecBFHkLwjVfwcb0a96vCISPwP8A+ijW8salZEEAAAAASUVORK5CYII="
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div>\n    <div id=\"header\">\n        <a v-link=\"{ path: '/home' }\" href=\"javascript:;\" class=\"logo\">\n          <img :src=\"logoUrl\">\n            XCUI Components\n        </a>\n    </div>\n  <router-view></router-view>\n</div>\n";
+
+/***/ },
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(16)
-	__vue_script__ = __webpack_require__(18)
+	__webpack_require__(18)
+	__vue_script__ = __webpack_require__(20)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\Home.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(20)
+	__vue_template__ = __webpack_require__(22)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -15274,16 +15318,16 @@
 	})()}
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(17);
+	var content = __webpack_require__(19);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -15300,21 +15344,21 @@
 	}
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "#wrapper {\n  -webkit-transition: all .5s ease;\n  transition: all .5s ease;\n}\n#wrapper .toggled {\n  padding-left: 250px;\n}\n#wrapper.row {\n  margin-left: 0;\n  margin-right: 0;\n  padding: 20px 40px;\n}\n#header {\n  height: 50px;\n  background: #fff;\n  padding-left: 50px;\n  border-bottom: 1px solid #f1f1f1;\n}\n#header .logo {\n  line-height: 50px;\n  font-size: 22px;\n  color: #46C3C1;\n}\n#sidebar-wrapper {\n  z-index: 1000;\n  display: inline-block;\n  height: 100%;\n  overflow-x: hidden;\n  background: #46C3C1;\n  -webkit-transition: all .5s ease;\n  transition: all .5s ease;\n  padding: 0;\n}\n#wrapper.toggled #sidebar-wrapper {\n  width: 250px;\n}\n#page-content-wrapper {\n  background: #fff;\n}\n/* Sidebar Styles */\n.sidebar-nav {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n  overflow-x: hidden!important;\n}\n.sidebar-nav li {\n  text-indent: 20px;\n  line-height: 40px;\n}\n.sidebar-nav li a {\n  display: block;\n  text-decoration: none;\n  color: #fff;\n}\n.sidebar-nav li a:hover {\n  text-decoration: none;\n  color: #fff;\n  background: rgba(255, 255, 255, 0.2);\n}\n.sidebar-nav li a.active,\n.sidebar-nav li a.focus {\n  text-decoration: none;\n}\n.sidebar-nav li a.v-link-active {\n  background: #fff;\n  color: #46C3C1;\n}\n.sidebar-nav .sidebar-brand {\n  height: 65px;\n  font-size: 18px;\n  line-height: 60px;\n}\n.sidebar-nav .sidebar-brand a {\n  color: #46C3C1;\n  background: #fff;\n}\n.sidebar-nav .sidebar-brand a :hover {\n  color: #fff;\n  background: #46C3C1;\n}\n@media (min-width: 768px) {\n}\n.xcui-demo-container {\n  border: 1px solid #ccc;\n  border-radius: 5px;\n  margin: 15px 0 30px 0;\n  padding: 15px;\n}\n.xcui-demo-container .xcui-example-container h3 {\n  margin-top: 15px !important;\n}\n.xcui-demo-container .xcui-example-container .xcui-code-wrap {\n  max-width: 100%;\n}\n.xcui-demo-container .xcui-example-container .xcui-code-wrap pre {\n  max-height: 300px;\n  padding-right: 0;\n  overflow: scroll;\n}\n.xcui-demo-container .xcui-example-container .xcui-code-wrap pre .token {\n  display: inline-block;\n  white-space: nowrap;\n}\n/* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript */\n/**\n * prism.js default theme for JavaScript, CSS and HTML\n * Based on dabblet (http://dabblet.com)\n * @author Lea Verou\n */\ncode[class*=\"language-\"],\npre[class*=\"language-\"] {\n  color: black;\n  background: none;\n  text-shadow: 0 1px white;\n  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;\n  text-align: left;\n  white-space: pre;\n  word-spacing: normal;\n  word-break: normal;\n  word-wrap: normal;\n  line-height: 1.5;\n  -moz-tab-size: 4;\n  -o-tab-size: 4;\n  tab-size: 4;\n  -webkit-hyphens: none;\n  -ms-hyphens: none;\n  hyphens: none;\n}\npre[class*=\"language-\"]::-moz-selection,\npre[class*=\"language-\"]::-moz-selection,\ncode[class*=\"language-\"]::-moz-selection,\ncode[class*=\"language-\"]::-moz-selection {\n  text-shadow: none;\n  background: #b3d4fc;\n}\npre[class*=\"language-\"]::selection,\npre[class*=\"language-\"]::selection,\ncode[class*=\"language-\"]::selection,\ncode[class*=\"language-\"]::selection {\n  text-shadow: none;\n  background: #b3d4fc;\n}\n@media print {\n  code[class*=\"language-\"],\n  pre[class*=\"language-\"] {\n    text-shadow: none;\n  }\n}\n/* Code blocks */\npre[class*=\"language-\"] {\n  padding: 1em;\n  margin: .5em 0;\n  overflow: auto;\n}\n:not(pre) > code[class*=\"language-\"],\npre[class*=\"language-\"] {\n  background: #f5f2f0;\n}\n/* Inline code */\n:not(pre) > code[class*=\"language-\"] {\n  padding: .1em;\n  border-radius: .3em;\n  white-space: normal;\n}\n.token.comment,\n.token.prolog,\n.token.doctype,\n.token.cdata {\n  color: slategray;\n}\n.token.style-attr {\n  margin-left: .5em;\n}\n.token.punctuation {\n  color: #999;\n}\n.namespace {\n  opacity: .7;\n}\n.token.property,\n.token.tag,\n.token.boolean,\n.token.number,\n.token.constant,\n.token.symbol,\n.token.deleted {\n  color: #905;\n}\n.token.selector,\n.token.attr-name,\n.token.string,\n.token.char,\n.token.builtin,\n.token.inserted {\n  color: #690;\n}\n.token.operator,\n.token.entity,\n.token.url,\n.language-css .token.string,\n.style .token.string {\n  color: #a67f59;\n}\n.token.atrule,\n.token.attr-value,\n.token.keyword {\n  color: #07a;\n}\n.token.function {\n  color: #DD4A68;\n}\n.token.regex,\n.token.important,\n.token.variable {\n  color: #e90;\n}\n.token.important,\n.token.bold {\n  font-weight: bold;\n}\n.token.italic {\n  font-style: italic;\n}\n.token.entity {\n  cursor: help;\n}\n", ""]);
+	exports.push([module.id, "#wrapper {\n  -webkit-transition: all .5s ease;\n  transition: all .5s ease;\n}\n#wrapper .toggled {\n  padding-left: 250px;\n}\n#wrapper.row {\n  margin-left: 0;\n  margin-right: 0;\n  padding: 20px 40px;\n}\n#sidebar-wrapper {\n  z-index: 1000;\n  display: inline-block;\n  height: 100%;\n  overflow-x: hidden;\n  background: #fff;\n  -webkit-transition: all .5s ease;\n  transition: all .5s ease;\n  padding: 0;\n}\n#wrapper.toggled #sidebar-wrapper {\n  width: 250px;\n}\n#page-content-wrapper {\n  background: #fff;\n}\n/* Sidebar Styles */\n.sidebar-nav {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n  overflow-x: hidden!important;\n}\n.sidebar-nav li {\n  text-indent: 20px;\n  line-height: 40px;\n}\n.sidebar-nav li a {\n  display: block;\n  text-decoration: none;\n  color: #333;\n  border-left: 2px solid #fff;\n}\n.sidebar-nav li a:hover {\n  text-decoration: none;\n  color: #FF2D4B;\n  background: rgba(255, 255, 255, 0.2);\n}\n.sidebar-nav li a.active,\n.sidebar-nav li a.focus {\n  text-decoration: none;\n}\n.sidebar-nav li a.v-link-active {\n  border-left: 2px solid #FF2D4B;\n  background: #fff;\n  color: #FF2D4B;\n}\n.sidebar-nav .sidebar-brand {\n  height: 65px;\n  font-size: 18px;\n  line-height: 60px;\n}\n.sidebar-nav .sidebar-brand a {\n  color: #FF2D4B;\n  background: #fff;\n}\n.sidebar-nav .sidebar-brand a :hover {\n  color: #fff;\n  background: #FF2D4B;\n}\n@media (min-width: 768px) {\n}\n.xcui-demo-container {\n  border: 1px solid #ccc;\n  border-radius: 5px;\n  margin: 15px 0 30px 0;\n  padding: 15px;\n}\n.xcui-demo-container .xcui-example-container h3 {\n  margin-top: 15px !important;\n}\n.xcui-demo-container .xcui-example-container .xcui-demo-wrap,\n.xcui-demo-container .xcui-example-container .xcui-code-wrap {\n  width: 100%!important;\n}\n.xcui-demo-container .xcui-example-container .xcui-code-wrap {\n  max-width: 100%;\n  margin-top: 20px;\n}\n.xcui-demo-container .xcui-example-container .xcui-code-wrap pre {\n  padding-right: 0;\n  display: block;\n  font-size: 13px;\n  line-height: 1.42857143;\n  color: #333;\n  word-break: break-all;\n  word-wrap: break-word;\n  background-color: rgba(128, 128, 128, 0.05);\n  border: 1px solid rgba(128, 128, 128, 0.075);\n  border-radius: 4px;\n  white-space: pre-wrap;\n}\n.xcui-demo-container .xcui-example-container .xcui-code-wrap pre .token {\n  display: inline-block;\n  white-space: normal;\n}\n/* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript */\n/**\n * prism.js default theme for JavaScript, CSS and HTML\n * Based on dabblet (http://dabblet.com)\n * @author Lea Verou\n */\ncode[class*=\"language-\"],\npre[class*=\"language-\"] {\n  background: none;\n  text-shadow: 0 1px white;\n  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;\n  text-align: left;\n  word-spacing: normal;\n  line-height: 1.5;\n  -moz-tab-size: 4;\n  -o-tab-size: 4;\n  tab-size: 4;\n  -webkit-hyphens: none;\n  -ms-hyphens: none;\n  hyphens: none;\n  display: block;\n  font-size: 13px;\n  color: #333;\n  word-break: break-all;\n  word-wrap: break-word;\n  background-color: rgba(128, 128, 128, 0.05);\n  border: 1px solid rgba(128, 128, 128, 0.075);\n  border-radius: 4px;\n  white-space: pre-wrap;\n}\npre[class*=\"language-\"]::-moz-selection,\npre[class*=\"language-\"]::-moz-selection,\ncode[class*=\"language-\"]::-moz-selection,\ncode[class*=\"language-\"]::-moz-selection {\n  text-shadow: none;\n  background: #b3d4fc;\n}\npre[class*=\"language-\"]::selection,\npre[class*=\"language-\"]::selection,\ncode[class*=\"language-\"]::selection,\ncode[class*=\"language-\"]::selection {\n  text-shadow: none;\n  background: #b3d4fc;\n}\n@media print {\n  code[class*=\"language-\"],\n  pre[class*=\"language-\"] {\n    text-shadow: none;\n  }\n}\n/* Code blocks */\npre[class*=\"language-\"] {\n  padding: 1em;\n  margin: .5em 0;\n  overflow: auto;\n}\n:not(pre) > code[class*=\"language-\"],\npre[class*=\"language-\"] {\n  background: #f5f2f0;\n}\n/* Inline code */\n:not(pre) > code[class*=\"language-\"] {\n  padding: .1em;\n  border-radius: .3em;\n  white-space: normal;\n}\n.token.comment,\n.token.prolog,\n.token.doctype,\n.token.cdata {\n  color: slategray;\n}\n.token.style-attr {\n  margin-left: .5em;\n}\n.token.punctuation {\n  color: #999;\n}\n.namespace {\n  opacity: .7;\n}\n.token.property,\n.token.tag,\n.token.boolean,\n.token.number,\n.token.constant,\n.token.symbol,\n.token.deleted {\n  color: #905;\n}\n.token.selector,\n.token.attr-name,\n.token.string,\n.token.char,\n.token.builtin,\n.token.inserted {\n  color: #690;\n}\n.token.operator,\n.token.entity,\n.token.url,\n.language-css .token.string,\n.style .token.string {\n  color: #a67f59;\n}\n.token.atrule,\n.token.attr-value,\n.token.keyword {\n  color: #07a;\n}\n.token.function {\n  color: #DD4A68;\n}\n.token.regex,\n.token.important,\n.token.variable {\n  color: #e90;\n}\n.token.important,\n.token.bold {\n  font-weight: bold;\n}\n.token.italic {\n  font-style: italic;\n}\n.token.entity {\n  cursor: help;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15323,17 +15367,23 @@
 	    value: true
 	});
 
-	var version = __webpack_require__(19).version;
+	var version = __webpack_require__(21).version;
+
 	exports.default = {
 	    data: function data() {
 	        return {
 	            version: version
 	        };
+	    },
+	    ready: function ready() {
+	        this.$route.router.go({
+	            name: 'home'
+	        });
 	    }
 	};
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -15369,7 +15419,7 @@
 			"array-shuffle": "^1.0.0",
 			"countup": "^1.6.1",
 			"fuzzysearch": "^1.0.3",
-			"xcui-demo-loader": "^0.1.3"
+			"xcui-demo-loader": "^0.1.4"
 		},
 		"devDependencies": {
 			"babel-core": "^6.9.1",
@@ -15379,6 +15429,7 @@
 			"babel-preset-stage-2": "^6.0.0",
 			"babel-runtime": "^6.0.0",
 			"cli-spinner": "^0.2.4",
+			"clone": "^2.0.0",
 			"co": "^4.6.0",
 			"co-fs": "^1.2.0",
 			"co-request": "^1.0.0",
@@ -15420,23 +15471,23 @@
 	};
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"wrapper\" class=\"row\">\n  <!-- sidebar-wrapper -->\n  <div id=\"sidebar-wrapper\" class=\"col-md-2\">\n      <ul class=\"sidebar-nav\">\n          <li>\n              <a v-link=\"{ path: '/component/paginations' }\" href=\"javascript:;\">Paginations</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/autocomplete' }\" href=\"javascript:;\">Autocomplete</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/popover' }\" href=\"javascript:;\">Popover</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/tag' }\" href=\"javascript:;\">Tag</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/datepicker' }\" href=\"javascript:;\">DatePicker</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/daterangepicker' }\" href=\"javascript:;\">DateRangePicker</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/select' }\" href=\"javascript:;\">Select</a>\n          </li>\n          <li>\n               <a v-link=\"{ path: '/component/loading' }\" href=\"javascript:;\">Loading</a>\n          </li>\n          <li>\n               <a v-link=\"{ path: '/component/toaster' }\" href=\"javascript:;\">Toaster</a>\n          </li>\n          <li>\n               <a v-link=\"{ path: '/component/inputNumber' }\" href=\"javascript:;\">InputNumber</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/progress' }\" href=\"javascript:;\">Progress</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/pageloading' }\" href=\"javascript:;\">PageLoading</a>\n          </li>\n      </ul>\n  </div>\n  <!-- /#sidebar-wrapper -->\n  <!-- Page Content -->\n  <div id=\"page-content-wrapper\" class=\"col-md-10\">\n     <router-view\n    transition=\"xcui-fade\"\n    transition-mode=\"out-in\"></router-view>\n  </div>\n  <!-- /#page-content-wrapper -->\n</div>\n";
+	module.exports = "\n<div id=\"wrapper\" class=\"row\">\n  <!-- sidebar-wrapper -->\n  <div id=\"sidebar-wrapper\" class=\"col-md-2\">\n      <ul class=\"sidebar-nav\">\n          <li>\n              <a v-link=\"{ path: '/home' }\" href=\"javascript:;\">关于XCUI</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/datepicker' }\" href=\"javascript:;\">DatePicker</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/daterangepicker' }\" href=\"javascript:;\">DateRangePicker</a>\n          </li>\n          <li>\n               <a v-link=\"{ path: '/component/inputNumber' }\" href=\"javascript:;\">InputNumber</a>\n          </li>\n          <li>\n               <a v-link=\"{ path: '/component/loading' }\" href=\"javascript:;\">Loading</a>\n          </li>\n          \n          <li>\n               <a v-link=\"{ path: '/component/modal' }\" href=\"javascript:;\">Modal</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/suggestion' }\" href=\"javascript:;\">Suggestion</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/paginations' }\" href=\"javascript:;\">Paginations</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/popover' }\" href=\"javascript:;\">Popover</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/progress' }\" href=\"javascript:;\">Progress</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/pageloading' }\" href=\"javascript:;\">PageLoading</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/tooltip' }\" href=\"javascript:;\">Tooltip</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/tag' }\" href=\"javascript:;\">Tag</a>\n          </li>\n          <li>\n               <a v-link=\"{ path: '/component/toaster' }\" href=\"javascript:;\">Toaster</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/select' }\" href=\"javascript:;\">Select</a>\n          </li>\n      </ul>\n  </div>\n  <!-- /#sidebar-wrapper -->\n  <!-- Page Content -->\n  <div id=\"page-content-wrapper\" class=\"col-md-10\">\n     <router-view\n    transition=\"xcui-fade\"\n    transition-mode=\"out-in\"></router-view>\n  </div>\n  <!-- /#page-content-wrapper -->\n</div>\n";
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(22)
+	__vue_script__ = __webpack_require__(24)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\demos\\homeContent.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(23)
+	__vue_template__ = __webpack_require__(25)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -15461,7 +15512,7 @@
 	})()}
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15470,7 +15521,7 @@
 	    value: true
 	});
 
-	var version = __webpack_require__(19).version;
+	var version = __webpack_require__(21).version;
 
 	exports.default = {
 	    data: function data() {
@@ -15481,24 +15532,24 @@
 	};
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports) {
 
-	module.exports = "<div><h1><strong>XCUI</strong></h1>\n<p>XCUI 是基于<code>Vue</code>和 <code>Bootstrap</code> 的桌面端组件库。</p>\n<p>XCUI的目标是：</p>\n<ul>\n<li>满足桌面端页面大部分组件需求。</li>\n<li>支持npm install； 支持按需加载和全部加载；快速开发基于 <code>FIS</code> 构建的项目。</li>\n<li>保持小体积(不依赖<code>jquery</code>, <code>Boostrap.js</code>), 仅使用 <code>Boostrap.css</code> 。</li>\n<li>简洁优雅。</li>\n</ul>\n<h3>文档修订</h3>\n<pre># clone the doc repo\ngit clone ssh://YOUR_NAME@icode.baidu.com:8235/baidu/waimai-bfe/xcui &amp;&amp; scp -p -P 8235 YOUR_NAME@icode.baidu.com:hooks/commit-msg xcui/.git/hooks/\n# 安装依赖\nnpm i\n# run server\nnpm run dev\n</pre>\n</div>";
+	module.exports = "<div><h1>关于XCUI</h1>\n<p><img src=\"/static/logo_nobg_128x128@2x.png\" alt=\"logo\" /></p>\n<p>XCUI 是基于<code>Vue</code>和 <code>Bootstrap.css</code> 的<strong>桌面端组件库</strong>。</p>\n<h2>XCUI的目标是：</h2>\n<ul>\n<li>满足桌面端页面大部分基础组件需求。</li>\n<li>快速开发基于 <code>vue</code> 构建的项目。</li>\n<li>保持小体积, 无其他js库依赖(不依赖<code>jquery</code>, <code>Boostrap.js</code>), 仅使用 <code>Boostrap.css</code> 。</li>\n<li>简洁优雅。</li>\n</ul>\n<h2>版本支持</h2>\n<p>XCUI目前支持<code>vue 1.x</code>版本；推荐使用<code>vue 1.0.26</code>及以上版本。后续XCUI会增加支持<code>vue 2.x</code>的版本，敬请期待。</p>\n<h2>如何使用</h2>\n<p>通过<code>npm</code>安装，或在<a href=\"https://github.com/wmfe/xcui\">这里</a>下载打包好的版本：</p>\n<pre>npm install xcui\n</pre>\n<p><code>xcui</code>使用<code>umd</code>方式打包，支持各种模块加载器。</p>\n<p>在页面根实例中引入：</p>\n<pre><span class=\"token keyword\" >import</span> Vue <span class=\"token keyword\" >from</span> <span class=\"token string\" >'vue'</span>\n<span class=\"token keyword\" >import</span> xcui <span class=\"token keyword\" >from</span> <span class=\"token string\" >'xcui'</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n</pre>\n<p>或者：</p>\n<pre><span class=\"token keyword\" >var</span> Vue <span class=\"token operator\" >=</span> <span class=\"token function\" >require</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'vue'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> xcui <span class=\"token operator\" >=</span> <span class=\"token function\" >require</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'xcui'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n</pre>\n<p>在页面中声明标签，即可使用。举例：</p>\n<pre><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-datepicker</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date.value<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:sep</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date.sep<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre>\n<h2>全局方法</h2>\n<p><code>xcui</code>把一些使用频率高的操作挂载到<code>Vue</code>的根实例，便于调用。如, 在一个<code>components</code>组件中可以这样调用：</p>\n<pre><span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$alert</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'alert message'</span><span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 警告提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$confirm</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'是否确认?'</span><span class=\"token punctuation\" >,</span> content<span class=\"token punctuation\" >,</span> onOk<span class=\"token punctuation\" >,</span> onCancel<span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 确认提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$toaster</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'toaster message'</span><span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 信息提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span>$Modal<span class=\"token punctuation\" >.</span><span class=\"token function\" >show</span><span class=\"token punctuation\" >(</span>options<span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 模态框</span>\n</pre>\n<p>具体请见<a href=\"/#!/component/modal\">modal</a> 中的说明。</p>\n<h2>开发</h2>\n<h4>clone the doc repo</h4>\n<pre>$ git clone git@github<span class=\"token punctuation\" >.</span>com<span class=\"token punctuation\" >:</span>wmfe<span class=\"token operator\" >/</span>xcui<span class=\"token punctuation\" >.</span>git\n</pre>\n<h4>安装依赖</h4>\n<pre>$ npm i\n</pre>\n<h4>run dev server</h4>\n<pre>$ npm run dev\n</pre>\n<h4>build components</h4>\n<pre>$ npm run build\n</pre>\n<h2>加入我们</h2>\n<h4>提交issue</h4>\n<p>在使用过程中有问题，请在<a href=\"https://github.com/wmfe/xcui/issues\">这里</a>给我们提交<code>issue</code>。</p>\n<h4>提交pull request</h4>\n<p>代码有问题？请在<a href=\"https://github.com/wmfe/xcui/pulls\">这里</a>给我们提交<code>pull request</code>。</p>\n<h4>加入开发团队</h4>\n<p>加入<a href=\"https://github.com/wmfe\">wmfe</a>团队，一起开发通用组件，交流vue组件开发的心得~</p>\n</div>";
 
 /***/ },
-/* 24 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(25)
-	__vue_script__ = __webpack_require__(27)
+	__webpack_require__(27)
+	__vue_script__ = __webpack_require__(29)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\demos\\paginations.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(33)
+	__vue_template__ = __webpack_require__(35)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -15523,16 +15574,16 @@
 	})()}
 
 /***/ },
-/* 25 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(26);
+	var content = __webpack_require__(28);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -15549,10 +15600,10 @@
 	}
 
 /***/ },
-/* 26 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
@@ -15563,7 +15614,7 @@
 
 
 /***/ },
-/* 27 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15572,7 +15623,7 @@
 	    value: true
 	});
 
-	var _pagination = __webpack_require__(28);
+	var _pagination = __webpack_require__(30);
 
 	var _pagination2 = _interopRequireDefault(_pagination);
 
@@ -15625,18 +15676,18 @@
 	};
 
 /***/ },
-/* 28 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(29)
-	__vue_script__ = __webpack_require__(31)
+	__webpack_require__(31)
+	__vue_script__ = __webpack_require__(33)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\pagination\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(32)
+	__vue_template__ = __webpack_require__(34)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -15661,23 +15712,23 @@
 	})()}
 
 /***/ },
-/* 29 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(30);
+	var content = __webpack_require__(32);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-3095ba00&scoped=true!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-3095ba00&scoped=true!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -15687,21 +15738,21 @@
 	}
 
 /***/ },
-/* 30 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".v-pagination-wrap[_v-3095ba00] {\n  -webkit-user-select: none;\n}\n.v-pagination-wrap .pagination[_v-3095ba00] {\n  vertical-align: bottom;\n  margin: 0;\n}\n.v-pagination-wrap .pagination li > a[_v-3095ba00] {\n  padding: 5px 12px;\n}\n.v-pagination-wrap .pagination li > a[_v-3095ba00]:focus {\n  background-color: initial;\n}\n.v-pagination-wrap .pagination li.active a[_v-3095ba00],\n.v-pagination-wrap .pagination li.active a[_v-3095ba00]:hover,\n.v-pagination-wrap .pagination li.active a[_v-3095ba00]:active {\n  background-color: #46c3c1;\n  border-color: #46c3c1;\n  outline: none;\n}\n.v-pagination-wrap .pagination .apostrophe[_v-3095ba00] {\n  border-color: transparent;\n  border-left-color: #ddd;\n}\n.v-pagination-wrap .pagination .apostrophe[_v-3095ba00]:hover {\n  background-color: inherit;\n}\n.v-pagination-wrap .v-pagination-page-size[_v-3095ba00] {\n  line-height: 34px;\n}\n.v-pagination-wrap .v-pagination-mini .prev-trigger[_v-3095ba00] {\n  margin: 0 10px;\n  padding: 2px 12px;\n}\n.v-pagination-wrap .v-pagination-mini .prev-trigger span[_v-3095ba00] {\n  -webkit-transform: rotate(90deg);\n  transform: rotate(90deg);\n}\n.v-pagination-wrap .v-pagination-mini .next-trigger[_v-3095ba00] {\n  margin: 0 0 0 10px;\n  padding: 2px 12px;\n}\n.v-pagination-wrap .v-pagination-mini .next-trigger span[_v-3095ba00] {\n  -webkit-transform: rotate(-90deg);\n  transform: rotate(-90deg);\n}\n", ""]);
+	exports.push([module.id, ".v-pagination-wrap {\n  -webkit-user-select: none;\n}\n.v-pagination-wrap .pagination {\n  vertical-align: bottom;\n  margin: 0;\n}\n.v-pagination-wrap .pagination li > a {\n  padding: 5px 12px;\n}\n.v-pagination-wrap .pagination li > a:focus {\n  background-color: initial;\n}\n.v-pagination-wrap .pagination li.active a,\n.v-pagination-wrap .pagination li.active a:hover,\n.v-pagination-wrap .pagination li.active a:active {\n  background-color: #46c3c1;\n  border-color: #46c3c1;\n  outline: none;\n}\n.v-pagination-wrap .pagination .apostrophe {\n  border-color: transparent;\n  border-left-color: #ddd;\n}\n.v-pagination-wrap .pagination .apostrophe:hover {\n  background-color: inherit;\n}\n.v-pagination-wrap .v-pagination-page-size {\n  line-height: 34px;\n}\n.v-pagination-wrap .v-pagination-mini .prev-trigger {\n  margin: 0 10px;\n  padding: 2px 12px;\n}\n.v-pagination-wrap .v-pagination-mini .prev-trigger span {\n  -webkit-transform: rotate(90deg);\n  transform: rotate(90deg);\n}\n.v-pagination-wrap .v-pagination-mini .next-trigger {\n  margin: 0 0 0 10px;\n  padding: 2px 12px;\n}\n.v-pagination-wrap .v-pagination-mini .next-trigger span {\n  -webkit-transform: rotate(-90deg);\n  transform: rotate(-90deg);\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 31 */
+/* 33 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15710,6 +15761,7 @@
 	    value: true
 	});
 	exports.default = {
+	    name: 'xcui-pagination',
 	    props: {
 	        'type': {
 	            type: String,
@@ -15809,30 +15861,30 @@
 	};
 
 /***/ },
-/* 32 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div class=\"v-pagination-wrap {{ class || '' }}\" _v-3095ba00=\"\">\n    <template v-if=\"type === 'standard' \">\n        <div class=\"row\" _v-3095ba00=\"\">\n            <div v-if=\"withPageSize\" class=\"v-pagination-page-size col-md-6\" _v-3095ba00=\"\">\n                共<span v-text=\"total\" _v-3095ba00=\"\"></span>条\n                &nbsp;&nbsp;\n                每页\n                <select v-model=\"pageSize\" _v-3095ba00=\"\">\n                    <option v-for=\"opt in pageSizeRange\" :value=\"opt\" v-text=\"opt\" _v-3095ba00=\"\">1</option>\n                </select>\n                条\n            </div>\n            <div class=\"v-pagination-standard col-md-6 text-right\" _v-3095ba00=\"\">\n                <button @click=\"prev\" class=\"btn btn-default\" :class=\"{'disabled': currentPageNo == 1}\" _v-3095ba00=\"\">上一页</button>\n\n                <ul class=\"pagination\" _v-3095ba00=\"\">\n                    <li v-if=\"getRangePage.begin > 1\" _v-3095ba00=\"\">\n                        <a href=\"javascript:void(0);\" @click=\"turnToPage(1)\" _v-3095ba00=\"\">1</a>\n                    </li>\n                    <li v-if=\"getRangePage.begin > 1\" _v-3095ba00=\"\">\n                        <a class=\"apostrophe\" _v-3095ba00=\"\">...</a>\n                    </li>\n\n                    <li v-for=\"number in (getRangePage.end - getRangePage.begin + 1)\" :class=\"{'active': isActive(number)}\" _v-3095ba00=\"\">\n                        <a v-if=\"isActive(number)\" href=\"javascript:void(0);\" v-text=\"number + getRangePage.begin\" _v-3095ba00=\"\"></a>\n                        <a v-else=\"\" href=\"javascript:void(0);\" v-text=\"number + getRangePage.begin\" @click=\"turnToPage(number + getRangePage.begin)\" _v-3095ba00=\"\"></a>\n                    </li>\n\n                    <li v-if=\"getRangePage.end < totalPageCount\" _v-3095ba00=\"\">\n                        <a class=\"apostrophe\" _v-3095ba00=\"\">...</a>\n                    </li>\n                    <li v-if=\"getRangePage.end < totalPageCount\" _v-3095ba00=\"\">\n                        <a href=\"javascript:void(0);\" v-text=\"totalPageCount\" @click=\"turnToPage(totalPageCount)\" _v-3095ba00=\"\"></a>\n                    </li>\n                </ul>\n\n                <button @click=\"next\" class=\"btn btn-default\" :class=\"{'disabled': currentPageNo == totalPageCount}\" _v-3095ba00=\"\">下一页</button>\n            </div>\n        </div>\n    </template>\n    <div v-else=\"\" class=\"v-pagination-mini\" _v-3095ba00=\"\">\n        <span _v-3095ba00=\"\">共<span v-text=\"total\" _v-3095ba00=\"\"></span>条</span>\n        <button class=\"btn btn-default prev-trigger\" :class=\"{'disabled': currentPageNo < 2}\" @click=\"prev\" _v-3095ba00=\"\">\n            <span class=\"caret\" _v-3095ba00=\"\"></span>\n        </button>\n        <span v-text=\"currentPageNo\" _v-3095ba00=\"\"></span>/<span v-text=\"totalPageCount\" _v-3095ba00=\"\"></span>\n        <button class=\"btn btn-default next-trigger\" :class=\"{'disabled': currentPageNo == totalPageCount}\" @click=\"next\" _v-3095ba00=\"\">\n            <span class=\"caret\" _v-3095ba00=\"\"></span>\n        </button>\n    </div>\n</div>\n";
-
-/***/ },
-/* 33 */
-/***/ function(module, exports) {
-
-	module.exports = "<div><h1>Pagination</h1>\n<ul>\n<li>Standard(With Page Size Setting)</li>\n<li>Mini</li>\n</ul>\n<h1>Demo</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>两种翻页展示</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <div class=\"row\">\n            <div class=\"col-md-12 text-right\">\n                <xcui-pagination\n                    type=\"mini\"\n            @go-to-page=\"turnToPage\"\n                    :current-page-no.sync=\"currentPageNum\"\n                    :total=\"total\"\n                    :page-size.sync=\"pageSize\"\n                    ></xcui-pagination>\n            </div>\n        </div>\n        <table class=\"table table-hover table-condensed\">\n            <thead>\n                <tr>\n                    <th>ID</th>\n                    <th>Name</th>\n                </tr>\n            </thead>\n            <tr v-for=\"item in list\">\n                <td v-text=\"item.id\"></td>\n                <td v-text=\"item.name\"></td>\n            </tr>\n        </table>\n        <xcui-pagination\n            @go-to-page=\"turnToPage\"\n            :current-page-no.sync=\"currentPageNum\"\n            :total=\"total\"\n            :page-size.sync=\"pageSize\"\n            ></xcui-pagination>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>row<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>col-md-12 text-right<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n        &lt;xcui-pagination\n            type=\"mini\"\n            @go-to-page=\"turnToPage\"\n            :current-page-no.sync=\"currentPageNum\"\n            :total=\"total\"\n            :page-size.sync=\"pageSize\"\n            ><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-pagination</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>table</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>table table-hover table-condensed<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>thead</span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>tr</span><span class=\"token punctuation\" >></span></span>\n            <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>th</span><span class=\"token punctuation\" >></span></span>ID<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>th</span><span class=\"token punctuation\" >></span></span>\n            <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>th</span><span class=\"token punctuation\" >></span></span>Name<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>th</span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>tr</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>thead</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>tr</span> <span class=\"token attr-name\" >v-for</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item in list<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>td</span> <span class=\"token attr-name\" >v-text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item.id<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>td</span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>td</span> <span class=\"token attr-name\" >v-text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item.name<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>td</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>tr</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>table</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-pagination\n    @go-to-page=\"turnToPage\"\n    :current-page-no.sync=\"currentPageNum\"\n    :total=\"total\"\n    :page-size.sync=\"pageSize\"\n    ><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-pagination</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>可选范围</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>standard</td>\n<td>控制样式选择</td>\n<td>standard,mini</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>currentPageNo</td>\n<td>Number</td>\n<td>1</td>\n<td>当前页码</td>\n<td>&gt;0</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>total</td>\n<td>Number</td>\n<td>0</td>\n<td>总条数</td>\n<td>&gt;0</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>pageSize</td>\n<td>Number</td>\n<td>20</td>\n<td>每页条数</td>\n<td>取自<code>pageSizeRange</code></td>\n<td>可选</td>\n</tr>\n<tr>\n<td>withPageSize</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否展示<code>pageSize</code>设置挂件</td>\n<td></td>\n<td>可选</td>\n</tr>\n<tr>\n<td>pageSizeRange</td>\n<td>Array</td>\n<td>[10, 20, 50, 100]</td>\n<td><code>pageSize</code>设置挂件的下拉菜单选项范围 <code>withPageSize</code>为 true 时生效</td>\n<td></td>\n<td>可选</td>\n</tr>\n<tr>\n<td>rangeLength</td>\n<td>Number</td>\n<td>10</td>\n<td>页码按钮的展示个数</td>\n<td></td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
 /* 34 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"v-pagination-wrap {{ class || '' }}\">\n    <template v-if=\"type === 'standard' \">\n        <div class=\"row\">\n            <div v-if=\"withPageSize\" class=\"v-pagination-page-size col-md-6\">\n                共<span v-text=\"total\"></span>条\n                &nbsp;&nbsp;\n                每页\n                <select v-model=\"pageSize\">\n                    <option v-for=\"opt in pageSizeRange\" :value=\"opt\" v-text=\"opt\">1</option>\n                </select>\n                条\n            </div>\n            <div class=\"v-pagination-standard col-md-6 text-right\">\n                <button\n                    @click=\"prev\"\n                    class=\"btn btn-default\"\n                    :class=\"{'disabled': currentPageNo == 1}\">上一页</button>\n\n                <ul class=\"pagination\">\n                    <li v-if=\"getRangePage.begin > 1\">\n                        <a href=\"javascript:void(0);\" @click=\"turnToPage(1)\">1</a>\n                    </li>\n                    <li v-if=\"getRangePage.begin > 1\">\n                        <a class=\"apostrophe\">...</a>\n                    </li>\n\n                    <li v-for=\"number in (getRangePage.end - getRangePage.begin + 1)\" :class=\"{'active': isActive(number)}\">\n                        <a v-if=\"isActive(number)\" href=\"javascript:void(0);\"  v-text=\"number + getRangePage.begin\"></a>\n                        <a v-else href=\"javascript:void(0);\"  v-text=\"number + getRangePage.begin\" @click=\"turnToPage(number + getRangePage.begin)\"></a>\n                    </li>\n\n                    <li v-if=\"getRangePage.end < totalPageCount\">\n                        <a class=\"apostrophe\">...</a>\n                    </li>\n                    <li v-if=\"getRangePage.end < totalPageCount\">\n                        <a href=\"javascript:void(0);\" v-text=\"totalPageCount\" @click=\"turnToPage(totalPageCount)\"></a>\n                    </li>\n                </ul>\n\n                <button\n                    @click=\"next\"\n                    class=\"btn btn-default\"\n                    :class=\"{'disabled': currentPageNo == totalPageCount}\">下一页</button>\n            </div>\n        </div>\n    </template>\n    <div v-else class=\"v-pagination-mini\">\n        <span>共<span v-text=\"total\"></span>条</span>\n        <button class=\"btn btn-default prev-trigger\" :class=\"{'disabled': currentPageNo < 2}\" @click=\"prev\">\n            <span class=\"caret\"></span>\n        </button>\n        <span v-text=\"currentPageNo\"></span>/<span v-text=\"totalPageCount\"></span>\n        <button class=\"btn btn-default next-trigger\" :class=\"{'disabled': currentPageNo == totalPageCount}\" @click=\"next\">\n            <span class=\"caret\"></span>\n        </button>\n    </div>\n</div>\n";
+
+/***/ },
+/* 35 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>Pagination页码</h1>\n<h2>使用场景</h2>\n<ul>\n<li>表格或其他需要分页的页面元素。</li>\n<li>支持两种类型的页码： <code>Standard</code> 标准页码, 一般用于元素顶部； <code>Mini</code> 迷你页码，一般用于元素底部。</li>\n</ul>\n<h1>Demo</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>两种翻页展示</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <div class=\"row\">\n            <div class=\"col-md-12 text-right\">\n                <xcui-pagination\n                    type=\"mini\"\n            @go-to-page=\"turnToPage\"\n                    :current-page-no.sync=\"currentPageNum\"\n                    :total=\"total\"\n                    :page-size.sync=\"pageSize\"\n                    ></xcui-pagination>\n            </div>\n        </div>\n        <table class=\"table table-hover table-condensed\">\n            <thead>\n                <tr>\n                    <th>ID</th>\n                    <th>Name</th>\n                </tr>\n            </thead>\n            <tr v-for=\"item in list\">\n                <td v-text=\"item.id\"></td>\n                <td v-text=\"item.name\"></td>\n            </tr>\n        </table>\n        <xcui-pagination\n            @go-to-page=\"turnToPage\"\n            :current-page-no.sync=\"currentPageNum\"\n            :total=\"total\"\n            :page-size.sync=\"pageSize\"\n            ></xcui-pagination>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>row<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>col-md-12 text-right<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n        &lt;xcui-pagination\n            type=\"mini\"\n            @go-to-page=\"turnToPage\"\n            :current-page-no.sync=\"currentPageNum\"\n            :total=\"total\"\n            :page-size.sync=\"pageSize\"\n            ><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-pagination</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>table</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>table table-hover table-condensed<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>thead</span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>tr</span><span class=\"token punctuation\" >></span></span>\n            <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>th</span><span class=\"token punctuation\" >></span></span>ID<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>th</span><span class=\"token punctuation\" >></span></span>\n            <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>th</span><span class=\"token punctuation\" >></span></span>Name<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>th</span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>tr</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>thead</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>tr</span> <span class=\"token attr-name\" >v-for</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item in list<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>td</span> <span class=\"token attr-name\" >v-text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item.id<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>td</span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>td</span> <span class=\"token attr-name\" >v-text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item.name<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>td</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>tr</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>table</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-pagination\n    @go-to-page=\"turnToPage\"\n    :current-page-no.sync=\"currentPageNum\"\n    :total=\"total\"\n    :page-size.sync=\"pageSize\"\n    ><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-pagination</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>可选范围</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>standard</td>\n<td>控制样式选择</td>\n<td>standard,mini</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>currentPageNo</td>\n<td>Number</td>\n<td>1</td>\n<td>当前页码</td>\n<td>&gt;0</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>total</td>\n<td>Number</td>\n<td>0</td>\n<td>总条数</td>\n<td>&gt;0</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>pageSize</td>\n<td>Number</td>\n<td>20</td>\n<td>每页条数</td>\n<td>取自<code>pageSizeRange</code></td>\n<td>可选</td>\n</tr>\n<tr>\n<td>withPageSize</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否展示<code>pageSize</code>设置挂件</td>\n<td></td>\n<td>可选</td>\n</tr>\n<tr>\n<td>pageSizeRange</td>\n<td>Array</td>\n<td>[10, 20, 50, 100]</td>\n<td><code>pageSize</code>设置挂件的下拉菜单选项范围 <code>withPageSize</code>为 true 时生效</td>\n<td></td>\n<td>可选</td>\n</tr>\n<tr>\n<td>rangeLength</td>\n<td>Number</td>\n<td>10</td>\n<td>页码按钮的展示个数</td>\n<td></td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(35)
-	__vue_script__ = __webpack_require__(37)
+	__webpack_require__(37)
+	__vue_script__ = __webpack_require__(39)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\demos\\loading.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(43)
+	__vue_template__ = __webpack_require__(45)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -15857,16 +15909,16 @@
 	})()}
 
 /***/ },
-/* 35 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(36);
+	var content = __webpack_require__(38);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -15883,21 +15935,21 @@
 	}
 
 /***/ },
-/* 36 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".loadWrap[_v-3bda6bba] {\n  padding: 30px;\n  position: relative;\n}\n.demo[_v-3bda6bba] {\n  text-align: center;\n}\nbutton[_v-3bda6bba],\n.btn-primary[_v-3bda6bba]:link,\n.btn-primary[_v-3bda6bba]:visited,\n.btn-primary[_v-3bda6bba]:focus,\n.btn-primary[_v-3bda6bba]:active {\n  background: #46C3C1;\n  border: 0;\n  box-shadow: none;\n  outline: none;\n  margin-right: 30px;\n}\n.btn-primary[_v-3bda6bba]:hover {\n  background-color: #2b9d9b;\n  border: 0;\n}\np[_v-3bda6bba] {\n  text-align: left;\n  text-indent: 2em;\n}\n.btnGroup[_v-3bda6bba] {\n  margin-top: 15px;\n}\n.btnGroup label[_v-3bda6bba] {\n  width: 20%;\n}\n", ""]);
+	exports.push([module.id, ".loadWrap[_v-3bda6bba] {\n  padding: 30px;\n  position: relative;\n}\np[_v-3bda6bba] {\n  text-align: left;\n  text-indent: 2em;\n}\n.btnGroup[_v-3bda6bba] {\n  margin-top: 15px;\n}\n.btnGroup label[_v-3bda6bba] {\n  width: 10%;\n  position: relative;\n  top: 5px;\n  text-align: right;\n}\nselect[_v-3bda6bba],\noption[_v-3bda6bba],\nbutton[_v-3bda6bba] {\n  outline: none;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 37 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15906,7 +15958,7 @@
 	    value: true
 	});
 
-	var _loading = __webpack_require__(38);
+	var _loading = __webpack_require__(40);
 
 	var _loading2 = _interopRequireDefault(_loading);
 
@@ -15919,36 +15971,35 @@
 	    data: function data() {
 	        return {
 	            show: true,
-	            type: 'load1',
+	            type: 'load2',
 	            showBtn: 'hide',
-	            typeBtn: 'load1',
 	            classname: 'myclass',
 	            color: '',
-	            size: ''
+	            size: 'md'
 	        };
 	    },
 
 	    methods: {
-	        toggleShow: function toggleShow() {
+	        toogleShow: function toogleShow() {
 	            this.show = !this.show;
-	            this.showBtn = this.showBtn === 'hide' ? 'show' : 'hide';
+	            this.showBtn = this.show ? 'hide' : 'show';
 	        }
 	    }
 	};
 
 /***/ },
-/* 38 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(39)
-	__vue_script__ = __webpack_require__(41)
+	__webpack_require__(41)
+	__vue_script__ = __webpack_require__(43)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\loading\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(42)
+	__vue_template__ = __webpack_require__(44)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -15973,23 +16024,23 @@
 	})()}
 
 /***/ },
-/* 39 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(40);
+	var content = __webpack_require__(42);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-3915d472&scoped=true!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-3915d472&scoped=true!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -15999,21 +16050,21 @@
 	}
 
 /***/ },
-/* 40 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".xcui-loading[_v-3915d472] {\n  display: block;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  z-index: 999;\n  background: rgba(255, 255, 255, 0.7);\n}\n/*loading-1********************/\n.load1 .loader[_v-3915d472] {\n  color: #46C3C1;\n  font-size: 13px;\n  margin: 20% auto;\n  width: 1em;\n  height: 1em;\n  border-radius: 50%;\n  position: relative;\n  text-indent: -9999em;\n  -webkit-animation: load1 1.3s infinite linear;\n  animation: load1 1.3s infinite linear;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n@-webkit-keyframes load1 {\n  0%,\n  100% {\n    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;\n  }\n  12.5% {\n    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  25% {\n    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  37.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  50% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  62.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;\n  }\n  75% {\n    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;\n  }\n  87.5% {\n    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;\n  }\n}\n@keyframes load1 {\n  0%,\n  100% {\n    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;\n  }\n  12.5% {\n    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  25% {\n    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  37.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  50% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  62.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;\n  }\n  75% {\n    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;\n  }\n  87.5% {\n    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;\n  }\n}\n/*loading-2********************/\n.load2 .loader[_v-3915d472] {\n  color: #46C3C1;\n  font-size: 60px;\n  text-indent: -9999em;\n  overflow: hidden;\n  width: 1em;\n  height: 1em;\n  border-radius: 50%;\n  margin: 20% auto;\n  position: relative;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation: load2 1.7s infinite ease;\n  animation: load2 1.7s infinite ease;\n}\n@-webkit-keyframes load2 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  5%,\n  95% {\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  10%,\n  59% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;\n  }\n  20% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;\n  }\n  38% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n}\n@keyframes load2 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  5%,\n  95% {\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  10%,\n  59% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;\n  }\n  20% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;\n  }\n  38% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n}\n/*loading-3********************/\n.load3 .loader[_v-3915d472],\n.load3 .loader[_v-3915d472]:before,\n.load3 .loader[_v-3915d472]:after {\n  border-radius: 50%;\n  width: 1.5em;\n  height: 1.5em;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n  -webkit-animation: load3 1.8s infinite ease-in-out;\n  animation: load3 1.8s infinite ease-in-out;\n}\n.load3 .loader[_v-3915d472] {\n  color: #46C3C1;\n  font-size: 10px;\n  margin: 20% auto;\n  position: relative;\n  text-indent: -9999em;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation-delay: -0.16s;\n  animation-delay: -0.16s;\n}\n.load3 .loader[_v-3915d472]:before,\n.load3 .loader[_v-3915d472]:after {\n  content: '';\n  position: absolute;\n  top: 0;\n}\n.load3 .loader[_v-3915d472]:before {\n  left: -3em;\n  -webkit-animation-delay: -0.32s;\n  animation-delay: -0.32s;\n}\n.load3 .loader[_v-3915d472]:after {\n  left: 3em;\n}\n@-webkit-keyframes load3 {\n  0%,\n  80%,\n  100% {\n    box-shadow: 0 2.5em 0 -1.3em;\n  }\n  40% {\n    box-shadow: 0 2.5em 0 0;\n  }\n}\n@keyframes load3 {\n  0%,\n  80%,\n  100% {\n    box-shadow: 0 2.5em 0 -1.3em;\n  }\n  40% {\n    box-shadow: 0 2.5em 0 0;\n  }\n}\n.sm .loader[_v-3915d472] {\n  font-size: 10px;\n}\n.sm.load2 .loader[_v-3915d472] {\n  font-size: 40px;\n}\n.md .loader[_v-3915d472] {\n  font-size: 14px;\n}\n.md.load2 .loader[_v-3915d472] {\n  font-size: 60px;\n}\n.lg .loader[_v-3915d472] {\n  font-size: 18px;\n}\n.lg.load2 .loader[_v-3915d472] {\n  font-size: 80px;\n}\n", ""]);
+	exports.push([module.id, ".xcui-loading {\n  display: block;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  z-index: 999;\n  background: rgba(255, 255, 255, 0.7);\n}\n.loader {\n  position: absolute;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n}\n/*loading-1********************/\n.load1 .loader {\n  top: 40%;\n  color: #46C3C1;\n  font-size: 13px;\n  width: 1em;\n  height: 1em;\n  border-radius: 50%;\n  text-indent: -9999em;\n  -webkit-animation: load1 1.3s infinite linear;\n  animation: load1 1.3s infinite linear;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n@-webkit-keyframes load1 {\n  0%,\n  100% {\n    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;\n  }\n  12.5% {\n    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  25% {\n    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  37.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  50% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  62.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;\n  }\n  75% {\n    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;\n  }\n  87.5% {\n    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;\n  }\n}\n@keyframes load1 {\n  0%,\n  100% {\n    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;\n  }\n  12.5% {\n    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  25% {\n    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  37.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  50% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  62.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;\n  }\n  75% {\n    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;\n  }\n  87.5% {\n    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;\n  }\n}\n/*loading-2********************/\n.load2 .loader {\n  top: 30%;\n  color: #46C3C1;\n  font-size: 60px;\n  text-indent: -9999em;\n  overflow: hidden;\n  width: 1em;\n  height: 1em;\n  border-radius: 50%;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation: load2 1.7s infinite ease;\n  animation: load2 1.7s infinite ease;\n}\n@-webkit-keyframes load2 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  5%,\n  95% {\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  10%,\n  59% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;\n  }\n  20% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;\n  }\n  38% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n}\n@keyframes load2 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  5%,\n  95% {\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  10%,\n  59% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;\n  }\n  20% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;\n  }\n  38% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n}\n/*loading-3********************/\n.load3 .loader,\n.load3 .loader:before,\n.load3 .loader:after {\n  top: 20%;\n  border-radius: 50%;\n  width: 1.5em;\n  height: 1.5em;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n  -webkit-animation: load3 1.8s infinite ease-in-out;\n  animation: load3 1.8s infinite ease-in-out;\n}\n.load3 .loader {\n  color: #46C3C1;\n  font-size: 10px;\n  text-indent: -9999em;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation-delay: -0.16s;\n  animation-delay: -0.16s;\n}\n.load3 .loader:before,\n.load3 .loader:after {\n  content: '';\n  position: absolute;\n  top: 0;\n}\n.load3 .loader:before {\n  left: -3em;\n  -webkit-animation-delay: -0.32s;\n  animation-delay: -0.32s;\n}\n.load3 .loader:after {\n  left: 3em;\n}\n@-webkit-keyframes load3 {\n  0%,\n  80%,\n  100% {\n    box-shadow: 0 2.5em 0 -1.3em;\n  }\n  40% {\n    box-shadow: 0 2.5em 0 0;\n  }\n}\n@keyframes load3 {\n  0%,\n  80%,\n  100% {\n    box-shadow: 0 2.5em 0 -1.3em;\n  }\n  40% {\n    box-shadow: 0 2.5em 0 0;\n  }\n}\n.sm .loader {\n  font-size: 10px;\n}\n.sm.load2 .loader {\n  font-size: 40px;\n}\n.md .loader {\n  font-size: 14px;\n}\n.md.load2 .loader {\n  font-size: 60px;\n}\n.lg .loader {\n  font-size: 18px;\n}\n.lg.load2 .loader {\n  font-size: 80px;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 41 */
+/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16030,7 +16081,7 @@
 	        },
 	        'type': {
 	            type: String,
-	            default: 'load1'
+	            default: 'load2'
 	        },
 	        'classname': {
 	            type: String,
@@ -16049,30 +16100,30 @@
 	};
 
 /***/ },
-/* 42 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div v-show=\"show\" class=\"xcui-loading load-container\" :class=\"[type,size,classname]\" _v-3915d472=\"\">\n    <div class=\"loader\" :style=\"{'color' : color}\" _v-3915d472=\"\"></div>\n</div>\n";
-
-/***/ },
-/* 43 */
-/***/ function(module, exports) {
-
-	module.exports = "<div _v-3bda6bba=\"\"><h2 _v-3bda6bba=\"\">Loading 加载组件</h2>\n<pre _v-3bda6bba=\"\"><code _v-3bda6bba=\"\">1.提供3种css加载样式。\n2.loading需要放在一个拥有定位属性的容器，组件蒙层大小为父元素大小。\n3.css动画颜色可定制。\n4.提供三种可选尺寸。\n5.可通过自定义类名增加特殊定制。\n</code></pre>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\" _v-3bda6bba=\"\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-3bda6bba=\"\">\n                    <h3 _v-3bda6bba=\"\">加载组件</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-3bda6bba=\"\">\n      <div class=\"loadWrap\" _v-3bda6bba=\"\">\n          <p _v-3bda6bba=\"\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n          <loading :show=\"show\" :type=\"type\" :color=\"color\" :size=\"size\" :classname=\"classname\" _v-3bda6bba=\"\"></loading>\n      </div>\n        <div class=\"btnGroup\" _v-3bda6bba=\"\">\n            <label _v-3bda6bba=\"\">show：{{show}}</label>\n            <button v-on:click=\"toggleShow\" class=\"btn btn-primary\" type=\"button\" _v-3bda6bba=\"\">{{showBtn}}</button>\n        </div>\n        <div class=\"btnGroup\" _v-3bda6bba=\"\">\n            <label _v-3bda6bba=\"\">type：{{type}}</label>\n            <button v-on:click=\"type='load1'\" class=\"btn btn-primary\" type=\"button\" _v-3bda6bba=\"\">load1</button>\n            <button v-on:click=\"type='load2'\" class=\"btn btn-primary\" type=\"button\" _v-3bda6bba=\"\">load2</button>\n            <button v-on:click=\"type='load3'\" class=\"btn btn-primary\" type=\"button\" _v-3bda6bba=\"\">load3</button>\n        </div>\n        <div class=\"btnGroup\" _v-3bda6bba=\"\">\n            <label _v-3bda6bba=\"\">size：{{size}}</label>\n            <button v-on:click=\"size='sm'\" class=\"btn btn-primary\" type=\"button\" _v-3bda6bba=\"\">sm</button>\n            <button v-on:click=\"size='md'\" class=\"btn btn-primary\" type=\"button\" _v-3bda6bba=\"\">md</button>\n            <button v-on:click=\"size='lg'\" class=\"btn btn-primary\" type=\"button\" _v-3bda6bba=\"\">lg</button>\n        </div>\n        <div class=\"btnGroup\" _v-3bda6bba=\"\">\n            <label _v-3bda6bba=\"\">color：</label>\n            <input type=\"text\" v-model=\"color\" placeholder=\"支持css颜色格式\" _v-3bda6bba=\"\">\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-3bda6bba=\"\"><pre _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>loadWrap<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>p</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>p</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n    &lt;Loading :show=\"show\"\n             :type=\"type\"\n             :color=\"color\"\n             :size=\"size\"\n             :classname=\"classname\"&gt;<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>Loading</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btnGroup<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>label</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>show：{{show}}<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>button</span> <span class=\"token attr-name\" _v-3bda6bba=\"\"><span class=\"token namespace\" _v-3bda6bba=\"\">v-on:</span>click</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>toggleShow<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btn btn-primary<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">type</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>button<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>{{showBtn}}<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>button</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btnGroup<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>label</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>type：{{type}}<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>button</span> <span class=\"token attr-name\" _v-3bda6bba=\"\"><span class=\"token namespace\" _v-3bda6bba=\"\">v-on:</span>click</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>type<span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">'</span>load1<span class=\"token punctuation\" _v-3bda6bba=\"\">'</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btn btn-primary<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">type</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>button<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>load1<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>button</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>button</span> <span class=\"token attr-name\" _v-3bda6bba=\"\"><span class=\"token namespace\" _v-3bda6bba=\"\">v-on:</span>click</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>type<span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">'</span>load2<span class=\"token punctuation\" _v-3bda6bba=\"\">'</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btn btn-primary<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">type</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>button<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>load2<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>button</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>button</span> <span class=\"token attr-name\" _v-3bda6bba=\"\"><span class=\"token namespace\" _v-3bda6bba=\"\">v-on:</span>click</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>type<span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">'</span>load3<span class=\"token punctuation\" _v-3bda6bba=\"\">'</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btn btn-primary<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">type</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>button<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>load3<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>button</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btnGroup<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>label</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>size：{{size}}<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>button</span> <span class=\"token attr-name\" _v-3bda6bba=\"\"><span class=\"token namespace\" _v-3bda6bba=\"\">v-on:</span>click</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>size<span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">'</span>sm<span class=\"token punctuation\" _v-3bda6bba=\"\">'</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btn btn-primary<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">type</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>button<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>sm<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>button</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>button</span> <span class=\"token attr-name\" _v-3bda6bba=\"\"><span class=\"token namespace\" _v-3bda6bba=\"\">v-on:</span>click</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>size<span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">'</span>md<span class=\"token punctuation\" _v-3bda6bba=\"\">'</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btn btn-primary<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">type</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>button<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>md<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>button</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>button</span> <span class=\"token attr-name\" _v-3bda6bba=\"\"><span class=\"token namespace\" _v-3bda6bba=\"\">v-on:</span>click</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>size<span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">'</span>lg<span class=\"token punctuation\" _v-3bda6bba=\"\">'</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btn btn-primary<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">type</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>button<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>lg<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>button</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btnGroup<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>label</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>color：<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>input</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">type</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>text<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">v-model</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>color<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">placeholder</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>支持css颜色格式<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n</div>\n<h2 _v-3bda6bba=\"\">Props</h2>\n<table class=\"table\" _v-3bda6bba=\"\">\n<thead _v-3bda6bba=\"\">\n<tr _v-3bda6bba=\"\">\n<th _v-3bda6bba=\"\">名字</th>\n<th _v-3bda6bba=\"\">类型</th>\n<th _v-3bda6bba=\"\">默认</th>\n<th _v-3bda6bba=\"\">描述</th>\n<th _v-3bda6bba=\"\">可选范围</th>\n<th _v-3bda6bba=\"\">是否必选</th>\n</tr>\n</thead>\n<tbody _v-3bda6bba=\"\">\n<tr _v-3bda6bba=\"\">\n<td _v-3bda6bba=\"\">show</td>\n<td _v-3bda6bba=\"\">Boolean</td>\n<td _v-3bda6bba=\"\">false</td>\n<td _v-3bda6bba=\"\">控制显示隐藏</td>\n<td _v-3bda6bba=\"\">true/false</td>\n<td _v-3bda6bba=\"\">必选</td>\n</tr>\n<tr _v-3bda6bba=\"\">\n<td _v-3bda6bba=\"\">type</td>\n<td _v-3bda6bba=\"\">String</td>\n<td _v-3bda6bba=\"\">load1</td>\n<td _v-3bda6bba=\"\">控制样式选择</td>\n<td _v-3bda6bba=\"\">load1-load4</td>\n<td _v-3bda6bba=\"\">可选</td>\n</tr>\n<tr _v-3bda6bba=\"\">\n<td _v-3bda6bba=\"\">size</td>\n<td _v-3bda6bba=\"\">String</td>\n<td _v-3bda6bba=\"\">md</td>\n<td _v-3bda6bba=\"\">控制大小</td>\n<td _v-3bda6bba=\"\">sm/md/lg</td>\n<td _v-3bda6bba=\"\">可选</td>\n</tr>\n<tr _v-3bda6bba=\"\">\n<td _v-3bda6bba=\"\">color</td>\n<td _v-3bda6bba=\"\">String</td>\n<td _v-3bda6bba=\"\">无</td>\n<td _v-3bda6bba=\"\">控制颜色</td>\n<td _v-3bda6bba=\"\">css色值</td>\n<td _v-3bda6bba=\"\">可选</td>\n</tr>\n<tr _v-3bda6bba=\"\">\n<td _v-3bda6bba=\"\">classname</td>\n<td _v-3bda6bba=\"\">String</td>\n<td _v-3bda6bba=\"\">无</td>\n<td _v-3bda6bba=\"\">自定义类名</td>\n<td _v-3bda6bba=\"\"></td>\n<td _v-3bda6bba=\"\">可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
 /* 44 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div v-show=\"show\" class=\"xcui-loading load-container\" :class=\"[type,size,classname]\">\n    <div class=\"loader\" :style=\"{'color' : color}\"></div>\n</div>\n";
+
+/***/ },
+/* 45 */
+/***/ function(module, exports) {
+
+	module.exports = "<div _v-3bda6bba=\"\"><h1 _v-3bda6bba=\"\">Loading 加载组件</h1>\n<h2 _v-3bda6bba=\"\">使用场景</h2>\n<p _v-3bda6bba=\"\">在ajax加载或其他长耗时操作时，在一个页面元素上加入加载中图标，当耗时操作完成后隐藏。</p>\n<h2 _v-3bda6bba=\"\">组件能力</h2>\n<ul _v-3bda6bba=\"\">\n<li _v-3bda6bba=\"\">提供3种css加载样式。</li>\n<li _v-3bda6bba=\"\">loading需要放在一个拥有定位属性的容器，组件蒙层大小为父元素大小。</li>\n<li _v-3bda6bba=\"\">css动画颜色可定制。</li>\n<li _v-3bda6bba=\"\">提供三种可选尺寸。</li>\n<li _v-3bda6bba=\"\">可通过自定义类名增加特殊定制。</li>\n</ul>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\" _v-3bda6bba=\"\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-3bda6bba=\"\">\n                    <h3 _v-3bda6bba=\"\">加载组件</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-3bda6bba=\"\">\n      <div class=\"loadWrap\" _v-3bda6bba=\"\">\n          <p _v-3bda6bba=\"\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n          <loading :show=\"show\" :type=\"type\" :color=\"color\" :size=\"size\" :classname=\"classname\" _v-3bda6bba=\"\"></loading>\n      </div>\n        <div class=\"btnGroup clearfix\" _v-3bda6bba=\"\">\n            <label class=\"control-label col-md-4\" _v-3bda6bba=\"\">show：</label>\n            <div class=\"col-md-6\" _v-3bda6bba=\"\">\n                <button class=\"btn btn-primary\" @click=\"toogleShow\" _v-3bda6bba=\"\">{{showBtn}}</button>\n            </div>\n        </div>\n        <div class=\"btnGroup clearfix\" _v-3bda6bba=\"\">\n            <label class=\"control-label col-md-4\" _v-3bda6bba=\"\">type：</label>\n            <div class=\"col-md-6\" _v-3bda6bba=\"\">\n                <select class=\"form-control\" v-model=\"type\" _v-3bda6bba=\"\">\n                    <option _v-3bda6bba=\"\">load1</option>\n                    <option _v-3bda6bba=\"\">load2</option>\n                    <option _v-3bda6bba=\"\">load3</option>\n                </select>\n            </div>\n        </div>\n        <div class=\"btnGroup clearfix\" _v-3bda6bba=\"\">\n            <label class=\"control-label col-md-4\" _v-3bda6bba=\"\">size：</label>\n            <div class=\"col-md-6\" _v-3bda6bba=\"\">\n                <select class=\"form-control\" v-model=\"size\" _v-3bda6bba=\"\">\n                    <option _v-3bda6bba=\"\">sm</option>\n                    <option _v-3bda6bba=\"\">md</option>\n                    <option _v-3bda6bba=\"\">lg</option>\n                </select>\n            </div>\n        </div>\n        <div class=\"btnGroup clearfix\" _v-3bda6bba=\"\">\n            <label class=\"control-label col-md-4\" _v-3bda6bba=\"\">color：</label>\n            <div class=\"col-md-6\" _v-3bda6bba=\"\">\n                <input class=\"form-control\" type=\"text\" v-model=\"color\" placeholder=\"支持css颜色格式\" _v-3bda6bba=\"\">\n            </div>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-3bda6bba=\"\"><pre _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>loadWrap<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>p</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>p</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n    &lt;Loading :show=\"show\"\n             :type=\"type\"\n             :color=\"color\"\n             :size=\"size\"\n             :classname=\"classname\"&gt;<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>Loading</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btnGroup clearfix<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>label</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>control-label col-md-4<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>show：<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>col-md-6<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>button</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btn btn-primary<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">@click</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>toogleShow<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>{{showBtn}}<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>button</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btnGroup clearfix<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>label</span>  <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>control-label col-md-4<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>type：<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>col-md-6<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>select</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>form-control<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">v-model</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>type<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>load1<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>load2<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>load3<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>select</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btnGroup clearfix<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>label</span>  <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>control-label col-md-4<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>size：<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>col-md-6<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>select</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>form-control<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">v-model</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>size<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>sm<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>md<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>lg<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>select</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>btnGroup clearfix<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>label</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>control-label col-md-4<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>color：<span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>col-md-6<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;</span>input</span> <span class=\"token attr-name\" _v-3bda6bba=\"\">class</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>form-control<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">type</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>text<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">v-model</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>color<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span> <span class=\"token attr-name\" _v-3bda6bba=\"\">placeholder</span><span class=\"token attr-value\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">=</span><span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span>支持css颜色格式<span class=\"token punctuation\" _v-3bda6bba=\"\">\"</span></span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token tag\" _v-3bda6bba=\"\"><span class=\"token punctuation\" _v-3bda6bba=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3bda6bba=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n</div>\n<h2 _v-3bda6bba=\"\">Props</h2>\n<table class=\"table\" _v-3bda6bba=\"\">\n<thead _v-3bda6bba=\"\">\n<tr _v-3bda6bba=\"\">\n<th _v-3bda6bba=\"\">名字</th>\n<th _v-3bda6bba=\"\">类型</th>\n<th _v-3bda6bba=\"\">默认</th>\n<th _v-3bda6bba=\"\">描述</th>\n<th _v-3bda6bba=\"\">可选范围</th>\n<th _v-3bda6bba=\"\">是否必选</th>\n</tr>\n</thead>\n<tbody _v-3bda6bba=\"\">\n<tr _v-3bda6bba=\"\">\n<td _v-3bda6bba=\"\">show</td>\n<td _v-3bda6bba=\"\">Boolean</td>\n<td _v-3bda6bba=\"\">false</td>\n<td _v-3bda6bba=\"\">控制显示隐藏</td>\n<td _v-3bda6bba=\"\">true/false</td>\n<td _v-3bda6bba=\"\">必选</td>\n</tr>\n<tr _v-3bda6bba=\"\">\n<td _v-3bda6bba=\"\">type</td>\n<td _v-3bda6bba=\"\">String</td>\n<td _v-3bda6bba=\"\">load2</td>\n<td _v-3bda6bba=\"\">控制样式选择</td>\n<td _v-3bda6bba=\"\">load1-load3</td>\n<td _v-3bda6bba=\"\">可选</td>\n</tr>\n<tr _v-3bda6bba=\"\">\n<td _v-3bda6bba=\"\">size</td>\n<td _v-3bda6bba=\"\">String</td>\n<td _v-3bda6bba=\"\">md</td>\n<td _v-3bda6bba=\"\">控制大小</td>\n<td _v-3bda6bba=\"\">sm/md/lg</td>\n<td _v-3bda6bba=\"\">可选</td>\n</tr>\n<tr _v-3bda6bba=\"\">\n<td _v-3bda6bba=\"\">color</td>\n<td _v-3bda6bba=\"\">String</td>\n<td _v-3bda6bba=\"\">无</td>\n<td _v-3bda6bba=\"\">控制颜色</td>\n<td _v-3bda6bba=\"\">css色值</td>\n<td _v-3bda6bba=\"\">可选</td>\n</tr>\n<tr _v-3bda6bba=\"\">\n<td _v-3bda6bba=\"\">classname</td>\n<td _v-3bda6bba=\"\">String</td>\n<td _v-3bda6bba=\"\">无</td>\n<td _v-3bda6bba=\"\">自定义类名</td>\n<td _v-3bda6bba=\"\"></td>\n<td _v-3bda6bba=\"\">可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(45)
-	__vue_script__ = __webpack_require__(47)
+	__webpack_require__(47)
+	__vue_script__ = __webpack_require__(49)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\demos\\popover.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(56)
+	__vue_template__ = __webpack_require__(57)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -16097,16 +16148,16 @@
 	})()}
 
 /***/ },
-/* 45 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(46);
+	var content = __webpack_require__(48);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -16123,21 +16174,21 @@
 	}
 
 /***/ },
-/* 46 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.container{\r\n    margin-top:100px;\r\n}\r\n.define-class{\r\n    background:#ffab47;\r\n    color:#fff;\r\n    width: 100px;\r\n}\r\n.title-class{\r\n    background:#46c3c1;\r\n    color:#fff;\r\n    width: 150px;\r\n}\r\n.content-class{\r\n    width: 150px;\r\n}\r\n", ""]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.container{\r\n    margin-top:100px;\r\n}\r\n.define-class{\r\n    background:#ffab47;\r\n    color:#fff;\r\n    width: 100px;\r\n}\r\n.title-class{\r\n    background:#46c3c1;\r\n    color:#fff;\r\n    width: 150px;\r\n}\r\n.content-class{\r\n    width: 150px;\r\n}\r\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 47 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16146,7 +16197,7 @@
 	    value: true
 	});
 
-	var _popover = __webpack_require__(48);
+	var _popover = __webpack_require__(50);
 
 	var _popover2 = _interopRequireDefault(_popover);
 
@@ -16157,25 +16208,25 @@
 	        vPopover: _popover2.default
 	    },
 	    data: function data() {
-	        return {};
-	    },
-
-	    methods: {}
+	        return {
+	            htmlContent: '<h3>This is h3</h3><h4>This is h4</h4>'
+	        };
+	    }
 	};
 
 /***/ },
-/* 48 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(49)
-	__vue_script__ = __webpack_require__(51)
+	__webpack_require__(51)
+	__vue_script__ = __webpack_require__(53)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\popover\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(55)
+	__vue_template__ = __webpack_require__(56)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -16200,23 +16251,23 @@
 	})()}
 
 /***/ },
-/* 49 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(50);
+	var content = __webpack_require__(52);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -16226,21 +16277,21 @@
 	}
 
 /***/ },
-/* 50 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.tooltip {\r\n        opacity: .9\r\n}\r\n.scale-transition, .fadein-transition {\r\n    display: block;\r\n}\r\n.fadein-enter {\r\n    -webkit-animation:fadein-in 0.3s ease-in;\r\n            animation:fadein-in 0.3s ease-in;\r\n}\r\n.fadein-leave {\r\n    -webkit-animation:fadein-out 0.3s ease-out;\r\n            animation:fadein-out 0.3s ease-out;\r\n}\r\n.scale-enter {\r\n    -webkit-animation:scale-in 0.15s ease-in;\r\n            animation:scale-in 0.15s ease-in;\r\n}\r\n.scale-leave {\r\n    -webkit-animation:scale-out 0.15s ease-out;\r\n            animation:scale-out 0.15s ease-out;\r\n}\r\n\r\n@-webkit-keyframes fadein-in {\r\n    0% {\r\n        opacity: 0;\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n    }\r\n}\r\n\r\n@keyframes fadein-in {\r\n    0% {\r\n        opacity: 0;\r\n    }\r\n    100% {\r\n        opacity: 1;\r\n    }\r\n}\r\n@-webkit-keyframes fadein-out {\r\n    0% {\r\n        opacity: 1;\r\n    }\r\n    100% {\r\n        opacity: 0;\r\n    }\r\n}\r\n@keyframes fadein-out {\r\n    0% {\r\n        opacity: 1;\r\n    }\r\n    100% {\r\n        opacity: 0;\r\n    }\r\n}\r\n\r\n@-webkit-keyframes scale-in {\r\n    0% {\r\n        -webkit-transform: scale(0);\r\n                transform: scale(0);\r\n        opacity: 0;\r\n    }\r\n    100% {\r\n        -webkit-transform: scale(1);\r\n                transform: scale(1);\r\n        opacity: 1;\r\n    }\r\n}\r\n\r\n@keyframes scale-in {\r\n    0% {\r\n        -webkit-transform: scale(0);\r\n                transform: scale(0);\r\n        opacity: 0;\r\n    }\r\n    100% {\r\n        -webkit-transform: scale(1);\r\n                transform: scale(1);\r\n        opacity: 1;\r\n    }\r\n}\r\n@-webkit-keyframes scale-out {\r\n    0% {\r\n        -webkit-transform: scale(1);\r\n                transform: scale(1);\r\n        opacity: 1;\r\n    }\r\n    100% {\r\n        -webkit-transform: scale(0);\r\n                transform: scale(0);\r\n        opacity: 0;\r\n    }\r\n}\r\n@keyframes scale-out {\r\n    0% {\r\n        -webkit-transform: scale(1);\r\n                transform: scale(1);\r\n        opacity: 1;\r\n    }\r\n    100% {\r\n        -webkit-transform: scale(0);\r\n                transform: scale(0);\r\n        opacity: 0;\r\n    }\r\n}\r\n", ""]);
+	exports.push([module.id, ".xcui-popover .scale-transition,\n.xcui-popover .fadein-transition {\n  display: inline-table;\n}\n.xcui-popover .fadein-enter {\n  -webkit-animation: fadein-in 0.3s ease-in;\n          animation: fadein-in 0.3s ease-in;\n}\n.xcui-popover .fadein-leave {\n  -webkit-animation: fadein-out 0.3s ease-out;\n          animation: fadein-out 0.3s ease-out;\n}\n.xcui-popover .scale-enter {\n  -webkit-animation: scale-in 0.15s ease-in;\n          animation: scale-in 0.15s ease-in;\n}\n.xcui-popover .scale-leave {\n  -webkit-animation: scale-out 0.15s ease-out;\n          animation: scale-out 0.15s ease-out;\n}\n@-webkit-keyframes fadein-in {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@keyframes fadein-in {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@-webkit-keyframes fadein-out {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n@keyframes fadein-out {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n@-webkit-keyframes scale-in {\n  0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes scale-in {\n  0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n}\n@-webkit-keyframes scale-out {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n}\n@keyframes scale-out {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 51 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16249,19 +16300,16 @@
 	    value: true
 	});
 
-	var _popoverMixins = __webpack_require__(52);
+	var _popoverMixins = __webpack_require__(54);
 
 	var _popoverMixins2 = _interopRequireDefault(_popoverMixins);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
+	    name: 'xcui-popover',
 	    mixins: [_popoverMixins2.default],
 	    props: {
-	        type: {
-	            type: String,
-	            default: 'popover'
-	        },
 	        trigger: {
 	            type: String,
 	            default: 'hover'
@@ -16282,17 +16330,11 @@
 	            type: String,
 	            default: 'scale'
 	        }
-	    },
-	    data: function data() {
-	        return {};
-	    },
-
-	    methods: {},
-	    ready: function ready() {}
+	    }
 	};
 
 /***/ },
-/* 52 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16301,13 +16343,9 @@
 	    value: true
 	});
 
-	var _EventListener = __webpack_require__(53);
+	var _eventlistener = __webpack_require__(55);
 
-	var _EventListener2 = _interopRequireDefault(_EventListener);
-
-	var _coerceBoolean = __webpack_require__(54);
-
-	var _coerceBoolean2 = _interopRequireDefault(_coerceBoolean);
+	var _eventlistener2 = _interopRequireDefault(_eventlistener);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16326,11 +16364,6 @@
 	        },
 	        'content': {
 	            'type': String
-	        },
-	        'header': {
-	            'type': Boolean,
-	            'coerce': _coerceBoolean2.default,
-	            'default': true
 	        },
 	        'placement': {
 	            'type': String
@@ -16374,38 +16407,36 @@
 	            popover.style.top = this.position.top + 'px';
 	            popover.style.left = this.position.left + 'px';
 	            popover.style.display = 'none';
-
 	            this.show = !this.show;
 	        }
 	    },
 	    ready: function ready() {
-	        if (!this.$els.popover) {}
 	        var triger = this.$els.trigger.children[0];
-	        var that = this;
+	        var me = this;
 	        if (this.trigger === 'hover') {
-	            this._mouseenterEvent = _EventListener2.default.listen(triger, 'mouseenter', function () {
-	                that.fixPosition(that.$els.trigger.children[0], that.$els.popover, that.placement);
-	                that.show = true;
+	            this._mouseenterEvent = _eventlistener2.default.listen(triger, 'mouseenter', function () {
+	                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
+	                me.show = true;
 	            });
-	            this._mouseleaveEvent = _EventListener2.default.listen(triger, 'mouseleave', function () {
-	                that.show = false;
+	            this._mouseleaveEvent = _eventlistener2.default.listen(triger, 'mouseleave', function () {
+	                me.show = false;
 	            });
 	        } else if (this.trigger === 'focus') {
-	            this._focusEvent = _EventListener2.default.listen(triger, 'focus', function () {
-	                that.fixPosition(that.$els.trigger.children[0], that.$els.popover, that.placement);
-	                that.show = true;
+	            this._focusEvent = _eventlistener2.default.listen(triger, 'focus', function () {
+	                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
+	                me.show = true;
 	            });
-	            this._blurEvent = _EventListener2.default.listen(triger, 'blur', function () {
-	                that.show = false;
+	            this._blurEvent = _eventlistener2.default.listen(triger, 'blur', function () {
+	                me.show = false;
 	            });
 	        } else {
-	            this._clickEvent = _EventListener2.default.listen(triger, 'click', function () {
-	                that.fixPosition(that.$els.trigger.children[0], that.$els.popover, that.placement);
-	                that.toggle;
+	            this._clickEvent = _eventlistener2.default.listen(triger, 'click', function () {
+	                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
+	                me.toggle;
 	            });
 	        }
 
-	        that.fixPosition(this.$els.trigger.children[0], this.$els.popover, this.placement);
+	        this.fixPosition(this.$els.trigger.children[0], this.$els.popover, this.placement);
 	    },
 	    beforeDestroy: function beforeDestroy() {
 	        if (this._blurEvent) {
@@ -16423,7 +16454,7 @@
 	};
 
 /***/ },
-/* 53 */
+/* 55 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16452,43 +16483,132 @@
 	};
 
 /***/ },
-/* 54 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function (val) {
-	  return typeof val !== 'string' ? val : val === 'true' ? true : val === 'false' ? false : val === 'null' ? false : val === 'undefined' ? false : val;
-	};
-
-/***/ },
-/* 55 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div v-el:outer style=\"position:relative; display: inline-block\" v-if=\"type == 'tooltip'\">\n     <span v-el:trigger>\n        <slot>\n        </slot>\n    </span>\n    <div class=\"tooltip\"\n        v-bind:class=\"{\n            'top':    placement === 'top',\n            'left':   placement === 'left',\n            'right':  placement === 'right',\n            'bottom': placement === 'bottom'\n        }\"\n        v-el:popover\n        v-show=\"show\"\n        :transition=\"effect\"\n        role=\"tooltip\">\n            <div class=\"tooltip-arrow\"></div>\n            <div class=\"tooltip-inner\" :class=\"tooltipClass\">\n                <slot name=\"content\">\n                    {{{content}}}\n                </slot>\n            </div>\n    </div>\n</div>\n<div v-el:outer style=\"position:relative; display: inline-block\"  v-else>\n    <span v-el:trigger>\n      <slot>\n      </slot>\n    </span>\n    <div class=\"popover\"\n      v-bind:class=\"{\n      'top':placement === 'top',\n      'left':placement === 'left',\n      'right':placement === 'right',\n      'bottom':placement === 'bottom'\n      }\"\n      v-el:popover\n      v-show=\"show\"\n      :transition=\"effect\">\n        <div class=\"arrow\"></div>\n        <div class=\"popover-title\" :class=\"titleClass\" v-show=\"title\">\n            <slot name=\"title\">\n              {{title}}\n            </slot>\n        </div>\n        <div class=\"popover-content\" :class=\"contentClass\">\n          <slot name=\"content\">\n              {{{content}}}\n          </slot>\n        </div>\n    </div>\n</div>\n";
-
-/***/ },
 /* 56 */
 /***/ function(module, exports) {
 
-	module.exports = "<div><h1>Tootip&amp;Popover 悬浮提示框</h1>\n<h2>使用场景</h2>\n<p>1、需要hover或click时悬浮提示更多详情<br />\n2、支持自定义提示框样式<br />\n3、支持自定义悬浮相对位置<br />\n4、支持两种悬浮框过渡样式<br />\n5、支持局部页面异步渲染后更新位置</p>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>Tooltip</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <div class=\"container\" id=\"container\">\n            <v-popover\n            type=\"tooltip\"\n            effect=\"fadein\"\n            placement=\"right\"\n            trigger=\"click\"\n            :tooltip-class=\"'define-class'\"\n            content=\"This is a tooltip!\" >\n                <button class=\"btn btn-default \">click tooltip on right</button>\n            </v-popover>\n            <v-popover\n            type=\"tooltip\"\n            effect=\"scale\"\n            placement=\"bottom\"\n            content=\"This is a tooltip!\">\n                <button class=\"btn btn-default \">hover tooltip on bottom</button>\n            </v-popover>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>container<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >id</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>container<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    &lt;v-popover\n    type=\"tooltip\"\n            effect=\"fadein\"\n            placement=\"right\"\n            trigger=\"click\"\n            :tooltip-class=\"'define-class'\"\n    content=\"This is a tooltip!\" >\n                <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>click tooltip on right<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-popover\n</span>            <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>tooltip<span class=\"token punctuation\" >\"</span></span>\n            <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span>\n            <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>bottom<span class=\"token punctuation\" >\"</span></span>\n            <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is a tooltip!<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n                <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>hover tooltip on bottom<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>Popover</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <v-popover\n          effect=\"fadein\"\n          placement=\"bottom\"\n          title=\"This is Title\"\n          trigger=\"click\"\n          content=\"Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod\">\n          <button class=\"btn btn-default \">Popover on bottom</button>\n        </v-popover>\n        <v-popover\n          effect=\"scale\"\n          placement=\"left\"\n          title=\"This is Title\"\n          content=\"Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod\">\n          <button class=\"btn btn-default \">Popover on left</button>\n        </v-popover>\n        <v-popover\n          effect=\"fadein\"\n          placement=\"top\"\n          title=\"This is Title\"\n          content=\"Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod\">\n          <button class=\"btn btn-default \">Popover on top</button>\n        </v-popover>\n        <v-popover\n          effect=\"scale\"\n          placement=\"right\"\n          title=\"This is Title\"\n          :title-class=\"'title-class'\"\n          :content-class=\"'content-class'\"\n          content=\"Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod\">\n          <button class=\"btn btn-default \">Popover on right</button>\n        </v-popover>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-popover\n</span>          <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span>\n          <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>bottom<span class=\"token punctuation\" >\"</span></span>\n          <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span>\n          <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span>\n          <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n          <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Popover on bottom<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-popover\n</span>          <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span>\n          <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>left<span class=\"token punctuation\" >\"</span></span>\n          <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span>\n          <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n          <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Popover on left<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-popover\n</span>          <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span>\n          <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>top<span class=\"token punctuation\" >\"</span></span>\n          <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span>\n          <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n          <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Popover on top<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\n&lt;v-popover\n  effect=\"scale\"\n          placement=\"right\"\n          title=\"This is Title\"\n          :title-class=\"'title-class'\"\n  :content-class=\"'content-class'\"\n  content=\"Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod\">\n          <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Popover on right<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>popover</td>\n<td>提示类型</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>trigger</td>\n<td>String</td>\n<td>hover</td>\n<td>悬浮触发方式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>effect</td>\n<td>String</td>\n<td>scale</td>\n<td>悬浮过渡样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>placement</td>\n<td>String</td>\n<td>空字符串</td>\n<td>悬浮相对位置</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>空字符串</td>\n<td>popover提示标题</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>空字符串</td>\n<td>提示内容</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>classname</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>tooltip-class</td>\n<td>String</td>\n<td>Object</td>\n<td>tootip提示框样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>title-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover标题样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover内容样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+	module.exports = "\n<div v-el:outer style=\"position:relative; display: inline-block\" class=\"xcui-popover\">\n    <span v-el:trigger>\n      <slot>\n      </slot>\n    </span>\n    <div class=\"popover\"\n      v-bind:class=\"{\n      'top':placement === 'top',\n      'left':placement === 'left',\n      'right':placement === 'right',\n      'bottom':placement === 'bottom'\n      }\"\n      v-el:popover\n      v-show=\"show\"\n      :transition=\"effect\">\n        <div class=\"arrow\"></div>\n        <div class=\"popover-title\" :class=\"titleClass\" v-show=\"title\">\n            <slot name=\"title\">\n              {{title}}\n            </slot>\n        </div>\n        <div class=\"popover-content\" :class=\"contentClass\">\n          <slot name=\"content\">\n              {{{content}}}\n          </slot>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 57 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>Popover 工具提示</h1>\n<h2>使用场景</h2>\n<ul>\n<li>需要hover或click时悬浮提示更多详情</li>\n<li>支持自定义提示框样式</li>\n<li>支持两种悬浮框过渡样式:  <code>scale</code> 和 <code>fadein</code></li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>Popover</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <v-popover effect=\"fadein\" placement=\"bottom\" title=\"This is Title\" trigger=\"click\" :content=\"htmlContent\">\n          <button class=\"btn btn-default \">Click Popover on bottom</button>\n        </v-popover>\n        <v-popover effect=\"scale\" placement=\"left\" title=\"This is Title\" trigger=\"click\"  content=\"Popover on left\">\n          <button class=\"btn btn-default \">Click Popover on left</button>\n        </v-popover>\n        <v-popover effect=\"fadein\" placement=\"top\" title=\"This is Title\"  content=\"Popover on top\">\n          <button class=\"btn btn-default \"> Hover Popover on top</button>\n        </v-popover>\n        <v-popover effect=\"scale\" placement=\"right\" title=\"This is Title\" :title-class=\"'title-class'\" :content-class=\"'content-class'\" content=\"Popover on right\">\n          <button class=\"btn btn-default \">Hover Popover on right</button>\n        </v-popover>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-popover</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>bottom<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>htmlContent<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Click Popover on bottom<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-popover</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>left<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Popover on left<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Click Popover on left<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-popover</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>top<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Popover on top<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span> Hover Popover on top<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-popover</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>right<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:title-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>title-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:content-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>content-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Popover on right<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Hover Popover on right<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>popover</td>\n<td>提示类型</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>trigger</td>\n<td>String</td>\n<td>hover</td>\n<td>悬浮触发方式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>effect</td>\n<td>String</td>\n<td>scale</td>\n<td>悬浮过渡样式</td>\n<td>可选, scale/fadein</td>\n</tr>\n<tr>\n<td>placement</td>\n<td>String</td>\n<td>空字符串</td>\n<td>悬浮相对位置</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>空字符串</td>\n<td>popover提示标题</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>空字符串</td>\n<td>提示内容</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>classname</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>tooltip-class</td>\n<td>String</td>\n<td>Object</td>\n<td>tootip提示框样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>title-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover标题样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover内容样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(58)
-	__vue_script__ = __webpack_require__(60)
+	__webpack_require__(59)
+	__vue_script__ = __webpack_require__(61)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\autocomplete.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\demos\\tooltip.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(67)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-7ba29f01/tooltip.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 59 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(60);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(13)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./tooltip.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./tooltip.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 60 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.container{\r\n    margin-top:100px;\r\n}\r\n.define-class{\r\n    background:#ffab47;\r\n    color:#fff;\r\n    width: 100px;\r\n}\r\n.title-class{\r\n    background:#46c3c1;\r\n    color:#fff;\r\n    width: 150px;\r\n}\r\n.content-class{\r\n    width: 150px;\r\n}\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 61 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _tooltip = __webpack_require__(62);
+
+	var _tooltip2 = _interopRequireDefault(_tooltip);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    components: {
+	        vTooltip: _tooltip2.default
+	    },
+	    data: function data() {
+	        return {
+	            htmlContent: '<h3>This is h3</h3><h4>This is h4</h4>'
+	        };
+	    }
+	};
+
+/***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(63)
+	__vue_script__ = __webpack_require__(65)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\tooltip\\index.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(66)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -16505,7 +16625,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-7974585a/autocomplete.vue"
+	  var id = "_v-0c863679/index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16514,23 +16634,23 @@
 	})()}
 
 /***/ },
-/* 58 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(59);
+	var content = __webpack_require__(64);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-7974585a&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./autocomplete.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-7974585a&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./autocomplete.vue");
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -16540,21 +16660,21 @@
 	}
 
 /***/ },
-/* 59 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".block-item[_v-7974585a] {\n  margin: 0 30px 50px;\n  float: left;\n}\n", ""]);
+	exports.push([module.id, ".xcui-tooltip .tooltip {\n  opacity: .9;\n}\n.xcui-tooltip .scale-transition,\n.xcui-tooltip .fadein-transition {\n  display: inline-table;\n}\n.xcui-tooltip .fadein-enter {\n  -webkit-animation: fadein-in 0.3s ease-in;\n          animation: fadein-in 0.3s ease-in;\n}\n.xcui-tooltip .fadein-leave {\n  -webkit-animation: fadein-out 0.3s ease-out;\n          animation: fadein-out 0.3s ease-out;\n}\n.xcui-tooltip .scale-enter {\n  -webkit-animation: scale-in 0.15s ease-in;\n          animation: scale-in 0.15s ease-in;\n}\n.xcui-tooltip .scale-leave {\n  -webkit-animation: scale-out 0.15s ease-out;\n          animation: scale-out 0.15s ease-out;\n}\n@-webkit-keyframes fadein-in {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@keyframes fadein-in {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@-webkit-keyframes fadein-out {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n@keyframes fadein-out {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n@-webkit-keyframes scale-in {\n  0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes scale-in {\n  0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n}\n@-webkit-keyframes scale-out {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n}\n@keyframes scale-out {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 60 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16563,15 +16683,147 @@
 	    value: true
 	});
 
-	var _autocomplete = __webpack_require__(61);
+	var _popoverMixins = __webpack_require__(54);
 
-	var _autocomplete2 = _interopRequireDefault(_autocomplete);
+	var _popoverMixins2 = _interopRequireDefault(_popoverMixins);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
+	    name: 'xcui-tooltip',
+	    mixins: [_popoverMixins2.default],
+	    props: {
+	        trigger: {
+	            type: String,
+	            default: 'hover'
+	        },
+	        effect: {
+	            type: String,
+	            default: 'scale'
+	        },
+	        tooltipClass: {
+	            type: String,
+	            default: ''
+	        },
+	        titleClass: {
+	            type: String,
+	            default: 'scale'
+	        },
+	        contentClass: {
+	            type: String,
+	            default: 'scale'
+	        }
+	    }
+	};
+
+/***/ },
+/* 66 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div v-el:outer style=\"position:relative; display: inline-block\" class=\"xcui-tooltip\">\n     <span v-el:trigger>\n        <slot>\n        </slot>\n    </span>\n    <div class=\"tooltip\"\n        v-bind:class=\"{\n            'top':    placement === 'top',\n            'left':   placement === 'left',\n            'right':  placement === 'right',\n            'bottom': placement === 'bottom'\n        }\"\n        v-el:popover\n        v-show=\"show\"\n        :transition=\"effect\"\n        role=\"tooltip\">\n            <div class=\"tooltip-arrow\"></div>\n            <div class=\"tooltip-inner\" :class=\"tooltipClass\">\n                <slot name=\"content\">\n                    {{{content}}}\n                </slot>\n            </div>\n    </div>\n</div>\n";
+
+/***/ },
+/* 67 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>Tooltip 工具提示</h1>\n<h2>使用场景</h2>\n<ul>\n<li>需要hover或click时悬浮提示更多详情</li>\n<li>支持自定义提示框样式</li>\n<li>支持两种悬浮框过渡样式:  <code>scale</code> 和 <code>fadein</code></li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>Popover</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <v-tooltip effect=\"fadein\" placement=\"bottom\" title=\"This is Title\" :content=\"htmlContent\">\n          <button class=\"btn btn-default \">Hover tooltip on bottom</button>\n        </v-tooltip>\n        <v-tooltip effect=\"scale\" placement=\"left\" title=\"This is Title\" content=\"Tooltip on left\">\n          <button class=\"btn btn-default \">Hover tooltip on left</button>\n        </v-tooltip>\n        <v-tooltip effect=\"fadein\" placement=\"top\" title=\"This is Title\"  trigger=\"click\"  content=\"Tooltip on top\">\n          <button class=\"btn btn-default \"> Click tooltip on top</button>\n        </v-tooltip>\n        <v-tooltip effect=\"scale\" placement=\"right\" title=\"This is Title\" trigger=\"click\"  :title-class=\"'title-class'\" :content-class=\"'content-class'\" content=\"Tooltip on right\">\n          <button class=\"btn btn-default \">Click tooltip on right</button>\n        </v-tooltip>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tooltip</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>bottom<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>htmlContent<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Hover tooltip on bottom<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tooltip</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tooltip</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>left<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Tooltip on left<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Hover tooltip on left<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tooltip</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tooltip</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>top<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Tooltip on top<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span> Click tooltip on top<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tooltip</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tooltip</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>right<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >:title-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>title-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:content-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>content-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Tooltip on right<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Click tooltip on right<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tooltip</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>popover</td>\n<td>提示类型</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>trigger</td>\n<td>String</td>\n<td>hover</td>\n<td>悬浮触发方式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>effect</td>\n<td>String</td>\n<td>scale</td>\n<td>悬浮过渡样式</td>\n<td>可选, scale/fadein</td>\n</tr>\n<tr>\n<td>placement</td>\n<td>String</td>\n<td>空字符串</td>\n<td>悬浮相对位置</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>空字符串</td>\n<td>popover提示标题</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>空字符串</td>\n<td>提示内容</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>classname</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>tooltip-class</td>\n<td>String</td>\n<td>Object</td>\n<td>tootip提示框样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>title-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover标题样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover内容样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 68 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(69)
+	__vue_script__ = __webpack_require__(71)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\suggestion.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(77)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-5f1c72f6/suggestion.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 69 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(70);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(13)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-5f1c72f6&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./suggestion.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-5f1c72f6&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./suggestion.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".block-item[_v-5f1c72f6] {\n  margin: 0 30px 50px;\n  float: left;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 71 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _suggestion = __webpack_require__(72);
+
+	var _suggestion2 = _interopRequireDefault(_suggestion);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    name: 'xcui-suggestion',
 	    components: {
-	        Autocomplete: _autocomplete2.default
+	        Suggestion: _suggestion2.default
 	    },
 	    data: function data() {
 	        return {
@@ -16658,18 +16910,18 @@
 	};
 
 /***/ },
-/* 61 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(62)
-	__vue_script__ = __webpack_require__(64)
+	__webpack_require__(73)
+	__vue_script__ = __webpack_require__(75)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\autocomplete\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(65)
+	  console.warn("[vue-loader] src\\components\\suggestion\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(76)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -16685,7 +16937,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-91b5c864/index.vue"
+	  var id = "_v-71e338ea/index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16694,23 +16946,23 @@
 	})()}
 
 /***/ },
-/* 62 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(63);
+	var content = __webpack_require__(74);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-91b5c864&scoped=true!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-91b5c864&scoped=true!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -16720,21 +16972,21 @@
 	}
 
 /***/ },
-/* 63 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".xcui-suggestion[_v-91b5c864] {\n  position: relative;\n  width: 100%;\n}\n.xcui-suggestion .xcui-suggestion-list[_v-91b5c864] {\n  min-width: 100%;\n}\n.xcui-suggestion .xcui-suggestion-list li.current[_v-91b5c864] {\n  background: #ddd;\n}\n", ""]);
+	exports.push([module.id, ".xcui-suggestion {\n  position: relative;\n  width: 100%;\n}\n.xcui-suggestion .xcui-show {\n  display: block;\n}\n.xcui-suggestion .xcui-suggestion-list {\n  min-width: 100%;\n  max-height: 400px;\n  overflow: auto;\n}\n.xcui-suggestion .xcui-suggestion-list li.current {\n  background: #ddd;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 64 */
+/* 75 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16743,6 +16995,7 @@
 	    value: true
 	});
 	exports.default = {
+	    name: 'xcui-autocomplete',
 	    data: function data() {
 	        return {
 	            list: [],
@@ -16799,17 +17052,20 @@
 	    },
 	    computed: {
 	        show: function show() {
-	            return this.list.length > 0;
+	            return this.list.length > 0 && this.$el.getElementsByTagName('input')[0] === document.activeElement;
 	        }
 	    },
 	    watch: {
 	        suggestions: function suggestions() {
 	            this.arrangeLocalList();
 	            this.getLocalSug();
+	        },
+	        dataText: function dataText() {
+	            this.onInput();
 	        }
 	    },
 	    methods: {
-	        onInput: function onInput(e) {
+	        onInput: function onInput() {
 	            this.currentIndex = -1;
 	            this.getLocalSug();
 	            this.autoSetItem();
@@ -16888,6 +17144,10 @@
 	        },
 	        isArray: function isArray(arr) {
 	            return Object.prototype.toString.call(arr) === '[object Array]';
+	        },
+	        clearText: function clearText() {
+	            this.dataText = '';
+	            this.dataValue = '';
 	        }
 	    },
 	    ready: function ready() {
@@ -16896,30 +17156,30 @@
 	};
 
 /***/ },
-/* 65 */
+/* 76 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"xcui-suggestion {{className}}\" _v-91b5c864=\"\">\n    <input type=\"text\" class=\"form-control xcui-suggestion-input\" :id=\"id\" :name=\"name\" :disabled=\"disabled\" :placeholder=\"placeholder\" v-model=\"dataText\" @focus=\"onInput\" @input=\"onInput\" @blur=\"onBlur\" @keydown.up=\"changeCurrent(-1)\" @keydown.down=\"changeCurrent(1)\" @keydown.enter=\"onBlur\" _v-91b5c864=\"\">\n    <ul class=\"xcui-suggestion-list dropdown-menu\" :class=\"{'show':show}\" _v-91b5c864=\"\">\n        <li v-for=\"(index,item) in list\" :class=\"{'current' : currentIndex==index}\" _v-91b5c864=\"\">\n            <a href=\"javascript:void(0)\" @click=\"setItem(item)\" _v-91b5c864=\"\">\n                {{item.text}}\n            </a>\n        </li>\n    </ul>\n</div>\n";
+	module.exports = "\n<div class=\"xcui-suggestion {{className}}\">\n    <input type=\"text\"\n            class=\"form-control xcui-suggestion-input\"\n            :id=\"id\"\n            :name=\"name\"\n            :disabled=\"disabled\"\n            :placeholder=\"placeholder\"\n            v-model=\"dataText\"\n            @focus=\"onInput\"\n            @blur=\"onBlur\"\n            @keyDown.up=\"changeCurrent(-1)\"\n            @keyDown.down=\"changeCurrent(1)\"\n            @keyDown.enter=\"onBlur\">\n    <ul class=\"xcui-suggestion-list dropdown-menu\" :class=\"{'xcui-show':show}\">\n        <li v-for=\"(index,item) in list\" :class=\"{'current' : currentIndex==index}\">\n            <a href=\"javascript:void(0)\" @click=\"setItem(item)\">\n                {{item.text}}\n            </a>\n        </li>\n    </ul>\n    <button @click=\"clearText\" type=\"button\"\n    title=\"点击清除输入内容\" class=\"close\" tabindex=\"-1\"\n    style=\"position: absolute; right: 8px; top: 4px;\">×</button>\n</div>\n";
 
 /***/ },
-/* 66 */
+/* 77 */
 /***/ function(module, exports) {
 
-	module.exports = "<div _v-7974585a=\"\"><h1 _v-7974585a=\"\">Autocomplete</h1>\n<ul _v-7974585a=\"\">\n<li _v-7974585a=\"\">sug</li>\n</ul>\n<h1 _v-7974585a=\"\">Demo</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\" _v-7974585a=\"\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-7974585a=\"\">\n                    <h3 _v-7974585a=\"\">sugs展示</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-7974585a=\"\">\n        <div class=\"\" _v-7974585a=\"\">\n            <div class=\"block-item\" _v-7974585a=\"\">\n                <h4 _v-7974585a=\"\">string数组 sugs:</h4>\n                <table class=\"table table-striped table-bordered\" style=\"width:400px\" _v-7974585a=\"\">\n                    <thead _v-7974585a=\"\">\n                        <tr _v-7974585a=\"\">\n                            <th _v-7974585a=\"\">dataText</th>\n                            <th _v-7974585a=\"\">dataValue</th>\n                        </tr>\n                    </thead>\n                    <tbody _v-7974585a=\"\">\n                        <tr _v-7974585a=\"\">\n                            <td _v-7974585a=\"\">constellation : {{constellation}}</td>\n                            <td _v-7974585a=\"\">constellationValue : {{constellationValue}}</td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div style=\"width:200px\" _v-7974585a=\"\">\n                        <autocomplete id=\"constellation\" name=\"constellation\" placeholder=\"请输入星座\" :data-text.sync=\"constellation\" :data-value.sync=\"constellationValue\" :suggestions=\"constellationSuggestions\" _v-7974585a=\"\">\n                        </autocomplete>\n                </div>\n            </div>\n            <div class=\"block-item\" _v-7974585a=\"\">\n                <h4 _v-7974585a=\"\">object数组 sugs:</h4>\n                <table class=\"table table-striped table-bordered\" style=\"width:400px\" _v-7974585a=\"\">\n                    <thead _v-7974585a=\"\">\n                        <tr _v-7974585a=\"\">\n                            <th _v-7974585a=\"\">dataText</th>\n                            <th _v-7974585a=\"\">dataValue</th>\n                        </tr>\n                    </thead>\n                    <tbody _v-7974585a=\"\">\n                        <tr _v-7974585a=\"\">\n                            <td _v-7974585a=\"\">cityName : {{cityName}}</td>\n                            <td _v-7974585a=\"\">cityId : {{cityId}}</td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div style=\"width:200px\" _v-7974585a=\"\">\n                        <autocomplete id=\"city\" name=\"city\" placeholder=\"请输入城市\" :data-text.sync=\"cityName\" :data-value.sync=\"cityId\" :suggestions=\"citySuggestions\" _v-7974585a=\"\">\n                        </autocomplete>\n                </div>\n            </div>\n            <div class=\"block-item\" _v-7974585a=\"\">\n                <h4 _v-7974585a=\"\">远程sug，string数组 sugs:</h4>\n                <table class=\"table table-striped table-bordered\" style=\"width:400px\" _v-7974585a=\"\">\n                    <thead _v-7974585a=\"\">\n                        <tr _v-7974585a=\"\">\n                            <th _v-7974585a=\"\">dataText</th>\n                            <th _v-7974585a=\"\">dataValue</th>\n                        </tr>\n                    </thead>\n                    <tbody _v-7974585a=\"\">\n                        <tr _v-7974585a=\"\">\n                            <td _v-7974585a=\"\">requestWord : {{requestWord}}</td>\n                            <td _v-7974585a=\"\"> </td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div style=\"width:200px\" _v-7974585a=\"\">\n                        <autocomplete placeholder=\"\" :check=\"false\" :data-text.sync=\"requestWord\" :suggestions=\"remoteSug\" :input-callback=\"request\" _v-7974585a=\"\">&gt;\n                        </autocomplete>\n                </div>\n            </div>\n            <div class=\"block-item\" _v-7974585a=\"\">\n                <h4 _v-7974585a=\"\">远程sug，object数组 sugs:</h4>\n                <table class=\"table table-striped table-bordered\" style=\"width:400px\" _v-7974585a=\"\">\n                    <thead _v-7974585a=\"\">\n                        <tr _v-7974585a=\"\">\n                            <th _v-7974585a=\"\">dataText</th>\n                            <th _v-7974585a=\"\">dataValue</th>\n                        </tr>\n                    </thead>\n                    <tbody _v-7974585a=\"\">\n                        <tr _v-7974585a=\"\">\n                            <td _v-7974585a=\"\">requestWord2 : {{requestWord2}}</td>\n                            <td _v-7974585a=\"\">requestValue2 : {{requestValue2}}</td>\n                        </tr>\n                    </tbody>\n                </table>\n                <div style=\"width:200px\" _v-7974585a=\"\">\n                        <autocomplete placeholder=\"\" :check=\"false\" :data-text.sync=\"requestWord2\" :data-value.sync=\"requestValue2\" :suggestions=\"remoteSug2\" :input-callback=\"request2\" _v-7974585a=\"\">\n                        </autocomplete>\n                </div>\n            </div>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-7974585a=\"\"><pre _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-7974585a=\"\">class</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">=</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-7974585a=\"\">class</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">=</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span>block-item<span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>h4</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>string数组 sugs:<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>h4</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-7974585a=\"\">class</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">=</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span>table table-striped table-bordered<span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-7974585a=\"\"><span class=\"token attr-name\" _v-7974585a=\"\"> <span class=\"token attr-name\" _v-7974585a=\"\">style</span></span><span class=\"token punctuation\" _v-7974585a=\"\">=\"</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token property\" _v-7974585a=\"\">width</span><span class=\"token punctuation\" _v-7974585a=\"\">:</span>400px</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>constellation : {{constellation}}<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>constellationValue : {{constellationValue}}<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-7974585a=\"\"><span class=\"token attr-name\" _v-7974585a=\"\"> <span class=\"token attr-name\" _v-7974585a=\"\">style</span></span><span class=\"token punctuation\" _v-7974585a=\"\">=\"</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token property\" _v-7974585a=\"\">width</span><span class=\"token punctuation\" _v-7974585a=\"\">:</span>200px</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                &lt;Autocomplete id=\"constellation\"\n                            name=\"constellation\"\n                                    placeholder=\"请输入星座\"\n                                    :data-text.sync=\"constellation\"\n                            :data-value.sync=\"constellationValue\"\n                            :suggestions=\"constellationSuggestions\"&gt;\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>Autocomplete</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-7974585a=\"\">class</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">=</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span>block-item<span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>h4</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>object数组 sugs:<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>h4</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-7974585a=\"\">class</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">=</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span>table table-striped table-bordered<span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-7974585a=\"\"><span class=\"token attr-name\" _v-7974585a=\"\"> <span class=\"token attr-name\" _v-7974585a=\"\">style</span></span><span class=\"token punctuation\" _v-7974585a=\"\">=\"</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token property\" _v-7974585a=\"\">width</span><span class=\"token punctuation\" _v-7974585a=\"\">:</span>400px</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>cityName : {{cityName}}<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>cityId : {{cityId}}<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-7974585a=\"\"><span class=\"token attr-name\" _v-7974585a=\"\"> <span class=\"token attr-name\" _v-7974585a=\"\">style</span></span><span class=\"token punctuation\" _v-7974585a=\"\">=\"</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token property\" _v-7974585a=\"\">width</span><span class=\"token punctuation\" _v-7974585a=\"\">:</span>200px</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                &lt;Autocomplete id=\"city\"\n                            name=\"city\"\n                                    placeholder=\"请输入城市\"\n                                    :data-text.sync=\"cityName\"\n                            :data-value.sync=\"cityId\"\n                            :suggestions=\"citySuggestions\"&gt;\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>Autocomplete</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-7974585a=\"\">class</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">=</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span>block-item<span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>h4</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>远程sug，string数组 sugs:<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>h4</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-7974585a=\"\">class</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">=</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span>table table-striped table-bordered<span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-7974585a=\"\"><span class=\"token attr-name\" _v-7974585a=\"\"> <span class=\"token attr-name\" _v-7974585a=\"\">style</span></span><span class=\"token punctuation\" _v-7974585a=\"\">=\"</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token property\" _v-7974585a=\"\">width</span><span class=\"token punctuation\" _v-7974585a=\"\">:</span>400px</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>requestWord : {{requestWord}}<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span> <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-7974585a=\"\"><span class=\"token attr-name\" _v-7974585a=\"\"> <span class=\"token attr-name\" _v-7974585a=\"\">style</span></span><span class=\"token punctuation\" _v-7974585a=\"\">=\"</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token property\" _v-7974585a=\"\">width</span><span class=\"token punctuation\" _v-7974585a=\"\">:</span>200px</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                &lt;Autocomplete placeholder=\"\"\n                            :check=false\n                            :data-text.sync=\"requestWord\"\n                            :suggestions=\"remoteSug\"\n                            :input-callback=\"request\"&gt;&gt;\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>Autocomplete</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-7974585a=\"\">class</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">=</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span>block-item<span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>h4</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>远程sug，object数组 sugs:<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>h4</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-7974585a=\"\">class</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">=</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span>table table-striped table-bordered<span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-7974585a=\"\"><span class=\"token attr-name\" _v-7974585a=\"\"> <span class=\"token attr-name\" _v-7974585a=\"\">style</span></span><span class=\"token punctuation\" _v-7974585a=\"\">=\"</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token property\" _v-7974585a=\"\">width</span><span class=\"token punctuation\" _v-7974585a=\"\">:</span>400px</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>requestWord2 : {{requestWord2}}<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>requestValue2 : {{requestValue2}}<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-7974585a=\"\"><span class=\"token attr-name\" _v-7974585a=\"\"> <span class=\"token attr-name\" _v-7974585a=\"\">style</span></span><span class=\"token punctuation\" _v-7974585a=\"\">=\"</span><span class=\"token attr-value\" _v-7974585a=\"\"><span class=\"token property\" _v-7974585a=\"\">width</span><span class=\"token punctuation\" _v-7974585a=\"\">:</span>200px</span><span class=\"token punctuation\" _v-7974585a=\"\">\"</span></span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n                &lt;Autocomplete placeholder=\"\"\n                            :check=false\n                            :data-text.sync=\"requestWord2\"\n                            :data-value.sync=\"requestValue2\"\n                            :suggestions=\"remoteSug2\"\n                            :input-callback=\"request2\"&gt;\n                <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>Autocomplete</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-7974585a=\"\"><span class=\"token tag\" _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-7974585a=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n</div>\n<h2 _v-7974585a=\"\">数据格式支持</h2>\n<p _v-7974585a=\"\">组件支持两种<code _v-7974585a=\"\">数据格式</code>：</p>\n<ul _v-7974585a=\"\">\n<li _v-7974585a=\"\">Object:</li>\n</ul>\n<pre _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">[</span><span class=\"token punctuation\" _v-7974585a=\"\">{</span>\n    text<span class=\"token punctuation\" _v-7974585a=\"\">:</span><span class=\"token string\" _v-7974585a=\"\">\"北京\"</span><span class=\"token punctuation\" _v-7974585a=\"\">,</span>\n    value<span class=\"token punctuation\" _v-7974585a=\"\">:</span><span class=\"token string\" _v-7974585a=\"\">\"103\"</span>\n<span class=\"token punctuation\" _v-7974585a=\"\">}</span><span class=\"token punctuation\" _v-7974585a=\"\">,</span><span class=\"token punctuation\" _v-7974585a=\"\">{</span>\n    text<span class=\"token punctuation\" _v-7974585a=\"\">:</span><span class=\"token string\" _v-7974585a=\"\">\"上海\"</span><span class=\"token punctuation\" _v-7974585a=\"\">,</span>\n    value<span class=\"token punctuation\" _v-7974585a=\"\">:</span><span class=\"token string\" _v-7974585a=\"\">\"131\"</span>\n<span class=\"token punctuation\" _v-7974585a=\"\">}</span><span class=\"token punctuation\" _v-7974585a=\"\">,</span>\n    ……\n<span class=\"token punctuation\" _v-7974585a=\"\">]</span>\n</pre>\n<ul _v-7974585a=\"\">\n<li _v-7974585a=\"\">Array:</li>\n</ul>\n<pre _v-7974585a=\"\"><span class=\"token punctuation\" _v-7974585a=\"\">[</span><span class=\"token string\" _v-7974585a=\"\">\"北京\"</span><span class=\"token punctuation\" _v-7974585a=\"\">,</span><span class=\"token string\" _v-7974585a=\"\">\"上海\"</span><span class=\"token punctuation\" _v-7974585a=\"\">,</span>……<span class=\"token punctuation\" _v-7974585a=\"\">]</span>\n</pre>\n<h2 _v-7974585a=\"\">参数说明</h2>\n<table class=\"table\" _v-7974585a=\"\">\n<thead _v-7974585a=\"\">\n<tr _v-7974585a=\"\">\n<th _v-7974585a=\"\">参数</th>\n<th _v-7974585a=\"\">类型</th>\n<th _v-7974585a=\"\">双向</th>\n<th _v-7974585a=\"\">说明</th>\n</tr>\n</thead>\n<tbody _v-7974585a=\"\">\n<tr _v-7974585a=\"\">\n<td _v-7974585a=\"\">id</td>\n<td _v-7974585a=\"\">String</td>\n<td _v-7974585a=\"\"></td>\n<td _v-7974585a=\"\">input的id</td>\n</tr>\n<tr _v-7974585a=\"\">\n<td _v-7974585a=\"\">name</td>\n<td _v-7974585a=\"\">String</td>\n<td _v-7974585a=\"\"></td>\n<td _v-7974585a=\"\">input的name属性</td>\n</tr>\n<tr _v-7974585a=\"\">\n<td _v-7974585a=\"\">className</td>\n<td _v-7974585a=\"\">String</td>\n<td _v-7974585a=\"\"></td>\n<td _v-7974585a=\"\">类名</td>\n</tr>\n<tr _v-7974585a=\"\">\n<td _v-7974585a=\"\">disabled</td>\n<td _v-7974585a=\"\">Boolean</td>\n<td _v-7974585a=\"\"></td>\n<td _v-7974585a=\"\">input的disabled属性</td>\n</tr>\n<tr _v-7974585a=\"\">\n<td _v-7974585a=\"\">placeholder</td>\n<td _v-7974585a=\"\">String</td>\n<td _v-7974585a=\"\"></td>\n<td _v-7974585a=\"\">input提示</td>\n</tr>\n<tr _v-7974585a=\"\">\n<td _v-7974585a=\"\">dataText</td>\n<td _v-7974585a=\"\">String</td>\n<td _v-7974585a=\"\">是</td>\n<td _v-7974585a=\"\">sug文本,展示给用户的sug值</td>\n</tr>\n<tr _v-7974585a=\"\">\n<td _v-7974585a=\"\">dataValue</td>\n<td _v-7974585a=\"\">String or Object</td>\n<td _v-7974585a=\"\">是</td>\n<td _v-7974585a=\"\">所选sug项</td>\n</tr>\n<tr _v-7974585a=\"\">\n<td _v-7974585a=\"\">suggestions</td>\n<td _v-7974585a=\"\">Array</td>\n<td _v-7974585a=\"\"></td>\n<td _v-7974585a=\"\">sug list</td>\n</tr>\n<tr _v-7974585a=\"\">\n<td _v-7974585a=\"\">check</td>\n<td _v-7974585a=\"\">Boolean@default:false</td>\n<td _v-7974585a=\"\"></td>\n<td _v-7974585a=\"\">是否要做sug匹配，如果想用本组件实现远程sug，设为false</td>\n</tr>\n<tr _v-7974585a=\"\">\n<td _v-7974585a=\"\">inputCallback</td>\n<td _v-7974585a=\"\">Function</td>\n<td _v-7974585a=\"\"></td>\n<td _v-7974585a=\"\">input事件回调，可以本时机触发远程sug异步请求</td>\n</tr>\n</tbody>\n</table>\n</div>";
+	module.exports = "<div _v-5f1c72f6=\"\"><h1 _v-5f1c72f6=\"\">Suggestion 自动完成/建议</h1>\n<h2 _v-5f1c72f6=\"\">使用场景</h2>\n<p _v-5f1c72f6=\"\">用户输入相关词语时进行输入建议(suggestions), 自动完成</p>\n<h1 _v-5f1c72f6=\"\">Demo</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\" _v-5f1c72f6=\"\">\n<div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-5f1c72f6=\"\">\n                    <h3 _v-5f1c72f6=\"\">string数组 sugs:</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-5f1c72f6=\"\">\n  <table class=\"table\" style=\"width:400px\" _v-5f1c72f6=\"\">\n    <thead _v-5f1c72f6=\"\">\n        <tr _v-5f1c72f6=\"\">\n            <th _v-5f1c72f6=\"\">dataText</th>\n            <th _v-5f1c72f6=\"\">dataValue</th>\n        </tr>\n    </thead>\n    <tbody _v-5f1c72f6=\"\">\n        <tr _v-5f1c72f6=\"\">\n            <td _v-5f1c72f6=\"\">constellation : {{constellation}}</td>\n            <td _v-5f1c72f6=\"\">constellationValue : {{constellationValue}}</td>\n        </tr>\n    </tbody>\n  </table>\n  <div style=\"width:200px\" _v-5f1c72f6=\"\">\n      <suggestion id=\"constellation\" name=\"constellation\" placeholder=\"请输入星座\" :data-text.sync=\"constellation\" :data-value.sync=\"constellationValue\" :suggestions=\"constellationSuggestions\" _v-5f1c72f6=\"\">\n      </suggestion>\n  </div>\n</div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-5f1c72f6=\"\"><pre _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-5f1c72f6=\"\">class</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">=</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span>table<span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-5f1c72f6=\"\"><span class=\"token attr-name\" _v-5f1c72f6=\"\"> <span class=\"token attr-name\" _v-5f1c72f6=\"\">style</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">=\"</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token property\" _v-5f1c72f6=\"\">width</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">:</span>400px</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>constellation : {{constellation}}<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>constellationValue : {{constellationValue}}<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-5f1c72f6=\"\"><span class=\"token attr-name\" _v-5f1c72f6=\"\"> <span class=\"token attr-name\" _v-5f1c72f6=\"\">style</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">=\"</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token property\" _v-5f1c72f6=\"\">width</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">:</span>200px</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n    &lt;Suggestion\n      id=\"constellation\"\n        name=\"constellation\"\n        placeholder=\"请输入星座\"\n        :data-text.sync=\"constellation\"\n      :data-value.sync=\"constellationValue\"\n      :suggestions=\"constellationSuggestions\"&gt;\n    <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>Suggestion</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-5f1c72f6=\"\">\n                    <h3 _v-5f1c72f6=\"\">object数组 sugs:</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-5f1c72f6=\"\">\n        <table class=\"table\" style=\"width:400px\" _v-5f1c72f6=\"\">\n              <thead _v-5f1c72f6=\"\">\n                  <tr _v-5f1c72f6=\"\">\n                      <th _v-5f1c72f6=\"\">dataText</th>\n                      <th _v-5f1c72f6=\"\">dataValue</th>\n                  </tr>\n              </thead>\n              <tbody _v-5f1c72f6=\"\">\n                  <tr _v-5f1c72f6=\"\">\n                      <td _v-5f1c72f6=\"\">cityName : {{cityName}}</td>\n                      <td _v-5f1c72f6=\"\">cityId : {{cityId}}</td>\n                  </tr>\n              </tbody>\n          </table>\n          <div style=\"width:200px\" _v-5f1c72f6=\"\">\n              <suggestion id=\"city\" name=\"city\" placeholder=\"请输入城市\" :data-text.sync=\"cityName\" :data-value.sync=\"cityId\" :suggestions=\"citySuggestions\" _v-5f1c72f6=\"\">\n              </suggestion>\n          </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-5f1c72f6=\"\"><pre _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-5f1c72f6=\"\">class</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">=</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span>table<span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-5f1c72f6=\"\"><span class=\"token attr-name\" _v-5f1c72f6=\"\"> <span class=\"token attr-name\" _v-5f1c72f6=\"\">style</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">=\"</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token property\" _v-5f1c72f6=\"\">width</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">:</span>400px</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>cityName : {{cityName}}<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>cityId : {{cityId}}<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-5f1c72f6=\"\"><span class=\"token attr-name\" _v-5f1c72f6=\"\"> <span class=\"token attr-name\" _v-5f1c72f6=\"\">style</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">=\"</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token property\" _v-5f1c72f6=\"\">width</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">:</span>200px</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>Suggestion</span> <span class=\"token attr-name\" _v-5f1c72f6=\"\">id</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">=</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span>city<span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span> <span class=\"token attr-name\" _v-5f1c72f6=\"\">name</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">=</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span>city<span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span> <span class=\"token attr-name\" _v-5f1c72f6=\"\">placeholder</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">=</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span>请输入城市<span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span> <span class=\"token attr-name\" _v-5f1c72f6=\"\">:data-text.sync</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">=</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span>cityName<span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span> <span class=\"token attr-name\" _v-5f1c72f6=\"\">:data-value.sync</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">=</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span>cityId<span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span> <span class=\"token attr-name\" _v-5f1c72f6=\"\">:suggestions</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">=</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span>citySuggestions<span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>Suggestion</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-5f1c72f6=\"\">\n                    <h3 _v-5f1c72f6=\"\">远程sug，string数组 sugs:</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-5f1c72f6=\"\">\n      <table class=\"table\" style=\"width:400px\" _v-5f1c72f6=\"\">\n          <thead _v-5f1c72f6=\"\">\n              <tr _v-5f1c72f6=\"\">\n                  <th _v-5f1c72f6=\"\">dataText</th>\n                  <th _v-5f1c72f6=\"\">dataValue</th>\n              </tr>\n          </thead>\n          <tbody _v-5f1c72f6=\"\">\n              <tr _v-5f1c72f6=\"\">\n                  <td _v-5f1c72f6=\"\">requestWord : {{requestWord}}</td>\n                  <td _v-5f1c72f6=\"\"> </td>\n              </tr>\n          </tbody>\n      </table>\n      <div style=\"width:200px\" _v-5f1c72f6=\"\">\n              <suggestion placeholder=\"\" :check=\"false\" :data-text.sync=\"requestWord\" :suggestions=\"remoteSug\" :input-callback=\"request\" _v-5f1c72f6=\"\">&gt;\n              </suggestion>\n      </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-5f1c72f6=\"\"><pre _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-5f1c72f6=\"\">class</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">=</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span>table<span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-5f1c72f6=\"\"><span class=\"token attr-name\" _v-5f1c72f6=\"\"> <span class=\"token attr-name\" _v-5f1c72f6=\"\">style</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">=\"</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token property\" _v-5f1c72f6=\"\">width</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">:</span>400px</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>requestWord : {{requestWord}}<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span> <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-5f1c72f6=\"\"><span class=\"token attr-name\" _v-5f1c72f6=\"\"> <span class=\"token attr-name\" _v-5f1c72f6=\"\">style</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">=\"</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token property\" _v-5f1c72f6=\"\">width</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">:</span>200px</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n        &lt;Suggestion placeholder=\"\"\n                    :check=false\n                    :data-text.sync=\"requestWord\"\n                    :suggestions=\"remoteSug\"\n                    :input-callback=\"request\"&gt;&gt;\n        <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>Suggestion</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-5f1c72f6=\"\">\n                    <h3 _v-5f1c72f6=\"\">远程sug，object数组 sugs:</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-5f1c72f6=\"\">\n        <div class=\"block-item\" _v-5f1c72f6=\"\">\n          <table class=\"table table-striped table-bordered\" style=\"width:400px\" _v-5f1c72f6=\"\">\n              <thead _v-5f1c72f6=\"\">\n                  <tr _v-5f1c72f6=\"\">\n                      <th _v-5f1c72f6=\"\">dataText</th>\n                      <th _v-5f1c72f6=\"\">dataValue</th>\n                  </tr>\n              </thead>\n              <tbody _v-5f1c72f6=\"\">\n                  <tr _v-5f1c72f6=\"\">\n                      <td _v-5f1c72f6=\"\">requestWord2 : {{requestWord2}}</td>\n                      <td _v-5f1c72f6=\"\">requestValue2 : {{requestValue2}}</td>\n                  </tr>\n              </tbody>\n          </table>\n          <div style=\"width:200px\" _v-5f1c72f6=\"\">\n                  <suggestion placeholder=\"\" :check=\"false\" :data-text.sync=\"requestWord2\" :data-value.sync=\"requestValue2\" :suggestions=\"remoteSug2\" :input-callback=\"request2\" _v-5f1c72f6=\"\">\n                  </suggestion>\n          </div>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-5f1c72f6=\"\"><pre _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-5f1c72f6=\"\">class</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">=</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span>block-item<span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-5f1c72f6=\"\">class</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">=</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span>table table-striped table-bordered<span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-5f1c72f6=\"\"><span class=\"token attr-name\" _v-5f1c72f6=\"\"> <span class=\"token attr-name\" _v-5f1c72f6=\"\">style</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">=\"</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token property\" _v-5f1c72f6=\"\">width</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">:</span>400px</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>requestWord2 : {{requestWord2}}<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>requestValue2 : {{requestValue2}}<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-5f1c72f6=\"\"><span class=\"token attr-name\" _v-5f1c72f6=\"\"> <span class=\"token attr-name\" _v-5f1c72f6=\"\">style</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">=\"</span><span class=\"token attr-value\" _v-5f1c72f6=\"\"><span class=\"token property\" _v-5f1c72f6=\"\">width</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">:</span>200px</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">\"</span></span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n          &lt;Suggestion placeholder=\"\"\n                      :check=false\n                      :data-text.sync=\"requestWord2\"\n                      :data-value.sync=\"requestValue2\"\n                      :suggestions=\"remoteSug2\"\n                      :input-callback=\"request2\"&gt;\n          <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>Suggestion</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token tag\" _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n</div>\n<h2 _v-5f1c72f6=\"\">数据格式支持</h2>\n<p _v-5f1c72f6=\"\">组件支持两种<code _v-5f1c72f6=\"\">数据格式</code>：</p>\n<ul _v-5f1c72f6=\"\">\n<li _v-5f1c72f6=\"\">Object:</li>\n</ul>\n<pre _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">[</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">{</span>\n    text<span class=\"token punctuation\" _v-5f1c72f6=\"\">:</span><span class=\"token string\" _v-5f1c72f6=\"\">\"北京\"</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">,</span>\n    value<span class=\"token punctuation\" _v-5f1c72f6=\"\">:</span><span class=\"token string\" _v-5f1c72f6=\"\">\"103\"</span>\n<span class=\"token punctuation\" _v-5f1c72f6=\"\">}</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">,</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">{</span>\n    text<span class=\"token punctuation\" _v-5f1c72f6=\"\">:</span><span class=\"token string\" _v-5f1c72f6=\"\">\"上海\"</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">,</span>\n    value<span class=\"token punctuation\" _v-5f1c72f6=\"\">:</span><span class=\"token string\" _v-5f1c72f6=\"\">\"131\"</span>\n<span class=\"token punctuation\" _v-5f1c72f6=\"\">}</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">,</span>\n    ……\n<span class=\"token punctuation\" _v-5f1c72f6=\"\">]</span>\n</pre>\n<ul _v-5f1c72f6=\"\">\n<li _v-5f1c72f6=\"\">Array:</li>\n</ul>\n<pre _v-5f1c72f6=\"\"><span class=\"token punctuation\" _v-5f1c72f6=\"\">[</span><span class=\"token string\" _v-5f1c72f6=\"\">\"北京\"</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">,</span><span class=\"token string\" _v-5f1c72f6=\"\">\"上海\"</span><span class=\"token punctuation\" _v-5f1c72f6=\"\">,</span>……<span class=\"token punctuation\" _v-5f1c72f6=\"\">]</span>\n</pre>\n<h2 _v-5f1c72f6=\"\">参数说明</h2>\n<table class=\"table\" _v-5f1c72f6=\"\">\n<thead _v-5f1c72f6=\"\">\n<tr _v-5f1c72f6=\"\">\n<th _v-5f1c72f6=\"\">参数</th>\n<th _v-5f1c72f6=\"\">类型</th>\n<th _v-5f1c72f6=\"\">双向</th>\n<th _v-5f1c72f6=\"\">说明</th>\n</tr>\n</thead>\n<tbody _v-5f1c72f6=\"\">\n<tr _v-5f1c72f6=\"\">\n<td _v-5f1c72f6=\"\">id</td>\n<td _v-5f1c72f6=\"\">String</td>\n<td _v-5f1c72f6=\"\"></td>\n<td _v-5f1c72f6=\"\">input的id</td>\n</tr>\n<tr _v-5f1c72f6=\"\">\n<td _v-5f1c72f6=\"\">name</td>\n<td _v-5f1c72f6=\"\">String</td>\n<td _v-5f1c72f6=\"\"></td>\n<td _v-5f1c72f6=\"\">input的name属性</td>\n</tr>\n<tr _v-5f1c72f6=\"\">\n<td _v-5f1c72f6=\"\">className</td>\n<td _v-5f1c72f6=\"\">String</td>\n<td _v-5f1c72f6=\"\"></td>\n<td _v-5f1c72f6=\"\">类名</td>\n</tr>\n<tr _v-5f1c72f6=\"\">\n<td _v-5f1c72f6=\"\">disabled</td>\n<td _v-5f1c72f6=\"\">Boolean</td>\n<td _v-5f1c72f6=\"\"></td>\n<td _v-5f1c72f6=\"\">input的disabled属性</td>\n</tr>\n<tr _v-5f1c72f6=\"\">\n<td _v-5f1c72f6=\"\">placeholder</td>\n<td _v-5f1c72f6=\"\">String</td>\n<td _v-5f1c72f6=\"\"></td>\n<td _v-5f1c72f6=\"\">input提示</td>\n</tr>\n<tr _v-5f1c72f6=\"\">\n<td _v-5f1c72f6=\"\">dataText</td>\n<td _v-5f1c72f6=\"\">String</td>\n<td _v-5f1c72f6=\"\">是</td>\n<td _v-5f1c72f6=\"\">sug文本,展示给用户的sug值</td>\n</tr>\n<tr _v-5f1c72f6=\"\">\n<td _v-5f1c72f6=\"\">dataValue</td>\n<td _v-5f1c72f6=\"\">String or Object</td>\n<td _v-5f1c72f6=\"\">是</td>\n<td _v-5f1c72f6=\"\">所选sug项</td>\n</tr>\n<tr _v-5f1c72f6=\"\">\n<td _v-5f1c72f6=\"\">suggestions</td>\n<td _v-5f1c72f6=\"\">Array</td>\n<td _v-5f1c72f6=\"\"></td>\n<td _v-5f1c72f6=\"\">sug list</td>\n</tr>\n<tr _v-5f1c72f6=\"\">\n<td _v-5f1c72f6=\"\">check</td>\n<td _v-5f1c72f6=\"\">Boolean@default:false</td>\n<td _v-5f1c72f6=\"\"></td>\n<td _v-5f1c72f6=\"\">是否要做sug匹配，如果想用本组件实现远程sug，设为false</td>\n</tr>\n<tr _v-5f1c72f6=\"\">\n<td _v-5f1c72f6=\"\">inputCallback</td>\n<td _v-5f1c72f6=\"\">Function</td>\n<td _v-5f1c72f6=\"\"></td>\n<td _v-5f1c72f6=\"\">input事件回调，可以本时机触发远程sug异步请求</td>\n</tr>\n</tbody>\n</table>\n</div>";
 
 /***/ },
-/* 67 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(68)
-	__vue_script__ = __webpack_require__(70)
+	__webpack_require__(79)
+	__vue_script__ = __webpack_require__(81)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\demos\\tag.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(76)
+	__vue_template__ = __webpack_require__(87)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -16944,16 +17204,16 @@
 	})()}
 
 /***/ },
-/* 68 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(69);
+	var content = __webpack_require__(80);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -16970,21 +17230,21 @@
 	}
 
 /***/ },
-/* 69 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.define-class{\r\n    background:#ffab47;\r\n    color:#fff;\r\n}\r\n", ""]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.define-class{\r\n    background:#ffab47;\r\n    color:#fff;\r\n    border-radius: 6px;\r\n}\r\n\r\n.define-class:hover{\r\n    background:red;\r\n}\r\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 70 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16993,7 +17253,7 @@
 	    value: true
 	});
 
-	var _tag = __webpack_require__(71);
+	var _tag = __webpack_require__(82);
 
 	var _tag2 = _interopRequireDefault(_tag);
 
@@ -17030,18 +17290,18 @@
 	};
 
 /***/ },
-/* 71 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(72)
-	__vue_script__ = __webpack_require__(74)
+	__webpack_require__(83)
+	__vue_script__ = __webpack_require__(85)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\tag\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(75)
+	__vue_template__ = __webpack_require__(86)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -17066,23 +17326,23 @@
 	})()}
 
 /***/ },
-/* 72 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(73);
+	var content = __webpack_require__(84);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-abe12d60&scoped=true!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-abe12d60&scoped=true!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -17092,21 +17352,21 @@
 	}
 
 /***/ },
-/* 73 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".xcui-tag[_v-abe12d60] {\n  display: inline-block;\n  line-height: 25px;\n  height: 27px;\n  border-radius: 6px;\n  border: 1px solid #e9e9e9;\n  background: #fff;\n  font-size: 12px;\n  vertical-align: middle;\n  opacity: 1;\n  overflow: hidden;\n  margin: 2px 4px 2px 0;\n  cursor: pointer;\n}\n.xcui-tag .xcui-tag-text[_v-abe12d60] {\n  padding: 0 8px;\n}\n.xcui-disabled[_v-abe12d60] {\n  background: #f5f5f5;\n  cursor: default;\n  opacity: .85;\n}\n.xcui-tag[_v-abe12d60]:hover {\n  opacity: 0.85;\n}\n.xcui-cross[_v-abe12d60] {\n  display: inline-block;\n  font-style: normal;\n  font-size: 17px;\n  zoom: 1;\n  cursor: pointer;\n  font-weight: 700;\n  margin-left: 3px;\n  color: #666;\n  opacity: 0.66;\n}\n.xcui-cross[_v-abe12d60]:before {\n  content: \"\\D7\";\n}\n", ""]);
+	exports.push([module.id, ".xcui-tag {\n  display: inline-block;\n  line-height: 25px;\n  height: 27px;\n  border-radius: 6px;\n  border: 1px solid #e9e9e9;\n  background: #fff;\n  font-size: 12px;\n  vertical-align: middle;\n  opacity: 1;\n  margin: 2px 4px 2px 0;\n  cursor: pointer;\n}\n.xcui-tag .xcui-tag-text {\n  padding: 0 8px;\n}\n.xcui-disabled {\n  background: #f5f5f5;\n  cursor: default;\n  opacity: .85;\n}\n.xcui-tag:hover {\n  opacity: 0.85;\n}\n.xcui-cross {\n  display: inline-block;\n  font-style: normal;\n  font-size: 17px;\n  zoom: 1;\n  cursor: pointer;\n  font-weight: 700;\n  margin-left: 3px;\n  color: #666;\n  opacity: 0.66;\n}\n.xcui-cross:before {\n  content: \"\\D7\";\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 74 */
+/* 85 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17161,29 +17421,30 @@
 	};
 
 /***/ },
-/* 75 */
+/* 86 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"xcui-tag {{disabled?'xcui-disabled':''}}\" @click=\"onClick\" v-if=\"showTag\" _v-abe12d60=\"\">\n        <div class=\"{{classname!='' ? classname : ''}}\" _v-abe12d60=\"\">\n\t\t<span class=\"xcui-tag-text\" _v-abe12d60=\"\"><slot _v-abe12d60=\"\"></slot>{{text}}<span _v-abe12d60=\"\">\n        <i class=\"xcui-cross\" v-if=\"closeable\" @click.stop=\"onCloseClick\" _v-abe12d60=\"\"></i>\n        </span></span></div>\n\t</div>\n";
+	module.exports = "\n\t<div :class=\"['xcui-tag', disabled ? ' xcui-disabled':'']\" @click=\"onClick\" v-if=\"showTag\" >\n        <div class=\"{{classname!='' ? classname : ''}}\" >\n\t\t<span class=\"xcui-tag-text\"><slot></slot>{{text}}<span>\n        <i class=\"xcui-cross\" v-if=\"closeable\" @click.stop=\"onCloseClick\"></i>\n        </div>\n\t</div>\n";
 
 /***/ },
-/* 76 */
+/* 87 */
 /***/ function(module, exports) {
 
-	module.exports = "<div><h1>Tag标签</h1>\n<h2>使用场景</h2>\n<p>1、标记事物的属性、分类等特性<br />\n2、支持关闭标签、点击标签<br />\n3、支持禁用标签<br />\n4、支持自定义标签样式</p>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n\t<div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>基本使用</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <v-tag :text=\"'标签'\"></v-tag>\n        <v-tag :disabled=\"true\" :text=\"'禁用标签'\"></v-tag>\n        <v-tag :closeable=\"true\" :text=\"'关闭'\" @close=\"closeclick\"></v-tag>\n        <v-tag :closeable=\"true\" @close=\"closeclick\" :key.sync=\"key\" :text=\"'点击不关闭'\" :aftercloseisshow.sync=\"afterCloseIsShowTag\" @click=\"click\"></v-tag>\n        <v-tag  :classname=\"'define-class'\" :text=\"'自定义样式'\" @click=\"click\" ></v-tag>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>标签<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:disabled</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>禁用标签<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@close</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>closeclick<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@close</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>closeclick<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:key.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>key<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>点击不关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:aftercloseisshow.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>afterCloseIsShowTag<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span>  <span class=\"token attr-name\" >:classname</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>define-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>自定义样式<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span> <span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>添加标签</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <template v-for=\"item in tags\">\n            <v-tag :closeable=\"true\" :text=\"item.text\"></v-tag>\n        </template>\n        <input type=\"button\" class=\"btn btn-primary\" value=\"添加\" @click=\"addTag\"/>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>template</span> <span class=\"token attr-name\" >v-for</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item in tags<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item.text<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>template</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>input</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>button<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>添加<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>addTag<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >/></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>text</td>\n<td>String</td>\n<td>空字符串</td>\n<td>内容</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>disabled</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否禁用</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>closeable</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否可关闭</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>close</td>\n<td>function</td>\n<td>无</td>\n<td>关闭时回调</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>click</td>\n<td>function</td>\n<td>无</td>\n<td>点击标签事件</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>showTag</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否展示tag</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>aftercloseisshow</td>\n<td>Boolean</td>\n<td>false</td>\n<td>关闭回调后是否展示Tag</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>key</td>\n<td>String</td>\n<td>空字符串</td>\n<td>存储数据</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>classname</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+	module.exports = "<div><h1>Tag标签</h1>\n<h2>使用场景</h2>\n<ul>\n<li>标记事物的属性、分类等特性</li>\n<li>支持关闭标签、点击标签</li>\n<li>支持禁用标签</li>\n<li>支持自定义标签样式</li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n\t<div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>基本使用</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <v-tag :text=\"'标签'\"></v-tag>\n        <v-tag :disabled=\"true\" :text=\"'禁用标签'\"></v-tag>\n        <v-tag :closeable=\"true\" :text=\"'关闭'\" @close=\"closeclick\"></v-tag>\n        <v-tag :closeable=\"true\" @close=\"closeclick\" :key.sync=\"key\" :text=\"'点击不关闭'\" :aftercloseisshow.sync=\"afterCloseIsShowTag\" @click=\"click\"></v-tag>\n        <v-tag  :classname=\"'define-class'\" :text=\"'自定义样式'\" @click=\"click\" ></v-tag>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>标签<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:disabled</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>禁用标签<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@close</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>closeclick<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@close</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>closeclick<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:key.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>key<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>点击不关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:aftercloseisshow.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>afterCloseIsShowTag<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span>  <span class=\"token attr-name\" >:classname</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>define-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>自定义样式<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span> <span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>添加标签</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <template v-for=\"item in tags\">\n            <v-tag :closeable=\"true\" :text=\"item.text\"></v-tag>\n        </template>\n        <input type=\"button\" class=\"btn btn-primary\" value=\"添加\" @click=\"addTag\"/>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>template</span> <span class=\"token attr-name\" >v-for</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item in tags<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item.text<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>template</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>input</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>button<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>添加<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>addTag<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >/></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>text</td>\n<td>String</td>\n<td>空字符串</td>\n<td>内容</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>disabled</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否禁用</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>closeable</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否可关闭</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>close</td>\n<td>function</td>\n<td>无</td>\n<td>关闭时回调</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>click</td>\n<td>function</td>\n<td>无</td>\n<td>点击标签事件</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>showTag</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否展示tag</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>aftercloseisshow</td>\n<td>Boolean</td>\n<td>false</td>\n<td>关闭回调后是否展示Tag</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>key</td>\n<td>String</td>\n<td>空字符串</td>\n<td>存储数据</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>classname</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
 
 /***/ },
-/* 77 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(78)
+	__webpack_require__(89)
+	__vue_script__ = __webpack_require__(91)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\demos\\datepicker.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(84)
+	__vue_template__ = __webpack_require__(98)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -17208,7 +17469,47 @@
 	})()}
 
 /***/ },
-/* 78 */
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(90);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(13)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./datepicker.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./datepicker.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".class-name {\n  width: 200px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17217,7 +17518,7 @@
 	    value: true
 	});
 
-	var _datepicker = __webpack_require__(79);
+	var _datepicker = __webpack_require__(92);
 
 	var _datepicker2 = _interopRequireDefault(_datepicker);
 
@@ -17227,24 +17528,17 @@
 	    data: function data() {
 	        return {
 	            date: {
-	                show: false,
-	                type: 'date',
 	                value: '2016-02-01',
 	                sep: '-',
 	                begin: '2015-12-20',
 	                end: '2016-09-09'
 	            },
 	            datetime: {
-	                show: false,
-	                type: 'datetime',
-	                value: '2016-02-01',
-	                color: 'pink',
-	                btnShow: true,
-	                inputClass: ['col-md-6']
+	                value: '2016/02/01 00:00:00',
+	                begin: '2015/02/01 00:00:00',
+	                end: '2017/02/01 00:00:00'
 	            },
 	            time: {
-	                show: false,
-	                type: 'time',
 	                value: ''
 	            }
 	        };
@@ -17256,18 +17550,18 @@
 	};
 
 /***/ },
-/* 79 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(80)
-	__vue_script__ = __webpack_require__(82)
+	__webpack_require__(93)
+	__vue_script__ = __webpack_require__(95)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\datepicker\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(83)
+	__vue_template__ = __webpack_require__(97)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -17292,23 +17586,23 @@
 	})()}
 
 /***/ },
-/* 80 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(81);
+	var content = __webpack_require__(94);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-3acd26a2&scoped=true!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-3acd26a2&scoped=true!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -17318,243 +17612,59 @@
 	}
 
 /***/ },
-/* 81 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".calendar[_v-3acd26a2] {\n  width: 240px;\n  padding: 10px;\n  background: #fff;\n  position: absolute;\n  z-index: 9999;\n  border: 1px solid #DEDEDE;\n  border-radius: 2px;\n  opacity: .95;\n  -webkit-transition: all .5s ease;\n  transition: all .5s ease;\n}\n.calendar-enter .calendar-leave[_v-3acd26a2] {\n  opacity: 0;\n  -webkit-transform: translate3d(0, -10px, 0);\n          transform: translate3d(0, -10px, 0);\n}\n.calendar-tit[_v-3acd26a2] {\n  text-align: center;\n  margin: 0 auto;\n  width: 104px;\n  font-weight: bold;\n}\n.calendar-tit input[_v-3acd26a2] {\n  color: #333;\n  height: 24px;\n  outline: medium;\n  text-align: center;\n  border: none;\n  background-color: transparent;\n}\n.calendar-tit-year[_v-3acd26a2] {\n  width: 36px;\n}\n.calendar-tit-month[_v-3acd26a2] {\n  width: 18px;\n  margin-left: 2px;\n}\n.calendar[_v-3acd26a2]:before {\n  position: absolute;\n  left: 30px;\n  top: -10px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #DEDEDE;\n}\n.calendar[_v-3acd26a2]:after {\n  position: absolute;\n  left: 30px;\n  top: -9px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #fff;\n}\n.calendar-tools[_v-3acd26a2] {\n  height: 32px;\n  font-size: 14px;\n  line-height: 32px;\n  color: #333;\n}\n.calendar-tools .float.left[_v-3acd26a2] {\n  float: left;\n}\n.calendar-tools .float.right[_v-3acd26a2] {\n  float: right;\n}\n.calendar-tools > i[_v-3acd26a2] {\n  margin: 0 10px;\n  line-height: 32px;\n  cursor: pointer;\n  color: #707070;\n}\n.calendar-tools > i[_v-3acd26a2]:hover {\n  color: #333;\n}\n.calendar table[_v-3acd26a2] {\n  clear: both;\n  width: 100%;\n  margin-bottom: 10px;\n  border-collapse: collapse;\n  color: #444;\n}\n.calendar td[_v-3acd26a2] {\n  margin: 2px !important;\n  padding: 5px 0;\n  width: 14.28571429%;\n  text-align: center;\n  vertical-align: middle;\n  font-size: 14px;\n  line-height: 125%;\n  cursor: pointer;\n  border: 0;\n}\n.calendar td[_v-3acd26a2]:hover {\n  background: #f3f8fa;\n}\n.calendar td.week[_v-3acd26a2] {\n  pointer-events: none !important;\n  cursor: default !important;\n}\n.calendar td.disabled[_v-3acd26a2] {\n  color: #c0c0c0;\n  pointer-events: none !important;\n  cursor: default !important;\n}\n.calendar td.today[_v-3acd26a2] {\n  background-color: #46c3c1;\n  color: #fff;\n  font-size: 14px;\n  border-radius: 4px;\n}\n.calendar td.today .lunar[_v-3acd26a2] {\n  color: #fff;\n}\n.calendar thead td[_v-3acd26a2] {\n  text-transform: uppercase;\n}\n.calendar .timer[_v-3acd26a2] {\n  margin: 10px 0 10px 30px;\n  width: 150px;\n  text-align: center;\n}\n.calendar .timer input[_v-3acd26a2] {\n  border-radius: 2px;\n  padding: 5px;\n  font-size: 14px;\n  line-height: 18px;\n  color: #46c3c1;\n  width: 50px;\n  text-align: center;\n  border: 1px solid #efefef;\n}\n.calendar .timer input[_v-3acd26a2]:focus {\n  border: 1px solid #46c3c1;\n}\n.calendar .timer-item[_v-3acd26a2] {\n  float: left;\n  text-align: center;\n  position: relative;\n  cursor: pointer;\n}\n.calendar .timer-item-current[_v-3acd26a2] {\n  color: #46c3c1;\n  line-height: 24px;\n  font-size: 14px;\n}\n.calendar .timer label[_v-3acd26a2] {\n  margin: 0;\n  width: 30px;\n  padding: 5px;\n  line-height: 14px;\n  margin-right: 4px;\n  font-weight: normal;\n}\n.calendar-button[_v-3acd26a2] {\n  text-align: center;\n}\n.calendar-button button[_v-3acd26a2] {\n  border: none;\n  cursor: pointer;\n  display: inline-block;\n  min-height: 1em;\n  vertical-align: baseline;\n  background: #46c3c1;\n  color: #fff;\n  margin: 0 .3em 0 0;\n  padding: .6em 2em;\n  font-size: 1em;\n  line-height: 1em;\n  text-align: center;\n  border-radius: .3em;\n}\n.calendar-button button.cancel[_v-3acd26a2] {\n  background: #efefef;\n  color: #666;\n}\n.calendar .lunar[_v-3acd26a2] {\n  font-size: 11px;\n  line-height: 150%;\n  color: #aaa;\n}\n.calendar .drop-down[_v-3acd26a2] {\n  position: absolute;\n  top: 24px;\n  left: -10px;\n  width: 50px;\n  height: 140px;\n  background: #fff;\n  border: 1px solid #efefef;\n  padding: 0;\n  margin: 0;\n  overflow-y: scroll;\n}\n.calendar .drop-down li[_v-3acd26a2] {\n  width: 50px;\n  list-style: none;\n}\n.calendar .drop-down li.on[_v-3acd26a2] {\n  background: #eee;\n}\n.calendar .drop-down li[_v-3acd26a2]:hover {\n  background: #eee;\n}\n.calendar .clearfix[_v-3acd26a2] {\n  zoom: 1;\n}\n.calendar .clearfix[_v-3acd26a2]:after {\n  display: block;\n  width: 0;\n  height: 0;\n  visibility: hidden;\n  content: '';\n  clear: both;\n}\n.bg-pr[_v-3acd26a2] {\n  position: relative;\n}\n.btn-default[_v-3acd26a2] {\n  color: #666;\n  border: #ccc solid 1px;\n  background-color: #fff;\n  margin-left: -1px;\n  border-radius: 0 4px 4px 0;\n}\n", ""]);
+	exports.push([module.id, ".xcui-datapicker .calendar {\n  width: 240px;\n  padding: 10px;\n  background: #fff;\n  position: absolute;\n  z-index: 9999;\n  left: 0;\n  top: 38px;\n  border: 1px solid #DEDEDE;\n  border-radius: 2px;\n  -webkit-transition: all .5s ease;\n  transition: all .5s ease;\n}\n.xcui-datapicker .calendar-enter .calendar-leave {\n  opacity: 0;\n  -webkit-transform: translate3d(0, -10px, 0);\n          transform: translate3d(0, -10px, 0);\n}\n.xcui-datapicker .calendar-tit {\n  text-align: center;\n  margin: 0 auto;\n  width: 104px;\n  font-weight: bold;\n}\n.xcui-datapicker .calendar-tit input {\n  color: #333;\n  height: 24px;\n  outline: medium;\n  text-align: center;\n  border: none;\n  background-color: transparent;\n}\n.xcui-datapicker .calendar-tit-year {\n  width: 36px;\n}\n.xcui-datapicker .calendar-tit-month {\n  width: 18px;\n  margin-left: 2px;\n}\n.xcui-datapicker .calendar:before {\n  position: absolute;\n  left: 30px;\n  top: -10px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #DEDEDE;\n}\n.xcui-datapicker .calendar:after {\n  position: absolute;\n  left: 30px;\n  top: -9px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #fff;\n}\n.xcui-datapicker .calendar-tools {\n  height: 32px;\n  font-size: 14px;\n  line-height: 32px;\n  color: #333;\n}\n.xcui-datapicker .calendar-tools .float.left {\n  float: left;\n}\n.xcui-datapicker .calendar-tools .float.right {\n  float: right;\n}\n.xcui-datapicker .calendar-tools > i {\n  margin: 0 10px;\n  line-height: 32px;\n  cursor: pointer;\n  color: #707070;\n}\n.xcui-datapicker .calendar-tools > i:hover {\n  color: #333;\n}\n.xcui-datapicker .calendar table {\n  clear: both;\n  width: 100%;\n  margin-bottom: 10px;\n  border-collapse: collapse;\n  color: #444;\n}\n.xcui-datapicker .calendar td {\n  margin: 2px !important;\n  padding: 5px 0;\n  width: 14.28571429%;\n  text-align: center;\n  vertical-align: middle;\n  font-size: 14px;\n  line-height: 125%;\n  cursor: pointer;\n  border: 0;\n}\n.xcui-datapicker .calendar td:hover {\n  background: #f3f8fa;\n}\n.xcui-datapicker .calendar td.week {\n  pointer-events: none !important;\n  cursor: default !important;\n}\n.xcui-datapicker .calendar td.off {\n  color: #c0c0c0;\n}\n.xcui-datapicker .calendar td.today {\n  background-color: #46c3c1;\n  color: #fff;\n  font-size: 14px;\n  border-radius: 4px;\n}\n.xcui-datapicker .calendar td.today .lunar {\n  color: #fff;\n}\n.xcui-datapicker .calendar thead td {\n  text-transform: uppercase;\n}\n.xcui-datapicker .calendar .timer {\n  margin: 10px 0 10px 30px;\n  width: 150px;\n  text-align: center;\n}\n.xcui-datapicker .calendar .timer input {\n  border-radius: 2px;\n  padding: 5px;\n  font-size: 14px;\n  line-height: 18px;\n  color: #46c3c1;\n  width: 50px;\n  text-align: center;\n  border: 1px solid #efefef;\n}\n.xcui-datapicker .calendar .timer input:focus {\n  border: 1px solid #46c3c1;\n}\n.xcui-datapicker .calendar .timer-item {\n  float: left;\n  text-align: center;\n  position: relative;\n  cursor: pointer;\n}\n.xcui-datapicker .calendar .timer-item-current {\n  color: #46c3c1;\n  line-height: 24px;\n  font-size: 14px;\n}\n.xcui-datapicker .calendar .timer label {\n  margin: 0;\n  width: 30px;\n  padding: 5px;\n  line-height: 14px;\n  margin-right: 4px;\n  font-weight: normal;\n}\n.xcui-datapicker .calendar-button {\n  text-align: center;\n}\n.xcui-datapicker .calendar-button button {\n  border: none;\n  cursor: pointer;\n  display: inline-block;\n  min-height: 1em;\n  vertical-align: baseline;\n  background: #46c3c1;\n  color: #fff;\n  margin: 0 .3em 0 0;\n  padding: .6em 2em;\n  font-size: 1em;\n  line-height: 1em;\n  text-align: center;\n  border-radius: .3em;\n}\n.xcui-datapicker .calendar-button button.cancel {\n  background: #efefef;\n  color: #666;\n}\n.xcui-datapicker .calendar .lunar {\n  font-size: 11px;\n  line-height: 150%;\n  color: #aaa;\n}\n.xcui-datapicker .calendar .drop-down {\n  position: absolute;\n  top: 24px;\n  left: -10px;\n  width: 50px;\n  height: 140px;\n  background: #fff;\n  border: 1px solid #efefef;\n  padding: 0;\n  margin: 0;\n  overflow-y: scroll;\n}\n.xcui-datapicker .calendar .drop-down li {\n  width: 50px;\n  list-style: none;\n}\n.xcui-datapicker .calendar .drop-down li.on {\n  background: #eee;\n}\n.xcui-datapicker .calendar .drop-down li:hover {\n  background: #eee;\n}\n.xcui-datapicker .calendar .clearfix {\n  zoom: 1;\n}\n.xcui-datapicker .calendar .clearfix:after {\n  display: block;\n  width: 0;\n  height: 0;\n  visibility: hidden;\n  content: '';\n  clear: both;\n}\n.xcui-datapicker .calendar .btn-default {\n  color: #666;\n  border-radius: 0 4px 4px 0;\n}\n.xcui-datapicker .bg-pr {\n  position: relative;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 82 */
-/***/ function(module, exports) {
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _calendarMixins = __webpack_require__(96);
+
+	var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	exports.default = {
+	    mixins: [_calendarMixins2.default],
+	    name: 'xcui-datapicker',
 	    props: {
 	        btnShow: {
 	            type: Boolean,
 	            default: false
-	        },
-	        inputClass: {
-	            type: Array,
-	            default: function _default() {
-	                return [];
-	            }
-	        },
-	        type: {
-	            type: String,
-	            default: 'date'
-	        },
-	        value: {
-	            type: String,
-	            twoWay: true,
-	            default: ''
-	        },
-	        x: {
-	            type: Number,
-	            default: 0
-	        },
-	        y: {
-	            type: Number,
-	            default: 38
-	        },
-	        begin: {
-	            type: String,
-	            default: ''
-	        },
-	        end: {
-	            type: String,
-	            default: ''
-	        },
-	        hourRange: {
-	            type: Number,
-	            default: 1
-	        },
-	        minuteRange: {
-	            type: Number,
-	            default: 1
-	        },
-	        secondRange: {
-	            type: Number,
-	            default: 1
-	        },
-	        sep: {
-	            type: String,
-	            default: '-'
-	        },
-	        color: {
-	            type: String,
-	            default: ''
 	        }
 	    },
 	    data: function data() {
 	        return {
 	            show: false,
-	            year: 0,
-	            month: 0,
-	            day: 0,
-	            hour: '00',
-	            hourList: [],
-	            hourListShow: false,
-	            minute: '00',
-	            minuteList: [],
-	            minuteListShow: false,
-	            second: '00',
-	            secondList: [],
-	            secondListShow: false,
-	            days: [],
-	            today: [],
 	            currentMonth: Number,
-	            weeks: ['日', '一', '二', '三', '四', '五', '六'],
-	            months: [],
-	            dataTableShow: true,
-	            yearTableShow: false,
-	            selectRangeList: [],
-	            selectRangeShow: true,
-	            selectRange: '',
-	            currentTimeBtnShow: true,
-	            selectValue: ''
+	            currentTimeBtnShow: true
 	        };
-	    },
-	    created: function created() {
-	        var now = new Date();
-	        var me = this;
-	        if (this.btnShow) {
-	            this.inputClass.push('input-group');
-	        }
-	        if (this.value !== '') {
-	            if (this.value.indexOf('-') !== -1) {
-	                this.sep = '-';
-	            }
-	            if (this.value.indexOf('.') !== -1) {
-	                this.sep = '.';
-	            }
-	            if (this.type === 'date') {
-	                var split = this.value.split(me.sep);
-	                this.year = parseInt(split[0], 10);
-	                this.month = parseInt(split[1], 10) - 1;
-	                this.day = parseInt(split[2], 10);
-	            } else if (this.type === 'datetime') {
-	                var _split = this.value.split(' ');
-	                var splitDate = _split[0].split(me.sep);
-	                this.year = parseInt(splitDate[0], 10);
-	                this.month = parseInt(splitDate[1], 10) - 1;
-	                this.day = parseInt(splitDate[2], 10);
-	                if (_split.length > 1) {
-	                    var splitTime = _split[1].split(':');
-	                    this.hour = splitTime[0];
-	                    this.minute = splitTime[1];
-	                    this.second = splitTime[2];
-	                }
-	            }
-	        } else {
-	            this.year = now.getFullYear();
-	            this.month = now.getMonth();
-	            this.day = now.getDate();
-	            this.hour = this.zero(now.getHours());
-	            this.minute = this.zero(now.getMinutes());
-	            this.second = this.zero(now.getSeconds());
-	        }
-	        for (var i = 0; i < 60; i++) {
-	            var item = i;
-	            if (i % this.minuteRange === 0) {
-	                if (i < 10) {
-	                    item = '0' + i;
-	                }
-	                this.minuteList.push(item);
-	            }
-	            if (i % this.secondRange === 0) {
-	                if (i < 10) {
-	                    item = '0' + i;
-	                }
-	                this.secondList.push(item);
-	            }
-	        }
-	        for (var _i = 1; _i < 13; _i++) {
-	            var _item = _i;
-	            if (_i % this.hourRange === 0) {
-	                if (_i < 10) {
-	                    _item = '0' + _i;
-	                }
-	                this.hourList.push(_item);
-	            }
-	            this.months.push(_i);
-	        }
-	        this.render(me.year, me.month);
 	    },
 
 	    methods: {
-	        zero: function zero(n) {
-	            return n < 10 && String(n).length === 1 ? '0' + n : n;
-	        },
-	        render: function render(y, m) {
+	        renderElse: function renderElse(y, m, i, temp, line, currentTime) {
 	            var me = this;
-	            var firstDayOfMonth = new Date(y, m, 1).getDay();
-	            var lastDateOfMonth = new Date(y, m + 1, 0).getDate();
-	            var lastDayOfLastMonth = new Date(y, m, 0).getDate();
-	            var seletSplit = me.value.split(' ')[0].split(me.sep);
-	            var i = void 0;
-	            var line = 0;
-	            var temp = [];
-	            var date = new Date();
-	            var currentTime = Number(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
-	            me.year = y;
-	            me.currentMonth = me.months[m];
-	            for (i = 1; i <= lastDateOfMonth; i++) {
-	                var dow = new Date(y, m, i).getDay();
-	                var chk = new Date();
-	                var chkY = chk.getFullYear();
-	                var chkM = chk.getMonth();
-	                var seletSplit1 = parseInt(seletSplit[0], 10) === me.year;
-	                var seletSplit2 = parseInt(seletSplit[1], 10) - 1 === me.month;
-	                var seletSplit3 = parseInt(seletSplit[2], 10) === i;
-	                var seletSplit4 = me.begin !== undefined || me.end !== undefined;
-
-	                if (dow === 0) {
-	                    temp[line] = [];
-	                } else if (i === 1) {
-	                    temp[line] = [];
-	                    var k = lastDayOfLastMonth - firstDayOfMonth + 1;
-	                    for (var j = 0; j < firstDayOfMonth; j++) {
-	                        temp[line].push({ day: k, disabled: true });
-	                        k++;
-	                    }
-	                }
-	                if (seletSplit1 && seletSplit2 && seletSplit3 && seletSplit4) {
-	                    temp[line].push({ day: i, today: true });
-	                    me.today = [line, temp[line].length - 1];
-	                } else if (chkY === me.year && chkM === me.month && i === me.day && me.value === undefined) {
-	                    temp[line].push({ day: i, today: true });
-	                    me.today = [line, temp[line].length - 1];
-	                } else {
-	                    var thisTime = Number(new Date(me.year, me.month, i));
-	                    var options = { day: i, today: false };
-	                    options = me.bindSingerTime(thisTime, currentTime, options);
-	                    temp[line].push(options);
-	                }
-
-	                if (dow === 6) {
-	                    line++;
-	                } else if (i === lastDateOfMonth) {
-	                    var _k = 1;
-	                    for (dow; dow < 6; dow++) {
-	                        temp[line].push({ day: _k, disabled: true });
-	                        _k++;
-	                    }
-	                }
-	            }
-	            me.days = temp;
+	            var thisTime = Number(new Date(me.year, me.month, i));
+	            var options = { day: i, today: false };
+	            options = me.bindSingerTime(thisTime, currentTime, options);
+	            temp[line].push(options);
 	        },
 	        bindSingerTime: function bindSingerTime(thisTime, currentTime, options) {
 	            var me = this;
@@ -17586,6 +17696,32 @@
 	            }
 	            return options;
 	        },
+	        select: function select(k1, k2, e) {
+	            var me = this;
+	            var days = this.days;
+	            var daySeleted = days[k1][k2];
+
+	            if (this.today.length > 0) {
+	                days[this.today[0]][this.today[1]].today = false;
+	            }
+
+	            daySeleted.today = true;
+	            me.day = me.zero(daySeleted.day);
+	            if (daySeleted.disabled) {
+	                me.month = k1 === 0 ? me.month - 1 : me.month + 1;
+	                var om = me.outputMonth(me.month, me.year);
+	                me.year = om.y;
+	                me.month = om.m;
+	                me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+	                me.render(me.year, me.month);
+	            } else {
+	                me.today = [k1, k2];
+	                me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+	            }
+	            if (me.type === 'date') {
+	                me.showFalse();
+	            }
+	        },
 	        currentTime: function currentTime() {
 	            var date = new Date();
 	            var year = date.getFullYear();
@@ -17595,69 +17731,26 @@
 	            var minute = this.zero(date.getMinutes());
 	            var second = this.zero(date.getSeconds());
 	            var me = this;
-	            var value = this.value;
 	            this.year = year;
 	            this.month = month;
 	            this.day = day;
 	            this.hour = hour;
 	            this.minute = minute;
 	            this.second = second;
-	            this.selectValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-	            this.value = this.selectValue;
+	            this.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
 	            if (this.currentTimeBtnShow) {
 	                this.render(year, month);
 	            }
-	            this.value = value;
 	            this.hourListShow = false;
 	            this.minuteListShow = false;
 	            this.secondListShow = false;
 	        },
-	        prev: function prev(e) {
-	            e.stopPropagation();
-	            var me = this;
-	            if (me.month === 0) {
-	                me.month = 11;
-	                me.year = me.year - 1;
-	            } else {
-	                me.month = parseInt(me.month, 10) - 1;
-	            }
-	            me.render(me.year, me.month);
-	        },
-	        next: function next(e) {
-	            e.stopPropagation();
-	            var me = this;
-	            if (me.month === 11) {
-	                me.month = 0;
-	                me.year = me.year + 1;
-	            } else {
-	                me.month = parseInt(me.month, 10) + 1;
-	            }
-	            me.render(me.year, me.month);
-	        },
-	        select: function select(k1, k2, e) {
-	            if (e !== undefined) {
-	                e.stopPropagation();
-	            }
-	            var me = this;
-
-	            if (this.today.length > 0) {
-	                this.days[this.today[0]][this.today[1]].today = false;
-	            }
-
-	            this.days[k1][k2].today = true;
-	            this.day = me.zero(me.days[k1][k2].day);
-	            this.today = [k1, k2];
-	            this.selectValue = this.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-	            if (this.type === 'date') {
-	                this.value = this.selectValue;
-	                this.showFalse();
-	            }
-	        },
 	        ok: function ok() {
-	            this.value = this.selectValue;
+	            this.value = this.value !== '' ? this.value : this.initialValue;
 	            this.showFalse();
 	        },
 	        cancel: function cancel() {
+	            this.value = this.initialValue === '' ? this.value : this.initialValue;
 	            this.showFalse();
 	        },
 	        showFalse: function showFalse() {
@@ -17666,49 +17759,208 @@
 	            this.secondListShow = false;
 	            this.show = false;
 	        },
-	        output: function output(args) {
+	        showCalendar: function showCalendar(e) {
 	            var me = this;
-	            if (me.type === 'time') {
-	                return me.zero(args[3]) + ':' + me.zero(args[4]) + ':' + me.zero(args[5]);
+	            e.stopPropagation();
+	            this.show = true;
+	            var bindHide = function bindHide(e) {
+	                e.stopPropagation();
+	                me.showFalse();
+	                document.removeEventListener('click', bindHide, false);
+	            };
+	            setTimeout(function () {
+	                document.addEventListener('click', bindHide, false);
+	            }, 500);
+	        }
+	    }
+	};
+
+/***/ },
+/* 96 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    props: {
+	        type: {
+	            type: String,
+	            default: 'date'
+	        },
+	        value: {
+	            type: String,
+	            twoWay: true,
+	            default: ''
+	        },
+	        begin: {
+	            type: String,
+	            default: ''
+	        },
+	        end: {
+	            type: String,
+	            default: ''
+	        },
+	        hourRange: {
+	            type: [Number, String],
+	            default: 1
+	        },
+	        minuteRange: {
+	            type: [Number, String],
+	            default: 1
+	        },
+	        secondRange: {
+	            type: [Number, String],
+	            default: 1
+	        },
+	        sep: {
+	            type: String,
+	            default: '-'
+	        },
+	        color: String,
+	        className: String
+	    },
+	    data: function data() {
+	        return {
+	            dataTableShow: true,
+	            year: '',
+	            month: '',
+	            day: '',
+	            days: [],
+	            weeks: ['日', '一', '二', '三', '四', '五', '六'],
+	            months: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
+	            today: [],
+	            hour: '00',
+	            hourList: [],
+	            hourListShow: false,
+	            minute: '00',
+	            minuteList: [],
+	            minuteListShow: false,
+	            second: '00',
+	            secondList: [],
+	            secondListShow: false,
+	            yearTableShow: false,
+	            selectRangeList: [],
+	            selectRangeShow: true,
+	            selectRange: ''
+	        };
+	    },
+	    created: function created() {
+	        var me = this;
+	        var now = me.getCurrentParams();
+	        this.initialValue = this.value;
+	        if (me.value !== '') {
+	            var params = me.getValueParams(me.value);
+	            me.year = params.year;
+	            me.month = params.month;
+	            me.day = params.day;
+	            me.hour = params.hour;
+	            me.minute = params.minute;
+	            me.second = params.second;
+	        } else {
+	            me.year = now.year;
+	            me.month = now.month;
+	            me.day = now.day;
+	            me.hour = now.hour;
+	            me.minute = now.minute;
+	            me.second = now.second;
+	            me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+	        }
+	        for (var i = 0; i < 60; i++) {
+	            if (i % me.minuteRange === 0) {
+	                me.minuteList.push(me.zero(i));
 	            }
-	            if (me.type === 'datetime') {
-	                var args1 = me.zero(args[1] + 1);
-	                var args2 = me.zero(args[2]);
-	                var args3 = me.zero(args[3]);
-	                var args4 = me.zero(args[4]);
-	                var args5 = me.zero(args[5]);
-	                return args[0] + me.sep + args1 + me.sep + args2 + ' ' + args3 + ':' + args4 + ':' + args5;
+	            if (i % me.secondRange === 0) {
+	                me.secondList.push(me.zero(i));
 	            }
-	            if (me.type === 'date') {
-	                return args[0] + me.sep + me.zero(args[1] + 1) + me.sep + me.zero(args[2]);
+	        }
+	        for (var _i = 0; _i < 24; _i++) {
+	            if (_i % me.hourRange === 0) {
+	                me.hourList.push(me.zero(_i));
 	            }
+	        }
+	        if (me.type !== 'time') {
+	            me.render(me.year, me.month);
+	        }
+	    },
+
+	    methods: {
+	        zero: function zero(n) {
+	            return n < 10 && String(n).length === 1 ? '0' + n : n;
 	        },
-	        dropHourList: function dropHourList() {
-	            this.hourListShow = true;
-	            this.secondListShow = false;
-	            this.minuteListShow = false;
+	        render: function render(y, m) {
+	            var me = this;
+	            me.firstDayOfMonth = new Date(y, m, 1).getDay();
+	            me.lastDateOfMonth = new Date(y, m + 1, 0).getDate();
+	            me.lastDayOfLastMonth = new Date(y, m, 0).getDate();
+	            var params = me.getValueParams(me.value);
+	            var line = 0;
+	            var temp = [];
+	            var date = new Date();
+	            var currentTime = Number(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
+	            me.year = y;
+	            me.currentMonth = me.months[m];
+	            for (var i = 1; i <= me.lastDateOfMonth; i++) {
+	                var dow = new Date(y, m, i).getDay();
+	                var chk = new Date();
+	                var chkY = chk.getFullYear();
+	                var chkM = chk.getMonth();
+	                var year = params.year === me.year;
+	                var month = params.month === me.month;
+	                var day = params.day === i;
+	                var seletSplit4 = me.begin !== undefined || me.end !== undefined;
+
+	                if (dow === 0) {
+	                    temp[line] = [];
+	                } else if (i === 1) {
+	                    temp[line] = [];
+	                    var k = me.lastDayOfLastMonth - me.firstDayOfMonth + 1;
+	                    for (var j = 0; j < me.firstDayOfMonth; j++) {
+	                        temp[line].push({ day: k, disabled: true, prev: true });
+	                        k++;
+	                    }
+	                }
+	                if (year && month && day && seletSplit4) {
+	                    temp[line].push({ day: i, today: true });
+	                    me.today = [line, temp[line].length - 1];
+	                } else if (chkY === me.year && chkM === me.month && i === me.day && me.value === undefined) {
+	                    temp[line].push({ day: i, today: true });
+	                    me.today = [line, temp[line].length - 1];
+	                } else {
+	                    me.renderElse(y, m, i, temp, line, currentTime);
+	                }
+
+	                if (dow === 6) {
+	                    line++;
+	                } else if (i === me.lastDateOfMonth) {
+	                    var _k = 1;
+	                    for (dow; dow < 6; dow++) {
+	                        temp[line].push({ day: _k, disabled: true, today: false });
+	                        _k++;
+	                    }
+	                }
+	            }
+	            me.days = temp;
 	        },
-	        selectHourItem: function selectHourItem(e) {
-	            this.hour = e.target.innerText;
-	            this.hourListShow = false;
+	        prev: function prev(e) {
+	            e.stopPropagation();
+	            var me = this;
+	            me.month -= 1;
+	            var om = me.outputMonth(me.month, me.year);
+	            me.year = om.y;
+	            me.month = om.m;
+	            me.render(me.year, me.month);
 	        },
-	        dropMinuteList: function dropMinuteList() {
-	            this.hourListShow = false;
-	            this.secondListShow = false;
-	            this.minuteListShow = true;
-	        },
-	        selectMinuteItem: function selectMinuteItem(e) {
-	            this.minute = e.target.innerText;
-	            this.minuteListShow = false;
-	        },
-	        dropSecondList: function dropSecondList() {
-	            this.hourListShow = false;
-	            this.minuteListShow = false;
-	            this.secondListShow = true;
-	        },
-	        selectSecondItem: function selectSecondItem(e) {
-	            this.second = e.target.innerText;
-	            this.secondListShow = false;
+	        next: function next(e) {
+	            e.stopPropagation();
+	            var me = this;
+	            me.month += 1;
+	            var om = me.outputMonth(me.month, me.year);
+	            me.year = om.y;
+	            me.month = om.m;
+	            me.render(me.year, me.month);
 	        },
 	        changeTitSelect: function changeTitSelect(year, type) {
 	            if (type === 'year') {
@@ -17735,587 +17987,14 @@
 	                this.changeTitSelect(parseInt(me.selectRange.split('~')[0].trim(), 10) + 10, 'year');
 	            } else if (select > 12) {
 	                this.year = select;
-	                this.selectValue = this.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
 	                this.render(me.year, me.month);
 	                this.dataTableShow = true;
 	                this.yearTableShow = false;
 	            } else {
 	                this.month = parseInt(select, 10) - 1;
-	                this.selectValue = this.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
 	                this.render(me.year, me.month);
 	                this.dataTableShow = true;
 	                this.yearTableShow = false;
-	            }
-	        },
-	        showCalendar: function showCalendar(e) {
-	            var me = this;
-	            e.stopPropagation();
-	            this.show = true;
-	            var bindHide = function bindHide(e) {
-	                e.stopPropagation();
-	                me.showFalse();
-	                document.removeEventListener('click', bindHide, false);
-	            };
-	            setTimeout(function () {
-	                document.addEventListener('click', bindHide, false);
-	            }, 500);
-	        }
-	    }
-	};
-
-/***/ },
-/* 83 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div class=\"bg-pr\" :class=\"inputClass\" _v-3acd26a2=\"\">\n    <input class=\"form-control\" type=\"text\" v-model=\"value\" placeholder=\"请输入日期\" @click=\"showCalendar\" _v-3acd26a2=\"\">\n    <div @click.stop=\"\" @touchstart.stop=\"\" class=\"calendar\" v-show=\"show\" :style=\"{'left':x+'px','top':y+'px'}\" _v-3acd26a2=\"\">\n        <div class=\"calendar-tools\" v-if=\"type!='time'\" _v-3acd26a2=\"\">\n            <i class=\"glyphicon glyphicon-chevron-left float left\" @click=\"prev\" _v-3acd26a2=\"\"></i>\n            <i class=\"glyphicon glyphicon-chevron-right float right\" @click=\"next\" _v-3acd26a2=\"\"></i>\n            <div class=\"calendar-tit\" _v-3acd26a2=\"\">\n                <span @click=\"changeTitSelect(year, 'year')\" _v-3acd26a2=\"\"><input v-model=\"year\" class=\"calendar-tit-year\" type=\"text\" @change=\"changeTitSelect(year,'year')\" _v-3acd26a2=\"\">年</span>\n                <span class=\"calendar-tit-month\" @click=\"changeTitSelect(month-1, 'month')\" _v-3acd26a2=\"\">{{month+1}}月</span>\n            </div>\n        </div>\n        <div v-show=\"dataTableShow\" _v-3acd26a2=\"\">\n            <table cellpadding=\"5\" v-if=\"type!='time'\" _v-3acd26a2=\"\">\n                <thead _v-3acd26a2=\"\">\n                    <tr _v-3acd26a2=\"\">\n                        <td v-for=\"week in weeks\" class=\"week\" _v-3acd26a2=\"\">{{week}}</td>\n                    </tr>\n                </thead>\n                <tbody _v-3acd26a2=\"\"><tr v-for=\"(k1,day) in days\" _v-3acd26a2=\"\">\n                    <td v-for=\"(k2,child) in day\" :class=\"{'today':child.today,'disabled':child.disabled}\" :style=\"{'background':color&amp;&amp;child.today?color:''}\" @click=\"select(k1,k2,$event)\" _v-3acd26a2=\"\">\n                    {{child.day}}\n                    <div class=\"lunar\" v-if=\"showLunar\" _v-3acd26a2=\"\">{{child.lunar}}</div>\n                    </td>\n                </tr>\n            </tbody></table>\n            <div class=\"calendar-time\" v-show=\"type=='datetime'|| type=='time'\" _v-3acd26a2=\"\">\n                <div class=\"timer clearfix\" _v-3acd26a2=\"\">\n                    <div class=\"timer-item\" _v-3acd26a2=\"\">\n                        <label @click=\"dropHourList\" _v-3acd26a2=\"\">{{hour}}</label>:\n                        <ul class=\"drop-down\" v-show=\"hourListShow\" _v-3acd26a2=\"\">\n                            <li v-for=\"item in hourList\" @click=\"selectHourItem\" _v-3acd26a2=\"\">{{item}}</li>\n                        </ul>\n                    </div>\n                    <div class=\"timer-item\" _v-3acd26a2=\"\">\n                        <label @click=\"dropMinuteList\" _v-3acd26a2=\"\">{{minute}}</label>:\n                        <ul class=\"drop-down\" v-show=\"minuteListShow\" _v-3acd26a2=\"\">\n                            <li v-for=\"item in minuteList\" @click=\"selectMinuteItem\" _v-3acd26a2=\"\">{{item}}</li>\n                        </ul>\n                    </div>\n                    <div class=\"timer-item\" _v-3acd26a2=\"\">\n                        <label @click=\"dropSecondList\" _v-3acd26a2=\"\">{{second}}</label>\n                        <ul class=\"drop-down\" v-show=\"secondListShow\" _v-3acd26a2=\"\">\n                            <li v-for=\"item in secondList\" @click=\"selectSecondItem\" _v-3acd26a2=\"\">{{item}}</li>\n                        </ul>\n                    </div>\n                    <div class=\"timer-item\" _v-3acd26a2=\"\">\n                        <div class=\"timer-item-current\" @click=\"currentTime\" :style=\"{'color':color}\" _v-3acd26a2=\"\">当前</div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"calendar-button\" v-show=\"type=='datetime'|| type=='time' || range\" _v-3acd26a2=\"\">\n                <button @click=\"ok\" :style=\"{'background':color}\" _v-3acd26a2=\"\">确定</button>\n                <button @click=\"cancel\" class=\"cancel\" _v-3acd26a2=\"\">取消</button>\n            </div>\n        </div>\n        <table cellpadding=\"6\" v-show=\"yearTableShow\" _v-3acd26a2=\"\">\n            <tbody _v-3acd26a2=\"\"><tr v-show=\"selectRangeShow\" _v-3acd26a2=\"\">\n                <td colspan=\"3\" _v-3acd26a2=\"\">{{selectRange}}</td>\n            </tr>\n            <tr v-for=\"selects in selectRangeList\" _v-3acd26a2=\"\">\n                <td v-for=\"select in selects\" @click=\"selectItem(select)\" _v-3acd26a2=\"\">{{select}}</td>\n            </tr>\n        </tbody></table>\n    </div>\n    <span class=\"input-group-btn\" v-if=\"btnShow\" @click=\"showCalendar\" _v-3acd26a2=\"\">\n        <button class=\"btn btn-default\" _v-3acd26a2=\"\">\n            <span class=\"glyphicon glyphicon-calendar\" _v-3acd26a2=\"\"></span>\n        </button>\n    </span>\n</div>\n";
-
-/***/ },
-/* 84 */
-/***/ function(module, exports) {
-
-	module.exports = "<div><h2>datepicker 日期选择框</h2>\n<p>1、支持日历筛选，日历＋时间，时间筛选<br />\n2、可以配置日期的筛选范围，日期格式<br />\n3、对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60<br />\n4、可以直接获取当前的时间<br />\n5、年筛选可以直接输入，可以筛选<br />\n6、支持定制皮肤颜色</p>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日历选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <datepicker\n              :value.sync = \"date.value\"\n              :sep = 'date.sep'\n              :type=\"date.type\"\n              :x=\"date.x\"\n              ></datepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;datepicker\n      :value.sync = \"date.value\"\n      :sep = 'date.sep'\n      :type=\"date.type\"\n      :x=\"date.x\"\n      ><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日历+时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <datepicker\n              :value.sync = \"datetime.value\"\n              :btn-show = \"datetime.btnShow\"\n              :sep = 'datetime.sep'\n              :type=\"datetime.type\"\n              :color=\"datetime.color\"\n              :btn-show=\"datetime.btnShow\"\n              :input-class = \"datetime.inputClass\"\n              ></datepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;datepicker\n      :value.sync = \"datetime.value\"\n      :btn-show = \"datetime.btnShow\"\n      :sep = 'datetime.sep'\n      :type=\"datetime.type\"\n      :color=\"datetime.color\"\n      :btn-show=\"datetime.btnShow\"\n      :input-class = \"datetime.inputClass\"\n      ><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <div class=\"input-group\">\n            <datepicker\n                  :value.sync = \"time.value\"\n                  :btn-show=\"datetime.btnShow\"\n                  :type=\"time.type\"\n                  ></datepicker>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>input-group<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    &lt;datepicker\n          :value.sync = \"time.value\"\n          :btn-show=\"datetime.btnShow\"\n          :type=\"time.type\"\n          ><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>datepicker</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>组件依赖</h2>\n<blockquote>\n<p>无</p>\n</blockquote>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否双向绑定</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>value</td>\n<td>String</td>\n<td>无</td>\n<td>默认日期</td>\n<td>双向绑定</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>date</td>\n<td>date:日历  datetime:日历＋时间 time:时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>sep</td>\n<td>String</td>\n<td>-</td>\n<td>日期格式设置 例如：2016-08-06</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>x</td>\n<td>Number</td>\n<td>0</td>\n<td>日历定位的 left 值</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>y</td>\n<td>Number</td>\n<td>38</td>\n<td>日历定位的 top 值</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>begin</td>\n<td>String</td>\n<td>无</td>\n<td>单选日历，可选日期范围的开始时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>end</td>\n<td>String</td>\n<td>无</td>\n<td>单选日历，可选日期范围的结束时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>hourRange</td>\n<td>Number</td>\n<td>1</td>\n<td>小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minuteRange</td>\n<td>Number</td>\n<td>1</td>\n<td>分可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>secondRange</td>\n<td>Number</td>\n<td>1</td>\n<td>秒可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>color</td>\n<td>String</td>\n<td>无</td>\n<td>订制按钮颜色，值为颜色值，例如：#f00,pink</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>btn-show</td>\n<td>boolean</td>\n<td>无</td>\n<td>是否显示日历后面的按钮</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>input-class</td>\n<td>Array</td>\n<td>无</td>\n<td>日历input输入框的样式，class名字</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(86)
-	__vue_script__ = __webpack_require__(88)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\daterangepicker.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(94)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-56e6e39b/daterangepicker.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 86 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(87);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-56e6e39b&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./daterangepicker.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-56e6e39b&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./daterangepicker.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 87 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(11)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".bg-pr[_v-56e6e39b] {\n  position: relative;\n}\n.btn-default[_v-56e6e39b] {\n  color: #666;\n  border: #ccc solid 1px;\n  background-color: #fff;\n  margin-left: -1px;\n  border-radius: 0 4px 4px 0;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 88 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _daterangepicker = __webpack_require__(89);
-
-	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    data: function data() {
-	        return {
-	            date: {
-	                show: false,
-	                type: 'date',
-	                value: '2016-09-08 至 2016-10-08',
-	                sep: '-',
-	                begin: '2015-12-20',
-	                end: '2016-11-20',
-	                dateLimit: {
-	                    months: 1
-	                },
-	                color: '#f00'
-	            },
-	            datetime: {
-	                show: false,
-	                type: 'datetime',
-	                value: '2016-09-08 00:02:03 至 2016-09-13 00:00:00',
-	                sep: '-',
-	                begin: '2015-12-20',
-	                end: '2016-11-20',
-	                dateLimit: {
-	                    days: 5
-	                },
-	                color: '#f00'
-	            },
-	            time: {
-	                show: false,
-	                type: 'time',
-	                value: '04:02:03 至 00:02:03'
-	            }
-	        };
-	    },
-
-	    components: {
-	        daterangepicker: _daterangepicker2.default
-	    },
-	    methods: {
-	        showDateCalendar: function showDateCalendar(e) {
-	            var me = this;
-	            e.stopPropagation();
-	            this.date.show = true;
-	            var bindHide = function bindHide(e) {
-	                e.stopPropagation();
-	                me.date.show = false;
-	                document.removeEventListener('click', bindHide, false);
-	            };
-	            setTimeout(function () {
-	                document.addEventListener('click', bindHide, false);
-	            }, 500);
-	        },
-	        showDateTimeCalendar: function showDateTimeCalendar(e) {
-	            var me = this;
-	            e.stopPropagation();
-	            this.datetime.show = true;
-	            var bindHide = function bindHide(e) {
-	                e.stopPropagation();
-	                me.datetime.show = false;
-	                document.removeEventListener('click', bindHide, false);
-	            };
-	            setTimeout(function () {
-	                document.addEventListener('click', bindHide, false);
-	            }, 500);
-	        },
-	        showTimeCalendar: function showTimeCalendar(e) {
-	            var me = this;
-	            e.stopPropagation();
-	            this.time.show = true;
-	            var bindHide = function bindHide(e) {
-	                e.stopPropagation();
-	                me.time.show = false;
-	                document.removeEventListener('click', bindHide, false);
-	            };
-	            setTimeout(function () {
-	                document.addEventListener('click', bindHide, false);
-	            }, 500);
-	        }
-	    }
-	};
-
-/***/ },
-/* 89 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(90)
-	__vue_script__ = __webpack_require__(92)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\daterangepicker\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(93)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-0fc8bd93/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 90 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(91);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 91 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(11)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".calendar {\n  width: 240px;\n  padding: 10px;\n  background: #fff;\n  position: absolute;\n  border: 1px solid #DEDEDE;\n  border-radius: 2px;\n  opacity: .95;\n  -webkit-transition: all .5s ease;\n  transition: all .5s ease;\n}\n.calendar-enter .calendar-leave {\n  opacity: 0;\n  -webkit-transform: translate3d(0, -10px, 0);\n          transform: translate3d(0, -10px, 0);\n}\n.calendar-tit {\n  text-align: center;\n  margin: 0 auto;\n  width: 104px;\n  font-weight: bold;\n}\n.calendar-tit input {\n  color: #333;\n  height: 24px;\n  outline: medium;\n  text-align: center;\n  border: none;\n  background-color: transparent;\n}\n.calendar-tit-year {\n  width: 36px;\n}\n.calendar-tit-month {\n  width: 18px;\n  margin-left: 2px;\n}\n.calendar:before {\n  position: absolute;\n  left: 30px;\n  top: -10px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #DEDEDE;\n}\n.calendar:after {\n  position: absolute;\n  left: 30px;\n  top: -9px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #fff;\n}\n.calendar-tools {\n  height: 32px;\n  font-size: 14px;\n  line-height: 32px;\n  color: #333;\n}\n.calendar-tools .float.left {\n  float: left;\n}\n.calendar-tools .float.right {\n  float: right;\n}\n.calendar-tools > i {\n  margin: 0 10px;\n  line-height: 32px;\n  cursor: pointer;\n  color: #707070;\n}\n.calendar-tools > i:hover {\n  color: #333;\n}\n.calendar table {\n  clear: both;\n  width: 100%;\n  margin-bottom: 10px;\n  border-collapse: collapse;\n  color: #444;\n}\n.calendar table td {\n  margin: 2px !important;\n  padding: 5px 0;\n  width: 14.28571429%;\n  text-align: center;\n  vertical-align: middle;\n  font-size: 14px;\n  line-height: 125%;\n  cursor: pointer;\n  border: 0;\n}\n.calendar table td:hover {\n  background: #f3f8fa;\n}\n.calendar table td.week {\n  pointer-events: none !important;\n  cursor: default !important;\n}\n.calendar table td.disabled {\n  color: #c0c0c0;\n  pointer-events: none !important;\n  cursor: default !important;\n}\n.calendar table td.today {\n  background-color: #46c3c1;\n  color: #fff;\n  font-size: 14px;\n  border-radius: 4px;\n}\n.calendar table td.today .lunar {\n  color: #fff;\n}\n.calendar table td.range {\n  background: #e2eff5;\n}\n.calendar table thead td {\n  text-transform: uppercase;\n}\n.calendar .timer {\n  margin: 0 auto 10px;\n  width: 120px;\n}\n.calendar .timer input {\n  border-radius: 2px;\n  padding: 5px;\n  font-size: 14px;\n  line-height: 18px;\n  color: #46c3c1;\n  width: 50px;\n  text-align: center;\n  border: 1px solid #efefef;\n}\n.calendar .timer input:focus {\n  border: 1px solid #46c3c1;\n}\n.calendar .timer-item {\n  float: left;\n  text-align: center;\n  position: relative;\n  cursor: pointer;\n}\n.calendar .timer-item-current {\n  color: #46c3c1;\n  line-height: 24px;\n  font-size: 14px;\n}\n.calendar .timer label {\n  margin: 0;\n  width: 30px;\n  padding: 5px;\n  line-height: 14px;\n  margin-right: 4px;\n  font-weight: normal;\n}\n.calendar-button {\n  text-align: center;\n}\n.calendar-button button {\n  border: none;\n  cursor: pointer;\n  display: inline-block;\n  min-height: 1em;\n  vertical-align: baseline;\n  background: #46c3c1;\n  color: #fff;\n  margin: 0 .3em 0 0;\n  padding: .6em 2em;\n  font-size: 1em;\n  line-height: 1em;\n  text-align: center;\n  border-radius: .3em;\n}\n.calendar-button button.cancel {\n  background: #efefef;\n  color: #666;\n}\n.calendar .lunar {\n  font-size: 11px;\n  line-height: 150%;\n  color: #aaa;\n}\n.calendar .drop-down {\n  position: absolute;\n  top: 24px;\n  left: -10px;\n  width: 50px;\n  height: 140px;\n  background: #fff;\n  border: 1px solid #efefef;\n  padding: 0;\n  margin: 0;\n  overflow-y: scroll;\n}\n.calendar .drop-down li {\n  width: 50px;\n  list-style: none;\n}\n.calendar .drop-down li.on {\n  background: #eee;\n}\n.calendar .drop-down li:hover {\n  background: #eee;\n}\n.double-calendar {\n  width: 490px;\n  z-index: 999;\n}\n.double-calendar-left {\n  width: 220px;\n  float: left;\n}\n.double-calendar-right {\n  width: 220px;\n  float: right;\n}\n.double-calendar .calendar-button {\n  padding-top: 10px;\n  border-top: 1px solid #ddd;\n}\n.clearfix {\n  zoom: 1;\n}\n.clearfix:after {\n  display: block;\n  width: 0;\n  height: 0;\n  visibility: hidden;\n  content: '';\n  clear: both;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 92 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var calendar = {
-	    template: '<div class="calendar-tools" v-if="type!=\'time\'">\n                    <i class="glyphicon glyphicon-chevron-left float left"\n                       @click="prev"></i>\n                    <i class="glyphicon glyphicon-chevron-right float right"\n                   @click="next"></i>\n                    <div class="calendar-tit">\n                        <span @click="changeTitSelect(year, \'year\')">\n                            <input v-model="year" class="calendar-tit-year" type="text" \n                                @change="changeTitSelect(year,\'year\')"/>\u5E74\n                        </span>\n                        <span class="calendar-tit-month" @click="changeTitSelect(month-1, \'month\')">{{month+1}}\u6708</span>\n                    </div>\n                </div>\n                <div v-show="dataTableShow">\n                    <table cellpadding="5" v-if="type!=\'time\'">\n                        <thead>\n                            <tr>\n                                <td v-for="week in weeks" class="week">{{week}}</td>\n                            </tr>\n                        </thead>\n                        <tr v-for="(k1,day) in days">\n                            <td\n                            v-for="(k2,child) in day"\n                            :class="{\'today\':child.today,\'range\':child.range,\'disabled\':child.disabled}"\n                            :style="{\'background\':color&&child.today?color:\'\'}"\n                            @click="select(k1,k2,day,$event)">\n                            {{child.day}}\n                            </td>\n                        </tr>\n                    </table>\n                    <div class="calendar-time" v-show="type==\'datetime\' || type==\'time\'">\n                        <div class="timer clearfix">\n                            <div class="timer-item">\n                                <label @click="dropTimeList(\'hour\')">{{hour}}</label>:\n                                <ul class="drop-down" v-show="hourListShow">\n                                    <li v-for="item in hourList" \n                                        @click="selectTimeItem($event,\'hour\')">{{item}}</li>\n                                </ul>\n                            </div>\n                            <div class="timer-item">\n                                <label @click="dropTimeList(\'minute\')">{{minute}}</label>:\n                                <ul class="drop-down" v-show="minuteListShow">\n                                    <li v-for="item in minuteList" \n                                        @click="selectTimeItem($event,\'minute\')">{{item}}</li>\n                                </ul>\n                            </div>\n                            <div class="timer-item">\n                                <label @click="dropTimeList(\'second\')">{{second}}</label>\n                                <ul class="drop-down" v-show="secondListShow">\n                                    <li v-for="item in secondList" \n                                        @click="selectTimeItem($event,\'second\')">{{item}}</li>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <table cellpadding="6" v-show="yearTableShow">\n                    <tr v-show="selectRangeShow">\n                        <td colspan ="3">{{selectRange}}</td>\n                    </tr>\n                    <tr v-for="selects in selectRangeList">\n                        <td v-for="select in selects" @click="selectItem(select)">{{select}}</td>\n                    </tr>\n                </table>',
-	    props: {
-	        type: {
-	            type: String,
-	            default: 'date'
-	        },
-	        value: {
-	            type: String,
-	            default: ''
-	        },
-	        otherValue: {
-	            type: String,
-	            default: ''
-	        },
-	        right: {
-	            type: Boolean,
-	            default: false
-	        },
-	        sep: {
-	            type: String,
-	            default: '-'
-	        },
-	        begin: {
-	            type: String,
-	            default: ''
-	        },
-	        end: {
-	            type: String,
-	            default: ''
-	        },
-	        hourRange: {
-	            type: Number,
-	            default: 1
-	        },
-	        minuteRange: {
-	            type: Number,
-	            default: 1
-	        },
-	        secondRange: {
-	            type: Number,
-	            default: 1
-	        },
-	        color: {
-	            type: String,
-	            default: ''
-	        },
-	        renderStar: {
-	            type: String,
-	            default: ''
-	        },
-	        renderEnd: {
-	            type: String,
-	            default: ''
-	        },
-	        dateLimit: {
-	            type: Object,
-	            default: null
-	        }
-	    },
-	    data: function data() {
-	        return {
-	            dataTableShow: true,
-	            year: '',
-	            month: '',
-	            day: '',
-	            weeks: ['日', '一', '二', '三', '四', '五', '六'],
-	            months: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
-	            days: [],
-	            today: [],
-	            hour: '00',
-	            hourList: [],
-	            hourListShow: false,
-	            minute: '00',
-	            minuteList: [],
-	            minuteListShow: false,
-	            second: '00',
-	            secondList: [],
-	            secondListShow: false,
-	            yearTableShow: false,
-	            selectRangeList: [],
-	            selectRangeShow: true,
-	            selectRange: '',
-	            currentTimeBtnShow: true
-	        };
-	    },
-	    created: function created() {
-	        var me = this;
-	        var now = me.getCurrentParams();
-	        if (me.value !== '') {
-	            var params = me.getValueParams(me.value);
-	            me.year = params.year;
-	            me.month = params.month;
-	            me.day = params.day;
-	            me.hour = params.hour;
-	            me.minute = params.minute;
-	            me.second = params.second;
-	        } else {
-	            me.year = now.year;
-	            me.month = now.month;
-	            me.day = now.day;
-	            me.hour = now.hour;
-	            me.minute = now.minute;
-	            me.second = now.second;
-	        }
-	        for (var i = 0; i < 60; i++) {
-	            if (i % me.minuteRange === 0) {
-	                me.minuteList.push(me.zero(i));
-	            }
-	            if (i % me.secondRange === 0) {
-	                me.secondList.push(me.zero(i));
-	            }
-	        }
-	        for (var _i = 1; _i < 24; _i++) {
-	            if (_i % me.hourRange === 0) {
-	                me.hourList.push(me.zero(_i));
-	            }
-	        }
-	        if (me.type !== 'time') {
-	            me.render(me.year, me.month);
-	        }
-	    },
-
-	    watch: {
-	        renderStar: function renderStar(val) {
-	            if (val === '' || this.right) {
-	                return false;
-	            }
-	            var params = this.getValueParams(val);
-	            this.year = params.year;
-	            this.month = params.month;
-	            this.render(params.year, params.month);
-	        },
-	        renderEnd: function renderEnd(val) {
-	            if (val === '' || !this.right) {
-	                return false;
-	            }
-	            var params = this.getValueParams(val);
-	            this.year = params.year;
-	            this.month = params.month;
-	            this.render(params.year, params.month);
-	        }
-	    },
-	    methods: {
-	        render: function render(y, m) {
-	            var me = this;
-	            var firstDayOfMonth = new Date(y, m, 1).getDay();
-	            var lastDateOfMonth = new Date(y, m + 1, 0).getDate();
-	            var lastDayOfLastMonth = new Date(y, m, 0).getDate();
-	            var params = me.getValueParams(me.value);
-	            var line = 0;
-	            var temp = [];
-	            var date = new Date();
-	            var currentTime = Number(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
-	            me.year = y;
-	            for (var i = 1; i <= lastDateOfMonth; i++) {
-	                var dow = new Date(y, m, i).getDay();
-	                var chk = new Date();
-	                var chkY = chk.getFullYear();
-	                var chkM = chk.getMonth();
-	                var year = params.year === me.year;
-	                var month = params.month === me.month;
-	                var day = params.day === i;
-
-	                if (dow === 0) {
-	                    temp[line] = [];
-	                } else if (i === 1) {
-	                    temp[line] = [];
-	                    var k = lastDayOfLastMonth - firstDayOfMonth + 1;
-	                    for (var j = 0; j < firstDayOfMonth; j++) {
-	                        temp[line].push({ day: k, disabled: true });
-	                        k++;
-	                    }
-	                }
-	                if (year && month && day) {
-	                    temp[line].push({ day: i, today: true });
-	                    me.today = [line, temp[line].length - 1];
-	                } else if (chkY === me.year && chkM === me.month && i === me.day && me.value === undefined) {
-	                    temp[line].push({ day: i, today: true });
-	                    me.today = [line, temp[line].length - 1];
-	                } else {
-	                    var today = y + me.sep + me.zero(m + 1) + me.sep + me.zero(i);
-	                    var otherDate = me.otherValue.substring(0, 10);
-	                    var value = me.value.substring(0, 10);
-	                    if (today < me.begin || today > me.end) {
-	                        temp[line].push({ day: i, disabled: true, range: false });
-	                    } else if (!me.right && today > value && today <= otherDate) {
-	                        temp[line].push({ day: i, disabled: false, range: true });
-	                    } else if (me.right && today < value && today >= otherDate) {
-	                        temp[line].push({ day: i, disabled: false, range: true });
-	                    } else if (me.right && today < otherDate) {
-	                        temp[line].push({ day: i, disabled: true, range: false });
-	                    } else {
-	                        temp[line].push({ day: i, today: false, range: false });
-	                    }
-	                }
-
-	                if (dow === 6) {
-	                    line++;
-	                } else if (i === lastDateOfMonth) {
-	                    var _k = 1;
-	                    for (dow; dow < 6; dow++) {
-	                        temp[line].push({ day: _k, disabled: true });
-	                        _k++;
-	                    }
-	                }
-	            }
-	            me.days = temp;
-	        },
-	        select: function select(k1, k2, day, e) {
-	            if (e !== undefined) {
-	                e.stopPropagation();
-	            }
-	            var me = this;
-
-	            if (me.today.length > 0) {
-	                me.days[me.today[0]][me.today[1]].today = false;
-	            }
-
-	            me.days[k1][k2].today = true;
-	            me.days[k1][k2].range = false;
-	            me.day = this.zero(me.days[k1][k2].day);
-	            me.today = [k1, k2];
-	            me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-	            me.otherValue = me.bindLimitDate();
-	            me.changeOtherCalender();
-	        },
-	        prev: function prev(e) {
-	            e.stopPropagation();
-	            var me = this;
-	            if (me.month === 0) {
-	                me.month = 11;
-	                me.year = me.year - 1;
-	            } else {
-	                me.month = parseInt(me.month, 10) - 1;
-	            }
-	            me.render(me.year, me.month);
-	        },
-	        next: function next(e) {
-	            e.stopPropagation();
-	            var me = this;
-	            if (me.month === 11) {
-	                me.month = 0;
-	                me.year = me.year + 1;
-	            } else {
-	                me.month = parseInt(me.month, 10) + 1;
-	            }
-	            this.render(me.year, me.month);
-	        },
-	        changeTitSelect: function changeTitSelect(year, type) {
-	            if (type === 'year') {
-	                var startYear = parseInt(year / 10, 10) * 10;
-	                var years1 = ['《', startYear, startYear + 1];
-	                var years2 = [startYear + 2, startYear + 3, startYear + 4];
-	                var years3 = [startYear + 5, startYear + 6, startYear + 7];
-	                var years4 = [startYear + 8, startYear + 9, '》'];
-	                this.selectRange = startYear + ' ~ ' + (startYear + 9);
-	                this.selectRangeList = [years1, years2, years3, years4];
-	                this.selectRangeShow = true;
-	            } else {
-	                this.selectRangeList = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]];
-	                this.selectRangeShow = false;
-	            }
-	            this.dataTableShow = false;
-	            this.yearTableShow = true;
-	        },
-	        selectItem: function selectItem(select) {
-	            var me = this;
-	            if (select === '《') {
-	                this.changeTitSelect(parseInt(me.selectRange.split('~')[0].trim(), 10) - 10, 'year');
-	            } else if (select === '》') {
-	                this.changeTitSelect(parseInt(me.selectRange.split('~')[0].trim(), 10) + 10, 'year');
-	            } else if (select > 12) {
-	                me.year = select;
-	                me.render(me.year, me.month);
-	                me.dataTableShow = true;
-	                me.yearTableShow = false;
-	            } else {
-	                me.month = parseInt(select, 10) - 1;
-	                me.render(me.year, me.month);
-	                me.dataTableShow = true;
-	                me.yearTableShow = false;
 	            }
 	        },
 	        dropTimeList: function dropTimeList(type) {
@@ -18355,9 +18034,6 @@
 	            };
 	            me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
 	        },
-	        zero: function zero(n) {
-	            return n < 10 && String(n).length === 1 ? '0' + n : n;
-	        },
 	        output: function output(args) {
 	            var me = this;
 	            if (args[1] === 12) {
@@ -18382,31 +18058,20 @@
 	                return args[0] + me.sep + args1 + me.sep + args2;
 	            }
 	        },
-	        changeOtherCalender: function changeOtherCalender() {
-	            var me = this;
-	            var params = me.getValueParams(me.value);
-	            var monthStar = me.month;
-	            var monthEnd = me.month;
-	            if (!me.right) {
-	                if (me.value > me.otherValue) {
-	                    me.otherValue = me.value;
-	                } else if (me.getYearMonth(me.otherValue) > me.getYearMonth(me.value) + 1) {
-	                    monthEnd = monthEnd + 1;
-	                }
-	            } else if (me.right) {
-	                if (me.value < me.otherValue) {
-	                    me.otherValue = me.value;
-	                } else if (me.getYearMonth(me.value) > me.getYearMonth(me.otherValue) + 1) {
-	                    monthStar = monthStar - 1;
-	                }
+	        outputMonth: function outputMonth(month, year) {
+	            var m = Number(month);
+	            var y = Number(year);
+	            if (m === -1) {
+	                m = 11;
+	                y -= 1;
+	            } else if (m === 12) {
+	                m = 0;
+	                y += 1;
 	            }
-	            me.$parent.renderStar = me.output([me.year, monthStar, params.day, me.hour, me.minute, me.second]);
-	            me.$parent.renderEnd = me.output([me.year, monthEnd, params.day, me.hour, me.minute, me.second]);
-	        },
-	        getYearMonth: function getYearMonth(date) {
-	            var me = this;
-	            var dates = date.split(me.sep);
-	            return dates[0] * 12 + dates[1];
+	            return {
+	                y: y,
+	                m: m
+	            };
 	        },
 	        getValueParams: function getValueParams(timeCur) {
 	            var me = this;
@@ -18450,41 +18115,248 @@
 	                minute: this.zero(date.getMinutes()),
 	                second: this.zero(date.getSeconds())
 	            };
-	        },
-	        bindLimitDate: function bindLimitDate() {
-	            var me = this;
-	            var otherTime = me.otherValue;
-	            if (me.dateLimit) {
-	                if (me.dateLimit.hasOwnProperty('months')) {
-	                    var month = me.month + me.dateLimit.months;
-	                    if (!me.right) {
-	                        otherTime = me.output([me.year, month, me.day, me.hour, me.minute, me.second]);
-	                        otherTime = otherTime > me.otherValue ? me.otherValue : otherTime > me.end ? me.end : otherTime;
-	                    } else {
-	                        var bg = me.begin;
-	                        month = me.month - me.dateLimit.months;
-	                        otherTime = me.output([me.year, month, me.day, me.hour, me.minute, me.second]);
-	                        otherTime = otherTime < me.otherValue ? me.otherValue : otherTime < bg ? bg : otherTime;
-	                    }
-	                } else if (this.dateLimit.hasOwnProperty('days')) {
-	                    var day = parseInt(me.day, 10) + me.dateLimit.days;
-	                    if (!me.right) {
-	                        otherTime = me.output([me.year, me.month, day, me.hour, me.minute, me.second]);
-	                        otherTime = otherTime > me.otherValue ? me.otherValue : otherTime > me.end ? me.end : otherTime;
-	                    } else {
-	                        var _bg = me.begin;
-	                        day = parseInt(me.day, 10) - me.dateLimit.days;
-	                        otherTime = me.output([me.year, me.month, day, me.hour, me.minute, me.second]);
-	                        otherTime = otherTime < me.otherValue ? me.otherValue : otherTime < _bg ? _bg : otherTime;
-	                    }
-	                }
-	            }
-	            return otherTime;
 	        }
 	    }
 	};
 
+/***/ },
+/* 97 */
+/***/ function(module, exports) {
+
+	module.exports = "\r\n<div class=\"xcui-datapicker {{className}}\">\r\n    <div :class=\"{'input-group':btnShow,'bg-pr':!btnShow}\">\r\n        <input class=\"form-control\"  type=\"text\" v-model=\"value\" placeholder=\"请输入日期\" @click=\"showCalendar\">\r\n        <div @click.stop=\"\"\r\n             @touchstart.stop=\"\"\r\n             class=\"calendar\"\r\n             v-show=\"show\">\r\n            <div class=\"calendar-tools\" v-if=\"type!='time'\">\r\n                <i class=\"glyphicon glyphicon-chevron-left float left\"\r\n                   @click=\"prev\"></i>\r\n                <i class=\"glyphicon glyphicon-chevron-right float right\"\r\n                   @click=\"next\"></i>\r\n                <div class=\"calendar-tit\">\r\n                    <span @click=\"changeTitSelect(year, 'year')\"><input v-model=\"year\" class=\"calendar-tit-year\" type=\"text\" @change=\"changeTitSelect(year,'year')\"/>年</span>\r\n                    <span class=\"calendar-tit-month\" @click=\"changeTitSelect(month-1, 'month')\">{{month+1}}月</span>\r\n                </div>\r\n            </div>\r\n            <div v-show=\"dataTableShow\">\r\n                <table cellpadding=\"5\" v-if=\"type!='time'\">\r\n                    <thead>\r\n                        <tr>\r\n                            <td v-for=\"week in weeks\" class=\"week\">{{week}}</td>\r\n                        </tr>\r\n                    </thead>\r\n                    <tr v-for=\"(k1,day) in days\">\r\n                        <td\r\n                        v-for=\"(k2,child) in day\"\r\n                        :class=\"{'today':child.today,'off':child.disabled}\"\r\n                        :style=\"{'background':color&&child.today?color:''}\"\r\n                        @click=\"select(k1,k2,$event)\">\r\n                        {{child.day}}\r\n                        <div class=\"lunar\" v-if=\"showLunar\">{{child.lunar}}</div>\r\n                        </td>\r\n                    </tr>\r\n                </table>\r\n                <div class=\"calendar-time\" v-show=\"type=='datetime'|| type=='time'\">\r\n                    <div  class=\"timer clearfix\">\r\n                        <div class=\"timer-item\">\r\n                            <label @click=\"dropTimeList('hour')\">{{hour}}</label>:\r\n                            <ul class=\"drop-down\" v-show=\"hourListShow\">\r\n                                <li v-for=\"item in hourList\" @click=\"selectTimeItem($event,'hour')\">{{item}}</li>\r\n                            </ul>\r\n                        </div>\r\n                        <div class=\"timer-item\">\r\n                            <label @click=\"dropTimeList('minute')\">{{minute}}</label>:\r\n                            <ul class=\"drop-down\" v-show=\"minuteListShow\">\r\n                                <li v-for=\"item in minuteList\" @click=\"selectTimeItem($event,'minute')\">{{item}}</li>\r\n                            </ul>\r\n                        </div>\r\n                        <div class=\"timer-item\">\r\n                            <label @click=\"dropTimeList('second')\">{{second}}</label>\r\n                            <ul class=\"drop-down\" v-show=\"secondListShow\">\r\n                                <li v-for=\"item in secondList\" @click=\"selectTimeItem($event,'second')\">{{item}}</li>\r\n                            </ul>\r\n                        </div>\r\n                        <div class=\"timer-item\">\r\n                            <div class=\"timer-item-current\"\r\n                                @click=\"currentTime\"\r\n                                :style=\"{'color':color}\">当前</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"calendar-button\" v-show=\"type=='datetime'|| type=='time' || range\">\r\n                    <button @click=\"ok\" :style=\"{'background':color}\">确定</button>\r\n                    <button @click=\"cancel\" class=\"cancel\">取消</button>\r\n                </div>\r\n            </div>\r\n            <table cellpadding=\"6\" v-show=\"yearTableShow\">\r\n                <tr v-show=\"selectRangeShow\">\r\n                    <td colspan =\"3\">{{selectRange}}</td>\r\n                </tr>\r\n                <tr v-for=\"selects in selectRangeList\">\r\n                    <td v-for=\"select in selects\" @click=\"selectItem(select)\">{{select}}</td>\r\n                </tr>\r\n            </table>\r\n        </div>\r\n        <span class=\"input-group-btn\" v-if=\"btnShow\" @click=\"showCalendar\" >\r\n            <button class=\"btn btn-default\">\r\n                <span class=\"glyphicon glyphicon-calendar\"></span>\r\n            </button>\r\n        </span>\r\n    </div>\r\n</div>\r\n";
+
+/***/ },
+/* 98 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>datepicker 日期选择框</h1>\n<h2>使用场景</h2>\n<ul>\n<li>支持日历筛选，日历＋时间，时间筛选</li>\n<li>可以配置日期的筛选范围，日期格式</li>\n<li>对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60</li>\n<li>可以直接获取当前的时间</li>\n<li>年筛选可以直接输入，可以筛选</li>\n<li>支持定制皮肤颜色</li>\n</ul>\n<h1>DEMO</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日历选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n    <datepicker\n        type=\"date\"\n        :value.sync=\"date.value\"\n        :sep=\"date.sep\">\n    </datepicker>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;datepicker\n    type=\"date\"\n        :value.sync=\"date.value\"\n    :sep=\"date.sep\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日历+时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n    <datepicker\n        type=\"datetime\"\n        class-name=\"class-name\"\n        color=\"pink\"\n        :value.sync=\"datetime.value\"\n        :btn-show=\"true\"\n        sep=\"/\"\n        :hour-range=\"'3'\"\n        :begin=\"datetime.begin\"\n        :end=\"datetime.end\">\n    </datepicker>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;datepicker\n    type=\"datetime\"\n        class-name=\"class-name\"\n        color=\"pink\"\n        :value.sync=\"datetime.value\"\n    :btn-show=\"true\"\n    sep=\"/\"\n        :hour-range=\"'3'\"\n    :begin=\"datetime.begin\"\n    :end=\"datetime.end\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n      <div class=\"input-group\">\n        <datepicker\n                type=\"time\"\n                :value.sync=\"time.value\"\n                :btn-show=\"datetime.btnShow\">\n        </datepicker>\n      </div>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>input-group<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  &lt;datepicker\n          type=\"time\"\n                :value.sync=\"time.value\"\n          :btn-show=\"datetime.btnShow\">\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>datepicker</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>组件依赖</h2>\n<blockquote>\n<p>无</p>\n</blockquote>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否双向绑定</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>value</td>\n<td>String</td>\n<td>无</td>\n<td>默认日期</td>\n<td>双向绑定</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>date</td>\n<td>date:日历  datetime:日历＋时间 time:时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>sep</td>\n<td>String</td>\n<td>-</td>\n<td>日期格式设置 例如：2016-08-06</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>begin</td>\n<td>String</td>\n<td>无</td>\n<td>单选日历，可选日期范围的开始时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>end</td>\n<td>String</td>\n<td>无</td>\n<td>单选日历，可选日期范围的结束时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>hourRange</td>\n<td>Number</td>\n<td>1</td>\n<td>小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minuteRange</td>\n<td>Number</td>\n<td>1</td>\n<td>分可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>secondRange</td>\n<td>Number</td>\n<td>1</td>\n<td>秒可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>color</td>\n<td>String</td>\n<td>无</td>\n<td>订制按钮颜色，值为颜色值，例如：#f00,pink</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>btnShow</td>\n<td>boolean</td>\n<td>无</td>\n<td>是否显示日历后面的按钮</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>class-name</td>\n<td>String</td>\n<td>无</td>\n<td>日历样式，class名字</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(100)
+	__vue_script__ = __webpack_require__(102)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\dateRangePicker.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(111)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-db6910ca/dateRangePicker.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 100 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(101);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(13)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./dateRangePicker.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./dateRangePicker.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 101 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".class-name {\n  width: 400px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 102 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _daterangepicker = __webpack_require__(103);
+
+	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	exports.default = {
+	    data: function data() {
+	        return {
+	            date: {
+	                type: 'date',
+	                value: '2016-09-08 至 2016-10-08',
+	                sep: '-',
+	                begin: '2015-12-20',
+	                end: '2016-11-20',
+	                dateLimit: {
+	                    months: 1
+	                },
+	                color: '#f00'
+	            },
+	            datetime: {
+	                type: 'datetime',
+	                value: '2016-09-08 00:02:03 至 2016-09-13 00:00:00',
+	                sep: '-',
+	                begin: '2015-12-20',
+	                end: '2017-11-20',
+	                dateLimit: {
+	                    days: 5
+	                },
+	                color: '#f00',
+	                btnShow: true
+	            },
+	            time: {
+	                type: 'time',
+	                value: '04:02:03 至 00:02:03',
+	                inputClass: ['col-md-6'],
+	                btnShow: true
+	            }
+	        };
+	    },
+
+	    components: {
+	        daterangepicker: _daterangepicker2.default
+	    }
+	};
+
+/***/ },
+/* 103 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(104)
+	__vue_script__ = __webpack_require__(106)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\daterangepicker\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(110)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-0fc8bd93/index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 104 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(105);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(13)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".xcui-datarangepicker {\n  position: relative;\n}\n.xcui-datarangepicker .calendar {\n  width: 240px;\n  padding: 10px;\n  background: #fff;\n  position: absolute;\n  border: 1px solid #DEDEDE;\n  border-radius: 2px;\n  -webkit-transition: all .5s ease;\n  transition: all .5s ease;\n  left: 0;\n  top: 38px;\n}\n.xcui-datarangepicker .calendar-enter .calendar-leave {\n  opacity: 0;\n  -webkit-transform: translate3d(0, -10px, 0);\n          transform: translate3d(0, -10px, 0);\n}\n.xcui-datarangepicker .calendar-tit {\n  text-align: center;\n  margin: 0 auto;\n  width: 104px;\n  font-weight: bold;\n}\n.xcui-datarangepicker .calendar-tit input {\n  color: #333;\n  height: 24px;\n  outline: medium;\n  text-align: center;\n  border: none;\n  background-color: transparent;\n}\n.xcui-datarangepicker .calendar-tit-year {\n  width: 36px;\n}\n.xcui-datarangepicker .calendar-tit-month {\n  width: 18px;\n  margin-left: 2px;\n}\n.xcui-datarangepicker .calendar:before {\n  position: absolute;\n  left: 30px;\n  top: -10px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #DEDEDE;\n}\n.xcui-datarangepicker .calendar:after {\n  position: absolute;\n  left: 30px;\n  top: -9px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #fff;\n}\n.xcui-datarangepicker .calendar-tools {\n  height: 32px;\n  font-size: 14px;\n  line-height: 32px;\n  color: #333;\n}\n.xcui-datarangepicker .calendar-tools .float.left {\n  float: left;\n}\n.xcui-datarangepicker .calendar-tools .float.right {\n  float: right;\n}\n.xcui-datarangepicker .calendar-tools > i {\n  margin: 0 10px;\n  line-height: 32px;\n  cursor: pointer;\n  color: #707070;\n}\n.xcui-datarangepicker .calendar-tools > i:hover {\n  color: #333;\n}\n.xcui-datarangepicker .calendar table {\n  clear: both;\n  width: 100%;\n  margin-bottom: 10px;\n  border-collapse: collapse;\n  color: #444;\n}\n.xcui-datarangepicker .calendar table td {\n  margin: 2px !important;\n  padding: 5px 0;\n  width: 14.28571429%;\n  text-align: center;\n  vertical-align: middle;\n  font-size: 14px;\n  line-height: 125%;\n  cursor: pointer;\n  border: 0;\n}\n.xcui-datarangepicker .calendar table td:hover {\n  background: #f3f8fa;\n}\n.xcui-datarangepicker .calendar table td.week {\n  pointer-events: none !important;\n  cursor: default !important;\n}\n.xcui-datarangepicker .calendar table td.off {\n  color: #c0c0c0;\n}\n.xcui-datarangepicker .calendar table td.today {\n  background-color: #46c3c1;\n  color: #fff;\n  font-size: 14px;\n  border-radius: 4px;\n}\n.xcui-datarangepicker .calendar table td.today .lunar {\n  color: #fff;\n}\n.xcui-datarangepicker .calendar table td.todayleft {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.xcui-datarangepicker .calendar table td.todayright {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n.xcui-datarangepicker .calendar table td.range {\n  background: #e2eff5;\n}\n.xcui-datarangepicker .calendar table thead td {\n  text-transform: uppercase;\n}\n.xcui-datarangepicker .calendar .timer {\n  margin: 0 auto 10px;\n  width: 120px;\n}\n.xcui-datarangepicker .calendar .timer input {\n  border-radius: 2px;\n  padding: 5px;\n  font-size: 14px;\n  line-height: 18px;\n  color: #46c3c1;\n  width: 50px;\n  text-align: center;\n  border: 1px solid #efefef;\n}\n.xcui-datarangepicker .calendar .timer input:focus {\n  border: 1px solid #46c3c1;\n}\n.xcui-datarangepicker .calendar .timer-item {\n  float: left;\n  text-align: center;\n  position: relative;\n  cursor: pointer;\n}\n.xcui-datarangepicker .calendar .timer-item-current {\n  color: #46c3c1;\n  line-height: 24px;\n  font-size: 14px;\n}\n.xcui-datarangepicker .calendar .timer label {\n  margin: 0;\n  width: 30px;\n  padding: 5px;\n  line-height: 14px;\n  margin-right: 4px;\n  font-weight: normal;\n}\n.xcui-datarangepicker .calendar-button {\n  text-align: center;\n}\n.xcui-datarangepicker .calendar-button button {\n  border: none;\n  cursor: pointer;\n  display: inline-block;\n  min-height: 1em;\n  vertical-align: baseline;\n  background: #46c3c1;\n  color: #fff;\n  margin: 0 .3em 0 0;\n  padding: .6em 2em;\n  font-size: 1em;\n  line-height: 1em;\n  text-align: center;\n  border-radius: .3em;\n}\n.xcui-datarangepicker .calendar-button button.cancel {\n  background: #efefef;\n  color: #666;\n}\n.xcui-datarangepicker .calendar .lunar {\n  font-size: 11px;\n  line-height: 150%;\n  color: #aaa;\n}\n.xcui-datarangepicker .calendar .drop-down {\n  position: absolute;\n  top: 24px;\n  left: -10px;\n  width: 50px;\n  height: 140px;\n  background: #fff;\n  border: 1px solid #efefef;\n  padding: 0;\n  margin: 0;\n  overflow-y: scroll;\n}\n.xcui-datarangepicker .calendar .drop-down li {\n  width: 50px;\n  list-style: none;\n}\n.xcui-datarangepicker .calendar .drop-down li.on {\n  background: #eee;\n}\n.xcui-datarangepicker .calendar .drop-down li:hover {\n  background: #eee;\n}\n.xcui-datarangepicker .double-calendar {\n  width: 490px;\n  z-index: 999;\n}\n.xcui-datarangepicker .double-calendar-left {\n  width: 220px;\n  float: left;\n}\n.xcui-datarangepicker .double-calendar-right {\n  width: 220px;\n  float: right;\n}\n.xcui-datarangepicker .double-calendar .calendar-button {\n  padding-top: 10px;\n  border-top: 1px solid #ddd;\n}\n.xcui-datarangepicker .clearfix {\n  zoom: 1;\n}\n.xcui-datarangepicker .clearfix:after {\n  display: block;\n  width: 0;\n  height: 0;\n  visibility: hidden;\n  content: '';\n  clear: both;\n}\n.xcui-datarangepicker .bg-pr {\n  position: relative;\n}\n.xcui-datarangepicker .btn-default {\n  color: #666;\n  border-radius: 0 4px 4px 0;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _calendar = __webpack_require__(107);
+
+	var _calendar2 = _interopRequireDefault(_calendar);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    name: 'xcui-datarangepicker',
 	    props: {
 	        show: {
 	            type: Boolean,
@@ -18499,14 +18371,6 @@
 	            type: String,
 	            twoWay: true,
 	            default: ''
-	        },
-	        x: {
-	            type: Number,
-	            default: 0
-	        },
-	        y: {
-	            type: Number,
-	            default: 38
 	        },
 	        begin: {
 	            type: String,
@@ -18539,10 +18403,15 @@
 	        dateLimit: {
 	            type: Object,
 	            default: null
+	        },
+	        className: String,
+	        btnShow: {
+	            type: Boolean,
+	            default: false
 	        }
 	    },
 	    components: {
-	        calendar: calendar
+	        calendar: _calendar2.default
 	    },
 	    data: function data() {
 	        return {
@@ -18557,13 +18426,25 @@
 	            var values = this.value.split('至');
 	            this.beginCalenderVal = values[0].trim();
 	            this.endCalenderVal = values[1].trim();
-	            if (this.type === 'datetime') {
-	                this.beginCalenderVal = this.beginCalenderVal + ' 00:00:00';
-	                this.endCalenderVal = this.endCalenderVal + ' 00:00:00';
+	            if (this.beginCalenderVal > this.endCalenderVal) {
+	                this.endCalenderVal = this.beginCalenderVal;
+	                this.value = this.beginCalenderVal + ' 至 ' + this.endCalenderVal;
 	            }
 	        }
 	    },
 
+	    watch: {
+	        beginCalenderVal: function beginCalenderVal(val) {
+	            if (val > this.endCalenderVal) {
+	                this.endCalenderVal = val;
+	            }
+	        },
+	        endCalenderVal: function endCalenderVal(val) {
+	            if (val < this.beginCalenderVal) {
+	                this.beginCalenderVal = val;
+	            }
+	        }
+	    },
 	    methods: {
 	        ok: function ok() {
 	            this.value = this.beginCalenderVal + ' 至 ' + this.endCalenderVal;
@@ -18572,59 +18453,322 @@
 	        cancel: function cancel() {
 	            this.show = false;
 	        },
-	        getChangeDate: function getChangeDate(val, type, num) {
+	        showCalendar: function showCalendar(e) {
 	            var me = this;
-	            if (this.type === 'datetime') {
-	                var vals = val.split(' ');
-	                var date = vals[0].split(me.sep);
-	                var time = vals[1];
-	                return me.typeDate(date, type, num) + ' ' + time;
-	            } else if (this.type === 'date') {
-	                var _date = val.split(me.sep);
-	                return me.typeDate(_date, type, num);
-	            }
-	        },
-	        typeDate: function typeDate(date, type, num) {
-	            var year = date[0];
-	            var month = date[1];
-	            var day = date[2];
-	            if (type === 'months') {
-	                month = parseInt(month, 10) + parseInt(num, 10);
-	                month = month > 10 ? month : '0' + day;
-	            } else if (type === 'day') {
-	                day = parseInt(day, 10) + parseInt(num, 10);
-	                day = day > 10 ? day : '0' + day;
-	            }
-	            return year + this.sep + month + this.sep + day;
+	            e.stopPropagation();
+	            me.show = true;
+	            var bindHide = function bindHide(e) {
+	                e.stopPropagation();
+	                me.show = false;
+	                document.removeEventListener('click', bindHide, false);
+	            };
+	            setTimeout(function () {
+	                document.addEventListener('click', bindHide, false);
+	            }, 500);
 	        }
 	    }
 	};
 
 /***/ },
-/* 93 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\n<!-- 双日历 -->\n<div @click.stop=\"\"\n     @touchstart.stop=\"\"\n     class=\"calendar double-calendar\"\n     v-show=\"show\"\n     :style=\"{'left':x+'px','top':y+'px'}\">\n     <div class=\"clearfix\">\n         <div class=\"double-calendar-left\">\n            <calendar\n                :type=\"type\"\n                :value.sync=\"beginCalenderVal\"\n                :sep=\"sep\"\n                :other-value.sync=\"endCalenderVal\"\n                :begin=\"begin\"\n                :end=\"end\"\n                :hour-range=\"hourRange\"\n                :minute-range=\"minuteRange\"\n                :second-range=\"secondRange\"\n                :color=\"color\"\n                :date-limit=\"dateLimit\"\n                :render-star=\"renderStar\"></calendar>\n         </div>\n         <div class=\"double-calendar-right\">\n            <calendar\n                :type=\"type\"\n                :value.sync=\"endCalenderVal\"\n                :sep=\"sep\"\n                :other-value.sync=\"beginCalenderVal\"\n                :right=\"true\"\n                :begin=\"begin\"\n                :end=\"end\"\n                :hour-range=\"hourRange\"\n                :minute-range=\"minuteRange\"\n                :second-range=\"secondRange\"\n                :color=\"color\"\n                :date-limit=\"dateLimit\"\n                :render-end=\"renderEnd\"></calendar>\n         </div>\n     </div>\n     <div class=\"calendar-button\">\n        <button @click=\"ok\" :style=\"{'background':color}\">确定</button>\n        <button @click=\"cancel\" class=\"cancel\">取消</button>\n     </div>\n</div>\n<!-- end 双日历 -->\n";
-
-/***/ },
-/* 94 */
-/***/ function(module, exports) {
-
-	module.exports = "<div _v-56e6e39b=\"\"><h2 _v-56e6e39b=\"\">daterangepicker 双日期选择框</h2>\n<p _v-56e6e39b=\"\">1、支持日历筛选，日历＋时间，时间筛选<br _v-56e6e39b=\"\">\n2、可以配置日期的筛选范围，日期格式<br _v-56e6e39b=\"\">\n3、对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60<br _v-56e6e39b=\"\">\n4、可以直接获取当前的时间<br _v-56e6e39b=\"\">\n5、年筛选可以直接输入，可以筛选<br _v-56e6e39b=\"\">\n6、支持定制皮肤颜色</p>\n<h2 _v-56e6e39b=\"\">应用指南</h2>\n<p _v-56e6e39b=\"\">1.要把datepicker放在一个拥有定位属性的容器中,因为datepicker是相对父级元素定位的。</p>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\" _v-56e6e39b=\"\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-56e6e39b=\"\">\n                    <h3 _v-56e6e39b=\"\">日历选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-56e6e39b=\"\">\n        <div class=\"bg-pr\" _v-56e6e39b=\"\">\n            <input class=\"form-control col-md-3\" type=\"text\" v-model=\"date.value\" placeholder=\"请输入日期\" @click=\"showDateCalendar\" _v-56e6e39b=\"\">\n            <daterangepicker :show.sync=\"date.show\" :value.sync=\"date.value\" :sep=\"date.sep\" :type=\"date.type\" :begin=\"date.begin\" :end.sync=\"date.end\" :date-limit=\"date.dateLimit\" _v-56e6e39b=\"\"></daterangepicker>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-56e6e39b=\"\"><pre _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-56e6e39b=\"\">class</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>bg-pr<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span><span class=\"token punctuation\" _v-56e6e39b=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">&lt;</span>input</span> <span class=\"token attr-name\" _v-56e6e39b=\"\">class</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>form-control col-md-3<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span> <span class=\"token attr-name\" _v-56e6e39b=\"\">type</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>text<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span> <span class=\"token attr-name\" _v-56e6e39b=\"\">v-model</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>date.value<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span> <span class=\"token attr-name\" _v-56e6e39b=\"\">placeholder</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>请输入日期<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span> <span class=\"token attr-name\" _v-56e6e39b=\"\">@click</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>showDateCalendar<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span><span class=\"token punctuation\" _v-56e6e39b=\"\">&gt;</span></span>\n    &lt;daterangepicker\n          :show.sync=\"date.show\"\n          :value.sync = \"date.value\"\n          :sep = 'date.sep'\n          :type=\"date.type\"\n          :begin=\"date.begin\"\n          :end.sync=\"date.end\"\n          :date-limit=\"date.dateLimit\"\n          &gt;<span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">&lt;/</span>daterangepicker</span><span class=\"token punctuation\" _v-56e6e39b=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-56e6e39b=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-56e6e39b=\"\">\n                    <h3 _v-56e6e39b=\"\">日期 + 时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-56e6e39b=\"\">\n        <div class=\"bg-pr\" _v-56e6e39b=\"\">\n            <input class=\"form-control col-md-3\" type=\"text\" v-model=\"datetime.value\" placeholder=\"请输入日期\" @click=\"showDateTimeCalendar\" _v-56e6e39b=\"\">\n            <daterangepicker :show.sync=\"datetime.show\" :value.sync=\"datetime.value\" :sep=\"datetime.sep\" :type=\"datetime.type\" :begin=\"datetime.begin\" :end.sync=\"datetime.end\" :date-limit=\"datetime.dateLimit\" _v-56e6e39b=\"\"></daterangepicker>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-56e6e39b=\"\"><pre _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-56e6e39b=\"\">class</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>bg-pr<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span><span class=\"token punctuation\" _v-56e6e39b=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">&lt;</span>input</span> <span class=\"token attr-name\" _v-56e6e39b=\"\">class</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>form-control col-md-3<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span> <span class=\"token attr-name\" _v-56e6e39b=\"\">type</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>text<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span> <span class=\"token attr-name\" _v-56e6e39b=\"\">v-model</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>datetime.value<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span> <span class=\"token attr-name\" _v-56e6e39b=\"\">placeholder</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>请输入日期<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span> <span class=\"token attr-name\" _v-56e6e39b=\"\">@click</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>showDateTimeCalendar<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span><span class=\"token punctuation\" _v-56e6e39b=\"\">&gt;</span></span>\n    &lt;daterangepicker\n          :show.sync=\"datetime.show\"\n          :value.sync = \"datetime.value\"\n          :sep = 'datetime.sep'\n          :type=\"datetime.type\"\n          :begin=\"datetime.begin\"\n          :end.sync=\"datetime.end\"\n          :date-limit=\"datetime.dateLimit\"\n          &gt;<span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">&lt;/</span>daterangepicker</span><span class=\"token punctuation\" _v-56e6e39b=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-56e6e39b=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-56e6e39b=\"\">\n                    <h3 _v-56e6e39b=\"\">时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-56e6e39b=\"\">\n        <div class=\"bg-pr\" _v-56e6e39b=\"\">\n            <input class=\"form-control col-md-3\" type=\"text\" v-model=\"time.value\" placeholder=\"请输入日期\" @click=\"showTimeCalendar\" _v-56e6e39b=\"\">\n            <daterangepicker :show.sync=\"time.show\" :value.sync=\"time.value\" :type=\"time.type\" _v-56e6e39b=\"\"></daterangepicker>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-56e6e39b=\"\"><pre _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-56e6e39b=\"\">class</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>bg-pr<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span><span class=\"token punctuation\" _v-56e6e39b=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">&lt;</span>input</span> <span class=\"token attr-name\" _v-56e6e39b=\"\">class</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>form-control col-md-3<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span> <span class=\"token attr-name\" _v-56e6e39b=\"\">type</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>text<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span> <span class=\"token attr-name\" _v-56e6e39b=\"\">v-model</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>time.value<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span> <span class=\"token attr-name\" _v-56e6e39b=\"\">placeholder</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>请输入日期<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span> <span class=\"token attr-name\" _v-56e6e39b=\"\">@click</span><span class=\"token attr-value\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">=</span><span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span>showTimeCalendar<span class=\"token punctuation\" _v-56e6e39b=\"\">\"</span></span><span class=\"token punctuation\" _v-56e6e39b=\"\">&gt;</span></span>\n    &lt;daterangepicker\n          :show.sync=\"time.show\"\n          :value.sync = \"time.value\"\n          :type=\"time.type\"\n          &gt;<span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">&lt;/</span>daterangepicker</span><span class=\"token punctuation\" _v-56e6e39b=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token tag\" _v-56e6e39b=\"\"><span class=\"token punctuation\" _v-56e6e39b=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-56e6e39b=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n</div>\n<h3 _v-56e6e39b=\"\">日历选择，日期＋世界选择 type: date、datetime</h3>\n<h4 _v-56e6e39b=\"\">Props</h4>\n<table class=\"table\" _v-56e6e39b=\"\">\n<thead _v-56e6e39b=\"\">\n<tr _v-56e6e39b=\"\">\n<th _v-56e6e39b=\"\">名字</th>\n<th _v-56e6e39b=\"\">类型</th>\n<th _v-56e6e39b=\"\">默认</th>\n<th _v-56e6e39b=\"\">描述</th>\n<th _v-56e6e39b=\"\">是否双向绑定</th>\n<th _v-56e6e39b=\"\">是否必选</th>\n</tr>\n</thead>\n<tbody _v-56e6e39b=\"\">\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">show</td>\n<td _v-56e6e39b=\"\">Boolean</td>\n<td _v-56e6e39b=\"\">false</td>\n<td _v-56e6e39b=\"\">控制日历选择框显示隐藏</td>\n<td _v-56e6e39b=\"\">双向绑定</td>\n<td _v-56e6e39b=\"\">必选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">value</td>\n<td _v-56e6e39b=\"\">String</td>\n<td _v-56e6e39b=\"\">无</td>\n<td _v-56e6e39b=\"\">默认日期</td>\n<td _v-56e6e39b=\"\">双向绑定</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">type</td>\n<td _v-56e6e39b=\"\">String</td>\n<td _v-56e6e39b=\"\">date</td>\n<td _v-56e6e39b=\"\">date: 日历  datetime: 日期＋时间 time: 时间</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">sep</td>\n<td _v-56e6e39b=\"\">String</td>\n<td _v-56e6e39b=\"\">-</td>\n<td _v-56e6e39b=\"\">日期格式设置 例如：2016-08-06</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">x</td>\n<td _v-56e6e39b=\"\">Number</td>\n<td _v-56e6e39b=\"\">0</td>\n<td _v-56e6e39b=\"\">日历定位的 left 值</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">y</td>\n<td _v-56e6e39b=\"\">Number</td>\n<td _v-56e6e39b=\"\">38</td>\n<td _v-56e6e39b=\"\">日历定位的 top 值</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">begin</td>\n<td _v-56e6e39b=\"\">String</td>\n<td _v-56e6e39b=\"\">无</td>\n<td _v-56e6e39b=\"\">可选日期范围的开始时间</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">end</td>\n<td _v-56e6e39b=\"\">String</td>\n<td _v-56e6e39b=\"\">无</td>\n<td _v-56e6e39b=\"\">可选日期范围的结束时间</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">hourRange</td>\n<td _v-56e6e39b=\"\">Number</td>\n<td _v-56e6e39b=\"\">1</td>\n<td _v-56e6e39b=\"\">小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12）</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">minuteRange</td>\n<td _v-56e6e39b=\"\">Number</td>\n<td _v-56e6e39b=\"\">1</td>\n<td _v-56e6e39b=\"\">分可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">secondRange</td>\n<td _v-56e6e39b=\"\">Number</td>\n<td _v-56e6e39b=\"\">1</td>\n<td _v-56e6e39b=\"\">秒可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">dateLimit</td>\n<td _v-56e6e39b=\"\">object</td>\n<td _v-56e6e39b=\"\">null</td>\n<td _v-56e6e39b=\"\">可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">color</td>\n<td _v-56e6e39b=\"\">String</td>\n<td _v-56e6e39b=\"\">无</td>\n<td _v-56e6e39b=\"\">订制按钮颜色，值为颜色值，例如：#f00,pink</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n</tbody>\n</table>\n<h3 _v-56e6e39b=\"\">时间选择 type: time</h3>\n<h4 _v-56e6e39b=\"\">Props</h4>\n<table class=\"table\" _v-56e6e39b=\"\">\n<thead _v-56e6e39b=\"\">\n<tr _v-56e6e39b=\"\">\n<th _v-56e6e39b=\"\">名字</th>\n<th _v-56e6e39b=\"\">类型</th>\n<th _v-56e6e39b=\"\">默认</th>\n<th _v-56e6e39b=\"\">描述</th>\n<th _v-56e6e39b=\"\">是否双向绑定</th>\n<th _v-56e6e39b=\"\">是否必选</th>\n</tr>\n</thead>\n<tbody _v-56e6e39b=\"\">\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">show</td>\n<td _v-56e6e39b=\"\">Boolean</td>\n<td _v-56e6e39b=\"\">false</td>\n<td _v-56e6e39b=\"\">控制日历选择框显示隐藏</td>\n<td _v-56e6e39b=\"\">双向绑定</td>\n<td _v-56e6e39b=\"\">必选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">value</td>\n<td _v-56e6e39b=\"\">String</td>\n<td _v-56e6e39b=\"\">无</td>\n<td _v-56e6e39b=\"\">默认日期</td>\n<td _v-56e6e39b=\"\">双向绑定</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">type</td>\n<td _v-56e6e39b=\"\">String</td>\n<td _v-56e6e39b=\"\">date</td>\n<td _v-56e6e39b=\"\">date: 日历  datetime: 日期＋时间 time: 时间</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">x</td>\n<td _v-56e6e39b=\"\">Number</td>\n<td _v-56e6e39b=\"\">0</td>\n<td _v-56e6e39b=\"\">日历定位的 left 值</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n<tr _v-56e6e39b=\"\">\n<td _v-56e6e39b=\"\">y</td>\n<td _v-56e6e39b=\"\">Number</td>\n<td _v-56e6e39b=\"\">38</td>\n<td _v-56e6e39b=\"\">日历定位的 top 值</td>\n<td _v-56e6e39b=\"\">否</td>\n<td _v-56e6e39b=\"\">可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 95 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(96)
-	__vue_script__ = __webpack_require__(98)
+	__vue_script__ = __webpack_require__(108)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\daterangepicker\\calendar.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(109)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-a8d1f1e6/calendar.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _calendarMixins = __webpack_require__(96);
+
+	var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    mixins: [_calendarMixins2.default],
+	    props: {
+	        otherValue: {
+	            type: String,
+	            default: ''
+	        },
+	        right: {
+	            type: Boolean,
+	            default: false
+	        },
+	        renderStar: {
+	            type: String,
+	            default: ''
+	        },
+	        renderEnd: {
+	            type: String,
+	            default: ''
+	        },
+	        dateLimit: {
+	            type: Object,
+	            default: null
+	        }
+	    },
+	    watch: {
+	        renderStar: function renderStar(val) {
+	            if (val === '' || this.right) {
+	                return false;
+	            }
+	            var params = this.getValueParams(val);
+	            this.year = params.year;
+	            this.month = params.month;
+	            this.render(params.year, params.month);
+	        },
+	        renderEnd: function renderEnd(val) {
+	            if (val === '' || !this.right) {
+	                return false;
+	            }
+	            var params = this.getValueParams(val);
+	            this.year = params.year;
+	            this.month = params.month;
+	            this.render(params.year, params.month);
+	        }
+	    },
+	    methods: {
+	        renderElse: function renderElse(y, m, i, temp, line) {
+	            var me = this;
+	            var today = y + me.sep + me.zero(m + 1) + me.sep + me.zero(i);
+	            var otherDate = me.otherValue.substring(0, 10);
+	            var value = me.value.substring(0, 10);
+	            if (today < me.begin || today > me.end) {
+	                temp[line].push({ day: i, disabled: true, range: false });
+	            } else if (!me.right && today > value && today <= otherDate) {
+	                temp[line].push({ day: i, disabled: false, range: true });
+	            } else if (me.right && today < value && today >= otherDate) {
+	                temp[line].push({ day: i, disabled: false, range: true });
+	            } else if (me.right && today < otherDate) {
+	                temp[line].push({ day: i, disabled: true, range: false });
+	            } else {
+	                temp[line].push({ day: i, today: false, range: false });
+	            }
+	        },
+	        select: function select(k1, k2, e) {
+	            if (e !== undefined) {
+	                e.stopPropagation();
+	            }
+	            if (e.target.className === 'off todayright prev') {
+	                return false;
+	            }
+	            var me = this;
+	            var daySeleted = me.days[k1][k2];
+
+	            var va = me.getValueParams(me.value);
+	            if (me.today.length > 0 && me.month === va.month && me.year === va.year) {
+	                me.days[me.today[0]][me.today[1]].today = false;
+	            }
+
+	            daySeleted.today = true;
+	            daySeleted.range = false;
+	            me.day = this.zero(me.days[k1][k2].day);
+	            me.today = [k1, k2];
+	            if (daySeleted.disabled) {
+	                me.month = k1 === 0 ? me.month - 1 : me.month + 1;
+	                var om = me.outputMonth(me.month, me.year);
+	                me.year = om.y;
+	                me.month = om.m;
+	                me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+	                me.render(me.year, me.month);
+	            } else {
+	                me.today = [k1, k2];
+	                me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+	            }
+	            me.otherValue = me.bindLimitDate();
+	            me.changeOtherCalender();
+	        },
+	        changeOtherCalender: function changeOtherCalender() {
+	            var me = this;
+	            var params = me.getValueParams(me.value);
+	            var monthStar = me.month;
+	            var monthEnd = me.month;
+	            if (!me.right) {
+	                if (me.value > me.otherValue) {
+	                    me.otherValue = me.value;
+	                } else if (me.getYearMonth(me.otherValue) > me.getYearMonth(me.value) + 1) {
+	                    monthEnd = monthEnd + 1;
+	                }
+	            } else if (me.right) {
+	                if (me.value < me.otherValue) {
+	                    me.otherValue = me.value;
+	                } else if (me.getYearMonth(me.value) > me.getYearMonth(me.otherValue) + 1) {
+	                    monthStar = monthStar - 1;
+	                }
+	            }
+	            me.$parent.renderStar = me.output([me.year, monthStar, params.day, me.hour, me.minute, me.second]);
+	            me.$parent.renderEnd = me.output([me.year, monthEnd, params.day, me.hour, me.minute, me.second]);
+	        },
+	        getYearMonth: function getYearMonth(date) {
+	            var me = this;
+	            var dates = date.split(me.sep);
+	            return dates[0] * 12 + dates[1];
+	        },
+	        bindLimitDate: function bindLimitDate() {
+	            var me = this;
+	            var oValue = me.otherValue;
+	            var ovs = me.getValueParams(oValue);
+	            var bg = me.begin;
+	            var ed = me.end;
+	            var y = ovs.year;
+	            var m = ovs.month;
+	            var d = ovs.day;
+	            var meValue = me.year + me.sep + me.zero(me.month + 1) + me.sep + me.zero(me.day);
+	            var meDate = new Date(me.year, me.month, me.day).getDate();
+	            var AddDayCount = 0;
+	            var params = null;
+	            var otherTime = '';
+	            if (me.right) {
+	                if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
+	                    for (var i1 = 0; i1 < me.dateLimit.months; i1++) {
+	                        AddDayCount += new Date(y, m + i1 + 1, 0).getDate();
+	                    }
+	                } else if (this.dateLimit.hasOwnProperty('days')) {
+	                    AddDayCount += me.dateLimit.days;
+	                }
+	                if (meValue > me.getDataStr(AddDayCount, oValue).val) {
+	                    AddDayCount = 0;
+	                    var diffDate = 0;
+	                    if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
+	                        var limitMonth = me.dateLimit.months;
+	                        for (var i2 = 0; i2 < limitMonth; i2++) {
+	                            var count = meDate === me.lastDateOfMonth ? 0 : 1;
+	                            var nextMaxDate = new Date(y, m - i2 + count, 0).getDate();
+	                            AddDayCount -= nextMaxDate;
+	                        }
+	                        diffDate = meDate - new Date(y, m - limitMonth + 1, 0).getDate();
+	                        if (meDate !== me.lastDateOfMonth && diffDate > 0) {
+	                            AddDayCount += diffDate;
+	                        }
+	                    } else if (this.dateLimit.hasOwnProperty('days')) {
+	                        AddDayCount -= me.dateLimit.days;
+	                    }
+	                    params = me.getDataStr(AddDayCount, meValue);
+	                    y = params.y;
+	                    m = params.m;
+	                    d = params.d;
+	                }
+	            } else {
+	                if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
+	                    for (var k1 = 0; k1 < me.dateLimit.months; k1++) {
+	                        AddDayCount -= new Date(y, m - k1, 0).getDate();
+	                    }
+	                } else if (this.dateLimit.hasOwnProperty('days')) {
+	                    AddDayCount -= me.dateLimit.days;
+	                }
+	                if (meValue < me.getDataStr(AddDayCount, oValue).val || meValue > oValue) {
+	                    AddDayCount = 0;
+	                    var diffDate2 = 0;
+	                    if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
+	                        var _limitMonth = me.dateLimit.months;
+	                        for (var k2 = 0; k2 < _limitMonth; k2++) {
+	                            var count2 = meDate === me.lastDateOfMonth ? 2 : 1;
+	                            var nextMaxDate2 = new Date(me.year, me.month + k2 + count2, 0).getDate();
+	                            AddDayCount += nextMaxDate2;
+	                        }
+	                        diffDate2 = meDate - new Date(me.year, me.month + _limitMonth + 1, 0).getDate();
+	                        if (meDate !== me.lastDateOfMonth && diffDate2 > 0) {
+	                            AddDayCount -= diffDate2;
+	                        }
+	                    } else if (this.dateLimit.hasOwnProperty('days')) {
+	                        AddDayCount += me.dateLimit.days;
+	                    }
+	                    params = me.getDataStr(AddDayCount, meValue);
+	                    y = params.y;
+	                    m = params.m;
+	                    d = params.d;
+	                }
+	            }
+	            otherTime = me.output([y, m, d, me.hour, me.minute, me.second]);
+	            otherTime = otherTime < bg ? bg : otherTime > ed ? ed : otherTime;
+	            return otherTime;
+	        },
+	        getDataStr: function getDataStr(AddDayCount, nowDate) {
+	            var date = new Date(nowDate);
+	            date.setDate(date.getDate() + AddDayCount);
+	            var y = date.getFullYear();
+	            var m = date.getMonth() + 1;
+	            var d = date.getDate();
+	            m = this.zero(m);
+	            d = this.zero(d);
+	            return {
+	                val: y + this.sep + m + this.sep + d,
+	                y: y,
+	                m: parseInt(m, 10) - 1,
+	                d: parseInt(d, 10)
+	            };
+	        }
+	    }
+	};
+
+/***/ },
+/* 109 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"calendar-tools\" v-if=\"type!='time'\">\n    <i class=\"glyphicon glyphicon-chevron-left float left\"\n       @click=\"prev\"></i>\n    <i class=\"glyphicon glyphicon-chevron-right float right\"\n   @click=\"next\"></i>\n    <div class=\"calendar-tit\">\n        <span @click=\"changeTitSelect(year, 'year')\">\n            <input v-model=\"year\" class=\"calendar-tit-year\" type=\"text\" @change=\"changeTitSelect(year,'year')\"/>年\n        </span>\n        <span class=\"calendar-tit-month\" @click=\"changeTitSelect(month-1, 'month')\">{{month+1}}月</span>\n    </div>\n</div>\n<div v-show=\"dataTableShow\">\n    <table cellpadding=\"5\" v-if=\"type!='time'\">\n        <thead>\n            <tr>\n                <td v-for=\"week in weeks\" class=\"week\">{{week}}</td>\n            </tr>\n        </thead>\n        <tr v-for=\"(k1,day) in days\">\n            <td\n            v-for=\"(k2,child) in day\"\n            :class=\"{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right,'prev':child.prev}\"\n            :style=\"{'background':color&&child.today?color:''}\"\n            @click=\"select(k1,k2,$event)\">\n            {{child.day}}\n            </td>\n        </tr>\n    </table>\n    <div class=\"calendar-time\" v-show=\"type=='datetime' || type=='time'\">\n        <div class=\"timer clearfix\">\n            <div class=\"timer-item\">\n                <label @click=\"dropTimeList('hour')\">{{hour}}</label>:\n                <ul class=\"drop-down\" v-show=\"hourListShow\">\n                    <li v-for=\"item in hourList\" @click=\"selectTimeItem($event,'hour')\">{{item}}</li>\n                </ul>\n            </div>\n            <div class=\"timer-item\">\n                <label @click=\"dropTimeList('minute')\">{{minute}}</label>:\n                <ul class=\"drop-down\" v-show=\"minuteListShow\">\n                    <li v-for=\"item in minuteList\" @click=\"selectTimeItem($event,'minute')\">{{item}}</li>\n                </ul>\n            </div>\n            <div class=\"timer-item\">\n                <label @click=\"dropTimeList('second')\">{{second}}</label>\n                <ul class=\"drop-down\" v-show=\"secondListShow\">\n                    <li v-for=\"item in secondList\" @click=\"selectTimeItem($event,'second')\">{{item}}</li>\n                </ul>\n            </div>\n        </div>\n    </div>\n</div>\n<table cellpadding=\"6\" v-show=\"yearTableShow\">\n    <tr v-show=\"selectRangeShow\">\n        <td colspan =\"3\">{{selectRange}}</td>\n    </tr>\n    <tr v-for=\"selects in selectRangeList\">\n        <td v-for=\"select in selects\" @click=\"selectItem(select)\">{{select}}</td>\n    </tr>\n</table>\n";
+
+/***/ },
+/* 110 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\r\n<div class=\"xcui-datarangepicker\" :class=\"className\">\r\n    <div :class=\"{'input-group':btnShow}\">\r\n        <input class=\"form-control col-md-3\" type=\"text\" v-model=\"value\" placeholder=\"请输入日期\" @click=\"showCalendar\">\r\n        <!-- 双日历 -->\r\n        <div @click.stop=\"\"\r\n             @touchstart.stop=\"\"\r\n             class=\"calendar double-calendar\"\r\n             v-show=\"show\">\r\n             <div class=\"clearfix\">\r\n                 <div class=\"double-calendar-left\">\r\n                    <calendar\r\n                        :type=\"type\"\r\n                        :value.sync=\"beginCalenderVal\"\r\n                        :sep=\"sep\"\r\n                        :other-value.sync=\"endCalenderVal\"\r\n                        :begin=\"begin\"\r\n                        :end=\"end\"\r\n                        :hour-range=\"hourRange\"\r\n                        :minute-range=\"minuteRange\"\r\n                        :second-range=\"secondRange\"\r\n                        :color=\"color\"\r\n                        :date-limit=\"dateLimit\"\r\n                        :render-star=\"renderStar\"></calendar>\r\n                 </div>\r\n                 <div class=\"double-calendar-right\">\r\n                    <calendar\r\n                        :type=\"type\"\r\n                        :value.sync=\"endCalenderVal\"\r\n                        :sep=\"sep\"\r\n                        :other-value.sync=\"beginCalenderVal\"\r\n                        :right=\"true\"\r\n                        :begin=\"begin\"\r\n                        :end=\"end\"\r\n                        :hour-range=\"hourRange\"\r\n                        :minute-range=\"minuteRange\"\r\n                        :second-range=\"secondRange\"\r\n                        :color=\"color\"\r\n                        :date-limit=\"dateLimit\"\r\n                        :render-end=\"renderEnd\"></calendar>\r\n                 </div>\r\n             </div>\r\n             <div class=\"calendar-button\">\r\n                <button @click=\"ok\" :style=\"{'background':color}\">确定</button>\r\n                <button @click=\"cancel\" class=\"cancel\">取消</button>\r\n             </div>\r\n        </div>\r\n        <!-- end 双日历 -->\r\n        <span class=\"input-group-btn\" v-if=\"btnShow\" @click=\"showCalendar\" >\r\n            <button class=\"btn btn-default\">\r\n                <span class=\"glyphicon glyphicon-calendar\"></span>\r\n            </button>\r\n        </span>\r\n    </div>\r\n</div>\r\n";
+
+/***/ },
+/* 111 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>daterangepicker 双日期选择框</h1>\n<h2>使用场景</h2>\n<ul>\n<li>支持日历筛选，日历＋时间，时间筛选</li>\n<li>可以配置日期的筛选范围，日期格式</li>\n<li>对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60</li>\n<li>可以直接获取当前的时间</li>\n<li>年筛选可以直接输入，可以筛选</li>\n<li>支持定制皮肤颜色</li>\n</ul>\n<h2>应用指南</h2>\n<p>要把datepicker放在一个拥有定位属性的容器中,因为datepicker是相对父级元素定位的。</p>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日历选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <daterangepicker\n              :value.sync=\"date.value\"\n              :sep=\"date.sep\"\n              :type=\"date.type\"\n              :begin=\"date.begin\"\n              :end=\"date.end\"\n              :date-limit=\"date.dateLimit\">\n        </daterangepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;daterangepicker\n      :value.sync=\"date.value\"\n      :sep=\"date.sep\"\n      :type=\"date.type\"\n      :begin=\"date.begin\"\n      :end=\"date.end\"\n      :date-limit=\"date.dateLimit\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>daterangepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日期 + 时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <daterangepicker\n              type=\"datetime\"\n              class-name=\"class-name\"\n              color=\"pink\"\n              :value.sync=\"datetime.value\"\n              :sep='datetime.sep'\n              :begin=\"datetime.begin\"\n              :end=\"datetime.end\"\n              :date-limit=\"datetime.dateLimit\"\n              :btn-show=\"datetime.btnShow\">\n        </daterangepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;daterangepicker\n      type=\"datetime\"\n              class-name=\"class-name\"\n              color=\"pink\"\n              :value.sync=\"datetime.value\"\n      :sep='datetime.sep'\n      :begin=\"datetime.begin\"\n      :end=\"datetime.end\"\n      :date-limit=\"datetime.dateLimit\"\n      :btn-show=\"datetime.btnShow\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>daterangepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <daterangepicker\n              :value.sync=\"time.value\"\n              :type=\"time.type\"\n              :input-class=\"time.inputClass\"\n              :btn-show=\"time.btnShow\">\n        </daterangepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;daterangepicker\n      :value.sync=\"time.value\"\n      :type=\"time.type\"\n      :input-class=\"time.inputClass\"\n      :btn-show=\"time.btnShow\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>daterangepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h3>日历选择，日期＋时间选择 type: date、datetime</h3>\n<h4>Props</h4>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否双向绑定</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>value</td>\n<td>String</td>\n<td>无</td>\n<td>默认日期</td>\n<td>双向绑定</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>date</td>\n<td>date: 日历  datetime: 日期＋时间 time: 时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>sep</td>\n<td>String</td>\n<td>-</td>\n<td>日期格式设置 例如：2016-08-06</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>begin</td>\n<td>String</td>\n<td>无</td>\n<td>可选日期范围的开始时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>end</td>\n<td>String</td>\n<td>无</td>\n<td>可选日期范围的结束时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>hourRange</td>\n<td>Number</td>\n<td>1</td>\n<td>小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minuteRange</td>\n<td>Number</td>\n<td>1</td>\n<td>分可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>secondRange</td>\n<td>Number</td>\n<td>1</td>\n<td>秒可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>dateLimit</td>\n<td>object</td>\n<td>null</td>\n<td>可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>color</td>\n<td>String</td>\n<td>无</td>\n<td>订制按钮颜色，值为颜色值，例如：#f00,pink</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>btnShow</td>\n<td>boolean</td>\n<td>无</td>\n<td>是否显示日历后面的按钮</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>inputClass</td>\n<td>Array</td>\n<td>无</td>\n<td>日历input输入框的样式，class名字</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h3>时间选择 type: time</h3>\n<h4>Props</h4>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否双向绑定</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>show</td>\n<td>Boolean</td>\n<td>false</td>\n<td>控制日历选择框显示隐藏</td>\n<td>双向绑定</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>value</td>\n<td>String</td>\n<td>无</td>\n<td>默认日期</td>\n<td>双向绑定</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>date</td>\n<td>date: 日历  datetime: 日期＋时间 time: 时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>hourRange</td>\n<td>Number</td>\n<td>1</td>\n<td>小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minuteRange</td>\n<td>Number</td>\n<td>1</td>\n<td>分可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>secondRange</td>\n<td>Number</td>\n<td>1</td>\n<td>秒可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>btnShow</td>\n<td>boolean</td>\n<td>无</td>\n<td>是否显示日历后面的按钮</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>inputClass</td>\n<td>Array</td>\n<td>无</td>\n<td>日历input输入框的样式，class名字</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 112 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(113)
+	__vue_script__ = __webpack_require__(115)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\demos\\select.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(182)
+	__vue_template__ = __webpack_require__(199)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -18649,23 +18793,23 @@
 	})()}
 
 /***/ },
-/* 96 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(97);
+	var content = __webpack_require__(114);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-e1d04224&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./select.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-e1d04224&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./select.vue");
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./select.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./select.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -18675,21 +18819,21 @@
 	}
 
 /***/ },
-/* 97 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".select-demo[_v-e1d04224] {\n  width: 200px;\n}\n.xcui-demo-container[_v-e1d04224] {\n  background: #fff !important;\n}\n.xcui-demo-container h3[_v-e1d04224] {\n  border-left: 4px solid #46C3C1;\n  text-indent: .5em;\n}\n.xcui-demo-wrap[_v-e1d04224],\n.xcui-code-wrap[_v-e1d04224] {\n  width: 100%!important;\n}\n.xcui-demo-wrap pre[_v-e1d04224],\n.xcui-code-wrap pre[_v-e1d04224] {\n  overflow: hidden !important;\n}\n.xcui-code-wrap[_v-e1d04224] {\n  margin-top: 20px;\n}\npre[_v-e1d04224] {\n  display: block;\n  font-size: 13px;\n  line-height: 1.42857143;\n  color: #333;\n  word-break: break-all;\n  word-wrap: break-word;\n  background-color: #f5f5f5;\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  white-space: pre-wrap;\n}\n", ""]);
+	exports.push([module.id, ".select-demo {\n  width: 200px;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 98 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18698,15 +18842,15 @@
 	    value: true
 	});
 
-	var _vue = __webpack_require__(4);
+	var _vue = __webpack_require__(5);
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _jsonp = __webpack_require__(99);
+	var _jsonp = __webpack_require__(116);
 
 	var _jsonp2 = _interopRequireDefault(_jsonp);
 
-	var _index = __webpack_require__(103);
+	var _index = __webpack_require__(120);
 
 	var _index2 = _interopRequireDefault(_index);
 
@@ -18824,7 +18968,6 @@
 	        var me = this;
 	        setTimeout(function () {
 	            me.optgroupDefaultValue = '11';
-	            console.log('???');
 	        }, 1000);
 	    },
 
@@ -18903,14 +19046,14 @@
 	};
 
 /***/ },
-/* 99 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies
 	 */
 
-	var debug = __webpack_require__(100)('jsonp');
+	var debug = __webpack_require__(117)('jsonp');
 
 	/**
 	 * Module exports.
@@ -19006,7 +19149,7 @@
 
 
 /***/ },
-/* 100 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -19016,7 +19159,7 @@
 	 * Expose `debug()` as the module.
 	 */
 
-	exports = module.exports = __webpack_require__(101);
+	exports = module.exports = __webpack_require__(118);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -19187,7 +19330,7 @@
 
 
 /***/ },
-/* 101 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -19203,7 +19346,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(102);
+	exports.humanize = __webpack_require__(119);
 
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -19390,7 +19533,7 @@
 
 
 /***/ },
-/* 102 */
+/* 119 */
 /***/ function(module, exports) {
 
 	/**
@@ -19519,18 +19662,18 @@
 
 
 /***/ },
-/* 103 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(104)
-	__vue_script__ = __webpack_require__(106)
+	__webpack_require__(121)
+	__vue_script__ = __webpack_require__(123)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\select\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(181)
+	__vue_template__ = __webpack_require__(198)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -19555,16 +19698,16 @@
 	})()}
 
 /***/ },
-/* 104 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(105);
+	var content = __webpack_require__(122);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -19581,21 +19724,21 @@
 	}
 
 /***/ },
-/* 105 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".xcui-select {\n  display: inline-block;\n  box-sizing: content-box;\n  position: relative;\n  vertical-align: middle;\n  color: #666;\n  font-size: 14px;\n  z-index: 10;\n}\n.xcui-select-open .xcui-select-selection {\n  border-color: #66afe9 !important;\n  outline: 0;\n  box-shadow: 0 0 0 2px #2db7f533;\n}\n.xcui-select.disabled .xcui-select-selection {\n  color: #ccc;\n  background: #f7f7f7;\n  cursor: not-allowed;\n}\n.xcui-select-selection {\n  outline: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  box-sizing: border-box;\n  display: block;\n  background-color: #fff;\n  border-radius: 4px;\n  border: 1px solid #ccc;\n  padding: 2px 6px;\n  -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n}\n.xcui-select-selection-rendered {\n  height: 26px;\n  display: block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  /*padding-left: 8px;*/\n  padding-right: 24px;\n  line-height: 26px;\n}\n.xcui-select-selection-text {\n  display: block;\n  font-size: 14px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.xcui-select-menu-dropdown {\n  background-color: #fff;\n  /*box-shadow: 0 1px 6px #63636333;*/\n  border-radius: 4px;\n  box-sizing: border-box;\n  z-index: 1050;\n  /*left: -9999px;*/\n  /*top: -9999px;*/\n  position: absolute;\n  top: 100%;\n  width: 100%;\n  margin-top: 2px;\n  outline: none;\n  overflow: hidden;\n  font-size: 12px;\n  max-height: 200px;\n  border: 1px solid rgba(0, 0, 0, 0.15);\n  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);\n}\n.xcui-select-menu,\n.xcui-select-menu-group {\n  outline: none;\n  margin-bottom: 0;\n  padding-left: 0;\n  list-style: none;\n  max-height: 200px;\n  overflow: auto;\n}\n.xcui-select-menu-item,\n.xcui-select-menu-group-item {\n  position: relative;\n  display: block;\n  padding: 7px 15px;\n  font-weight: 400;\n  color: #262626;\n  cursor: pointer;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  -webkit-transition: background .3s ease;\n  transition: background .3s ease;\n}\n.xcui-select-menu-item-select,\n.xcui-select-menu-group-item-select {\n  font-weight: 500;\n  color: #666;\n  background-color: #f7f7f7;\n}\n.xcui-select-menu-item.disabled,\n.xcui-select-menu-group-item.disabled {\n  color: #ccc !important;\n  cursor: not-allowed !important;\n}\n.xcui-select-menu-item-selected,\n.xcui-select-menu-group-item-selected {\n  background-color: #337ab7;\n  font-weight: 700;\n  color: #fff;\n}\n.xcui-select-menu-item-selected:after,\n.xcui-select-menu-group-item-selected:after {\n  font-family: 'Glyphicons Halflings';\n  content: \"\\E013\";\n  position: absolute;\n  right: 6px;\n  top: 6px;\n  font-size: 12px;\n}\n.xcui-select-menu-item-selected:hover,\n.xcui-select-menu-group-item-selected:hover {\n  background-color: #f7f7f7;\n  font-weight: 700;\n  color: #666;\n}\n.xcui-select-menu-item:hover,\n.xcui-select-menu-group-item:hover {\n  background-color: #f5f5f5;\n}\n.xcui-select-menu-item-partial,\n.xcui-select-menu-group-item-partial {\n  background: red;\n}\n.xcui-select-menu-item-key,\n.xcui-select-menu-group-item-key {\n  background-color: #f5f5f5;\n}\n.xcui-select-menu-group-title {\n  color: #999;\n  line-height: 1.5;\n  padding: 8px 12px;\n}\n.xcui-select-menu-group-item {\n  padding-left: 20px;\n}\n.xcui-select-menu-group-item-selected {\n  background-color: #337ab7;\n  font-weight: 700;\n  color: #fff;\n}\n.xcui-select-menu-group-item-selected:after {\n  font-family: 'Glyphicons Halflings';\n  content: \"\\E013\";\n  position: absolute;\n  right: 6px;\n  top: 6px;\n  font-size: 12px;\n}\n.xcui-select-menu-group-item-selected:hover {\n  background-color: #f7f7f7;\n  font-weight: 700;\n  color: #666;\n}\n.xcui-select-menu-group > ul {\n  margin: 0;\n  padding: 0;\n}\n.xcui-select-search-input {\n  width: 100%;\n  border: 0;\n  font-size: 100%;\n  height: 100%;\n  outline: 0;\n  border-radius: 6px;\n}\n.xcui-select .glyphicon {\n  font-size: 12px;\n}\n.xcui-select .xcui-select-arrow {\n  position: absolute;\n  right: 10px;\n  top: 10px;\n  color: #ccc;\n}\n.xcui-select > ul > li > a {\n  padding: 0;\n  background-color: #fff;\n}\n", ""]);
+	exports.push([module.id, ".xcui-select {\n  display: inline-block;\n  box-sizing: content-box;\n  position: relative;\n  vertical-align: middle;\n  color: #666;\n  font-size: 14px;\n  z-index: 10;\n}\n.xcui-select-open .xcui-select-selection {\n  border-color: #66afe9 !important;\n  outline: 0;\n  box-shadow: 0 0 0 2px #2db7f533;\n}\n.xcui-select.disabled .xcui-select-selection {\n  color: #ccc;\n  background: #f7f7f7;\n  cursor: not-allowed;\n}\n.xcui-select-selection {\n  outline: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  box-sizing: border-box;\n  display: block;\n  background-color: #fff;\n  border-radius: 4px;\n  border: 1px solid #ccc;\n  padding: 2px 6px;\n  -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n}\n.xcui-select-selection-rendered {\n  height: 26px;\n  display: block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  /*padding-left: 8px;*/\n  padding-right: 24px;\n  line-height: 26px;\n}\n.xcui-select-selection-text {\n  display: block;\n  font-size: 14px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.xcui-select-menu-dropdown {\n  background-color: #fff;\n  /*box-shadow: 0 1px 6px #63636333;*/\n  border-radius: 4px;\n  box-sizing: border-box;\n  z-index: 1050;\n  /*left: -9999px;*/\n  /*top: -9999px;*/\n  position: absolute;\n  top: 100%;\n  width: 100%;\n  margin-top: 2px;\n  outline: none;\n  overflow: hidden;\n  font-size: 12px;\n  max-height: 200px;\n  border: 1px solid rgba(0, 0, 0, 0.15);\n  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);\n  z-index: 1;\n}\n.xcui-select-menu,\n.xcui-select-menu-group {\n  outline: none;\n  margin-bottom: 0;\n  padding-left: 0;\n  list-style: none;\n  max-height: 200px;\n  overflow: auto;\n}\n.xcui-select-menu-item,\n.xcui-select-menu-group-item {\n  position: relative;\n  display: block;\n  padding: 7px 15px;\n  font-weight: 400;\n  color: #262626;\n  cursor: pointer;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  -webkit-transition: background .3s ease;\n  transition: background .3s ease;\n}\n.xcui-select-menu-item-select,\n.xcui-select-menu-group-item-select {\n  font-weight: 500;\n  color: #666;\n  background-color: #f7f7f7;\n}\n.xcui-select-menu-item.disabled,\n.xcui-select-menu-group-item.disabled {\n  color: #ccc !important;\n  cursor: not-allowed !important;\n}\n.xcui-select-menu-item-selected,\n.xcui-select-menu-group-item-selected {\n  background-color: #337ab7;\n  font-weight: 700;\n  color: #fff;\n}\n.xcui-select-menu-item-selected:after,\n.xcui-select-menu-group-item-selected:after {\n  font-family: 'Glyphicons Halflings';\n  content: \"\\E013\";\n  position: absolute;\n  right: 6px;\n  top: 6px;\n  font-size: 12px;\n}\n.xcui-select-menu-item-selected:hover,\n.xcui-select-menu-group-item-selected:hover {\n  background-color: #f7f7f7;\n  font-weight: 700;\n  color: #666;\n}\n.xcui-select-menu-item:hover,\n.xcui-select-menu-group-item:hover {\n  background-color: #f5f5f5;\n}\n.xcui-select-menu-item-partial,\n.xcui-select-menu-group-item-partial {\n  background: red;\n}\n.xcui-select-menu-item-key,\n.xcui-select-menu-group-item-key {\n  background-color: #f5f5f5;\n}\n.xcui-select-menu-group-title {\n  color: #999;\n  line-height: 1.5;\n  padding: 8px 12px;\n}\n.xcui-select-menu-group-item {\n  padding-left: 20px;\n}\n.xcui-select-menu-group-item-selected {\n  background-color: #337ab7;\n  font-weight: 700;\n  color: #fff;\n}\n.xcui-select-menu-group-item-selected:after {\n  font-family: 'Glyphicons Halflings';\n  content: \"\\E013\";\n  position: absolute;\n  right: 6px;\n  top: 6px;\n  font-size: 12px;\n}\n.xcui-select-menu-group-item-selected:hover {\n  background-color: #f7f7f7;\n  font-weight: 700;\n  color: #666;\n}\n.xcui-select-menu-group > ul {\n  margin: 0;\n  padding: 0;\n}\n.xcui-select-search-input {\n  width: 100%;\n  border: 0;\n  font-size: 100%;\n  height: 100%;\n  outline: 0;\n  border-radius: 6px;\n}\n.xcui-select .glyphicon {\n  font-size: 12px;\n}\n.xcui-select .xcui-select-arrow {\n  position: absolute;\n  right: 10px;\n  top: 10px;\n  color: #ccc;\n}\n.xcui-select > ul > li > a {\n  padding: 0;\n  background-color: #fff;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 106 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19604,15 +19747,15 @@
 	    value: true
 	});
 
-	var _typeof2 = __webpack_require__(107);
+	var _typeof2 = __webpack_require__(124);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
-	var _deepClone = __webpack_require__(175);
+	var _clone = __webpack_require__(192);
 
-	var _deepClone2 = _interopRequireDefault(_deepClone);
+	var _clone2 = _interopRequireDefault(_clone);
 
-	var _fuzzysearch = __webpack_require__(180);
+	var _fuzzysearch = __webpack_require__(197);
 
 	var _fuzzysearch2 = _interopRequireDefault(_fuzzysearch);
 
@@ -19692,7 +19835,7 @@
 	            searchValue: '',
 	            isOpen: false,
 	            selectIndex: 0,
-	            value: this.selected ? (0, _deepClone2.default)(this.selected) : this.multiple ? [] : null
+	            value: this.selected ? (0, _clone2.default)(this.selected) : this.multiple ? [] : null
 	        };
 	    },
 
@@ -19705,6 +19848,7 @@
 	            if (this.showSearch) {
 	                if (this.clearOnSelect) {
 	                    this.searchValue = '';
+	                    this.options = [];
 	                }
 	                this.$els.search.focus();
 	            } else {
@@ -19732,16 +19876,12 @@
 	            if (option !== null && (typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
 	                if (this.customLabel) {
 	                    return this.customLabel(option);
-	                } else {
-	                    if (this.label && option[this.label]) {
-	                        return option[this.label];
-	                    } else if (option.label) {
-	                        return option.label;
-	                    }
+	                } else if (this.label && option[this.label]) {
+	                    return option[this.label];
 	                }
-	            } else {
-	                return option;
+	                return option.label;
 	            }
+	            return option;
 	        },
 	        optgroupSelect: function optgroupSelect(parentIndex, index, option) {
 	            if (this.selectIndex === parentIndex + '-' + index && this.value === option) {
@@ -19749,8 +19889,8 @@
 	            }
 	            this.value = option;
 	            this.selectIndex = parentIndex + '-' + index;
-	            this.$emit('change', (0, _deepClone2.default)(this.value), parentIndex, index);
-	            this.$emit('select', (0, _deepClone2.default)(this.value), parentIndex, index);
+	            this.$emit('change', (0, _clone2.default)(this.value), parentIndex, index);
+	            this.$emit('select', (0, _clone2.default)(this.value), parentIndex, index);
 	            this.closeAfterSelect && this.deactivate();
 	        },
 	        select: function select(option) {
@@ -19776,8 +19916,8 @@
 	                }
 	                this.value = isSelected ? null : option;
 	            }
-	            this.$emit('change', (0, _deepClone2.default)(this.value));
-	            this.$emit('select', (0, _deepClone2.default)(this.value));
+	            this.$emit('change', (0, _clone2.default)(this.value));
+	            this.$emit('select', (0, _clone2.default)(this.value));
 	            this.closeAfterSelect && this.deactivate();
 	        },
 	        isSelected: function isSelected(option, groupIndex, index) {
@@ -19791,27 +19931,29 @@
 	            if (this.multiple) {
 	                if ((typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
 	                    return this.value.indexOf(option[me.label] || option.label) > -1;
-	                } else {
-	                    return this.value.indexOf(option) > -1;
 	                }
+	                return this.value.indexOf(option) > -1;
+	            }
+	            if (this.showSearch) {
+	                if ((typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
+	                    return this.searchValue === option[me.label];
+	                }
+	                return this.searchValue === option;
 	            }
 	            if (this.value === option && !option.disable) {
 	                return true;
-	            } else {
-	                return false;
 	            }
+	            return false;
 	        },
 	        removeOption: function removeOption(option) {
 	            if (this.value.length === 0) {
 	                return;
 	            }
 	            if ((typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
-	                this.values.map(function (e) {
-	                    console.log(e === option);
-	                });
+	                this.values.map(function (e) {});
 	            }
 	            this.value.$remove(option);
-	            this.$emit('remove', (0, _deepClone2.default)(option));
+	            this.$emit('remove', (0, _clone2.default)(option));
 	        },
 	        indexSet: function indexSet(parentIndex, index) {
 	            if (this.optgroup) {
@@ -19887,8 +20029,12 @@
 	        },
 	        filteredOptions: function filteredOptions() {
 	            var value = this.searchValue;
+	            var me = this;
 	            if (this.showSearch && this.options.length) {
 	                return this.options.filter(function (item) {
+	                    if (typeof item !== 'string') {
+	                        return (0, _fuzzysearch2.default)(value, item[me.label || 'label']);
+	                    }
 	                    return (0, _fuzzysearch2.default)(value, item);
 	                });
 	            }
@@ -19905,9 +20051,8 @@
 	                return this.value;
 	            } else if (this.label) {
 	                return this.value[this.label];
-	            } else {
-	                return this.value.label || '';
 	            }
+	            return this.value.label || '';
 	        },
 	        getDropDownHeight: function getDropDownHeight() {
 	            var list = this.$els.list;
@@ -19972,18 +20117,18 @@
 	};
 
 /***/ },
-/* 107 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _iterator = __webpack_require__(108);
+	var _iterator = __webpack_require__(125);
 
 	var _iterator2 = _interopRequireDefault(_iterator);
 
-	var _symbol = __webpack_require__(159);
+	var _symbol = __webpack_require__(176);
 
 	var _symbol2 = _interopRequireDefault(_symbol);
 
@@ -19998,28 +20143,28 @@
 	};
 
 /***/ },
-/* 108 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(109), __esModule: true };
+	module.exports = { "default": __webpack_require__(126), __esModule: true };
 
 /***/ },
-/* 109 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(110);
-	__webpack_require__(154);
-	module.exports = __webpack_require__(158).f('iterator');
+	__webpack_require__(127);
+	__webpack_require__(171);
+	module.exports = __webpack_require__(175).f('iterator');
 
 /***/ },
-/* 110 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var $at  = __webpack_require__(111)(true);
+	var $at  = __webpack_require__(128)(true);
 
 	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(114)(String, 'String', function(iterated){
+	__webpack_require__(131)(String, 'String', function(iterated){
 	  this._t = String(iterated); // target
 	  this._i = 0;                // next index
 	// 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -20034,11 +20179,11 @@
 	});
 
 /***/ },
-/* 111 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(112)
-	  , defined   = __webpack_require__(113);
+	var toInteger = __webpack_require__(129)
+	  , defined   = __webpack_require__(130);
 	// true  -> String#at
 	// false -> String#codePointAt
 	module.exports = function(TO_STRING){
@@ -20056,7 +20201,7 @@
 	};
 
 /***/ },
-/* 112 */
+/* 129 */
 /***/ function(module, exports) {
 
 	// 7.1.4 ToInteger
@@ -20067,7 +20212,7 @@
 	};
 
 /***/ },
-/* 113 */
+/* 130 */
 /***/ function(module, exports) {
 
 	// 7.2.1 RequireObjectCoercible(argument)
@@ -20077,20 +20222,20 @@
 	};
 
 /***/ },
-/* 114 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var LIBRARY        = __webpack_require__(115)
-	  , $export        = __webpack_require__(116)
-	  , redefine       = __webpack_require__(131)
-	  , hide           = __webpack_require__(121)
-	  , has            = __webpack_require__(132)
-	  , Iterators      = __webpack_require__(133)
-	  , $iterCreate    = __webpack_require__(134)
-	  , setToStringTag = __webpack_require__(150)
-	  , getPrototypeOf = __webpack_require__(152)
-	  , ITERATOR       = __webpack_require__(151)('iterator')
+	var LIBRARY        = __webpack_require__(132)
+	  , $export        = __webpack_require__(133)
+	  , redefine       = __webpack_require__(148)
+	  , hide           = __webpack_require__(138)
+	  , has            = __webpack_require__(149)
+	  , Iterators      = __webpack_require__(150)
+	  , $iterCreate    = __webpack_require__(151)
+	  , setToStringTag = __webpack_require__(167)
+	  , getPrototypeOf = __webpack_require__(169)
+	  , ITERATOR       = __webpack_require__(168)('iterator')
 	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
 	  , FF_ITERATOR    = '@@iterator'
 	  , KEYS           = 'keys'
@@ -20152,19 +20297,19 @@
 	};
 
 /***/ },
-/* 115 */
+/* 132 */
 /***/ function(module, exports) {
 
 	module.exports = true;
 
 /***/ },
-/* 116 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global    = __webpack_require__(117)
-	  , core      = __webpack_require__(118)
-	  , ctx       = __webpack_require__(119)
-	  , hide      = __webpack_require__(121)
+	var global    = __webpack_require__(134)
+	  , core      = __webpack_require__(135)
+	  , ctx       = __webpack_require__(136)
+	  , hide      = __webpack_require__(138)
 	  , PROTOTYPE = 'prototype';
 
 	var $export = function(type, name, source){
@@ -20224,7 +20369,7 @@
 	module.exports = $export;
 
 /***/ },
-/* 117 */
+/* 134 */
 /***/ function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -20233,18 +20378,18 @@
 	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
 
 /***/ },
-/* 118 */
+/* 135 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 119 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(120);
+	var aFunction = __webpack_require__(137);
 	module.exports = function(fn, that, length){
 	  aFunction(fn);
 	  if(that === undefined)return fn;
@@ -20265,7 +20410,7 @@
 	};
 
 /***/ },
-/* 120 */
+/* 137 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -20274,12 +20419,12 @@
 	};
 
 /***/ },
-/* 121 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP         = __webpack_require__(122)
-	  , createDesc = __webpack_require__(130);
-	module.exports = __webpack_require__(126) ? function(object, key, value){
+	var dP         = __webpack_require__(139)
+	  , createDesc = __webpack_require__(147);
+	module.exports = __webpack_require__(143) ? function(object, key, value){
 	  return dP.f(object, key, createDesc(1, value));
 	} : function(object, key, value){
 	  object[key] = value;
@@ -20287,15 +20432,15 @@
 	};
 
 /***/ },
-/* 122 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var anObject       = __webpack_require__(123)
-	  , IE8_DOM_DEFINE = __webpack_require__(125)
-	  , toPrimitive    = __webpack_require__(129)
+	var anObject       = __webpack_require__(140)
+	  , IE8_DOM_DEFINE = __webpack_require__(142)
+	  , toPrimitive    = __webpack_require__(146)
 	  , dP             = Object.defineProperty;
 
-	exports.f = __webpack_require__(126) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	exports.f = __webpack_require__(143) ? Object.defineProperty : function defineProperty(O, P, Attributes){
 	  anObject(O);
 	  P = toPrimitive(P, true);
 	  anObject(Attributes);
@@ -20308,17 +20453,17 @@
 	};
 
 /***/ },
-/* 123 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(124);
+	var isObject = __webpack_require__(141);
 	module.exports = function(it){
 	  if(!isObject(it))throw TypeError(it + ' is not an object!');
 	  return it;
 	};
 
 /***/ },
-/* 124 */
+/* 141 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -20326,24 +20471,24 @@
 	};
 
 /***/ },
-/* 125 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = !__webpack_require__(126) && !__webpack_require__(127)(function(){
-	  return Object.defineProperty(__webpack_require__(128)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+	module.exports = !__webpack_require__(143) && !__webpack_require__(144)(function(){
+	  return Object.defineProperty(__webpack_require__(145)('div'), 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 126 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(127)(function(){
+	module.exports = !__webpack_require__(144)(function(){
 	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 127 */
+/* 144 */
 /***/ function(module, exports) {
 
 	module.exports = function(exec){
@@ -20355,11 +20500,11 @@
 	};
 
 /***/ },
-/* 128 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(124)
-	  , document = __webpack_require__(117).document
+	var isObject = __webpack_require__(141)
+	  , document = __webpack_require__(134).document
 	  // in old IE typeof document.createElement is 'object'
 	  , is = isObject(document) && isObject(document.createElement);
 	module.exports = function(it){
@@ -20367,11 +20512,11 @@
 	};
 
 /***/ },
-/* 129 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.1 ToPrimitive(input [, PreferredType])
-	var isObject = __webpack_require__(124);
+	var isObject = __webpack_require__(141);
 	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
 	// and the second argument - flag - preferred type is a string
 	module.exports = function(it, S){
@@ -20384,7 +20529,7 @@
 	};
 
 /***/ },
-/* 130 */
+/* 147 */
 /***/ function(module, exports) {
 
 	module.exports = function(bitmap, value){
@@ -20397,13 +20542,13 @@
 	};
 
 /***/ },
-/* 131 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(121);
+	module.exports = __webpack_require__(138);
 
 /***/ },
-/* 132 */
+/* 149 */
 /***/ function(module, exports) {
 
 	var hasOwnProperty = {}.hasOwnProperty;
@@ -20412,23 +20557,23 @@
 	};
 
 /***/ },
-/* 133 */
+/* 150 */
 /***/ function(module, exports) {
 
 	module.exports = {};
 
 /***/ },
-/* 134 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var create         = __webpack_require__(135)
-	  , descriptor     = __webpack_require__(130)
-	  , setToStringTag = __webpack_require__(150)
+	var create         = __webpack_require__(152)
+	  , descriptor     = __webpack_require__(147)
+	  , setToStringTag = __webpack_require__(167)
 	  , IteratorPrototype = {};
 
 	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	__webpack_require__(121)(IteratorPrototype, __webpack_require__(151)('iterator'), function(){ return this; });
+	__webpack_require__(138)(IteratorPrototype, __webpack_require__(168)('iterator'), function(){ return this; });
 
 	module.exports = function(Constructor, NAME, next){
 	  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
@@ -20436,27 +20581,27 @@
 	};
 
 /***/ },
-/* 135 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-	var anObject    = __webpack_require__(123)
-	  , dPs         = __webpack_require__(136)
-	  , enumBugKeys = __webpack_require__(148)
-	  , IE_PROTO    = __webpack_require__(145)('IE_PROTO')
+	var anObject    = __webpack_require__(140)
+	  , dPs         = __webpack_require__(153)
+	  , enumBugKeys = __webpack_require__(165)
+	  , IE_PROTO    = __webpack_require__(162)('IE_PROTO')
 	  , Empty       = function(){ /* empty */ }
 	  , PROTOTYPE   = 'prototype';
 
 	// Create object with fake `null` prototype: use iframe Object with cleared prototype
 	var createDict = function(){
 	  // Thrash, waste and sodomy: IE GC bug
-	  var iframe = __webpack_require__(128)('iframe')
+	  var iframe = __webpack_require__(145)('iframe')
 	    , i      = enumBugKeys.length
 	    , lt     = '<'
 	    , gt     = '>'
 	    , iframeDocument;
 	  iframe.style.display = 'none';
-	  __webpack_require__(149).appendChild(iframe);
+	  __webpack_require__(166).appendChild(iframe);
 	  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
 	  // createDict = iframe.contentWindow.Object;
 	  // html.removeChild(iframe);
@@ -20483,14 +20628,14 @@
 
 
 /***/ },
-/* 136 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP       = __webpack_require__(122)
-	  , anObject = __webpack_require__(123)
-	  , getKeys  = __webpack_require__(137);
+	var dP       = __webpack_require__(139)
+	  , anObject = __webpack_require__(140)
+	  , getKeys  = __webpack_require__(154);
 
-	module.exports = __webpack_require__(126) ? Object.defineProperties : function defineProperties(O, Properties){
+	module.exports = __webpack_require__(143) ? Object.defineProperties : function defineProperties(O, Properties){
 	  anObject(O);
 	  var keys   = getKeys(Properties)
 	    , length = keys.length
@@ -20501,25 +20646,25 @@
 	};
 
 /***/ },
-/* 137 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-	var $keys       = __webpack_require__(138)
-	  , enumBugKeys = __webpack_require__(148);
+	var $keys       = __webpack_require__(155)
+	  , enumBugKeys = __webpack_require__(165);
 
 	module.exports = Object.keys || function keys(O){
 	  return $keys(O, enumBugKeys);
 	};
 
 /***/ },
-/* 138 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var has          = __webpack_require__(132)
-	  , toIObject    = __webpack_require__(139)
-	  , arrayIndexOf = __webpack_require__(142)(false)
-	  , IE_PROTO     = __webpack_require__(145)('IE_PROTO');
+	var has          = __webpack_require__(149)
+	  , toIObject    = __webpack_require__(156)
+	  , arrayIndexOf = __webpack_require__(159)(false)
+	  , IE_PROTO     = __webpack_require__(162)('IE_PROTO');
 
 	module.exports = function(object, names){
 	  var O      = toIObject(object)
@@ -20535,28 +20680,28 @@
 	};
 
 /***/ },
-/* 139 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// to indexed object, toObject with fallback for non-array-like ES3 strings
-	var IObject = __webpack_require__(140)
-	  , defined = __webpack_require__(113);
+	var IObject = __webpack_require__(157)
+	  , defined = __webpack_require__(130);
 	module.exports = function(it){
 	  return IObject(defined(it));
 	};
 
 /***/ },
-/* 140 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for non-array-like ES3 and non-enumerable old V8 strings
-	var cof = __webpack_require__(141);
+	var cof = __webpack_require__(158);
 	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
 	  return cof(it) == 'String' ? it.split('') : Object(it);
 	};
 
 /***/ },
-/* 141 */
+/* 158 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -20566,14 +20711,14 @@
 	};
 
 /***/ },
-/* 142 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// false -> Array#indexOf
 	// true  -> Array#includes
-	var toIObject = __webpack_require__(139)
-	  , toLength  = __webpack_require__(143)
-	  , toIndex   = __webpack_require__(144);
+	var toIObject = __webpack_require__(156)
+	  , toLength  = __webpack_require__(160)
+	  , toIndex   = __webpack_require__(161);
 	module.exports = function(IS_INCLUDES){
 	  return function($this, el, fromIndex){
 	    var O      = toIObject($this)
@@ -20592,21 +20737,21 @@
 	};
 
 /***/ },
-/* 143 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.15 ToLength
-	var toInteger = __webpack_require__(112)
+	var toInteger = __webpack_require__(129)
 	  , min       = Math.min;
 	module.exports = function(it){
 	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 	};
 
 /***/ },
-/* 144 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(112)
+	var toInteger = __webpack_require__(129)
 	  , max       = Math.max
 	  , min       = Math.min;
 	module.exports = function(index, length){
@@ -20615,20 +20760,20 @@
 	};
 
 /***/ },
-/* 145 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var shared = __webpack_require__(146)('keys')
-	  , uid    = __webpack_require__(147);
+	var shared = __webpack_require__(163)('keys')
+	  , uid    = __webpack_require__(164);
 	module.exports = function(key){
 	  return shared[key] || (shared[key] = uid(key));
 	};
 
 /***/ },
-/* 146 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global = __webpack_require__(117)
+	var global = __webpack_require__(134)
 	  , SHARED = '__core-js_shared__'
 	  , store  = global[SHARED] || (global[SHARED] = {});
 	module.exports = function(key){
@@ -20636,7 +20781,7 @@
 	};
 
 /***/ },
-/* 147 */
+/* 164 */
 /***/ function(module, exports) {
 
 	var id = 0
@@ -20646,7 +20791,7 @@
 	};
 
 /***/ },
-/* 148 */
+/* 165 */
 /***/ function(module, exports) {
 
 	// IE 8- don't enum bug keys
@@ -20655,30 +20800,30 @@
 	).split(',');
 
 /***/ },
-/* 149 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(117).document && document.documentElement;
+	module.exports = __webpack_require__(134).document && document.documentElement;
 
 /***/ },
-/* 150 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var def = __webpack_require__(122).f
-	  , has = __webpack_require__(132)
-	  , TAG = __webpack_require__(151)('toStringTag');
+	var def = __webpack_require__(139).f
+	  , has = __webpack_require__(149)
+	  , TAG = __webpack_require__(168)('toStringTag');
 
 	module.exports = function(it, tag, stat){
 	  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
 	};
 
 /***/ },
-/* 151 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var store      = __webpack_require__(146)('wks')
-	  , uid        = __webpack_require__(147)
-	  , Symbol     = __webpack_require__(117).Symbol
+	var store      = __webpack_require__(163)('wks')
+	  , uid        = __webpack_require__(164)
+	  , Symbol     = __webpack_require__(134).Symbol
 	  , USE_SYMBOL = typeof Symbol == 'function';
 
 	var $exports = module.exports = function(name){
@@ -20689,13 +20834,13 @@
 	$exports.store = store;
 
 /***/ },
-/* 152 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-	var has         = __webpack_require__(132)
-	  , toObject    = __webpack_require__(153)
-	  , IE_PROTO    = __webpack_require__(145)('IE_PROTO')
+	var has         = __webpack_require__(149)
+	  , toObject    = __webpack_require__(170)
+	  , IE_PROTO    = __webpack_require__(162)('IE_PROTO')
 	  , ObjectProto = Object.prototype;
 
 	module.exports = Object.getPrototypeOf || function(O){
@@ -20707,24 +20852,24 @@
 	};
 
 /***/ },
-/* 153 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.13 ToObject(argument)
-	var defined = __webpack_require__(113);
+	var defined = __webpack_require__(130);
 	module.exports = function(it){
 	  return Object(defined(it));
 	};
 
 /***/ },
-/* 154 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(155);
-	var global        = __webpack_require__(117)
-	  , hide          = __webpack_require__(121)
-	  , Iterators     = __webpack_require__(133)
-	  , TO_STRING_TAG = __webpack_require__(151)('toStringTag');
+	__webpack_require__(172);
+	var global        = __webpack_require__(134)
+	  , hide          = __webpack_require__(138)
+	  , Iterators     = __webpack_require__(150)
+	  , TO_STRING_TAG = __webpack_require__(168)('toStringTag');
 
 	for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
 	  var NAME       = collections[i]
@@ -20735,20 +20880,20 @@
 	}
 
 /***/ },
-/* 155 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var addToUnscopables = __webpack_require__(156)
-	  , step             = __webpack_require__(157)
-	  , Iterators        = __webpack_require__(133)
-	  , toIObject        = __webpack_require__(139);
+	var addToUnscopables = __webpack_require__(173)
+	  , step             = __webpack_require__(174)
+	  , Iterators        = __webpack_require__(150)
+	  , toIObject        = __webpack_require__(156);
 
 	// 22.1.3.4 Array.prototype.entries()
 	// 22.1.3.13 Array.prototype.keys()
 	// 22.1.3.29 Array.prototype.values()
 	// 22.1.3.30 Array.prototype[@@iterator]()
-	module.exports = __webpack_require__(114)(Array, 'Array', function(iterated, kind){
+	module.exports = __webpack_require__(131)(Array, 'Array', function(iterated, kind){
 	  this._t = toIObject(iterated); // target
 	  this._i = 0;                   // next index
 	  this._k = kind;                // kind
@@ -20774,13 +20919,13 @@
 	addToUnscopables('entries');
 
 /***/ },
-/* 156 */
+/* 173 */
 /***/ function(module, exports) {
 
 	module.exports = function(){ /* empty */ };
 
 /***/ },
-/* 157 */
+/* 174 */
 /***/ function(module, exports) {
 
 	module.exports = function(done, value){
@@ -20788,58 +20933,58 @@
 	};
 
 /***/ },
-/* 158 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports.f = __webpack_require__(151);
+	exports.f = __webpack_require__(168);
 
 /***/ },
-/* 159 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(160), __esModule: true };
+	module.exports = { "default": __webpack_require__(177), __esModule: true };
 
 /***/ },
-/* 160 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(161);
-	__webpack_require__(172);
-	__webpack_require__(173);
-	__webpack_require__(174);
-	module.exports = __webpack_require__(118).Symbol;
+	__webpack_require__(178);
+	__webpack_require__(189);
+	__webpack_require__(190);
+	__webpack_require__(191);
+	module.exports = __webpack_require__(135).Symbol;
 
 /***/ },
-/* 161 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	// ECMAScript 6 symbols shim
-	var global         = __webpack_require__(117)
-	  , has            = __webpack_require__(132)
-	  , DESCRIPTORS    = __webpack_require__(126)
-	  , $export        = __webpack_require__(116)
-	  , redefine       = __webpack_require__(131)
-	  , META           = __webpack_require__(162).KEY
-	  , $fails         = __webpack_require__(127)
-	  , shared         = __webpack_require__(146)
-	  , setToStringTag = __webpack_require__(150)
-	  , uid            = __webpack_require__(147)
-	  , wks            = __webpack_require__(151)
-	  , wksExt         = __webpack_require__(158)
-	  , wksDefine      = __webpack_require__(163)
-	  , keyOf          = __webpack_require__(164)
-	  , enumKeys       = __webpack_require__(165)
-	  , isArray        = __webpack_require__(168)
-	  , anObject       = __webpack_require__(123)
-	  , toIObject      = __webpack_require__(139)
-	  , toPrimitive    = __webpack_require__(129)
-	  , createDesc     = __webpack_require__(130)
-	  , _create        = __webpack_require__(135)
-	  , gOPNExt        = __webpack_require__(169)
-	  , $GOPD          = __webpack_require__(171)
-	  , $DP            = __webpack_require__(122)
-	  , $keys          = __webpack_require__(137)
+	var global         = __webpack_require__(134)
+	  , has            = __webpack_require__(149)
+	  , DESCRIPTORS    = __webpack_require__(143)
+	  , $export        = __webpack_require__(133)
+	  , redefine       = __webpack_require__(148)
+	  , META           = __webpack_require__(179).KEY
+	  , $fails         = __webpack_require__(144)
+	  , shared         = __webpack_require__(163)
+	  , setToStringTag = __webpack_require__(167)
+	  , uid            = __webpack_require__(164)
+	  , wks            = __webpack_require__(168)
+	  , wksExt         = __webpack_require__(175)
+	  , wksDefine      = __webpack_require__(180)
+	  , keyOf          = __webpack_require__(181)
+	  , enumKeys       = __webpack_require__(182)
+	  , isArray        = __webpack_require__(185)
+	  , anObject       = __webpack_require__(140)
+	  , toIObject      = __webpack_require__(156)
+	  , toPrimitive    = __webpack_require__(146)
+	  , createDesc     = __webpack_require__(147)
+	  , _create        = __webpack_require__(152)
+	  , gOPNExt        = __webpack_require__(186)
+	  , $GOPD          = __webpack_require__(188)
+	  , $DP            = __webpack_require__(139)
+	  , $keys          = __webpack_require__(154)
 	  , gOPD           = $GOPD.f
 	  , dP             = $DP.f
 	  , gOPN           = gOPNExt.f
@@ -20962,11 +21107,11 @@
 
 	  $GOPD.f = $getOwnPropertyDescriptor;
 	  $DP.f   = $defineProperty;
-	  __webpack_require__(170).f = gOPNExt.f = $getOwnPropertyNames;
-	  __webpack_require__(167).f  = $propertyIsEnumerable;
-	  __webpack_require__(166).f = $getOwnPropertySymbols;
+	  __webpack_require__(187).f = gOPNExt.f = $getOwnPropertyNames;
+	  __webpack_require__(184).f  = $propertyIsEnumerable;
+	  __webpack_require__(183).f = $getOwnPropertySymbols;
 
-	  if(DESCRIPTORS && !__webpack_require__(115)){
+	  if(DESCRIPTORS && !__webpack_require__(132)){
 	    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
 	  }
 
@@ -21041,7 +21186,7 @@
 	});
 
 	// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-	$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(121)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+	$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(138)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
 	// 19.4.3.5 Symbol.prototype[@@toStringTag]
 	setToStringTag($Symbol, 'Symbol');
 	// 20.2.1.9 Math[@@toStringTag]
@@ -21050,18 +21195,18 @@
 	setToStringTag(global.JSON, 'JSON', true);
 
 /***/ },
-/* 162 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var META     = __webpack_require__(147)('meta')
-	  , isObject = __webpack_require__(124)
-	  , has      = __webpack_require__(132)
-	  , setDesc  = __webpack_require__(122).f
+	var META     = __webpack_require__(164)('meta')
+	  , isObject = __webpack_require__(141)
+	  , has      = __webpack_require__(149)
+	  , setDesc  = __webpack_require__(139).f
 	  , id       = 0;
 	var isExtensible = Object.isExtensible || function(){
 	  return true;
 	};
-	var FREEZE = !__webpack_require__(127)(function(){
+	var FREEZE = !__webpack_require__(144)(function(){
 	  return isExtensible(Object.preventExtensions({}));
 	});
 	var setMeta = function(it){
@@ -21108,25 +21253,25 @@
 	};
 
 /***/ },
-/* 163 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global         = __webpack_require__(117)
-	  , core           = __webpack_require__(118)
-	  , LIBRARY        = __webpack_require__(115)
-	  , wksExt         = __webpack_require__(158)
-	  , defineProperty = __webpack_require__(122).f;
+	var global         = __webpack_require__(134)
+	  , core           = __webpack_require__(135)
+	  , LIBRARY        = __webpack_require__(132)
+	  , wksExt         = __webpack_require__(175)
+	  , defineProperty = __webpack_require__(139).f;
 	module.exports = function(name){
 	  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
 	  if(name.charAt(0) != '_' && !(name in $Symbol))defineProperty($Symbol, name, {value: wksExt.f(name)});
 	};
 
 /***/ },
-/* 164 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getKeys   = __webpack_require__(137)
-	  , toIObject = __webpack_require__(139);
+	var getKeys   = __webpack_require__(154)
+	  , toIObject = __webpack_require__(156);
 	module.exports = function(object, el){
 	  var O      = toIObject(object)
 	    , keys   = getKeys(O)
@@ -21137,13 +21282,13 @@
 	};
 
 /***/ },
-/* 165 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// all enumerable object keys, includes symbols
-	var getKeys = __webpack_require__(137)
-	  , gOPS    = __webpack_require__(166)
-	  , pIE     = __webpack_require__(167);
+	var getKeys = __webpack_require__(154)
+	  , gOPS    = __webpack_require__(183)
+	  , pIE     = __webpack_require__(184);
 	module.exports = function(it){
 	  var result     = getKeys(it)
 	    , getSymbols = gOPS.f;
@@ -21157,34 +21302,34 @@
 	};
 
 /***/ },
-/* 166 */
+/* 183 */
 /***/ function(module, exports) {
 
 	exports.f = Object.getOwnPropertySymbols;
 
 /***/ },
-/* 167 */
+/* 184 */
 /***/ function(module, exports) {
 
 	exports.f = {}.propertyIsEnumerable;
 
 /***/ },
-/* 168 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.2.2 IsArray(argument)
-	var cof = __webpack_require__(141);
+	var cof = __webpack_require__(158);
 	module.exports = Array.isArray || function isArray(arg){
 	  return cof(arg) == 'Array';
 	};
 
 /***/ },
-/* 169 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-	var toIObject = __webpack_require__(139)
-	  , gOPN      = __webpack_require__(170).f
+	var toIObject = __webpack_require__(156)
+	  , gOPN      = __webpack_require__(187).f
 	  , toString  = {}.toString;
 
 	var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
@@ -21204,30 +21349,30 @@
 
 
 /***/ },
-/* 170 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-	var $keys      = __webpack_require__(138)
-	  , hiddenKeys = __webpack_require__(148).concat('length', 'prototype');
+	var $keys      = __webpack_require__(155)
+	  , hiddenKeys = __webpack_require__(165).concat('length', 'prototype');
 
 	exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 	  return $keys(O, hiddenKeys);
 	};
 
 /***/ },
-/* 171 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var pIE            = __webpack_require__(167)
-	  , createDesc     = __webpack_require__(130)
-	  , toIObject      = __webpack_require__(139)
-	  , toPrimitive    = __webpack_require__(129)
-	  , has            = __webpack_require__(132)
-	  , IE8_DOM_DEFINE = __webpack_require__(125)
+	var pIE            = __webpack_require__(184)
+	  , createDesc     = __webpack_require__(147)
+	  , toIObject      = __webpack_require__(156)
+	  , toPrimitive    = __webpack_require__(146)
+	  , has            = __webpack_require__(149)
+	  , IE8_DOM_DEFINE = __webpack_require__(142)
 	  , gOPD           = Object.getOwnPropertyDescriptor;
 
-	exports.f = __webpack_require__(126) ? gOPD : function getOwnPropertyDescriptor(O, P){
+	exports.f = __webpack_require__(143) ? gOPD : function getOwnPropertyDescriptor(O, P){
 	  O = toIObject(O);
 	  P = toPrimitive(P, true);
 	  if(IE8_DOM_DEFINE)try {
@@ -21237,48 +21382,48 @@
 	};
 
 /***/ },
-/* 172 */
+/* 189 */
 /***/ function(module, exports) {
 
 	
 
 /***/ },
-/* 173 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(163)('asyncIterator');
+	__webpack_require__(180)('asyncIterator');
 
 /***/ },
-/* 174 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(163)('observable');
+	__webpack_require__(180)('observable');
 
 /***/ },
-/* 175 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _keys = __webpack_require__(176);
+	var _keys = __webpack_require__(193);
 
 	var _keys2 = _interopRequireDefault(_keys);
 
-	var _typeof2 = __webpack_require__(107);
+	var _typeof2 = __webpack_require__(124);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var deepClone = function deepClone(obj) {
+	var clone = function clone(obj) {
 	    if (Array.isArray(obj)) {
-	        return obj.map(deepClone);
+	        return obj.map(clone);
 	    } else if (obj && (typeof obj === 'undefined' ? 'undefined' : (0, _typeof3.default)(obj)) === 'object') {
 	        var cloned = {};
 	        var keys = (0, _keys2.default)(obj);
 	        for (var i = 0, l = keys.length; i < l; i++) {
 	            var key = keys[i];
-	            cloned[key] = deepClone(obj[key]);
+	            cloned[key] = clone(obj[key]);
 	        }
 	        return cloned;
 	    } else {
@@ -21286,43 +21431,43 @@
 	    }
 	};
 
-	module.exports = deepClone;
+	module.exports = clone;
 
 /***/ },
-/* 176 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(177), __esModule: true };
+	module.exports = { "default": __webpack_require__(194), __esModule: true };
 
 /***/ },
-/* 177 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(178);
-	module.exports = __webpack_require__(118).Object.keys;
+	__webpack_require__(195);
+	module.exports = __webpack_require__(135).Object.keys;
 
 /***/ },
-/* 178 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 Object.keys(O)
-	var toObject = __webpack_require__(153)
-	  , $keys    = __webpack_require__(137);
+	var toObject = __webpack_require__(170)
+	  , $keys    = __webpack_require__(154);
 
-	__webpack_require__(179)('keys', function(){
+	__webpack_require__(196)('keys', function(){
 	  return function keys(it){
 	    return $keys(toObject(it));
 	  };
 	});
 
 /***/ },
-/* 179 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// most Object methods by ES6 should accept primitives
-	var $export = __webpack_require__(116)
-	  , core    = __webpack_require__(118)
-	  , fails   = __webpack_require__(127);
+	var $export = __webpack_require__(133)
+	  , core    = __webpack_require__(135)
+	  , fails   = __webpack_require__(144);
 	module.exports = function(KEY, exec){
 	  var fn  = (core.Object || {})[KEY] || Object[KEY]
 	    , exp = {};
@@ -21331,7 +21476,7 @@
 	};
 
 /***/ },
-/* 180 */
+/* 197 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21361,29 +21506,29 @@
 
 
 /***/ },
-/* 181 */
+/* 198 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div tabindex=\"0\"\n     :class=\"getWrapCls\"\n     @focus=\"activate()\"\n     @blur=\"showSearch ? false : deactivate()\"\n     @keydown.enter.stop.prevent.self=\"enterSearchValue()\">\n    <div class=\"xcui-select-selection\">\n        <div class=\"xcui-select-selection-rendered\"\n             @mousedown.stop=\"toggle()\">\n            <input\n                type=\"text\"\n                name=\"search\"\n                v-el:search\n                autocomplete=\"off\"\n                class=\"xcui-select-search-input\"\n                v-if=\"showSearch\"\n                v-model=\"searchValue\"\n                @focus.prevent=\"activate()\"\n                @blur.prevent=\"deactivate()\"\n                @keyup.down=\"keyNext()\"\n                @keyup.up=\"keyPrev()\"\n                @keydown.enter.stop.prevent.self=\"enterSearchValue()\"\n                @change.prevent.stop=\"\"\n                :placeholder=\"placeholder\">\n            <span\n                class=\"xcui-select-selection-text\"\n                v-if=\"!showSearch\"\n                v-text=\"currentOptionLabel || placeholder\">\n            </span>\n            <i class=\"glyphicon xcui-select-arrow\"\n               @mousedown.prevent.stop=\"toggle()\"\n               :class=\"{'glyphicon-triangle-bottom':(!isOpen),'glyphicon-triangle-top':(isOpen)}\"></i>\n        </div>\n    </div>\n    <div class=\"xcui-select-menu-dropdown\"\n         v-show=\"(isOpen && filteredOptions.length>0) || (isOpen && multiple)\">\n        <ul\n            v-el:list\n            aria-activedescendant\n            class=\"xcui-select-menu\">\n            <li class=\"xcui-select-menu-item\"\n                v-if=\"multiple && multipleMax === value.length\">\n                最多可选{{multipleMax}}项!\n            </li>\n            <li class=\"xcui-select-menu-item\"\n                v-if=\"filteredOptions.length<1 && searchEmptyText\"\n                v-text=\"searchEmptyText\">\n            </li>\n            <template\n                      v-for=\"item in filteredOptions\">\n                <li class=\"xcui-select-menu-item\"\n                    v-if=\"!optgroup\"\n                    track-by=\"$index\"\n                    tabindex=\"1\"\n                    :class=\"{'xcui-select-menu-item-selected': isSelected(item), 'xcui-select-menu-item-key': $index === selectIndex,'disabled': item.disable}\"\n                    @mouseenter.prevent.stop.self=\"indexSet($index)\"\n                    @mousedown.prevent.stop.self=\"select(item)\">\n                    <partial :name=\"optionPartial\"\n                             class=\"xcui-select-menu-item-partial\"\n                             v-if=\"optionPartial.length\"></partial>\n                    <span v-else v-text=\"getOptionLabel(item)\"></span>\n                </li>\n            </template>\n            <template\n                v-for=\"item in filteredOptions\">\n                <li class=\"xcui-select-menu-group\" v-if=\"optgroup\">\n                    <div class=\"xcui-select-menu-group-title\">{{item.name}}</div>\n                    <ul>\n                        <template v-for=\"option in item.options\">\n                            <li class=\"xcui-select-menu-group-item\"\n                                :class=\"{'xcui-select-menu-group-item-selected': isSelected(option,$parent.$index,$index), 'disabled': option.disable}\"\n                                @mousedown.prevent.stop.self=\"optgroupSelect($parent.$index,$index,option)\">\n                                <partial :name=\"optionPartial\"\n                                         class=\"xcui-select-menu-item-partial\"\n                                         v-if=\"optionPartial.length\"></partial>\n                                <span v-else v-text=\"getOptionLabel(option)\"></span>\n                            </li>\n                        </template>\n                    </ul>\n                </li>\n            </template>\n        </ul>\n    </div>\n</div>\n";
+	module.exports = "\n<div tabindex=\"0\"\n     :class=\"getWrapCls\"\n     @focus=\"activate()\"\n     @blur=\"showSearch ? false : deactivate()\"\n     @keydown.enter.stop.prevent.self=\"enterSearchValue()\">\n    <div class=\"xcui-select-selection\">\n        <div class=\"xcui-select-selection-rendered\"\n             @mousedown.stop=\"toggle()\">\n            <input\n                type=\"text\"\n                name=\"search\"\n                v-el:search\n                autocomplete=\"off\"\n                class=\"xcui-select-search-input\"\n                v-if=\"showSearch\"\n                v-model=\"searchValue\"\n                @focus.prevent=\"activate()\"\n                @blur.prevent=\"deactivate()\"\n                @keyup.down=\"keyNext()\"\n                @keyup.up=\"keyPrev()\"\n                @keydown.enter.stop.prevent.self=\"enterSearchValue()\"\n                @change.prevent.stop=\"\"\n                :placeholder=\"placeholder\">\n            <span\n                class=\"xcui-select-selection-text\"\n                v-if=\"!showSearch\"\n                v-text=\"currentOptionLabel || placeholder\">\n            </span>\n            <i class=\"glyphicon xcui-select-arrow\"\n               @mousedown.prevent.stop=\"toggle()\"\n               :class=\"{'glyphicon-triangle-bottom':(!isOpen),'glyphicon-triangle-top':(isOpen)}\"></i>\n        </div>\n    </div>\n    <div class=\"xcui-select-menu-dropdown\"\n         v-show=\"(isOpen && filteredOptions.length>0) || (isOpen && multiple)\">\n        <ul\n            v-el:list\n            aria-activedescendant\n            class=\"xcui-select-menu\">\n            <li class=\"xcui-select-menu-item\"\n                v-if=\"multiple && multipleMax === value.length\">\n                最多可选{{multipleMax}}项!\n            </li>\n            <li class=\"xcui-select-menu-item\"\n                v-if=\"filteredOptions.length<1 && searchEmptyText\"\n                v-text=\"searchEmptyText\">\n            </li>\n            <template\n                      v-for=\"item in filteredOptions\">\n                <li class=\"xcui-select-menu-item\"\n                    v-if=\"!optgroup\"\n                    tabindex=\"1\"\n                    :class=\"{'xcui-select-menu-item-selected': isSelected(item), 'xcui-select-menu-item-key': $index === selectIndex,'disabled': item.disable}\"\n                    @mouseenter.prevent.stop.self=\"indexSet($index)\"\n                    @mousedown.prevent=\"select(item)\">\n                    <partial :name=\"optionPartial\"\n                             class=\"xcui-select-menu-item-partial\"\n                             v-if=\"optionPartial.length\"></partial>\n                    <span v-else v-text=\"getOptionLabel(item)\"></span>\n                </li>\n            </template>\n            <template\n                v-for=\"item in filteredOptions\">\n                <li class=\"xcui-select-menu-group\" v-if=\"optgroup\">\n                    <div class=\"xcui-select-menu-group-title\">{{item.name}}</div>\n                    <ul>\n                        <template v-for=\"option in item.options\">\n                            <li class=\"xcui-select-menu-group-item\"\n                                :class=\"{'xcui-select-menu-group-item-selected': isSelected(option,$parent.$index,$index), 'disabled': option.disable}\"\n                                @mousedown.prevent.stop.self=\"optgroupSelect($parent.$index,$index,option)\">\n                                <partial :name=\"optionPartial\"\n                                         class=\"xcui-select-menu-item-partial\"\n                                         v-if=\"optionPartial.length\"></partial>\n                                <span v-else v-text=\"getOptionLabel(option)\"></span>\n                            </li>\n                        </template>\n                    </ul>\n                </li>\n            </template>\n        </ul>\n    </div>\n</div>\n";
 
 /***/ },
-/* 182 */
+/* 199 */
 /***/ function(module, exports) {
 
-	module.exports = "<div _v-e1d04224=\"\"><h2 _v-e1d04224=\"\">xcui-select</h2>\n<h3 _v-e1d04224=\"\">使用场景</h3>\n<blockquote _v-e1d04224=\"\">\n<p _v-e1d04224=\"\">替代原生下拉框</p>\n</blockquote>\n<h3 _v-e1d04224=\"\">DEMO</h3>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\" _v-e1d04224=\"\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">single - 基本模式 options(Array)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\" :custom-label=\"reRender\" :close-after-select=\"closeAfterSelect\" :selected=\"defaultValue\" @change=\"selectChange2\" @select=\"onSelect2\" :options=\"dataSource2\" _v-e1d04224=\"\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n             :custom-label=\"reRender\"\n             :close-after-select=\"closeAfterSelect\"\n             :selected=\"defaultValue\"\n             @change=\"selectChange2\"\n             @select=\"onSelect2\"\n             :options=\"dataSource2\"&gt;\n<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">single - 基本模式 options(Object)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\" @change=\"selectChange\" @select=\"onSelect\" :options=\"dataSource\" _v-e1d04224=\"\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n             @change=\"selectChange\"\n             @select=\"onSelect\"\n             :options=\"dataSource\"&gt;<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">自定义label的字段(label='text')</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\" label=\"text\" @change=\"selectChange\" :options=\"dataSource\" _v-e1d04224=\"\"></xcui-select>\n        <pre _v-e1d04224=\"\">    {\n        name: 'jake',\n        label: 'jake',\n        text: '测试1',\n        disable: true\n    }</pre>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">    &lt;xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n                 label=\"text\"\n                     @change=\"selectChange\"\n                 :options=\"dataSource\"&gt;<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;</span>pre</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n{\n        name: 'jake',\n        label: 'jake',\n        text: '测试1',\n        disable: true\n    }<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>pre</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">禁用(:disabled)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"disable\" :disabled=\"disable\" @change=\"selectChange\" :options=\"dataSource\" _v-e1d04224=\"\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"disable\"\n             :disabled=\"disable\"\n             @change=\"selectChange\"\n             :options=\"dataSource\"&gt;<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">禁用单个option(:disabled)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"disable\" @change=\"selectChange\" :options=\"dataSourceDisable\" _v-e1d04224=\"\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"disable\"\n             @change=\"selectChange\"\n             :options=\"dataSourceDisable\"&gt;<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">定制label(:custom-label)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\" :custom-label=\"reRenderLabel\" @change=\"selectChange2\" :options=\"dataSource\" _v-e1d04224=\"\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n             :custom-label=\"reRenderLabel\"\n             @change=\"selectChange2\" :options=\"dataSource\"&gt;<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">定制 option list(option-partial &amp;&amp; Vue.partial)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\" option-partial=\"customOptionPartial\" :custom-label=\"reRender\" @change=\"selectChange2\" :options=\"partialSource\" _v-e1d04224=\"\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n             option-partial=\"customOptionPartial\" :custom-label=\"reRender\"\n                     @change=\"selectChange2\" :options=\"partialSource\"&gt;<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">省市联动</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择省\" @change=\"provinceChange\" :options=\"provinceData\" _v-e1d04224=\"\"></xcui-select>\n        <xcui-select v-if=\"selectCityData.length>0\" class-name=\"select-demo\" placeholder=\"选择市\" @change=\"cityChange\" :options=\"selectCityData\" _v-e1d04224=\"\"></xcui-select>\n        {{selectProvinceValue}} - {{selectCityValue}}\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"选择省\"\n             @change=\"provinceChange\" :options=\"provinceData\"&gt;<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n&lt;xcui-select v-if=\"selectCityData.length&gt;0\" class-name=\"select-demo\" placeholder=\"选择市\"\n             @change=\"cityChange\" :options=\"selectCityData\"&gt;<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n{{selectProvinceValue}} - {{selectCityValue}}</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">input Local Search</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择一个城市\" show-search=\"\" search-empty-text=\"没有搜索结果哎...\" @search-change=\"searchChange\" @change=\"localSearchChange\" :options=\"localSearchSource\" _v-e1d04224=\"\">\n        </xcui-select>\n        输入值: {{localSearchValue}}\n        选择结果: {{localSearchResult}}\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"选择一个城市\"\n             show-search search-empty-text=\"没有搜索结果哎...\"\n                     @search-change=\"searchChange\"\n             @change=\"localSearchChange\"\n             :options=\"localSearchSource\"&gt;\n<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n输入值: {{localSearchValue}}\n选择结果: {{localSearchResult}}\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">智能输入</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"输入邮箱\" show-search=\"\" @search-change=\"asyncSearchChange\" @change=\"asyncSearchOnChange\" :options=\"asyncSearchSource\" _v-e1d04224=\"\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"输入邮箱\"\n             show-search\n             @search-change=\"asyncSearchChange\"\n             @change=\"asyncSearchOnChange\"\n             :options=\"asyncSearchSource\"&gt;\n<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">远程数据</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        远程搜索\n        <xcui-select class-name=\"select-demo\" placeholder=\"搜索\" show-search=\"\" clear-on-select=\"\" @search-change=\"serverSearchChange\" @change=\"serverSearchOnChange\" :options=\"serverSearchSource\" _v-e1d04224=\"\">\n        </xcui-select>\n        {{serverSearchValue}}\n        <br _v-e1d04224=\"\">\n        ajax请求不能耦合select组件, 提供EVENT(@search-change)让使用者进行数据获取 &amp; options赋值\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">远程搜索\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n             show-search\n             clear-on-select\n             @search-change=\"serverSearchChange\"\n             @change=\"serverSearchOnChange\"\n             :options=\"serverSearchSource\"&gt;\n<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n{{serverSearchValue}}\n        <span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;</span>br</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\najax请求不能耦合select组件, 提供EVENT(@search-change)让使用者进行数据获取 &amp; options赋值\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">option Group (数据格式一)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"搜索\" optgroup=\"\" @change=\"optgroupOnChange\" :selected=\"optgroupDefaultValue\" option-partial=\"optgroupPartial\" :options=\"optgroupSource\" _v-e1d04224=\"\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n             optgroup\n             @change=\"optgroupOnChange\"\n             :selected=\"optgroupDefaultValue\"\n             option-partial=\"optgroupPartial\"\n                     :options=\"optgroupSource\"&gt;\n<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">option Group (数据格式二)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"搜索\" optgroup=\"\" label=\"name\" @change=\"optgroupOnChange2\" :options=\"optgroupSource2\" _v-e1d04224=\"\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n             optgroup\n             label=\"name\"\n                     @change=\"optgroupOnChange2\"\n             :options=\"optgroupSource2\"&gt;\n<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">multiple select</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择多个\" multiple=\"\" :multiple-max=\"2\" :selected=\"multipleDefaultValue\" @change=\"multipleOnChange\" @remove=\"multipleOnRemove\" :options=\"dataSource2\" _v-e1d04224=\"\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"选择多个\"\n             multiple\n             :multiple-max=2\n             :selected=\"multipleDefaultValue\"\n             @change=\"multipleOnChange\"\n             @remove=\"multipleOnRemove\"\n             :options=\"dataSource2\"&gt;\n<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-e1d04224=\"\">\n                    <h3 _v-e1d04224=\"\">multiple select</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择多个\" multiple=\"\" :multiple-max=\"2\" :selected=\"multipleDefaultValue2\" :options=\"dataSource\" _v-e1d04224=\"\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-e1d04224=\"\"><pre _v-e1d04224=\"\">&lt;xcui-select class-name=\"select-demo\" placeholder=\"选择多个\"\n             multiple\n             :multiple-max=2\n             :selected=\"multipleDefaultValue2\"\n             :options=\"dataSource\"&gt;\n<span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token tag\" _v-e1d04224=\"\"><span class=\"token punctuation\" _v-e1d04224=\"\">&lt;/</span>xcui-select</span><span class=\"token punctuation\" _v-e1d04224=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n</div>\n<h2 _v-e1d04224=\"\">组件依赖</h2>\n<blockquote _v-e1d04224=\"\">\n<p _v-e1d04224=\"\"><a href=\"https://www.npmjs.com/package/fuzzysearch\" _v-e1d04224=\"\">fuzzysearch</a> 模糊搜索模块</p>\n</blockquote>\n<h2 _v-e1d04224=\"\">Props</h2>\n<table class=\"table\" _v-e1d04224=\"\">\n<thead _v-e1d04224=\"\">\n<tr _v-e1d04224=\"\">\n<th _v-e1d04224=\"\">名字</th>\n<th _v-e1d04224=\"\">类型</th>\n<th _v-e1d04224=\"\">默认</th>\n<th _v-e1d04224=\"\">描述</th>\n<th _v-e1d04224=\"\">是否必选</th>\n</tr>\n</thead>\n<tbody _v-e1d04224=\"\">\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">className</td>\n<td _v-e1d04224=\"\">String</td>\n<td _v-e1d04224=\"\">无</td>\n<td _v-e1d04224=\"\">自定义css类名</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">placeholder</td>\n<td _v-e1d04224=\"\">String</td>\n<td _v-e1d04224=\"\">无</td>\n<td _v-e1d04224=\"\">选择框默认文字</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">optgroup</td>\n<td _v-e1d04224=\"\">Boolean</td>\n<td _v-e1d04224=\"\">false</td>\n<td _v-e1d04224=\"\">列表分组模式(结合options使用)</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">multiple</td>\n<td _v-e1d04224=\"\">Boolean</td>\n<td _v-e1d04224=\"\">false</td>\n<td _v-e1d04224=\"\">多选</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">showSearch</td>\n<td _v-e1d04224=\"\">Boolean</td>\n<td _v-e1d04224=\"\">false</td>\n<td _v-e1d04224=\"\">是否展示搜索框</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">clearOnSelect</td>\n<td _v-e1d04224=\"\">Boolean</td>\n<td _v-e1d04224=\"\">false</td>\n<td _v-e1d04224=\"\">选择完以后清除搜索内容</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">label</td>\n<td _v-e1d04224=\"\">String</td>\n<td _v-e1d04224=\"\">无</td>\n<td _v-e1d04224=\"\">自定义label展现key(对应数据中key)</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">optionPartial</td>\n<td _v-e1d04224=\"\">Vue.partial</td>\n<td _v-e1d04224=\"\">无</td>\n<td _v-e1d04224=\"\">option可定制</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">:customLabel</td>\n<td _v-e1d04224=\"\">Function</td>\n<td _v-e1d04224=\"\">无</td>\n<td _v-e1d04224=\"\">option内容定制</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">:options</td>\n<td _v-e1d04224=\"\">Array</td>\n<td _v-e1d04224=\"\">无</td>\n<td _v-e1d04224=\"\">默认数据,optgroup模式下数据结构有要求(具体查看demo#option Group)</td>\n<td _v-e1d04224=\"\">是</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">:disabled</td>\n<td _v-e1d04224=\"\">Boolean</td>\n<td _v-e1d04224=\"\">false</td>\n<td _v-e1d04224=\"\">禁用</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">:selected</td>\n<td _v-e1d04224=\"\">String</td>\n<td _v-e1d04224=\"\">无</td>\n<td _v-e1d04224=\"\">默认已选的值</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">@change</td>\n<td _v-e1d04224=\"\">function(value) / function(value,groupIndex,valueIndex)</td>\n<td _v-e1d04224=\"\">无</td>\n<td _v-e1d04224=\"\">值发生变化的时候(2种模式: 普通模式/分组模式)</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">@select</td>\n<td _v-e1d04224=\"\">function(value) / function(value,groupIndex,valueIndex)</td>\n<td _v-e1d04224=\"\">无</td>\n<td _v-e1d04224=\"\">发生了选择的时候(2种模式: 普通模式/分组模式)</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">@searchChange</td>\n<td _v-e1d04224=\"\">function(searchValue)</td>\n<td _v-e1d04224=\"\">无</td>\n<td _v-e1d04224=\"\">搜索值发生变化的时候</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n<tr _v-e1d04224=\"\">\n<td _v-e1d04224=\"\">@remove</td>\n<td _v-e1d04224=\"\">function(removeValue)</td>\n<td _v-e1d04224=\"\">无</td>\n<td _v-e1d04224=\"\">多选模式下移除一个选值的时候</td>\n<td _v-e1d04224=\"\">否</td>\n</tr>\n</tbody>\n</table>\n<h3 _v-e1d04224=\"\">模式说明</h3>\n<ul _v-e1d04224=\"\">\n<li _v-e1d04224=\"\">\n<p _v-e1d04224=\"\">单选模式:</p>\n<pre _v-e1d04224=\"\">options数据格式一<span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token punctuation\" _v-e1d04224=\"\">[</span>\n    <span class=\"token string\" _v-e1d04224=\"\">'item1'</span><span class=\"token punctuation\" _v-e1d04224=\"\">,</span>\n    <span class=\"token string\" _v-e1d04224=\"\">'item2'</span>\n<span class=\"token punctuation\" _v-e1d04224=\"\">]</span>\noptions数据格式二<span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token punctuation\" _v-e1d04224=\"\">[</span>\n    <span class=\"token punctuation\" _v-e1d04224=\"\">{</span>\n        label<span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token string\" _v-e1d04224=\"\">'1'</span><span class=\"token punctuation\" _v-e1d04224=\"\">,</span>\n        disable<span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token boolean\" _v-e1d04224=\"\">true</span><span class=\"token punctuation\" _v-e1d04224=\"\">,</span>\n        name<span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token string\" _v-e1d04224=\"\">'1'</span>\n    <span class=\"token punctuation\" _v-e1d04224=\"\">}</span>\n<span class=\"token punctuation\" _v-e1d04224=\"\">]</span>\n</pre>\n</li>\n<li _v-e1d04224=\"\">\n<p _v-e1d04224=\"\">分组模式:</p>\n<pre _v-e1d04224=\"\">optgroup    【必选】\nshowSearch  【不支持】\noptions数据格式一 <span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token punctuation\" _v-e1d04224=\"\">[</span>\n    <span class=\"token punctuation\" _v-e1d04224=\"\">{</span>\n        name<span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token string\" _v-e1d04224=\"\">'opt group 1'</span><span class=\"token punctuation\" _v-e1d04224=\"\">,</span>\n        options<span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token punctuation\" _v-e1d04224=\"\">[</span>\n            <span class=\"token string\" _v-e1d04224=\"\">'item1'</span><span class=\"token punctuation\" _v-e1d04224=\"\">,</span>\n            <span class=\"token string\" _v-e1d04224=\"\">'item2'</span>\n        <span class=\"token punctuation\" _v-e1d04224=\"\">]</span>\n    <span class=\"token punctuation\" _v-e1d04224=\"\">}</span>\n<span class=\"token punctuation\" _v-e1d04224=\"\">]</span>\noptions数据格式二 <span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token punctuation\" _v-e1d04224=\"\">[</span>\n    <span class=\"token punctuation\" _v-e1d04224=\"\">{</span>\n        name<span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token string\" _v-e1d04224=\"\">'opt group 2'</span><span class=\"token punctuation\" _v-e1d04224=\"\">,</span>\n        options<span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token punctuation\" _v-e1d04224=\"\">[</span>\n            <span class=\"token punctuation\" _v-e1d04224=\"\">{</span>\n                label<span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token string\" _v-e1d04224=\"\">'1'</span><span class=\"token punctuation\" _v-e1d04224=\"\">,</span>\n                disable<span class=\"token punctuation\" _v-e1d04224=\"\">:</span> <span class=\"token boolean\" _v-e1d04224=\"\">true</span>\n            <span class=\"token punctuation\" _v-e1d04224=\"\">}</span>\n        <span class=\"token punctuation\" _v-e1d04224=\"\">]</span>\n    <span class=\"token punctuation\" _v-e1d04224=\"\">}</span>\n<span class=\"token punctuation\" _v-e1d04224=\"\">]</span>\n</pre>\n</li>\n<li _v-e1d04224=\"\">\n<p _v-e1d04224=\"\">多选模式:</p>\n<pre _v-e1d04224=\"\">multiple 【必选】\nshowSearch  【不支持】\nselected<span class=\"token punctuation\" _v-e1d04224=\"\">:</span> Array\n</pre>\n</li>\n</ul>\n<h3 _v-e1d04224=\"\">参考</h3>\n<p _v-e1d04224=\"\"><a href=\"https://select2.github.io/\" _v-e1d04224=\"\">select2</a><br _v-e1d04224=\"\">\n<a href=\"http://ant.design/components/select/\" _v-e1d04224=\"\">antd-select</a><br _v-e1d04224=\"\">\n<a href=\"http://monterail.github.io/vue-multiselect/\" _v-e1d04224=\"\">vue-multiselect</a><br _v-e1d04224=\"\">\n<a href=\"https://josephuspaye.github.io/Keen-UI/#/ui-select-docs\" _v-e1d04224=\"\">Keen-UI - select</a><br _v-e1d04224=\"\">\n<a href=\"http://amazeui.org/javascript/selected\" _v-e1d04224=\"\">http://amazeui.org/javascript/selected</a></p>\n</div>";
+	module.exports = "<div><h1>Select多功能选择框</h1>\n<h2>使用场景</h2>\n<ol>\n<li>替代原生下拉框，支持多选</li>\n<li>支持Array, Object等格式</li>\n<li>支持进行输入建议，远程搜索等</li>\n<li>支持optionGroup</li>\n</ol>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>single - 基本模式 options(Array)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n                     :custom-label=\"reRender\"\n                     :close-after-select=\"closeAfterSelect\"\n                     :selected=\"defaultValue\"\n                     @change=\"selectChange2\"\n                     @select=\"onSelect2\"\n                     :options=\"dataSource2\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n             :custom-label=\"reRender\"\n             :close-after-select=\"closeAfterSelect\"\n             :selected=\"defaultValue\"\n             @change=\"selectChange2\"\n             @select=\"onSelect2\"\n             :options=\"dataSource2\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>single - 基本模式 options(Object)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n                     @change=\"selectChange\"\n                     @select=\"onSelect\"\n                     :options=\"dataSource\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n             @change=\"selectChange\"\n             @select=\"onSelect\"\n             :options=\"dataSource\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>自定义label的字段(label='text')</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n                     label=\"text\"\n                     @change=\"selectChange\"\n                     :options=\"dataSource\"></xcui-select>\n        <pre>\n    {\n        name: 'jake',\n        label: 'jake',\n        text: '测试1',\n        disable: true\n    }</pre>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n    &lt;xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n                 label=\"text\"\n                     @change=\"selectChange\"\n                 :options=\"dataSource\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>pre</span><span class=\"token punctuation\" >></span></span>\n{\n        name: 'jake',\n        label: 'jake',\n        text: '测试1',\n        disable: true\n    }<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>pre</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>禁用(:disabled)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"disable\"\n                     :disabled=\"disable\"\n                     @change=\"selectChange\"\n                     :options=\"dataSource\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"disable\"\n             :disabled=\"disable\"\n             @change=\"selectChange\"\n             :options=\"dataSource\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>禁用单个option(:disabled)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"disable\"\n                     @change=\"selectChange\"\n                     :options=\"dataSourceDisable\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"disable\"\n             @change=\"selectChange\"\n             :options=\"dataSourceDisable\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>定制label(:custom-label)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n                     :custom-label=\"reRenderLabel\"\n                     @change=\"selectChange2\" :options=\"dataSource\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n             :custom-label=\"reRenderLabel\"\n             @change=\"selectChange2\" :options=\"dataSource\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>定制 option list(option-partial && Vue.partial)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n                     option-partial=\"customOptionPartial\" :custom-label=\"reRender\"\n                     @change=\"selectChange2\" :options=\"partialSource\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\n             option-partial=\"customOptionPartial\" :custom-label=\"reRender\"\n                     @change=\"selectChange2\" :options=\"partialSource\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>省市联动</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择省\"\n                     @change=\"provinceChange\" :options=\"provinceData\"></xcui-select>\n        <xcui-select v-if=\"selectCityData.length>0\" class-name=\"select-demo\" placeholder=\"选择市\"\n                     @change=\"cityChange\" :options=\"selectCityData\"></xcui-select>\n        {{selectProvinceValue}} - {{selectCityValue}}\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"选择省\"\n             @change=\"provinceChange\" :options=\"provinceData\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-select v-if=\"selectCityData.length>0\" class-name=\"select-demo\" placeholder=\"选择市\"\n             @change=\"cityChange\" :options=\"selectCityData\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n{{selectProvinceValue}} - {{selectCityValue}}</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>input Local Search</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择一个城市\"\n                     show-search search-empty-text=\"没有搜索结果哎...\"\n                     @search-change=\"searchChange\"\n                     @change=\"localSearchChange\"\n                     :options=\"localSearchSource\">\n        </xcui-select>\n        输入值: {{localSearchValue}}\n        选择结果: {{localSearchResult}}\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"选择一个城市\"\n             show-search search-empty-text=\"没有搜索结果哎...\"\n                     @search-change=\"searchChange\"\n             @change=\"localSearchChange\"\n             :options=\"localSearchSource\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n输入值: {{localSearchValue}}\n选择结果: {{localSearchResult}}\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>智能输入</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"输入邮箱\"\n                     show-search\n                     @search-change=\"asyncSearchChange\"\n                     @change=\"asyncSearchOnChange\"\n                     :options=\"asyncSearchSource\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"输入邮箱\"\n             show-search\n             @search-change=\"asyncSearchChange\"\n             @change=\"asyncSearchOnChange\"\n             :options=\"asyncSearchSource\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>远程数据</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        远程搜索\n        <xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n                     show-search\n                     clear-on-select\n                     @search-change=\"serverSearchChange\"\n                     @change=\"serverSearchOnChange\"\n                     :options=\"serverSearchSource\">\n        </xcui-select>\n        {{serverSearchValue}}\n        <br>\n        ajax请求不能耦合select组件, 提供EVENT(@search-change)让使用者进行数据获取 & options赋值\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n远程搜索\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n             show-search\n             clear-on-select\n             @search-change=\"serverSearchChange\"\n             @change=\"serverSearchOnChange\"\n             :options=\"serverSearchSource\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n{{serverSearchValue}}\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>br</span><span class=\"token punctuation\" >></span></span>\najax请求不能耦合select组件, 提供EVENT(@search-change)让使用者进行数据获取 &amp; options赋值\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>option Group (数据格式一)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n                     optgroup\n                     @change=\"optgroupOnChange\"\n                     :selected=\"optgroupDefaultValue\"\n                     option-partial=\"optgroupPartial\"\n                     :options=\"optgroupSource\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n             optgroup\n             @change=\"optgroupOnChange\"\n             :selected=\"optgroupDefaultValue\"\n             option-partial=\"optgroupPartial\"\n                     :options=\"optgroupSource\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>option Group (数据格式二)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n                     optgroup\n                     label=\"name\"\n                     @change=\"optgroupOnChange2\"\n                     :options=\"optgroupSource2\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n             optgroup\n             label=\"name\"\n                     @change=\"optgroupOnChange2\"\n             :options=\"optgroupSource2\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>multiple select</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择多个\"\n                     multiple\n                     :multiple-max=2\n                     :selected=\"multipleDefaultValue\"\n                     @change=\"multipleOnChange\"\n                     @remove=\"multipleOnRemove\"\n                     :options=\"dataSource2\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"选择多个\"\n             multiple\n             :multiple-max=2\n             :selected=\"multipleDefaultValue\"\n             @change=\"multipleOnChange\"\n             @remove=\"multipleOnRemove\"\n             :options=\"dataSource2\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>multiple select</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择多个\"\n                     multiple\n                     :multiple-max=2\n                     :selected=\"multipleDefaultValue2\"\n                     :options=\"dataSource\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"选择多个\"\n             multiple\n             :multiple-max=2\n             :selected=\"multipleDefaultValue2\"\n             :options=\"dataSource\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>组件依赖</h2>\n<blockquote>\n<p><a href=\"https://www.npmjs.com/package/fuzzysearch\">fuzzysearch</a> 模糊搜索模块</p>\n</blockquote>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>className</td>\n<td>String</td>\n<td>无</td>\n<td>自定义css类名</td>\n<td>否</td>\n</tr>\n<tr>\n<td>placeholder</td>\n<td>String</td>\n<td>无</td>\n<td>选择框默认文字</td>\n<td>否</td>\n</tr>\n<tr>\n<td>optgroup</td>\n<td>Boolean</td>\n<td>false</td>\n<td>列表分组模式(结合options使用)</td>\n<td>否</td>\n</tr>\n<tr>\n<td>multiple</td>\n<td>Boolean</td>\n<td>false</td>\n<td>多选</td>\n<td>否</td>\n</tr>\n<tr>\n<td>showSearch</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否展示搜索框</td>\n<td>否</td>\n</tr>\n<tr>\n<td>clearOnSelect</td>\n<td>Boolean</td>\n<td>false</td>\n<td>选择完以后清除搜索内容</td>\n<td>否</td>\n</tr>\n<tr>\n<td>label</td>\n<td>String</td>\n<td>无</td>\n<td>自定义label展现key(对应数据中key)</td>\n<td>否</td>\n</tr>\n<tr>\n<td>optionPartial</td>\n<td>Vue.partial</td>\n<td>无</td>\n<td>option可定制</td>\n<td>否</td>\n</tr>\n<tr>\n<td>:customLabel</td>\n<td>Function</td>\n<td>无</td>\n<td>option内容定制</td>\n<td>否</td>\n</tr>\n<tr>\n<td>:options</td>\n<td>Array</td>\n<td>无</td>\n<td>默认数据,optgroup模式下数据结构有要求(具体查看demo#option Group)</td>\n<td>是</td>\n</tr>\n<tr>\n<td>:disabled</td>\n<td>Boolean</td>\n<td>false</td>\n<td>禁用</td>\n<td>否</td>\n</tr>\n<tr>\n<td>:selected</td>\n<td>String</td>\n<td>无</td>\n<td>默认已选的值</td>\n<td>否</td>\n</tr>\n<tr>\n<td>@change</td>\n<td>function(value) / function(value,groupIndex,valueIndex)</td>\n<td>无</td>\n<td>值发生变化的时候(2种模式: 普通模式/分组模式)</td>\n<td>否</td>\n</tr>\n<tr>\n<td>@select</td>\n<td>function(value) / function(value,groupIndex,valueIndex)</td>\n<td>无</td>\n<td>发生了选择的时候(2种模式: 普通模式/分组模式)</td>\n<td>否</td>\n</tr>\n<tr>\n<td>@searchChange</td>\n<td>function(searchValue)</td>\n<td>无</td>\n<td>搜索值发生变化的时候</td>\n<td>否</td>\n</tr>\n<tr>\n<td>@remove</td>\n<td>function(removeValue)</td>\n<td>无</td>\n<td>多选模式下移除一个选值的时候</td>\n<td>否</td>\n</tr>\n</tbody>\n</table>\n<h3>模式说明</h3>\n<ul>\n<li>\n<p>单选模式:</p>\n<pre>options数据格式一<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n    <span class=\"token string\" >'item1'</span><span class=\"token punctuation\" >,</span>\n    <span class=\"token string\" >'item2'</span>\n<span class=\"token punctuation\" >]</span>\noptions数据格式二<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n    <span class=\"token punctuation\" >{</span>\n        label<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'1'</span><span class=\"token punctuation\" >,</span>\n        disable<span class=\"token punctuation\" >:</span> <span class=\"token boolean\" >true</span><span class=\"token punctuation\" >,</span>\n        name<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'1'</span>\n    <span class=\"token punctuation\" >}</span>\n<span class=\"token punctuation\" >]</span>\n</pre>\n</li>\n<li>\n<p>分组模式:</p>\n<pre>optgroup    【必选】\nshowSearch  【不支持】\noptions数据格式一 <span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n    <span class=\"token punctuation\" >{</span>\n        name<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'opt group 1'</span><span class=\"token punctuation\" >,</span>\n        options<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n            <span class=\"token string\" >'item1'</span><span class=\"token punctuation\" >,</span>\n            <span class=\"token string\" >'item2'</span>\n        <span class=\"token punctuation\" >]</span>\n    <span class=\"token punctuation\" >}</span>\n<span class=\"token punctuation\" >]</span>\noptions数据格式二 <span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n    <span class=\"token punctuation\" >{</span>\n        name<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'opt group 2'</span><span class=\"token punctuation\" >,</span>\n        options<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n            <span class=\"token punctuation\" >{</span>\n                label<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'1'</span><span class=\"token punctuation\" >,</span>\n                disable<span class=\"token punctuation\" >:</span> <span class=\"token boolean\" >true</span>\n            <span class=\"token punctuation\" >}</span>\n        <span class=\"token punctuation\" >]</span>\n    <span class=\"token punctuation\" >}</span>\n<span class=\"token punctuation\" >]</span>\n</pre>\n</li>\n<li>\n<p>多选模式:</p>\n<pre>multiple 【必选】\nshowSearch  【不支持】\nselected<span class=\"token punctuation\" >:</span> Array\n</pre>\n</li>\n</ul>\n<h3>参考</h3>\n<p><a href=\"https://select2.github.io/\">select2</a><br />\n<a href=\"http://ant.design/components/select/\">antd-select</a><br />\n<a href=\"http://monterail.github.io/vue-multiselect/\">vue-multiselect</a><br />\n<a href=\"https://josephuspaye.github.io/Keen-UI/#/ui-select-docs\">Keen-UI - select</a><br />\n<a href=\"http://amazeui.org/javascript/selected\">http://amazeui.org/javascript/selected</a></p>\n</div>";
 
 /***/ },
-/* 183 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(184)
+	__vue_script__ = __webpack_require__(201)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\demos\\toaster.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(190)
+	__vue_template__ = __webpack_require__(207)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -21408,7 +21553,7 @@
 	})()}
 
 /***/ },
-/* 184 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21417,7 +21562,7 @@
 	    value: true
 	});
 
-	var _toaster = __webpack_require__(185);
+	var _toaster = __webpack_require__(202);
 
 	var _toaster2 = _interopRequireDefault(_toaster);
 
@@ -21435,18 +21580,18 @@
 	};
 
 /***/ },
-/* 185 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(186)
-	__vue_script__ = __webpack_require__(188)
+	__webpack_require__(203)
+	__vue_script__ = __webpack_require__(205)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\toaster\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(189)
+	__vue_template__ = __webpack_require__(206)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -21471,16 +21616,16 @@
 	})()}
 
 /***/ },
-/* 186 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(187);
+	var content = __webpack_require__(204);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -21497,21 +21642,21 @@
 	}
 
 /***/ },
-/* 187 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".toaster {\n  width: 300px;\n  border-radius: 5px;\n  text-align: center;\n  box-shadow: 0 1px 8px rgba(99, 99, 99, 0.2);\n  padding: 5px 10px;\n  color: #000;\n  font-size: 16px;\n  z-index: 1000;\n  position: fixed;\n  top: 150px;\n  left: calc(50% - 150px);\n}\n.toaster .toaster-icon {\n  vertical-align: middle;\n}\n.toaster .toaster-desc {\n  display: inline-block;\n  margin-left: 10px;\n  margin-bottom: 0px;\n  vertical-align: middle;\n}\n", ""]);
+	exports.push([module.id, ".toaster {\n  width: 300px;\n  border-radius: 5px;\n  text-align: center;\n  box-shadow: 0 1px 8px rgba(99, 99, 99, 0.2);\n  padding: 5px 10px;\n  font-size: 16px;\n  z-index: 1000;\n  position: fixed;\n  top: 150px;\n  left: calc(50% - 150px);\n  background: #fff;\n}\n.toaster .toaster-icon {\n  vertical-align: middle;\n}\n.toaster .toaster-desc {\n  display: inline-block;\n  margin-left: 10px;\n  margin-bottom: 0px;\n  vertical-align: middle;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 188 */
+/* 205 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21564,30 +21709,30 @@
 	};
 
 /***/ },
-/* 189 */
+/* 206 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"toaster\"\n:class=\"{\n    'btn-info': options.type === 'info' || options.type == undefined,\n    'btn-success': options.type === 'success',\n    'btn-danger': options.type === 'error',\n    'btn-warning': options.type === 'warning'\n}\" v-show=\"show\">\n    <span class=\"toaster-icon glyphicon\"\n    :class=\"{\n        'glyphicon-info-sign': options.type === 'info' || options.type == undefined,\n        'glyphicon-ok': options.type === 'success',\n        'glyphicon-remove': options.type === 'error',\n        'glyphicon-warning-sign': options.type === 'warning'\n    }\"></span>\n    <p class=\"toaster-desc\">\n        {{options.content}}\n    </p>\n</div>\n";
+	module.exports = "\n<div class=\"toaster\"\n:class=\"{\n    'text-info': options.type === 'info' || options.type == undefined,\n    'text-success': options.type === 'success',\n    'text-danger': options.type === 'error',\n    'text-warning': options.type === 'warning'\n}\" v-show=\"show\">\n    <span class=\"toaster-icon glyphicon\"\n    :class=\"{\n        'glyphicon-info-sign': options.type === 'info' || options.type == undefined,\n        'glyphicon-ok': options.type === 'success',\n        'glyphicon-remove': options.type === 'error',\n        'glyphicon-warning-sign': options.type === 'warning'\n    }\"></span>\n    <p class=\"toaster-desc\">\n        {{options.content}}\n    </p>\n</div>\n";
 
 /***/ },
-/* 190 */
+/* 207 */
 /***/ function(module, exports) {
 
-	module.exports = "<div><h1>Toaster</h1>\n<p>Toaster提供一种不打断用户操作的轻量级提示方式，顶部居中显示并自动消失。</p>\n<h4>支持4种信息类型</h4>\n<ol>\n<li>info：普通信息提示</li>\n<li>success：成功信息提示</li>\n<li>error：错误信息提示</li>\n<li>warning：警告信息提示</li>\n</ol>\n<h1>DEMO</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>信息提示组件</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <button class=\"btn btn-info\" @click=\"options={type:'info',content:'this is a info message',duration:1000}\">info</button>\n        <button class=\"btn btn-success\" @click=\"options={type:'success',content:'this is a success message',duration:2000}\">success</button>\n        <button class=\"btn btn-danger\" @click=\"options={type:'error',content:'this is a error message',duration:3000}\">error</button>\n        <button class=\"btn btn-warning\" @click=\"options={type:'warning',content:'this is a warning message',duration:1000}\">warning</button>\n        <Toaster :options=\"options\"></Toaster>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-info<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >=</span>{type:<span class=\"token punctuation\" >'</span>info<span class=\"token punctuation\" >'</span>,content:<span class=\"token punctuation\" >'</span>this is a info message<span class=\"token punctuation\" >'</span>,duration:1000}<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>info<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-success<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >=</span>{type:<span class=\"token punctuation\" >'</span>success<span class=\"token punctuation\" >'</span>,content:<span class=\"token punctuation\" >'</span>this is a success message<span class=\"token punctuation\" >'</span>,duration:2000}<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>success<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-danger<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >=</span>{type:<span class=\"token punctuation\" >'</span>error<span class=\"token punctuation\" >'</span>,content:<span class=\"token punctuation\" >'</span>this is a error message<span class=\"token punctuation\" >'</span>,duration:3000}<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>error<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-warning<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >=</span>{type:<span class=\"token punctuation\" >'</span>warning<span class=\"token punctuation\" >'</span>,content:<span class=\"token punctuation\" >'</span>this is a warning message<span class=\"token punctuation\" >'</span>,duration:1000}<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>warning<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Toaster</span> <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Toaster</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>options</td>\n<td>Object</td>\n<td>无</td>\n<td>type：指定提示信息的类型，默认为info类型；可自行配置，有四种选择info、success、error、warning<br>content：必选项，提示信息内容<br>duration：默认2秒自动关闭，可自行配置</td>\n</tr>\n</tbody>\n</table>\n</div>";
+	module.exports = "<div><h1>Toaster信息提示</h1>\n<p>Toaster提供一种不打断用户操作的轻量级提示方式，顶部居中显示并自动消失。</p>\n<h4>支持4种信息类型</h4>\n<ul>\n<li>info：普通信息提示</li>\n<li>success：成功信息提示</li>\n<li>error：错误信息提示</li>\n<li>warning：警告信息提示</li>\n</ul>\n<h1>DEMO</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>信息提示组件</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <button class=\"btn btn-info\" @click=\"options={type:'info',content:'this is a info message',duration:1000}\">info</button>\n        <button class=\"btn btn-success\" @click=\"options={type:'success',content:'this is a success message',duration:2000}\">success</button>\n        <button class=\"btn btn-danger\" @click=\"options={type:'error',content:'this is a error message',duration:3000}\">error</button>\n        <button class=\"btn btn-warning\" @click=\"options={type:'warning',content:'this is a warning message',duration:1000}\">warning</button>\n        <Toaster :options=\"options\"></Toaster>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-info<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >=</span>{type:<span class=\"token punctuation\" >'</span>info<span class=\"token punctuation\" >'</span>,content:<span class=\"token punctuation\" >'</span>this is a info message<span class=\"token punctuation\" >'</span>,duration:1000}<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>info<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-success<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >=</span>{type:<span class=\"token punctuation\" >'</span>success<span class=\"token punctuation\" >'</span>,content:<span class=\"token punctuation\" >'</span>this is a success message<span class=\"token punctuation\" >'</span>,duration:2000}<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>success<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-danger<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >=</span>{type:<span class=\"token punctuation\" >'</span>error<span class=\"token punctuation\" >'</span>,content:<span class=\"token punctuation\" >'</span>this is a error message<span class=\"token punctuation\" >'</span>,duration:3000}<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>error<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-warning<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >=</span>{type:<span class=\"token punctuation\" >'</span>warning<span class=\"token punctuation\" >'</span>,content:<span class=\"token punctuation\" >'</span>this is a warning message<span class=\"token punctuation\" >'</span>,duration:1000}<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>warning<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Toaster</span> <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Toaster</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>options</td>\n<td>Object</td>\n<td>无</td>\n<td>type：指定提示信息的类型，默认为info类型；可自行配置，有四种选择info、success、error、warning<br>content：必选项，提示信息内容<br>duration：默认2秒自动关闭，可自行配置</td>\n</tr>\n</tbody>\n</table>\n</div>";
 
 /***/ },
-/* 191 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(192)
-	__vue_script__ = __webpack_require__(194)
+	__webpack_require__(209)
+	__vue_script__ = __webpack_require__(211)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\inputNumber.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(200)
+	  console.warn("[vue-loader] src\\demos\\modal.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(235)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -21603,7 +21748,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-f376989e/inputNumber.vue"
+	  var id = "_v-27acb3aa/modal.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -21612,23 +21757,23 @@
 	})()}
 
 /***/ },
-/* 192 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(193);
+	var content = __webpack_require__(210);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./inputNumber.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./inputNumber.vue");
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./modal.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./modal.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -21638,21 +21783,21 @@
 	}
 
 /***/ },
-/* 193 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.input-define-class{\r\n    color: blue;\r\n    width: 190px;\r\n    font-size: 20px;\r\n}\r\n", ""]);
+	exports.push([module.id, ".xcui-modal-demo-title {\n  color: #66ccff;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 194 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21661,37 +21806,173 @@
 	    value: true
 	});
 
-	var _inputNumber = __webpack_require__(195);
+	var _vue = __webpack_require__(5);
 
-	var _inputNumber2 = _interopRequireDefault(_inputNumber);
+	var _vue2 = _interopRequireDefault(_vue);
+
+	var _index = __webpack_require__(212);
+
+	var _index2 = _interopRequireDefault(_index);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = {
+	_vue2.default.use(_index2.default);
+	var Modal = _index2.default.Modal;
+
+	var ModalDemo = {
 	    components: {
-	        vInputNumber: _inputNumber2.default
+	        Modal: Modal
 	    },
 	    data: function data() {
-	        return {};
+	        return {
+	            modal1: false,
+	            modal2: false,
+	            modal3: false,
+	            modal4: false,
+	            modal5: false,
+	            modal6: false,
+	            modal7: false,
+	            modal8: false,
+	            modal9: false,
+	            modal10: false
+	        };
 	    },
 
-	    methods: {},
-	    ready: function ready() {}
+	    methods: {
+	        modal1OK: function modal1OK() {
+	            console.log('modal1OK');
+	        }
+	    }
 	};
 
+	exports.default = ModalDemo;
+
 /***/ },
-/* 195 */
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _suggestion = __webpack_require__(72);
+
+	var _suggestion2 = _interopRequireDefault(_suggestion);
+
+	var _datepicker = __webpack_require__(92);
+
+	var _datepicker2 = _interopRequireDefault(_datepicker);
+
+	var _daterangepicker = __webpack_require__(103);
+
+	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
+
+	var _inputNumber = __webpack_require__(213);
+
+	var _inputNumber2 = _interopRequireDefault(_inputNumber);
+
+	var _loading = __webpack_require__(40);
+
+	var _loading2 = _interopRequireDefault(_loading);
+
+	var _modal = __webpack_require__(218);
+
+	var _modal2 = _interopRequireDefault(_modal);
+
+	var _pageloading = __webpack_require__(223);
+
+	var _pageloading2 = _interopRequireDefault(_pageloading);
+
+	var _pagination = __webpack_require__(30);
+
+	var _pagination2 = _interopRequireDefault(_pagination);
+
+	var _popover = __webpack_require__(50);
+
+	var _popover2 = _interopRequireDefault(_popover);
+
+	var _progress = __webpack_require__(228);
+
+	var _progress2 = _interopRequireDefault(_progress);
+
+	var _select = __webpack_require__(120);
+
+	var _select2 = _interopRequireDefault(_select);
+
+	var _tag = __webpack_require__(82);
+
+	var _tag2 = _interopRequireDefault(_tag);
+
+	var _toaster = __webpack_require__(202);
+
+	var _toaster2 = _interopRequireDefault(_toaster);
+
+	var _tooltip = __webpack_require__(62);
+
+	var _tooltip2 = _interopRequireDefault(_tooltip);
+
+	var _install = __webpack_require__(233);
+
+	var _install2 = _interopRequireDefault(_install);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var install = function install(Vue) {
+	    if (install.installed) {
+	        return;
+	    }
+	    Vue.component(_suggestion2.default.name, _suggestion2.default);
+	    Vue.component(_datepicker2.default.name, _datepicker2.default);
+	    Vue.component(_daterangepicker2.default.name, _daterangepicker2.default);
+	    Vue.component(_inputNumber2.default.name, _inputNumber2.default);
+	    Vue.component(_loading2.default.name, _loading2.default);
+	    Vue.component(_modal2.default.name, _modal2.default);
+	    Vue.component(_pageloading2.default.name, _pageloading2.default);
+	    Vue.component(_pagination2.default.name, _pagination2.default);
+	    Vue.component(_popover2.default.name, _popover2.default);
+	    Vue.component(_progress2.default.name, _progress2.default);
+	    Vue.component(_select2.default.name, _select2.default);
+	    Vue.component(_tag2.default.name, _tag2.default);
+	    Vue.component(_toaster2.default.name, _toaster2.default);
+	    Vue.component(_tooltip2.default.name, _tooltip2.default);
+
+	    Vue.use(_install2.default);
+	};
+
+	var xcui = {
+	    version: '1.0.0-alpha',
+	    Suggestion: _suggestion2.default,
+	    Datepicker: _datepicker2.default,
+	    DateRangePicker: _daterangepicker2.default,
+	    InputNumber: _inputNumber2.default,
+	    Loading: _loading2.default,
+	    Modal: _modal2.default,
+	    PageLoading: _pageloading2.default,
+	    Pagination: _pagination2.default,
+	    Popover: _popover2.default,
+	    Progress: _progress2.default,
+	    Select: _select2.default,
+	    Tag: _tag2.default,
+	    Toaster: _toaster2.default,
+	    Tooltip: _tooltip2.default,
+
+	    install: install,
+	    xcuiInstall: _install2.default
+	};
+
+	module.exports = xcui;
+
+/***/ },
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(196)
-	__vue_script__ = __webpack_require__(198)
+	__webpack_require__(214)
+	__vue_script__ = __webpack_require__(216)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\inputNumber\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(199)
+	__vue_template__ = __webpack_require__(217)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -21716,23 +21997,23 @@
 	})()}
 
 /***/ },
-/* 196 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(197);
+	var content = __webpack_require__(215);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-653ad3ae&scoped=true!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-653ad3ae&scoped=true!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -21742,21 +22023,21 @@
 	}
 
 /***/ },
-/* 197 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".outer[_v-653ad3ae] {\n  overflow: hidden;\n  display: inline-block;\n  border: 1px solid #c1c1c1;\n  border-radius: 5px;\n}\n.outer[_v-653ad3ae]:hover {\n  border: 1px solid #2db7f5;\n}\n.outer:hover .up-down-wrap[_v-653ad3ae] {\n  border-left: 1px solid #c1c1c1;\n}\n.outer:hover .up-down-wrap .up-wrap[_v-653ad3ae] {\n  color: #c1c1c1;\n  border-bottom: 1px solid #c1c1c1;\n  border-radius: 1px;\n}\n.outer:hover .up-down-wrap .down-wrap[_v-653ad3ae] {\n  color: #c1c1c1;\n}\n.outer .input-wrap[_v-653ad3ae] {\n  float: right;\n}\n.outer .input-wrap input[_v-653ad3ae] {\n  padding-left: 5px;\n  float: right;\n  background-color: white;\n  border: none;\n}\n.outer .input-wrap input[_v-653ad3ae]:focus {\n  outline: none !important;\n}\n.outer .up-down-wrap[_v-653ad3ae] {\n  width: 20px;\n  margin-left: -22px;\n  border: none;\n  text-align: center;\n  float: right;\n  position: relative;\n}\n.outer .up-down-wrap .up-wrap[_v-653ad3ae] {\n  border: none;\n  display: block;\n}\n.outer .up-down-wrap .down-wrap[_v-653ad3ae] {\n  border: none;\n  display: block;\n}\n.outer .up-down-wrap a[_v-653ad3ae]:link,\n.outer .up-down-wrap a[_v-653ad3ae]:visited {\n  color: #fff;\n  text-decoration: none;\n}\n.outer .up-down-wrap a[_v-653ad3ae]:hover,\n.outer .up-down-wrap a[_v-653ad3ae]:active {\n  color: #2db7f5 !important;\n  text-decoration: none;\n}\n.large[_v-653ad3ae] {\n  height: 45px !important;\n}\n.large .input-wrap input[_v-653ad3ae] {\n  height: 40px !important;\n}\n.large .up-down-wrap[_v-653ad3ae] {\n  height: 40px !important;\n}\n.large .up-down-wrap .up-wrap[_v-653ad3ae] {\n  margin-top: 4px !important;\n}\n.large .up-down-wrap .down-wrap[_v-653ad3ae] {\n  margin-top: 4px !important;\n}\n.normal[_v-653ad3ae] {\n  height: 30px !important;\n  vertical-align: middle;\n}\n.normal .input-wrap input[_v-653ad3ae] {\n  height: 30px !important;\n}\n.normal .up-down-wrap[_v-653ad3ae] {\n  height: 30px !important;\n}\n.normal .up-down-wrap .up-wrap[_v-653ad3ae] {\n  font-size: 1px !important;\n  margin: 0 !important;\n}\n.normal .up-down-wrap .down-wrap[_v-653ad3ae] {\n  font-size: 1px !important;\n  margin: 0 !important;\n}\n", ""]);
+	exports.push([module.id, ".outer {\n  overflow: hidden;\n  display: inline-block;\n  border: 1px solid #c1c1c1;\n  border-radius: 5px;\n}\n.outer:hover {\n  border: 1px solid #2db7f5;\n}\n.outer:hover .up-down-wrap {\n  border-left: 1px solid #c1c1c1;\n}\n.outer:hover .up-down-wrap .up-wrap {\n  color: #c1c1c1;\n  border-bottom: 1px solid #c1c1c1;\n  border-radius: 1px;\n}\n.outer:hover .up-down-wrap .down-wrap {\n  color: #c1c1c1;\n}\n.outer .input-wrap {\n  float: right;\n}\n.outer .input-wrap input {\n  padding-left: 5px;\n  float: right;\n  background-color: #ffffff;\n  border: none;\n  padding-right: 20px;\n}\n.outer .input-wrap input:focus {\n  outline: none !important;\n}\n.outer .up-down-wrap {\n  width: 20px;\n  margin-left: -22px;\n  border: none;\n  text-align: center;\n  float: right;\n  position: relative;\n}\n.outer .up-down-wrap .up-wrap {\n  border: none;\n  display: block;\n}\n.outer .up-down-wrap .down-wrap {\n  border: none;\n  display: block;\n}\n.outer .up-down-wrap a:link,\n.outer .up-down-wrap a:visited {\n  color: transparent;\n  text-decoration: none;\n}\n.outer .up-down-wrap a:hover,\n.outer .up-down-wrap a:active {\n  color: #2db7f5 !important;\n  text-decoration: none;\n}\n.large {\n  height: 45px !important;\n}\n.large .input-wrap input {\n  height: 40px !important;\n}\n.large .up-down-wrap {\n  height: 100% !important;\n}\n.large .up-down-wrap .up-wrap {\n  margin-top: 4px !important;\n}\n.large .up-down-wrap .down-wrap {\n  margin-top: 4px !important;\n}\n.normal {\n  height: 100% !important;\n  vertical-align: middle;\n}\n.normal .input-wrap input {\n  height: 30px !important;\n}\n.normal .up-down-wrap {\n  height: 30px !important;\n}\n.normal .up-down-wrap .up-wrap {\n  font-size: 1px !important;\n  margin: 0 !important;\n}\n.normal .up-down-wrap .down-wrap {\n  font-size: 1px !important;\n  margin: 0 !important;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 198 */
+/* 216 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21765,6 +22046,7 @@
 	    value: true
 	});
 	exports.default = {
+	    name: 'xcui-inputnumber',
 	    props: {
 	        maxValue: {
 	            type: Number
@@ -21793,8 +22075,7 @@
 	            default: 'large'
 	        },
 	        inputValue: {
-	            type: String,
-	            default: ''
+	            type: Number
 	        }
 	    },
 	    data: function data() {
@@ -21803,7 +22084,7 @@
 
 	    methods: {
 	        changeValue: function changeValue(event) {
-	            if (this.isAvailbale(event.keyCode)) {
+	            if (this.isAvailbale(event.keyCode) && this.isNumber(this.inputValue + '')) {
 	                this.inputValue = this.limitValue(this.inputValue) + '';
 	            } else {
 	                this.inputValue = '';
@@ -21830,16 +22111,14 @@
 	                return true;
 	            }
 
-	            if (keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 39) {
+	            if (keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 39 || keyCode === 189) {
 	                return true;
 	            }
 	            return false;
 	        },
 	        isNumber: function isNumber(num) {
-	            if (window.parseInt(num) === window.Number(num)) {
-	                return true;
-	            }
-	            return false;
+	            var result = /^(-)?\d*$/.test(num);
+	            return result;
 	        },
 	        upValue: function upValue(e) {
 	            if (this.isNumber(this.inputValue)) {
@@ -21865,269 +22144,23 @@
 	};
 
 /***/ },
-/* 199 */
+/* 217 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div v-el:outer=\"\" class=\"outer\" :class=\"size\" _v-653ad3ae=\"\">\n\t<div class=\"up-down-wrap\" _v-653ad3ae=\"\">\n\t\t<a href=\"\" class=\"up-wrap glyphicon glyphicon-chevron-up\" @mouse.down=\"preventDefault\" @click=\"upValue\" _v-653ad3ae=\"\">\n\t\t\t<!-- <span class=\"up\"></span> -->\n\t\t</a>\n\t\t<a href=\"\" class=\"down-wrap glyphicon glyphicon-chevron-down\" @mouse.down=\"preventDefault\" @click=\"downValue\" _v-653ad3ae=\"\">\n\t\t\t<!-- <span class=\"down\"></span> -->\n\t\t</a>\n\t</div>\n\t<div class=\"input-wrap\" _v-653ad3ae=\"\">\n\t\t<input type=\"text\" v-el=\"input\" class=\"middle\" v-model=\"inputValue\" @keyup=\"changeValue($event)\" :placeholder=\"textTips\" :disabled=\"isDisable\" :class=\"className\" _v-653ad3ae=\"\">\n\t</div>\n</div>\n";
+	module.exports = "\n<div v-el:outer class=\"outer\" :class=\"size\">\n\t<div class=\"up-down-wrap\">\n\t\t<a href=\"\" class=\"up-wrap glyphicon glyphicon-chevron-up\" @mouse.down=\"preventDefault\" @click=\"upValue\">\n\t\t\t<!-- <span class=\"up\"></span> -->\n\t\t</a>\n\t\t<a href=\"\" class=\"down-wrap glyphicon glyphicon-chevron-down\" @mouse.down=\"preventDefault\" @click=\"downValue\">\n\t\t\t<!-- <span class=\"down\"></span> -->\n\t\t</a>\n\t</div>\n\t<div class=\"input-wrap\">\n\t\t<input type='text' v-el='input' class=\"middle\" v-model=\"inputValue\" @keyup=\"changeValue($event)\" :placeholder=\"textTips\"\n\t\t:disabled =\"isDisable\" :class=\"className\"/>\n\t</div>\n</div>\n";
 
 /***/ },
-/* 200 */
-/***/ function(module, exports) {
-
-	module.exports = "<div><h1>InputNumber数字输入框</h1>\n<h2>使用场景</h2>\n<p>1、数字专用输入框<br />\n2、支持限制输入整数数字范围<br />\n3、支持设置增减数字幅度<br />\n4、支持自定义框内提示文案<br />\n5、支持自定义输入框样式</p>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n\t<div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>InputNumber</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n\t\t\t<div id=\"container\">\n\t\t\t\t<v-input-number\n\t\t\t\t:max-value=\"100\"\n\t\t\t\t:min-value=\"3\"\n\t\t        :step=\"2\"\n\t\t        :is-disable=\"false\"\n\t\t        text-tips=\"请输入结算周期天数\"\n\t\t\t\t></v-input-number>\n\t\t\t\t<p>支持键盘输入周期天数，以2为步长，最小值为3，最大值为100</p>\n\t\t\t\t</br>\n\t\t\t\t<v-input-number\n\t\t\t\t:max-value=\"100\"\n\t\t\t\t:min-value=\"-25\"\n\t\t\t\t:input-value.sync=\"'6'\"\n\t\t        :step=\"5\"\n\t\t        class-name=\"input-define-class\"\n\t\t        :is-disable=\"true\"\n\t\t        size=\"normal\"\n\t\t\t\t></v-input-number>\n\t\t\t\t<p>默认值为6，禁止手动输入，以5为步长，最小值为-25，最大值为100，自定义输入框与字体样式</p>\n\t\t\t</div>\n\t</div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >id</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>container<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n\t&lt;v-input-number\n\t:max-value=\"100\"\n\t:min-value=\"3\"\n       :step=\"2\"\n       :is-disable=\"false\"\n       text-tips=\"请输入结算周期天数\"\n\t\t\t\t><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-input-number</span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>p</span><span class=\"token punctuation\" >></span></span>支持键盘输入周期天数，以2为步长，最小值为3，最大值为100<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>p</span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>br</span><span class=\"token punctuation\" >></span></span>\n\t&lt;v-input-number\n\t:max-value=\"100\"\n\t:min-value=\"-25\"\n\t:input-value.sync=\"'6'\"\n       :step=\"5\"\n       class-name=\"input-define-class\"\n\t\t        :is-disable=\"true\"\n       size=\"normal\"\n\t\t\t\t><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-input-number</span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>p</span><span class=\"token punctuation\" >></span></span>默认值为6，禁止手动输入，以5为步长，最小值为-25，最大值为100，自定义输入框与字体样式<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>p</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>max-value</td>\n<td>Number</td>\n<td>100</td>\n<td>最大值</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>min-value</td>\n<td>Number</td>\n<td>1</td>\n<td>最小值</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>input-value</td>\n<td>String</td>\n<td>空字符串</td>\n<td>默认显示数值</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>step</td>\n<td>Number</td>\n<td>1</td>\n<td>增减步长</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>is-disable</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否禁用键盘输入</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>class-name</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>size</td>\n<td>String</td>\n<td>large</td>\n<td>可选尺寸</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>text-tips</td>\n<td>String</td>\n<td>请输入范围内整数</td>\n<td>自定义提示文案</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 201 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(202)
-	__vue_script__ = __webpack_require__(204)
+	__webpack_require__(219)
+	__vue_script__ = __webpack_require__(221)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\progress.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(210)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-18b17d1f/progress.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 202 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(203);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./progress.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./progress.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 203 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(11)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.info{\n    float: left;\n    padding-right: 10px;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 204 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _progress = __webpack_require__(205);
-
-	var _progress2 = _interopRequireDefault(_progress);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    components: {
-	        vProgress: _progress2.default
-	    },
-	    data: function data() {
-	        return {
-	            percent: 50,
-	            percentInfo: '50/100',
-	            height: 5
-	        };
-	    }
-	};
-
-/***/ },
-/* 205 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(206)
-	__vue_script__ = __webpack_require__(208)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\progress\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(209)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-0ce187d3/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 206 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(207);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 207 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(11)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".xcui-progress {\n  margin: 10px;\n}\n.xcui-progress .xcui-progress-container {\n  width: 100%;\n  margin-right: -50px;\n  padding-right: 50px;\n  display: inline-block;\n}\n.xcui-progress .xcui-progress-outer {\n  width: 100%;\n  background: #ccc;\n  display: inline-block;\n  border-radius: 50px;\n}\n.xcui-progress .xcui-progress-inner {\n  background-color: #2db7f5;\n  border-radius: 50px;\n  position: relative;\n}\n.xcui-progress .xcui-progress-info {\n  display: inline-block;\n}\n.xcui-progress .xcui-progress-inner:after {\n  content: \"\";\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background: #fff;\n  border-radius: 3px;\n  -moz-animation: animate-shine 2s ease-out infinite;\n  -webkit-animation: animate-shine 2s ease-out infinite;\n}\n@-webkit-keyframes animate-shine {\n  0% {\n    opacity: 0;\n    width: 0;\n  }\n  50% {\n    opacity: 0.5;\n  }\n  100% {\n    opacity: 0;\n    width: 95%;\n  }\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 208 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.default = {
-	    name: 'xcui-progress',
-	    data: function data() {
-	        return {
-	            easing: 'linear',
-	            positionUsing: '',
-	            status: null,
-	            showSpinner: true,
-	            template: '<div class="bar" role="bar"><div class="peg"></div></div>',
-	            spinnerSelector: '[role="spinner"]',
-	            parent: 'body',
-	            barSelector: '[role="bar"]'
-	        };
-	    },
-
-	    props: {
-	        percent: {
-	            type: Number,
-	            default: 0
-	        },
-	        percentInfo: {
-	            type: String,
-	            default: ''
-	        },
-	        infoClassName: {
-	            type: String,
-	            default: 'xcui-progress-info'
-	        },
-	        showInfo: {
-	            type: Boolean,
-	            default: false
-	        },
-	        height: {
-	            type: Number,
-	            default: 10
-	        }
-	    }
-	};
-
-/***/ },
-/* 209 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div class=\"xcui-progress\" >\n    <div class=\"xcui-progress-container\">\n        <div class=\"xcui-progress-outer\">\n             <div class=\"xcui-progress-inner\" :style=\"{width:percent+'%',height:height+'px'}\"></div>\n        </div>\n    </div>\n    <div :class=\"infoClassName\" :class={'hidden':!showInfo} >\n        {{percentInfo}}\n    </div>\n<div>\n";
-
-/***/ },
-/* 210 */
-/***/ function(module, exports) {
-
-	module.exports = "<div><h1>Progress进度条</h1>\n<h2>使用场景</h2>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>basic</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <v-progress :percent-info='percentInfo' :percent='percent' :show-info='true'></v-progress>\n        <div style=\"width:200px\">\n        <v-progress :info-class-name=\"'info'\" :percent='percent' :percent-info=\"'50%'\" :height='height'></v-progress>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-progress</span> <span class=\"token attr-name\" >:percent-info</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>percentInfo<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >:percent</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>percent<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >:show-info</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>true<span class=\"token punctuation\" >'</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-progress</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token style-attr language-css\" ><span class=\"token attr-name\" > <span class=\"token attr-name\" >style</span></span><span class=\"token punctuation\" >=\"</span><span class=\"token attr-value\" ><span class=\"token property\" >width</span><span class=\"token punctuation\" >:</span>200px</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-progress</span> <span class=\"token attr-name\" >:info-class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>info<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:percent</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>percent<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >:percent-info</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>50%<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:height</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>height<span class=\"token punctuation\" >'</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-progress</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>percent-info</td>\n<td>Number</td>\n<td>0</td>\n<td>百分比</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>height</td>\n<td>Number</td>\n<td>10</td>\n<td>高度</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-info</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否展示信息</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 211 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(212)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\pageloading.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\components\\modal\\index.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(222)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -22144,7 +22177,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-7f32726a/pageloading.vue"
+	  var id = "_v-04ecc2ba/index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -22153,60 +22186,184 @@
 	})()}
 
 /***/ },
-/* 212 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(220);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(13)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".xcui-modal-wrapper {\n  z-index: 1000;\n  overflow: auto;\n}\n.xcui-modal-wrapper,\n.xcui-modal-mask {\n  position: fixed;\n  top: 0;\n  right: 0;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  -webkit-transition: opacity 0.2s ease;\n  transition: opacity 0.2s ease;\n  background-color: rgba(55, 55, 55, 0.6);\n}\n.xcui-modal {\n  font-size: 14px;\n  position: relative;\n  margin: 0 auto;\n  top: 100px;\n  background-color: #fff;\n  padding: 0;\n  background-color: white;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px 1;\n  -webkit-transition: all 0.2s ease;\n  transition: all 0.2s ease;\n  max-height: 100vh;\n  max-width: 100vw;\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n.xcui-modal.large {\n  width: 45rem;\n}\n.xcui-modal-body {\n  padding: 1.6rem;\n  border-bottom: 1px solid #f3f3f3;\n  min-height: 8rem;\n}\n.xcui-modal-header {\n  font-size: 1.6rem;\n  padding: .6rem;\n  border-bottom: 1px solid #f3f3f3;\n  text-align: center;\n}\n.xcui-modal-header-close {\n  position: absolute;\n  right: 8px;\n  top: 8px;\n  color: #000;\n  opacity: .2;\n  font-weight: 700;\n  line-height: 1;\n  font-size: 20px;\n  outline: 0;\n}\n.xcui-modal-header-close:hover {\n  cursor: pointer;\n  text-decoration: none;\n  opacity: .5;\n}\n.xcui-modal-footer {\n  padding: .5rem 1rem;\n  text-align: center;\n}\n.xcui-modal-footer .xcui-modal-btn {\n  margin-right: .5rem;\n  background-color: #46C3C1;\n  color: #fff;\n  border: #46c3c1 solid 1px;\n  min-width: 75px;\n}\n.xcui-modal-footer .xcui-modal-btn:hover {\n  background-color: #2b9d9b;\n  border: #2b9d9b solid 1px;\n}\n.xcui-modal-footer .xcui-modal-btn:active {\n  background-color: #2b9d9b;\n  border: #2b9d9b solid 1px;\n  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);\n}\n.xcui-modal-footer .xcui-modal-cancel-btn {\n  min-width: 75px;\n}\n.xcui-modal-size-small {\n  width: 22%;\n}\n.xcui-modal-size-middle {\n  width: 30%;\n}\n.xcui-modal-size-large {\n  width: 60%;\n}\n.xcui-modal-size-full {\n  width: 99%;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 221 */
+/***/ function(module, exports) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	var _pageloading = __webpack_require__(213);
-
-	var _pageloading2 = _interopRequireDefault(_pageloading);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	exports.default = {
-	    components: {
-	        vPageloading: _pageloading2.default
+	    name: 'xcui-modal',
+	    props: {
+	        title: {
+	            type: String,
+	            default: '提示'
+	        },
+	        show: {
+	            type: Boolean,
+	            default: false
+	        },
+	        style: {
+	            type: Object
+	        },
+	        contentStyle: {
+	            type: Object
+	        },
+	        size: {
+	            type: String,
+	            default: 'middle'
+	        },
+	        className: {
+	            type: String,
+	            default: ''
+	        },
+	        showHeader: {
+	            type: Boolean,
+	            default: true
+	        },
+	        showFooter: {
+	            type: Boolean,
+	            default: true
+	        },
+	        showCloseButton: {
+	            type: Boolean,
+	            default: true
+	        },
+	        showOkButton: {
+	            type: Boolean,
+	            default: true
+	        },
+	        showCancelButton: {
+	            type: Boolean,
+	            default: true
+	        },
+	        maskClosable: {
+	            type: Boolean,
+	            default: true
+	        },
+	        scrollable: {
+	            type: Boolean,
+	            default: false
+	        },
+	        okText: {
+	            type: String,
+	            default: '确定'
+	        },
+	        cancelText: {
+	            type: String,
+	            default: '取消'
+	        },
+	        onOk: {
+	            type: Function,
+	            default: function _default() {}
+	        },
+	        onCancel: {
+	            type: Function,
+	            default: function _default() {}
+	        }
 	    },
-	    data: function data() {
-	        return {
-	            toppercent: ''
-	        };
+	    watch: {
+	        show: function show(val) {
+	            if (this.scrollable) {
+	                return;
+	            }
+	            if (val) {
+	                document.body.style.overflow = 'hidden';
+	            } else {
+	                document.body.style.overflow = 'auto';
+	            }
+	        }
 	    },
-
+	    computed: {
+	        sizeClass: function sizeClass() {
+	            return 'xcui-modal-size-' + this.size;
+	        }
+	    },
 	    methods: {
-	        start: function start() {
-	            this.$refs.pageLoading.start();
+	        close: function close(e) {
+	            this.show = false;
 	        },
-	        stop: function stop() {
-	            this.$refs.pageLoading.done();
+	        maskClose: function maskClose() {
+	            if (this.maskClosable) {
+	                this.cancel();
+	            }
 	        },
-	        setPercent: function setPercent() {
-	            this.$refs.pageLoading.set(parseFloat(this.toppercent, 10));
+	        ok: function ok() {
+	            var noClose = typeof this.onOk === 'function' && this.onOk();
+	            if (!noClose) {
+	                this.close();
+	            }
 	        },
-	        inc: function inc() {
-	            this.$refs.pageLoading.inc();
+	        cancel: function cancel() {
+	            var noClose = typeof this.onCancel === 'function' && this.onCancel();
+	            if (!noClose) {
+	                this.close();
+	            }
 	        }
 	    }
 	};
 
 /***/ },
-/* 213 */
+/* 222 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"xcui-modal-wrapper\" v-show=\"show\">\n    <div class=\"xcui-modal-mask\" @click=\"maskClose\" v-el:modal-mask></div>\n    <div class=\"xcui-modal\" tabindex=\"-1\" @keydown.esc=\"cancel\" :style=\"style\" :class=\"[sizeClass,className]\">\n        <div class=\"xcui-modal-header\" v-if=\"showHeader\">\n            <slot name=\"header\">\n                <span class=\"xcui-modal-title\">{{title}}</span>\n            </slot>\n            <slot name=\"close\">\n                <!-- <div class=\"xcui-modal-header-close\" @click=\"cancel\" v-if=\"showCloseButton\">X</div> -->\n                <i class=\"xcui-modal-header-close glyphicon glyphicon-remove\" @click=\"cancel\" v-if=\"showCloseButton\"></i>\n            </slot>\n        </div>\n        <div class=\"xcui-modal-body\" :style=\"contentStyle\">\n            <slot></slot>\n        </div>\n        <div class=\"xcui-modal-footer\" v-if=\"showFooter\">\n            <slot name=\"footer\">\n                <button type=\"button\" name=\"button\" v-if=\"showOkButton\" @click=\"ok\"\n                    class=\"btn xcui-modal-btn btn-primary\">{{okText}}</button>\n                <button type=\"button\" name=\"button\" v-if=\"showCancelButton\" @click=\"cancel\"\n                    class=\"btn xcui-modal-cancel-btn btn-default\">{{cancelText}}</button>\n            </slot>\n        </div>\n    </div>\n</div>\n";
+
+/***/ },
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(214)
-	__vue_script__ = __webpack_require__(216)
+	__webpack_require__(224)
+	__vue_script__ = __webpack_require__(226)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\pageloading\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(221)
+	__vue_template__ = __webpack_require__(227)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -22231,16 +22388,16 @@
 	})()}
 
 /***/ },
-/* 214 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(215);
+	var content = __webpack_require__(225);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(12)(content, {});
+	var update = __webpack_require__(13)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22257,39 +22414,30 @@
 	}
 
 /***/ },
-/* 215 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "#nprogress .bar {\n  background: #29d;\n  position: fixed;\n  z-index: 1031;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 2px;\n}\n#nprogress .peg {\n  display: block;\n  position: absolute;\n  right: 0px;\n  width: 100px;\n  height: 100%;\n  box-shadow: 0 0 10px #29d, 0 0 5px #29d;\n  opacity: 1.0;\n  -webkit-transform: rotate(3deg) translate(0px, -4px);\n  transform: rotate(3deg) translate(0px, -4px);\n}\n", ""]);
+	exports.push([module.id, "#xcui-pageloading .bar {\n  background: #29d;\n  position: fixed;\n  z-index: 1031;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 2px;\n}\n#xcui-pageloading .peg {\n  display: block;\n  position: absolute;\n  right: 0px;\n  width: 100px;\n  height: 100%;\n  box-shadow: 0 0 10px #29d, 0 0 5px #29d;\n  opacity: 1.0;\n  -webkit-transform: rotate(3deg) translate(0px, -4px);\n  transform: rotate(3deg) translate(0px, -4px);\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 216 */
-/***/ function(module, exports, __webpack_require__) {
+/* 226 */
+/***/ function(module, exports) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	var _defineProperty2 = __webpack_require__(217);
-
-	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
-	var _methods;
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	exports.default = {
-	    name: 'xcui-progress',
+	    name: 'xcui-pageloading',
 	    data: function data() {
 	        return {
 	            easing: 'linear',
@@ -22302,10 +22450,6 @@
 	    },
 
 	    props: {
-	        active: {
-	            type: Boolean,
-	            default: false
-	        },
 	        minimum: {
 	            type: Number,
 	            default: 0.08
@@ -22323,7 +22467,7 @@
 	            default: 250
 	        }
 	    },
-	    methods: (_methods = {
+	    methods: {
 	        set: function set(n) {
 	            var started = this.isStarted();
 
@@ -22416,19 +22560,18 @@
 	        }(),
 	        render: function render(fromStart) {
 	            if (this.isRendered()) {
-	                return document.getElementById('nprogress');
+	                return document.getElementById('xcui-pageloading');
 	            }
 
-	            this.addClass(document.documentElement, 'nprogress-busy');
+	            this.addClass(document.documentElement, 'xcui-pageloading-busy');
 
 	            var progress = document.createElement('div');
-	            progress.id = 'nprogress';
+	            progress.id = 'xcui-pageloading';
 	            progress.innerHTML = this.template;
 
 	            var bar = progress.querySelector(this.barSelector);
 	            var perc = fromStart ? '-100' : this.toBarPerc(this.status || 0);
 	            var parent = document.querySelector(this.parent);
-	            var spinner = void 0;
 
 	            this.css(bar, {
 	                transition: 'all 0 linear',
@@ -22436,7 +22579,7 @@
 	            });
 
 	            if (parent !== document.body) {
-	                this.addClass(parent, 'nprogress-custom-parent');
+	                this.addClass(parent, 'xcui-pageloading-custom-parent');
 	            }
 
 	            parent.appendChild(progress);
@@ -22516,9 +22659,11 @@
 
 	                if (args.length === 0) {
 	                    for (prop in properties) {
-	                        value = properties[prop];
-	                        if (value !== undefined && properties.hasOwnProperty(prop)) {
-	                            applyCss(element, prop, value);
+	                        if (properties.hasOwnProperty(prop)) {
+	                            value = properties[prop];
+	                            if (value !== undefined && properties.hasOwnProperty(prop)) {
+	                                applyCss(element, prop, value);
+	                            }
 	                        }
 	                    }
 	                } else {
@@ -22527,9 +22672,9 @@
 	            };
 	        }(),
 	        remove: function remove() {
-	            this.removeClass(document.documentElement, 'nprogress-busy');
-	            this.removeClass(document.querySelector(this.parent), 'nprogress-custom-parent');
-	            var progress = document.getElementById('nprogress');
+	            this.removeClass(document.documentElement, 'xcui-pageloading-busy');
+	            this.removeClass(document.querySelector(this.parent), 'xcui-pageloading-custom-parent');
+	            var progress = document.getElementById('xcui-pageloading');
 	            progress && this.removeElement(progress);
 	        },
 	        removeClass: function removeClass(element) {
@@ -22542,9 +22687,6 @@
 	            newList = oldList.replace(' ' + name + ' ', ' ');
 
 	            element.className = newList.substring(1, newList.length - 1);
-	        },
-	        classList: function classList(element) {
-	            return (' ' + (element && element.className || '') + ' ').replace(/\s+/gi, ' ');
 	        },
 	        getPositioningCSS: function getPositioningCSS() {
 	            var bodyStyle = document.body.style;
@@ -22567,9 +22709,8 @@
 	                return 'translate3d';
 	            } else if (vendorPrefix + 'Transform' in bodyStyle) {
 	                return 'translate';
-	            } else {
-	                return 'margin';
 	            }
+	            return 'margin';
 	        },
 	        toBarPerc: function toBarPerc(n) {
 	            return (-1 + n) * 100;
@@ -22578,7 +22719,7 @@
 	            return typeof this.status === 'number';
 	        },
 	        isRendered: function isRendered() {
-	            return !!document.getElementById('nprogress');
+	            return !!document.getElementById('xcui-pageloading');
 	        },
 	        addClass: function addClass(element, name) {
 	            var oldList = this.classList(element);
@@ -22592,24 +22733,25 @@
 	        },
 	        removeElement: function removeElement(element) {
 	            element && element.parentNode && element.parentNode.removeChild(element);
-	        }
-	    }, (0, _defineProperty3.default)(_methods, 'toBarPerc', function toBarPerc(n) {
-	        return (-1 + n) * 100;
-	    }), (0, _defineProperty3.default)(_methods, 'hasClass', function hasClass(element, name) {
-	        var list = typeof element === 'string' ? element : this.classList(element);
-	        return list.indexOf(' ' + name + ' ') >= 0;
-	    }), (0, _defineProperty3.default)(_methods, 'classList', function classList(element) {
-	        return (' ' + (element && element.className || '') + ' ').replace(/\s+/gi, ' ');
-	    }), (0, _defineProperty3.default)(_methods, 'trickle', function trickle() {
-	        return this.inc();
-	    }), (0, _defineProperty3.default)(_methods, 'inc', function inc(amount) {
-	        var n = this.status;
+	        },
+	        hasClass: function hasClass(element, name) {
+	            var list = typeof element === 'string' ? element : this.classList(element);
+	            return list.indexOf(' ' + name + ' ') >= 0;
+	        },
+	        classList: function classList(element) {
+	            return (' ' + (element && element.className || '') + ' ').replace(/\s+/gi, ' ');
+	        },
+	        trickle: function trickle() {
+	            return this.inc();
+	        },
+	        inc: function inc(amount) {
+	            var n = this.status;
 
-	        if (!n) {
-	            return this.start();
-	        } else if (n > 1) {
-	            return;
-	        } else {
+	            if (!n) {
+	                return this.start();
+	            } else if (n > 1) {
+	                return;
+	            }
 	            if (typeof amount !== 'number') {
 	                if (n >= 0 && n < 0.25) {
 	                    amount = (Math.random() * (5 - 3 + 1) + 3) / 100;
@@ -22627,73 +22769,617 @@
 	            n = this.clamp(n + amount, 0, 0.994);
 	            return this.set(n);
 	        }
-	    }), _methods)
+	    }
 	};
 
 /***/ },
-/* 217 */
+/* 227 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"xcui-pageloading\">\n    <div class=\"bar\" role=\"bar\">\n        <div class=\"peg\"></div>\n    </div>\n</div>\n";
+
+/***/ },
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(229)
+	__vue_script__ = __webpack_require__(231)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\progress\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(232)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-0ce187d3/index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
 
-	exports.__esModule = true;
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var _defineProperty = __webpack_require__(218);
+	// style-loader: Adds some css to the DOM by adding a <style> tag
 
-	var _defineProperty2 = _interopRequireDefault(_defineProperty);
+	// load the styles
+	var content = __webpack_require__(230);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(13)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".xcui-progress {\n  margin: 10px;\n}\n.xcui-progress .xcui-progress-container {\n  width: 100%;\n  margin-right: -50px;\n  padding-right: 50px;\n  display: inline-block;\n}\n.xcui-progress .xcui-progress-outer {\n  width: 100%;\n  background: #ccc;\n  display: inline-block;\n  border-radius: 50px;\n}\n.xcui-progress .xcui-progress-inner {\n  background-color: #2db7f5;\n  border-radius: 50px;\n  position: relative;\n}\n.xcui-progress .xcui-progress-info {\n  display: inline-block;\n}\n.xcui-progress .xcui-progress-inner:after {\n  content: \"\";\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  background: #fff;\n  border-radius: 3px;\n  -moz-animation: animate-shine 2s ease-out infinite;\n  -webkit-animation: animate-shine 2s ease-out infinite;\n}\n@-webkit-keyframes animate-shine {\n  0% {\n    opacity: 0;\n    width: 0;\n  }\n  50% {\n    opacity: 0.5;\n  }\n  100% {\n    opacity: 0;\n    width: 95%;\n  }\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 231 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    name: 'xcui-progress',
+	    props: {
+	        percent: {
+	            type: Number,
+	            default: 0
+	        },
+	        percentInfo: {
+	            type: String,
+	            default: ''
+	        },
+	        infoClassName: {
+	            type: String,
+	            default: 'xcui-progress-info'
+	        },
+	        showInfo: {
+	            type: Boolean,
+	            default: false
+	        },
+	        height: {
+	            type: Number,
+	            default: 10
+	        }
+	    }
+	};
+
+/***/ },
+/* 232 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"xcui-progress\" >\n    <div class=\"xcui-progress-container\">\n        <div class=\"xcui-progress-outer\">\n             <div class=\"xcui-progress-inner\" :style=\"{width:percent+'%',height:height+'px'}\"></div>\n        </div>\n    </div>\n    <div :class=\"['infoClassName',!showInfo ? 'hidden':'']\" >\n        {{percentInfo}}\n    </div>\n<div>\n";
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _install = __webpack_require__(234);
+
+	var _install2 = _interopRequireDefault(_install);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = function (obj, key, value) {
-	  if (key in obj) {
-	    (0, _defineProperty2.default)(obj, key, {
-	      value: value,
-	      enumerable: true,
-	      configurable: true,
-	      writable: true
+	var xcuiInstall = {};
+	xcuiInstall.install = function (Vue) {
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+	        Modal: true,
+	        Toaster: true
+	    };
+
+	    if (options.Modal) {
+	        (0, _install2.default)(Vue);
+	    }
+	};
+
+	exports.default = xcuiInstall;
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _typeof2 = __webpack_require__(124);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	var _keys = __webpack_require__(193);
+
+	var _keys2 = _interopRequireDefault(_keys);
+
+	var _index = __webpack_require__(218);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var modalInstance = void 0;
+	var newModalInstance = function newModalInstance(Vue) {
+	    var camelcaseToHyphen = function camelcaseToHyphen(str) {
+	        return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+	    };
+
+	    var isEmptyObject = function isEmptyObject(obj) {
+	        return !(0, _keys2.default)(obj).length;
+	    };
+
+	    var PROPERTIES = ['title', 'style', 'contentStyle', 'size', 'className', 'showFooter', 'showHeader', 'showCloseButton', 'showOkButton', 'showCancelButton', 'maskClosable', 'scrollable', 'okText', 'cancelText', 'onOk', 'onCancel'];
+
+	    var div = document.createElement('div');
+	    var propsString = PROPERTIES.reduce(function (preValue, curValue) {
+	        return preValue + ' :' + camelcaseToHyphen(curValue) + '="' + curValue + '"';
+	    }, '');
+	    div.innerHTML = '\n        <Modal' + propsString + ' :show.sync="show">\n            <template v-if="!isRawHTML">\n                {{content}}\n            </template>\n            <div v-else>\n                {{{content}}}\n            </div>\n        </Modal>\n    ';
+	    document.body.appendChild(div);
+
+	    var modalVM = new Vue({
+	        el: div,
+	        components: {
+	            Modal: _index2.default
+	        },
+	        data: function data() {
+	            return {
+	                show: false,
+	                content: '',
+	                isRawHTML: false,
+
+	                title: '提示',
+	                style: {},
+	                contentStyle: {},
+	                size: 'middle',
+	                className: '',
+	                showFooter: true,
+	                showHeader: true,
+	                showCloseButton: true,
+	                showOkButton: true,
+	                showCancelButton: true,
+	                maskClosable: true,
+	                scrollable: false,
+	                okText: '确定',
+	                cancelText: '取消',
+	                onOk: function onOk() {},
+	                onCancel: function onCancel() {}
+	            };
+	        }
 	    });
+
+	    return {
+	        show: function show(props) {
+	            props = !props || isEmptyObject(props) ? {} : props;
+	            modalVM.content = props.content ? props.content : '';
+
+	            (0, _keys2.default)(props).forEach(function (propKey) {
+	                modalVM[propKey] = props[propKey];
+	            });
+	            modalVM.show = true;
+	        },
+	        remove: function remove() {
+	            modalVM.show = false;
+	        },
+	        _chooseContentMode: function _chooseContentMode(isRawHTML) {
+	            modalVM.isRawHTML = !!isRawHTML;
+	        }
+	    };
+	};
+
+	var getModalInstance = function getModalInstance(Vue, isRawHTML) {
+	    modalInstance = modalInstance || newModalInstance(Vue);
+	    modalInstance._chooseContentMode(isRawHTML);
+	    return modalInstance;
+	};
+
+	var ModalInstall = function ModalInstall(Vue) {
+	    var modalFunc = {
+	        show: function show(options, isRawHTML) {
+	            var instance = getModalInstance(Vue, isRawHTML);
+	            instance.show(options);
+	        },
+	        close: function close() {
+	            if (!modalInstance) {
+	                return false;
+	            }
+	            var instance = getModalInstance(Vue);
+	            instance.remove();
+	        }
+	    };
+	    Vue.prototype.$Modal = modalFunc;
+	    Vue.prototype.$confirm = function (title, content, onOk, onCancel, isRawHTML) {
+	        var options = {};
+	        var type = isRawHTML;
+	        if ((typeof title === 'undefined' ? 'undefined' : (0, _typeof3.default)(title)) === 'object') {
+	            options = title;
+	            type = content;
+	        } else {
+	            options.title = title;
+	            options.content = content;
+	            options.onOk = onOk;
+	            options.onCancel = onCancel;
+	        }
+	        modalFunc.show(options, type);
+	    };
+
+	    Vue.prototype.$alert = function (content, onOk) {
+	        var options = {
+	            showHeader: false,
+	            showCancelButton: false,
+	            size: 'small',
+	            maskClosable: false,
+	            okText: '确定',
+	            scrollable: false
+	        };
+	        options.content = content;
+	        options.onOk = onOk;
+	        modalFunc.show(options);
+	    };
+	};
+
+	exports.default = ModalInstall;
+
+/***/ },
+/* 235 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h2>Modal 模态窗口</h2>\n<h3>使用场景</h3>\n<p>模拟浏览器的 <code>alert</code>、<code>confirm</code></p>\n<h3>Demo</h3>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>基础使用</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <button class=\"btn btn-default\" @click=\"this.modal1 = true\">显示对话框</button>\n        <Modal\n        :show.sync=\"modal1\"\n        title=\"基础弹窗\"\n        :on-ok=\"modal1OK\">\n        <div>XCUI，做有品质的外卖UI</div>\n        </Modal>\n        <div>通过控制show来显示/隐藏对话框，需要将show设置为.sync双向绑定</div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal1 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>显示对话框<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n&lt;Modal\n:show.sync=\"modal1\"\ntitle=\"基础弹窗\"\n        :on-ok=\"modal1OK\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>XCUI，做有品质的外卖UI<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>通过控制show来显示/隐藏对话框，需要将show设置为.sync双向绑定<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>定义元素的显示</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <button class=\"btn btn-default\" @click=\"this.modal2 = true\">自定义页头</button>\n        <button class=\"btn btn-default\" @click=\"this.modal3 = true\">不带标题栏</button>\n        <button class=\"btn btn-default\" @click=\"this.modal4 = true\">不带关闭按钮</button>\n        <button class=\"btn btn-default\" @click=\"this.modal5 = true\">不带页脚</button>\n        <button class=\"btn btn-default\" @click=\"this.modal6 = true\">不带关闭按钮和页脚</button>\n        <Modal\n        :show.sync=\"modal2\"\n        title=\"自定义页头（有slot则无效）\">\n        <span slot=\"header\" class=\"xcui-modal-demo-title\">不一样的页头</span>\n        <div>我跟你不一样，我有你没有的头脑</div>\n        </Modal>\n        <Modal\n        :show.sync=\"modal3\"\n        :show-header=\"false\">\n        <div>无头骑士。生前是一名勇猛的骑士，由于在战场上不幸阵亡，首级被敌人割去，因此每逢月黑风高的夜晚他便会骑着一匹同为亡灵的马出没于沉睡谷，四处寻找自己遗失的首级；而每当看见与自己生前长相相似者便会斩其头颅带回。</div>\n        </Modal>\n        <Modal\n        :show.sync=\"modal4\"\n        title=\"不带关闭按钮\"\n        :show-close-button=\"false\">\n        <div>不带关闭按钮</div>\n        </Modal>\n        <Modal\n        :show.sync=\"modal5\"\n        title=\"不带页脚\"\n        :show-footer=\"false\">\n        <div>即使我失去了双脚，我依然顶天立地</div>\n        </Modal>\n        <Modal\n        :show.sync=\"modal6\"\n        :show-close-button=\"false\"\n        :show-footer=\"false\">\n        <div>我且问你，除了刷新，你能如何关闭我？</div>\n        </Modal>\n        <div>Modal提供了灵活的组件化API和Slot，可以自由控制整个Modal的组成部分。比如，页头、页脚和关闭按钮</div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal2 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>自定义页头<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal3 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不带标题栏<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal4 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不带关闭按钮<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal5 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不带页脚<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal6 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不带关闭按钮和页脚<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n&lt;Modal\n:show.sync=\"modal2\"\ntitle=\"自定义页头（有slot则无效）\">\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>span</span> <span class=\"token attr-name\" >slot</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>header<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>xcui-modal-demo-title<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不一样的页头<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>span</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>我跟你不一样，我有你没有的头脑<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\n&lt;Modal\n:show.sync=\"modal3\"\n:show-header=\"false\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>无头骑士。生前是一名勇猛的骑士，由于在战场上不幸阵亡，首级被敌人割去，因此每逢月黑风高的夜晚他便会骑着一匹同为亡灵的马出没于沉睡谷，四处寻找自己遗失的首级；而每当看见与自己生前长相相似者便会斩其头颅带回。<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\n&lt;Modal\n:show.sync=\"modal4\"\ntitle=\"不带关闭按钮\"\n        :show-close-button=\"false\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>不带关闭按钮<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\n&lt;Modal\n:show.sync=\"modal5\"\ntitle=\"不带页脚\"\n        :show-footer=\"false\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>即使我失去了双脚，我依然顶天立地<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\n&lt;Modal\n:show.sync=\"modal6\"\n:show-close-button=\"false\"\n:show-footer=\"false\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>我且问你，除了刷新，你能如何关闭我？<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>Modal提供了灵活的组件化API和Slot，可以自由控制整个Modal的组成部分。比如，页头、页脚和关闭按钮<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>自定义样式</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <button class=\"btn btn-default\" @click=\"this.modal7 = true\">Full对话框</button>\n        <button class=\"btn btn-default\" @click=\"this.modal8 = true\">Small对话框</button>\n        <button class=\"btn btn-default\" @click=\"this.modal9 = true\">自定义Style</button>\n        <button class=\"btn btn-default\" @click=\"this.modal10 = true\">自定义class-name</button>\n        <Modal\n        :show.sync=\"modal7\"\n        :size=\"'full'\"\n        title=\"Full对话框\">\n        <div>心宽体肥，宅心仁厚。</div>\n        </Modal>\n        <Modal\n        :show.sync=\"modal8\"\n        :size=\"'small'\"\n        title=\"Small对话框\">\n        <div>即使我小，这世间也会有我的一席之地。因为我小巧玲珑，精灵剔透。</div>\n        </Modal>\n        <Modal\n        :show.sync=\"modal9\"\n        :style=\"{'transform': 'rotate(-10deg)'}\"\n        title=\"自定义Style\">\n        <div>身正不怕影子斜</div>\n        </Modal>\n        <Modal\n        :show.sync=\"modal10\"\n        title=\"自定义class-name\"\n        :class-name=\"'xcui-modal-demo-class'\">\n        <div>欲与天公试比高</div>\n        </Modal>\n        <style>\n        .Modal-demo-class { top: 0; }\n        </style>\n        <div>通过设置size可以快速设置对话框的宽度大小，也可以设置class-name和style自定义Modal的样式</div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal7 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Full对话框<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal8 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Small对话框<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal9 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>自定义Style<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal10 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>自定义class-name<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n&lt;Modal\n:show.sync=\"modal7\"\n:size=\"'full'\"\ntitle=\"Full对话框\">\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>心宽体肥，宅心仁厚。<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\n&lt;Modal\n:show.sync=\"modal8\"\n:size=\"'small'\"\ntitle=\"Small对话框\">\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>即使我小，这世间也会有我的一席之地。因为我小巧玲珑，精灵剔透。<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\n&lt;Modal\n:show.sync=\"modal9\"\n:style=\"{'transform': 'rotate(-10deg)'}\"\ntitle=\"自定义Style\">\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>身正不怕影子斜<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\n&lt;Modal\n:show.sync=\"modal10\"\ntitle=\"自定义class-name\"\n        :class-name=\"'xcui-modal-demo-class'\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>欲与天公试比高<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>style</span><span class=\"token punctuation\" >></span></span><span class=\"token style language-css\" ><span class=\"token selector\" >\n.Modal-demo-class</span> <span class=\"token punctuation\" >{</span> <span class=\"token property\" >top</span><span class=\"token punctuation\" >:</span> 0<span class=\"token punctuation\" >;</span> <span class=\"token punctuation\" >}</span>\n        </span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>style</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>通过设置size可以快速设置对话框的宽度大小，也可以设置class-name和style自定义Modal的样式<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>show</td>\n<td>Boolean</td>\n<td>false</td>\n<td>对话框是否显示,需要.sync双向绑定</td>\n<td><strong>必选</strong></td>\n</tr>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的标题，如果slot定义了header，则title无效</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>mask-closable</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否允许点击遮罩层关闭对话框</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>scrollable</td>\n<td>Boolean</td>\n<td>false</td>\n<td>打开Modal后，是否允许底页可滚动</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-close-button</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示右上角的关闭按钮</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-ok-button</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示确定按钮</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-cancel-button</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示取消按钮</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-header</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示整个标题栏</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-footer</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示整个底边栏</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>ok-text</td>\n<td>String</td>\n<td>确定</td>\n<td>确定按钮的文字</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>cancel-text</td>\n<td>String</td>\n<td>取消</td>\n<td>取消按钮的文字</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>size</td>\n<td>String</td>\n<td>middle</td>\n<td>预设对话框浮层的宽度大小。可选值：small/middle/large/full</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>class-name</td>\n<td>String</td>\n<td>-</td>\n<td>自定义样式类名</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>style</td>\n<td>object</td>\n<td>-</td>\n<td>设置对话框浮层的样式，调整浮层位置等。该属性设置的是.Modal的样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content-style</td>\n<td>object</td>\n<td>-</td>\n<td>设置对话框内容主体的样式。该属性设置的是.Modal-body的样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h2>Events</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>on-ok</td>\n<td>点击确定的回调函数。回调函数如果返回真值(true)，则不再关闭对话框；如果返回假值(false)或不返回，则默认执行on-ok后关闭对话框</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>on-cancel</td>\n<td>点击取消和右上角关闭的回调函数。回调函数如果返回真值(true)，则不再关闭对话框；如果返回假值(false)或不返回，则默认执行on-cancel后关闭对话框</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h2>Slot</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>描述</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>header</td>\n<td>自定义页头</td>\n</tr>\n<tr>\n<td>footer</td>\n<td>自定义页脚内容</td>\n</tr>\n<tr>\n<td>close</td>\n<td>自定义右上角关闭按钮</td>\n</tr>\n<tr>\n<td>-</td>\n<td>对话框的主体内容</td>\n</tr>\n</tbody>\n</table>\n<h2>Modal 全局方法</h2>\n<p>XCUI为Modal提供了便捷的调用方式。在Vue.prototype中添加了快捷的方法：$Modal.show,$Modal.close, $confirm和$alert。因此，在Vue实例代码中，可以使用this.$Modal等方法快捷地创建一个对话框。<br />\n但需要在调用这些全局方法之前，先在项目中引入XCUI或xcuiInstall，并调用Vue.use安装。</p>\n<p>引入方式一：</p>\n<pre><span class=\"token keyword\" >import</span> Vue <span class=\"token keyword\" >from</span> <span class=\"token string\" >'vue'</span>\n<span class=\"token keyword\" >import</span> XCUI <span class=\"token keyword\" >from</span> <span class=\"token string\" >'xcui'</span> <span class=\"token comment\" spellcheck=\"true\">// 全局引入</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>XCUI<span class=\"token punctuation\" >)</span>\n</pre>\n<p>引入方式二：</p>\n<pre><span class=\"token keyword\" >import</span> Vue <span class=\"token keyword\" >from</span> <span class=\"token string\" >'vue'</span>\n<span class=\"token keyword\" >import</span> <span class=\"token punctuation\" >{</span>xcuiInstall<span class=\"token punctuation\" >}</span> <span class=\"token keyword\" >from</span> <span class=\"token string\" >'xcui'</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcuiInstall<span class=\"token punctuation\" >)</span>\n</pre>\n<p>做好以上准备工作后，即可在组件任何位置调用vm.$confirm等来隐式地创建一个对话框了。</p>\n<ol>\n<li><strong>this.$Modal.show(options)</strong></li>\n</ol>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>options</td>\n<td>Object</td>\n<td>-</td>\n<td>对话框的参数，属性同props</td>\n<td><strong>必选</strong></td>\n</tr>\n</tbody>\n</table>\n<ol start=\"2\">\n<li><strong>this.$Modal.close()</strong></li>\n</ol>\n<p><code>$Modal.close()</code>提供隐式地关闭对话框全局实例的能力。</p>\n<ol start=\"3\">\n<li><strong>this.$confirm(title, content, onOk, onCancel, isRawHTML)</strong> 或 <strong>this.$confirm(options, isRawHTML)</strong></li>\n</ol>\n<p>写法1：</p>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的标题</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的内容，可通过isRawHTML指定是否解析为原生HTML</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>onOk</td>\n<td>Function</td>\n<td>-</td>\n<td>点击确定按钮的回调函数</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>onCancel</td>\n<td>Function</td>\n<td>-</td>\n<td>点击取消按钮或关闭按钮的回调函数</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>options</td>\n<td>Object</td>\n<td>-</td>\n<td>对content(String)是否解析为原生HTML</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<p>写法2：</p>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>options</td>\n<td>Object</td>\n<td>-</td>\n<td>对话框的参数，属性同props</td>\n<td><strong>必选</strong></td>\n</tr>\n<tr>\n<td>isRawHTML</td>\n<td>Boolean</td>\n<td>false</td>\n<td>对options.content(String)是否解析为原生HTML</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<ol start=\"4\">\n<li><strong>this.$alert(content, onOk)</strong></li>\n</ol>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的内容</td>\n<td><strong>必选</strong></td>\n</tr>\n<tr>\n<td>onOk</td>\n<td>Function</td>\n<td>-</td>\n<td>点击确定按钮的回调函数</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(237)
+	__vue_script__ = __webpack_require__(239)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\inputNumber.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(240)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-f376989e/inputNumber.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    obj[key] = value;
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
+	})()}
 
-	  return obj;
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(238);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(13)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./inputNumber.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./inputNumber.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.input-define-class{\r\n    color: blue;\r\n    width: 190px;\r\n    font-size: 20px;\r\n}\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _inputNumber = __webpack_require__(213);
+
+	var _inputNumber2 = _interopRequireDefault(_inputNumber);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    components: {
+	        vInputNumber: _inputNumber2.default
+	    },
+	    data: function data() {
+	        return {};
+	    },
+
+	    methods: {},
+	    ready: function ready() {}
 	};
 
 /***/ },
-/* 218 */
-/***/ function(module, exports, __webpack_require__) {
+/* 240 */
+/***/ function(module, exports) {
 
-	module.exports = { "default": __webpack_require__(219), __esModule: true };
+	module.exports = "<div><h1>InputNumber数字输入框</h1>\n<h2>使用场景</h2>\n<ul>\n<li>数字专用输入框</li>\n<li>支持限制输入整数数字范围</li>\n<li>支持设置增减数字幅度</li>\n<li>支持自定义框内提示文案</li>\n<li>支持自定义输入框样式</li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n\t<div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>InputNumber</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n\t\t\t<div id=\"container\">\n\t\t\t\t<v-input-number :max-value=\"100\" :min-value=\"3\" :step=\"2\" :is-disable=\"false\" text-tips=\"请输入整数\" ></v-input-number>\n\t\t\t\t<p>支持键盘输入整数，以2为步长，最小值为3，最大值为100</p>\n\t\t\t\t</br>\n\t\t\t\t<v-input-number :max-value=\"100\" :min-value=\"-25\" :input-value.sync=\"6\" :step=\"5\" class-name=\"input-define-class\" :is-disable=\"true\" size=\"normal\"></v-input-number>\n\t\t\t\t<p>默认值为6，禁止手动输入，以5为步长，最小值为-25，最大值为100，自定义输入框与字体样式</p>\n\t\t\t</div>\n\t</div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >id</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>container<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-input-number</span> <span class=\"token attr-name\" >:max-value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>100<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:min-value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>3<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:step</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>2<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:is-disable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>false<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >text-tips</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>请输入整数<span class=\"token punctuation\" >\"</span></span> <span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-input-number</span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>p</span><span class=\"token punctuation\" >></span></span>支持键盘输入整数，以2为步长，最小值为3，最大值为100<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>p</span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>br</span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-input-number</span> <span class=\"token attr-name\" >:max-value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>100<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:min-value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>-25<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:input-value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>6<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:step</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>5<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>input-define-class<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:is-disable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >size</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>normal<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-input-number</span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>p</span><span class=\"token punctuation\" >></span></span>默认值为6，禁止手动输入，以5为步长，最小值为-25，最大值为100，自定义输入框与字体样式<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>p</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n<th>可选值</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>max-value</td>\n<td>Number</td>\n<td>100</td>\n<td>最大值</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>min-value</td>\n<td>Number</td>\n<td>1</td>\n<td>最小值</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>input-value</td>\n<td>Number</td>\n<td>空</td>\n<td>默认显示数值</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>step</td>\n<td>Number</td>\n<td>1</td>\n<td>增减步长</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>is-disable</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否禁用键盘输入</td>\n<td>可选</td>\n<td>true,false</td>\n</tr>\n<tr>\n<td>class-name</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>size</td>\n<td>String</td>\n<td>large</td>\n<td>可选尺寸</td>\n<td>可选</td>\n<td>large,normal</td>\n</tr>\n<tr>\n<td>text-tips</td>\n<td>String</td>\n<td>请输入范围内整数</td>\n<td>自定义提示文案</td>\n<td>可选</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n</div>";
 
 /***/ },
-/* 219 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(220);
-	var $Object = __webpack_require__(118).Object;
-	module.exports = function defineProperty(it, key, desc){
-	  return $Object.defineProperty(it, key, desc);
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(242)
+	__vue_script__ = __webpack_require__(244)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\progress.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(245)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-18b17d1f/progress.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(243);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(13)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./progress.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./progress.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(12)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.info{\n    float: left;\n    padding-right: 10px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _progress = __webpack_require__(228);
+
+	var _progress2 = _interopRequireDefault(_progress);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    components: {
+	        vProgress: _progress2.default
+	    },
+	    data: function data() {
+	        return {
+	            percent: 50,
+	            percentInfo: '50/100',
+	            height: 5
+	        };
+	    }
 	};
 
 /***/ },
-/* 220 */
+/* 245 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>Progress进度条</h1>\n<h2>使用场景</h2>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>basic</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <v-progress :percent-info='percentInfo' :percent='percent' :show-info='true'></v-progress>\n        <div style=\"width:200px\">\n        <v-progress :info-class-name=\"'info'\" :percent='percent' :percent-info=\"'50%'\" :height='height'></v-progress>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-progress</span> <span class=\"token attr-name\" >:percent-info</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>percentInfo<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >:percent</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>percent<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >:show-info</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>true<span class=\"token punctuation\" >'</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-progress</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token style-attr language-css\" ><span class=\"token attr-name\" > <span class=\"token attr-name\" >style</span></span><span class=\"token punctuation\" >=\"</span><span class=\"token attr-value\" ><span class=\"token property\" >width</span><span class=\"token punctuation\" >:</span>200px</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-progress</span> <span class=\"token attr-name\" >:info-class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>info<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:percent</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>percent<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >:percent-info</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>50%<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:height</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>height<span class=\"token punctuation\" >'</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-progress</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>percent-info</td>\n<td>Number</td>\n<td>0</td>\n<td>百分比</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>height</td>\n<td>Number</td>\n<td>10</td>\n<td>高度</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-info</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否展示信息</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $export = __webpack_require__(116);
-	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-	$export($export.S + $export.F * !__webpack_require__(126), 'Object', {defineProperty: __webpack_require__(122).f});
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__vue_script__ = __webpack_require__(247)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\pageloading.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(248)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-7f32726a/pageloading.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
 
 /***/ },
-/* 221 */
-/***/ function(module, exports) {
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "\n<div class=\"xcui-top-progress\">\n    <div class=\"bar\" role=\"bar\">\n        <div class=\"peg\"></div>\n        <div class=\"spinner\" role=\"spinner\"> </div>\n        <div class=\"spinner-icon\"></div>\n    </div>\n</div>\n";
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _pageloading = __webpack_require__(223);
+
+	var _pageloading2 = _interopRequireDefault(_pageloading);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    components: {
+	        vPageloading: _pageloading2.default
+	    },
+	    data: function data() {
+	        return {
+	            toppercent: ''
+	        };
+	    },
+
+	    methods: {
+	        start: function start() {
+	            this.$refs.pageLoading.start();
+	        },
+	        done: function done() {
+	            this.$refs.pageLoading.done();
+	        },
+	        setPercent: function setPercent() {
+	            this.$refs.pageLoading.set(parseFloat(this.toppercent, 10));
+	        },
+	        inc: function inc() {
+	            this.$refs.pageLoading.inc();
+	        }
+	    }
+	};
 
 /***/ },
-/* 222 */
+/* 248 */
 /***/ function(module, exports) {
 
-	module.exports = "<div><h1>PageLoading</h1>\n<h2>使用场景</h2>\n<p>页面加载进度条</p>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>顶部加载条</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <v-pageloading :type=\"'top'\" v-ref:page-loading></v-pageloading>\n        <div>\n            <input type=\"button\" class=\"btn btn-primary\" value='start' @click=\"start\"/>\n            <input type=\"button\" class=\"btn btn-primary\" value='stop' @click=\"stop\"/>\n            <input type=\"button\" class=\"btn btn-primary\" @click=\"inc\" value=\"inc\"/>\n            <input type=\"button\" class=\"btn btn-primary\" value='set' @click=\"setPercent\"/>\n            <input type=\"text\" v-model=\"toppercent\" placeholder=\"设置进度条速度\"/>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-pageloading</span> <span class=\"token attr-name\" >:type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>top<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" ><span class=\"token namespace\" >v-ref:</span>page-loading</span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-pageloading</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>input</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>button<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>start<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>start<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >/></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>input</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>button<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>stop<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>stop<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >/></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>input</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>button<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>inc<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>inc<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >/></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>input</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>button<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>set<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>setPercent<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >/></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>input</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >v-model</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>toppercent<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>设置进度条速度<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >/></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>speed</td>\n<td>Number</td>\n<td>350</td>\n<td>速度</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>start</td>\n<td>function</td>\n<td>-</td>\n<td>开始</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>end</td>\n<td>function</td>\n<td>-</td>\n<td>结束</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>set</td>\n<td>function</td>\n<td>-</td>\n<td>设置进度条进度</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>inc</td>\n<td>function</td>\n<td>-</td>\n<td>增加一小段进度</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+	module.exports = "<div><h1>PageLoading页面加载进度条</h1>\n<h2>使用场景</h2>\n<ul>\n<li>路由页面切换时提供顶部加载进度条。</li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>顶部加载条</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <v-pageloading v-ref:page-loading></v-pageloading>\n        <div class=\"form-group\">\n            <button class=\"btn btn-primary\" @click=\"start\">start</button>\n            <button class=\"btn btn-primary\" @click=\"done\">done</button>\n            <button class=\"btn btn-primary\" @click=\"inc\">inc</button>\n            <button class=\"btn btn-primary\" @click=\"setPercent\">set</button>\n        </div>\n        <div class=\"input-group\">\n            <input type=\"text\" class=\"form-control\" v-model=\"toppercent\" placeholder=\"设置进度条速度\"/>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-pageloading</span> <span class=\"token attr-name\" ><span class=\"token namespace\" >v-ref:</span>page-loading</span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-pageloading</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>form-group<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>start<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>start<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>done<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>done<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>inc<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>inc<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>setPercent<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>set<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>input-group<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>input</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>form-control<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >v-model</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>toppercent<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>设置进度条速度<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >/></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>speed</td>\n<td>Number</td>\n<td>350</td>\n<td>速度</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h2>Methods</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>start</td>\n<td>function</td>\n<td>-</td>\n<td>开始</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>done</td>\n<td>function</td>\n<td>-</td>\n<td>结束</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>set</td>\n<td>function</td>\n<td>0.08</td>\n<td>设置进度条进度，取值范围（0.08 ~ 1）</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>inc</td>\n<td>function</td>\n<td>-</td>\n<td>增加一小段进度</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h3>方法调用</h3>\n<blockquote>\n<ul>\n<li>this.$refs.pageLoading.start();</li>\n<li>this.$refs.pageLoading.done();</li>\n<li>this.$refs.pageLoading.set(0.5);</li>\n<li>this.$refs.pageLoading.inc();</li>\n</ul>\n</blockquote>\n<p>备注：先执行set(0.X)，再执行inc()，即可看到inc的执行效果</p>\n</div>";
 
 /***/ }
 /******/ ]);
