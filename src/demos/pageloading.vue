@@ -1,8 +1,9 @@
 <template lang="md">
-# PageLoading
+# PageLoading页面加载进度条
 
 ## 使用场景
-页面加载进度条
+
+- 路由页面切换时提供顶部加载进度条。
 
 ## DEMO
 <demo>
