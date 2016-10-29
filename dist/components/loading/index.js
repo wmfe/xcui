@@ -24,7 +24,7 @@
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(4);
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname] _v-14d75033=""> <div class=loader :style="{\'color\' : color}" _v-14d75033=""></div> </div> ';
+        module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname]> <div class=loader :style="{\'color\' : color}"></div> </div> ';
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -39,11 +39,7 @@
                 },
                 type: {
                     type: String,
-<<<<<<< HEAD
-                    "default": "load2"
-=======
                     default: "load2"
->>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
                 },
                 classname: {
                     type: String,
@@ -60,11 +56,6 @@
             },
             methods: {}
         };
-<<<<<<< HEAD
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname]> <div class=loader :style="{\'color\' : color}"></div> </div> ';
-=======
->>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};

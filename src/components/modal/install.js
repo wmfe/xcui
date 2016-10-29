@@ -1,8 +1,7 @@
-import Vue from 'vue';
 import Modal from './index.vue';
 
 let modalInstance;
-let newModalInstance = () => {
+let newModalInstance = (Vue) => {
     const camelcaseToHyphen = str => str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 
     const isEmptyObject = obj => !Object.keys(obj).length;
@@ -80,8 +79,8 @@ let newModalInstance = () => {
     };
 };
 
-let getModalInstance = (isRawHTML) => {
-    modalInstance = modalInstance || newModalInstance();
+let getModalInstance = (Vue, isRawHTML) => {
+    modalInstance = modalInstance || newModalInstance(Vue);
     modalInstance._chooseContentMode(isRawHTML);
     return modalInstance;
 };
@@ -89,14 +88,14 @@ let getModalInstance = (isRawHTML) => {
 let ModalInstall = (Vue) => {
     let modalFunc = {
         show(options, isRawHTML) {
-            let instance = getModalInstance(isRawHTML);
+            let instance = getModalInstance(Vue, isRawHTML);
             instance.show(options);
         },
         close() {
             if (!modalInstance) {
                 return false;
             }
-            const instance = getModalInstance();
+            const instance = getModalInstance(Vue);
             instance.remove();
         }
     };

@@ -24,7 +24,7 @@
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(4);
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class=xcui-modal-wrapper v-show=show> <div class=xcui-modal-mask @click=maskClose v-el:modal-mask></div> <div class=xcui-modal tabindex=-1 @keydown.esc=cancel :style=style :class=[sizeClass,className]> <div class=xcui-modal-header v-if=showHeader> <slot name=header> <span class=xcui-modal-title>{{title}}</span> </slot> <slot name=close> <i class="xcui-modal-header-close glyphicon glyphicon-remove" @click=cancel v-if=showCloseButton></i> </slot> </div> <div class=xcui-modal-body> <slot></slot> </div> <div class=xcui-modal-footer v-if=showFooter> <slot name=footer> <button type=button name=button @click=ok class="btn xcui-btn btn-primary">{{okText}}</button> <button type=button name=button @click=cancel class="btn btn-default">{{cancelText}}</button> </slot> </div> </div> </div> ';
+        module.exports = ' <div class=xcui-modal-wrapper v-show=show> <div class=xcui-modal-mask @click=maskClose v-el:modal-mask></div> <div class=xcui-modal tabindex=-1 @keydown.esc=cancel :style=style :class=[sizeClass,className]> <div class=xcui-modal-header v-if=showHeader> <slot name=header> <span class=xcui-modal-title>{{title}}</span> </slot> <slot name=close> <i class="xcui-modal-header-close glyphicon glyphicon-remove" @click=cancel v-if=showCloseButton></i> </slot> </div> <div class=xcui-modal-body :style=contentStyle> <slot></slot> </div> <div class=xcui-modal-footer v-if=showFooter> <slot name=footer> <button type=button name=button v-if=showOkButton @click=ok class="btn xcui-modal-btn btn-primary">{{okText}}</button> <button type=button name=button v-if=showCancelButton @click=cancel class="btn xcui-modal-cancel-btn btn-default">{{cancelText}}</button> </slot> </div> </div> </div> ';
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -69,11 +69,11 @@
                 },
                 showOkButton: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 },
                 showCancelButton: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 },
                 maskClosable: {
                     type: Boolean,
@@ -81,7 +81,7 @@
                 },
                 scrollable: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 okText: {
                     type: String,
@@ -140,11 +140,6 @@
                 }
             }
         };
-<<<<<<< HEAD
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class=xcui-modal-wrapper v-show=show> <div class=xcui-modal-mask @click=maskClose v-el:modal-mask></div> <div class=xcui-modal tabindex=-1 @keydown.esc=cancel :style=style :class=[sizeClass,className]> <div class=xcui-modal-header v-if=showHeader> <slot name=header> <span class=xcui-modal-title>{{title}}</span> </slot> <slot name=close> <i class="xcui-modal-header-close glyphicon glyphicon-remove" @click=cancel v-if=showCloseButton></i> </slot> </div> <div class=xcui-modal-body :style=contentStyle> <slot></slot> </div> <div class=xcui-modal-footer v-if=showFooter> <slot name=footer> <button type=button name=button v-if=showOkButton @click=ok class="btn xcui-modal-btn btn-primary">{{okText}}</button> <button type=button name=button v-if=showCancelButton @click=cancel class="btn xcui-modal-cancel-btn btn-default">{{cancelText}}</button> </slot> </div> </div> </div> ';
-=======
->>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};
