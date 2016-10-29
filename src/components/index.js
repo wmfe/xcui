@@ -1,7 +1,7 @@
 /**
  * @file index.js
  */
-import Autocomplete from './autocomplete';
+import Suggestion from './suggestion';
 import Datepicker from './datepicker';
 import DateRangePicker from './daterangepicker';
 import InputNumber from './inputNumber';
@@ -22,7 +22,7 @@ const install = (Vue) => {
     if (install.installed) {
         return;
     }
-    Vue.component(Autocomplete.name, Autocomplete);
+    Vue.component(Suggestion.name, Suggestion);
     Vue.component(Datepicker.name, Datepicker);
     Vue.component(DateRangePicker.name, DateRangePicker);
     Vue.component(InputNumber.name, InputNumber);
@@ -42,7 +42,7 @@ const install = (Vue) => {
 
 const xcui = {
     version: '1.0.0-alpha',
-    Autocomplete,
+    Suggestion,
     Datepicker,
     DateRangePicker,
     InputNumber,

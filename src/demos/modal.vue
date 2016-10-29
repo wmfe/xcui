@@ -2,7 +2,7 @@
 ## Modal 模态窗口
 
 ### 使用场景
-> 模拟浏览器的 **alert**、**confirm**
+ 模拟浏览器的 `alert`、`confirm`
 
 ### Demo
 

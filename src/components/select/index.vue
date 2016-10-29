@@ -83,7 +83,7 @@
     </div>
 </template>
 <script>
-    import clone from 'clone';
+    import clone from '../../utils/clone';
     import fuzzysearch from 'fuzzysearch';
     export default {
         name: 'xcui-select',
@@ -530,7 +530,7 @@
             max-height: 200px;
             border: 1px solid rgba(0,0,0,.15);
             box-shadow: 0 6px 12px rgba(0,0,0,.175);
-
+            z-index: 1;
         }
         &-menu ,&-menu-group{
             outline: none;

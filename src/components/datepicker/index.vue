@@ -236,7 +236,6 @@
         top:38px;
         border: 1px solid #DEDEDE;
         border-radius: 2px;
-        opacity: .95;
         transition: all .5s ease;
         &-enter{
             .calendar-leave{
