@@ -7,6 +7,7 @@
                 :disabled="disabled"
                 :placeholder="placeholder"
                 v-model="dataText"
+                @input="onInput"
                 @focus="onInput"
                 @blur="onBlur"
                 @keyDown.up="changeCurrent(-1)"
@@ -90,9 +91,6 @@
             suggestions() {
                 this.arrangeLocalList();
                 this.getLocalSug();
-            },
-            dataText() {
-                this.onInput();
             }
         },
         methods: {
