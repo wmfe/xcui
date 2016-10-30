@@ -2,6 +2,7 @@
     <div class="xcui-suggestion {{className}}">
         <input type="text"
                 class="form-control xcui-suggestion-input"
+                autocomplete="off"
                 :id="id"
                 :name="name"
                 :disabled="disabled"
