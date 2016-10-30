@@ -145,9 +145,6 @@ export default {
     overflow-x: hidden;
     overflow-y: auto;
 }
-.xcui-modal-mask {
-    z-index: 999;
-}
 .xcui-modal-wrapper, .xcui-modal-mask {
     position: fixed;
     top: 0;
