@@ -1,6 +1,5 @@
 <template lang="html">
-    <div class="xcui-modal-wrapper" v-show="show">
-        <div class="xcui-modal-mask" @click="maskClose" v-el:modal-mask></div>
+    <div class="xcui-modal-wrapper xcui-modal-mask" @click="maskClose" v-el:modal-mask v-show="show">
         <div class="xcui-modal" tabindex="-1" @keydown.esc="cancel" :style="style" :class="[sizeClass,className]">
             <div class="xcui-modal-header" v-if="showHeader">
                 <slot name="header">
@@ -119,8 +118,8 @@ export default {
         close(e) {
             this.show = false;
         },
-        maskClose() {
-            if (this.maskClosable) {
+        maskClose(e) {
+            if (this.maskClosable && e.target === this.$els.modalMask) {
                 this.cancel();
             }
         },
@@ -143,7 +142,11 @@ export default {
 <style lang="less">
 .xcui-modal-wrapper {
     z-index: 1000;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.xcui-modal-mask {
+    z-index: 999;
 }
 .xcui-modal-wrapper, .xcui-modal-mask {
     position: fixed;
@@ -151,26 +154,21 @@ export default {
     right: 0;
     left: 0;
     bottom: 0;
-    width: 100%;
-    height: 100%;
     transition: opacity 0.2s ease;
     background-color: rgba(55, 55, 55, 0.6);
 }
 .xcui-modal {
+    z-index: 1001;
     font-size: 14px;
     position: relative;
-    margin: 0 auto;
-    top: 100px;
+    margin: 100px auto 30px;
     background-color: #fff;
     padding: 0;
     background-color: white;
     border-radius: 2px;
     box-shadow: 0 2px 8px alpha(black, 0.33);
     transition: all 0.2s ease;
-    max-height: 100vh;
     max-width: 100vw;
-    overflow-x: hidden;
-    overflow-y: auto;
     &.large {
         width: 45rem;
     }

@@ -59,6 +59,7 @@
         <button class="btn btn-default" @click="this.modal8 = true">Small对话框</button>
         <button class="btn btn-default" @click="this.modal9 = true">自定义Style</button>
         <button class="btn btn-default" @click="this.modal10 = true">自定义class-name</button>
+        <button class="btn btn-default" @click="this.modal11 = true">滚动Modal</button>
         <Modal
         :show.sync="modal7"
         :size="'full'"
@@ -82,6 +83,11 @@
         title="自定义class-name"
         :class-name="'xcui-modal-demo-class'">
         <div>欲与天公试比高</div>
+        </Modal>
+        <Modal
+        :show.sync="modal11"
+        title="滚动Modal">
+        <div>{{modal11LargeContent}}</div>
         </Modal>
         <style>
         .Modal-demo-class { top: 0; }
@@ -203,7 +209,12 @@ let ModalDemo = {
             modal7: false,
             modal8: false,
             modal9: false,
-            modal10: false
+            modal10: false,
+            modal11: false,
+            modal11LargeContent: `谁念西风独自凉 萧萧黄叶闭疏窗 
+沉思往事立残阳 被酒莫惊春睡重
+读书消得泼发香 当时只道是寻常
+`.repeat(300)
         };
     },
     methods: {
