@@ -60,6 +60,7 @@
 
 <script>
 export default {
+    name: 'xcui-pagination',
     props: {
         'type': {
             type: String,
@@ -170,7 +171,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .v-pagination-wrap{
     -webkit-user-select: none;
     // standard

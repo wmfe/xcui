@@ -2,32 +2,33 @@
     <div class="xcui-suggestion {{className}}">
         <input type="text"
                 class="form-control xcui-suggestion-input"
+                autocomplete="off"
                 :id="id"
                 :name="name"
                 :disabled="disabled"
                 :placeholder="placeholder"
+                debounce＝100
                 v-model="dataText"
+                @input="onInput"
                 @focus="onInput"
                 @blur="onBlur"
                 @keyDown.up="changeCurrent(-1)"
                 @keyDown.down="changeCurrent(1)"
                 @keyDown.enter="onBlur">
-        <ul class="xcui-suggestion-list dropdown-menu" :class="{'xcui-show':show}">
+
+        <ul class="xcui-suggestion-list dropdown-menu" :class="{'show':show}">
             <li v-for="(index,item) in list" :class="{'current' : currentIndex==index}">
                 <a href="javascript:void(0)" @click="setItem(item)">
                     {{item.text}}
                 </a>
             </li>
         </ul>
-        <button @click="clearText" type="button"
-        title="点击清除输入内容" class="close" tabindex="-1"
-        style="position: absolute; right: 8px; top: 4px;">×</button>
     </div>
 </template>
 
 <script>
-
     export default {
+        name: 'xcui-suggestion',
         data() {
             return {
                 list: [],
@@ -83,24 +84,24 @@
         },
         computed: {
             show() {
-                return this.list.length > 0 && this.$el.getElementsByTagName('input')[0] === document.activeElement;
+                return this.list.length > 0;
             }
         },
         watch: {
             suggestions() {
                 this.arrangeLocalList();
                 this.getLocalSug();
-            },
-            dataText() {
-                this.onInput();
             }
         },
         methods: {
             onInput() {
-                this.currentIndex = -1;
-                this.getLocalSug();
-                this.autoSetItem();
-                this.inputCallback && this.inputCallback();
+                let me = this;
+                setTimeout(function () {
+                    me.currentIndex = -1;
+                    me.getLocalSug();
+                    me.autoSetItem();
+                    me.inputCallback && me.inputCallback();
+                }, 100);
             },
             onBlur() {
                 let me = this;
@@ -188,7 +189,7 @@
     };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
     .xcui-suggestion{
         position:relative;
         width:100%;

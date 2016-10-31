@@ -1,6 +1,7 @@
 
 <template>
-    <div class="bg-pr" :class="inputClass">
+<div class="xcui-datarangepicker" :class="className">
+    <div :class="{'input-group':btnShow}">
         <input class="form-control col-md-3" type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
         <!-- 双日历 -->
         <div @click.stop=""
@@ -52,10 +53,12 @@
             </button>
         </span>
     </div>
+</div>
 </template>
 <script>
     import calendar from './calendar';
     export default {
+        name: 'xcui-datarangepicker',
         props: {
             show: {
                 type: Boolean,
@@ -103,12 +106,7 @@
                 type: Object,
                 default: null
             },
-            inputClass: {
-                type: Array,
-                default: function () {
-                    return [];
-                }
-            },
+            className: String,
             btnShow: {
                 type: Boolean,
                 default: false
@@ -126,16 +124,25 @@
             };
         },
         created() {
-            if (this.btnShow) {
-                this.inputClass.push('input-group');
-            }
             if (this.value !== '') {
                 let values = this.value.split('至');
                 this.beginCalenderVal = values[0].trim();
                 this.endCalenderVal = values[1].trim();
-                if (this.type === 'datetime') {
-                    this.beginCalenderVal = this.beginCalenderVal + ' 00:00:00';
-                    this.endCalenderVal = this.endCalenderVal + ' 00:00:00';
+                if (this.beginCalenderVal > this.endCalenderVal) {
+                    this.endCalenderVal = this.beginCalenderVal;
+                    this.value = this.beginCalenderVal + ' 至 ' + this.endCalenderVal;
+                }
+            }
+        },
+        watch: {
+            beginCalenderVal(val) {
+                if (val > this.endCalenderVal) {
+                    this.endCalenderVal = val;
+                }
+            },
+            endCalenderVal(val) {
+                if (val < this.beginCalenderVal) {
+                    this.beginCalenderVal = val;
                 }
             }
         },
@@ -165,10 +172,11 @@
 </script>
  
 <style lang="less">
+.xcui-datarangepicker{
     @base-color:#46c3c1;
     @base-size:14px;
     @tit-color:#333;
-
+    position:relative;
     .calendar{
         width: 240px;
         padding: 10px;
@@ -176,7 +184,6 @@
         position: absolute;
         border: 1px solid #DEDEDE;
         border-radius: 2px;
-        opacity: .95;
         transition: all .5s ease;
         left:0;
         top:38px;
@@ -269,10 +276,8 @@
                     pointer-events:none !important;
                     cursor: default !important;
                 }
-                &.disabled{
+                &.off{
                     color: #c0c0c0;
-                    pointer-events: none !important;
-                    cursor: default !important;
                 }
                 &.today{
                     background-color: @base-color;
@@ -282,6 +287,14 @@
                     .lunar{
                         color:#fff;
                     }
+                }
+                &.todayleft{
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+                &.todayright{
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
                 }
                 &.range{
                     background:#e2eff5;
@@ -412,9 +425,7 @@
     }
     .btn-default {
         color: #666;
-        border: #ccc solid 1px;
-        background-color: #fff;
-        margin-left: -1px;
         border-radius: 0 4px 4px 0;
     }
+}
 </style>

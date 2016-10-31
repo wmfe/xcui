@@ -1,8 +1,8 @@
 /**
  * @file PopoverMixin pass event param for eventlistener
  */
-import EventListener from '../../utils/EventListener.js';
-import coerceBoolean from '../../utils/coerceBoolean.js';
+
+import EventListener from '../../utils/eventlistener';
 
 export default {
     'props': {
@@ -19,11 +19,6 @@ export default {
         },
         'content': {
             'type': String
-        },
-        'header': {
-            'type': Boolean,
-            'coerce': coerceBoolean,
-            'default': true
         },
         'placement': {
             'type': String
@@ -45,7 +40,7 @@ export default {
         fixPosition(triger, popover, placement) {
             popover.style.display = '';
             switch (placement) {
-                case 'top' :
+                case 'top':
                     this.position.left = triger.offsetLeft - popover.offsetWidth / 2 + triger.offsetWidth / 2;
                     this.position.top = triger.offsetTop - popover.offsetHeight;
                     break;
@@ -66,42 +61,38 @@ export default {
             popover.style.top = this.position.top + 'px';
             popover.style.left = this.position.left + 'px';
             popover.style.display = 'none';
-
             this.show = !this.show;
         }
     },
     ready() {
-        if (!this.$els.popover) {
-            // return console.error('Could not find popover v-el in your component that uses popoverMixin');
-        }
         const triger = this.$els.trigger.children[0];
-        let that = this;
+        let me = this;
         if (this.trigger === 'hover') {
             this._mouseenterEvent = EventListener.listen(triger, 'mouseenter', function () {
-                that.fixPosition(that.$els.trigger.children[0], that.$els.popover, that.placement);
-                that.show = true;
+                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
+                me.show = true;
             });
             this._mouseleaveEvent = EventListener.listen(triger, 'mouseleave', function () {
-                that.show = false;
+                me.show = false;
             });
         }
         else if (this.trigger === 'focus') {
             this._focusEvent = EventListener.listen(triger, 'focus', function () {
-                that.fixPosition(that.$els.trigger.children[0], that.$els.popover, that.placement);
-                that.show = true;
+                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
+                me.show = true;
             });
             this._blurEvent = EventListener.listen(triger, 'blur', function () {
-                that.show = false;
+                me.show = false;
             });
         }
         else {
             this._clickEvent = EventListener.listen(triger, 'click', function () {
-                that.fixPosition(that.$els.trigger.children[0], that.$els.popover, that.placement);
-                that.toggle;
+                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
+                me.toggle;
             });
         }
 
-        that.fixPosition(this.$els.trigger.children[0], this.$els.popover, this.placement);
+        this.fixPosition(this.$els.trigger.children[0], this.$els.popover, this.placement);
     },
     beforeDestroy() {
         if (this._blurEvent) {

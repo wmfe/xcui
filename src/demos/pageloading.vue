@@ -1,19 +1,22 @@
 <template lang="md">
-# PageLoading
+# PageLoading页面加载进度条
 
 ## 使用场景
-页面加载进度条
+
+- 路由页面切换时提供顶部加载进度条。
 
 ## DEMO
 <demo>
     <example title="顶部加载条">
         <v-pageloading v-ref:page-loading></v-pageloading>
-        <div>
-            <input type="button" class="btn btn-primary" value='start' @click="start"/>
-            <input type="button" class="btn btn-primary" value='done' @click="done"/>
-            <input type="button" class="btn btn-primary" @click="inc" value="inc"/>
-            <input type="button" class="btn btn-primary" value='set' @click="setPercent"/>
-            <input type="text" v-model="toppercent" placeholder="设置进度条速度"/>
+        <div class="form-group">
+            <button class="btn btn-primary" @click="start">start</button>
+            <button class="btn btn-primary" @click="done">done</button>
+            <button class="btn btn-primary" @click="inc">inc</button>
+            <button class="btn btn-primary" @click="setPercent">set</button>
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" v-model="toppercent" placeholder="设置进度条速度"/>
         </div>
     </example>
 </demo>

@@ -1,5 +1,5 @@
 /**
- * @file webpack.npm.base.conf.js
+ * @file webpack.base.conf.js
  */
 
 var path = require('path');

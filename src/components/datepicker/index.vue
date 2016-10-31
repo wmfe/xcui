@@ -1,5 +1,6 @@
 <template>
-    <div class="bg-pr" :class="inputClass">
+<div class="xcui-datapicker {{className}}">
+    <div :class="{'input-group':btnShow,'bg-pr':!btnShow}">
         <input class="form-control"  type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
         <div @click.stop=""
              @touchstart.stop=""
@@ -25,7 +26,7 @@
                     <tr v-for="(k1,day) in days">
                         <td
                         v-for="(k2,child) in day"
-                        :class="{'today':child.today,'disabled':child.disabled}"
+                        :class="{'today':child.today,'off':child.disabled}"
                         :style="{'background':color&&child.today?color:''}"
                         @click="select(k1,k2,$event)">
                         {{child.day}}
@@ -80,28 +81,23 @@
             </button>
         </span>
     </div>
+</div>
 </template>
 <script>
     import CalendarMixins from '../daterangepicker/calendarMixins.js';
     export default {
         mixins: [CalendarMixins],
+        name: 'xcui-datapicker',
         props: {
             btnShow: {
                 type: Boolean,
                 default: false
-            },
-            inputClass: {
-                type: Array,
-                default: function () {
-                    return [];
-                }
             }
         },
         data() {
             return {
                 show: false,
                 currentMonth: Number,
-                selectValue: '',
                 currentTimeBtnShow: true
             };
         },
@@ -145,22 +141,30 @@
                 return options;
             },
             select(k1, k2, e) {
-                if (e !== undefined) {
-                    e.stopPropagation();
-                }
                 let me = this;
+                let days = this.days;
+                let daySeleted = days[k1][k2];
                 // 取消上次选中
                 if (this.today.length > 0) {
-                    this.days[this.today[0]][this.today[1]].today = false;
+                    days[this.today[0]][this.today[1]].today = false;
                 }
                 // 设置当前选中天
-                this.days[k1][k2].today = true;
-                this.day = me.zero(me.days[k1][k2].day);
-                this.today = [k1, k2];
-                this.selectValue = this.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-                if (this.type === 'date') {
-                    this.value = this.selectValue;
-                    this.showFalse();
+                daySeleted.today = true;
+                me.day = me.zero(daySeleted.day);
+                if (daySeleted.disabled) {
+                    me.month = k1 === 0 ? (me.month - 1) : (me.month + 1);
+                    let om = me.outputMonth(me.month, me.year);
+                    me.year = om.y;
+                    me.month = om.m;
+                    me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+                    me.render(me.year, me.month);
+                }
+                else {
+                    me.today = [k1, k2];
+                    me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+                }
+                if (me.type === 'date') {
+                    me.showFalse();
                 }
             },
             currentTime() {
@@ -172,28 +176,26 @@
                 let minute = this.zero(date.getMinutes());
                 let second = this.zero(date.getSeconds());
                 let me = this;
-                let value = this.value;
                 this.year = year;
                 this.month = month;
                 this.day = day;
                 this.hour = hour;
                 this.minute = minute;
                 this.second = second;
-                this.selectValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-                this.value = this.selectValue;
+                this.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
                 if (this.currentTimeBtnShow) {
                     this.render(year, month);
                 }
-                this.value = value;
                 this.hourListShow = false;
                 this.minuteListShow = false;
                 this.secondListShow = false;
             },
             ok() {
-                this.value = this.selectValue !== '' ? this.selectValue : this.value;
+                this.value = this.value !== '' ? this.value : this.initialValue;
                 this.showFalse();
             },
             cancel() {
+                this.value = this.initialValue === '' ? this.value : this.initialValue;
                 this.showFalse();
             },
             showFalse() {
@@ -218,13 +220,13 @@
         }
     };
 </script>
- 
-<style lang="less" scoped>
-    @base-color:#46c3c1;
-    @base-size:14px;
-    @tit-color:#333;
 
+<style lang="less">
+.xcui-datapicker{
     .calendar {
+        @base-color:#46c3c1;
+        @base-size:14px;
+        @tit-color:#333;
         width: 240px;
         padding: 10px;
         background: #fff;
@@ -234,7 +236,6 @@
         top:38px;
         border: 1px solid #DEDEDE;
         border-radius: 2px;
-        opacity: .95;
         transition: all .5s ease;
         &-enter{
             .calendar-leave{
@@ -326,10 +327,8 @@
                 pointer-events:none !important;
                 cursor: default !important;
             }
-            &.disabled{
+            &.off{
                 color: #c0c0c0;
-                pointer-events: none !important;
-                cursor: default !important;
             }
             &.today{
                 background-color: @base-color;
@@ -443,15 +442,13 @@
             content: '';
             clear: both;
         }
+        .btn-default {
+            color: #666;
+            border-radius: 0 4px 4px 0;
+        }
     }
     .bg-pr{
         position:relative;
     }
-    .btn-default {
-        color: #666;
-        border: #ccc solid 1px;
-        background-color: #fff;
-        margin-left:-1px;
-        border-radius: 0 4px 4px 0;
-    }
+}
 </style>

@@ -1,5 +1,5 @@
 /**
- * @file webpack.npm.base.conf.js
+ * @file webpack.dev.conf.js
  */
 
 var webpack = require('webpack');
