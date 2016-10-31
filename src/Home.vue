@@ -72,9 +72,11 @@ export default {
         };
     },
     ready() {
-        this.$route.router.go({
-            name: 'home'
-        });
+        if (this.$route.path === '/') {
+            this.$route.router.go({
+                name: 'home'
+            });
+        }
     }
 };
 
