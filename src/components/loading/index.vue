@@ -34,7 +34,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
     @foreground: #46C3C1;
     @background: rgba(255, 255, 255, 0.7);
 	.xcui-loading {

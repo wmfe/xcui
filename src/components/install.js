@@ -1,28 +1,12 @@
-import xcuiModal from './components/modal'
-let modalInstall = (Vue, $root) => {
-    Vue.set($root, 'XCUI_MODAL', {
-        show: false,
-        title: '',
-        ok: ()=>{},
-        cancel: ()=>{}
-    });
-    Vue.prototype.$Modal = {
-        open(title, text, onOk, onCancel, rawHTML) {
-            $root.XCUI_MODAL = {
-
-            }
-        },
-        close() {
-
-        },
-        alert() {
-
-        },
-        confirm() {
-            
-        }
-    };
+import ModalInstall from './modal/install.js';
+let xcuiInstall = {};
+xcuiInstall.install = (Vue, options = {
+    Modal: true,
+    Toaster: true
+}) => {
+    if (options.Modal) {
+        ModalInstall(Vue);
+    }
 };
-const install = (Vue, options) => {
 
-};
+export default xcuiInstall;

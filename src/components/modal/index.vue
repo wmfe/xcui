@@ -7,16 +7,19 @@
                     <span class="xcui-modal-title">{{title}}</span>
                 </slot>
                 <slot name="close">
+                    <!-- <div class="xcui-modal-header-close" @click="cancel" v-if="showCloseButton">X</div> -->
                     <i class="xcui-modal-header-close glyphicon glyphicon-remove" @click="cancel" v-if="showCloseButton"></i>
                 </slot>
             </div>
-            <div class="xcui-modal-body">
+            <div class="xcui-modal-body" :style="contentStyle">
                 <slot></slot>
             </div>
             <div class="xcui-modal-footer" v-if="showFooter">
                 <slot name="footer">
-                    <button type="button" name="button" @click="ok" class="btn xcui-btn btn-primary">{{okText}}</button>
-                    <button type="button" name="button" @click="cancel" class="btn btn-default">{{cancelText}}</button>
+                    <button type="button" name="button" v-if="showOkButton" @click="ok"
+                        class="btn xcui-modal-btn btn-primary">{{okText}}</button>
+                    <button type="button" name="button" v-if="showCancelButton" @click="cancel"
+                        class="btn xcui-modal-cancel-btn btn-default">{{cancelText}}</button>
                 </slot>
             </div>
         </div>
@@ -36,6 +39,9 @@ export default {
             default: false
         },
         style: {
+            type: Object
+        },
+        contentStyle: {
             type: Object
         },
         size: {
@@ -58,9 +64,21 @@ export default {
             type: Boolean,
             default: true
         },
+        showOkButton: {
+            type: Boolean,
+            default: true
+        },
+        showCancelButton: {
+            type: Boolean,
+            default: true
+        },
         maskClosable: {
             type: Boolean,
             default: true
+        },
+        scrollable: {
+            type: Boolean,
+            default: false
         },
         okText: {
             type: String,
@@ -77,6 +95,19 @@ export default {
         onCancel: {
             type: Function,
             default: () => {}
+        }
+    },
+    watch: {
+        show(val) {
+            if (this.scrollable) {
+                return;
+            }
+            if (val) {
+                document.body.style.overflow = 'hidden';
+            }
+            else {
+                document.body.style.overflow = 'auto';
+            }
         }
     },
     computed: {
@@ -112,6 +143,7 @@ export default {
 <style lang="less">
 .xcui-modal-wrapper {
     z-index: 1000;
+    overflow: auto;
 }
 .xcui-modal-wrapper, .xcui-modal-mask {
     position: fixed;
@@ -145,28 +177,41 @@ export default {
 
 }
 .xcui-modal-body {
-    padding: 1rem;
+    padding: 1.6rem;
     border-bottom: 1px solid #f3f3f3;
     min-height: 8rem;
 }
 .xcui-modal-header {
-    font-size: 2rem;
+    font-size: 1.6rem;
     padding: .6rem;
     border-bottom: 1px solid #f3f3f3;
+    text-align: center;
 }
 .xcui-modal-header-close {
-    float: right;
-    cursor: pointer;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    color: #000;
+    opacity: .2;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 20px;
+    outline: 0;
+    &:hover{
+        cursor: pointer;
+        text-decoration: none;
+        opacity: .5;
+    }
 }
 .xcui-modal-footer {
-    display: flex;
-    justify-content: flex-end;
     padding: .5rem 1rem;
-    .xcui-btn {
+    text-align: center;
+    .xcui-modal-btn {
         margin-right: .5rem;
         background-color: #46C3C1;
         color: #fff;
         border: #46c3c1 solid 1px;
+        min-width: 75px;
         &:hover {
             background-color: #2b9d9b;
             border: #2b9d9b solid 1px;
@@ -177,6 +222,9 @@ export default {
             -webkit-box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
             box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
         }
+    }
+    .xcui-modal-cancel-btn {
+        min-width: 75px;
     }
 }
 .xcui-modal-size-small {

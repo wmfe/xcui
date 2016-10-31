@@ -1,7 +1,10 @@
 <template lang="md">
-# Pagination
-- Standard(With Page Size Setting)
-- Mini
+# Pagination页码
+
+## 使用场景
+
+- 表格或其他需要分页的页面元素。
+- 支持两种类型的页码： `Standard` 标准页码, 一般用于元素顶部； `Mini` 迷你页码，一般用于元素底部。
 
 # Demo
 

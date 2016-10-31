@@ -1,10 +1,15 @@
 <template lang="md">
-## xcui-select
+# Select多功能选择框
 
 
-### 使用场景
-> 替代原生下拉框
-### DEMO
+## 使用场景
+
+1. 替代原生下拉框，支持多选
+2. 支持Array, Object等格式
+3. 支持进行输入建议，远程搜索等
+4. 支持optionGroup
+
+## DEMO
 
 <demo>
     <example title="single - 基本模式 options(Array)">
@@ -212,7 +217,7 @@
 [Keen-UI - select](https://josephuspaye.github.io/Keen-UI/#/ui-select-docs)
 [http://amazeui.org/javascript/selected](http://amazeui.org/javascript/selected)
 </template>
-<style lang="less" scoped>
+<style lang="less">
     .select-demo{
         width:200px;
     }

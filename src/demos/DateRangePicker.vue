@@ -1,47 +1,53 @@
 <template lang="md">
-    ## daterangepicker 双日期选择框
+    # daterangepicker 双日期选择框
 
-    1、支持日历筛选，日历＋时间，时间筛选
-    2、可以配置日期的筛选范围，日期格式
-    3、对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60
-    4、可以直接获取当前的时间
-    5、年筛选可以直接输入，可以筛选
-    6、支持定制皮肤颜色
+    ## 使用场景
+
+    - 支持日历筛选，日历＋时间，时间筛选
+    - 可以配置日期的筛选范围，日期格式
+    - 对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60
+    - 可以直接获取当前的时间
+    - 年筛选可以直接输入，可以筛选
+    - 支持定制皮肤颜色
 
     ## 应用指南
-    1.要把datepicker放在一个拥有定位属性的容器中,因为datepicker是相对父级元素定位的。
+
+    要把datepicker放在一个拥有定位属性的容器中,因为datepicker是相对父级元素定位的。
+
+
+    ## DEMO
     
     <demo>
         <example title="日历选择">
             <daterangepicker
-                  :value.sync = "date.value"
-                  :sep = 'date.sep'
+                  :value.sync="date.value"
+                  :sep="date.sep"
                   :type="date.type"
                   :begin="date.begin"
                   :end="date.end"
-                  :date-limit="date.dateLimit"
-                  ></daterangepicker>
+                  :date-limit="date.dateLimit">
+            </daterangepicker>
         </example>
         <example title="日期 + 时间选择">
             <daterangepicker
                   type="datetime"
                   class-name="class-name"
                   color="pink"
-                  :value.sync = "datetime.value"
-                  :sep = 'datetime.sep'
+                  :value.sync="datetime.value"
+                  :sep='datetime.sep'
                   :begin="datetime.begin"
                   :end="datetime.end"
                   :date-limit="datetime.dateLimit"
-                  :btn-show="datetime.btnShow"
-                  ></daterangepicker>
+                  :btn-show="datetime.btnShow">
+            </daterangepicker>
         </example>
         <example title="时间选择">
             <daterangepicker
-                  :value.sync = "time.value"
+                  :value.sync="time.value"
                   :type="time.type"
                   :input-class="time.inputClass"
-                  :btn-show="time.btnShow"
-                  ></daterangepicker>
+                  :btn-show="time.btnShow">
+            </daterangepicker>
         </example>
     </demo>
     

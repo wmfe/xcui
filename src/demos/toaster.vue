@@ -1,13 +1,13 @@
 <template lang="md">
-# Toaster
+# Toaster信息提示
 
 Toaster提供一种不打断用户操作的轻量级提示方式，顶部居中显示并自动消失。
 
 #### 支持4种信息类型
-1. info：普通信息提示
-2. success：成功信息提示
-3. error：错误信息提示
-4. warning：警告信息提示
+- info：普通信息提示
+- success：成功信息提示
+- error：错误信息提示
+- warning：警告信息提示
 
 # DEMO
 
