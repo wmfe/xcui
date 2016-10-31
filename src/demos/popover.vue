@@ -2,9 +2,9 @@
 # Popover 工具提示
 
 ## 使用场景
-1. 需要hover或click时悬浮提示更多详情
-2. 支持自定义提示框样式
-3. 支持两种悬浮框过渡样式:  `scale` 和 `fadein`
+- 需要hover或click时悬浮提示更多详情
+- 支持自定义提示框样式
+- 支持两种悬浮框过渡样式:  `scale` 和 `fadein`
 
 ## DEMO
 <demo>

@@ -1,11 +1,17 @@
 <template lang="md">
-  ## Loading 加载组件
+# Loading 加载组件
 
-    1.提供3种css加载样式。
-    2.loading需要放在一个拥有定位属性的容器，组件蒙层大小为父元素大小。
-    3.css动画颜色可定制。
-    4.提供三种可选尺寸。
-    5.可通过自定义类名增加特殊定制。
+## 使用场景
+
+在ajax加载或其他长耗时操作时，在一个页面元素上加入加载中图标，当耗时操作完成后隐藏。
+
+## 组件能力
+
+- 提供3种css加载样式。
+- loading需要放在一个拥有定位属性的容器，组件蒙层大小为父元素大小。
+- css动画颜色可定制。
+- 提供三种可选尺寸。
+- 可通过自定义类名增加特殊定制。
 
 <demo>
     <example title="加载组件">
@@ -90,7 +96,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 	.loadWrap
 		{
             padding: 30px;

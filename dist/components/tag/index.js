@@ -73,8 +73,11 @@
                 }
             }
         };
+<<<<<<< HEAD
     }, function(module, exports) {}, function(module, exports) {
         module.exports = " <div :class=\"['xcui-tag', disabled ? ' xcui-disabled':'']\" @click=onClick v-if=showTag> <div class=\"{{classname!='' ? classname : ''}}\"> <span class=xcui-tag-text><slot></slot>{{text}}<span> <i class=xcui-cross v-if=closeable @click.stop=onCloseClick></i> </span></span></div> </div> ";
+=======
+>>>>>>> 6db40f0cf5c7d086f4dce3548a6339ee03328252
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(2);
