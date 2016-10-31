@@ -4,11 +4,7 @@
     <div id="sidebar-wrapper" class="col-md-2">
         <ul class="sidebar-nav">
             <li>
-<<<<<<< HEAD
-                <a v-link="{ path: '/component/pagination' }" href="javascript:;">Pagination</a>
-=======
                 <a v-link="{ path: '/home' }" href="javascript:;">关于XCUI</a>
->>>>>>> e7aa7c2b65d8b8b4d8d13aaafdfc8947a164515f
             </li>
             <li>
                 <a v-link="{ path: '/component/datepicker' }" href="javascript:;">DatePicker</a>
@@ -22,7 +18,7 @@
             <li>
                  <a v-link="{ path: '/component/loading' }" href="javascript:;">Loading</a>
             </li>
-            
+
             <li>
                  <a v-link="{ path: '/component/modal' }" href="javascript:;">Modal</a>
             </li>
@@ -30,7 +26,7 @@
                 <a v-link="{ path: '/component/suggestion' }" href="javascript:;">Suggestion</a>
             </li>
             <li>
-                <a v-link="{ path: '/component/paginations' }" href="javascript:;">Paginations</a>
+                <a v-link="{ path: '/component/pagination' }" href="javascript:;">Pagination</a>
             </li>
             <li>
                 <a v-link="{ path: '/component/popover' }" href="javascript:;">Popover</a>
