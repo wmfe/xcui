@@ -88,7 +88,13 @@ export default {
         },
         'rangeLength': {
             type: Number,
-            default: 10
+            default: 10,
+            coerce(val) {
+                if (val < 1) {
+                    return 1;
+                }
+                return val;
+            }
         }
     },
     computed: {

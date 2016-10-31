@@ -34,6 +34,7 @@
             @go-to-page="turnToPage"
             :current-page-no.sync="currentPageNo"
             :total="total"
+            :range-Length="0"
             :page-size.sync="pageSize"
             ></xcui-pagination>
     </example>
