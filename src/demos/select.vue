@@ -400,7 +400,6 @@
             let me = this;
             setTimeout(function () {
                 me.optgroupDefaultValue = '11';
-                console.log('???');
             }, 1000);
         },
         methods: {
@@ -443,7 +442,8 @@
                     this.asyncSearchSource = emails.map(function (item) {
                         return v + '@' + item;
                     });
-                } else {
+                }
+                else {
                     this.asyncSearchSource = [];
                 }
             },
@@ -456,7 +456,8 @@
                 jsonp(`http://suggest.taobao.com/sug?code=utf-8&q=${v}`, (err, d) => {
                     if (err) {
                         me.serverSearchSource = [];
-                    } else {
+                    }
+                    else {
                         me.serverSearchSource = d.result.map(v => {
                             return v[0];
                         });

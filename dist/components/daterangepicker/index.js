@@ -122,11 +122,15 @@
                         e.stopPropagation();
                     }
                     var me = this;
+<<<<<<< HEAD
                     var daySeleted = me.days[k1][k2];
+=======
+>>>>>>> upstream/master
                     var va = me.getValueParams(me.value);
                     if (me.today.length > 0 && me.month === va.month && me.year === va.year) {
                         me.days[me.today[0]][me.today[1]].today = false;
                     }
+<<<<<<< HEAD
                     daySeleted.today = true;
                     daySeleted.range = false;
                     me.day = this.zero(me.days[k1][k2].day);
@@ -143,6 +147,37 @@
                     me.otherValue = me.bindLimitDate();
                     me.changeOtherCalender();
                 },
+=======
+                    me.days[k1][k2].today = true;
+                    me.days[k1][k2].range = false;
+                    me.day = this.zero(me.days[k1][k2].day);
+                    me.today = [ k1, k2 ];
+                    me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+                    me.otherValue = me.bindLimitDate();
+                    me.changeOtherCalender();
+                },
+                selectTimeItem: function selectTimeItem(e, type) {
+                    var me = this;
+                    switch (type) {
+                      case "hour":
+                        me.hour = e.target.innerText;
+                        me.hourListShow = false;
+                        break;
+
+                      case "minute":
+                        me.minute = e.target.innerText;
+                        me.minuteListShow = false;
+                        break;
+
+                      case "second":
+                        me.second = e.target.innerText;
+                        me.secondListShow = false;
+                        break;
+
+                      default:                    }
+                    me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+                },
+>>>>>>> upstream/master
                 changeOtherCalender: function changeOtherCalender() {
                     var me = this;
                     var params = me.getValueParams(me.value);
@@ -262,7 +297,16 @@
                     type: Object,
                     "default": null
                 },
+<<<<<<< HEAD
                 className: String,
+=======
+                inputClass: {
+                    type: Array,
+                    "default": function _default() {
+                        return [];
+                    }
+                },
+>>>>>>> upstream/master
                 btnShow: {
                     type: Boolean,
                     "default": false
@@ -271,6 +315,7 @@
             components: {
                 calendar: _calendar2.default
             },
+<<<<<<< HEAD
             data: function data() {
                 return {
                     beginCalenderVal: "",
@@ -374,6 +419,100 @@
             },
             data: function data() {
                 return {
+=======
+            data: function data() {
+                return {
+                    beginCalenderVal: "",
+                    endCalenderVal: "",
+                    renderStar: "",
+                    renderEnd: ""
+                };
+            },
+            created: function created() {
+                if (this.btnShow) {
+                    this.inputClass.push("input-group");
+                }
+                if (this.value !== "") {
+                    var values = this.value.split("至");
+                    this.beginCalenderVal = values[0].trim();
+                    this.endCalenderVal = values[1].trim();
+                    if (this.type === "datetime") {
+                        this.beginCalenderVal = this.beginCalenderVal + " 00:00:00";
+                        this.endCalenderVal = this.endCalenderVal + " 00:00:00";
+                    }
+                }
+            },
+            methods: {
+                ok: function ok() {
+                    this.value = this.beginCalenderVal + " 至 " + this.endCalenderVal;
+                    this.show = false;
+                },
+                cancel: function cancel() {
+                    this.show = false;
+                },
+                showCalendar: function showCalendar(e) {
+                    var me = this;
+                    e.stopPropagation();
+                    me.show = true;
+                    var bindHide = function bindHide(e) {
+                        e.stopPropagation();
+                        me.show = false;
+                        document.removeEventListener("click", bindHide, false);
+                    };
+                    setTimeout(function() {
+                        document.addEventListener("click", bindHide, false);
+                    }, 500);
+                }
+            }
+        };
+    }, function(module, exports) {
+        "use strict";
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+        exports.default = {
+            props: {
+                type: {
+                    type: String,
+                    "default": "date"
+                },
+                value: {
+                    type: String,
+                    twoWay: true,
+                    "default": ""
+                },
+                begin: {
+                    type: String,
+                    "default": ""
+                },
+                end: {
+                    type: String,
+                    "default": ""
+                },
+                hourRange: {
+                    type: [ Number, String ],
+                    "default": 1
+                },
+                minuteRange: {
+                    type: Number,
+                    "default": 1
+                },
+                secondRange: {
+                    type: Number,
+                    "default": 1
+                },
+                sep: {
+                    type: String,
+                    "default": "-"
+                },
+                color: {
+                    type: String,
+                    "default": ""
+                }
+            },
+            data: function data() {
+                return {
+>>>>>>> upstream/master
                     dataTableShow: true,
                     year: "",
                     month: "",
@@ -400,7 +539,13 @@
             created: function created() {
                 var me = this;
                 var now = me.getCurrentParams();
+<<<<<<< HEAD
                 this.initialValue = this.value;
+=======
+                if (this.btnShow) {
+                    this.inputClass.push("input-group");
+                }
+>>>>>>> upstream/master
                 if (me.value !== "") {
                     var params = me.getValueParams(me.value);
                     me.year = params.year;
@@ -416,7 +561,10 @@
                     me.hour = now.hour;
                     me.minute = now.minute;
                     me.second = now.second;
+<<<<<<< HEAD
                     me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+=======
+>>>>>>> upstream/master
                 }
                 for (var i = 0; i < 60; i++) {
                     if (i % me.minuteRange === 0) {
@@ -426,7 +574,11 @@
                         me.secondList.push(me.zero(i));
                     }
                 }
+<<<<<<< HEAD
                 for (var _i = 0; _i < 24; _i++) {
+=======
+                for (var _i = 1; _i < 24; _i++) {
+>>>>>>> upstream/master
                     if (_i % me.hourRange === 0) {
                         me.hourList.push(me.zero(_i));
                     }
@@ -515,8 +667,51 @@
                 next: function next(e) {
                     e.stopPropagation();
                     var me = this;
+<<<<<<< HEAD
                     me.month += 1;
                     me.outputMonth(me.month);
+                    me.render(me.year, me.month);
+                },
+                changeTitSelect: function changeTitSelect(year, type) {
+                    if (type === "year") {
+                        var startYear = parseInt(year / 10, 10) * 10;
+                        var years1 = [ "《", startYear, startYear + 1 ];
+                        var years2 = [ startYear + 2, startYear + 3, startYear + 4 ];
+                        var years3 = [ startYear + 5, startYear + 6, startYear + 7 ];
+                        var years4 = [ startYear + 8, startYear + 9, "》" ];
+                        this.selectRange = startYear + " ~ " + (startYear + 9);
+                        this.selectRangeList = [ years1, years2, years3, years4 ];
+                        this.selectRangeShow = true;
+=======
+                    if (me.month === 11) {
+                        me.month = 0;
+                        me.year = me.year + 1;
+>>>>>>> upstream/master
+                    } else {
+                        this.selectRangeList = [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ], [ 10, 11, 12 ] ];
+                        this.selectRangeShow = false;
+                    }
+<<<<<<< HEAD
+                    this.dataTableShow = false;
+                    this.yearTableShow = true;
+                },
+                selectItem: function selectItem(select) {
+                    var me = this;
+                    if (select === "《") {
+                        this.changeTitSelect(parseInt(me.selectRange.split("~")[0].trim(), 10) - 10, "year");
+                    } else if (select === "》") {
+                        this.changeTitSelect(parseInt(me.selectRange.split("~")[0].trim(), 10) + 10, "year");
+                    } else if (select > 12) {
+                        this.year = select;
+                        this.render(me.year, me.month);
+                        this.dataTableShow = true;
+                        this.yearTableShow = false;
+                    } else {
+                        this.month = parseInt(select, 10) - 1;
+                        this.render(me.year, me.month);
+                        this.dataTableShow = true;
+                        this.yearTableShow = false;
+=======
                     me.render(me.year, me.month);
                 },
                 changeTitSelect: function changeTitSelect(year, type) {
@@ -532,10 +727,15 @@
                     } else {
                         this.selectRangeList = [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ], [ 10, 11, 12 ] ];
                         this.selectRangeShow = false;
+>>>>>>> upstream/master
                     }
                     this.dataTableShow = false;
                     this.yearTableShow = true;
                 },
+<<<<<<< HEAD
+                dropTimeList: function dropTimeList(type) {
+                    var me = this;
+=======
                 selectItem: function selectItem(select) {
                     var me = this;
                     if (select === "《") {
@@ -556,6 +756,7 @@
                 },
                 dropTimeList: function dropTimeList(type) {
                     var me = this;
+>>>>>>> upstream/master
                     me.hourListShow = false;
                     me.secondListShow = false;
                     me.minuteListShow = false;
@@ -593,7 +794,11 @@
                         break;
 
                       default:                    }
+<<<<<<< HEAD
                     me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+=======
+                    me.selectValue = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+>>>>>>> upstream/master
                 },
                 output: function output(args) {
                     var me = this;
@@ -617,6 +822,7 @@
                     }
                     if (me.type === "date") {
                         return args[0] + me.sep + args1 + me.sep + args2;
+<<<<<<< HEAD
                     }
                 },
                 outputMonth: function outputMonth(val) {
@@ -627,6 +833,8 @@
                     } else if (val === 12) {
                         this.month = 0;
                         this.year += 1;
+=======
+>>>>>>> upstream/master
                     }
                 },
                 getValueParams: function getValueParams(timeCur) {
@@ -675,16 +883,25 @@
             }
         };
     }, function(module, exports) {}, function(module, exports) {
+<<<<<<< HEAD
         module.exports = ' <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"> <input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年 </span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'range\':child.range,\'off\':child.disabled}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\' || type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> </div> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> ';
     }, function(module, exports) {
         module.exports = ' <div class=xcui-datarangepicker :class=className> <div :class="{\'input-group\':btnShow}"> <input class="form-control col-md-3" type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class="calendar double-calendar" v-show=show> <div class=clearfix> <div class=double-calendar-left> <calendar :type=type :value.sync=beginCalenderVal :sep=sep :other-value.sync=endCalenderVal :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-star=renderStar></calendar> </div> <div class=double-calendar-right> <calendar :type=type :value.sync=endCalenderVal :sep=sep :other-value.sync=beginCalenderVal :right=true :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-end=renderEnd></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};
+=======
+        module.exports = ' <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"> <input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年 </span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'range\':child.range,\'disabled\':child.disabled}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\' || type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> </div> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> ';
+    }, function(module, exports) {
+        module.exports = ' <div class=bg-pr :class=inputClass> <input class="form-control col-md-3" type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class="calendar double-calendar" v-show=show> <div class=clearfix> <div class=double-calendar-left> <calendar :type=type :value.sync=beginCalenderVal :sep=sep :other-value.sync=endCalenderVal :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-star=renderStar></calendar> </div> <div class=double-calendar-right> <calendar :type=type :value.sync=endCalenderVal :sep=sep :other-value.sync=beginCalenderVal :right=true :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-end=renderEnd></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> ';
+    }, function(module, exports, __webpack_require__) {
+        var __vue_script__, __vue_template__;
+>>>>>>> upstream/master
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(5);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+<<<<<<< HEAD
         var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
             __vue_options__.template = __vue_template__;
@@ -699,6 +916,13 @@
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};
+=======
+        if (__vue_template__) {
+            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+        }
+    }, function(module, exports, __webpack_require__) {
+        var __vue_script__, __vue_template__;
+>>>>>>> upstream/master
         __webpack_require__(4);
         __vue_script__ = __webpack_require__(2);
         __vue_template__ = __webpack_require__(6);

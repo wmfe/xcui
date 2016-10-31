@@ -12,12 +12,14 @@ import Homecontent from './demos/homeContent';
 import Paginations from './demos/paginations';
 import Loading from './demos/loading';
 import Popover from './demos/popover';
+import Tooltip from './demos/tooltip';
 import Autocomplete from './demos/autocomplete';
 import TagDemo from './demos/tag';
 import datepicker from './demos/datepicker';
 import daterangepicker from './demos/daterangepicker';
 import Select from './demos/select.vue';
 import Toaster from './demos/toaster';
+import Modal from './demos/modal';
 import InputNumber from './demos/inputNumber';
 import Progress from './demos/progress';
 import PageLoading from './demos/pageloading';
@@ -45,6 +47,11 @@ router.map({
             '/component/popover': {
                 component(resolve) {
                     resolve(Popover);
+                }
+            },
+            '/component/tooltip': {
+                component(resolve) {
+                    resolve(Tooltip);
                 }
             },
             '/component/autocomplete': {
@@ -80,6 +87,11 @@ router.map({
             '/component/toaster': {
                 component(resolve) {
                     resolve(Toaster);
+                }
+            },
+            '/component/modal': {
+                component(resolve) {
+                    resolve(Modal);
                 }
             },
             '/component/inputNumber': {

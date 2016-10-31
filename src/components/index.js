@@ -10,7 +10,9 @@ import Tag from './tag';
 import Toaster from './toaster';
 import Select from './select';
 import Loading from './loading';
+import Modal from './modal';
 import Progress from './progress';
+import inputNumber from './inputNumber';
 
 const xcui = {
     Pagination,
@@ -21,7 +23,9 @@ const xcui = {
     Toaster,
     Select,
     Loading,
-    Progress
+    Progress,
+    Modal,
+    inputNumber
 };
 
 module.exports = xcui;

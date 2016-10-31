@@ -55,7 +55,11 @@
             methods: {}
         };
     }, function(module, exports) {}, function(module, exports) {
+<<<<<<< HEAD
         module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname] _v-2520a06b=""> <div class=loader :style="{\'color\' : color}" _v-2520a06b=""></div> </div> ';
+=======
+        module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname] _v-df3ce176=""> <div class=loader :style="{\'color\' : color}" _v-df3ce176=""></div> </div> ';
+>>>>>>> upstream/master
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};

@@ -17,25 +17,37 @@
                    :size="size"
                    :classname="classname"></Loading>
       </div>
-        <div class="btnGroup">
-            <label>show：{{show}}</label>
-            <button v-on:click="toggleShow" class="btn btn-primary" type="button">{{showBtn}}</button>
+        <div class="btnGroup clearfix">
+            <label class="control-label col-md-4">show：</label>
+            <div class="col-md-6">
+                <button class="btn btn-primary" @click="toogleShow">{{showBtn}}</button>
+            </div>
         </div>
-        <div class="btnGroup">
-            <label>type：{{type}}</label>
-            <button v-on:click="type='load1'" class="btn btn-primary" type="button">load1</button>
-            <button v-on:click="type='load2'" class="btn btn-primary" type="button">load2</button>
-            <button v-on:click="type='load3'" class="btn btn-primary" type="button">load3</button>
+        <div class="btnGroup clearfix">
+            <label  class="control-label col-md-4">type：</label>
+            <div class="col-md-6">
+                <select class="form-control" v-model="type">
+                    <option>load1</option>
+                    <option>load2</option>
+                    <option>load3</option>
+                </select>
+            </div>
         </div>
-        <div class="btnGroup">
-            <label>size：{{size}}</label>
-            <button v-on:click="size='sm'" class="btn btn-primary" type="button">sm</button>
-            <button v-on:click="size='md'" class="btn btn-primary" type="button">md</button>
-            <button v-on:click="size='lg'" class="btn btn-primary" type="button">lg</button>
+        <div class="btnGroup clearfix">
+            <label  class="control-label col-md-4">size：</label>
+            <div class="col-md-6">
+                <select class="form-control" v-model="size">
+                    <option>sm</option>
+                    <option>md</option>
+                    <option>lg</option>
+                </select>
+            </div>
         </div>
-        <div class="btnGroup">
-            <label>color：</label>
-            <input type="text" v-model="color" placeholder="支持css颜色格式">
+        <div class="btnGroup clearfix">
+            <label class="control-label col-md-4">color：</label>
+            <div class="col-md-6">
+                <input class="form-control" type="text" v-model="color" placeholder="支持css颜色格式">
+            </div>
         </div>
     </example>
 </demo>
@@ -45,7 +57,7 @@
 | 名字 | 类型 | 默认 | 描述 | 可选范围 | 是否必选 |
 |-----|-----|-----|-----|----|----|
 | show | Boolean | false | 控制显示隐藏 | true/false | 必选 |
-| type | String | load1 | 控制样式选择 | load1-load4 | 可选 |
+| type | String | load2 | 控制样式选择 | load1-load3 | 可选 |
 | size | String | md | 控制大小 | sm/md/lg | 可选 |
 | color | String | 无 | 控制颜色 | css色值 | 可选 |
 | classname | String | 无 | 自定义类名 |  | 可选 |
@@ -62,18 +74,17 @@ export default {
     data() {
         return {
             show: true,
-            type: 'load1',
+            type: 'load2',
             showBtn: 'hide',
-            typeBtn: 'load1',
             classname: 'myclass', // 自定义类名
             color: '',
-            size: ''
+            size: 'md'
         };
     },
     methods: {
-        toggleShow() {
+        toogleShow() {
             this.show = !this.show;
-            this.showBtn = (this.showBtn === 'hide' ? 'show' : 'hide');
+            this.showBtn = this.show ? 'hide' : 'show';
         }
     }
 };
@@ -86,23 +97,6 @@ export default {
 			position: relative;
 		}
 
-    .demo{
-        text-align: center;
-    }
-
-    button,.btn-primary:link,.btn-primary:visited,.btn-primary:focus,.btn-primary:active{
-        background: #46C3C1;
-        border: 0;
-        box-shadow: none;
-        outline: none;
-        margin-right: 30px;
-    }
-
-    .btn-primary:hover{
-        background-color: #2b9d9b;
-        border: 0;
-    }
-
     p{
         text-align: left;
         text-indent: 2em;
@@ -111,8 +105,15 @@ export default {
     .btnGroup{
         margin-top: 15px;
         label{
-            width: 20%;
+            width: 10%;
+            position: relative;
+            top: 5px;
+            text-align: right;
         }
+    }
+
+    select,option,button{
+        outline: none;
     }
 
 </style>

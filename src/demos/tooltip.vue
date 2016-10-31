@@ -1,5 +1,5 @@
 <template lang="md">
-# Popover 工具提示
+# Tooltip 工具提示
 
 ## 使用场景
 1. 需要hover或click时悬浮提示更多详情
@@ -9,18 +9,18 @@
 ## DEMO
 <demo>
     <example title="Popover">
-        <v-popover effect="fadein" placement="bottom" title="This is Title" trigger="click" :content="htmlContent">
-          <button class="btn btn-default ">Click Popover on bottom</button>
-        </v-popover>
-        <v-popover effect="scale" placement="left" title="This is Title" trigger="click"  content="Popover on left">
-          <button class="btn btn-default ">Click Popover on left</button>
-        </v-popover>
-        <v-popover effect="fadein" placement="top" title="This is Title"  content="Popover on top">
-          <button class="btn btn-default "> Hover Popover on top</button>
-        </v-popover>
-        <v-popover effect="scale" placement="right" title="This is Title" :title-class="'title-class'" :content-class="'content-class'" content="Popover on right">
-          <button class="btn btn-default ">Hover Popover on right</button>
-        </v-popover>
+        <v-tooltip effect="fadein" placement="bottom" title="This is Title" :content="htmlContent">
+          <button class="btn btn-default ">Hover tooltip on bottom</button>
+        </v-tooltip>
+        <v-tooltip effect="scale" placement="left" title="This is Title" content="Tooltip on left">
+          <button class="btn btn-default ">Hover tooltip on left</button>
+        </v-tooltip>
+        <v-tooltip effect="fadein" placement="top" title="This is Title"  trigger="click"  content="Tooltip on top">
+          <button class="btn btn-default "> Click tooltip on top</button>
+        </v-tooltip>
+        <v-tooltip effect="scale" placement="right" title="This is Title" trigger="click"  :title-class="'title-class'" :content-class="'content-class'" content="Tooltip on right">
+          <button class="btn btn-default ">Click tooltip on right</button>
+        </v-tooltip>
     </example>
 </demo>
 
@@ -42,10 +42,10 @@
 
 </template>
 <script>
-import vPopover from '../components/popover';
+import vTooltip from '../components/tooltip';
 export default {
     components: {
-        vPopover
+        vTooltip
     },
     data() {
         return {

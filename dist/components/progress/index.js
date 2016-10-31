@@ -57,12 +57,16 @@
         module.exports = " <div class=xcui-progress> <div class=xcui-progress-container> <div class=xcui-progress-outer> <div class=xcui-progress-inner :style=\"{width:percent+'%',height:height+'px'}\"></div> </div> </div> <div :class=\"'infoClassName',!showInfo ? 'hidden':''\"> {{percentInfo}} </div> <div> </div></div>";
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+<<<<<<< HEAD
         var __vue_styles__ = {};
+=======
+>>>>>>> upstream/master
         __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(3);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+<<<<<<< HEAD
         var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
             __vue_options__.template = __vue_template__;
@@ -74,6 +78,11 @@
                 return module;
             };
         });
+=======
+        if (__vue_template__) {
+            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+        }
+>>>>>>> upstream/master
     } ]);
 });
 
