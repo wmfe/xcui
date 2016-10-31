@@ -186,8 +186,6 @@ import Vue from 'vue';
 import XCUI from '../components/index.js';
 Vue.use(XCUI);
 let Modal = XCUI.Modal;
-// window.XCUI = XCUI;
-// window.Vue = Vue;
 let ModalDemo = {
     components: {
         Modal

@@ -23,8 +23,6 @@
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(4);
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname] _v-14d75033=""> <div class=loader :style="{\'color\' : color}" _v-14d75033=""></div> </div> ';
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -35,55 +33,39 @@
             props: {
                 show: {
                     type: Boolean,
-                    default: false
+                    "default": false
                 },
                 type: {
                     type: String,
-<<<<<<< HEAD
                     "default": "load2"
-=======
-                    default: "load2"
->>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
                 },
                 classname: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 color: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 size: {
                     type: String,
-                    default: "md"
+                    "default": "md"
                 }
             },
             methods: {}
         };
-<<<<<<< HEAD
     }, function(module, exports) {}, function(module, exports) {
         module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname]> <div class=loader :style="{\'color\' : color}"></div> </div> ';
-=======
->>>>>>> 665842a6c4a70ad448c3fcffde3109aa06ea74eb
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        var __vue_styles__ = {};
-        __webpack_require__(1);
-        __vue_script__ = __webpack_require__(3);
-        __vue_template__ = __webpack_require__(2);
+        __webpack_require__(2);
+        __vue_script__ = __webpack_require__(1);
+        __vue_template__ = __webpack_require__(3);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
-        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            __vue_options__.template = __vue_template__;
+            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
         }
-        if (!__vue_options__.computed) __vue_options__.computed = {};
-        Object.keys(__vue_styles__).forEach(function(key) {
-            var module = __vue_styles__[key];
-            __vue_options__.computed[key] = function() {
-                return module;
-            };
-        });
     } ]);
 });
 
