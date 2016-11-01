@@ -54,63 +54,63 @@
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-	var _vueResource = __webpack_require__(8);
-
-	var _vueResource2 = _interopRequireDefault(_vueResource);
-
-	var _App = __webpack_require__(9);
+	var _App = __webpack_require__(8);
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Home = __webpack_require__(17);
+	var _Home = __webpack_require__(16);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _homeContent = __webpack_require__(23);
+	var _homeContent = __webpack_require__(22);
 
 	var _homeContent2 = _interopRequireDefault(_homeContent);
 
-	var _paginations = __webpack_require__(26);
+	var _index = __webpack_require__(25);
 
-	var _paginations2 = _interopRequireDefault(_paginations);
+	var _index2 = _interopRequireDefault(_index);
 
-	var _loading = __webpack_require__(36);
+	var _pagination = __webpack_require__(180);
+
+	var _pagination2 = _interopRequireDefault(_pagination);
+
+	var _loading = __webpack_require__(185);
 
 	var _loading2 = _interopRequireDefault(_loading);
 
-	var _popover = __webpack_require__(46);
+	var _popover = __webpack_require__(190);
 
 	var _popover2 = _interopRequireDefault(_popover);
 
-	var _tooltip = __webpack_require__(58);
+	var _tooltip = __webpack_require__(195);
 
 	var _tooltip2 = _interopRequireDefault(_tooltip);
 
-	var _suggestion = __webpack_require__(68);
+	var _suggestion = __webpack_require__(200);
 
 	var _suggestion2 = _interopRequireDefault(_suggestion);
 
-	var _tag = __webpack_require__(78);
+	var _tag = __webpack_require__(205);
 
 	var _tag2 = _interopRequireDefault(_tag);
 
-	var _datepicker = __webpack_require__(88);
+	var _datepicker = __webpack_require__(210);
 
 	var _datepicker2 = _interopRequireDefault(_datepicker);
 
-	var _dateRangePicker = __webpack_require__(99);
+	var _dateRangePicker = __webpack_require__(215);
 
 	var _dateRangePicker2 = _interopRequireDefault(_dateRangePicker);
 
-	var _select = __webpack_require__(112);
+	var _select = __webpack_require__(220);
 
 	var _select2 = _interopRequireDefault(_select);
 
-	var _toaster = __webpack_require__(200);
+	var _message = __webpack_require__(229);
 
-	var _toaster2 = _interopRequireDefault(_toaster);
+	var _message2 = _interopRequireDefault(_message);
 
-	var _modal = __webpack_require__(208);
+	var _modal = __webpack_require__(231);
 
 	var _modal2 = _interopRequireDefault(_modal);
 
@@ -129,7 +129,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	_vue2.default.use(_vueRouter2.default);
-	_vue2.default.use(_vueResource2.default);
+	_vue2.default.use(_index2.default);
 	_vue2.default.config.devtools = true;
 
 	var router = new _vueRouter2.default();
@@ -144,9 +144,9 @@
 	                    resolve(_homeContent2.default);
 	                }
 	            },
-	            '/component/paginations': {
+	            '/component/pagination': {
 	                component: function component(resolve) {
-	                    resolve(_paginations2.default);
+	                    resolve(_pagination2.default);
 	                }
 	            },
 	            '/component/popover': {
@@ -189,9 +189,9 @@
 	                    resolve(_loading2.default);
 	                }
 	            },
-	            '/component/toaster': {
+	            '/component/message': {
 	                component: function component(resolve) {
-	                    resolve(_toaster2.default);
+	                    resolve(_message2.default);
 	                }
 	            },
 	            '/component/modal': {
@@ -13370,1540 +13370,17 @@
 
 /***/ },
 /* 8 */
-/***/ function(module, exports) {
-
-	/*!
-	 * vue-resource v1.0.3
-	 * https://github.com/vuejs/vue-resource
-	 * Released under the MIT License.
-	 */
-
-	'use strict';
-
-	/**
-	 * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
-	 */
-
-	var RESOLVED = 0;
-	var REJECTED = 1;
-	var PENDING = 2;
-
-	function Promise$1(executor) {
-
-	    this.state = PENDING;
-	    this.value = undefined;
-	    this.deferred = [];
-
-	    var promise = this;
-
-	    try {
-	        executor(function (x) {
-	            promise.resolve(x);
-	        }, function (r) {
-	            promise.reject(r);
-	        });
-	    } catch (e) {
-	        promise.reject(e);
-	    }
-	}
-
-	Promise$1.reject = function (r) {
-	    return new Promise$1(function (resolve, reject) {
-	        reject(r);
-	    });
-	};
-
-	Promise$1.resolve = function (x) {
-	    return new Promise$1(function (resolve, reject) {
-	        resolve(x);
-	    });
-	};
-
-	Promise$1.all = function all(iterable) {
-	    return new Promise$1(function (resolve, reject) {
-	        var count = 0,
-	            result = [];
-
-	        if (iterable.length === 0) {
-	            resolve(result);
-	        }
-
-	        function resolver(i) {
-	            return function (x) {
-	                result[i] = x;
-	                count += 1;
-
-	                if (count === iterable.length) {
-	                    resolve(result);
-	                }
-	            };
-	        }
-
-	        for (var i = 0; i < iterable.length; i += 1) {
-	            Promise$1.resolve(iterable[i]).then(resolver(i), reject);
-	        }
-	    });
-	};
-
-	Promise$1.race = function race(iterable) {
-	    return new Promise$1(function (resolve, reject) {
-	        for (var i = 0; i < iterable.length; i += 1) {
-	            Promise$1.resolve(iterable[i]).then(resolve, reject);
-	        }
-	    });
-	};
-
-	var p$1 = Promise$1.prototype;
-
-	p$1.resolve = function resolve(x) {
-	    var promise = this;
-
-	    if (promise.state === PENDING) {
-	        if (x === promise) {
-	            throw new TypeError('Promise settled with itself.');
-	        }
-
-	        var called = false;
-
-	        try {
-	            var then = x && x['then'];
-
-	            if (x !== null && typeof x === 'object' && typeof then === 'function') {
-	                then.call(x, function (x) {
-	                    if (!called) {
-	                        promise.resolve(x);
-	                    }
-	                    called = true;
-	                }, function (r) {
-	                    if (!called) {
-	                        promise.reject(r);
-	                    }
-	                    called = true;
-	                });
-	                return;
-	            }
-	        } catch (e) {
-	            if (!called) {
-	                promise.reject(e);
-	            }
-	            return;
-	        }
-
-	        promise.state = RESOLVED;
-	        promise.value = x;
-	        promise.notify();
-	    }
-	};
-
-	p$1.reject = function reject(reason) {
-	    var promise = this;
-
-	    if (promise.state === PENDING) {
-	        if (reason === promise) {
-	            throw new TypeError('Promise settled with itself.');
-	        }
-
-	        promise.state = REJECTED;
-	        promise.value = reason;
-	        promise.notify();
-	    }
-	};
-
-	p$1.notify = function notify() {
-	    var promise = this;
-
-	    nextTick(function () {
-	        if (promise.state !== PENDING) {
-	            while (promise.deferred.length) {
-	                var deferred = promise.deferred.shift(),
-	                    onResolved = deferred[0],
-	                    onRejected = deferred[1],
-	                    resolve = deferred[2],
-	                    reject = deferred[3];
-
-	                try {
-	                    if (promise.state === RESOLVED) {
-	                        if (typeof onResolved === 'function') {
-	                            resolve(onResolved.call(undefined, promise.value));
-	                        } else {
-	                            resolve(promise.value);
-	                        }
-	                    } else if (promise.state === REJECTED) {
-	                        if (typeof onRejected === 'function') {
-	                            resolve(onRejected.call(undefined, promise.value));
-	                        } else {
-	                            reject(promise.value);
-	                        }
-	                    }
-	                } catch (e) {
-	                    reject(e);
-	                }
-	            }
-	        }
-	    });
-	};
-
-	p$1.then = function then(onResolved, onRejected) {
-	    var promise = this;
-
-	    return new Promise$1(function (resolve, reject) {
-	        promise.deferred.push([onResolved, onRejected, resolve, reject]);
-	        promise.notify();
-	    });
-	};
-
-	p$1.catch = function (onRejected) {
-	    return this.then(undefined, onRejected);
-	};
-
-	/**
-	 * Promise adapter.
-	 */
-
-	if (typeof Promise === 'undefined') {
-	    window.Promise = Promise$1;
-	}
-
-	function PromiseObj(executor, context) {
-
-	    if (executor instanceof Promise) {
-	        this.promise = executor;
-	    } else {
-	        this.promise = new Promise(executor.bind(context));
-	    }
-
-	    this.context = context;
-	}
-
-	PromiseObj.all = function (iterable, context) {
-	    return new PromiseObj(Promise.all(iterable), context);
-	};
-
-	PromiseObj.resolve = function (value, context) {
-	    return new PromiseObj(Promise.resolve(value), context);
-	};
-
-	PromiseObj.reject = function (reason, context) {
-	    return new PromiseObj(Promise.reject(reason), context);
-	};
-
-	PromiseObj.race = function (iterable, context) {
-	    return new PromiseObj(Promise.race(iterable), context);
-	};
-
-	var p = PromiseObj.prototype;
-
-	p.bind = function (context) {
-	    this.context = context;
-	    return this;
-	};
-
-	p.then = function (fulfilled, rejected) {
-
-	    if (fulfilled && fulfilled.bind && this.context) {
-	        fulfilled = fulfilled.bind(this.context);
-	    }
-
-	    if (rejected && rejected.bind && this.context) {
-	        rejected = rejected.bind(this.context);
-	    }
-
-	    return new PromiseObj(this.promise.then(fulfilled, rejected), this.context);
-	};
-
-	p.catch = function (rejected) {
-
-	    if (rejected && rejected.bind && this.context) {
-	        rejected = rejected.bind(this.context);
-	    }
-
-	    return new PromiseObj(this.promise.catch(rejected), this.context);
-	};
-
-	p.finally = function (callback) {
-
-	    return this.then(function (value) {
-	        callback.call(this);
-	        return value;
-	    }, function (reason) {
-	        callback.call(this);
-	        return Promise.reject(reason);
-	    });
-	};
-
-	/**
-	 * Utility functions.
-	 */
-
-	var debug = false;var util = {};var slice = [].slice;
-
-
-	function Util (Vue) {
-	    util = Vue.util;
-	    debug = Vue.config.debug || !Vue.config.silent;
-	}
-
-	function warn(msg) {
-	    if (typeof console !== 'undefined' && debug) {
-	        console.warn('[VueResource warn]: ' + msg);
-	    }
-	}
-
-	function error(msg) {
-	    if (typeof console !== 'undefined') {
-	        console.error(msg);
-	    }
-	}
-
-	function nextTick(cb, ctx) {
-	    return util.nextTick(cb, ctx);
-	}
-
-	function trim(str) {
-	    return str.replace(/^\s*|\s*$/g, '');
-	}
-
-	function toLower(str) {
-	    return str ? str.toLowerCase() : '';
-	}
-
-	function toUpper(str) {
-	    return str ? str.toUpperCase() : '';
-	}
-
-	var isArray = Array.isArray;
-
-	function isString(val) {
-	    return typeof val === 'string';
-	}
-
-	function isBoolean(val) {
-	    return val === true || val === false;
-	}
-
-	function isFunction(val) {
-	    return typeof val === 'function';
-	}
-
-	function isObject(obj) {
-	    return obj !== null && typeof obj === 'object';
-	}
-
-	function isPlainObject(obj) {
-	    return isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
-	}
-
-	function isBlob(obj) {
-	    return typeof Blob !== 'undefined' && obj instanceof Blob;
-	}
-
-	function isFormData(obj) {
-	    return typeof FormData !== 'undefined' && obj instanceof FormData;
-	}
-
-	function when(value, fulfilled, rejected) {
-
-	    var promise = PromiseObj.resolve(value);
-
-	    if (arguments.length < 2) {
-	        return promise;
-	    }
-
-	    return promise.then(fulfilled, rejected);
-	}
-
-	function options(fn, obj, opts) {
-
-	    opts = opts || {};
-
-	    if (isFunction(opts)) {
-	        opts = opts.call(obj);
-	    }
-
-	    return merge(fn.bind({ $vm: obj, $options: opts }), fn, { $options: opts });
-	}
-
-	function each(obj, iterator) {
-
-	    var i, key;
-
-	    if (obj && typeof obj.length == 'number') {
-	        for (i = 0; i < obj.length; i++) {
-	            iterator.call(obj[i], obj[i], i);
-	        }
-	    } else if (isObject(obj)) {
-	        for (key in obj) {
-	            if (obj.hasOwnProperty(key)) {
-	                iterator.call(obj[key], obj[key], key);
-	            }
-	        }
-	    }
-
-	    return obj;
-	}
-
-	var assign = Object.assign || _assign;
-
-	function merge(target) {
-
-	    var args = slice.call(arguments, 1);
-
-	    args.forEach(function (source) {
-	        _merge(target, source, true);
-	    });
-
-	    return target;
-	}
-
-	function defaults(target) {
-
-	    var args = slice.call(arguments, 1);
-
-	    args.forEach(function (source) {
-
-	        for (var key in source) {
-	            if (target[key] === undefined) {
-	                target[key] = source[key];
-	            }
-	        }
-	    });
-
-	    return target;
-	}
-
-	function _assign(target) {
-
-	    var args = slice.call(arguments, 1);
-
-	    args.forEach(function (source) {
-	        _merge(target, source);
-	    });
-
-	    return target;
-	}
-
-	function _merge(target, source, deep) {
-	    for (var key in source) {
-	        if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
-	            if (isPlainObject(source[key]) && !isPlainObject(target[key])) {
-	                target[key] = {};
-	            }
-	            if (isArray(source[key]) && !isArray(target[key])) {
-	                target[key] = [];
-	            }
-	            _merge(target[key], source[key], deep);
-	        } else if (source[key] !== undefined) {
-	            target[key] = source[key];
-	        }
-	    }
-	}
-
-	/**
-	 * Root Prefix Transform.
-	 */
-
-	function root (options, next) {
-
-	    var url = next(options);
-
-	    if (isString(options.root) && !url.match(/^(https?:)?\//)) {
-	        url = options.root + '/' + url;
-	    }
-
-	    return url;
-	}
-
-	/**
-	 * Query Parameter Transform.
-	 */
-
-	function query (options, next) {
-
-	    var urlParams = Object.keys(Url.options.params),
-	        query = {},
-	        url = next(options);
-
-	    each(options.params, function (value, key) {
-	        if (urlParams.indexOf(key) === -1) {
-	            query[key] = value;
-	        }
-	    });
-
-	    query = Url.params(query);
-
-	    if (query) {
-	        url += (url.indexOf('?') == -1 ? '?' : '&') + query;
-	    }
-
-	    return url;
-	}
-
-	/**
-	 * URL Template v2.0.6 (https://github.com/bramstein/url-template)
-	 */
-
-	function expand(url, params, variables) {
-
-	    var tmpl = parse(url),
-	        expanded = tmpl.expand(params);
-
-	    if (variables) {
-	        variables.push.apply(variables, tmpl.vars);
-	    }
-
-	    return expanded;
-	}
-
-	function parse(template) {
-
-	    var operators = ['+', '#', '.', '/', ';', '?', '&'],
-	        variables = [];
-
-	    return {
-	        vars: variables,
-	        expand: function (context) {
-	            return template.replace(/\{([^\{\}]+)\}|([^\{\}]+)/g, function (_, expression, literal) {
-	                if (expression) {
-
-	                    var operator = null,
-	                        values = [];
-
-	                    if (operators.indexOf(expression.charAt(0)) !== -1) {
-	                        operator = expression.charAt(0);
-	                        expression = expression.substr(1);
-	                    }
-
-	                    expression.split(/,/g).forEach(function (variable) {
-	                        var tmp = /([^:\*]*)(?::(\d+)|(\*))?/.exec(variable);
-	                        values.push.apply(values, getValues(context, operator, tmp[1], tmp[2] || tmp[3]));
-	                        variables.push(tmp[1]);
-	                    });
-
-	                    if (operator && operator !== '+') {
-
-	                        var separator = ',';
-
-	                        if (operator === '?') {
-	                            separator = '&';
-	                        } else if (operator !== '#') {
-	                            separator = operator;
-	                        }
-
-	                        return (values.length !== 0 ? operator : '') + values.join(separator);
-	                    } else {
-	                        return values.join(',');
-	                    }
-	                } else {
-	                    return encodeReserved(literal);
-	                }
-	            });
-	        }
-	    };
-	}
-
-	function getValues(context, operator, key, modifier) {
-
-	    var value = context[key],
-	        result = [];
-
-	    if (isDefined(value) && value !== '') {
-	        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
-	            value = value.toString();
-
-	            if (modifier && modifier !== '*') {
-	                value = value.substring(0, parseInt(modifier, 10));
-	            }
-
-	            result.push(encodeValue(operator, value, isKeyOperator(operator) ? key : null));
-	        } else {
-	            if (modifier === '*') {
-	                if (Array.isArray(value)) {
-	                    value.filter(isDefined).forEach(function (value) {
-	                        result.push(encodeValue(operator, value, isKeyOperator(operator) ? key : null));
-	                    });
-	                } else {
-	                    Object.keys(value).forEach(function (k) {
-	                        if (isDefined(value[k])) {
-	                            result.push(encodeValue(operator, value[k], k));
-	                        }
-	                    });
-	                }
-	            } else {
-	                var tmp = [];
-
-	                if (Array.isArray(value)) {
-	                    value.filter(isDefined).forEach(function (value) {
-	                        tmp.push(encodeValue(operator, value));
-	                    });
-	                } else {
-	                    Object.keys(value).forEach(function (k) {
-	                        if (isDefined(value[k])) {
-	                            tmp.push(encodeURIComponent(k));
-	                            tmp.push(encodeValue(operator, value[k].toString()));
-	                        }
-	                    });
-	                }
-
-	                if (isKeyOperator(operator)) {
-	                    result.push(encodeURIComponent(key) + '=' + tmp.join(','));
-	                } else if (tmp.length !== 0) {
-	                    result.push(tmp.join(','));
-	                }
-	            }
-	        }
-	    } else {
-	        if (operator === ';') {
-	            result.push(encodeURIComponent(key));
-	        } else if (value === '' && (operator === '&' || operator === '?')) {
-	            result.push(encodeURIComponent(key) + '=');
-	        } else if (value === '') {
-	            result.push('');
-	        }
-	    }
-
-	    return result;
-	}
-
-	function isDefined(value) {
-	    return value !== undefined && value !== null;
-	}
-
-	function isKeyOperator(operator) {
-	    return operator === ';' || operator === '&' || operator === '?';
-	}
-
-	function encodeValue(operator, value, key) {
-
-	    value = operator === '+' || operator === '#' ? encodeReserved(value) : encodeURIComponent(value);
-
-	    if (key) {
-	        return encodeURIComponent(key) + '=' + value;
-	    } else {
-	        return value;
-	    }
-	}
-
-	function encodeReserved(str) {
-	    return str.split(/(%[0-9A-Fa-f]{2})/g).map(function (part) {
-	        if (!/%[0-9A-Fa-f]/.test(part)) {
-	            part = encodeURI(part);
-	        }
-	        return part;
-	    }).join('');
-	}
-
-	/**
-	 * URL Template (RFC 6570) Transform.
-	 */
-
-	function template (options) {
-
-	    var variables = [],
-	        url = expand(options.url, options.params, variables);
-
-	    variables.forEach(function (key) {
-	        delete options.params[key];
-	    });
-
-	    return url;
-	}
-
-	/**
-	 * Service for URL templating.
-	 */
-
-	var ie = document.documentMode;
-	var el = document.createElement('a');
-
-	function Url(url, params) {
-
-	    var self = this || {},
-	        options = url,
-	        transform;
-
-	    if (isString(url)) {
-	        options = { url: url, params: params };
-	    }
-
-	    options = merge({}, Url.options, self.$options, options);
-
-	    Url.transforms.forEach(function (handler) {
-	        transform = factory(handler, transform, self.$vm);
-	    });
-
-	    return transform(options);
-	}
-
-	/**
-	 * Url options.
-	 */
-
-	Url.options = {
-	    url: '',
-	    root: null,
-	    params: {}
-	};
-
-	/**
-	 * Url transforms.
-	 */
-
-	Url.transforms = [template, query, root];
-
-	/**
-	 * Encodes a Url parameter string.
-	 *
-	 * @param {Object} obj
-	 */
-
-	Url.params = function (obj) {
-
-	    var params = [],
-	        escape = encodeURIComponent;
-
-	    params.add = function (key, value) {
-
-	        if (isFunction(value)) {
-	            value = value();
-	        }
-
-	        if (value === null) {
-	            value = '';
-	        }
-
-	        this.push(escape(key) + '=' + escape(value));
-	    };
-
-	    serialize(params, obj);
-
-	    return params.join('&').replace(/%20/g, '+');
-	};
-
-	/**
-	 * Parse a URL and return its components.
-	 *
-	 * @param {String} url
-	 */
-
-	Url.parse = function (url) {
-
-	    if (ie) {
-	        el.href = url;
-	        url = el.href;
-	    }
-
-	    el.href = url;
-
-	    return {
-	        href: el.href,
-	        protocol: el.protocol ? el.protocol.replace(/:$/, '') : '',
-	        port: el.port,
-	        host: el.host,
-	        hostname: el.hostname,
-	        pathname: el.pathname.charAt(0) === '/' ? el.pathname : '/' + el.pathname,
-	        search: el.search ? el.search.replace(/^\?/, '') : '',
-	        hash: el.hash ? el.hash.replace(/^#/, '') : ''
-	    };
-	};
-
-	function factory(handler, next, vm) {
-	    return function (options) {
-	        return handler.call(vm, options, next);
-	    };
-	}
-
-	function serialize(params, obj, scope) {
-
-	    var array = isArray(obj),
-	        plain = isPlainObject(obj),
-	        hash;
-
-	    each(obj, function (value, key) {
-
-	        hash = isObject(value) || isArray(value);
-
-	        if (scope) {
-	            key = scope + '[' + (plain || hash ? key : '') + ']';
-	        }
-
-	        if (!scope && array) {
-	            params.add(value.name, value.value);
-	        } else if (hash) {
-	            serialize(params, value, key);
-	        } else {
-	            params.add(key, value);
-	        }
-	    });
-	}
-
-	/**
-	 * XDomain client (Internet Explorer).
-	 */
-
-	function xdrClient (request) {
-	    return new PromiseObj(function (resolve) {
-
-	        var xdr = new XDomainRequest(),
-	            handler = function (_ref) {
-	            var type = _ref.type;
-
-
-	            var status = 0;
-
-	            if (type === 'load') {
-	                status = 200;
-	            } else if (type === 'error') {
-	                status = 500;
-	            }
-
-	            resolve(request.respondWith(xdr.responseText, { status: status }));
-	        };
-
-	        request.abort = function () {
-	            return xdr.abort();
-	        };
-
-	        xdr.open(request.method, request.getUrl());
-	        xdr.timeout = 0;
-	        xdr.onload = handler;
-	        xdr.onerror = handler;
-	        xdr.ontimeout = handler;
-	        xdr.onprogress = function () {};
-	        xdr.send(request.getBody());
-	    });
-	}
-
-	/**
-	 * CORS Interceptor.
-	 */
-
-	var ORIGIN_URL = Url.parse(location.href);
-	var SUPPORTS_CORS = 'withCredentials' in new XMLHttpRequest();
-
-	function cors (request, next) {
-
-	    if (!isBoolean(request.crossOrigin) && crossOrigin(request)) {
-	        request.crossOrigin = true;
-	    }
-
-	    if (request.crossOrigin) {
-
-	        if (!SUPPORTS_CORS) {
-	            request.client = xdrClient;
-	        }
-
-	        delete request.emulateHTTP;
-	    }
-
-	    next();
-	}
-
-	function crossOrigin(request) {
-
-	    var requestUrl = Url.parse(Url(request));
-
-	    return requestUrl.protocol !== ORIGIN_URL.protocol || requestUrl.host !== ORIGIN_URL.host;
-	}
-
-	/**
-	 * Body Interceptor.
-	 */
-
-	function body (request, next) {
-
-	    if (isFormData(request.body)) {
-
-	        request.headers.delete('Content-Type');
-	    } else if (isObject(request.body) || isArray(request.body)) {
-
-	        if (request.emulateJSON) {
-	            request.body = Url.params(request.body);
-	            request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-	        } else {
-	            request.body = JSON.stringify(request.body);
-	        }
-	    }
-
-	    next(function (response) {
-
-	        Object.defineProperty(response, 'data', {
-	            get: function () {
-	                return this.body;
-	            },
-	            set: function (body) {
-	                this.body = body;
-	            }
-	        });
-
-	        return response.bodyText ? when(response.text(), function (text) {
-
-	            var type = response.headers.get('Content-Type');
-
-	            if (isString(type) && type.indexOf('application/json') === 0) {
-
-	                try {
-	                    response.body = JSON.parse(text);
-	                } catch (e) {
-	                    response.body = null;
-	                }
-	            } else {
-	                response.body = text;
-	            }
-
-	            return response;
-	        }) : response;
-	    });
-	}
-
-	/**
-	 * JSONP client.
-	 */
-
-	function jsonpClient (request) {
-	    return new PromiseObj(function (resolve) {
-
-	        var name = request.jsonp || 'callback',
-	            callback = '_jsonp' + Math.random().toString(36).substr(2),
-	            body = null,
-	            handler,
-	            script;
-
-	        handler = function (_ref) {
-	            var type = _ref.type;
-
-
-	            var status = 0;
-
-	            if (type === 'load' && body !== null) {
-	                status = 200;
-	            } else if (type === 'error') {
-	                status = 500;
-	            }
-
-	            resolve(request.respondWith(body, { status: status }));
-
-	            delete window[callback];
-	            document.body.removeChild(script);
-	        };
-
-	        request.params[name] = callback;
-
-	        window[callback] = function (result) {
-	            body = JSON.stringify(result);
-	        };
-
-	        script = document.createElement('script');
-	        script.src = request.getUrl();
-	        script.type = 'text/javascript';
-	        script.async = true;
-	        script.onload = handler;
-	        script.onerror = handler;
-
-	        document.body.appendChild(script);
-	    });
-	}
-
-	/**
-	 * JSONP Interceptor.
-	 */
-
-	function jsonp (request, next) {
-
-	    if (request.method == 'JSONP') {
-	        request.client = jsonpClient;
-	    }
-
-	    next(function (response) {
-
-	        if (request.method == 'JSONP') {
-
-	            return when(response.json(), function (json) {
-
-	                response.body = json;
-
-	                return response;
-	            });
-	        }
-	    });
-	}
-
-	/**
-	 * Before Interceptor.
-	 */
-
-	function before (request, next) {
-
-	    if (isFunction(request.before)) {
-	        request.before.call(this, request);
-	    }
-
-	    next();
-	}
-
-	/**
-	 * HTTP method override Interceptor.
-	 */
-
-	function method (request, next) {
-
-	    if (request.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(request.method)) {
-	        request.headers.set('X-HTTP-Method-Override', request.method);
-	        request.method = 'POST';
-	    }
-
-	    next();
-	}
-
-	/**
-	 * Header Interceptor.
-	 */
-
-	function header (request, next) {
-
-	    var headers = assign({}, Http.headers.common, !request.crossOrigin ? Http.headers.custom : {}, Http.headers[toLower(request.method)]);
-
-	    each(headers, function (value, name) {
-	        if (!request.headers.has(name)) {
-	            request.headers.set(name, value);
-	        }
-	    });
-
-	    next();
-	}
-
-	/**
-	 * Timeout Interceptor.
-	 */
-
-	function timeout (request, next) {
-
-	    var timeout;
-
-	    if (request.timeout) {
-	        timeout = setTimeout(function () {
-	            request.abort();
-	        }, request.timeout);
-	    }
-
-	    next(function (response) {
-
-	        clearTimeout(timeout);
-	    });
-	}
-
-	/**
-	 * XMLHttp client.
-	 */
-
-	function xhrClient (request) {
-	    return new PromiseObj(function (resolve) {
-
-	        var xhr = new XMLHttpRequest(),
-	            handler = function (event) {
-
-	            var response = request.respondWith('response' in xhr ? xhr.response : xhr.responseText, {
-	                status: xhr.status === 1223 ? 204 : xhr.status, // IE9 status bug
-	                statusText: xhr.status === 1223 ? 'No Content' : trim(xhr.statusText)
-	            });
-
-	            each(trim(xhr.getAllResponseHeaders()).split('\n'), function (row) {
-	                response.headers.append(row.slice(0, row.indexOf(':')), row.slice(row.indexOf(':') + 1));
-	            });
-
-	            resolve(response);
-	        };
-
-	        request.abort = function () {
-	            return xhr.abort();
-	        };
-
-	        if (request.progress) {
-	            if (request.method === 'GET') {
-	                xhr.addEventListener('progress', request.progress);
-	            } else if (/^(POST|PUT)$/i.test(request.method)) {
-	                xhr.upload.addEventListener('progress', request.progress);
-	            }
-	        }
-
-	        xhr.open(request.method, request.getUrl(), true);
-
-	        if ('responseType' in xhr) {
-	            xhr.responseType = 'blob';
-	        }
-
-	        if (request.credentials === true) {
-	            xhr.withCredentials = true;
-	        }
-
-	        request.headers.forEach(function (value, name) {
-	            xhr.setRequestHeader(name, value);
-	        });
-
-	        xhr.timeout = 0;
-	        xhr.onload = handler;
-	        xhr.onerror = handler;
-	        xhr.send(request.getBody());
-	    });
-	}
-
-	/**
-	 * Base client.
-	 */
-
-	function Client (context) {
-
-	    var reqHandlers = [sendRequest],
-	        resHandlers = [],
-	        handler;
-
-	    if (!isObject(context)) {
-	        context = null;
-	    }
-
-	    function Client(request) {
-	        return new PromiseObj(function (resolve) {
-
-	            function exec() {
-
-	                handler = reqHandlers.pop();
-
-	                if (isFunction(handler)) {
-	                    handler.call(context, request, next);
-	                } else {
-	                    warn('Invalid interceptor of type ' + typeof handler + ', must be a function');
-	                    next();
-	                }
-	            }
-
-	            function next(response) {
-
-	                if (isFunction(response)) {
-
-	                    resHandlers.unshift(response);
-	                } else if (isObject(response)) {
-
-	                    resHandlers.forEach(function (handler) {
-	                        response = when(response, function (response) {
-	                            return handler.call(context, response) || response;
-	                        });
-	                    });
-
-	                    when(response, resolve);
-
-	                    return;
-	                }
-
-	                exec();
-	            }
-
-	            exec();
-	        }, context);
-	    }
-
-	    Client.use = function (handler) {
-	        reqHandlers.push(handler);
-	    };
-
-	    return Client;
-	}
-
-	function sendRequest(request, resolve) {
-
-	    var client = request.client || xhrClient;
-
-	    resolve(client(request));
-	}
-
-	var classCallCheck = function (instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError("Cannot call a class as a function");
-	  }
-	};
-
-	/**
-	 * HTTP Headers.
-	 */
-
-	var Headers = function () {
-	    function Headers(headers) {
-	        var _this = this;
-
-	        classCallCheck(this, Headers);
-
-
-	        this.map = {};
-
-	        each(headers, function (value, name) {
-	            return _this.append(name, value);
-	        });
-	    }
-
-	    Headers.prototype.has = function has(name) {
-	        return getName(this.map, name) !== null;
-	    };
-
-	    Headers.prototype.get = function get(name) {
-
-	        var list = this.map[getName(this.map, name)];
-
-	        return list ? list[0] : null;
-	    };
-
-	    Headers.prototype.getAll = function getAll(name) {
-	        return this.map[getName(this.map, name)] || [];
-	    };
-
-	    Headers.prototype.set = function set(name, value) {
-	        this.map[normalizeName(getName(this.map, name) || name)] = [trim(value)];
-	    };
-
-	    Headers.prototype.append = function append(name, value) {
-
-	        var list = this.getAll(name);
-
-	        if (list.length) {
-	            list.push(trim(value));
-	        } else {
-	            this.set(name, value);
-	        }
-	    };
-
-	    Headers.prototype.delete = function _delete(name) {
-	        delete this.map[getName(this.map, name)];
-	    };
-
-	    Headers.prototype.forEach = function forEach(callback, thisArg) {
-	        var _this2 = this;
-
-	        each(this.map, function (list, name) {
-	            each(list, function (value) {
-	                return callback.call(thisArg, value, name, _this2);
-	            });
-	        });
-	    };
-
-	    return Headers;
-	}();
-
-	function getName(map, name) {
-	    return Object.keys(map).reduce(function (prev, curr) {
-	        return toLower(name) === toLower(curr) ? curr : prev;
-	    }, null);
-	}
-
-	function normalizeName(name) {
-
-	    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
-	        throw new TypeError('Invalid character in header field name');
-	    }
-
-	    return trim(name);
-	}
-
-	/**
-	 * HTTP Response.
-	 */
-
-	var Response = function () {
-	    function Response(body, _ref) {
-	        var url = _ref.url;
-	        var headers = _ref.headers;
-	        var status = _ref.status;
-	        var statusText = _ref.statusText;
-	        classCallCheck(this, Response);
-
-
-	        this.url = url;
-	        this.ok = status >= 200 && status < 300;
-	        this.status = status || 0;
-	        this.statusText = statusText || '';
-	        this.headers = new Headers(headers);
-	        this.body = body;
-
-	        if (isString(body)) {
-
-	            this.bodyText = body;
-	        } else if (isBlob(body)) {
-
-	            this.bodyBlob = body;
-
-	            if (isBlobText(body)) {
-	                this.bodyText = blobText(body);
-	            }
-	        }
-	    }
-
-	    Response.prototype.blob = function blob() {
-	        return when(this.bodyBlob);
-	    };
-
-	    Response.prototype.text = function text() {
-	        return when(this.bodyText);
-	    };
-
-	    Response.prototype.json = function json() {
-	        return when(this.text(), function (text) {
-	            return JSON.parse(text);
-	        });
-	    };
-
-	    return Response;
-	}();
-
-	function blobText(body) {
-	    return new PromiseObj(function (resolve) {
-
-	        var reader = new FileReader();
-
-	        reader.readAsText(body);
-	        reader.onload = function () {
-	            resolve(reader.result);
-	        };
-	    });
-	}
-
-	function isBlobText(body) {
-	    return body.type.indexOf('text') === 0 || body.type.indexOf('json') !== -1;
-	}
-
-	/**
-	 * HTTP Request.
-	 */
-
-	var Request = function () {
-	    function Request(options) {
-	        classCallCheck(this, Request);
-
-
-	        this.body = null;
-	        this.params = {};
-
-	        assign(this, options, {
-	            method: toUpper(options.method || 'GET')
-	        });
-
-	        if (!(this.headers instanceof Headers)) {
-	            this.headers = new Headers(this.headers);
-	        }
-	    }
-
-	    Request.prototype.getUrl = function getUrl() {
-	        return Url(this);
-	    };
-
-	    Request.prototype.getBody = function getBody() {
-	        return this.body;
-	    };
-
-	    Request.prototype.respondWith = function respondWith(body, options) {
-	        return new Response(body, assign(options || {}, { url: this.getUrl() }));
-	    };
-
-	    return Request;
-	}();
-
-	/**
-	 * Service for sending network requests.
-	 */
-
-	var CUSTOM_HEADERS = { 'X-Requested-With': 'XMLHttpRequest' };
-	var COMMON_HEADERS = { 'Accept': 'application/json, text/plain, */*' };
-	var JSON_CONTENT_TYPE = { 'Content-Type': 'application/json;charset=utf-8' };
-
-	function Http(options) {
-
-	    var self = this || {},
-	        client = Client(self.$vm);
-
-	    defaults(options || {}, self.$options, Http.options);
-
-	    Http.interceptors.forEach(function (handler) {
-	        client.use(handler);
-	    });
-
-	    return client(new Request(options)).then(function (response) {
-
-	        return response.ok ? response : PromiseObj.reject(response);
-	    }, function (response) {
-
-	        if (response instanceof Error) {
-	            error(response);
-	        }
-
-	        return PromiseObj.reject(response);
-	    });
-	}
-
-	Http.options = {};
-
-	Http.headers = {
-	    put: JSON_CONTENT_TYPE,
-	    post: JSON_CONTENT_TYPE,
-	    patch: JSON_CONTENT_TYPE,
-	    delete: JSON_CONTENT_TYPE,
-	    custom: CUSTOM_HEADERS,
-	    common: COMMON_HEADERS
-	};
-
-	Http.interceptors = [before, timeout, method, body, jsonp, header, cors];
-
-	['get', 'delete', 'head', 'jsonp'].forEach(function (method) {
-
-	    Http[method] = function (url, options) {
-	        return this(assign(options || {}, { url: url, method: method }));
-	    };
-	});
-
-	['post', 'put', 'patch'].forEach(function (method) {
-
-	    Http[method] = function (url, body, options) {
-	        return this(assign(options || {}, { url: url, method: method, body: body }));
-	    };
-	});
-
-	/**
-	 * Service for interacting with RESTful services.
-	 */
-
-	function Resource(url, params, actions, options) {
-
-	    var self = this || {},
-	        resource = {};
-
-	    actions = assign({}, Resource.actions, actions);
-
-	    each(actions, function (action, name) {
-
-	        action = merge({ url: url, params: assign({}, params) }, options, action);
-
-	        resource[name] = function () {
-	            return (self.$http || Http)(opts(action, arguments));
-	        };
-	    });
-
-	    return resource;
-	}
-
-	function opts(action, args) {
-
-	    var options = assign({}, action),
-	        params = {},
-	        body;
-
-	    switch (args.length) {
-
-	        case 2:
-
-	            params = args[0];
-	            body = args[1];
-
-	            break;
-
-	        case 1:
-
-	            if (/^(POST|PUT|PATCH)$/i.test(options.method)) {
-	                body = args[0];
-	            } else {
-	                params = args[0];
-	            }
-
-	            break;
-
-	        case 0:
-
-	            break;
-
-	        default:
-
-	            throw 'Expected up to 4 arguments [params, body], got ' + args.length + ' arguments';
-	    }
-
-	    options.body = body;
-	    options.params = assign({}, options.params, params);
-
-	    return options;
-	}
-
-	Resource.actions = {
-
-	    get: { method: 'GET' },
-	    save: { method: 'POST' },
-	    query: { method: 'GET' },
-	    update: { method: 'PUT' },
-	    remove: { method: 'DELETE' },
-	    delete: { method: 'DELETE' }
-
-	};
-
-	/**
-	 * Install plugin.
-	 */
-
-	function plugin(Vue) {
-
-	    if (plugin.installed) {
-	        return;
-	    }
-
-	    Util(Vue);
-
-	    Vue.url = Url;
-	    Vue.http = Http;
-	    Vue.resource = Resource;
-	    Vue.Promise = PromiseObj;
-
-	    Object.defineProperties(Vue.prototype, {
-
-	        $url: {
-	            get: function () {
-	                return options(Vue.url, this, this.$options.url);
-	            }
-	        },
-
-	        $http: {
-	            get: function () {
-	                return options(Vue.http, this, this.$options.http);
-	            }
-	        },
-
-	        $resource: {
-	            get: function () {
-	                return Vue.resource.bind(this);
-	            }
-	        },
-
-	        $promise: {
-	            get: function () {
-	                var _this = this;
-
-	                return function (executor) {
-	                    return new Vue.Promise(executor, _this);
-	                };
-	            }
-	        }
-
-	    });
-	}
-
-	if (typeof window !== 'undefined' && window.Vue) {
-	    window.Vue.use(plugin);
-	}
-
-	module.exports = plugin;
-
-/***/ },
-/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(10)
-	__vue_script__ = __webpack_require__(14)
+	__webpack_require__(9)
+	__vue_script__ = __webpack_require__(13)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(16)
+	__vue_template__ = __webpack_require__(15)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -14919,7 +13396,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-56f05fc0/App.vue"
+	  var id = "_v-fac32dec/App.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14928,16 +13405,16 @@
 	})()}
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(11);
+	var content = __webpack_require__(10);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -14954,10 +13431,10 @@
 	}
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(11)();
 	// imports
 
 
@@ -14968,7 +13445,7 @@
 
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports) {
 
 	/*
@@ -15024,7 +13501,7 @@
 
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -15246,7 +13723,7 @@
 
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15255,7 +13732,7 @@
 	    value: true
 	});
 
-	var _logo_nobg_32x322x = __webpack_require__(15);
+	var _logo_nobg_32x322x = __webpack_require__(14);
 
 	var _logo_nobg_32x322x2 = _interopRequireDefault(_logo_nobg_32x322x);
 
@@ -15270,30 +13747,30 @@
 	};
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAADOJJREFUeAHtWwl0FeUV/uateUkIgSwGAhIwLAZlt9FKFbBStdYFRauWg2iPskkAqUcQNIALbsgiKiitAlqPqLgUFUGJFVE8YEXZyhaWBBOJCZCNl7dMv5thMi/JW7Ogod5z3vtn5l/vN/e/9/73/wf4Pyfl5+ZfVVUFg2eaZRxKTrb7dI+nSQBQs7NNWLe/A2ItfeDx9oaitIPVEge7LRox0fbq1GGLgtVq43MrbDb+qlM7LBYFFrMLbo8HVVVeOKtcOFnlhMvtREUFr51O3lfxeSWfVcHD525PBbxqMczmfKg4CAVH4CwthCOlRPlwoTMSEBsEgNrnungkxV9HhoYguW17ZKSno2fXJHRLi0bqWYAjKpIxNKysm8JyogwoKgF+OlaFwqIyFBSVI6/gGNMinCg9jvLKMrg8x6CoO+HBHv4+V3JePunbYdgAqBcNdyAuZhLaJQ/CkIv6Y1BmW3Rs59vWL/e6+DgIjIq7p5ejwpGifLe8POzBqoNuj1KHjnpOfeT5vWphEadsC6aCo6o6dOSdvsxbfG/qXquDR/ZE55TlWJTdF1H2utkt7/6sRGpa04Uc+FJ98AEBUC+95XL8PvMlTBtztl74jEhjo5N8+fALgDoo24Ku7ofOOOaF847tU3wBMPne1Fxbcm/FjLGZNfdn0kX3tFTRazpL/gGw266mhvcrHXrFFptmpCfAhjR9/PUAqHZq+vbsrhcImZ6k37FoBeD1hizaZAVUFZi1EPhmW+RNpqY4YDKdq1esBwA2Hs7A4Mx0vUDI1O0Btu4C7poOVEbkhIVs2m8B6ePuGcD2PUCHBvgh7emoub299LbrA2BSr0S/jGi9QNB0wizggbnAnClABR2sO+4HjhQGrdKozIKjwJ1TgeOlwIIHNeAvGAaIRIRLDppzsylVL14fAKu1L+Lj9Hz/qXhWX3xD5scCMqjZi4BnOSATmxs7E9jcANH035Px9D87gDEPaVPtWaa7c4HFrwOP3gv88CMg+eGS3dJKL1ofgIT4ZD0zYPrjT2R4ObBpK/BcNt86ByAgLKRoxlJ4pj4FvPFBwOoRZ6z6GLj/SSDKxj4I9K59wPxlnAp/Bs7rCtw7B1idE36zDkesXrgWANUKsHuXTnqm33Q0B9Aqhp3So3xllSYJviAsoC4Qj2vu34HHFvttIqKHTy8FnuSvbWtN7OsyP34WcDZ1wcjrgWtHa4ujUB0ktqkR8VoA4KsDZ6NXd2qJIHRWAjBhNtCODtVUdhgIhPQ04E1KwT0coKzcIiWPF5j8KPDq+0AnMihz3h/zXfm+5GX8jVKQ1gFIbBO6p/i4mkK1ATBZeqNrWs388NtS9gR2Eh8eCOdSPD/7GvjrNKDkuN/m/D4sq9DqrNsIdE8LzvzkO7SxyBL8aSrIcKht61bq8OFmKVobAK+3DzoEFwAGO4B5nOt2zsesMCShVw/a6x2a6RLFFYpy86jpCdgWKtKetMbB3rwwn/WIphjnc0yWap5C9cDpFG/DESeVVV0AzKbOYQUzxJQI2h6VA3g49HQ4vxvFdz8wimYymLJavwkYlw3s3AvceEV4zJeWapYgrkavhQYgsY0d0YnVkl5bAmIc1DRhkuiAGeO0qEwgEHLz6SW+Cgw4X2u0tJzAUaGt+Xf9TjaKWZ0rgQstTwDbsJnWZoWh7UXhyZyfNEoDXnyOyZz/6XwWCTns0fB4HFKlNgBRURHAyNr9MrTByUD8gfASxVPEftk7xvAkhCVa/fAPxjNRknOWAGUESKdtu/lmXwBuukozdb7MT2S7+w4BI64Dhlyo1wg/tdvNjEX6ASCxTY12DLu1G/4ADONv/2EDhGmjgRff0HyDg0c4VTy1mxM/4tMvjWfbKfL6mzeegoFQWpKPgPF0ruTNy5wX5nfuA4YOpKIc7ls6/Gu71Qy1Kkoq1EgAA10KUpKSw2/Fp+QUiuElA7S3LZLQIYXS0RNY/xVw7IRPQZ/L/XnGjSi+QKZSfP48Stj4ERrAcp/Zm+BONOpHemWzKfAqVqlWAwAGXhtLB4YeTgPpKSrFAWRaRH7YeCCHzAcl1ciVBVUwknxRoMK8KNT50xnaojVqKLk9JobU6Wj4AhDTOhEpjQBATNB8OisZ6UBpGe1+gDevDzqZDpVOl15AFzoI9i4XGPYGpI5Yn8bGJ1XyrmqoGxJgtrVHUlu7PqYGpeIiy+IkLTV09SQfAJLaEoBqnRS4XjLd61kU+5SkwGXCzZFNGFWpFjsDAAWdkBAfbhOBy3XpCGRnMfbWLnAZyXl3Lef9KdF/7X3gKK1DIJK2ZowFfts3UInInjudFbCanVLJ4lOzS1h+tE+FgJdiHmdP4kpxBZVgKdfvnA4x0fTpKRkSQRIT9z1/9z3B5fNtwIp3NUvRrTOBowKVOuV0h+PoqyTRMF1zGXBREzEvgy4p5faackwuDQDcnmREhxBDqREuCQgvPaqVljdtotKSeIGQLKMXLqOi3MTYwfe0/2T20t9o85vbhs1Ox0+4UFFElH2VoMnUuPkfbNSiIHXmpZyYsQdpKUSZiZkUGy/r/NPBvPR/rNQFa79KuTR0gLkZAZCefEk0+kMLqImpjVOo3A7RWZKAyumio8XF+la8AYBiOg2yRw6LOfVknX8wX3Nz33yWuqED8P6ntCDPnx4IDhuBSwMAi7n5Adh7UFsW7zkE3PxHbVEjqzhxbGRB8/bHwPRnmh+E42XV8186MgAwNzMAX38HTJnDNUMePcXL6daONBiVKNOCGYDEDlav11xeiQg1F1VV+QHAbm0+JfhBDu34PIo95/rQixngvLs+axLKkiizhLXEOoyhUuRhkSanCuo+r3ev3q4hAdEOm/6wSdN/vAU8vkQLXV/cj4HSKYGbP4dO1ANjGGDhmuyrb7nae0CLNwSuEXnO9j0ueoGf6BUNAKzNIAEzFwIv/FNbF2T24lynmIciCZ5M5PSIbw18u0OLDYrkNBV9s+MnrlU4HzXyAcBiOEV6bkNTWdqOywbeWcftspNAb87tRTNlRya8Fq+4BLh9GP2EKC2UJjtQEiNsCtq8bZfy5cpqH0CaM0Ykp7eaguTgkgQ1P99suLfzpkfu5NxxA3Dl7zQHSuIFstnyHk1lYymv4LBvEwYANlvjJUAiNbJ3p29TdWqv7Rs2dJE1MwsQvSFUQOfpicW0Fq9o9w3533fIxWN8H/pWNQDwlQbfEuFei6af/Bjw31ythixxp1LbRxqwrNufSE9fBlqETpRr8cX7Hm/Ydvzq9QdQ6H5Pa0z7NwAw+zrrvkXCuJ7Ht/IIvbj8Aq1wjIOScCOXr/3DqByiiJWC+QynVI/OWkExjWs20KGimRSTFglt2LKr7hE5AwCTYlyH26gou0l0a5etYhSIb0fIzIXPn4YAt16j3TfFv+wLyo6UHMIUku3wTTSTMt0OnwJdywn8n18o2+pr6xYwmFYUthoBSXhblN0nG2sHNAfyrU+jLW9qyuhKy/IXbswyrqCTRJPvoXWRLbRQtPTN3TC3WlK3mAGAhIkioVsmGcpOr9eXMQAR1+aiqwcDN1xZewtMwvHiZR4tDtyri5K6ccsGf+eIfQHwBm7BT05dzd6jC219NgfXeGPipzfj0eRRwMABxr1cSfRIgAhEqz7Oh7Nytr9sAwBVjczxlrmuk4StZtFkyeGI00ESGT6vm9GTnPsJZG1ENy1d+ZGS8/oBo4JxZbyuykrKSQS05GEtrCXxO1F6Pc6JoHIji4plmEsQxM0WibuJ06KuROpdzFm8CwUevp0QpN41/bMWfAza/9B35Zarl40cF4x1YwpUuZzBCra4PNl/zJr1rvLJK0FjbQYAFbJqOUNIQu83TdiNuLIRoTgyAKh0RuhWhWr6Z8qXxdjNWVtRYu6nrFwZ0rQbAFRVnXLlfqaBN0W3eQUe3DJxNVy2zLoub6DmDSvgdlOdt2Ba+eGPPJOwQln78r2RcGEAYLJ8j0IqDglQtiTautOF7IWfo6IsS1m7fFukQzcAUJVP8faaMoy5lXHqFkBfbKnEkje+xpGCJcq6Za81dMSKb0V1yIjR3Iy8HlcN7o+B/RMgO72/JJJzRf9an8vQ+RYen5lPxjc0dni1ANAbUzNvi0Nr61Vc2l5OD6sj+pzbGX0yUvldoCPktrfeSFOkssDZsbccH+Tsx7Y9O/jh5EeoKH5L+eK9JtNXfgGoO/bqb4iiDp0Dr2cAVH51FWVLQlxsPI/LJvNkaQKP1sTyOobb6/bqM72yyxzORqfYawlq/HBUwuaV3DcowYEjRdh7IJ8nSwsYv98Cky1HWfPi9rpjaqr7sAAI1ln1B5V2WwKirO3gRkfuAqdC9SQy9t4GZkW+zjAxgGHimR72xZ/C7zfdHn4C6znJT9hKGCkuJLDyVecBFHkLwjVfwcb0a96vCISPwP8A+ijW8salZEEAAAAASUVORK5CYII="
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div>\n    <div id=\"header\">\n        <a v-link=\"{ path: '/home' }\" href=\"javascript:;\" class=\"logo\">\n          <img :src=\"logoUrl\">\n            XCUI Components\n        </a>\n    </div>\n  <router-view></router-view>\n</div>\n";
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(18)
-	__vue_script__ = __webpack_require__(20)
+	__webpack_require__(17)
+	__vue_script__ = __webpack_require__(19)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\Home.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(22)
+	__vue_template__ = __webpack_require__(21)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -15309,7 +13786,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-27256550/Home.vue"
+	  var id = "_v-71388546/Home.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15318,16 +13795,16 @@
 	})()}
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(19);
+	var content = __webpack_require__(18);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -15344,10 +13821,10 @@
 	}
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(11)();
 	// imports
 
 
@@ -15358,7 +13835,7 @@
 
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15367,7 +13844,7 @@
 	    value: true
 	});
 
-	var version = __webpack_require__(21).version;
+	var version = __webpack_require__(20).version;
 
 	exports.default = {
 	    data: function data() {
@@ -15376,14 +13853,16 @@
 	        };
 	    },
 	    ready: function ready() {
-	        this.$route.router.go({
-	            name: 'home'
-	        });
+	        if (this.$route.path === '/') {
+	            this.$route.router.go({
+	                name: 'home'
+	            });
+	        }
 	    }
 	};
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -15429,7 +13908,6 @@
 			"babel-preset-stage-2": "^6.0.0",
 			"babel-runtime": "^6.0.0",
 			"cli-spinner": "^0.2.4",
-			"clone": "^2.0.0",
 			"co": "^4.6.0",
 			"co-fs": "^1.2.0",
 			"co-request": "^1.0.0",
@@ -15461,7 +13939,6 @@
 			"vue-hot-reload-api": "^1.2.0",
 			"vue-html-loader": "^1.2.0",
 			"vue-loader": "^8.5.2",
-			"vue-resource": "",
 			"vue-router": "^0.7.11",
 			"vue-style-loader": "^1.0.0",
 			"webpack": "^1.12.2",
@@ -15471,23 +13948,23 @@
 	};
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"wrapper\" class=\"row\">\n  <!-- sidebar-wrapper -->\n  <div id=\"sidebar-wrapper\" class=\"col-md-2\">\n      <ul class=\"sidebar-nav\">\n          <li>\n              <a v-link=\"{ path: '/home' }\" href=\"javascript:;\">关于XCUI</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/datepicker' }\" href=\"javascript:;\">DatePicker</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/daterangepicker' }\" href=\"javascript:;\">DateRangePicker</a>\n          </li>\n          <li>\n               <a v-link=\"{ path: '/component/inputNumber' }\" href=\"javascript:;\">InputNumber</a>\n          </li>\n          <li>\n               <a v-link=\"{ path: '/component/loading' }\" href=\"javascript:;\">Loading</a>\n          </li>\n          \n          <li>\n               <a v-link=\"{ path: '/component/modal' }\" href=\"javascript:;\">Modal</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/suggestion' }\" href=\"javascript:;\">Suggestion</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/paginations' }\" href=\"javascript:;\">Paginations</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/popover' }\" href=\"javascript:;\">Popover</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/progress' }\" href=\"javascript:;\">Progress</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/pageloading' }\" href=\"javascript:;\">PageLoading</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/tooltip' }\" href=\"javascript:;\">Tooltip</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/tag' }\" href=\"javascript:;\">Tag</a>\n          </li>\n          <li>\n               <a v-link=\"{ path: '/component/toaster' }\" href=\"javascript:;\">Toaster</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/select' }\" href=\"javascript:;\">Select</a>\n          </li>\n      </ul>\n  </div>\n  <!-- /#sidebar-wrapper -->\n  <!-- Page Content -->\n  <div id=\"page-content-wrapper\" class=\"col-md-10\">\n     <router-view\n    transition=\"xcui-fade\"\n    transition-mode=\"out-in\"></router-view>\n  </div>\n  <!-- /#page-content-wrapper -->\n</div>\n";
+	module.exports = "\n<div id=\"wrapper\" class=\"row\">\n  <!-- sidebar-wrapper -->\n  <div id=\"sidebar-wrapper\" class=\"col-md-2\">\n      <ul class=\"sidebar-nav\">\n          <li>\n              <a v-link=\"{ path: '/home' }\" href=\"javascript:;\">关于XCUI</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/datepicker' }\" href=\"javascript:;\">DatePicker</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/daterangepicker' }\" href=\"javascript:;\">DateRangePicker</a>\n          </li>\n          <li>\n               <a v-link=\"{ path: '/component/inputNumber' }\" href=\"javascript:;\">InputNumber</a>\n          </li>\n          <li>\n               <a v-link=\"{ path: '/component/loading' }\" href=\"javascript:;\">Loading</a>\n          </li>\n\n          <li>\n               <a v-link=\"{ path: '/component/modal' }\" href=\"javascript:;\">Modal</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/suggestion' }\" href=\"javascript:;\">Suggestion</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/pagination' }\" href=\"javascript:;\">Pagination</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/popover' }\" href=\"javascript:;\">Popover</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/progress' }\" href=\"javascript:;\">Progress</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/pageloading' }\" href=\"javascript:;\">PageLoading</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/tooltip' }\" href=\"javascript:;\">Tooltip</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/tag' }\" href=\"javascript:;\">Tag</a>\n          </li>\n          <li>\n               <a v-link=\"{ path: '/component/message' }\" href=\"javascript:;\">Message</a>\n          </li>\n          <li>\n              <a v-link=\"{ path: '/component/select' }\" href=\"javascript:;\">Select</a>\n          </li>\n      </ul>\n  </div>\n  <!-- /#sidebar-wrapper -->\n  <!-- Page Content -->\n  <div id=\"page-content-wrapper\" class=\"col-md-10\">\n     <router-view\n    transition=\"xcui-fade\"\n    transition-mode=\"out-in\"></router-view>\n  </div>\n  <!-- /#page-content-wrapper -->\n</div>\n";
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(24)
+	__vue_script__ = __webpack_require__(23)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\demos\\homeContent.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(25)
+	__vue_template__ = __webpack_require__(24)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -15503,7 +13980,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-6f7582ad/homeContent.vue"
+	  var id = "_v-42cc8277/homeContent.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15512,7 +13989,7 @@
 	})()}
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15521,7 +13998,7 @@
 	    value: true
 	});
 
-	var version = __webpack_require__(21).version;
+	var version = __webpack_require__(20).version;
 
 	exports.default = {
 	    data: function data() {
@@ -15532,10 +14009,122 @@
 	};
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports) {
 
-	module.exports = "<div><h1>关于XCUI</h1>\n<p><img src=\"/xcui/static/logo_nobg_128x128@2x.png\" alt=\"logo\" /></p>\n<p>XCUI 是基于<code>Vue</code>和 <code>Bootstrap.css</code> 的<strong>桌面端组件库</strong>。</p>\n<h2>XCUI的目标是：</h2>\n<ul>\n<li>满足桌面端页面大部分基础组件需求。</li>\n<li>快速开发基于 <code>vue</code> 构建的项目。</li>\n<li>保持小体积, 无其他js库依赖(不依赖<code>jquery</code>, <code>Boostrap.js</code>), 仅使用 <code>Boostrap.css</code> 。</li>\n<li>简洁优雅。</li>\n</ul>\n<h2>版本支持</h2>\n<p>XCUI目前支持<code>vue 1.x</code>版本；推荐使用<code>vue 1.0.26</code>及以上版本。后续XCUI会增加支持<code>vue 2.x</code>的版本，敬请期待。</p>\n<h2>如何使用</h2>\n<p>通过<code>npm</code>安装，或在<a href=\"https://github.com/wmfe/xcui\">这里</a>下载打包好的版本：</p>\n<pre>npm install xcui\n</pre>\n<p><code>xcui</code>使用<code>umd</code>方式打包，支持各种模块加载器。</p>\n<p>在页面根实例中引入：</p>\n<pre><span class=\"token keyword\" >import</span> Vue <span class=\"token keyword\" >from</span> <span class=\"token string\" >'vue'</span>\n<span class=\"token keyword\" >import</span> xcui <span class=\"token keyword\" >from</span> <span class=\"token string\" >'xcui'</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n</pre>\n<p>或者：</p>\n<pre><span class=\"token keyword\" >var</span> Vue <span class=\"token operator\" >=</span> <span class=\"token function\" >require</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'vue'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> xcui <span class=\"token operator\" >=</span> <span class=\"token function\" >require</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'xcui'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n</pre>\n<p>在页面中声明标签，即可使用。举例：</p>\n<pre><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-datepicker</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date.value<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:sep</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date.sep<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre>\n<h2>全局方法</h2>\n<p><code>xcui</code>把一些使用频率高的操作挂载到<code>Vue</code>的根实例，便于调用。如, 在一个<code>components</code>组件中可以这样调用：</p>\n<pre><span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$alert</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'alert message'</span><span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 警告提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$confirm</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'是否确认?'</span><span class=\"token punctuation\" >,</span> content<span class=\"token punctuation\" >,</span> onOk<span class=\"token punctuation\" >,</span> onCancel<span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 确认提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$toaster</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'toaster message'</span><span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 信息提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span>$Modal<span class=\"token punctuation\" >.</span><span class=\"token function\" >show</span><span class=\"token punctuation\" >(</span>options<span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 模态框</span>\n</pre>\n<p>具体请见<a href=\"/#!/component/modal\">modal</a> 中的说明。</p>\n<h2>开发</h2>\n<h4>clone the doc repo</h4>\n<pre>$ git clone git@github<span class=\"token punctuation\" >.</span>com<span class=\"token punctuation\" >:</span>wmfe<span class=\"token operator\" >/</span>xcui<span class=\"token punctuation\" >.</span>git\n</pre>\n<h4>安装依赖</h4>\n<pre>$ npm i\n</pre>\n<h4>run dev server</h4>\n<pre>$ npm run dev\n</pre>\n<h4>build components</h4>\n<pre>$ npm run build\n</pre>\n<h2>加入我们</h2>\n<h4>提交issue</h4>\n<p>在使用过程中有问题，请在<a href=\"https://github.com/wmfe/xcui/issues\">这里</a>给我们提交<code>issue</code>。</p>\n<h4>提交pull request</h4>\n<p>代码有问题？请在<a href=\"https://github.com/wmfe/xcui/pulls\">这里</a>给我们提交<code>pull request</code>。</p>\n<h4>加入开发团队</h4>\n<p>加入<a href=\"https://github.com/wmfe\">wmfe</a>团队，一起开发通用组件，交流vue组件开发的心得~</p>\n</div>";
+	module.exports = "<div><h1>关于XCUI</h1>\n<p><img src=\"https://github.com/wmfe/xcui/raw/master/src/assets/logo_nobg_128x128@2x.png\" alt=\"logo\" /></p>\n<p>XCUI 是基于<code>Vue</code>和 <code>Bootstrap.css</code> 的<strong>桌面端组件库</strong>。</p>\n<h2>XCUI的目标是：</h2>\n<ul>\n<li>满足桌面端页面大部分基础组件需求。</li>\n<li>快速开发基于 <code>vue</code> 构建的项目。</li>\n<li>保持小体积, 无其他js库依赖(不依赖<code>jquery</code>, <code>Boostrap.js</code>), 仅使用 <code>Boostrap.css</code> 。</li>\n<li>简洁优雅。</li>\n</ul>\n<h2>版本支持</h2>\n<p>XCUI目前支持<code>vue 1.x</code>版本；推荐使用<code>vue 1.0.26</code>及以上版本。后续XCUI会增加支持<code>vue 2.x</code>的版本，敬请期待。</p>\n<blockquote>\n<p>XCUI需要在页面中引入<code>bootstrap.css</code>。</p>\n</blockquote>\n<h2>如何使用</h2>\n<p>通过<code>npm</code>安装，或在<a href=\"https://github.com/wmfe/xcui\">这里</a>下载打包好的版本：</p>\n<pre>npm install xcui\n</pre>\n<p><code>xcui</code>使用<code>umd</code>方式打包，支持各种模块加载器。</p>\n<p>在页面根实例中引入：</p>\n<pre><span class=\"token keyword\" >import</span> Vue <span class=\"token keyword\" >from</span> <span class=\"token string\" >'vue'</span>\n<span class=\"token keyword\" >import</span> xcui <span class=\"token keyword\" >from</span> <span class=\"token string\" >'xcui'</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n</pre>\n<p>或者：</p>\n<pre><span class=\"token keyword\" >var</span> Vue <span class=\"token operator\" >=</span> <span class=\"token function\" >require</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'vue'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> xcui <span class=\"token operator\" >=</span> <span class=\"token function\" >require</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'xcui'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n</pre>\n<p>在页面中声明标签，即可使用。举例：</p>\n<pre><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n</pre>\n<p>除了使用npm进行安装外，还可直接将xcui的js和css文件使用标签形式引入，举例：</p>\n<pre><span class=\"token doctype\" >&lt;!DOCTYPE html></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>html</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>head</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>title</span><span class=\"token punctuation\" >></span></span>Hello XCUI<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>title</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>link</span> <span class=\"token attr-name\" >rel</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>stylesheet<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >href</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>bootstrap/css/bootstrap.css<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>link</span> <span class=\"token attr-name\" >rel</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>stylesheet<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >href</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>xcui.css<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>script</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text/javascript<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >src</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>vue.js<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token script language-javascript\" ></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>script</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>script</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text/javascript<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >src</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>xcui.js<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token script language-javascript\" ></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>script</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>head</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>body</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >id</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>app<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>script</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text/javascript<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token script language-javascript\" >\n        Vue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n        <span class=\"token keyword\" >new</span> <span class=\"token class-name\" >Vue</span><span class=\"token punctuation\" >(</span><span class=\"token punctuation\" >{</span>\n            el<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'#app'</span><span class=\"token punctuation\" >,</span>\n            ready<span class=\"token punctuation\" >:</span> <span class=\"token keyword\" >function</span> <span class=\"token punctuation\" >(</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >{</span>\n                <span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$alert</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'Hello XCUI!'</span><span class=\"token punctuation\" >)</span>\n            <span class=\"token punctuation\" >}</span>\n        <span class=\"token punctuation\" >}</span><span class=\"token punctuation\" >)</span>\n    </span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>script</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>body</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>html</span><span class=\"token punctuation\" >></span></span>\n</pre>\n<blockquote>\n<p><strong>说明</strong></p>\n<p>XCUI在使用<code>Vue.use(xcui)</code>后，会默认以<code>xcui-</code>前缀注册所有组件，在Vue实例中可直接使用而<strong>不用在<code>components</code>中声明</strong>。如：</p>\n</blockquote>\n<pre><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n</pre>\n<p>当然，您也可以按以下方式使用xcui组件：</p>\n<pre><span class=\"token keyword\" >import</span> <span class=\"token punctuation\" >{</span>Tag<span class=\"token punctuation\" >,</span> Select<span class=\"token punctuation\" >}</span> <span class=\"token keyword\" >from</span> xcui<span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >export</span> <span class=\"token keyword\" >default</span> <span class=\"token punctuation\" >{</span>\n    components<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >{</span>Tag<span class=\"token punctuation\" >,</span> Select<span class=\"token punctuation\" >}</span>\n<span class=\"token punctuation\" >}</span>\n</pre>\n<h2>全局方法</h2>\n<p><code>xcui</code>把一些使用频率高的操作挂载到<code>Vue</code>的根实例，便于调用。如, 在一个<code>components</code>组件中可以这样调用 ( <strong>且不用在页面中显式地声明html标签</strong> )：</p>\n<pre><span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$alert</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'alert message'</span><span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 警告提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$confirm</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'是否确认?'</span><span class=\"token punctuation\" >,</span> content<span class=\"token punctuation\" >,</span> onOk<span class=\"token punctuation\" >,</span> onCancel<span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 确认提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$toaster</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'toaster message'</span><span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 信息提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span>$Modal<span class=\"token punctuation\" >.</span><span class=\"token function\" >show</span><span class=\"token punctuation\" >(</span>options<span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 模态框</span>\n</pre>\n<p>具体请见<a href=\"https://wmfe.github.io/xcui/#!/component/modal\">modal</a> 中的说明。</p>\n<h2>开发</h2>\n<h4>clone the repo</h4>\n<pre>$ git clone git@github<span class=\"token punctuation\" >.</span>com<span class=\"token punctuation\" >:</span>wmfe<span class=\"token operator\" >/</span>xcui<span class=\"token punctuation\" >.</span>git\n</pre>\n<h4>安装依赖</h4>\n<pre>$ npm i\n</pre>\n<h4>run dev server</h4>\n<pre>$ npm run dev\n</pre>\n<h4>build components</h4>\n<pre>$ npm run build\n</pre>\n<h2>加入我们</h2>\n<h4>提交issue</h4>\n<p>在使用过程中有问题，请在<a href=\"https://github.com/wmfe/xcui/issues\">这里</a>给我们提交<code>issue</code>。</p>\n<h4>提交pull request</h4>\n<p>代码有问题？请在<a href=\"https://github.com/wmfe/xcui/pulls\">这里</a>给我们提交<code>pull request</code>。</p>\n<h4>加入开发团队</h4>\n<p>加入<a href=\"https://github.com/wmfe\">wmfe</a>团队，一起开发通用组件，交流vue组件开发的心得~</p>\n</div>";
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _datepicker = __webpack_require__(26);
+
+	var _datepicker2 = _interopRequireDefault(_datepicker);
+
+	var _daterangepicker = __webpack_require__(100);
+
+	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
+
+	var _inputNumber = __webpack_require__(108);
+
+	var _inputNumber2 = _interopRequireDefault(_inputNumber);
+
+	var _loading = __webpack_require__(113);
+
+	var _loading2 = _interopRequireDefault(_loading);
+
+	var _message = __webpack_require__(118);
+
+	var _message2 = _interopRequireDefault(_message);
+
+	var _modal = __webpack_require__(123);
+
+	var _modal2 = _interopRequireDefault(_modal);
+
+	var _pageloading = __webpack_require__(128);
+
+	var _pageloading2 = _interopRequireDefault(_pageloading);
+
+	var _pagination = __webpack_require__(133);
+
+	var _pagination2 = _interopRequireDefault(_pagination);
+
+	var _popover = __webpack_require__(138);
+
+	var _popover2 = _interopRequireDefault(_popover);
+
+	var _progress = __webpack_require__(145);
+
+	var _progress2 = _interopRequireDefault(_progress);
+
+	var _select = __webpack_require__(150);
+
+	var _select2 = _interopRequireDefault(_select);
+
+	var _suggestion = __webpack_require__(161);
+
+	var _suggestion2 = _interopRequireDefault(_suggestion);
+
+	var _tag = __webpack_require__(166);
+
+	var _tag2 = _interopRequireDefault(_tag);
+
+	var _tooltip = __webpack_require__(171);
+
+	var _tooltip2 = _interopRequireDefault(_tooltip);
+
+	var _install = __webpack_require__(176);
+
+	var _install2 = _interopRequireDefault(_install);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var install = function install(Vue) {
+	    if (install.installed) {
+	        return;
+	    }
+	    Vue.component(_datepicker2.default.name, _datepicker2.default);
+	    Vue.component(_daterangepicker2.default.name, _daterangepicker2.default);
+	    Vue.component(_inputNumber2.default.name, _inputNumber2.default);
+	    Vue.component(_loading2.default.name, _loading2.default);
+	    Vue.component(_message2.default.name, _message2.default);
+	    Vue.component(_modal2.default.name, _modal2.default);
+	    Vue.component(_pageloading2.default.name, _pageloading2.default);
+	    Vue.component(_pagination2.default.name, _pagination2.default);
+	    Vue.component(_popover2.default.name, _popover2.default);
+	    Vue.component(_progress2.default.name, _progress2.default);
+	    Vue.component(_select2.default.name, _select2.default);
+	    Vue.component(_suggestion2.default.name, _suggestion2.default);
+	    Vue.component(_tag2.default.name, _tag2.default);
+	    Vue.component(_tooltip2.default.name, _tooltip2.default);
+
+	    Vue.use(_install2.default);
+	};
+
+	var xcui = {
+	    version: '1.0.0-alpha',
+	    Datepicker: _datepicker2.default,
+	    DateRangePicker: _daterangepicker2.default,
+	    InputNumber: _inputNumber2.default,
+	    Loading: _loading2.default,
+	    Message: _message2.default,
+	    Modal: _modal2.default,
+	    PageLoading: _pageloading2.default,
+	    Pagination: _pagination2.default,
+	    Popover: _popover2.default,
+	    Progress: _progress2.default,
+	    Select: _select2.default,
+	    Suggestion: _suggestion2.default,
+	    Tag: _tag2.default,
+	    Tooltip: _tooltip2.default,
+	    install: install,
+	    xcuiInstall: _install2.default
+	};
+
+	module.exports = xcui;
 
 /***/ },
 /* 26 */
@@ -15548,8 +14137,8 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\paginations.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(35)
+	  console.warn("[vue-loader] src\\components\\datepicker\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(99)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -15565,7 +14154,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-2627f8ac/paginations.vue"
+	  var id = "_v-73ad8741/index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15583,14 +14172,14 @@
 	var content = __webpack_require__(28);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./paginations.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./paginations.vue");
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -15603,12 +14192,12 @@
 /* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(11)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".table {\n  border: 1px solid #ddd;\n  background-color: #fff;\n  margin-top: 15px;\n}\n", ""]);
+	exports.push([module.id, ".xcui-datapicker .calendar {\n  width: 240px;\n  padding: 10px;\n  background: #fff;\n  position: absolute;\n  z-index: 9999;\n  left: 0;\n  top: 38px;\n  border: 1px solid #DEDEDE;\n  border-radius: 2px;\n  -webkit-transition: all .5s ease;\n  transition: all .5s ease;\n}\n.xcui-datapicker .calendar-enter .calendar-leave {\n  opacity: 0;\n  -webkit-transform: translate3d(0, -10px, 0);\n          transform: translate3d(0, -10px, 0);\n}\n.xcui-datapicker .calendar-tit {\n  text-align: center;\n  margin: 0 auto;\n  width: 104px;\n  font-weight: bold;\n}\n.xcui-datapicker .calendar-tit input {\n  color: #333;\n  height: 24px;\n  outline: medium;\n  text-align: center;\n  border: none;\n  background-color: transparent;\n}\n.xcui-datapicker .calendar-tit-year {\n  width: 36px;\n}\n.xcui-datapicker .calendar-tit-month {\n  width: 18px;\n  margin-left: 2px;\n}\n.xcui-datapicker .calendar:before {\n  position: absolute;\n  left: 30px;\n  top: -10px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #DEDEDE;\n}\n.xcui-datapicker .calendar:after {\n  position: absolute;\n  left: 30px;\n  top: -9px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #fff;\n}\n.xcui-datapicker .calendar-tools {\n  height: 32px;\n  font-size: 14px;\n  line-height: 32px;\n  color: #333;\n}\n.xcui-datapicker .calendar-tools .float.left {\n  float: left;\n}\n.xcui-datapicker .calendar-tools .float.right {\n  float: right;\n}\n.xcui-datapicker .calendar-tools > i {\n  margin: 0 10px;\n  line-height: 32px;\n  cursor: pointer;\n  color: #707070;\n}\n.xcui-datapicker .calendar-tools > i:hover {\n  color: #333;\n}\n.xcui-datapicker .calendar table {\n  clear: both;\n  width: 100%;\n  margin-bottom: 10px;\n  border-collapse: collapse;\n  color: #444;\n}\n.xcui-datapicker .calendar td {\n  margin: 2px !important;\n  padding: 5px 0;\n  width: 14.28571429%;\n  text-align: center;\n  vertical-align: middle;\n  font-size: 14px;\n  line-height: 125%;\n  cursor: pointer;\n  border: 0;\n}\n.xcui-datapicker .calendar td:hover {\n  background: #f3f8fa;\n}\n.xcui-datapicker .calendar td.week {\n  pointer-events: none !important;\n  cursor: default !important;\n}\n.xcui-datapicker .calendar td.off {\n  color: #c0c0c0;\n}\n.xcui-datapicker .calendar td.today {\n  background-color: #46c3c1;\n  color: #fff;\n  font-size: 14px;\n  border-radius: 4px;\n}\n.xcui-datapicker .calendar td.today .lunar {\n  color: #fff;\n}\n.xcui-datapicker .calendar thead td {\n  text-transform: uppercase;\n}\n.xcui-datapicker .calendar .timer {\n  margin: 10px 0 10px 30px;\n  width: 150px;\n  text-align: center;\n}\n.xcui-datapicker .calendar .timer input {\n  border-radius: 2px;\n  padding: 5px;\n  font-size: 14px;\n  line-height: 18px;\n  color: #46c3c1;\n  width: 50px;\n  text-align: center;\n  border: 1px solid #efefef;\n}\n.xcui-datapicker .calendar .timer input:focus {\n  border: 1px solid #46c3c1;\n}\n.xcui-datapicker .calendar .timer-item {\n  float: left;\n  text-align: center;\n  position: relative;\n  cursor: pointer;\n}\n.xcui-datapicker .calendar .timer-item-current {\n  color: #46c3c1;\n  line-height: 24px;\n  font-size: 14px;\n}\n.xcui-datapicker .calendar .timer label {\n  margin: 0;\n  width: 30px;\n  padding: 5px;\n  line-height: 14px;\n  margin-right: 4px;\n  font-weight: normal;\n}\n.xcui-datapicker .calendar-button {\n  text-align: center;\n}\n.xcui-datapicker .calendar-button button {\n  border: none;\n  cursor: pointer;\n  display: inline-block;\n  min-height: 1em;\n  vertical-align: baseline;\n  background: #46c3c1;\n  color: #fff;\n  margin: 0 .3em 0 0;\n  padding: .6em 2em;\n  font-size: 1em;\n  line-height: 1em;\n  text-align: center;\n  border-radius: .3em;\n}\n.xcui-datapicker .calendar-button button.cancel {\n  background: #efefef;\n  color: #666;\n}\n.xcui-datapicker .calendar .lunar {\n  font-size: 11px;\n  line-height: 150%;\n  color: #aaa;\n}\n.xcui-datapicker .calendar .drop-down {\n  position: absolute;\n  top: 24px;\n  left: -10px;\n  width: 50px;\n  height: 140px;\n  background: #fff;\n  border: 1px solid #efefef;\n  padding: 0;\n  margin: 0;\n  overflow-y: scroll;\n}\n.xcui-datapicker .calendar .drop-down li {\n  width: 50px;\n  list-style: none;\n}\n.xcui-datapicker .calendar .drop-down li.on {\n  background: #eee;\n}\n.xcui-datapicker .calendar .drop-down li:hover {\n  background: #eee;\n}\n.xcui-datapicker .calendar .clearfix {\n  zoom: 1;\n}\n.xcui-datapicker .calendar .clearfix:after {\n  display: block;\n  width: 0;\n  height: 0;\n  visibility: hidden;\n  content: '';\n  clear: both;\n}\n.xcui-datapicker .calendar .btn-default {\n  color: #666;\n  border-radius: 0 4px 4px 0;\n}\n.xcui-datapicker .bg-pr {\n  position: relative;\n}\n", ""]);
 
 	// exports
 
@@ -15623,2018 +14212,7 @@
 	    value: true
 	});
 
-	var _pagination = __webpack_require__(30);
-
-	var _pagination2 = _interopRequireDefault(_pagination);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    components: {
-	        xcuiPagination: _pagination2.default
-	    },
-	    data: function data() {
-	        return {
-	            currentPageNum: 1,
-	            pageSize: 10,
-	            list: [],
-	            total: 0
-	        };
-	    },
-
-	    methods: {
-	        genId: function genId() {
-	            return Math.floor(Math.random() * 100);
-	        },
-	        fetch: function fetch(pageNo) {
-	            var _this = this;
-
-	            return {
-	                list: new Array(this.pageSize).fill(undefined).map(function (item) {
-	                    return {
-	                        name: 'example',
-	                        id: _this.genId()
-	                    };
-	                }),
-	                total: 55
-	            };
-	        },
-	        turnToPage: function turnToPage(pageNo, oldPageNo) {
-	            var _fetch = this.fetch(pageNo),
-	                list = _fetch.list,
-	                total = _fetch.total;
-
-	            this.list = list;
-	            this.total = total;
-	            this.currentPageNum = pageNo;
-	        }
-	    },
-	    ready: function ready() {
-	        this.turnToPage(1);
-	    }
-	};
-
-/***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(31)
-	__vue_script__ = __webpack_require__(33)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\pagination\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(34)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-93878f56/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 31 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(32);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".v-pagination-wrap {\n  -webkit-user-select: none;\n}\n.v-pagination-wrap .pagination {\n  vertical-align: bottom;\n  margin: 0;\n}\n.v-pagination-wrap .pagination li > a {\n  padding: 5px 12px;\n}\n.v-pagination-wrap .pagination li > a:focus {\n  background-color: initial;\n}\n.v-pagination-wrap .pagination li.active a,\n.v-pagination-wrap .pagination li.active a:hover,\n.v-pagination-wrap .pagination li.active a:active {\n  background-color: #46c3c1;\n  border-color: #46c3c1;\n  outline: none;\n}\n.v-pagination-wrap .pagination .apostrophe {\n  border-color: transparent;\n  border-left-color: #ddd;\n}\n.v-pagination-wrap .pagination .apostrophe:hover {\n  background-color: inherit;\n}\n.v-pagination-wrap .v-pagination-page-size {\n  line-height: 34px;\n}\n.v-pagination-wrap .v-pagination-mini .prev-trigger {\n  margin: 0 10px;\n  padding: 2px 12px;\n}\n.v-pagination-wrap .v-pagination-mini .prev-trigger span {\n  -webkit-transform: rotate(90deg);\n  transform: rotate(90deg);\n}\n.v-pagination-wrap .v-pagination-mini .next-trigger {\n  margin: 0 0 0 10px;\n  padding: 2px 12px;\n}\n.v-pagination-wrap .v-pagination-mini .next-trigger span {\n  -webkit-transform: rotate(-90deg);\n  transform: rotate(-90deg);\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 33 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.default = {
-	    name: 'xcui-pagination',
-	    props: {
-	        'type': {
-	            type: String,
-	            default: 'standard' },
-	        'currentPageNo': {
-	            type: Number,
-	            default: 1
-	        },
-	        'total': Number,
-	        'pageSize': {
-	            type: Number,
-	            default: 20
-	        },
-	        'class': String,
-	        'withPageSize': {
-	            type: Boolean,
-	            default: true
-	        },
-	        'pageSizeRange': {
-	            type: Array,
-	            default: function _default() {
-	                return [10, 20, 50, 100];
-	            }
-	        },
-	        'rangeLength': {
-	            type: Number,
-	            default: 10
-	        }
-	    },
-	    computed: {
-	        totalPageCount: function totalPageCount() {
-	            return Math.ceil(this.total / this.pageSize);
-	        },
-	        getRangePage: function getRangePage() {
-	            var curPage = this.currentPageNo;
-	            var midpoint = curPage;
-
-	            var pageRange = this.rangeLength - 1;
-
-	            var leftHand = Math.floor(pageRange / 2);
-
-	            var rightHand = Math.ceil(pageRange / 2);
-	            var totalPage = this.totalPageCount;
-	            var result = {
-	                begin: 1,
-	                end: 1
-	            };
-
-	            if (!midpoint) {
-	                result.begin = curPage - leftHand;
-	                result.end = curPage + rightHand;
-	            } else {
-	                result.begin = midpoint - leftHand;
-	                result.end = midpoint + rightHand;
-	            }
-
-	            if (result.begin < 1) {
-	                result.end = result.end - result.begin + 1;
-
-	                result.begin = 1;
-	                if (result.end > totalPage) {
-	                    result.end = totalPage;
-	                }
-	            } else if (result.end > totalPage) {
-	                result.begin += totalPage - result.end;
-	                result.end = totalPage;
-	                if (result.begin < 1) {
-	                    result.begin = 1;
-	                }
-	            }
-	            return result;
-	        }
-	    },
-	    watch: {
-	        pageSize: function pageSize(val) {
-	            this.$emit('change-pagesize', this.pageSize);
-	            this.$emit('go-to-page', 1, this.currentPageNo);
-	        }
-	    },
-	    methods: {
-	        turnToPage: function turnToPage(pageNo) {
-	            if (pageNo > 0 && pageNo <= this.totalPageCount) {
-	                this.$emit('go-to-page', pageNo, this.currentPageNo);
-	                this.currentPageNo = pageNo;
-	            }
-	        },
-	        prev: function prev() {
-	            this.turnToPage(this.currentPageNo - 1);
-	        },
-	        next: function next() {
-	            this.turnToPage(this.currentPageNo + 1);
-	        },
-	        isActive: function isActive(number) {
-	            return number + this.getRangePage.begin === this.currentPageNo;
-	        }
-	    }
-	};
-
-/***/ },
-/* 34 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div class=\"v-pagination-wrap {{ class || '' }}\">\n    <template v-if=\"type === 'standard' \">\n        <div class=\"row\">\n            <div v-if=\"withPageSize\" class=\"v-pagination-page-size col-md-6\">\n                共<span v-text=\"total\"></span>条\n                &nbsp;&nbsp;\n                每页\n                <select v-model=\"pageSize\">\n                    <option v-for=\"opt in pageSizeRange\" :value=\"opt\" v-text=\"opt\">1</option>\n                </select>\n                条\n            </div>\n            <div class=\"v-pagination-standard col-md-6 text-right\">\n                <button\n                    @click=\"prev\"\n                    class=\"btn btn-default\"\n                    :class=\"{'disabled': currentPageNo == 1}\">上一页</button>\n\n                <ul class=\"pagination\">\n                    <li v-if=\"getRangePage.begin > 1\">\n                        <a href=\"javascript:void(0);\" @click=\"turnToPage(1)\">1</a>\n                    </li>\n                    <li v-if=\"getRangePage.begin > 1\">\n                        <a class=\"apostrophe\">...</a>\n                    </li>\n\n                    <li v-for=\"number in (getRangePage.end - getRangePage.begin + 1)\" :class=\"{'active': isActive(number)}\">\n                        <a v-if=\"isActive(number)\" href=\"javascript:void(0);\"  v-text=\"number + getRangePage.begin\"></a>\n                        <a v-else href=\"javascript:void(0);\"  v-text=\"number + getRangePage.begin\" @click=\"turnToPage(number + getRangePage.begin)\"></a>\n                    </li>\n\n                    <li v-if=\"getRangePage.end < totalPageCount\">\n                        <a class=\"apostrophe\">...</a>\n                    </li>\n                    <li v-if=\"getRangePage.end < totalPageCount\">\n                        <a href=\"javascript:void(0);\" v-text=\"totalPageCount\" @click=\"turnToPage(totalPageCount)\"></a>\n                    </li>\n                </ul>\n\n                <button\n                    @click=\"next\"\n                    class=\"btn btn-default\"\n                    :class=\"{'disabled': currentPageNo == totalPageCount}\">下一页</button>\n            </div>\n        </div>\n    </template>\n    <div v-else class=\"v-pagination-mini\">\n        <span>共<span v-text=\"total\"></span>条</span>\n        <button class=\"btn btn-default prev-trigger\" :class=\"{'disabled': currentPageNo < 2}\" @click=\"prev\">\n            <span class=\"caret\"></span>\n        </button>\n        <span v-text=\"currentPageNo\"></span>/<span v-text=\"totalPageCount\"></span>\n        <button class=\"btn btn-default next-trigger\" :class=\"{'disabled': currentPageNo == totalPageCount}\" @click=\"next\">\n            <span class=\"caret\"></span>\n        </button>\n    </div>\n</div>\n";
-
-/***/ },
-/* 35 */
-/***/ function(module, exports) {
-
-	module.exports = "<div><h1>Pagination页码</h1>\n<h2>使用场景</h2>\n<ul>\n<li>表格或其他需要分页的页面元素。</li>\n<li>支持两种类型的页码： <code>Standard</code> 标准页码, 一般用于元素顶部； <code>Mini</code> 迷你页码，一般用于元素底部。</li>\n</ul>\n<h1>Demo</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>两种翻页展示</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12 text-right\">\r\n                <xcui-pagination\r\n                    type=\"mini\"\n            @go-to-page=\"turnToPage\"\r\n                    :current-page-no.sync=\"currentPageNum\"\r\n                    :total=\"total\"\r\n                    :page-size.sync=\"pageSize\"\r\n                    ></xcui-pagination>\r\n            </div>\r\n        </div>\r\n        <table class=\"table table-hover table-condensed\">\r\n            <thead>\r\n                <tr>\r\n                    <th>ID</th>\r\n                    <th>Name</th>\r\n                </tr>\r\n            </thead>\r\n            <tr v-for=\"item in list\">\r\n                <td v-text=\"item.id\"></td>\r\n                <td v-text=\"item.name\"></td>\r\n            </tr>\r\n        </table>\r\n        <xcui-pagination\r\n            @go-to-page=\"turnToPage\"\r\n            :current-page-no.sync=\"currentPageNum\"\r\n            :total=\"total\"\r\n            :page-size.sync=\"pageSize\"\r\n            ></xcui-pagination>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>row<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>col-md-12 text-right<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n         <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-pagination</span>\r\n             <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>mini<span class=\"token punctuation\" >\"</span></span>\n     <span class=\"token attr-name\" >@go-to-page</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>turnToPage<span class=\"token punctuation\" >\"</span></span>\r\n             <span class=\"token attr-name\" >:current-page-no.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>currentPageNum<span class=\"token punctuation\" >\"</span></span>\r\n             <span class=\"token attr-name\" >:total</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>total<span class=\"token punctuation\" >\"</span></span>\r\n             <span class=\"token attr-name\" >:page-size.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>pageSize<span class=\"token punctuation\" >\"</span></span>\r\n             <span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-pagination</span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>table</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>table table-hover table-condensed<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>thead</span><span class=\"token punctuation\" >></span></span>\r\n         <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>tr</span><span class=\"token punctuation\" >></span></span>\r\n             <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>th</span><span class=\"token punctuation\" >></span></span>ID<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>th</span><span class=\"token punctuation\" >></span></span>\r\n             <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>th</span><span class=\"token punctuation\" >></span></span>Name<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>th</span><span class=\"token punctuation\" >></span></span>\r\n         <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>tr</span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>thead</span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>tr</span> <span class=\"token attr-name\" >v-for</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item in list<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n         <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>td</span> <span class=\"token attr-name\" >v-text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item.id<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>td</span><span class=\"token punctuation\" >></span></span>\r\n         <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>td</span> <span class=\"token attr-name\" >v-text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item.name<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>td</span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>tr</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>table</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-pagination</span>\r\n     <span class=\"token attr-name\" >@go-to-page</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>turnToPage<span class=\"token punctuation\" >\"</span></span>\r\n     <span class=\"token attr-name\" >:current-page-no.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>currentPageNum<span class=\"token punctuation\" >\"</span></span>\r\n     <span class=\"token attr-name\" >:total</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>total<span class=\"token punctuation\" >\"</span></span>\r\n     <span class=\"token attr-name\" >:page-size.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>pageSize<span class=\"token punctuation\" >\"</span></span>\r\n     <span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-pagination</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>可选范围</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>standard</td>\n<td>控制样式选择</td>\n<td>standard,mini</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>currentPageNo</td>\n<td>Number</td>\n<td>1</td>\n<td>当前页码</td>\n<td>&gt;0</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>total</td>\n<td>Number</td>\n<td>0</td>\n<td>总条数</td>\n<td>&gt;0</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>pageSize</td>\n<td>Number</td>\n<td>20</td>\n<td>每页条数</td>\n<td>取自<code>pageSizeRange</code></td>\n<td>可选</td>\n</tr>\n<tr>\n<td>withPageSize</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否展示<code>pageSize</code>设置挂件</td>\n<td></td>\n<td>可选</td>\n</tr>\n<tr>\n<td>pageSizeRange</td>\n<td>Array</td>\n<td>[10, 20, 50, 100]</td>\n<td><code>pageSize</code>设置挂件的下拉菜单选项范围 <code>withPageSize</code>为 true 时生效</td>\n<td></td>\n<td>可选</td>\n</tr>\n<tr>\n<td>rangeLength</td>\n<td>Number</td>\n<td>10</td>\n<td>页码按钮的展示个数</td>\n<td></td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(37)
-	__vue_script__ = __webpack_require__(39)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\loading.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(45)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-3e7e49cf/loading.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(38);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-3e7e49cf&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./loading.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-3e7e49cf&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./loading.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".loadWrap[_v-3e7e49cf] {\n  padding: 30px;\n  position: relative;\n}\np[_v-3e7e49cf] {\n  text-align: left;\n  text-indent: 2em;\n}\n.btnGroup[_v-3e7e49cf] {\n  margin-top: 15px;\n}\n.btnGroup label[_v-3e7e49cf] {\n  width: 10%;\n  position: relative;\n  top: 5px;\n  text-align: right;\n}\nselect[_v-3e7e49cf],\noption[_v-3e7e49cf],\nbutton[_v-3e7e49cf] {\n  outline: none;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _loading = __webpack_require__(40);
-
-	var _loading2 = _interopRequireDefault(_loading);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    components: {
-	        Loading: _loading2.default
-	    },
-	    data: function data() {
-	        return {
-	            show: true,
-	            type: 'load2',
-	            showBtn: 'hide',
-	            classname: 'myclass',
-	            color: '',
-	            size: 'md'
-	        };
-	    },
-
-	    methods: {
-	        toogleShow: function toogleShow() {
-	            this.show = !this.show;
-	            this.showBtn = this.show ? 'hide' : 'show';
-	        }
-	    }
-	};
-
-/***/ },
-/* 40 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(41)
-	__vue_script__ = __webpack_require__(43)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\loading\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(44)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-1ce47186/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 41 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(42);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 42 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".xcui-loading {\n  display: block;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  z-index: 999;\n  background: rgba(255, 255, 255, 0.7);\n}\n.loader {\n  position: absolute;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n}\n/*loading-1********************/\n.load1 .loader {\n  top: 40%;\n  color: #46C3C1;\n  font-size: 13px;\n  width: 1em;\n  height: 1em;\n  border-radius: 50%;\n  text-indent: -9999em;\n  -webkit-animation: load1 1.3s infinite linear;\n  animation: load1 1.3s infinite linear;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n@-webkit-keyframes load1 {\n  0%,\n  100% {\n    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;\n  }\n  12.5% {\n    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  25% {\n    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  37.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  50% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  62.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;\n  }\n  75% {\n    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;\n  }\n  87.5% {\n    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;\n  }\n}\n@keyframes load1 {\n  0%,\n  100% {\n    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;\n  }\n  12.5% {\n    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  25% {\n    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  37.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  50% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  62.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;\n  }\n  75% {\n    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;\n  }\n  87.5% {\n    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;\n  }\n}\n/*loading-2********************/\n.load2 .loader {\n  top: 30%;\n  color: #46C3C1;\n  font-size: 60px;\n  text-indent: -9999em;\n  overflow: hidden;\n  width: 1em;\n  height: 1em;\n  border-radius: 50%;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation: load2 1.7s infinite ease;\n  animation: load2 1.7s infinite ease;\n}\n@-webkit-keyframes load2 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  5%,\n  95% {\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  10%,\n  59% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;\n  }\n  20% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;\n  }\n  38% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n}\n@keyframes load2 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  5%,\n  95% {\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  10%,\n  59% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;\n  }\n  20% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;\n  }\n  38% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n}\n/*loading-3********************/\n.load3 .loader,\n.load3 .loader:before,\n.load3 .loader:after {\n  top: 20%;\n  border-radius: 50%;\n  width: 1.5em;\n  height: 1.5em;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n  -webkit-animation: load3 1.8s infinite ease-in-out;\n  animation: load3 1.8s infinite ease-in-out;\n}\n.load3 .loader {\n  color: #46C3C1;\n  font-size: 10px;\n  text-indent: -9999em;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation-delay: -0.16s;\n  animation-delay: -0.16s;\n}\n.load3 .loader:before,\n.load3 .loader:after {\n  content: '';\n  position: absolute;\n  top: 0;\n}\n.load3 .loader:before {\n  left: -3em;\n  -webkit-animation-delay: -0.32s;\n  animation-delay: -0.32s;\n}\n.load3 .loader:after {\n  left: 3em;\n}\n@-webkit-keyframes load3 {\n  0%,\n  80%,\n  100% {\n    box-shadow: 0 2.5em 0 -1.3em;\n  }\n  40% {\n    box-shadow: 0 2.5em 0 0;\n  }\n}\n@keyframes load3 {\n  0%,\n  80%,\n  100% {\n    box-shadow: 0 2.5em 0 -1.3em;\n  }\n  40% {\n    box-shadow: 0 2.5em 0 0;\n  }\n}\n.sm .loader {\n  font-size: 10px;\n}\n.sm.load2 .loader {\n  font-size: 40px;\n}\n.md .loader {\n  font-size: 14px;\n}\n.md.load2 .loader {\n  font-size: 60px;\n}\n.lg .loader {\n  font-size: 18px;\n}\n.lg.load2 .loader {\n  font-size: 80px;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 43 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.default = {
-	    name: 'xcui-loading',
-	    props: {
-	        'show': {
-	            type: Boolean,
-	            default: false
-	        },
-	        'type': {
-	            type: String,
-	            default: 'load2'
-	        },
-	        'classname': {
-	            type: String,
-	            default: ''
-	        },
-	        'color': {
-	            type: String,
-	            default: ''
-	        },
-	        'size': {
-	            type: String,
-	            default: 'md'
-	        }
-	    },
-	    methods: {}
-	};
-
-/***/ },
-/* 44 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div v-show=\"show\" class=\"xcui-loading load-container\" :class=\"[type,size,classname]\">\n    <div class=\"loader\" :style=\"{'color' : color}\"></div>\n</div>\n";
-
-/***/ },
-/* 45 */
-/***/ function(module, exports) {
-
-	module.exports = "<div _v-3e7e49cf=\"\"><h1 _v-3e7e49cf=\"\">Loading 加载组件</h1>\n<h2 _v-3e7e49cf=\"\">使用场景</h2>\n<p _v-3e7e49cf=\"\">在ajax加载或其他长耗时操作时，在一个页面元素上加入加载中图标，当耗时操作完成后隐藏。</p>\n<h2 _v-3e7e49cf=\"\">组件能力</h2>\n<ul _v-3e7e49cf=\"\">\n<li _v-3e7e49cf=\"\">提供3种css加载样式。</li>\n<li _v-3e7e49cf=\"\">loading需要放在一个拥有定位属性的容器，组件蒙层大小为父元素大小。</li>\n<li _v-3e7e49cf=\"\">css动画颜色可定制。</li>\n<li _v-3e7e49cf=\"\">提供三种可选尺寸。</li>\n<li _v-3e7e49cf=\"\">可通过自定义类名增加特殊定制。</li>\n</ul>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\" _v-3e7e49cf=\"\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-3e7e49cf=\"\">\n                    <h3 _v-3e7e49cf=\"\">加载组件</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-3e7e49cf=\"\">\n      <div class=\"loadWrap\" _v-3e7e49cf=\"\">\n          <p _v-3e7e49cf=\"\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n          <loading :show=\"show\" :type=\"type\" :color=\"color\" :size=\"size\" :classname=\"classname\" _v-3e7e49cf=\"\"></loading>\n      </div>\n        <div class=\"btnGroup clearfix\" _v-3e7e49cf=\"\">\n            <label class=\"control-label col-md-4\" _v-3e7e49cf=\"\">show：</label>\n            <div class=\"col-md-6\" _v-3e7e49cf=\"\">\n                <button class=\"btn btn-primary\" @click=\"toogleShow\" _v-3e7e49cf=\"\">{{showBtn}}</button>\n            </div>\n        </div>\n        <div class=\"btnGroup clearfix\" _v-3e7e49cf=\"\">\n            <label class=\"control-label col-md-4\" _v-3e7e49cf=\"\">type：</label>\n            <div class=\"col-md-6\" _v-3e7e49cf=\"\">\n                <select class=\"form-control\" v-model=\"type\" _v-3e7e49cf=\"\">\n                    <option _v-3e7e49cf=\"\">load1</option>\n                    <option _v-3e7e49cf=\"\">load2</option>\n                    <option _v-3e7e49cf=\"\">load3</option>\n                </select>\n            </div>\n        </div>\n        <div class=\"btnGroup clearfix\" _v-3e7e49cf=\"\">\n            <label class=\"control-label col-md-4\" _v-3e7e49cf=\"\">size：</label>\n            <div class=\"col-md-6\" _v-3e7e49cf=\"\">\n                <select class=\"form-control\" v-model=\"size\" _v-3e7e49cf=\"\">\n                    <option _v-3e7e49cf=\"\">sm</option>\n                    <option _v-3e7e49cf=\"\">md</option>\n                    <option _v-3e7e49cf=\"\">lg</option>\n                </select>\n            </div>\n        </div>\n        <div class=\"btnGroup clearfix\" _v-3e7e49cf=\"\">\n            <label class=\"control-label col-md-4\" _v-3e7e49cf=\"\">color：</label>\n            <div class=\"col-md-6\" _v-3e7e49cf=\"\">\n                <input class=\"form-control\" type=\"text\" v-model=\"color\" placeholder=\"支持css颜色格式\" _v-3e7e49cf=\"\">\n            </div>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-3e7e49cf=\"\"><pre _v-3e7e49cf=\"\"> <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>loadWrap<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n     <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>p</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>p</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n     <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>Loading</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">:show</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>show<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span>\n              <span class=\"token attr-name\" _v-3e7e49cf=\"\">:type</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>type<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span>\n              <span class=\"token attr-name\" _v-3e7e49cf=\"\">:color</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>color<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span>\n              <span class=\"token attr-name\" _v-3e7e49cf=\"\">:size</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>size<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span>\n              <span class=\"token attr-name\" _v-3e7e49cf=\"\">:classname</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>classname<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>Loading</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>btnGroup clearfix<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>label</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>control-label col-md-4<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>show：<span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>col-md-6<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>button</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>btn btn-primary<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">@click</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>toogleShow<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">{</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">{</span>showBtn<span class=\"token punctuation\" _v-3e7e49cf=\"\">}</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">}</span><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>button</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>btnGroup clearfix<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>label</span>  <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>control-label col-md-4<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>type：<span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>col-md-6<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>select</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>form-control<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">v-model</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>type<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>load1<span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>load2<span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>load3<span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>select</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>btnGroup clearfix<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>label</span>  <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>control-label col-md-4<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>size：<span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>col-md-6<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>select</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>form-control<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">v-model</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>size<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>sm<span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>md<span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>lg<span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>select</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>btnGroup clearfix<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>label</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>control-label col-md-4<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>color：<span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>col-md-6<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;</span>input</span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">class</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>form-control<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">type</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>text<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">v-model</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>color<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span> <span class=\"token attr-name\" _v-3e7e49cf=\"\">placeholder</span><span class=\"token attr-value\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">=</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span>支持css颜色格式<span class=\"token punctuation\" _v-3e7e49cf=\"\">\"</span></span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token tag\" _v-3e7e49cf=\"\"><span class=\"token punctuation\" _v-3e7e49cf=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3e7e49cf=\"\">&gt;</span></span></pre></div>\n                    </div>\n</div>\n<h2 _v-3e7e49cf=\"\">Props</h2>\n<table class=\"table\" _v-3e7e49cf=\"\">\n<thead _v-3e7e49cf=\"\">\n<tr _v-3e7e49cf=\"\">\n<th _v-3e7e49cf=\"\">名字</th>\n<th _v-3e7e49cf=\"\">类型</th>\n<th _v-3e7e49cf=\"\">默认</th>\n<th _v-3e7e49cf=\"\">描述</th>\n<th _v-3e7e49cf=\"\">可选范围</th>\n<th _v-3e7e49cf=\"\">是否必选</th>\n</tr>\n</thead>\n<tbody _v-3e7e49cf=\"\">\n<tr _v-3e7e49cf=\"\">\n<td _v-3e7e49cf=\"\">show</td>\n<td _v-3e7e49cf=\"\">Boolean</td>\n<td _v-3e7e49cf=\"\">false</td>\n<td _v-3e7e49cf=\"\">控制显示隐藏</td>\n<td _v-3e7e49cf=\"\">true/false</td>\n<td _v-3e7e49cf=\"\">必选</td>\n</tr>\n<tr _v-3e7e49cf=\"\">\n<td _v-3e7e49cf=\"\">type</td>\n<td _v-3e7e49cf=\"\">String</td>\n<td _v-3e7e49cf=\"\">load2</td>\n<td _v-3e7e49cf=\"\">控制样式选择</td>\n<td _v-3e7e49cf=\"\">load1-load3</td>\n<td _v-3e7e49cf=\"\">可选</td>\n</tr>\n<tr _v-3e7e49cf=\"\">\n<td _v-3e7e49cf=\"\">size</td>\n<td _v-3e7e49cf=\"\">String</td>\n<td _v-3e7e49cf=\"\">md</td>\n<td _v-3e7e49cf=\"\">控制大小</td>\n<td _v-3e7e49cf=\"\">sm/md/lg</td>\n<td _v-3e7e49cf=\"\">可选</td>\n</tr>\n<tr _v-3e7e49cf=\"\">\n<td _v-3e7e49cf=\"\">color</td>\n<td _v-3e7e49cf=\"\">String</td>\n<td _v-3e7e49cf=\"\">无</td>\n<td _v-3e7e49cf=\"\">控制颜色</td>\n<td _v-3e7e49cf=\"\">css色值</td>\n<td _v-3e7e49cf=\"\">可选</td>\n</tr>\n<tr _v-3e7e49cf=\"\">\n<td _v-3e7e49cf=\"\">classname</td>\n<td _v-3e7e49cf=\"\">String</td>\n<td _v-3e7e49cf=\"\">无</td>\n<td _v-3e7e49cf=\"\">自定义类名</td>\n<td _v-3e7e49cf=\"\"></td>\n<td _v-3e7e49cf=\"\">可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 46 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(47)
-	__vue_script__ = __webpack_require__(49)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\popover.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(57)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-59b0eab8/popover.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 47 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(48);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./popover.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./popover.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 48 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.container{\r\n    margin-top:100px;\r\n}\r\n.define-class{\r\n    background:#ffab47;\r\n    color:#fff;\r\n    width: 100px;\r\n}\r\n.title-class{\r\n    background:#46c3c1;\r\n    color:#fff;\r\n    width: 150px;\r\n}\r\n.content-class{\r\n    width: 150px;\r\n}\r\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 49 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _popover = __webpack_require__(50);
-
-	var _popover2 = _interopRequireDefault(_popover);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    components: {
-	        vPopover: _popover2.default
-	    },
-	    data: function data() {
-	        return {
-	            htmlContent: '<h3>This is h3</h3><h4>This is h4</h4>'
-	        };
-	    }
-	};
-
-/***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(51)
-	__vue_script__ = __webpack_require__(53)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\popover\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(56)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-69d45566/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(52);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".xcui-popover .scale-transition,\n.xcui-popover .fadein-transition {\n  display: inline-table;\n}\n.xcui-popover .fadein-enter {\n  -webkit-animation: fadein-in 0.3s ease-in;\n          animation: fadein-in 0.3s ease-in;\n}\n.xcui-popover .fadein-leave {\n  -webkit-animation: fadein-out 0.3s ease-out;\n          animation: fadein-out 0.3s ease-out;\n}\n.xcui-popover .scale-enter {\n  -webkit-animation: scale-in 0.15s ease-in;\n          animation: scale-in 0.15s ease-in;\n}\n.xcui-popover .scale-leave {\n  -webkit-animation: scale-out 0.15s ease-out;\n          animation: scale-out 0.15s ease-out;\n}\n@-webkit-keyframes fadein-in {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@keyframes fadein-in {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@-webkit-keyframes fadein-out {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n@keyframes fadein-out {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n@-webkit-keyframes scale-in {\n  0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes scale-in {\n  0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n}\n@-webkit-keyframes scale-out {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n}\n@keyframes scale-out {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _popoverMixins = __webpack_require__(54);
-
-	var _popoverMixins2 = _interopRequireDefault(_popoverMixins);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    name: 'xcui-popover',
-	    mixins: [_popoverMixins2.default],
-	    props: {
-	        trigger: {
-	            type: String,
-	            default: 'hover'
-	        },
-	        effect: {
-	            type: String,
-	            default: 'scale'
-	        },
-	        tooltipClass: {
-	            type: String,
-	            default: ''
-	        },
-	        titleClass: {
-	            type: String,
-	            default: 'scale'
-	        },
-	        contentClass: {
-	            type: String,
-	            default: 'scale'
-	        }
-	    }
-	};
-
-/***/ },
-/* 54 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _eventlistener = __webpack_require__(55);
-
-	var _eventlistener2 = _interopRequireDefault(_eventlistener);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    'props': {
-	        'trigger': {
-	            'type': String,
-	            'default': 'click'
-	        },
-	        'effect': {
-	            'type': String,
-	            'default': 'fadein'
-	        },
-	        'title': {
-	            'type': String
-	        },
-	        'content': {
-	            'type': String
-	        },
-	        'placement': {
-	            'type': String
-	        }
-	    },
-	    data: function data() {
-	        return {
-	            'position': {
-	                'top': 0,
-	                'left': 0
-	            },
-	            'show': true
-	        };
-	    },
-
-	    methods: {
-	        toggle: function toggle() {
-	            this.show = !this.show;
-	        },
-	        fixPosition: function fixPosition(triger, popover, placement) {
-	            popover.style.display = '';
-	            switch (placement) {
-	                case 'top':
-	                    this.position.left = triger.offsetLeft - popover.offsetWidth / 2 + triger.offsetWidth / 2;
-	                    this.position.top = triger.offsetTop - popover.offsetHeight;
-	                    break;
-	                case 'left':
-	                    this.position.left = triger.offsetLeft - popover.offsetWidth;
-	                    this.position.top = triger.offsetTop + triger.offsetHeight / 2 - popover.offsetHeight / 2;
-	                    break;
-	                case 'right':
-	                    this.position.left = triger.offsetLeft + triger.offsetWidth;
-	                    this.position.top = triger.offsetTop + triger.offsetHeight / 2 - popover.offsetHeight / 2;
-	                    break;
-	                case 'bottom':
-	                    this.position.left = triger.offsetLeft - popover.offsetWidth / 2 + triger.offsetWidth / 2;
-	                    this.position.top = triger.offsetTop + triger.offsetHeight;
-	                    break;
-	                default:
-	            }
-	            popover.style.top = this.position.top + 'px';
-	            popover.style.left = this.position.left + 'px';
-	            popover.style.display = 'none';
-	            this.show = !this.show;
-	        }
-	    },
-	    ready: function ready() {
-	        var triger = this.$els.trigger.children[0];
-	        var me = this;
-	        if (this.trigger === 'hover') {
-	            this._mouseenterEvent = _eventlistener2.default.listen(triger, 'mouseenter', function () {
-	                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
-	                me.show = true;
-	            });
-	            this._mouseleaveEvent = _eventlistener2.default.listen(triger, 'mouseleave', function () {
-	                me.show = false;
-	            });
-	        } else if (this.trigger === 'focus') {
-	            this._focusEvent = _eventlistener2.default.listen(triger, 'focus', function () {
-	                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
-	                me.show = true;
-	            });
-	            this._blurEvent = _eventlistener2.default.listen(triger, 'blur', function () {
-	                me.show = false;
-	            });
-	        } else {
-	            this._clickEvent = _eventlistener2.default.listen(triger, 'click', function () {
-	                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
-	                me.toggle;
-	            });
-	        }
-
-	        this.fixPosition(this.$els.trigger.children[0], this.$els.popover, this.placement);
-	    },
-	    beforeDestroy: function beforeDestroy() {
-	        if (this._blurEvent) {
-	            this._blurEvent.remove();
-	            this._focusEvent.remove();
-	        }
-	        if (this._mouseenterEvent) {
-	            this._mouseenterEvent.remove();
-	            this._mouseleaveEvent.remove();
-	        }
-	        if (this._clickEvent) {
-	            this._clickEvent.remove();
-	        }
-	    }
-	};
-
-/***/ },
-/* 55 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.default = {
-	    listen: function listen(target, eventType, callback) {
-	        if (target.addEventListener) {
-	            target.addEventListener(eventType, callback, false);
-	            return {
-	                remove: function remove() {
-	                    target.removeEventListener(eventType, callback, false);
-	                }
-	            };
-	        } else if (target.attachEvent) {
-	            target.attachEvent('on' + eventType, callback);
-	            return {
-	                remove: function remove() {
-	                    target.detachEvent('on' + eventType, callback);
-	                }
-	            };
-	        }
-	    }
-	};
-
-/***/ },
-/* 56 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div v-el:outer style=\"position:relative; display: inline-block\" class=\"xcui-popover\">\n    <span v-el:trigger>\n      <slot>\n      </slot>\n    </span>\n    <div class=\"popover\"\n      v-bind:class=\"{\n      'top':placement === 'top',\n      'left':placement === 'left',\n      'right':placement === 'right',\n      'bottom':placement === 'bottom'\n      }\"\n      v-el:popover\n      v-show=\"show\"\n      :transition=\"effect\">\n        <div class=\"arrow\"></div>\n        <div class=\"popover-title\" :class=\"titleClass\" v-show=\"title\">\n            <slot name=\"title\">\n              {{title}}\n            </slot>\n        </div>\n        <div class=\"popover-content\" :class=\"contentClass\">\n          <slot name=\"content\">\n              {{{content}}}\n          </slot>\n        </div>\n    </div>\n</div>\n";
-
-/***/ },
-/* 57 */
-/***/ function(module, exports) {
-
-	module.exports = "<div><h1>Popover 工具提示</h1>\n<h2>使用场景</h2>\n<ul>\n<li>需要hover或click时悬浮提示更多详情</li>\n<li>支持自定义提示框样式</li>\n<li>支持两种悬浮框过渡样式:  <code>scale</code> 和 <code>fadein</code></li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>Popover</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <v-popover effect=\"fadein\" placement=\"bottom\" title=\"This is Title\" trigger=\"click\" :content=\"htmlContent\">\r\n          <button class=\"btn btn-default \">Click Popover on bottom</button>\r\n        </v-popover>\r\n        <v-popover effect=\"scale\" placement=\"left\" title=\"This is Title\" trigger=\"click\"  content=\"Popover on left\">\r\n          <button class=\"btn btn-default \">Click Popover on left</button>\r\n        </v-popover>\r\n        <v-popover effect=\"fadein\" placement=\"top\" title=\"This is Title\"  content=\"Popover on top\">\r\n          <button class=\"btn btn-default \"> Hover Popover on top</button>\r\n        </v-popover>\r\n        <v-popover effect=\"scale\" placement=\"right\" title=\"This is Title\" :title-class=\"'title-class'\" :content-class=\"'content-class'\" content=\"Popover on right\">\r\n          <button class=\"btn btn-default \">Hover Popover on right</button>\r\n        </v-popover>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-popover</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>bottom<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>htmlContent<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n   <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Click Popover on bottom<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-popover</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>left<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Popover on left<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n   <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Click Popover on left<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-popover</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>top<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Popover on top<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n   <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span> Hover Popover on top<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-popover</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>right<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:title-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>title-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:content-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>content-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Popover on right<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n   <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Hover Popover on right<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-popover</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>popover</td>\n<td>提示类型</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>trigger</td>\n<td>String</td>\n<td>hover</td>\n<td>悬浮触发方式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>effect</td>\n<td>String</td>\n<td>scale</td>\n<td>悬浮过渡样式</td>\n<td>可选, scale/fadein</td>\n</tr>\n<tr>\n<td>placement</td>\n<td>String</td>\n<td>空字符串</td>\n<td>悬浮相对位置</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>空字符串</td>\n<td>popover提示标题</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>空字符串</td>\n<td>提示内容</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>classname</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>tooltip-class</td>\n<td>String</td>\n<td>Object</td>\n<td>tootip提示框样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>title-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover标题样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover内容样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 58 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(59)
-	__vue_script__ = __webpack_require__(61)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\tooltip.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(67)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-7e467d16/tooltip.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 59 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(60);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./tooltip.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./tooltip.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 60 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.container{\r\n    margin-top:100px;\r\n}\r\n.define-class{\r\n    background:#ffab47;\r\n    color:#fff;\r\n    width: 100px;\r\n}\r\n.title-class{\r\n    background:#46c3c1;\r\n    color:#fff;\r\n    width: 150px;\r\n}\r\n.content-class{\r\n    width: 150px;\r\n}\r\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 61 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _tooltip = __webpack_require__(62);
-
-	var _tooltip2 = _interopRequireDefault(_tooltip);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    components: {
-	        vTooltip: _tooltip2.default
-	    },
-	    data: function data() {
-	        return {
-	            htmlContent: '<h3>This is h3</h3><h4>This is h4</h4>'
-	        };
-	    }
-	};
-
-/***/ },
-/* 62 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(63)
-	__vue_script__ = __webpack_require__(65)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\tooltip\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(66)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-7603ad78/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(64);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 64 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".xcui-tooltip .tooltip {\n  opacity: .9;\n}\n.xcui-tooltip .scale-transition,\n.xcui-tooltip .fadein-transition {\n  display: inline-table;\n}\n.xcui-tooltip .fadein-enter {\n  -webkit-animation: fadein-in 0.3s ease-in;\n          animation: fadein-in 0.3s ease-in;\n}\n.xcui-tooltip .fadein-leave {\n  -webkit-animation: fadein-out 0.3s ease-out;\n          animation: fadein-out 0.3s ease-out;\n}\n.xcui-tooltip .scale-enter {\n  -webkit-animation: scale-in 0.15s ease-in;\n          animation: scale-in 0.15s ease-in;\n}\n.xcui-tooltip .scale-leave {\n  -webkit-animation: scale-out 0.15s ease-out;\n          animation: scale-out 0.15s ease-out;\n}\n@-webkit-keyframes fadein-in {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@keyframes fadein-in {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@-webkit-keyframes fadein-out {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n@keyframes fadein-out {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n@-webkit-keyframes scale-in {\n  0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes scale-in {\n  0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n}\n@-webkit-keyframes scale-out {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n}\n@keyframes scale-out {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _popoverMixins = __webpack_require__(54);
-
-	var _popoverMixins2 = _interopRequireDefault(_popoverMixins);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    name: 'xcui-tooltip',
-	    mixins: [_popoverMixins2.default],
-	    props: {
-	        trigger: {
-	            type: String,
-	            default: 'hover'
-	        },
-	        effect: {
-	            type: String,
-	            default: 'scale'
-	        },
-	        tooltipClass: {
-	            type: String,
-	            default: ''
-	        },
-	        titleClass: {
-	            type: String,
-	            default: 'scale'
-	        },
-	        contentClass: {
-	            type: String,
-	            default: 'scale'
-	        }
-	    }
-	};
-
-/***/ },
-/* 66 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div v-el:outer style=\"position:relative; display: inline-block\" class=\"xcui-tooltip\">\n     <span v-el:trigger>\n        <slot>\n        </slot>\n    </span>\n    <div class=\"tooltip\"\n        v-bind:class=\"{\n            'top':    placement === 'top',\n            'left':   placement === 'left',\n            'right':  placement === 'right',\n            'bottom': placement === 'bottom'\n        }\"\n        v-el:popover\n        v-show=\"show\"\n        :transition=\"effect\"\n        role=\"tooltip\">\n            <div class=\"tooltip-arrow\"></div>\n            <div class=\"tooltip-inner\" :class=\"tooltipClass\">\n                <slot name=\"content\">\n                    {{{content}}}\n                </slot>\n            </div>\n    </div>\n</div>\n";
-
-/***/ },
-/* 67 */
-/***/ function(module, exports) {
-
-	module.exports = "<div><h1>Tooltip 工具提示</h1>\n<h2>使用场景</h2>\n<ul>\n<li>需要hover或click时悬浮提示更多详情</li>\n<li>支持自定义提示框样式</li>\n<li>支持两种悬浮框过渡样式:  <code>scale</code> 和 <code>fadein</code></li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>Popover</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <v-tooltip effect=\"fadein\" placement=\"bottom\" title=\"This is Title\" :content=\"htmlContent\">\r\n          <button class=\"btn btn-default \">Hover tooltip on bottom</button>\r\n        </v-tooltip>\r\n        <v-tooltip effect=\"scale\" placement=\"left\" title=\"This is Title\" content=\"Tooltip on left\">\r\n          <button class=\"btn btn-default \">Hover tooltip on left</button>\r\n        </v-tooltip>\r\n        <v-tooltip effect=\"fadein\" placement=\"top\" title=\"This is Title\"  trigger=\"click\"  content=\"Tooltip on top\">\r\n          <button class=\"btn btn-default \"> Click tooltip on top</button>\r\n        </v-tooltip>\r\n        <v-tooltip effect=\"scale\" placement=\"right\" title=\"This is Title\" trigger=\"click\"  :title-class=\"'title-class'\" :content-class=\"'content-class'\" content=\"Tooltip on right\">\r\n          <button class=\"btn btn-default \">Click tooltip on right</button>\r\n        </v-tooltip>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tooltip</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>bottom<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>htmlContent<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n   <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Hover tooltip on bottom<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tooltip</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tooltip</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>left<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Tooltip on left<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n   <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Hover tooltip on left<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tooltip</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tooltip</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>top<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Tooltip on top<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n   <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span> Click tooltip on top<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tooltip</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tooltip</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>right<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >:title-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>title-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:content-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>content-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Tooltip on right<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n   <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Click tooltip on right<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tooltip</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>popover</td>\n<td>提示类型</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>trigger</td>\n<td>String</td>\n<td>hover</td>\n<td>悬浮触发方式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>effect</td>\n<td>String</td>\n<td>scale</td>\n<td>悬浮过渡样式</td>\n<td>可选, scale/fadein</td>\n</tr>\n<tr>\n<td>placement</td>\n<td>String</td>\n<td>空字符串</td>\n<td>悬浮相对位置</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>空字符串</td>\n<td>popover提示标题</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>空字符串</td>\n<td>提示内容</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>classname</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>tooltip-class</td>\n<td>String</td>\n<td>Object</td>\n<td>tootip提示框样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>title-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover标题样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover内容样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 68 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(69)
-	__vue_script__ = __webpack_require__(71)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\suggestion.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(77)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-cae53e7e/suggestion.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 69 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(70);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-cae53e7e&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./suggestion.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-cae53e7e&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./suggestion.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 70 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".block-item[_v-cae53e7e] {\n  margin: 0 30px 50px;\n  float: left;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 71 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _suggestion = __webpack_require__(72);
-
-	var _suggestion2 = _interopRequireDefault(_suggestion);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    name: 'xcui-suggestion',
-	    components: {
-	        Suggestion: _suggestion2.default
-	    },
-	    data: function data() {
-	        return {
-	            cityName: '',
-	            cityId: '',
-	            citySuggestions: [{
-	                text: '北京',
-	                value: '131'
-	            }, {
-	                text: '上海',
-	                value: '289'
-	            }, {
-	                text: '海口',
-	                value: '125'
-	            }, {
-	                text: '三亚',
-	                value: '121'
-	            }, {
-	                text: '杭州',
-	                value: '179'
-	            }, {
-	                text: '成都',
-	                value: '75'
-	            }, {
-	                text: '贵阳',
-	                value: '146'
-	            }],
-	            constellation: '',
-	            constellationValue: '',
-	            constellationSuggestions: ['水瓶', '双鱼', '白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手', '魔羯'],
-	            requestWord: '',
-	            remoteSug: [],
-	            remoteUrl: 'http://suggestion.baidu.com/su?cb=window.bdsug.sug&wd=',
-	            requestWord2: 'w',
-	            requestValue2: '',
-	            remoteSug2: [],
-	            remoteUrl2: 'http://suggestion.baidu.com/su?cb=window.bdsug.sug2&wd='
-	        };
-	    },
-
-	    watch: {},
-	    methods: {
-	        setSug: function setSug(s) {
-	            this.remoteSug = s;
-	        },
-	        setSug2: function setSug2(s) {
-	            this.remoteSug2 = s.map(function (item, index) {
-	                return {
-	                    text: item,
-	                    value: index
-	                };
-	            });
-	        },
-	        request: function request() {
-	            var url = this.remoteUrl + this.requestWord;
-	            var script = document.createElement('script');
-	            script.src = url;
-	            document.body.appendChild(script);
-	            script.onload = function (res) {
-	                document.body.removeChild(script);
-	            };
-	        },
-	        request2: function request2() {
-	            var url = this.remoteUrl2 + this.requestWord2;
-	            var script = document.createElement('script');
-	            script.src = url;
-	            document.body.appendChild(script);
-	            script.onload = function (res) {
-	                document.body.removeChild(script);
-	            };
-	        }
-	    },
-	    ready: function ready() {
-	        var me = this;
-	        window.bdsug = {
-	            sug: function sug(res) {
-	                me.setSug(res.s);
-	            },
-	            sug2: function sug2(res) {
-	                me.setSug2(res.s);
-	            }
-	        };
-	    }
-	};
-
-/***/ },
-/* 72 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(73)
-	__vue_script__ = __webpack_require__(75)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\suggestion\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(76)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-406a4e3f/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 73 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(74);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 74 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".xcui-suggestion {\n  position: relative;\n  width: 100%;\n}\n.xcui-suggestion .xcui-show {\n  display: block;\n}\n.xcui-suggestion .xcui-suggestion-list {\n  min-width: 100%;\n  max-height: 400px;\n  overflow: auto;\n}\n.xcui-suggestion .xcui-suggestion-list li.current {\n  background: #ddd;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 75 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.default = {
-	    name: 'xcui-autocomplete',
-	    data: function data() {
-	        return {
-	            list: [],
-	            localList: [],
-	            currentIndex: -1
-	        };
-	    },
-
-	    props: {
-	        id: {
-	            type: String,
-	            default: ''
-	        },
-	        name: {
-	            type: String,
-	            default: ''
-	        },
-	        className: {
-	            type: String,
-	            default: ''
-	        },
-	        disabled: {
-	            type: Boolean,
-	            default: false
-	        },
-	        placeholder: {
-	            type: String,
-	            default: ''
-	        },
-	        suggestions: {
-	            type: Array,
-	            default: function _default() {
-	                return [];
-	            }
-	        },
-	        'dataText': {
-	            type: String,
-	            default: ''
-	        },
-	        'dataValue': {
-	            type: [String, Number],
-	            default: ''
-	        },
-	        'check': {
-	            type: Boolean,
-	            default: true
-	        },
-	        'inputCallback': {
-	            type: Function,
-	            default: function _default() {
-	                return function () {};
-	            }
-	        }
-	    },
-	    computed: {
-	        show: function show() {
-	            return this.list.length > 0 && this.$el.getElementsByTagName('input')[0] === document.activeElement;
-	        }
-	    },
-	    watch: {
-	        suggestions: function suggestions() {
-	            this.arrangeLocalList();
-	            this.getLocalSug();
-	        },
-	        dataText: function dataText() {
-	            this.onInput();
-	        }
-	    },
-	    methods: {
-	        onInput: function onInput() {
-	            this.currentIndex = -1;
-	            this.getLocalSug();
-	            this.autoSetItem();
-	            this.inputCallback && this.inputCallback();
-	        },
-	        onBlur: function onBlur() {
-	            var me = this;
-
-	            setTimeout(function () {
-	                me.currentIndex = -1;
-	                me.list = [];
-	            }, 200);
-	        },
-	        changeCurrent: function changeCurrent(offset) {
-	            this.currentIndex += offset;
-
-	            if (offset > 0 && this.currentIndex >= this.list.length) {
-	                this.currentIndex = 0;
-	            } else if (offset < 0 && this.currentIndex < 0) {
-	                this.currentIndex = this.list.length - 1;
-	            }
-
-	            var currentItem = this.list[this.currentIndex];
-
-	            this.setItem(currentItem);
-	        },
-	        convert2standard: function convert2standard(data) {
-	            var res = [];
-
-	            res = data.map(function (item, index) {
-	                return {
-	                    text: item,
-	                    value: item
-	                };
-	            });
-
-	            return res;
-	        },
-	        arrangeLocalList: function arrangeLocalList() {
-	            var sugs = this.suggestions;
-
-	            if (this.isArray(sugs) && sugs.length > 0 && typeof sugs[0] === 'string') {
-	                this.localList = this.convert2standard(sugs);
-	            } else {
-	                this.localList = sugs;
-	            }
-	        },
-	        autoSetItem: function autoSetItem() {
-	            var word = this.dataText;
-
-	            var match = this.list.filter(function (item) {
-	                return item.text === word;
-	            });
-
-	            if (match.length) {
-	                this.setItem(match[0]);
-	            } else {
-	                this.dataValue = '';
-	            }
-	        },
-	        getLocalSug: function getLocalSug() {
-	            var _this = this;
-
-	            var word = this.dataText;
-
-	            this.list = this.localList.filter(function (item) {
-	                return word && _this.check ? item.text.indexOf(word) > -1 : true;
-	            });
-	        },
-	        setItem: function setItem(item) {
-	            this.dataValue = item.value;
-	            this.dataText = item.text;
-	        },
-	        logError: function logError(msg) {
-	            throw new Error('[xcui] - ' + msg);
-	        },
-	        isArray: function isArray(arr) {
-	            return Object.prototype.toString.call(arr) === '[object Array]';
-	        },
-	        clearText: function clearText() {
-	            this.dataText = '';
-	            this.dataValue = '';
-	        }
-	    },
-	    ready: function ready() {
-	        this.arrangeLocalList();
-	    }
-	};
-
-/***/ },
-/* 76 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div class=\"xcui-suggestion {{className}}\">\n    <input type=\"text\"\n            class=\"form-control xcui-suggestion-input\"\n            :id=\"id\"\n            :name=\"name\"\n            :disabled=\"disabled\"\n            :placeholder=\"placeholder\"\n            v-model=\"dataText\"\n            @focus=\"onInput\"\n            @blur=\"onBlur\"\n            @keyDown.up=\"changeCurrent(-1)\"\n            @keyDown.down=\"changeCurrent(1)\"\n            @keyDown.enter=\"onBlur\">\n    <ul class=\"xcui-suggestion-list dropdown-menu\" :class=\"{'xcui-show':show}\">\n        <li v-for=\"(index,item) in list\" :class=\"{'current' : currentIndex==index}\">\n            <a href=\"javascript:void(0)\" @click=\"setItem(item)\">\n                {{item.text}}\n            </a>\n        </li>\n    </ul>\n    <button @click=\"clearText\" type=\"button\"\n    title=\"点击清除输入内容\" class=\"close\" tabindex=\"-1\"\n    style=\"position: absolute; right: 8px; top: 4px;\">×</button>\n</div>\n";
-
-/***/ },
-/* 77 */
-/***/ function(module, exports) {
-
-	module.exports = "<div _v-cae53e7e=\"\"><h1 _v-cae53e7e=\"\">Suggestion 自动完成/建议</h1>\n<h2 _v-cae53e7e=\"\">使用场景</h2>\n<p _v-cae53e7e=\"\">用户输入相关词语时进行输入建议(suggestions), 自动完成</p>\n<h1 _v-cae53e7e=\"\">Demo</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\" _v-cae53e7e=\"\">\n<div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-cae53e7e=\"\">\n                    <h3 _v-cae53e7e=\"\">string数组 sugs:</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-cae53e7e=\"\">\n  <table class=\"table\" style=\"width:400px\" _v-cae53e7e=\"\">\n    <thead _v-cae53e7e=\"\">\n        <tr _v-cae53e7e=\"\">\n            <th _v-cae53e7e=\"\">dataText</th>\n            <th _v-cae53e7e=\"\">dataValue</th>\n        </tr>\n    </thead>\n    <tbody _v-cae53e7e=\"\">\n        <tr _v-cae53e7e=\"\">\n            <td _v-cae53e7e=\"\">constellation : {{constellation}}</td>\n            <td _v-cae53e7e=\"\">constellationValue : {{constellationValue}}</td>\n        </tr>\n    </tbody>\n  </table>\n  <div style=\"width:200px\" _v-cae53e7e=\"\">\n      <suggestion id=\"constellation\" name=\"constellation\" placeholder=\"请输入星座\" :data-text.sync=\"constellation\" :data-value.sync=\"constellationValue\" :suggestions=\"constellationSuggestions\" _v-cae53e7e=\"\">\n      </suggestion>\n  </div>\n</div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-cae53e7e=\"\"><pre _v-cae53e7e=\"\"> <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-cae53e7e=\"\">class</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>table<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-cae53e7e=\"\"><span class=\"token attr-name\" _v-cae53e7e=\"\"> <span class=\"token attr-name\" _v-cae53e7e=\"\">style</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">=\"</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token property\" _v-cae53e7e=\"\">width</span><span class=\"token punctuation\" _v-cae53e7e=\"\">:</span>400px</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>constellation : <span class=\"token punctuation\" _v-cae53e7e=\"\">{</span><span class=\"token punctuation\" _v-cae53e7e=\"\">{</span>constellation<span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>constellationValue : <span class=\"token punctuation\" _v-cae53e7e=\"\">{</span><span class=\"token punctuation\" _v-cae53e7e=\"\">{</span>constellationValue<span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-cae53e7e=\"\"><span class=\"token attr-name\" _v-cae53e7e=\"\"> <span class=\"token attr-name\" _v-cae53e7e=\"\">style</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">=\"</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token property\" _v-cae53e7e=\"\">width</span><span class=\"token punctuation\" _v-cae53e7e=\"\">:</span>200px</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n     <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>Suggestion</span>\n       <span class=\"token attr-name\" _v-cae53e7e=\"\">id</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>constellation<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span>\n       <span class=\"token attr-name\" _v-cae53e7e=\"\">name</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>constellation<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span>\n       <span class=\"token attr-name\" _v-cae53e7e=\"\">placeholder</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>请输入星座<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span>\n       <span class=\"token attr-name\" _v-cae53e7e=\"\">:data-text.sync</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>constellation<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span>\n       <span class=\"token attr-name\" _v-cae53e7e=\"\">:data-value.sync</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>constellationValue<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span>\n       <span class=\"token attr-name\" _v-cae53e7e=\"\">:suggestions</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>constellationSuggestions<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n     <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>Suggestion</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-cae53e7e=\"\">\n                    <h3 _v-cae53e7e=\"\">object数组 sugs:</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-cae53e7e=\"\">\n        <table class=\"table\" style=\"width:400px\" _v-cae53e7e=\"\">\n              <thead _v-cae53e7e=\"\">\n                  <tr _v-cae53e7e=\"\">\n                      <th _v-cae53e7e=\"\">dataText</th>\n                      <th _v-cae53e7e=\"\">dataValue</th>\n                  </tr>\n              </thead>\n              <tbody _v-cae53e7e=\"\">\n                  <tr _v-cae53e7e=\"\">\n                      <td _v-cae53e7e=\"\">cityName : {{cityName}}</td>\n                      <td _v-cae53e7e=\"\">cityId : {{cityId}}</td>\n                  </tr>\n              </tbody>\n          </table>\n          <div style=\"width:200px\" _v-cae53e7e=\"\">\n              <suggestion id=\"city\" name=\"city\" placeholder=\"请输入城市\" :data-text.sync=\"cityName\" :data-value.sync=\"cityId\" :suggestions=\"citySuggestions\" _v-cae53e7e=\"\">\n              </suggestion>\n          </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-cae53e7e=\"\"><pre _v-cae53e7e=\"\"> <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-cae53e7e=\"\">class</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>table<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-cae53e7e=\"\"><span class=\"token attr-name\" _v-cae53e7e=\"\"> <span class=\"token attr-name\" _v-cae53e7e=\"\">style</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">=\"</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token property\" _v-cae53e7e=\"\">width</span><span class=\"token punctuation\" _v-cae53e7e=\"\">:</span>400px</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>cityName : <span class=\"token punctuation\" _v-cae53e7e=\"\">{</span><span class=\"token punctuation\" _v-cae53e7e=\"\">{</span>cityName<span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>cityId : <span class=\"token punctuation\" _v-cae53e7e=\"\">{</span><span class=\"token punctuation\" _v-cae53e7e=\"\">{</span>cityId<span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-cae53e7e=\"\"><span class=\"token attr-name\" _v-cae53e7e=\"\"> <span class=\"token attr-name\" _v-cae53e7e=\"\">style</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">=\"</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token property\" _v-cae53e7e=\"\">width</span><span class=\"token punctuation\" _v-cae53e7e=\"\">:</span>200px</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>Suggestion</span> <span class=\"token attr-name\" _v-cae53e7e=\"\">id</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>city<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span> <span class=\"token attr-name\" _v-cae53e7e=\"\">name</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>city<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span> <span class=\"token attr-name\" _v-cae53e7e=\"\">placeholder</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>请输入城市<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span> <span class=\"token attr-name\" _v-cae53e7e=\"\">:data-text.sync</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>cityName<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span> <span class=\"token attr-name\" _v-cae53e7e=\"\">:data-value.sync</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>cityId<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span> <span class=\"token attr-name\" _v-cae53e7e=\"\">:suggestions</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>citySuggestions<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>Suggestion</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-cae53e7e=\"\">\n                    <h3 _v-cae53e7e=\"\">远程sug，string数组 sugs:</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-cae53e7e=\"\">\n      <table class=\"table\" style=\"width:400px\" _v-cae53e7e=\"\">\n          <thead _v-cae53e7e=\"\">\n              <tr _v-cae53e7e=\"\">\n                  <th _v-cae53e7e=\"\">dataText</th>\n                  <th _v-cae53e7e=\"\">dataValue</th>\n              </tr>\n          </thead>\n          <tbody _v-cae53e7e=\"\">\n              <tr _v-cae53e7e=\"\">\n                  <td _v-cae53e7e=\"\">requestWord : {{requestWord}}</td>\n                  <td _v-cae53e7e=\"\"> </td>\n              </tr>\n          </tbody>\n      </table>\n      <div style=\"width:200px\" _v-cae53e7e=\"\">\n              <suggestion placeholder=\"\" :check=\"false\" :data-text.sync=\"requestWord\" :suggestions=\"remoteSug\" :input-callback=\"request\" _v-cae53e7e=\"\">&gt;\n              </suggestion>\n      </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-cae53e7e=\"\"><pre _v-cae53e7e=\"\"> <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-cae53e7e=\"\">class</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>table<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-cae53e7e=\"\"><span class=\"token attr-name\" _v-cae53e7e=\"\"> <span class=\"token attr-name\" _v-cae53e7e=\"\">style</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">=\"</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token property\" _v-cae53e7e=\"\">width</span><span class=\"token punctuation\" _v-cae53e7e=\"\">:</span>400px</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n     <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n         <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n             <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n             <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n         <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n     <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n     <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n         <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n             <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>requestWord : <span class=\"token punctuation\" _v-cae53e7e=\"\">{</span><span class=\"token punctuation\" _v-cae53e7e=\"\">{</span>requestWord<span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n             <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span> <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n         <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n     <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-cae53e7e=\"\"><span class=\"token attr-name\" _v-cae53e7e=\"\"> <span class=\"token attr-name\" _v-cae53e7e=\"\">style</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">=\"</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token property\" _v-cae53e7e=\"\">width</span><span class=\"token punctuation\" _v-cae53e7e=\"\">:</span>200px</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n         <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>Suggestion</span> <span class=\"token attr-name\" _v-cae53e7e=\"\">placeholder</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span>\n                     <span class=\"token attr-name\" _v-cae53e7e=\"\">:check</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span>false</span>\n                     <span class=\"token attr-name\" _v-cae53e7e=\"\">:data-text.sync</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>requestWord<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span>\n                     <span class=\"token attr-name\" _v-cae53e7e=\"\">:suggestions</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>remoteSug<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span>\n                     <span class=\"token attr-name\" _v-cae53e7e=\"\">:input-callback</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>request<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>&gt;\n         <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>Suggestion</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-cae53e7e=\"\">\n                    <h3 _v-cae53e7e=\"\">远程sug，object数组 sugs:</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-cae53e7e=\"\">\n        <div class=\"block-item\" _v-cae53e7e=\"\">\n          <table class=\"table table-striped table-bordered\" style=\"width:400px\" _v-cae53e7e=\"\">\n              <thead _v-cae53e7e=\"\">\n                  <tr _v-cae53e7e=\"\">\n                      <th _v-cae53e7e=\"\">dataText</th>\n                      <th _v-cae53e7e=\"\">dataValue</th>\n                  </tr>\n              </thead>\n              <tbody _v-cae53e7e=\"\">\n                  <tr _v-cae53e7e=\"\">\n                      <td _v-cae53e7e=\"\">requestWord2 : {{requestWord2}}</td>\n                      <td _v-cae53e7e=\"\">requestValue2 : {{requestValue2}}</td>\n                  </tr>\n              </tbody>\n          </table>\n          <div style=\"width:200px\" _v-cae53e7e=\"\">\n                  <suggestion placeholder=\"\" :check=\"false\" :data-text.sync=\"requestWord2\" :data-value.sync=\"requestValue2\" :suggestions=\"remoteSug2\" :input-callback=\"request2\" _v-cae53e7e=\"\">\n                  </suggestion>\n          </div>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-cae53e7e=\"\"><pre _v-cae53e7e=\"\"> <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-cae53e7e=\"\">class</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>block-item<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-cae53e7e=\"\">class</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>table table-striped table-bordered<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-cae53e7e=\"\"><span class=\"token attr-name\" _v-cae53e7e=\"\"> <span class=\"token attr-name\" _v-cae53e7e=\"\">style</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">=\"</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token property\" _v-cae53e7e=\"\">width</span><span class=\"token punctuation\" _v-cae53e7e=\"\">:</span>400px</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>requestWord2 : <span class=\"token punctuation\" _v-cae53e7e=\"\">{</span><span class=\"token punctuation\" _v-cae53e7e=\"\">{</span>requestWord2<span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n               <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>requestValue2 : <span class=\"token punctuation\" _v-cae53e7e=\"\">{</span><span class=\"token punctuation\" _v-cae53e7e=\"\">{</span>requestValue2<span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n       <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-cae53e7e=\"\"><span class=\"token attr-name\" _v-cae53e7e=\"\"> <span class=\"token attr-name\" _v-cae53e7e=\"\">style</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">=\"</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token property\" _v-cae53e7e=\"\">width</span><span class=\"token punctuation\" _v-cae53e7e=\"\">:</span>200px</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;</span>Suggestion</span> <span class=\"token attr-name\" _v-cae53e7e=\"\">placeholder</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span>\n                       <span class=\"token attr-name\" _v-cae53e7e=\"\">:check</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span>false</span>\n                       <span class=\"token attr-name\" _v-cae53e7e=\"\">:data-text.sync</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>requestWord2<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span>\n                       <span class=\"token attr-name\" _v-cae53e7e=\"\">:data-value.sync</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>requestValue2<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span>\n                       <span class=\"token attr-name\" _v-cae53e7e=\"\">:suggestions</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>remoteSug2<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span>\n                       <span class=\"token attr-name\" _v-cae53e7e=\"\">:input-callback</span><span class=\"token attr-value\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">=</span><span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span>request2<span class=\"token punctuation\" _v-cae53e7e=\"\">\"</span></span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n           <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>Suggestion</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n   <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span>\n <span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token tag\" _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-cae53e7e=\"\">&gt;</span></span></pre></div>\n                    </div>\n</div>\n<h2 _v-cae53e7e=\"\">数据格式支持</h2>\n<p _v-cae53e7e=\"\">组件支持两种<code _v-cae53e7e=\"\">数据格式</code>：</p>\n<ul _v-cae53e7e=\"\">\n<li _v-cae53e7e=\"\">Object:</li>\n</ul>\n<pre _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">[</span><span class=\"token punctuation\" _v-cae53e7e=\"\">{</span>\n    text<span class=\"token punctuation\" _v-cae53e7e=\"\">:</span><span class=\"token string\" _v-cae53e7e=\"\">\"北京\"</span><span class=\"token punctuation\" _v-cae53e7e=\"\">,</span>\n    value<span class=\"token punctuation\" _v-cae53e7e=\"\">:</span><span class=\"token string\" _v-cae53e7e=\"\">\"103\"</span>\n<span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token punctuation\" _v-cae53e7e=\"\">,</span><span class=\"token punctuation\" _v-cae53e7e=\"\">{</span>\n    text<span class=\"token punctuation\" _v-cae53e7e=\"\">:</span><span class=\"token string\" _v-cae53e7e=\"\">\"上海\"</span><span class=\"token punctuation\" _v-cae53e7e=\"\">,</span>\n    value<span class=\"token punctuation\" _v-cae53e7e=\"\">:</span><span class=\"token string\" _v-cae53e7e=\"\">\"131\"</span>\n<span class=\"token punctuation\" _v-cae53e7e=\"\">}</span><span class=\"token punctuation\" _v-cae53e7e=\"\">,</span>\n    ……\n<span class=\"token punctuation\" _v-cae53e7e=\"\">]</span>\n</pre>\n<ul _v-cae53e7e=\"\">\n<li _v-cae53e7e=\"\">Array:</li>\n</ul>\n<pre _v-cae53e7e=\"\"><span class=\"token punctuation\" _v-cae53e7e=\"\">[</span><span class=\"token string\" _v-cae53e7e=\"\">\"北京\"</span><span class=\"token punctuation\" _v-cae53e7e=\"\">,</span><span class=\"token string\" _v-cae53e7e=\"\">\"上海\"</span><span class=\"token punctuation\" _v-cae53e7e=\"\">,</span>……<span class=\"token punctuation\" _v-cae53e7e=\"\">]</span>\n</pre>\n<h2 _v-cae53e7e=\"\">参数说明</h2>\n<table class=\"table\" _v-cae53e7e=\"\">\n<thead _v-cae53e7e=\"\">\n<tr _v-cae53e7e=\"\">\n<th _v-cae53e7e=\"\">参数</th>\n<th _v-cae53e7e=\"\">类型</th>\n<th _v-cae53e7e=\"\">双向</th>\n<th _v-cae53e7e=\"\">说明</th>\n</tr>\n</thead>\n<tbody _v-cae53e7e=\"\">\n<tr _v-cae53e7e=\"\">\n<td _v-cae53e7e=\"\">id</td>\n<td _v-cae53e7e=\"\">String</td>\n<td _v-cae53e7e=\"\"></td>\n<td _v-cae53e7e=\"\">input的id</td>\n</tr>\n<tr _v-cae53e7e=\"\">\n<td _v-cae53e7e=\"\">name</td>\n<td _v-cae53e7e=\"\">String</td>\n<td _v-cae53e7e=\"\"></td>\n<td _v-cae53e7e=\"\">input的name属性</td>\n</tr>\n<tr _v-cae53e7e=\"\">\n<td _v-cae53e7e=\"\">className</td>\n<td _v-cae53e7e=\"\">String</td>\n<td _v-cae53e7e=\"\"></td>\n<td _v-cae53e7e=\"\">类名</td>\n</tr>\n<tr _v-cae53e7e=\"\">\n<td _v-cae53e7e=\"\">disabled</td>\n<td _v-cae53e7e=\"\">Boolean</td>\n<td _v-cae53e7e=\"\"></td>\n<td _v-cae53e7e=\"\">input的disabled属性</td>\n</tr>\n<tr _v-cae53e7e=\"\">\n<td _v-cae53e7e=\"\">placeholder</td>\n<td _v-cae53e7e=\"\">String</td>\n<td _v-cae53e7e=\"\"></td>\n<td _v-cae53e7e=\"\">input提示</td>\n</tr>\n<tr _v-cae53e7e=\"\">\n<td _v-cae53e7e=\"\">dataText</td>\n<td _v-cae53e7e=\"\">String</td>\n<td _v-cae53e7e=\"\">是</td>\n<td _v-cae53e7e=\"\">sug文本,展示给用户的sug值</td>\n</tr>\n<tr _v-cae53e7e=\"\">\n<td _v-cae53e7e=\"\">dataValue</td>\n<td _v-cae53e7e=\"\">String or Object</td>\n<td _v-cae53e7e=\"\">是</td>\n<td _v-cae53e7e=\"\">所选sug项</td>\n</tr>\n<tr _v-cae53e7e=\"\">\n<td _v-cae53e7e=\"\">suggestions</td>\n<td _v-cae53e7e=\"\">Array</td>\n<td _v-cae53e7e=\"\"></td>\n<td _v-cae53e7e=\"\">sug list</td>\n</tr>\n<tr _v-cae53e7e=\"\">\n<td _v-cae53e7e=\"\">check</td>\n<td _v-cae53e7e=\"\">Boolean@default:false</td>\n<td _v-cae53e7e=\"\"></td>\n<td _v-cae53e7e=\"\">是否要做sug匹配，如果想用本组件实现远程sug，设为false</td>\n</tr>\n<tr _v-cae53e7e=\"\">\n<td _v-cae53e7e=\"\">inputCallback</td>\n<td _v-cae53e7e=\"\">Function</td>\n<td _v-cae53e7e=\"\"></td>\n<td _v-cae53e7e=\"\">input事件回调，可以本时机触发远程sug异步请求</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 78 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(79)
-	__vue_script__ = __webpack_require__(81)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\tag.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(87)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-1c5802a6/tag.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 79 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(80);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./tag.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./tag.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 80 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.define-class{\r\n    background:#ffab47;\r\n    color:#fff;\r\n    border-radius: 6px;\r\n}\r\n\r\n.define-class:hover{\r\n    background:red;\r\n}\r\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 81 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _tag = __webpack_require__(82);
-
-	var _tag2 = _interopRequireDefault(_tag);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    data: function data() {
-	        return {
-	            tags: [{ text: '新标签', key: 'test' }],
-	            showTag: false,
-	            index: 1,
-	            key: 'data',
-	            afterCloseIsShowTag: true
-	        };
-	    },
-
-	    components: {
-	        vTag: _tag2.default
-	    },
-	    methods: {
-	        closeclick: function closeclick() {
-	            alert('testValidateSuccess');
-	        },
-	        addTag: function addTag() {
-	            if (this.tags === null) {
-	                this.tags = [];
-	            }
-	            this.tags.push({ text: '\u65B0\u6807\u7B7E' + this.index++, key: this.index });
-	        },
-	        click: function click() {
-	            alert('clicksuccess');
-	        }
-	    }
-	};
-
-/***/ },
-/* 82 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(83)
-	__vue_script__ = __webpack_require__(85)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\tag\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(86)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-77230cca/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(84);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".xcui-tag {\n  display: inline-block;\n  line-height: 25px;\n  height: 27px;\n  border-radius: 6px;\n  border: 1px solid #e9e9e9;\n  background: #fff;\n  font-size: 12px;\n  vertical-align: middle;\n  opacity: 1;\n  margin: 2px 4px 2px 0;\n  cursor: pointer;\n}\n.xcui-tag .xcui-tag-text {\n  padding: 0 8px;\n}\n.xcui-disabled {\n  background: #f5f5f5;\n  cursor: default;\n  opacity: .85;\n}\n.xcui-tag:hover {\n  opacity: 0.85;\n}\n.xcui-cross {\n  display: inline-block;\n  font-style: normal;\n  font-size: 17px;\n  zoom: 1;\n  cursor: pointer;\n  font-weight: 700;\n  margin-left: 3px;\n  color: #666;\n  opacity: 0.66;\n}\n.xcui-cross:before {\n  content: \"\\D7\";\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 85 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.default = {
-	    name: 'xcui-tag',
-	    props: {
-	        text: {
-	            type: String,
-	            default: ''
-	        },
-	        closeable: {
-	            type: Boolean,
-	            default: false
-	        },
-	        disabled: {
-	            type: Boolean,
-	            default: false
-	        },
-	        showTag: {
-	            type: Boolean,
-	            default: true
-	        },
-	        classname: {
-	            type: String,
-	            default: ''
-	        },
-	        key: {
-	            type: String,
-	            default: ''
-	        },
-	        aftercloseisshow: {
-	            type: Boolean,
-	            default: false,
-	            twoway: true
-	        }
-	    },
-	    methods: {
-	        onCloseClick: function onCloseClick() {
-	            this.$emit('close');
-	            if (this.aftercloseisshow === false) {
-	                this.showTag = false;
-	            };
-	        },
-	        onClick: function onClick() {
-	            this.$emit('click');
-	        }
-	    }
-	};
-
-/***/ },
-/* 86 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\t<div :class=\"['xcui-tag', disabled ? ' xcui-disabled':'']\" @click=\"onClick\" v-if=\"showTag\" >\n        <div class=\"{{classname!='' ? classname : ''}}\" >\n\t\t<span class=\"xcui-tag-text\"><slot></slot>{{text}}<span>\n        <i class=\"xcui-cross\" v-if=\"closeable\" @click.stop=\"onCloseClick\"></i>\n        </div>\n\t</div>\n";
-
-/***/ },
-/* 87 */
-/***/ function(module, exports) {
-
-	module.exports = "<div><h1>Tag标签</h1>\n<h2>使用场景</h2>\n<ul>\n<li>标记事物的属性、分类等特性</li>\n<li>支持关闭标签、点击标签</li>\n<li>支持禁用标签</li>\n<li>支持自定义标签样式</li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n\t<div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>基本使用</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <v-tag :text=\"'标签'\"></v-tag>\r\n        <v-tag :disabled=\"true\" :text=\"'禁用标签'\"></v-tag>\r\n        <v-tag :closeable=\"true\" :text=\"'关闭'\" @close=\"closeclick\"></v-tag>\r\n        <v-tag :closeable=\"true\" @close=\"closeclick\" :key.sync=\"key\" :text=\"'点击不关闭'\" :aftercloseisshow.sync=\"afterCloseIsShowTag\" @click=\"click\"></v-tag>\r\n        <v-tag  :classname=\"'define-class'\" :text=\"'自定义样式'\" @click=\"click\" ></v-tag>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>标签<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:disabled</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>禁用标签<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@close</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>closeclick<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@close</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>closeclick<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:key.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>key<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>点击不关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:aftercloseisshow.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>afterCloseIsShowTag<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span>  <span class=\"token attr-name\" >:classname</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>define-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>自定义样式<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span> <span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>添加标签</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <template v-for=\"item in tags\">\r\n            <v-tag :closeable=\"true\" :text=\"item.text\"></v-tag>\r\n        </template>\r\n        <input type=\"button\" class=\"btn btn-primary\" value=\"添加\" @click=\"addTag\"/>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>template</span> <span class=\"token attr-name\" >v-for</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item in tags<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item.text<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-tag</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>template</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>input</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>button<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>添加<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>addTag<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >/></span></span></pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>text</td>\n<td>String</td>\n<td>空字符串</td>\n<td>内容</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>disabled</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否禁用</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>closeable</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否可关闭</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>close</td>\n<td>function</td>\n<td>无</td>\n<td>关闭时回调</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>click</td>\n<td>function</td>\n<td>无</td>\n<td>点击标签事件</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>showTag</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否展示tag</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>aftercloseisshow</td>\n<td>Boolean</td>\n<td>false</td>\n<td>关闭回调后是否展示Tag</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>key</td>\n<td>String</td>\n<td>空字符串</td>\n<td>存储数据</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>classname</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 88 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(89)
-	__vue_script__ = __webpack_require__(91)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\datepicker.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(98)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-1e09f879/datepicker.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 89 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(90);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./datepicker.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./datepicker.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 90 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".class-name {\n  width: 200px;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 91 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _datepicker = __webpack_require__(92);
-
-	var _datepicker2 = _interopRequireDefault(_datepicker);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    data: function data() {
-	        return {
-	            date: {
-	                value: '2016-02-01',
-	                sep: '-',
-	                begin: '2015-12-20',
-	                end: '2016-09-09'
-	            },
-	            datetime: {
-	                value: '2016/02/01 00:00:00',
-	                begin: '2015/02/01 00:00:00',
-	                end: '2017/02/01 00:00:00'
-	            },
-	            time: {
-	                value: ''
-	            }
-	        };
-	    },
-
-	    components: {
-	        datepicker: _datepicker2.default
-	    }
-	};
-
-/***/ },
-/* 92 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(93)
-	__vue_script__ = __webpack_require__(95)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\datepicker\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(97)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-09543bf7/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 93 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(94);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 94 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".xcui-datapicker .calendar {\n  width: 240px;\n  padding: 10px;\n  background: #fff;\n  position: absolute;\n  z-index: 9999;\n  left: 0;\n  top: 38px;\n  border: 1px solid #DEDEDE;\n  border-radius: 2px;\n  -webkit-transition: all .5s ease;\n  transition: all .5s ease;\n}\n.xcui-datapicker .calendar-enter .calendar-leave {\n  opacity: 0;\n  -webkit-transform: translate3d(0, -10px, 0);\n          transform: translate3d(0, -10px, 0);\n}\n.xcui-datapicker .calendar-tit {\n  text-align: center;\n  margin: 0 auto;\n  width: 104px;\n  font-weight: bold;\n}\n.xcui-datapicker .calendar-tit input {\n  color: #333;\n  height: 24px;\n  outline: medium;\n  text-align: center;\n  border: none;\n  background-color: transparent;\n}\n.xcui-datapicker .calendar-tit-year {\n  width: 36px;\n}\n.xcui-datapicker .calendar-tit-month {\n  width: 18px;\n  margin-left: 2px;\n}\n.xcui-datapicker .calendar:before {\n  position: absolute;\n  left: 30px;\n  top: -10px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #DEDEDE;\n}\n.xcui-datapicker .calendar:after {\n  position: absolute;\n  left: 30px;\n  top: -9px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #fff;\n}\n.xcui-datapicker .calendar-tools {\n  height: 32px;\n  font-size: 14px;\n  line-height: 32px;\n  color: #333;\n}\n.xcui-datapicker .calendar-tools .float.left {\n  float: left;\n}\n.xcui-datapicker .calendar-tools .float.right {\n  float: right;\n}\n.xcui-datapicker .calendar-tools > i {\n  margin: 0 10px;\n  line-height: 32px;\n  cursor: pointer;\n  color: #707070;\n}\n.xcui-datapicker .calendar-tools > i:hover {\n  color: #333;\n}\n.xcui-datapicker .calendar table {\n  clear: both;\n  width: 100%;\n  margin-bottom: 10px;\n  border-collapse: collapse;\n  color: #444;\n}\n.xcui-datapicker .calendar td {\n  margin: 2px !important;\n  padding: 5px 0;\n  width: 14.28571429%;\n  text-align: center;\n  vertical-align: middle;\n  font-size: 14px;\n  line-height: 125%;\n  cursor: pointer;\n  border: 0;\n}\n.xcui-datapicker .calendar td:hover {\n  background: #f3f8fa;\n}\n.xcui-datapicker .calendar td.week {\n  pointer-events: none !important;\n  cursor: default !important;\n}\n.xcui-datapicker .calendar td.off {\n  color: #c0c0c0;\n}\n.xcui-datapicker .calendar td.today {\n  background-color: #46c3c1;\n  color: #fff;\n  font-size: 14px;\n  border-radius: 4px;\n}\n.xcui-datapicker .calendar td.today .lunar {\n  color: #fff;\n}\n.xcui-datapicker .calendar thead td {\n  text-transform: uppercase;\n}\n.xcui-datapicker .calendar .timer {\n  margin: 10px 0 10px 30px;\n  width: 150px;\n  text-align: center;\n}\n.xcui-datapicker .calendar .timer input {\n  border-radius: 2px;\n  padding: 5px;\n  font-size: 14px;\n  line-height: 18px;\n  color: #46c3c1;\n  width: 50px;\n  text-align: center;\n  border: 1px solid #efefef;\n}\n.xcui-datapicker .calendar .timer input:focus {\n  border: 1px solid #46c3c1;\n}\n.xcui-datapicker .calendar .timer-item {\n  float: left;\n  text-align: center;\n  position: relative;\n  cursor: pointer;\n}\n.xcui-datapicker .calendar .timer-item-current {\n  color: #46c3c1;\n  line-height: 24px;\n  font-size: 14px;\n}\n.xcui-datapicker .calendar .timer label {\n  margin: 0;\n  width: 30px;\n  padding: 5px;\n  line-height: 14px;\n  margin-right: 4px;\n  font-weight: normal;\n}\n.xcui-datapicker .calendar-button {\n  text-align: center;\n}\n.xcui-datapicker .calendar-button button {\n  border: none;\n  cursor: pointer;\n  display: inline-block;\n  min-height: 1em;\n  vertical-align: baseline;\n  background: #46c3c1;\n  color: #fff;\n  margin: 0 .3em 0 0;\n  padding: .6em 2em;\n  font-size: 1em;\n  line-height: 1em;\n  text-align: center;\n  border-radius: .3em;\n}\n.xcui-datapicker .calendar-button button.cancel {\n  background: #efefef;\n  color: #666;\n}\n.xcui-datapicker .calendar .lunar {\n  font-size: 11px;\n  line-height: 150%;\n  color: #aaa;\n}\n.xcui-datapicker .calendar .drop-down {\n  position: absolute;\n  top: 24px;\n  left: -10px;\n  width: 50px;\n  height: 140px;\n  background: #fff;\n  border: 1px solid #efefef;\n  padding: 0;\n  margin: 0;\n  overflow-y: scroll;\n}\n.xcui-datapicker .calendar .drop-down li {\n  width: 50px;\n  list-style: none;\n}\n.xcui-datapicker .calendar .drop-down li.on {\n  background: #eee;\n}\n.xcui-datapicker .calendar .drop-down li:hover {\n  background: #eee;\n}\n.xcui-datapicker .calendar .clearfix {\n  zoom: 1;\n}\n.xcui-datapicker .calendar .clearfix:after {\n  display: block;\n  width: 0;\n  height: 0;\n  visibility: hidden;\n  content: '';\n  clear: both;\n}\n.xcui-datapicker .calendar .btn-default {\n  color: #666;\n  border-radius: 0 4px 4px 0;\n}\n.xcui-datapicker .bg-pr {\n  position: relative;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 95 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _calendarMixins = __webpack_require__(96);
+	var _calendarMixins = __webpack_require__(30);
 
 	var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
 
@@ -17642,7 +14220,7 @@
 
 	exports.default = {
 	    mixins: [_calendarMixins2.default],
-	    name: 'xcui-datapicker',
+	    name: 'xcui-datepicker',
 	    props: {
 	        btnShow: {
 	            type: Boolean,
@@ -17660,45 +14238,38 @@
 	    methods: {
 	        renderElse: function renderElse(y, m, i, temp, line, currentTime) {
 	            var me = this;
-	            var thisTime = Number(new Date(me.year, me.month, i));
+	            var thisTime = new Date(me.output([me.year, me.month, i], me.defaultFormat)).getTime();
 	            var options = { day: i, today: false };
 	            options = me.bindSingerTime(thisTime, currentTime, options);
 	            temp[line].push(options);
 	        },
 	        bindSingerTime: function bindSingerTime(thisTime, currentTime, options) {
 	            var me = this;
-	            if (me.begin !== undefined) {
-	                var beginSplit = me.begin.split(me.sep);
-	                var beginSplit1 = parseInt(beginSplit[0], 10);
-	                var beginSplit2 = parseInt(beginSplit[1], 10) - 1;
-	                var beginSplit3 = parseInt(beginSplit[2], 10);
-	                var beginTime = Number(new Date(beginSplit1, beginSplit2, beginSplit3));
+	            var format = me.defaultFormat;
+	            if (me.minDate) {
+	                var beginTime = new Date(me.output(me.minDate, format)).getTime();
 	                if (beginTime > thisTime) {
 	                    options.disabled = true;
-	                }
-	                if (beginTime > currentTime) {
-	                    me.currentTimeBtnShow = false;
+	                    options.noClick = true;
 	                }
 	            }
-	            if (me.end !== undefined) {
-	                var endSplit = me.end.split(me.sep);
-	                var endSplit1 = parseInt(endSplit[0], 10);
-	                var endSplit2 = parseInt(endSplit[1], 10) - 1;
-	                var endSplit3 = parseInt(endSplit[2], 10);
-	                var endTime = Number(new Date(endSplit1, endSplit2, endSplit3));
+	            if (me.maxDate) {
+	                var endTime = new Date(me.output(me.maxDate, format)).getTime();
 	                if (endTime < thisTime) {
 	                    options.disabled = true;
-	                }
-	                if (endTime < currentTime) {
-	                    me.currentTimeBtnShow = false;
+	                    options.noClick = true;
 	                }
 	            }
 	            return options;
 	        },
 	        select: function select(k1, k2, e) {
+	            if (e.target.className.indexOf('noclick') !== -1) {
+	                return false;
+	            }
 	            var me = this;
 	            var days = this.days;
 	            var daySeleted = days[k1][k2];
+	            var oldValue = this.value = me.output(this.value);
 
 	            if (this.today.length > 0) {
 	                days[this.today[0]][this.today[1]].today = false;
@@ -17718,38 +14289,34 @@
 	                me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
 	            }
 	            if (me.type === 'date') {
+	                this.$emit('on-change', this.value, oldValue);
 	                me.showFalse();
 	            }
 	        },
 	        currentTime: function currentTime() {
-	            var date = new Date();
-	            var year = date.getFullYear();
-	            var month = date.getMonth();
-	            var hour = this.zero(date.getHours());
-	            var day = this.zero(date.getDate());
-	            var minute = this.zero(date.getMinutes());
-	            var second = this.zero(date.getSeconds());
 	            var me = this;
-	            this.year = year;
-	            this.month = month;
-	            this.day = day;
-	            this.hour = hour;
-	            this.minute = minute;
-	            this.second = second;
-	            this.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-	            if (this.currentTimeBtnShow) {
-	                this.render(year, month);
+	            me.value = me.output(new Date());
+	            var params = this.dateParams;
+	            me.year = params.year;
+	            me.month = params.month;
+	            me.day = params.day;
+	            me.hour = params.hour;
+	            me.minute = params.minute;
+	            me.second = params.second;
+	            if (me.currentTimeBtnShow) {
+	                me.render(me.year, me.month);
 	            }
-	            this.hourListShow = false;
-	            this.minuteListShow = false;
-	            this.secondListShow = false;
+	            me.hourListShow = false;
+	            me.minuteListShow = false;
+	            me.secondListShow = false;
 	        },
 	        ok: function ok() {
-	            this.value = this.value !== '' ? this.value : this.initialValue;
 	            this.showFalse();
+	            this.$emit('on-change', this.value, this.initialValue);
+	            this.initialValue = this.value;
 	        },
 	        cancel: function cancel() {
-	            this.value = this.initialValue === '' ? this.value : this.initialValue;
+	            this.value = this.initialValue;
 	            this.showFalse();
 	        },
 	        showFalse: function showFalse() {
@@ -17761,7 +14328,17 @@
 	        showCalendar: function showCalendar(e) {
 	            var me = this;
 	            e.stopPropagation();
-	            this.show = true;
+	            me.show = true;
+	            if (me.value !== '') {
+	                me.output(me.value);
+	                var params = me.dateParams;
+	                me.year = params.year;
+	                me.month = params.month;
+	                me.hour = params.hour;
+	                me.minute = params.minute;
+	                me.second = params.second;
+	            }
+	            me.render(me.year, me.month);
 	            var bindHide = function bindHide(e) {
 	                e.stopPropagation();
 	                me.showFalse();
@@ -17775,33 +14352,33 @@
 	};
 
 /***/ },
-/* 96 */
-/***/ function(module, exports) {
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _typeof2 = __webpack_require__(31);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	exports.default = {
 	    props: {
-	        type: {
-	            type: String,
-	            default: 'date'
-	        },
 	        value: {
-	            type: String,
 	            twoWay: true,
 	            default: ''
 	        },
-	        begin: {
+	        format: {
 	            type: String,
-	            default: ''
+	            default: 'YYYY-MM-DD'
 	        },
-	        end: {
-	            type: String,
-	            default: ''
-	        },
+	        minDate: {},
+	        maxDate: {},
 	        hourRange: {
 	            type: [Number, String],
 	            default: 1
@@ -17813,10 +14390,6 @@
 	        secondRange: {
 	            type: [Number, String],
 	            default: 1
-	        },
-	        sep: {
-	            type: String,
-	            default: '-'
 	        },
 	        color: String,
 	        className: String
@@ -17843,30 +14416,44 @@
 	            yearTableShow: false,
 	            selectRangeList: [],
 	            selectRangeShow: true,
-	            selectRange: ''
+	            selectRange: '',
+	            dateParams: null,
+	            defaultFormat: 'YYYY-MM-DD'
 	        };
+	    },
+
+	    computed: {
+	        type: function type() {
+	            var type = 'date';
+	            var format = this.format;
+	            var hasY = format.indexOf('YYYY') !== -1;
+	            var hasH = format.indexOf('hh') !== -1 || format.indexOf('HH') !== -1;
+	            if (hasY && hasH) {
+	                type = 'datetime';
+	            } else if (hasH) {
+	                type = 'time';
+	            }
+	            return type;
+	        },
+	        formatValue: function formatValue() {
+	            return this.output(this.value);
+	        }
 	    },
 	    created: function created() {
 	        var me = this;
-	        var now = me.getCurrentParams();
 	        this.initialValue = this.value;
 	        if (me.value !== '') {
-	            var params = me.getValueParams(me.value);
-	            me.year = params.year;
-	            me.month = params.month;
-	            me.day = params.day;
-	            me.hour = params.hour;
-	            me.minute = params.minute;
-	            me.second = params.second;
+	            me.value = me.output(me.value);
 	        } else {
-	            me.year = now.year;
-	            me.month = now.month;
-	            me.day = now.day;
-	            me.hour = now.hour;
-	            me.minute = now.minute;
-	            me.second = now.second;
-	            me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+	            me.value = me.output(new Date());
 	        }
+	        var params = me.dateParams;
+	        me.year = params.year;
+	        me.month = params.month;
+	        me.day = params.day;
+	        me.hour = params.hour;
+	        me.minute = params.minute;
+	        me.second = params.second;
 	        for (var i = 0; i < 60; i++) {
 	            if (i % me.minuteRange === 0) {
 	                me.minuteList.push(me.zero(i));
@@ -17882,6 +14469,8 @@
 	        }
 	        if (me.type !== 'time') {
 	            me.render(me.year, me.month);
+	        } else {
+	            this.initialValue = this.value;
 	        }
 	    },
 
@@ -17891,10 +14480,14 @@
 	        },
 	        render: function render(y, m) {
 	            var me = this;
+	            if (me.type === 'time') {
+	                return false;
+	            }
 	            me.firstDayOfMonth = new Date(y, m, 1).getDay();
 	            me.lastDateOfMonth = new Date(y, m + 1, 0).getDate();
 	            me.lastDayOfLastMonth = new Date(y, m, 0).getDate();
-	            var params = me.getValueParams(me.value);
+	            me.output(me.value);
+	            var params = me.dateParams;
 	            var line = 0;
 	            var temp = [];
 	            var date = new Date();
@@ -17903,13 +14496,12 @@
 	            me.currentMonth = me.months[m];
 	            for (var i = 1; i <= me.lastDateOfMonth; i++) {
 	                var dow = new Date(y, m, i).getDay();
-	                var chk = new Date();
-	                var chkY = chk.getFullYear();
-	                var chkM = chk.getMonth();
-	                var year = params.year === me.year;
-	                var month = params.month === me.month;
-	                var day = params.day === i;
-	                var seletSplit4 = me.begin !== undefined || me.end !== undefined;
+	                var isYear = params.year === me.year;
+	                var isMonth = params.month === me.month;
+	                var isDay = Number(params.day) === i;
+	                var format = me.defaultFormat;
+	                var minDate = me.minDate && me.output(me.minDate, format);
+	                var maxDate = me.maxDate && me.output(me.maxDate, format);
 
 	                if (dow === 0) {
 	                    temp[line] = [];
@@ -17917,15 +14509,17 @@
 	                    temp[line] = [];
 	                    var k = me.lastDayOfLastMonth - me.firstDayOfMonth + 1;
 	                    for (var j = 0; j < me.firstDayOfMonth; j++) {
-	                        temp[line].push({ day: k, disabled: true, prev: true });
+	                        var nowDay = me.output([me.year, me.month, k], format);
+	                        if (nowDay < minDate || nowDay > maxDate) {
+	                            temp[line].push({ day: k, disabled: true, prev: true, noClick: true });
+	                        } else {
+	                            temp[line].push({ day: k, disabled: true, prev: true });
+	                        }
 	                        k++;
 	                    }
 	                }
-	                if (year && month && day && seletSplit4) {
-	                    temp[line].push({ day: i, today: true });
-	                    me.today = [line, temp[line].length - 1];
-	                } else if (chkY === me.year && chkM === me.month && i === me.day && me.value === undefined) {
-	                    temp[line].push({ day: i, today: true });
+	                if (isYear && isMonth && isDay) {
+	                    temp[line].push({ day: i, today: true, disabled: false });
 	                    me.today = [line, temp[line].length - 1];
 	                } else {
 	                    me.renderElse(y, m, i, temp, line, currentTime);
@@ -18031,31 +14625,56 @@
 	                    break;
 	                default:
 	            };
+
 	            me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
 	        },
-	        output: function output(args) {
+	        output: function output(d, format) {
+	            var fmt = format || this.format;
 	            var me = this;
-	            if (args[1] === 12) {
-	                args[1] = 0;
-	                args[0] += 1;
-	            } else if (args[1] === -1) {
-	                args[1] = 11;
-	                args[0] -= 1;
+	            if (this.value && this.value !== '' && this.type === 'time' && typeof d === 'string') {
+	                d = '1970-01-01 ' + d;
 	            }
-	            if (me.type === 'time') {
-	                return me.zero(args[3]) + ':' + me.zero(args[4]) + ':' + me.zero(args[5]);
+	            var date = new Date(d);
+	            if ((typeof d === 'undefined' ? 'undefined' : (0, _typeof3.default)(d)) === 'object' && d.length > 0) {
+	                date = new Date(d[0], d[1], d[2], d[3] || '00', d[4] || '00', d[5] || '00');
 	            }
-	            var args1 = me.zero(args[1] + 1);
-	            var args2 = me.zero(args[2]);
-	            if (me.type === 'datetime') {
-	                var args3 = me.zero(args[3]);
-	                var args4 = me.zero(args[4]);
-	                var args5 = me.zero(args[5]);
-	                return args[0] + me.sep + args1 + me.sep + args2 + ' ' + args3 + ':' + args4 + ':' + args5;
+	            var year = date.getFullYear();
+	            var month = date.getMonth();
+	            var getDate = date.getDate();
+	            var hour = date.getHours();
+	            var minute = date.getMinutes();
+	            var second = date.getSeconds();
+	            var timeParams = me.getRangeTime(hour, minute, second);
+	            hour = timeParams.hour;
+	            minute = timeParams.minute;
+	            second = timeParams.second;
+	            var o = {
+	                'M+': month + 1,
+	                'D+': getDate,
+	                'h+': hour,
+	                'm+': minute,
+	                's+': second,
+	                'q+': Math.floor((date.getMonth() + 3) / 3),
+	                'S': date.getMilliseconds()
+	            };
+	            if (/(Y+)/.test(fmt)) {
+	                fmt = fmt.replace(RegExp.$1, (year + '').substr(4 - RegExp.$1.length));
 	            }
-	            if (me.type === 'date') {
-	                return args[0] + me.sep + args1 + me.sep + args2;
+	            for (var k in o) {
+	                if (new RegExp('(' + k + ')').test(fmt)) {
+	                    var str = ('00' + o[k]).substr(('' + o[k]).length);
+	                    fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : str);
+	                }
 	            }
+	            me.dateParams = {
+	                year: year,
+	                month: month,
+	                day: me.zero(getDate),
+	                hour: me.zero(hour),
+	                minute: me.zero(minute),
+	                second: me.zero(second)
+	            };
+	            return fmt;
 	        },
 	        outputMonth: function outputMonth(month, year) {
 	            var m = Number(month);
@@ -18072,2062 +14691,36 @@
 	                m: m
 	            };
 	        },
-	        getValueParams: function getValueParams(timeCur) {
+	        getRangeTime: function getRangeTime(hour, minute, second) {
 	            var me = this;
-	            var params = {};
-	            if (me.type === 'date') {
-	                var split = timeCur.split(me.sep);
-	                params.year = parseInt(split[0], 10);
-	                params.month = parseInt(split[1], 10) - 1;
-	                params.day = parseInt(split[2], 10);
-	            } else if (me.type === 'datetime') {
-	                var _split = timeCur.split(' ');
-	                var splitDate = _split[0].split(me.sep);
-	                params.year = parseInt(splitDate[0], 10);
-	                params.month = parseInt(splitDate[1], 10) - 1;
-	                params.day = parseInt(splitDate[2], 10);
-	                if (_split.length > 1) {
-	                    var splitTime = _split[1].split(':');
-	                    params.hour = splitTime[0];
-	                    params.minute = splitTime[1];
-	                    params.second = splitTime[2];
-	                } else {
-	                    params.hour = me.hour;
-	                    params.minute = me.minute;
-	                    params.second = me.second;
-	                }
-	            } else if (me.type === 'time') {
-	                var _split2 = timeCur.split(':');
-	                params.hour = me.hour = _split2[0];
-	                params.minute = me.minute = _split2[1];
-	                params.second = me.second = _split2[2];
-	            }
-	            return params;
-	        },
-	        getCurrentParams: function getCurrentParams() {
-	            var date = new Date();
+	            hour = Math.round(hour / me.hourRange) * me.hourRange;
+	            minute = Math.round(minute / me.minuteRange) * me.minuteRange;
+	            second = Math.round(second / me.secondRange) * me.secondRange;
+	            hour = hour === 24 ? hour - me.hourRange : hour;
+	            minute = minute === 60 ? minute - me.minuteRange : minute;
+	            second = second === 60 ? second - me.secondRange : second;
 	            return {
-	                year: date.getFullYear(),
-	                month: date.getMonth(),
-	                day: this.zero(date.getDate()),
-	                hour: this.zero(date.getHours()),
-	                minute: this.zero(date.getMinutes()),
-	                second: this.zero(date.getSeconds())
+	                hour: me.zero(hour),
+	                minute: me.zero(minute),
+	                second: me.zero(second)
 	            };
 	        }
 	    }
 	};
 
 /***/ },
-/* 97 */
-/***/ function(module, exports) {
-
-	module.exports = "\r\n<div class=\"xcui-datapicker {{className}}\">\r\n    <div :class=\"{'input-group':btnShow,'bg-pr':!btnShow}\">\r\n        <input class=\"form-control\"  type=\"text\" v-model=\"value\" placeholder=\"请输入日期\" @click=\"showCalendar\">\r\n        <div @click.stop=\"\"\r\n             @touchstart.stop=\"\"\r\n             class=\"calendar\"\r\n             v-show=\"show\">\r\n            <div class=\"calendar-tools\" v-if=\"type!='time'\">\r\n                <i class=\"glyphicon glyphicon-chevron-left float left\"\r\n                   @click=\"prev\"></i>\r\n                <i class=\"glyphicon glyphicon-chevron-right float right\"\r\n                   @click=\"next\"></i>\r\n                <div class=\"calendar-tit\">\r\n                    <span @click=\"changeTitSelect(year, 'year')\"><input v-model=\"year\" class=\"calendar-tit-year\" type=\"text\" @change=\"changeTitSelect(year,'year')\"/>年</span>\r\n                    <span class=\"calendar-tit-month\" @click=\"changeTitSelect(month-1, 'month')\">{{month+1}}月</span>\r\n                </div>\r\n            </div>\r\n            <div v-show=\"dataTableShow\">\r\n                <table cellpadding=\"5\" v-if=\"type!='time'\">\r\n                    <thead>\r\n                        <tr>\r\n                            <td v-for=\"week in weeks\" class=\"week\">{{week}}</td>\r\n                        </tr>\r\n                    </thead>\r\n                    <tr v-for=\"(k1,day) in days\">\r\n                        <td\r\n                        v-for=\"(k2,child) in day\"\r\n                        :class=\"{'today':child.today,'off':child.disabled}\"\r\n                        :style=\"{'background':color&&child.today?color:''}\"\r\n                        @click=\"select(k1,k2,$event)\">\r\n                        {{child.day}}\r\n                        <div class=\"lunar\" v-if=\"showLunar\">{{child.lunar}}</div>\r\n                        </td>\r\n                    </tr>\r\n                </table>\r\n                <div class=\"calendar-time\" v-show=\"type=='datetime'|| type=='time'\">\r\n                    <div  class=\"timer clearfix\">\r\n                        <div class=\"timer-item\">\r\n                            <label @click=\"dropTimeList('hour')\">{{hour}}</label>:\r\n                            <ul class=\"drop-down\" v-show=\"hourListShow\">\r\n                                <li v-for=\"item in hourList\" @click=\"selectTimeItem($event,'hour')\">{{item}}</li>\r\n                            </ul>\r\n                        </div>\r\n                        <div class=\"timer-item\">\r\n                            <label @click=\"dropTimeList('minute')\">{{minute}}</label>:\r\n                            <ul class=\"drop-down\" v-show=\"minuteListShow\">\r\n                                <li v-for=\"item in minuteList\" @click=\"selectTimeItem($event,'minute')\">{{item}}</li>\r\n                            </ul>\r\n                        </div>\r\n                        <div class=\"timer-item\">\r\n                            <label @click=\"dropTimeList('second')\">{{second}}</label>\r\n                            <ul class=\"drop-down\" v-show=\"secondListShow\">\r\n                                <li v-for=\"item in secondList\" @click=\"selectTimeItem($event,'second')\">{{item}}</li>\r\n                            </ul>\r\n                        </div>\r\n                        <div class=\"timer-item\">\r\n                            <div class=\"timer-item-current\"\r\n                                @click=\"currentTime\"\r\n                                :style=\"{'color':color}\">当前</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"calendar-button\" v-show=\"type=='datetime'|| type=='time' || range\">\r\n                    <button @click=\"ok\" :style=\"{'background':color}\">确定</button>\r\n                    <button @click=\"cancel\" class=\"cancel\">取消</button>\r\n                </div>\r\n            </div>\r\n            <table cellpadding=\"6\" v-show=\"yearTableShow\">\r\n                <tr v-show=\"selectRangeShow\">\r\n                    <td colspan =\"3\">{{selectRange}}</td>\r\n                </tr>\r\n                <tr v-for=\"selects in selectRangeList\">\r\n                    <td v-for=\"select in selects\" @click=\"selectItem(select)\">{{select}}</td>\r\n                </tr>\r\n            </table>\r\n        </div>\r\n        <span class=\"input-group-btn\" v-if=\"btnShow\" @click=\"showCalendar\" >\r\n            <button class=\"btn btn-default\">\r\n                <span class=\"glyphicon glyphicon-calendar\"></span>\r\n            </button>\r\n        </span>\r\n    </div>\r\n</div>\r\n";
-
-/***/ },
-/* 98 */
-/***/ function(module, exports) {
-
-	module.exports = "<div><h1>datepicker 日期选择框</h1>\n<h2>使用场景</h2>\n<ul>\n<li>支持日历筛选，日历＋时间，时间筛选</li>\n<li>可以配置日期的筛选范围，日期格式</li>\n<li>对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60</li>\n<li>可以直接获取当前的时间</li>\n<li>年筛选可以直接输入，可以筛选</li>\n<li>支持定制皮肤颜色</li>\n</ul>\n<h1>DEMO</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日历选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n    <datepicker\r\n        type=\"date\"\n        :value.sync=\"date.value\"\r\n        :sep=\"date.sep\">\r\n    </datepicker>\r\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>datepicker</span>\r\n     <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date<span class=\"token punctuation\" >\"</span></span>\n     <span class=\"token attr-name\" >:value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date.value<span class=\"token punctuation\" >\"</span></span>\r\n     <span class=\"token attr-name\" >:sep</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date.sep<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>datepicker</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日历+时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n    <datepicker\r\n        type=\"datetime\"\n        class-name=\"class-name\"\n        color=\"pink\"\n        :value.sync=\"datetime.value\"\r\n        :btn-show=\"true\"\r\n        sep=\"/\"\n        :hour-range=\"'3'\"\r\n        :begin=\"datetime.begin\"\r\n        :end=\"datetime.end\">\r\n    </datepicker>\r\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>datepicker</span>\r\n     <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>datetime<span class=\"token punctuation\" >\"</span></span>\n     <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>class-name<span class=\"token punctuation\" >\"</span></span>\n     <span class=\"token attr-name\" >color</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>pink<span class=\"token punctuation\" >\"</span></span>\n     <span class=\"token attr-name\" >:value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>datetime.value<span class=\"token punctuation\" >\"</span></span>\r\n     <span class=\"token attr-name\" >:btn-show</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span>\r\n     <span class=\"token attr-name\" >sep</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>/<span class=\"token punctuation\" >\"</span></span>\n     <span class=\"token attr-name\" >:hour-range</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>3<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span>\r\n     <span class=\"token attr-name\" >:begin</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>datetime.begin<span class=\"token punctuation\" >\"</span></span>\r\n     <span class=\"token attr-name\" >:end</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>datetime.end<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>datepicker</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n      <div class=\"input-group\">\r\n        <datepicker\r\n                type=\"time\"\n                :value.sync=\"time.value\"\r\n                :btn-show=\"datetime.btnShow\">\r\n        </datepicker>\r\n      </div>\r\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>input-group<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n   <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>datepicker</span>\r\n           <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>time<span class=\"token punctuation\" >\"</span></span>\n           <span class=\"token attr-name\" >:value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>time.value<span class=\"token punctuation\" >\"</span></span>\r\n           <span class=\"token attr-name\" >:btn-show</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>datetime.btnShow<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n   <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>datepicker</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n</div>\n<h2>组件依赖</h2>\n<blockquote>\n<p>无</p>\n</blockquote>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否双向绑定</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>value</td>\n<td>String</td>\n<td>无</td>\n<td>默认日期</td>\n<td>双向绑定</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>date</td>\n<td>date:日历  datetime:日历＋时间 time:时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>sep</td>\n<td>String</td>\n<td>-</td>\n<td>日期格式设置 例如：2016-08-06</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>begin</td>\n<td>String</td>\n<td>无</td>\n<td>单选日历，可选日期范围的开始时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>end</td>\n<td>String</td>\n<td>无</td>\n<td>单选日历，可选日期范围的结束时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>hourRange</td>\n<td>Number</td>\n<td>1</td>\n<td>小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minuteRange</td>\n<td>Number</td>\n<td>1</td>\n<td>分可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>secondRange</td>\n<td>Number</td>\n<td>1</td>\n<td>秒可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>color</td>\n<td>String</td>\n<td>无</td>\n<td>订制按钮颜色，值为颜色值，例如：#f00,pink</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>btnShow</td>\n<td>boolean</td>\n<td>无</td>\n<td>是否显示日历后面的按钮</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>class-name</td>\n<td>String</td>\n<td>无</td>\n<td>日历样式，class名字</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 99 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(100)
-	__vue_script__ = __webpack_require__(102)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\dateRangePicker.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(111)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-78631ea0/dateRangePicker.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 100 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(101);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./dateRangePicker.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./dateRangePicker.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 101 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".class-name {\n  width: 400px;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 102 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _daterangepicker = __webpack_require__(103);
-
-	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    data: function data() {
-	        return {
-	            date: {
-	                type: 'date',
-	                value: '2016-09-08 至 2016-10-08',
-	                sep: '-',
-	                begin: '2015-12-20',
-	                end: '2016-11-20',
-	                dateLimit: {
-	                    months: 1
-	                },
-	                color: '#f00'
-	            },
-	            datetime: {
-	                type: 'datetime',
-	                value: '2016-09-08 00:02:03 至 2016-09-13 00:00:00',
-	                sep: '-',
-	                begin: '2015-12-20',
-	                end: '2017-11-20',
-	                dateLimit: {
-	                    days: 5
-	                },
-	                color: '#f00',
-	                btnShow: true
-	            },
-	            time: {
-	                type: 'time',
-	                value: '04:02:03 至 00:02:03',
-	                inputClass: ['col-md-6'],
-	                btnShow: true
-	            }
-	        };
-	    },
-
-	    components: {
-	        daterangepicker: _daterangepicker2.default
-	    }
-	};
-
-/***/ },
-/* 103 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(104)
-	__vue_script__ = __webpack_require__(106)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\daterangepicker\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(110)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-b71a9544/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 104 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(105);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 105 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".xcui-datarangepicker {\n  position: relative;\n}\n.xcui-datarangepicker .calendar {\n  width: 240px;\n  padding: 10px;\n  background: #fff;\n  position: absolute;\n  border: 1px solid #DEDEDE;\n  border-radius: 2px;\n  -webkit-transition: all .5s ease;\n  transition: all .5s ease;\n  left: 0;\n  top: 38px;\n}\n.xcui-datarangepicker .calendar-enter .calendar-leave {\n  opacity: 0;\n  -webkit-transform: translate3d(0, -10px, 0);\n          transform: translate3d(0, -10px, 0);\n}\n.xcui-datarangepicker .calendar-tit {\n  text-align: center;\n  margin: 0 auto;\n  width: 104px;\n  font-weight: bold;\n}\n.xcui-datarangepicker .calendar-tit input {\n  color: #333;\n  height: 24px;\n  outline: medium;\n  text-align: center;\n  border: none;\n  background-color: transparent;\n}\n.xcui-datarangepicker .calendar-tit-year {\n  width: 36px;\n}\n.xcui-datarangepicker .calendar-tit-month {\n  width: 18px;\n  margin-left: 2px;\n}\n.xcui-datarangepicker .calendar:before {\n  position: absolute;\n  left: 30px;\n  top: -10px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #DEDEDE;\n}\n.xcui-datarangepicker .calendar:after {\n  position: absolute;\n  left: 30px;\n  top: -9px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #fff;\n}\n.xcui-datarangepicker .calendar-tools {\n  height: 32px;\n  font-size: 14px;\n  line-height: 32px;\n  color: #333;\n}\n.xcui-datarangepicker .calendar-tools .float.left {\n  float: left;\n}\n.xcui-datarangepicker .calendar-tools .float.right {\n  float: right;\n}\n.xcui-datarangepicker .calendar-tools > i {\n  margin: 0 10px;\n  line-height: 32px;\n  cursor: pointer;\n  color: #707070;\n}\n.xcui-datarangepicker .calendar-tools > i:hover {\n  color: #333;\n}\n.xcui-datarangepicker .calendar table {\n  clear: both;\n  width: 100%;\n  margin-bottom: 10px;\n  border-collapse: collapse;\n  color: #444;\n}\n.xcui-datarangepicker .calendar table td {\n  margin: 2px !important;\n  padding: 5px 0;\n  width: 14.28571429%;\n  text-align: center;\n  vertical-align: middle;\n  font-size: 14px;\n  line-height: 125%;\n  cursor: pointer;\n  border: 0;\n}\n.xcui-datarangepicker .calendar table td:hover {\n  background: #f3f8fa;\n}\n.xcui-datarangepicker .calendar table td.week {\n  pointer-events: none !important;\n  cursor: default !important;\n}\n.xcui-datarangepicker .calendar table td.off {\n  color: #c0c0c0;\n}\n.xcui-datarangepicker .calendar table td.today {\n  background-color: #46c3c1;\n  color: #fff;\n  font-size: 14px;\n  border-radius: 4px;\n}\n.xcui-datarangepicker .calendar table td.today .lunar {\n  color: #fff;\n}\n.xcui-datarangepicker .calendar table td.todayleft {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.xcui-datarangepicker .calendar table td.todayright {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n.xcui-datarangepicker .calendar table td.range {\n  background: #e2eff5;\n}\n.xcui-datarangepicker .calendar table thead td {\n  text-transform: uppercase;\n}\n.xcui-datarangepicker .calendar .timer {\n  margin: 0 auto 10px;\n  width: 120px;\n}\n.xcui-datarangepicker .calendar .timer input {\n  border-radius: 2px;\n  padding: 5px;\n  font-size: 14px;\n  line-height: 18px;\n  color: #46c3c1;\n  width: 50px;\n  text-align: center;\n  border: 1px solid #efefef;\n}\n.xcui-datarangepicker .calendar .timer input:focus {\n  border: 1px solid #46c3c1;\n}\n.xcui-datarangepicker .calendar .timer-item {\n  float: left;\n  text-align: center;\n  position: relative;\n  cursor: pointer;\n}\n.xcui-datarangepicker .calendar .timer-item-current {\n  color: #46c3c1;\n  line-height: 24px;\n  font-size: 14px;\n}\n.xcui-datarangepicker .calendar .timer label {\n  margin: 0;\n  width: 30px;\n  padding: 5px;\n  line-height: 14px;\n  margin-right: 4px;\n  font-weight: normal;\n}\n.xcui-datarangepicker .calendar-button {\n  text-align: center;\n}\n.xcui-datarangepicker .calendar-button button {\n  border: none;\n  cursor: pointer;\n  display: inline-block;\n  min-height: 1em;\n  vertical-align: baseline;\n  background: #46c3c1;\n  color: #fff;\n  margin: 0 .3em 0 0;\n  padding: .6em 2em;\n  font-size: 1em;\n  line-height: 1em;\n  text-align: center;\n  border-radius: .3em;\n}\n.xcui-datarangepicker .calendar-button button.cancel {\n  background: #efefef;\n  color: #666;\n}\n.xcui-datarangepicker .calendar .lunar {\n  font-size: 11px;\n  line-height: 150%;\n  color: #aaa;\n}\n.xcui-datarangepicker .calendar .drop-down {\n  position: absolute;\n  top: 24px;\n  left: -10px;\n  width: 50px;\n  height: 140px;\n  background: #fff;\n  border: 1px solid #efefef;\n  padding: 0;\n  margin: 0;\n  overflow-y: scroll;\n}\n.xcui-datarangepicker .calendar .drop-down li {\n  width: 50px;\n  list-style: none;\n}\n.xcui-datarangepicker .calendar .drop-down li.on {\n  background: #eee;\n}\n.xcui-datarangepicker .calendar .drop-down li:hover {\n  background: #eee;\n}\n.xcui-datarangepicker .double-calendar {\n  width: 490px;\n  z-index: 999;\n}\n.xcui-datarangepicker .double-calendar-left {\n  width: 220px;\n  float: left;\n}\n.xcui-datarangepicker .double-calendar-right {\n  width: 220px;\n  float: right;\n}\n.xcui-datarangepicker .double-calendar .calendar-button {\n  padding-top: 10px;\n  border-top: 1px solid #ddd;\n}\n.xcui-datarangepicker .clearfix {\n  zoom: 1;\n}\n.xcui-datarangepicker .clearfix:after {\n  display: block;\n  width: 0;\n  height: 0;\n  visibility: hidden;\n  content: '';\n  clear: both;\n}\n.xcui-datarangepicker .bg-pr {\n  position: relative;\n}\n.xcui-datarangepicker .btn-default {\n  color: #666;\n  border-radius: 0 4px 4px 0;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 106 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _calendar = __webpack_require__(107);
-
-	var _calendar2 = _interopRequireDefault(_calendar);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    name: 'xcui-datarangepicker',
-	    props: {
-	        show: {
-	            type: Boolean,
-	            twoWay: true,
-	            default: false
-	        },
-	        type: {
-	            type: String,
-	            default: 'date'
-	        },
-	        value: {
-	            type: String,
-	            twoWay: true,
-	            default: ''
-	        },
-	        begin: {
-	            type: String,
-	            default: ''
-	        },
-	        end: {
-	            type: String,
-	            default: ''
-	        },
-	        hourRange: {
-	            type: Number,
-	            default: 1
-	        },
-	        minuteRange: {
-	            type: Number,
-	            default: 1
-	        },
-	        secondRange: {
-	            type: Number,
-	            default: 1
-	        },
-	        sep: {
-	            type: String,
-	            default: '-'
-	        },
-	        color: {
-	            type: String,
-	            default: ''
-	        },
-	        dateLimit: {
-	            type: Object,
-	            default: null
-	        },
-	        className: String,
-	        btnShow: {
-	            type: Boolean,
-	            default: false
-	        }
-	    },
-	    components: {
-	        calendar: _calendar2.default
-	    },
-	    data: function data() {
-	        return {
-	            beginCalenderVal: '',
-	            endCalenderVal: '',
-	            renderStar: '',
-	            renderEnd: ''
-	        };
-	    },
-	    created: function created() {
-	        if (this.value !== '') {
-	            var values = this.value.split('至');
-	            this.beginCalenderVal = values[0].trim();
-	            this.endCalenderVal = values[1].trim();
-	            if (this.beginCalenderVal > this.endCalenderVal) {
-	                this.endCalenderVal = this.beginCalenderVal;
-	                this.value = this.beginCalenderVal + ' 至 ' + this.endCalenderVal;
-	            }
-	        }
-	    },
-
-	    watch: {
-	        beginCalenderVal: function beginCalenderVal(val) {
-	            if (val > this.endCalenderVal) {
-	                this.endCalenderVal = val;
-	            }
-	        },
-	        endCalenderVal: function endCalenderVal(val) {
-	            if (val < this.beginCalenderVal) {
-	                this.beginCalenderVal = val;
-	            }
-	        }
-	    },
-	    methods: {
-	        ok: function ok() {
-	            this.value = this.beginCalenderVal + ' 至 ' + this.endCalenderVal;
-	            this.show = false;
-	        },
-	        cancel: function cancel() {
-	            this.show = false;
-	        },
-	        showCalendar: function showCalendar(e) {
-	            var me = this;
-	            e.stopPropagation();
-	            me.show = true;
-	            var bindHide = function bindHide(e) {
-	                e.stopPropagation();
-	                me.show = false;
-	                document.removeEventListener('click', bindHide, false);
-	            };
-	            setTimeout(function () {
-	                document.addEventListener('click', bindHide, false);
-	            }, 500);
-	        }
-	    }
-	};
-
-/***/ },
-/* 107 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(108)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\daterangepicker\\calendar.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(109)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-4a1c113c/calendar.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 108 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _calendarMixins = __webpack_require__(96);
-
-	var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    mixins: [_calendarMixins2.default],
-	    props: {
-	        otherValue: {
-	            type: String,
-	            default: ''
-	        },
-	        right: {
-	            type: Boolean,
-	            default: false
-	        },
-	        renderStar: {
-	            type: String,
-	            default: ''
-	        },
-	        renderEnd: {
-	            type: String,
-	            default: ''
-	        },
-	        dateLimit: {
-	            type: Object,
-	            default: null
-	        }
-	    },
-	    watch: {
-	        renderStar: function renderStar(val) {
-	            if (val === '' || this.right) {
-	                return false;
-	            }
-	            var params = this.getValueParams(val);
-	            this.year = params.year;
-	            this.month = params.month;
-	            this.render(params.year, params.month);
-	        },
-	        renderEnd: function renderEnd(val) {
-	            if (val === '' || !this.right) {
-	                return false;
-	            }
-	            var params = this.getValueParams(val);
-	            this.year = params.year;
-	            this.month = params.month;
-	            this.render(params.year, params.month);
-	        }
-	    },
-	    methods: {
-	        renderElse: function renderElse(y, m, i, temp, line) {
-	            var me = this;
-	            var today = y + me.sep + me.zero(m + 1) + me.sep + me.zero(i);
-	            var otherDate = me.otherValue.substring(0, 10);
-	            var value = me.value.substring(0, 10);
-	            if (today < me.begin || today > me.end) {
-	                temp[line].push({ day: i, disabled: true, range: false });
-	            } else if (!me.right && today > value && today <= otherDate) {
-	                temp[line].push({ day: i, disabled: false, range: true });
-	            } else if (me.right && today < value && today >= otherDate) {
-	                temp[line].push({ day: i, disabled: false, range: true });
-	            } else if (me.right && today < otherDate) {
-	                temp[line].push({ day: i, disabled: true, range: false });
-	            } else {
-	                temp[line].push({ day: i, today: false, range: false });
-	            }
-	        },
-	        select: function select(k1, k2, e) {
-	            if (e !== undefined) {
-	                e.stopPropagation();
-	            }
-	            if (e.target.className === 'off todayright prev') {
-	                return false;
-	            }
-	            var me = this;
-	            var daySeleted = me.days[k1][k2];
-
-	            var va = me.getValueParams(me.value);
-	            if (me.today.length > 0 && me.month === va.month && me.year === va.year) {
-	                me.days[me.today[0]][me.today[1]].today = false;
-	            }
-
-	            daySeleted.today = true;
-	            daySeleted.range = false;
-	            me.day = this.zero(me.days[k1][k2].day);
-	            me.today = [k1, k2];
-	            if (daySeleted.disabled) {
-	                me.month = k1 === 0 ? me.month - 1 : me.month + 1;
-	                var om = me.outputMonth(me.month, me.year);
-	                me.year = om.y;
-	                me.month = om.m;
-	                me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-	                me.render(me.year, me.month);
-	            } else {
-	                me.today = [k1, k2];
-	                me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-	            }
-	            me.otherValue = me.bindLimitDate();
-	            me.changeOtherCalender();
-	        },
-	        changeOtherCalender: function changeOtherCalender() {
-	            var me = this;
-	            var params = me.getValueParams(me.value);
-	            var monthStar = me.month;
-	            var monthEnd = me.month;
-	            if (!me.right) {
-	                if (me.value > me.otherValue) {
-	                    me.otherValue = me.value;
-	                } else if (me.getYearMonth(me.otherValue) > me.getYearMonth(me.value) + 1) {
-	                    monthEnd = monthEnd + 1;
-	                }
-	            } else if (me.right) {
-	                if (me.value < me.otherValue) {
-	                    me.otherValue = me.value;
-	                } else if (me.getYearMonth(me.value) > me.getYearMonth(me.otherValue) + 1) {
-	                    monthStar = monthStar - 1;
-	                }
-	            }
-	            me.$parent.renderStar = me.output([me.year, monthStar, params.day, me.hour, me.minute, me.second]);
-	            me.$parent.renderEnd = me.output([me.year, monthEnd, params.day, me.hour, me.minute, me.second]);
-	        },
-	        getYearMonth: function getYearMonth(date) {
-	            var me = this;
-	            var dates = date.split(me.sep);
-	            return dates[0] * 12 + dates[1];
-	        },
-	        bindLimitDate: function bindLimitDate() {
-	            var me = this;
-	            var oValue = me.otherValue;
-	            var ovs = me.getValueParams(oValue);
-	            var bg = me.begin;
-	            var ed = me.end;
-	            var y = ovs.year;
-	            var m = ovs.month;
-	            var d = ovs.day;
-	            var meValue = me.year + me.sep + me.zero(me.month + 1) + me.sep + me.zero(me.day);
-	            var meDate = new Date(me.year, me.month, me.day).getDate();
-	            var AddDayCount = 0;
-	            var params = null;
-	            var otherTime = '';
-	            if (me.right) {
-	                if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
-	                    for (var i1 = 0; i1 < me.dateLimit.months; i1++) {
-	                        AddDayCount += new Date(y, m + i1 + 1, 0).getDate();
-	                    }
-	                } else if (this.dateLimit.hasOwnProperty('days')) {
-	                    AddDayCount += me.dateLimit.days;
-	                }
-	                if (meValue > me.getDataStr(AddDayCount, oValue).val) {
-	                    AddDayCount = 0;
-	                    var diffDate = 0;
-	                    if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
-	                        var limitMonth = me.dateLimit.months;
-	                        for (var i2 = 0; i2 < limitMonth; i2++) {
-	                            var count = meDate === me.lastDateOfMonth ? 0 : 1;
-	                            var nextMaxDate = new Date(y, m - i2 + count, 0).getDate();
-	                            AddDayCount -= nextMaxDate;
-	                        }
-	                        diffDate = meDate - new Date(y, m - limitMonth + 1, 0).getDate();
-	                        if (meDate !== me.lastDateOfMonth && diffDate > 0) {
-	                            AddDayCount += diffDate;
-	                        }
-	                    } else if (this.dateLimit.hasOwnProperty('days')) {
-	                        AddDayCount -= me.dateLimit.days;
-	                    }
-	                    params = me.getDataStr(AddDayCount, meValue);
-	                    y = params.y;
-	                    m = params.m;
-	                    d = params.d;
-	                }
-	            } else {
-	                if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
-	                    for (var k1 = 0; k1 < me.dateLimit.months; k1++) {
-	                        AddDayCount -= new Date(y, m - k1, 0).getDate();
-	                    }
-	                } else if (this.dateLimit.hasOwnProperty('days')) {
-	                    AddDayCount -= me.dateLimit.days;
-	                }
-	                if (meValue < me.getDataStr(AddDayCount, oValue).val || meValue > oValue) {
-	                    AddDayCount = 0;
-	                    var diffDate2 = 0;
-	                    if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
-	                        var _limitMonth = me.dateLimit.months;
-	                        for (var k2 = 0; k2 < _limitMonth; k2++) {
-	                            var count2 = meDate === me.lastDateOfMonth ? 2 : 1;
-	                            var nextMaxDate2 = new Date(me.year, me.month + k2 + count2, 0).getDate();
-	                            AddDayCount += nextMaxDate2;
-	                        }
-	                        diffDate2 = meDate - new Date(me.year, me.month + _limitMonth + 1, 0).getDate();
-	                        if (meDate !== me.lastDateOfMonth && diffDate2 > 0) {
-	                            AddDayCount -= diffDate2;
-	                        }
-	                    } else if (this.dateLimit.hasOwnProperty('days')) {
-	                        AddDayCount += me.dateLimit.days;
-	                    }
-	                    params = me.getDataStr(AddDayCount, meValue);
-	                    y = params.y;
-	                    m = params.m;
-	                    d = params.d;
-	                }
-	            }
-	            otherTime = me.output([y, m, d, me.hour, me.minute, me.second]);
-	            otherTime = otherTime < bg ? bg : otherTime > ed ? ed : otherTime;
-	            return otherTime;
-	        },
-	        getDataStr: function getDataStr(AddDayCount, nowDate) {
-	            var date = new Date(nowDate);
-	            date.setDate(date.getDate() + AddDayCount);
-	            var y = date.getFullYear();
-	            var m = date.getMonth() + 1;
-	            var d = date.getDate();
-	            m = this.zero(m);
-	            d = this.zero(d);
-	            return {
-	                val: y + this.sep + m + this.sep + d,
-	                y: y,
-	                m: parseInt(m, 10) - 1,
-	                d: parseInt(d, 10)
-	            };
-	        }
-	    }
-	};
-
-/***/ },
-/* 109 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div class=\"calendar-tools\" v-if=\"type!='time'\">\n    <i class=\"glyphicon glyphicon-chevron-left float left\"\n       @click=\"prev\"></i>\n    <i class=\"glyphicon glyphicon-chevron-right float right\"\n   @click=\"next\"></i>\n    <div class=\"calendar-tit\">\n        <span @click=\"changeTitSelect(year, 'year')\">\n            <input v-model=\"year\" class=\"calendar-tit-year\" type=\"text\" @change=\"changeTitSelect(year,'year')\"/>年\n        </span>\n        <span class=\"calendar-tit-month\" @click=\"changeTitSelect(month-1, 'month')\">{{month+1}}月</span>\n    </div>\n</div>\n<div v-show=\"dataTableShow\">\n    <table cellpadding=\"5\" v-if=\"type!='time'\">\n        <thead>\n            <tr>\n                <td v-for=\"week in weeks\" class=\"week\">{{week}}</td>\n            </tr>\n        </thead>\n        <tr v-for=\"(k1,day) in days\">\n            <td\n            v-for=\"(k2,child) in day\"\n            :class=\"{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right,'prev':child.prev}\"\n            :style=\"{'background':color&&child.today?color:''}\"\n            @click=\"select(k1,k2,$event)\">\n            {{child.day}}\n            </td>\n        </tr>\n    </table>\n    <div class=\"calendar-time\" v-show=\"type=='datetime' || type=='time'\">\n        <div class=\"timer clearfix\">\n            <div class=\"timer-item\">\n                <label @click=\"dropTimeList('hour')\">{{hour}}</label>:\n                <ul class=\"drop-down\" v-show=\"hourListShow\">\n                    <li v-for=\"item in hourList\" @click=\"selectTimeItem($event,'hour')\">{{item}}</li>\n                </ul>\n            </div>\n            <div class=\"timer-item\">\n                <label @click=\"dropTimeList('minute')\">{{minute}}</label>:\n                <ul class=\"drop-down\" v-show=\"minuteListShow\">\n                    <li v-for=\"item in minuteList\" @click=\"selectTimeItem($event,'minute')\">{{item}}</li>\n                </ul>\n            </div>\n            <div class=\"timer-item\">\n                <label @click=\"dropTimeList('second')\">{{second}}</label>\n                <ul class=\"drop-down\" v-show=\"secondListShow\">\n                    <li v-for=\"item in secondList\" @click=\"selectTimeItem($event,'second')\">{{item}}</li>\n                </ul>\n            </div>\n        </div>\n    </div>\n</div>\n<table cellpadding=\"6\" v-show=\"yearTableShow\">\n    <tr v-show=\"selectRangeShow\">\n        <td colspan =\"3\">{{selectRange}}</td>\n    </tr>\n    <tr v-for=\"selects in selectRangeList\">\n        <td v-for=\"select in selects\" @click=\"selectItem(select)\">{{select}}</td>\n    </tr>\n</table>\n";
-
-/***/ },
-/* 110 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\r\n<div class=\"xcui-datarangepicker\" :class=\"className\">\r\n    <div :class=\"{'input-group':btnShow}\">\r\n        <input class=\"form-control col-md-3\" type=\"text\" v-model=\"value\" placeholder=\"请输入日期\" @click=\"showCalendar\">\r\n        <!-- 双日历 -->\r\n        <div @click.stop=\"\"\r\n             @touchstart.stop=\"\"\r\n             class=\"calendar double-calendar\"\r\n             v-show=\"show\">\r\n             <div class=\"clearfix\">\r\n                 <div class=\"double-calendar-left\">\r\n                    <calendar\r\n                        :type=\"type\"\r\n                        :value.sync=\"beginCalenderVal\"\r\n                        :sep=\"sep\"\r\n                        :other-value.sync=\"endCalenderVal\"\r\n                        :begin=\"begin\"\r\n                        :end=\"end\"\r\n                        :hour-range=\"hourRange\"\r\n                        :minute-range=\"minuteRange\"\r\n                        :second-range=\"secondRange\"\r\n                        :color=\"color\"\r\n                        :date-limit=\"dateLimit\"\r\n                        :render-star=\"renderStar\"></calendar>\r\n                 </div>\r\n                 <div class=\"double-calendar-right\">\r\n                    <calendar\r\n                        :type=\"type\"\r\n                        :value.sync=\"endCalenderVal\"\r\n                        :sep=\"sep\"\r\n                        :other-value.sync=\"beginCalenderVal\"\r\n                        :right=\"true\"\r\n                        :begin=\"begin\"\r\n                        :end=\"end\"\r\n                        :hour-range=\"hourRange\"\r\n                        :minute-range=\"minuteRange\"\r\n                        :second-range=\"secondRange\"\r\n                        :color=\"color\"\r\n                        :date-limit=\"dateLimit\"\r\n                        :render-end=\"renderEnd\"></calendar>\r\n                 </div>\r\n             </div>\r\n             <div class=\"calendar-button\">\r\n                <button @click=\"ok\" :style=\"{'background':color}\">确定</button>\r\n                <button @click=\"cancel\" class=\"cancel\">取消</button>\r\n             </div>\r\n        </div>\r\n        <!-- end 双日历 -->\r\n        <span class=\"input-group-btn\" v-if=\"btnShow\" @click=\"showCalendar\" >\r\n            <button class=\"btn btn-default\">\r\n                <span class=\"glyphicon glyphicon-calendar\"></span>\r\n            </button>\r\n        </span>\r\n    </div>\r\n</div>\r\n";
-
-/***/ },
-/* 111 */
-/***/ function(module, exports) {
-
-	module.exports = "<div><h1>daterangepicker 双日期选择框</h1>\n<h2>使用场景</h2>\n<ul>\n<li>支持日历筛选，日历＋时间，时间筛选</li>\n<li>可以配置日期的筛选范围，日期格式</li>\n<li>对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60</li>\n<li>可以直接获取当前的时间</li>\n<li>年筛选可以直接输入，可以筛选</li>\n<li>支持定制皮肤颜色</li>\n</ul>\n<h2>应用指南</h2>\n<p>要把datepicker放在一个拥有定位属性的容器中,因为datepicker是相对父级元素定位的。</p>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日历选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <daterangepicker\r\n              :value.sync=\"date.value\"\r\n              :sep=\"date.sep\"\r\n              :type=\"date.type\"\r\n              :begin=\"date.begin\"\r\n              :end=\"date.end\"\r\n              :date-limit=\"date.dateLimit\">\r\n        </daterangepicker>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>daterangepicker</span>\r\n       <span class=\"token attr-name\" >:value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date.value<span class=\"token punctuation\" >\"</span></span>\r\n       <span class=\"token attr-name\" >:sep</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date.sep<span class=\"token punctuation\" >\"</span></span>\r\n       <span class=\"token attr-name\" >:type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date.type<span class=\"token punctuation\" >\"</span></span>\r\n       <span class=\"token attr-name\" >:begin</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date.begin<span class=\"token punctuation\" >\"</span></span>\r\n       <span class=\"token attr-name\" >:end</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date.end<span class=\"token punctuation\" >\"</span></span>\r\n       <span class=\"token attr-name\" >:date-limit</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>date.dateLimit<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>daterangepicker</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日期 + 时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <daterangepicker\r\n              type=\"datetime\"\n              class-name=\"class-name\"\n              color=\"pink\"\n              :value.sync=\"datetime.value\"\r\n              :sep='datetime.sep'\r\n              :begin=\"datetime.begin\"\r\n              :end=\"datetime.end\"\r\n              :date-limit=\"datetime.dateLimit\"\r\n              :btn-show=\"datetime.btnShow\">\r\n        </daterangepicker>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>daterangepicker</span>\r\n       <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>datetime<span class=\"token punctuation\" >\"</span></span>\n       <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>class-name<span class=\"token punctuation\" >\"</span></span>\n       <span class=\"token attr-name\" >color</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>pink<span class=\"token punctuation\" >\"</span></span>\n       <span class=\"token attr-name\" >:value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>datetime.value<span class=\"token punctuation\" >\"</span></span>\r\n       <span class=\"token attr-name\" >:sep</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>datetime.sep<span class=\"token punctuation\" >'</span></span>\r\n       <span class=\"token attr-name\" >:begin</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>datetime.begin<span class=\"token punctuation\" >\"</span></span>\r\n       <span class=\"token attr-name\" >:end</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>datetime.end<span class=\"token punctuation\" >\"</span></span>\r\n       <span class=\"token attr-name\" >:date-limit</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>datetime.dateLimit<span class=\"token punctuation\" >\"</span></span>\r\n       <span class=\"token attr-name\" >:btn-show</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>datetime.btnShow<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>daterangepicker</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <daterangepicker\r\n              :value.sync=\"time.value\"\r\n              :type=\"time.type\"\r\n              :input-class=\"time.inputClass\"\r\n              :btn-show=\"time.btnShow\">\r\n        </daterangepicker>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>daterangepicker</span>\r\n       <span class=\"token attr-name\" >:value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>time.value<span class=\"token punctuation\" >\"</span></span>\r\n       <span class=\"token attr-name\" >:type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>time.type<span class=\"token punctuation\" >\"</span></span>\r\n       <span class=\"token attr-name\" >:input-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>time.inputClass<span class=\"token punctuation\" >\"</span></span>\r\n       <span class=\"token attr-name\" >:btn-show</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>time.btnShow<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>daterangepicker</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n</div>\n<h3>日历选择，日期＋时间选择 type: date、datetime</h3>\n<h4>Props</h4>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否双向绑定</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>value</td>\n<td>String</td>\n<td>无</td>\n<td>默认日期</td>\n<td>双向绑定</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>date</td>\n<td>date: 日历  datetime: 日期＋时间 time: 时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>sep</td>\n<td>String</td>\n<td>-</td>\n<td>日期格式设置 例如：2016-08-06</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>begin</td>\n<td>String</td>\n<td>无</td>\n<td>可选日期范围的开始时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>end</td>\n<td>String</td>\n<td>无</td>\n<td>可选日期范围的结束时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>hourRange</td>\n<td>Number</td>\n<td>1</td>\n<td>小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minuteRange</td>\n<td>Number</td>\n<td>1</td>\n<td>分可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>secondRange</td>\n<td>Number</td>\n<td>1</td>\n<td>秒可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>dateLimit</td>\n<td>object</td>\n<td>null</td>\n<td>可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>color</td>\n<td>String</td>\n<td>无</td>\n<td>订制按钮颜色，值为颜色值，例如：#f00,pink</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>btnShow</td>\n<td>boolean</td>\n<td>无</td>\n<td>是否显示日历后面的按钮</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>inputClass</td>\n<td>Array</td>\n<td>无</td>\n<td>日历input输入框的样式，class名字</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h3>时间选择 type: time</h3>\n<h4>Props</h4>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否双向绑定</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>show</td>\n<td>Boolean</td>\n<td>false</td>\n<td>控制日历选择框显示隐藏</td>\n<td>双向绑定</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>value</td>\n<td>String</td>\n<td>无</td>\n<td>默认日期</td>\n<td>双向绑定</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>date</td>\n<td>date: 日历  datetime: 日期＋时间 time: 时间</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>hourRange</td>\n<td>Number</td>\n<td>1</td>\n<td>小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minuteRange</td>\n<td>Number</td>\n<td>1</td>\n<td>分可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>secondRange</td>\n<td>Number</td>\n<td>1</td>\n<td>秒可选值设置（例如：值为 20 时，分可选值为 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>btnShow</td>\n<td>boolean</td>\n<td>无</td>\n<td>是否显示日历后面的按钮</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>inputClass</td>\n<td>Array</td>\n<td>无</td>\n<td>日历input输入框的样式，class名字</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 112 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(113)
-	__vue_script__ = __webpack_require__(115)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\select.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(199)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-6e256a39/select.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 113 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(114);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./select.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./select.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 114 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".select-demo {\n  width: 200px;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 115 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _vue = __webpack_require__(5);
-
-	var _vue2 = _interopRequireDefault(_vue);
-
-	var _jsonp = __webpack_require__(116);
-
-	var _jsonp2 = _interopRequireDefault(_jsonp);
-
-	var _index = __webpack_require__(120);
-
-	var _index2 = _interopRequireDefault(_index);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	_vue2.default.partial('customOptionPartial', '<p><i class={{item}}></i> - {{item}}</p>');
-	_vue2.default.partial('optgroupPartial', '<span>test - {{option|json}}</span>');
-	exports.default = {
-	    data: function data() {
-	        return {
-	            dataSource: [{
-	                name: 'jake',
-	                label: 'jake',
-	                text: '测试1',
-	                disable: true
-	            }, {
-	                name: 2,
-	                label: 2,
-	                text: '测试2'
-	            }, {
-	                name: 3,
-	                label: 3,
-	                text: '测试3'
-	            }, {
-	                name: 4,
-	                label: 4,
-	                text: '测试4'
-	            }],
-	            dataSourceDisable: [{
-	                name: 'jake',
-	                label: 'jake',
-	                text: '测试1',
-	                disable: true
-	            }, {
-	                name: 2,
-	                label: 2,
-	                text: '测试2'
-	            }, {
-	                name: 3,
-	                label: 3,
-	                text: '测试3'
-	            }, {
-	                name: 4,
-	                label: 4,
-	                text: '测试4'
-	            }],
-	            dataSource2: ['js', 'python', 'java', 'ruby', 'markdown', 'php', 'css', 'less'],
-	            asyncSearchSource: [],
-	            serverSearchSource: [],
-	            serverSearchValue: '',
-	            localSearchSource: ['北京', '南京', '天津', '上海', '静安', '刘安', '安徽', '南充', '广州', '西宁', 'angular', 'vue', 'test', 'fis', 'node', 'express', 'koa', 'connect'],
-	            localSearchValue: '',
-	            localSearchResult: '',
-	            optgroupDefaultValue: '1',
-	            optgroupSource: [{
-	                name: 'group 1',
-	                options: ['1', '2', '3']
-	            }, {
-	                name: 'group 2',
-	                options: ['11', '12', '13']
-	            }],
-	            optgroupSource2: [{
-	                name: 'group 1',
-	                options: [{
-	                    name: 'name1',
-	                    label: 1,
-	                    text: '测试1',
-	                    disable: true
-	                }, {
-	                    name: 'name2',
-	                    label: 2,
-	                    text: '测试2'
-	                }, {
-	                    name: 'name3',
-	                    label: 3,
-	                    text: '测试3'
-	                }, {
-	                    name: 'name4',
-	                    label: 4,
-	                    text: '测试4'
-	                }]
-	            }],
-	            optgroupValue: '',
-	            multipleDefaultValue: ['java', 'ruby'],
-	            multipleDefaultValue2: [2, 4],
-	            value: '',
-	            value2: '',
-	            disable: true,
-	            defaultValue: 'css',
-	            closeAfterSelect: true,
-
-	            partialSource: ['glyphicon glyphicon-envelope', 'glyphicon glyphicon-heart', 'glyphicon glyphicon-music', 'glyphicon glyphicon-user', 'glyphicon glyphicon-road'],
-
-	            selectProvinceValue: '',
-	            selectCityValue: '',
-	            provinceData: ['浙江', '江苏'],
-	            selectCityData: [],
-	            cityData: {
-	                浙江: ['杭州', '宁波', '温州'],
-	                江苏: ['南京', '苏州', '镇江']
-	            }
-	        };
-	    },
-
-	    watch: {
-	        'selectProvinceValue': function selectProvinceValue(province) {
-	            this.selectCityData = this.cityData[province] || null;
-	            this.selectCityValue = '';
-	        }
-	    },
-	    components: {
-	        'xcui-select': _index2.default
-	    },
-	    created: function created() {
-	        var me = this;
-	        setTimeout(function () {
-	            me.optgroupDefaultValue = '11';
-	        }, 1000);
-	    },
-
-	    methods: {
-	        selectChange: function selectChange(v) {
-	            this.value = v;
-	        },
-	        selectChange2: function selectChange2(v) {
-	            this.value2 = v;
-	        },
-	        reRenderLabel: function reRenderLabel(item) {
-	            return item.text + ' - ' + item.name;
-	        },
-	        reRender: function reRender(item) {
-	            return '' + item;
-	        },
-	        onSelect: function onSelect(_ref) {
-	            var name = _ref.name;
-	        },
-	        onSelect2: function onSelect2(value) {
-	            this.defaultValue = value;
-	        },
-	        provinceChange: function provinceChange(value) {
-	            this.selectProvinceValue = value;
-	        },
-	        cityChange: function cityChange(value) {
-	            this.selectCityValue = value;
-	        },
-	        searchChange: function searchChange(v) {
-	            this.localSearchValue = v;
-	        },
-	        localSearchChange: function localSearchChange(value) {
-	            this.localSearchResult = value;
-	        },
-	        asyncSearchChange: function asyncSearchChange(v) {
-	            var emails = ['gmail.com', '163.com', 'qq.com'];
-	            if (v && v.indexOf('@') < 1) {
-	                this.asyncSearchSource = emails.map(function (item) {
-	                    return v + '@' + item;
-	                });
-	            } else {
-	                this.asyncSearchSource = [];
-	            }
-	        },
-	        asyncSearchOnChange: function asyncSearchOnChange(v) {
-	            console.log('asycn select:' + v);
-	        },
-	        serverSearchChange: function serverSearchChange(v) {
-	            var me = this;
-	            (0, _jsonp2.default)('http://suggest.taobao.com/sug?code=utf-8&q=' + v, function (err, d) {
-	                if (err) {
-	                    me.serverSearchSource = [];
-	                } else {
-	                    me.serverSearchSource = d.result.map(function (v) {
-	                        return v[0];
-	                    });
-	                }
-	            });
-	        },
-	        serverSearchOnChange: function serverSearchOnChange(v) {
-	            this.serverSearchValue = v;
-	        },
-	        optgroupOnChange: function optgroupOnChange(value, groupIndex, valueIndex) {
-	            console.log('optgroupOnChange: ', value, 'groupIndex:', groupIndex, 'valueIndex:', valueIndex);
-	        },
-	        optgroupOnChange2: function optgroupOnChange2(value, groupIndex, valueIndex) {
-	            console.log('optgroupOnChange2: ', value, 'groupIndex:', groupIndex, 'valueIndex:', valueIndex);
-	        },
-	        multipleOnChange: function multipleOnChange(v) {
-	            console.log('multipleOnChange', v);
-	        },
-	        multipleOnRemove: function multipleOnRemove(v) {
-	            console.log('multipleOnRemove', v);
-	        }
-	    }
-	};
-
-/***/ },
-/* 116 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Module dependencies
-	 */
-
-	var debug = __webpack_require__(117)('jsonp');
-
-	/**
-	 * Module exports.
-	 */
-
-	module.exports = jsonp;
-
-	/**
-	 * Callback index.
-	 */
-
-	var count = 0;
-
-	/**
-	 * Noop function.
-	 */
-
-	function noop(){}
-
-	/**
-	 * JSONP handler
-	 *
-	 * Options:
-	 *  - param {String} qs parameter (`callback`)
-	 *  - prefix {String} qs parameter (`__jp`)
-	 *  - name {String} qs parameter (`prefix` + incr)
-	 *  - timeout {Number} how long after a timeout error is emitted (`60000`)
-	 *
-	 * @param {String} url
-	 * @param {Object|Function} optional options / callback
-	 * @param {Function} optional callback
-	 */
-
-	function jsonp(url, opts, fn){
-	  if ('function' == typeof opts) {
-	    fn = opts;
-	    opts = {};
-	  }
-	  if (!opts) opts = {};
-
-	  var prefix = opts.prefix || '__jp';
-
-	  // use the callback name that was passed if one was provided.
-	  // otherwise generate a unique name by incrementing our counter.
-	  var id = opts.name || (prefix + (count++));
-
-	  var param = opts.param || 'callback';
-	  var timeout = null != opts.timeout ? opts.timeout : 60000;
-	  var enc = encodeURIComponent;
-	  var target = document.getElementsByTagName('script')[0] || document.head;
-	  var script;
-	  var timer;
-
-
-	  if (timeout) {
-	    timer = setTimeout(function(){
-	      cleanup();
-	      if (fn) fn(new Error('Timeout'));
-	    }, timeout);
-	  }
-
-	  function cleanup(){
-	    if (script.parentNode) script.parentNode.removeChild(script);
-	    window[id] = noop;
-	    if (timer) clearTimeout(timer);
-	  }
-
-	  function cancel(){
-	    if (window[id]) {
-	      cleanup();
-	    }
-	  }
-
-	  window[id] = function(data){
-	    debug('jsonp got', data);
-	    cleanup();
-	    if (fn) fn(null, data);
-	  };
-
-	  // add qs component
-	  url += (~url.indexOf('?') ? '&' : '?') + param + '=' + enc(id);
-	  url = url.replace('?&', '?');
-
-	  debug('jsonp req "%s"', url);
-
-	  // create script
-	  script = document.createElement('script');
-	  script.src = url;
-	  target.parentNode.insertBefore(script, target);
-
-	  return cancel;
-	}
-
-
-/***/ },
-/* 117 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * This is the web browser implementation of `debug()`.
-	 *
-	 * Expose `debug()` as the module.
-	 */
-
-	exports = module.exports = __webpack_require__(118);
-	exports.log = log;
-	exports.formatArgs = formatArgs;
-	exports.save = save;
-	exports.load = load;
-	exports.useColors = useColors;
-
-	/**
-	 * Use chrome.storage.local if we are in an app
-	 */
-
-	var storage;
-
-	if (typeof chrome !== 'undefined' && typeof chrome.storage !== 'undefined')
-	  storage = chrome.storage.local;
-	else
-	  storage = localstorage();
-
-	/**
-	 * Colors.
-	 */
-
-	exports.colors = [
-	  'lightseagreen',
-	  'forestgreen',
-	  'goldenrod',
-	  'dodgerblue',
-	  'darkorchid',
-	  'crimson'
-	];
-
-	/**
-	 * Currently only WebKit-based Web Inspectors, Firefox >= v31,
-	 * and the Firebug extension (any Firefox version) are known
-	 * to support "%c" CSS customizations.
-	 *
-	 * TODO: add a `localStorage` variable to explicitly enable/disable colors
-	 */
-
-	function useColors() {
-	  // is webkit? http://stackoverflow.com/a/16459606/376773
-	  return ('WebkitAppearance' in document.documentElement.style) ||
-	    // is firebug? http://stackoverflow.com/a/398120/376773
-	    (window.console && (console.firebug || (console.exception && console.table))) ||
-	    // is firefox >= v31?
-	    // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
-	    (navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31);
-	}
-
-	/**
-	 * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
-	 */
-
-	exports.formatters.j = function(v) {
-	  return JSON.stringify(v);
-	};
-
-
-	/**
-	 * Colorize log arguments if enabled.
-	 *
-	 * @api public
-	 */
-
-	function formatArgs() {
-	  var args = arguments;
-	  var useColors = this.useColors;
-
-	  args[0] = (useColors ? '%c' : '')
-	    + this.namespace
-	    + (useColors ? ' %c' : ' ')
-	    + args[0]
-	    + (useColors ? '%c ' : ' ')
-	    + '+' + exports.humanize(this.diff);
-
-	  if (!useColors) return args;
-
-	  var c = 'color: ' + this.color;
-	  args = [args[0], c, 'color: inherit'].concat(Array.prototype.slice.call(args, 1));
-
-	  // the final "%c" is somewhat tricky, because there could be other
-	  // arguments passed either before or after the %c, so we need to
-	  // figure out the correct index to insert the CSS into
-	  var index = 0;
-	  var lastC = 0;
-	  args[0].replace(/%[a-z%]/g, function(match) {
-	    if ('%%' === match) return;
-	    index++;
-	    if ('%c' === match) {
-	      // we only are interested in the *last* %c
-	      // (the user may have provided their own)
-	      lastC = index;
-	    }
-	  });
-
-	  args.splice(lastC, 0, c);
-	  return args;
-	}
-
-	/**
-	 * Invokes `console.log()` when available.
-	 * No-op when `console.log` is not a "function".
-	 *
-	 * @api public
-	 */
-
-	function log() {
-	  // this hackery is required for IE8/9, where
-	  // the `console.log` function doesn't have 'apply'
-	  return 'object' === typeof console
-	    && console.log
-	    && Function.prototype.apply.call(console.log, console, arguments);
-	}
-
-	/**
-	 * Save `namespaces`.
-	 *
-	 * @param {String} namespaces
-	 * @api private
-	 */
-
-	function save(namespaces) {
-	  try {
-	    if (null == namespaces) {
-	      storage.removeItem('debug');
-	    } else {
-	      storage.debug = namespaces;
-	    }
-	  } catch(e) {}
-	}
-
-	/**
-	 * Load `namespaces`.
-	 *
-	 * @return {String} returns the previously persisted debug modes
-	 * @api private
-	 */
-
-	function load() {
-	  var r;
-	  try {
-	    r = storage.debug;
-	  } catch(e) {}
-	  return r;
-	}
-
-	/**
-	 * Enable namespaces listed in `localStorage.debug` initially.
-	 */
-
-	exports.enable(load());
-
-	/**
-	 * Localstorage attempts to return the localstorage.
-	 *
-	 * This is necessary because safari throws
-	 * when a user disables cookies/localstorage
-	 * and you attempt to access it.
-	 *
-	 * @return {LocalStorage}
-	 * @api private
-	 */
-
-	function localstorage(){
-	  try {
-	    return window.localStorage;
-	  } catch (e) {}
-	}
-
-
-/***/ },
-/* 118 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * This is the common logic for both the Node.js and web browser
-	 * implementations of `debug()`.
-	 *
-	 * Expose `debug()` as the module.
-	 */
-
-	exports = module.exports = debug;
-	exports.coerce = coerce;
-	exports.disable = disable;
-	exports.enable = enable;
-	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(119);
-
-	/**
-	 * The currently active debug mode names, and names to skip.
-	 */
-
-	exports.names = [];
-	exports.skips = [];
-
-	/**
-	 * Map of special "%n" handling functions, for the debug "format" argument.
-	 *
-	 * Valid key names are a single, lowercased letter, i.e. "n".
-	 */
-
-	exports.formatters = {};
-
-	/**
-	 * Previously assigned color.
-	 */
-
-	var prevColor = 0;
-
-	/**
-	 * Previous log timestamp.
-	 */
-
-	var prevTime;
-
-	/**
-	 * Select a color.
-	 *
-	 * @return {Number}
-	 * @api private
-	 */
-
-	function selectColor() {
-	  return exports.colors[prevColor++ % exports.colors.length];
-	}
-
-	/**
-	 * Create a debugger with the given `namespace`.
-	 *
-	 * @param {String} namespace
-	 * @return {Function}
-	 * @api public
-	 */
-
-	function debug(namespace) {
-
-	  // define the `disabled` version
-	  function disabled() {
-	  }
-	  disabled.enabled = false;
-
-	  // define the `enabled` version
-	  function enabled() {
-
-	    var self = enabled;
-
-	    // set `diff` timestamp
-	    var curr = +new Date();
-	    var ms = curr - (prevTime || curr);
-	    self.diff = ms;
-	    self.prev = prevTime;
-	    self.curr = curr;
-	    prevTime = curr;
-
-	    // add the `color` if not set
-	    if (null == self.useColors) self.useColors = exports.useColors();
-	    if (null == self.color && self.useColors) self.color = selectColor();
-
-	    var args = Array.prototype.slice.call(arguments);
-
-	    args[0] = exports.coerce(args[0]);
-
-	    if ('string' !== typeof args[0]) {
-	      // anything else let's inspect with %o
-	      args = ['%o'].concat(args);
-	    }
-
-	    // apply any `formatters` transformations
-	    var index = 0;
-	    args[0] = args[0].replace(/%([a-z%])/g, function(match, format) {
-	      // if we encounter an escaped % then don't increase the array index
-	      if (match === '%%') return match;
-	      index++;
-	      var formatter = exports.formatters[format];
-	      if ('function' === typeof formatter) {
-	        var val = args[index];
-	        match = formatter.call(self, val);
-
-	        // now we need to remove `args[index]` since it's inlined in the `format`
-	        args.splice(index, 1);
-	        index--;
-	      }
-	      return match;
-	    });
-
-	    if ('function' === typeof exports.formatArgs) {
-	      args = exports.formatArgs.apply(self, args);
-	    }
-	    var logFn = enabled.log || exports.log || console.log.bind(console);
-	    logFn.apply(self, args);
-	  }
-	  enabled.enabled = true;
-
-	  var fn = exports.enabled(namespace) ? enabled : disabled;
-
-	  fn.namespace = namespace;
-
-	  return fn;
-	}
-
-	/**
-	 * Enables a debug mode by namespaces. This can include modes
-	 * separated by a colon and wildcards.
-	 *
-	 * @param {String} namespaces
-	 * @api public
-	 */
-
-	function enable(namespaces) {
-	  exports.save(namespaces);
-
-	  var split = (namespaces || '').split(/[\s,]+/);
-	  var len = split.length;
-
-	  for (var i = 0; i < len; i++) {
-	    if (!split[i]) continue; // ignore empty strings
-	    namespaces = split[i].replace(/\*/g, '.*?');
-	    if (namespaces[0] === '-') {
-	      exports.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
-	    } else {
-	      exports.names.push(new RegExp('^' + namespaces + '$'));
-	    }
-	  }
-	}
-
-	/**
-	 * Disable debug output.
-	 *
-	 * @api public
-	 */
-
-	function disable() {
-	  exports.enable('');
-	}
-
-	/**
-	 * Returns true if the given mode name is enabled, false otherwise.
-	 *
-	 * @param {String} name
-	 * @return {Boolean}
-	 * @api public
-	 */
-
-	function enabled(name) {
-	  var i, len;
-	  for (i = 0, len = exports.skips.length; i < len; i++) {
-	    if (exports.skips[i].test(name)) {
-	      return false;
-	    }
-	  }
-	  for (i = 0, len = exports.names.length; i < len; i++) {
-	    if (exports.names[i].test(name)) {
-	      return true;
-	    }
-	  }
-	  return false;
-	}
-
-	/**
-	 * Coerce `val`.
-	 *
-	 * @param {Mixed} val
-	 * @return {Mixed}
-	 * @api private
-	 */
-
-	function coerce(val) {
-	  if (val instanceof Error) return val.stack || val.message;
-	  return val;
-	}
-
-
-/***/ },
-/* 119 */
-/***/ function(module, exports) {
-
-	/**
-	 * Helpers.
-	 */
-
-	var s = 1000;
-	var m = s * 60;
-	var h = m * 60;
-	var d = h * 24;
-	var y = d * 365.25;
-
-	/**
-	 * Parse or format the given `val`.
-	 *
-	 * Options:
-	 *
-	 *  - `long` verbose formatting [false]
-	 *
-	 * @param {String|Number} val
-	 * @param {Object} options
-	 * @return {String|Number}
-	 * @api public
-	 */
-
-	module.exports = function(val, options){
-	  options = options || {};
-	  if ('string' == typeof val) return parse(val);
-	  return options.long
-	    ? long(val)
-	    : short(val);
-	};
-
-	/**
-	 * Parse the given `str` and return milliseconds.
-	 *
-	 * @param {String} str
-	 * @return {Number}
-	 * @api private
-	 */
-
-	function parse(str) {
-	  var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(str);
-	  if (!match) return;
-	  var n = parseFloat(match[1]);
-	  var type = (match[2] || 'ms').toLowerCase();
-	  switch (type) {
-	    case 'years':
-	    case 'year':
-	    case 'yrs':
-	    case 'yr':
-	    case 'y':
-	      return n * y;
-	    case 'days':
-	    case 'day':
-	    case 'd':
-	      return n * d;
-	    case 'hours':
-	    case 'hour':
-	    case 'hrs':
-	    case 'hr':
-	    case 'h':
-	      return n * h;
-	    case 'minutes':
-	    case 'minute':
-	    case 'mins':
-	    case 'min':
-	    case 'm':
-	      return n * m;
-	    case 'seconds':
-	    case 'second':
-	    case 'secs':
-	    case 'sec':
-	    case 's':
-	      return n * s;
-	    case 'milliseconds':
-	    case 'millisecond':
-	    case 'msecs':
-	    case 'msec':
-	    case 'ms':
-	      return n;
-	  }
-	}
-
-	/**
-	 * Short format for `ms`.
-	 *
-	 * @param {Number} ms
-	 * @return {String}
-	 * @api private
-	 */
-
-	function short(ms) {
-	  if (ms >= d) return Math.round(ms / d) + 'd';
-	  if (ms >= h) return Math.round(ms / h) + 'h';
-	  if (ms >= m) return Math.round(ms / m) + 'm';
-	  if (ms >= s) return Math.round(ms / s) + 's';
-	  return ms + 'ms';
-	}
-
-	/**
-	 * Long format for `ms`.
-	 *
-	 * @param {Number} ms
-	 * @return {String}
-	 * @api private
-	 */
-
-	function long(ms) {
-	  return plural(ms, d, 'day')
-	    || plural(ms, h, 'hour')
-	    || plural(ms, m, 'minute')
-	    || plural(ms, s, 'second')
-	    || ms + ' ms';
-	}
-
-	/**
-	 * Pluralization helper.
-	 */
-
-	function plural(ms, n, name) {
-	  if (ms < n) return;
-	  if (ms < n * 1.5) return Math.floor(ms / n) + ' ' + name;
-	  return Math.ceil(ms / n) + ' ' + name + 's';
-	}
-
-
-/***/ },
-/* 120 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(121)
-	__vue_script__ = __webpack_require__(123)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\select\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(198)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-40b341b7/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 121 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(122);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 122 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".xcui-select {\n  display: inline-block;\n  box-sizing: content-box;\n  position: relative;\n  vertical-align: middle;\n  color: #666;\n  font-size: 14px;\n  z-index: 10;\n}\n.xcui-select-open .xcui-select-selection {\n  border-color: #66afe9 !important;\n  outline: 0;\n  box-shadow: 0 0 0 2px #2db7f533;\n}\n.xcui-select.disabled .xcui-select-selection {\n  color: #ccc;\n  background: #f7f7f7;\n  cursor: not-allowed;\n}\n.xcui-select-selection {\n  outline: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  box-sizing: border-box;\n  display: block;\n  background-color: #fff;\n  border-radius: 4px;\n  border: 1px solid #ccc;\n  padding: 2px 6px;\n  -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n}\n.xcui-select-selection-rendered {\n  height: 26px;\n  display: block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  /*padding-left: 8px;*/\n  padding-right: 24px;\n  line-height: 26px;\n}\n.xcui-select-selection-text {\n  display: block;\n  font-size: 14px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.xcui-select-menu-dropdown {\n  background-color: #fff;\n  /*box-shadow: 0 1px 6px #63636333;*/\n  border-radius: 4px;\n  box-sizing: border-box;\n  z-index: 1050;\n  /*left: -9999px;*/\n  /*top: -9999px;*/\n  position: absolute;\n  top: 100%;\n  width: 100%;\n  margin-top: 2px;\n  outline: none;\n  overflow: hidden;\n  font-size: 12px;\n  max-height: 200px;\n  border: 1px solid rgba(0, 0, 0, 0.15);\n  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);\n  z-index: 1;\n}\n.xcui-select-menu,\n.xcui-select-menu-group {\n  outline: none;\n  margin-bottom: 0;\n  padding-left: 0;\n  list-style: none;\n  max-height: 200px;\n  overflow: auto;\n}\n.xcui-select-menu-item,\n.xcui-select-menu-group-item {\n  position: relative;\n  display: block;\n  padding: 7px 15px;\n  font-weight: 400;\n  color: #262626;\n  cursor: pointer;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  -webkit-transition: background .3s ease;\n  transition: background .3s ease;\n}\n.xcui-select-menu-item-select,\n.xcui-select-menu-group-item-select {\n  font-weight: 500;\n  color: #666;\n  background-color: #f7f7f7;\n}\n.xcui-select-menu-item.disabled,\n.xcui-select-menu-group-item.disabled {\n  color: #ccc !important;\n  cursor: not-allowed !important;\n}\n.xcui-select-menu-item-selected,\n.xcui-select-menu-group-item-selected {\n  background-color: #337ab7;\n  font-weight: 700;\n  color: #fff;\n}\n.xcui-select-menu-item-selected:after,\n.xcui-select-menu-group-item-selected:after {\n  font-family: 'Glyphicons Halflings';\n  content: \"\\E013\";\n  position: absolute;\n  right: 6px;\n  top: 6px;\n  font-size: 12px;\n}\n.xcui-select-menu-item-selected:hover,\n.xcui-select-menu-group-item-selected:hover {\n  background-color: #f7f7f7;\n  font-weight: 700;\n  color: #666;\n}\n.xcui-select-menu-item:hover,\n.xcui-select-menu-group-item:hover {\n  background-color: #f5f5f5;\n}\n.xcui-select-menu-item-partial,\n.xcui-select-menu-group-item-partial {\n  background: red;\n}\n.xcui-select-menu-item-key,\n.xcui-select-menu-group-item-key {\n  background-color: #f5f5f5;\n}\n.xcui-select-menu-group-title {\n  color: #999;\n  line-height: 1.5;\n  padding: 8px 12px;\n}\n.xcui-select-menu-group-item {\n  padding-left: 20px;\n}\n.xcui-select-menu-group-item-selected {\n  background-color: #337ab7;\n  font-weight: 700;\n  color: #fff;\n}\n.xcui-select-menu-group-item-selected:after {\n  font-family: 'Glyphicons Halflings';\n  content: \"\\E013\";\n  position: absolute;\n  right: 6px;\n  top: 6px;\n  font-size: 12px;\n}\n.xcui-select-menu-group-item-selected:hover {\n  background-color: #f7f7f7;\n  font-weight: 700;\n  color: #666;\n}\n.xcui-select-menu-group > ul {\n  margin: 0;\n  padding: 0;\n}\n.xcui-select-search-input {\n  width: 100%;\n  border: 0;\n  font-size: 100%;\n  height: 100%;\n  outline: 0;\n  border-radius: 6px;\n}\n.xcui-select .glyphicon {\n  font-size: 12px;\n}\n.xcui-select .xcui-select-arrow {\n  position: absolute;\n  right: 10px;\n  top: 10px;\n  color: #ccc;\n}\n.xcui-select > ul > li > a {\n  padding: 0;\n  background-color: #fff;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 123 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _typeof2 = __webpack_require__(124);
-
-	var _typeof3 = _interopRequireDefault(_typeof2);
-
-	var _clone = __webpack_require__(192);
-
-	var _clone2 = _interopRequireDefault(_clone);
-
-	var _fuzzysearch = __webpack_require__(197);
-
-	var _fuzzysearch2 = _interopRequireDefault(_fuzzysearch);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    name: 'xcui-select',
-	    props: {
-	        className: {
-	            type: String
-	        },
-
-	        selected: [String, Array],
-
-	        placeholder: {
-	            type: String
-	        },
-
-	        disabled: {
-	            type: Boolean,
-	            default: false
-	        },
-
-	        showSearch: {
-	            type: Boolean,
-	            default: false
-	        },
-
-	        clearOnSelect: {
-	            type: Boolean,
-	            default: false
-	        },
-
-	        searchEmptyText: {
-	            type: String,
-	            default: ''
-	        },
-
-	        optgroup: {
-	            type: Boolean,
-	            default: false
-	        },
-
-	        optionPartial: {
-	            type: String,
-	            default: ''
-	        },
-
-	        customLabel: {
-	            type: Function
-	        },
-
-	        options: {
-	            type: Array
-	        },
-
-	        multiple: {
-	            type: Boolean,
-	            default: false
-	        },
-	        multipleMax: {
-	            type: Number
-	        },
-
-	        label: {
-	            type: String,
-	            default: ''
-	        },
-
-	        closeAfterSelect: {
-	            type: Boolean,
-	            default: true
-	        }
-	    },
-	    data: function data() {
-	        return {
-	            searchValue: '',
-	            isOpen: false,
-	            selectIndex: 0,
-	            value: this.selected ? (0, _clone2.default)(this.selected) : this.multiple ? [] : null
-	        };
-	    },
-
-	    methods: {
-	        activate: function activate() {
-	            if (this.isOpen || this.disabled) {
-	                return;
-	            }
-	            this.isOpen = true;
-	            if (this.showSearch) {
-	                if (this.clearOnSelect) {
-	                    this.searchValue = '';
-	                    this.options = [];
-	                }
-	                this.$els.search.focus();
-	            } else {
-	                this.$el.focus();
-	            }
-	        },
-	        deactivate: function deactivate() {
-	            if (!this.isOpen) {
-	                return;
-	            }
-	            if (this.showSearch) {
-	                this.$els.search.blur();
-	                this.adjustSearch();
-	            }
-	            this.isOpen = false;
-	        },
-	        toggle: function toggle(key) {
-	            if (!this.isOpen) {
-	                this.activate();
-	            } else {
-	                this.deactivate();
-	            }
-	        },
-	        getOptionLabel: function getOptionLabel(option) {
-	            if (option !== null && (typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
-	                if (this.customLabel) {
-	                    return this.customLabel(option);
-	                } else if (this.label && option[this.label]) {
-	                    return option[this.label];
-	                }
-	                return option.label;
-	            }
-	            return option;
-	        },
-	        optgroupSelect: function optgroupSelect(parentIndex, index, option) {
-	            if (this.selectIndex === parentIndex + '-' + index && this.value === option) {
-	                return;
-	            }
-	            this.value = option;
-	            this.selectIndex = parentIndex + '-' + index;
-	            this.$emit('change', (0, _clone2.default)(this.value), parentIndex, index);
-	            this.$emit('select', (0, _clone2.default)(this.value), parentIndex, index);
-	            this.closeAfterSelect && this.deactivate();
-	        },
-	        select: function select(option) {
-	            var isSelected = this.isSelected(option);
-	            if (!option || option.disable) {
-	                return;
-	            }
-	            if (this.multiple) {
-	                var optionValue = option;
-	                if ((typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
-	                    optionValue = option[this.label] || option.label;
-	                }
-	                if (isSelected) {
-	                    this.removeOption(optionValue);
-	                } else {
-	                    if (this.multipleMax > this.value.length) {
-	                        this.value.push(optionValue);
-	                    }
-	                }
-	            } else {
-	                if (isSelected) {
-	                    return;
-	                }
-	                this.value = isSelected ? null : option;
-	            }
-	            this.$emit('change', (0, _clone2.default)(this.value));
-	            this.$emit('select', (0, _clone2.default)(this.value));
-	            this.closeAfterSelect && this.deactivate();
-	        },
-	        isSelected: function isSelected(option, groupIndex, index) {
-	            var me = this;
-	            if (!this.value) {
-	                return false;
-	            }
-	            if (this.optgroup) {
-	                return this.selectIndex === groupIndex + '-' + index;
-	            }
-	            if (this.multiple) {
-	                if ((typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
-	                    return this.value.indexOf(option[me.label] || option.label) > -1;
-	                }
-	                return this.value.indexOf(option) > -1;
-	            }
-	            if (this.showSearch) {
-	                if ((typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
-	                    return this.searchValue === option[me.label];
-	                }
-	                return this.searchValue === option;
-	            }
-	            if (this.value === option && !option.disable) {
-	                return true;
-	            }
-	            return false;
-	        },
-	        removeOption: function removeOption(option) {
-	            if (this.value.length === 0) {
-	                return;
-	            }
-	            if ((typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
-	                this.values.map(function (e) {});
-	            }
-	            this.value.$remove(option);
-	            this.$emit('remove', (0, _clone2.default)(option));
-	        },
-	        indexSet: function indexSet(parentIndex, index) {
-	            if (this.optgroup) {
-	                this.selectIndex = parentIndex + '-' + index;
-	                return;
-	            }
-	            this.selectIndex = index;
-	        },
-	        enterSearchValue: function enterSearchValue() {
-	            if (this.filteredOptions.length > 0) {
-	                this.select(this.filteredOptions[this.selectIndex]);
-	            }
-	            this.resetSelectIndex();
-	        },
-	        keyNext: function keyNext() {
-	            var filterLen = this.filteredOptions.length;
-	            if (this.selectIndex < filterLen - 1) {
-	                this.selectIndex++;
-	            }
-	            this.resetSearchScrollTop();
-	        },
-	        keyPrev: function keyPrev() {
-	            if (this.selectIndex > 0) {
-	                this.selectIndex--;
-	            }
-	            this.resetSearchScrollTop();
-	        },
-	        resetSearchScrollTop: function resetSearchScrollTop() {
-	            var index = this.selectIndex;
-	            var scrollTop = this.$els.list.scrollTop;
-	            var _getDropDownHeight = this.getDropDownHeight,
-	                itemHeight = _getDropDownHeight.itemHeight,
-	                listHeight = _getDropDownHeight.listHeight;
-
-	            var listViewLen = Math.floor(listHeight / itemHeight);
-	            var indexPos = index * itemHeight;
-	            if (scrollTop <= indexPos - listViewLen * itemHeight) {
-	                this.$els.list.scrollTop = indexPos - (listViewLen - 1) * itemHeight;
-	            }
-	            if (scrollTop >= indexPos) {
-	                this.$els.list.scrollTop = indexPos;
-	            }
-	        },
-	        resetSelectIndex: function resetSelectIndex() {
-	            this.selectIndex = 0;
-	            this.closeAfterSelect && this.deactivate();
-	        },
-	        adjustSearch: function adjustSearch() {
-	            if (!this.showSearch) {
-	                return;
-	            }
-	            this.searchValue = this.value ? this.currentOptionLabel : '';
-	        },
-	        reset: function reset() {
-	            this.selected = '';
-	            this.value = null;
-	        }
-	    },
-	    computed: {
-	        getWrapCls: function getWrapCls() {
-	            var me = this;
-	            var cls = ['xcui-select'];
-	            if (this.disabled) {
-	                cls.push('disabled');
-	            }
-	            if (this.isOpen) {
-	                cls.push('xcui-select-open');
-	            }
-	            if (this.className) {
-	                cls.push(me.className);
-	            }
-	            return cls.join(' ');
-	        },
-	        filteredOptions: function filteredOptions() {
-	            var value = this.searchValue;
-	            var me = this;
-	            if (this.showSearch && this.options.length) {
-	                return this.options.filter(function (item) {
-	                    if (typeof item !== 'string') {
-	                        return (0, _fuzzysearch2.default)(value, item[me.label || 'label']);
-	                    }
-	                    return (0, _fuzzysearch2.default)(value, item);
-	                });
-	            }
-	            return this.options || [];
-	        },
-	        currentOptionLabel: function currentOptionLabel() {
-	            if (!this.value) {
-	                return this.placeholder;
-	            }
-	            if (this.multiple) {
-	                return this.value.join(',');
-	            }
-	            if (typeof this.value === 'string') {
-	                return this.value;
-	            } else if (this.label) {
-	                return this.value[this.label];
-	            }
-	            return this.value.label || '';
-	        },
-	        getDropDownHeight: function getDropDownHeight() {
-	            var list = this.$els.list;
-	            var item = list.children[0];
-	            var itemHeight = item.currentStyle ? item.currentStyle.height : getComputedStyle(item, false).height;
-	            var listHeight = list.currentStyle ? list.currentStyle.height : getComputedStyle(list, false).height;
-	            return {
-	                listHeight: listHeight.replace('px', ''),
-	                itemHeight: itemHeight.replace('px', '')
-	            };
-	        },
-	        optgroupDefaultIndex: function optgroupDefaultIndex() {
-	            var me = this;
-	            var selected = this.selected;
-	            var indexs = [];
-	            this.options.forEach(function (item, index) {
-	                item.options.forEach(function (subItem, subIndex) {
-	                    if (typeof subItem === 'string' && selected === subItem) {
-	                        indexs = [index, subIndex];
-	                        return;
-	                    }
-	                    if (subItem[me.label] && subItem[me.label] === selected) {
-	                        if (subItem[me.label].disable) {
-	                            return;
-	                        }
-	                        indexs = [index, subIndex];
-	                        return;
-	                    }
-	                });
-	            });
-	            return indexs;
-	        }
-	    },
-	    watch: {
-	        'options': function options() {
-	            if (this.showSearch) {
-	                return;
-	            }
-	            this.reset();
-	        },
-	        'filteredOptions': function filteredOptions() {
-	            var filterLen = this.filteredOptions.length;
-	            if (this.selectIndex >= filterLen) {
-	                this.selectIndex = filterLen > 0 ? filterLen - 1 : 0;
-	            }
-	        },
-	        'searchValue': function searchValue(oldVal, newVal) {
-	            if (this.searchValue !== this.currentOptionLabel) {
-	                this.$emit('search-change', this.searchValue);
-	            }
-	        },
-	        'selected': function selected() {
-	            if (this.optgroup) {
-	                this.value = this.selected;
-	                var indexs = this.optgroupDefaultIndex;
-	                this.selectIndex = indexs.join('-');
-	            } else {
-	                this.value = this.selected;
-	            }
-	        }
-	    }
-	};
-
-/***/ },
-/* 124 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _iterator = __webpack_require__(125);
+	var _iterator = __webpack_require__(32);
 
 	var _iterator2 = _interopRequireDefault(_iterator);
 
-	var _symbol = __webpack_require__(176);
+	var _symbol = __webpack_require__(83);
 
 	var _symbol2 = _interopRequireDefault(_symbol);
 
@@ -20142,28 +14735,28 @@
 	};
 
 /***/ },
-/* 125 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(126), __esModule: true };
+	module.exports = { "default": __webpack_require__(33), __esModule: true };
 
 /***/ },
-/* 126 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(127);
-	__webpack_require__(171);
-	module.exports = __webpack_require__(175).f('iterator');
+	__webpack_require__(34);
+	__webpack_require__(78);
+	module.exports = __webpack_require__(82).f('iterator');
 
 /***/ },
-/* 127 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var $at  = __webpack_require__(128)(true);
+	var $at  = __webpack_require__(35)(true);
 
 	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(131)(String, 'String', function(iterated){
+	__webpack_require__(38)(String, 'String', function(iterated){
 	  this._t = String(iterated); // target
 	  this._i = 0;                // next index
 	// 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -20178,11 +14771,11 @@
 	});
 
 /***/ },
-/* 128 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(129)
-	  , defined   = __webpack_require__(130);
+	var toInteger = __webpack_require__(36)
+	  , defined   = __webpack_require__(37);
 	// true  -> String#at
 	// false -> String#codePointAt
 	module.exports = function(TO_STRING){
@@ -20200,7 +14793,7 @@
 	};
 
 /***/ },
-/* 129 */
+/* 36 */
 /***/ function(module, exports) {
 
 	// 7.1.4 ToInteger
@@ -20211,7 +14804,7 @@
 	};
 
 /***/ },
-/* 130 */
+/* 37 */
 /***/ function(module, exports) {
 
 	// 7.2.1 RequireObjectCoercible(argument)
@@ -20221,20 +14814,20 @@
 	};
 
 /***/ },
-/* 131 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var LIBRARY        = __webpack_require__(132)
-	  , $export        = __webpack_require__(133)
-	  , redefine       = __webpack_require__(148)
-	  , hide           = __webpack_require__(138)
-	  , has            = __webpack_require__(149)
-	  , Iterators      = __webpack_require__(150)
-	  , $iterCreate    = __webpack_require__(151)
-	  , setToStringTag = __webpack_require__(167)
-	  , getPrototypeOf = __webpack_require__(169)
-	  , ITERATOR       = __webpack_require__(168)('iterator')
+	var LIBRARY        = __webpack_require__(39)
+	  , $export        = __webpack_require__(40)
+	  , redefine       = __webpack_require__(55)
+	  , hide           = __webpack_require__(45)
+	  , has            = __webpack_require__(56)
+	  , Iterators      = __webpack_require__(57)
+	  , $iterCreate    = __webpack_require__(58)
+	  , setToStringTag = __webpack_require__(74)
+	  , getPrototypeOf = __webpack_require__(76)
+	  , ITERATOR       = __webpack_require__(75)('iterator')
 	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
 	  , FF_ITERATOR    = '@@iterator'
 	  , KEYS           = 'keys'
@@ -20296,19 +14889,19 @@
 	};
 
 /***/ },
-/* 132 */
+/* 39 */
 /***/ function(module, exports) {
 
 	module.exports = true;
 
 /***/ },
-/* 133 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global    = __webpack_require__(134)
-	  , core      = __webpack_require__(135)
-	  , ctx       = __webpack_require__(136)
-	  , hide      = __webpack_require__(138)
+	var global    = __webpack_require__(41)
+	  , core      = __webpack_require__(42)
+	  , ctx       = __webpack_require__(43)
+	  , hide      = __webpack_require__(45)
 	  , PROTOTYPE = 'prototype';
 
 	var $export = function(type, name, source){
@@ -20368,7 +14961,7 @@
 	module.exports = $export;
 
 /***/ },
-/* 134 */
+/* 41 */
 /***/ function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -20377,18 +14970,18 @@
 	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
 
 /***/ },
-/* 135 */
+/* 42 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 136 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(137);
+	var aFunction = __webpack_require__(44);
 	module.exports = function(fn, that, length){
 	  aFunction(fn);
 	  if(that === undefined)return fn;
@@ -20409,7 +15002,7 @@
 	};
 
 /***/ },
-/* 137 */
+/* 44 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -20418,12 +15011,12 @@
 	};
 
 /***/ },
-/* 138 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP         = __webpack_require__(139)
-	  , createDesc = __webpack_require__(147);
-	module.exports = __webpack_require__(143) ? function(object, key, value){
+	var dP         = __webpack_require__(46)
+	  , createDesc = __webpack_require__(54);
+	module.exports = __webpack_require__(50) ? function(object, key, value){
 	  return dP.f(object, key, createDesc(1, value));
 	} : function(object, key, value){
 	  object[key] = value;
@@ -20431,15 +15024,15 @@
 	};
 
 /***/ },
-/* 139 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var anObject       = __webpack_require__(140)
-	  , IE8_DOM_DEFINE = __webpack_require__(142)
-	  , toPrimitive    = __webpack_require__(146)
+	var anObject       = __webpack_require__(47)
+	  , IE8_DOM_DEFINE = __webpack_require__(49)
+	  , toPrimitive    = __webpack_require__(53)
 	  , dP             = Object.defineProperty;
 
-	exports.f = __webpack_require__(143) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	exports.f = __webpack_require__(50) ? Object.defineProperty : function defineProperty(O, P, Attributes){
 	  anObject(O);
 	  P = toPrimitive(P, true);
 	  anObject(Attributes);
@@ -20452,17 +15045,17 @@
 	};
 
 /***/ },
-/* 140 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(141);
+	var isObject = __webpack_require__(48);
 	module.exports = function(it){
 	  if(!isObject(it))throw TypeError(it + ' is not an object!');
 	  return it;
 	};
 
 /***/ },
-/* 141 */
+/* 48 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -20470,24 +15063,24 @@
 	};
 
 /***/ },
-/* 142 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = !__webpack_require__(143) && !__webpack_require__(144)(function(){
-	  return Object.defineProperty(__webpack_require__(145)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+	module.exports = !__webpack_require__(50) && !__webpack_require__(51)(function(){
+	  return Object.defineProperty(__webpack_require__(52)('div'), 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 143 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(144)(function(){
+	module.exports = !__webpack_require__(51)(function(){
 	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 144 */
+/* 51 */
 /***/ function(module, exports) {
 
 	module.exports = function(exec){
@@ -20499,11 +15092,11 @@
 	};
 
 /***/ },
-/* 145 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(141)
-	  , document = __webpack_require__(134).document
+	var isObject = __webpack_require__(48)
+	  , document = __webpack_require__(41).document
 	  // in old IE typeof document.createElement is 'object'
 	  , is = isObject(document) && isObject(document.createElement);
 	module.exports = function(it){
@@ -20511,11 +15104,11 @@
 	};
 
 /***/ },
-/* 146 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.1 ToPrimitive(input [, PreferredType])
-	var isObject = __webpack_require__(141);
+	var isObject = __webpack_require__(48);
 	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
 	// and the second argument - flag - preferred type is a string
 	module.exports = function(it, S){
@@ -20528,7 +15121,7 @@
 	};
 
 /***/ },
-/* 147 */
+/* 54 */
 /***/ function(module, exports) {
 
 	module.exports = function(bitmap, value){
@@ -20541,13 +15134,13 @@
 	};
 
 /***/ },
-/* 148 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(138);
+	module.exports = __webpack_require__(45);
 
 /***/ },
-/* 149 */
+/* 56 */
 /***/ function(module, exports) {
 
 	var hasOwnProperty = {}.hasOwnProperty;
@@ -20556,23 +15149,23 @@
 	};
 
 /***/ },
-/* 150 */
+/* 57 */
 /***/ function(module, exports) {
 
 	module.exports = {};
 
 /***/ },
-/* 151 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var create         = __webpack_require__(152)
-	  , descriptor     = __webpack_require__(147)
-	  , setToStringTag = __webpack_require__(167)
+	var create         = __webpack_require__(59)
+	  , descriptor     = __webpack_require__(54)
+	  , setToStringTag = __webpack_require__(74)
 	  , IteratorPrototype = {};
 
 	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	__webpack_require__(138)(IteratorPrototype, __webpack_require__(168)('iterator'), function(){ return this; });
+	__webpack_require__(45)(IteratorPrototype, __webpack_require__(75)('iterator'), function(){ return this; });
 
 	module.exports = function(Constructor, NAME, next){
 	  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
@@ -20580,27 +15173,27 @@
 	};
 
 /***/ },
-/* 152 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-	var anObject    = __webpack_require__(140)
-	  , dPs         = __webpack_require__(153)
-	  , enumBugKeys = __webpack_require__(165)
-	  , IE_PROTO    = __webpack_require__(162)('IE_PROTO')
+	var anObject    = __webpack_require__(47)
+	  , dPs         = __webpack_require__(60)
+	  , enumBugKeys = __webpack_require__(72)
+	  , IE_PROTO    = __webpack_require__(69)('IE_PROTO')
 	  , Empty       = function(){ /* empty */ }
 	  , PROTOTYPE   = 'prototype';
 
 	// Create object with fake `null` prototype: use iframe Object with cleared prototype
 	var createDict = function(){
 	  // Thrash, waste and sodomy: IE GC bug
-	  var iframe = __webpack_require__(145)('iframe')
+	  var iframe = __webpack_require__(52)('iframe')
 	    , i      = enumBugKeys.length
 	    , lt     = '<'
 	    , gt     = '>'
 	    , iframeDocument;
 	  iframe.style.display = 'none';
-	  __webpack_require__(166).appendChild(iframe);
+	  __webpack_require__(73).appendChild(iframe);
 	  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
 	  // createDict = iframe.contentWindow.Object;
 	  // html.removeChild(iframe);
@@ -20627,14 +15220,14 @@
 
 
 /***/ },
-/* 153 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP       = __webpack_require__(139)
-	  , anObject = __webpack_require__(140)
-	  , getKeys  = __webpack_require__(154);
+	var dP       = __webpack_require__(46)
+	  , anObject = __webpack_require__(47)
+	  , getKeys  = __webpack_require__(61);
 
-	module.exports = __webpack_require__(143) ? Object.defineProperties : function defineProperties(O, Properties){
+	module.exports = __webpack_require__(50) ? Object.defineProperties : function defineProperties(O, Properties){
 	  anObject(O);
 	  var keys   = getKeys(Properties)
 	    , length = keys.length
@@ -20645,25 +15238,25 @@
 	};
 
 /***/ },
-/* 154 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-	var $keys       = __webpack_require__(155)
-	  , enumBugKeys = __webpack_require__(165);
+	var $keys       = __webpack_require__(62)
+	  , enumBugKeys = __webpack_require__(72);
 
 	module.exports = Object.keys || function keys(O){
 	  return $keys(O, enumBugKeys);
 	};
 
 /***/ },
-/* 155 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var has          = __webpack_require__(149)
-	  , toIObject    = __webpack_require__(156)
-	  , arrayIndexOf = __webpack_require__(159)(false)
-	  , IE_PROTO     = __webpack_require__(162)('IE_PROTO');
+	var has          = __webpack_require__(56)
+	  , toIObject    = __webpack_require__(63)
+	  , arrayIndexOf = __webpack_require__(66)(false)
+	  , IE_PROTO     = __webpack_require__(69)('IE_PROTO');
 
 	module.exports = function(object, names){
 	  var O      = toIObject(object)
@@ -20679,28 +15272,28 @@
 	};
 
 /***/ },
-/* 156 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// to indexed object, toObject with fallback for non-array-like ES3 strings
-	var IObject = __webpack_require__(157)
-	  , defined = __webpack_require__(130);
+	var IObject = __webpack_require__(64)
+	  , defined = __webpack_require__(37);
 	module.exports = function(it){
 	  return IObject(defined(it));
 	};
 
 /***/ },
-/* 157 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for non-array-like ES3 and non-enumerable old V8 strings
-	var cof = __webpack_require__(158);
+	var cof = __webpack_require__(65);
 	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
 	  return cof(it) == 'String' ? it.split('') : Object(it);
 	};
 
 /***/ },
-/* 158 */
+/* 65 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -20710,14 +15303,14 @@
 	};
 
 /***/ },
-/* 159 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// false -> Array#indexOf
 	// true  -> Array#includes
-	var toIObject = __webpack_require__(156)
-	  , toLength  = __webpack_require__(160)
-	  , toIndex   = __webpack_require__(161);
+	var toIObject = __webpack_require__(63)
+	  , toLength  = __webpack_require__(67)
+	  , toIndex   = __webpack_require__(68);
 	module.exports = function(IS_INCLUDES){
 	  return function($this, el, fromIndex){
 	    var O      = toIObject($this)
@@ -20736,21 +15329,21 @@
 	};
 
 /***/ },
-/* 160 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.15 ToLength
-	var toInteger = __webpack_require__(129)
+	var toInteger = __webpack_require__(36)
 	  , min       = Math.min;
 	module.exports = function(it){
 	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 	};
 
 /***/ },
-/* 161 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(129)
+	var toInteger = __webpack_require__(36)
 	  , max       = Math.max
 	  , min       = Math.min;
 	module.exports = function(index, length){
@@ -20759,20 +15352,20 @@
 	};
 
 /***/ },
-/* 162 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var shared = __webpack_require__(163)('keys')
-	  , uid    = __webpack_require__(164);
+	var shared = __webpack_require__(70)('keys')
+	  , uid    = __webpack_require__(71);
 	module.exports = function(key){
 	  return shared[key] || (shared[key] = uid(key));
 	};
 
 /***/ },
-/* 163 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global = __webpack_require__(134)
+	var global = __webpack_require__(41)
 	  , SHARED = '__core-js_shared__'
 	  , store  = global[SHARED] || (global[SHARED] = {});
 	module.exports = function(key){
@@ -20780,7 +15373,7 @@
 	};
 
 /***/ },
-/* 164 */
+/* 71 */
 /***/ function(module, exports) {
 
 	var id = 0
@@ -20790,7 +15383,7 @@
 	};
 
 /***/ },
-/* 165 */
+/* 72 */
 /***/ function(module, exports) {
 
 	// IE 8- don't enum bug keys
@@ -20799,30 +15392,30 @@
 	).split(',');
 
 /***/ },
-/* 166 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(134).document && document.documentElement;
+	module.exports = __webpack_require__(41).document && document.documentElement;
 
 /***/ },
-/* 167 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var def = __webpack_require__(139).f
-	  , has = __webpack_require__(149)
-	  , TAG = __webpack_require__(168)('toStringTag');
+	var def = __webpack_require__(46).f
+	  , has = __webpack_require__(56)
+	  , TAG = __webpack_require__(75)('toStringTag');
 
 	module.exports = function(it, tag, stat){
 	  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
 	};
 
 /***/ },
-/* 168 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var store      = __webpack_require__(163)('wks')
-	  , uid        = __webpack_require__(164)
-	  , Symbol     = __webpack_require__(134).Symbol
+	var store      = __webpack_require__(70)('wks')
+	  , uid        = __webpack_require__(71)
+	  , Symbol     = __webpack_require__(41).Symbol
 	  , USE_SYMBOL = typeof Symbol == 'function';
 
 	var $exports = module.exports = function(name){
@@ -20833,13 +15426,13 @@
 	$exports.store = store;
 
 /***/ },
-/* 169 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-	var has         = __webpack_require__(149)
-	  , toObject    = __webpack_require__(170)
-	  , IE_PROTO    = __webpack_require__(162)('IE_PROTO')
+	var has         = __webpack_require__(56)
+	  , toObject    = __webpack_require__(77)
+	  , IE_PROTO    = __webpack_require__(69)('IE_PROTO')
 	  , ObjectProto = Object.prototype;
 
 	module.exports = Object.getPrototypeOf || function(O){
@@ -20851,24 +15444,24 @@
 	};
 
 /***/ },
-/* 170 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.13 ToObject(argument)
-	var defined = __webpack_require__(130);
+	var defined = __webpack_require__(37);
 	module.exports = function(it){
 	  return Object(defined(it));
 	};
 
 /***/ },
-/* 171 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(172);
-	var global        = __webpack_require__(134)
-	  , hide          = __webpack_require__(138)
-	  , Iterators     = __webpack_require__(150)
-	  , TO_STRING_TAG = __webpack_require__(168)('toStringTag');
+	__webpack_require__(79);
+	var global        = __webpack_require__(41)
+	  , hide          = __webpack_require__(45)
+	  , Iterators     = __webpack_require__(57)
+	  , TO_STRING_TAG = __webpack_require__(75)('toStringTag');
 
 	for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
 	  var NAME       = collections[i]
@@ -20879,20 +15472,20 @@
 	}
 
 /***/ },
-/* 172 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var addToUnscopables = __webpack_require__(173)
-	  , step             = __webpack_require__(174)
-	  , Iterators        = __webpack_require__(150)
-	  , toIObject        = __webpack_require__(156);
+	var addToUnscopables = __webpack_require__(80)
+	  , step             = __webpack_require__(81)
+	  , Iterators        = __webpack_require__(57)
+	  , toIObject        = __webpack_require__(63);
 
 	// 22.1.3.4 Array.prototype.entries()
 	// 22.1.3.13 Array.prototype.keys()
 	// 22.1.3.29 Array.prototype.values()
 	// 22.1.3.30 Array.prototype[@@iterator]()
-	module.exports = __webpack_require__(131)(Array, 'Array', function(iterated, kind){
+	module.exports = __webpack_require__(38)(Array, 'Array', function(iterated, kind){
 	  this._t = toIObject(iterated); // target
 	  this._i = 0;                   // next index
 	  this._k = kind;                // kind
@@ -20918,13 +15511,13 @@
 	addToUnscopables('entries');
 
 /***/ },
-/* 173 */
+/* 80 */
 /***/ function(module, exports) {
 
 	module.exports = function(){ /* empty */ };
 
 /***/ },
-/* 174 */
+/* 81 */
 /***/ function(module, exports) {
 
 	module.exports = function(done, value){
@@ -20932,58 +15525,58 @@
 	};
 
 /***/ },
-/* 175 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports.f = __webpack_require__(168);
+	exports.f = __webpack_require__(75);
 
 /***/ },
-/* 176 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(177), __esModule: true };
+	module.exports = { "default": __webpack_require__(84), __esModule: true };
 
 /***/ },
-/* 177 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(178);
-	__webpack_require__(189);
-	__webpack_require__(190);
-	__webpack_require__(191);
-	module.exports = __webpack_require__(135).Symbol;
+	__webpack_require__(85);
+	__webpack_require__(96);
+	__webpack_require__(97);
+	__webpack_require__(98);
+	module.exports = __webpack_require__(42).Symbol;
 
 /***/ },
-/* 178 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	// ECMAScript 6 symbols shim
-	var global         = __webpack_require__(134)
-	  , has            = __webpack_require__(149)
-	  , DESCRIPTORS    = __webpack_require__(143)
-	  , $export        = __webpack_require__(133)
-	  , redefine       = __webpack_require__(148)
-	  , META           = __webpack_require__(179).KEY
-	  , $fails         = __webpack_require__(144)
-	  , shared         = __webpack_require__(163)
-	  , setToStringTag = __webpack_require__(167)
-	  , uid            = __webpack_require__(164)
-	  , wks            = __webpack_require__(168)
-	  , wksExt         = __webpack_require__(175)
-	  , wksDefine      = __webpack_require__(180)
-	  , keyOf          = __webpack_require__(181)
-	  , enumKeys       = __webpack_require__(182)
-	  , isArray        = __webpack_require__(185)
-	  , anObject       = __webpack_require__(140)
-	  , toIObject      = __webpack_require__(156)
-	  , toPrimitive    = __webpack_require__(146)
-	  , createDesc     = __webpack_require__(147)
-	  , _create        = __webpack_require__(152)
-	  , gOPNExt        = __webpack_require__(186)
-	  , $GOPD          = __webpack_require__(188)
-	  , $DP            = __webpack_require__(139)
-	  , $keys          = __webpack_require__(154)
+	var global         = __webpack_require__(41)
+	  , has            = __webpack_require__(56)
+	  , DESCRIPTORS    = __webpack_require__(50)
+	  , $export        = __webpack_require__(40)
+	  , redefine       = __webpack_require__(55)
+	  , META           = __webpack_require__(86).KEY
+	  , $fails         = __webpack_require__(51)
+	  , shared         = __webpack_require__(70)
+	  , setToStringTag = __webpack_require__(74)
+	  , uid            = __webpack_require__(71)
+	  , wks            = __webpack_require__(75)
+	  , wksExt         = __webpack_require__(82)
+	  , wksDefine      = __webpack_require__(87)
+	  , keyOf          = __webpack_require__(88)
+	  , enumKeys       = __webpack_require__(89)
+	  , isArray        = __webpack_require__(92)
+	  , anObject       = __webpack_require__(47)
+	  , toIObject      = __webpack_require__(63)
+	  , toPrimitive    = __webpack_require__(53)
+	  , createDesc     = __webpack_require__(54)
+	  , _create        = __webpack_require__(59)
+	  , gOPNExt        = __webpack_require__(93)
+	  , $GOPD          = __webpack_require__(95)
+	  , $DP            = __webpack_require__(46)
+	  , $keys          = __webpack_require__(61)
 	  , gOPD           = $GOPD.f
 	  , dP             = $DP.f
 	  , gOPN           = gOPNExt.f
@@ -21106,11 +15699,11 @@
 
 	  $GOPD.f = $getOwnPropertyDescriptor;
 	  $DP.f   = $defineProperty;
-	  __webpack_require__(187).f = gOPNExt.f = $getOwnPropertyNames;
-	  __webpack_require__(184).f  = $propertyIsEnumerable;
-	  __webpack_require__(183).f = $getOwnPropertySymbols;
+	  __webpack_require__(94).f = gOPNExt.f = $getOwnPropertyNames;
+	  __webpack_require__(91).f  = $propertyIsEnumerable;
+	  __webpack_require__(90).f = $getOwnPropertySymbols;
 
-	  if(DESCRIPTORS && !__webpack_require__(132)){
+	  if(DESCRIPTORS && !__webpack_require__(39)){
 	    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
 	  }
 
@@ -21185,7 +15778,7 @@
 	});
 
 	// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-	$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(138)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+	$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(45)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
 	// 19.4.3.5 Symbol.prototype[@@toStringTag]
 	setToStringTag($Symbol, 'Symbol');
 	// 20.2.1.9 Math[@@toStringTag]
@@ -21194,18 +15787,18 @@
 	setToStringTag(global.JSON, 'JSON', true);
 
 /***/ },
-/* 179 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var META     = __webpack_require__(164)('meta')
-	  , isObject = __webpack_require__(141)
-	  , has      = __webpack_require__(149)
-	  , setDesc  = __webpack_require__(139).f
+	var META     = __webpack_require__(71)('meta')
+	  , isObject = __webpack_require__(48)
+	  , has      = __webpack_require__(56)
+	  , setDesc  = __webpack_require__(46).f
 	  , id       = 0;
 	var isExtensible = Object.isExtensible || function(){
 	  return true;
 	};
-	var FREEZE = !__webpack_require__(144)(function(){
+	var FREEZE = !__webpack_require__(51)(function(){
 	  return isExtensible(Object.preventExtensions({}));
 	});
 	var setMeta = function(it){
@@ -21252,25 +15845,25 @@
 	};
 
 /***/ },
-/* 180 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global         = __webpack_require__(134)
-	  , core           = __webpack_require__(135)
-	  , LIBRARY        = __webpack_require__(132)
-	  , wksExt         = __webpack_require__(175)
-	  , defineProperty = __webpack_require__(139).f;
+	var global         = __webpack_require__(41)
+	  , core           = __webpack_require__(42)
+	  , LIBRARY        = __webpack_require__(39)
+	  , wksExt         = __webpack_require__(82)
+	  , defineProperty = __webpack_require__(46).f;
 	module.exports = function(name){
 	  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
 	  if(name.charAt(0) != '_' && !(name in $Symbol))defineProperty($Symbol, name, {value: wksExt.f(name)});
 	};
 
 /***/ },
-/* 181 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getKeys   = __webpack_require__(154)
-	  , toIObject = __webpack_require__(156);
+	var getKeys   = __webpack_require__(61)
+	  , toIObject = __webpack_require__(63);
 	module.exports = function(object, el){
 	  var O      = toIObject(object)
 	    , keys   = getKeys(O)
@@ -21281,13 +15874,13 @@
 	};
 
 /***/ },
-/* 182 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// all enumerable object keys, includes symbols
-	var getKeys = __webpack_require__(154)
-	  , gOPS    = __webpack_require__(183)
-	  , pIE     = __webpack_require__(184);
+	var getKeys = __webpack_require__(61)
+	  , gOPS    = __webpack_require__(90)
+	  , pIE     = __webpack_require__(91);
 	module.exports = function(it){
 	  var result     = getKeys(it)
 	    , getSymbols = gOPS.f;
@@ -21301,34 +15894,34 @@
 	};
 
 /***/ },
-/* 183 */
+/* 90 */
 /***/ function(module, exports) {
 
 	exports.f = Object.getOwnPropertySymbols;
 
 /***/ },
-/* 184 */
+/* 91 */
 /***/ function(module, exports) {
 
 	exports.f = {}.propertyIsEnumerable;
 
 /***/ },
-/* 185 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.2.2 IsArray(argument)
-	var cof = __webpack_require__(158);
+	var cof = __webpack_require__(65);
 	module.exports = Array.isArray || function isArray(arg){
 	  return cof(arg) == 'Array';
 	};
 
 /***/ },
-/* 186 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-	var toIObject = __webpack_require__(156)
-	  , gOPN      = __webpack_require__(187).f
+	var toIObject = __webpack_require__(63)
+	  , gOPN      = __webpack_require__(94).f
 	  , toString  = {}.toString;
 
 	var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
@@ -21348,30 +15941,30 @@
 
 
 /***/ },
-/* 187 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-	var $keys      = __webpack_require__(155)
-	  , hiddenKeys = __webpack_require__(165).concat('length', 'prototype');
+	var $keys      = __webpack_require__(62)
+	  , hiddenKeys = __webpack_require__(72).concat('length', 'prototype');
 
 	exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
 	  return $keys(O, hiddenKeys);
 	};
 
 /***/ },
-/* 188 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var pIE            = __webpack_require__(184)
-	  , createDesc     = __webpack_require__(147)
-	  , toIObject      = __webpack_require__(156)
-	  , toPrimitive    = __webpack_require__(146)
-	  , has            = __webpack_require__(149)
-	  , IE8_DOM_DEFINE = __webpack_require__(142)
+	var pIE            = __webpack_require__(91)
+	  , createDesc     = __webpack_require__(54)
+	  , toIObject      = __webpack_require__(63)
+	  , toPrimitive    = __webpack_require__(53)
+	  , has            = __webpack_require__(56)
+	  , IE8_DOM_DEFINE = __webpack_require__(49)
 	  , gOPD           = Object.getOwnPropertyDescriptor;
 
-	exports.f = __webpack_require__(143) ? gOPD : function getOwnPropertyDescriptor(O, P){
+	exports.f = __webpack_require__(50) ? gOPD : function getOwnPropertyDescriptor(O, P){
 	  O = toIObject(O);
 	  P = toPrimitive(P, true);
 	  if(IE8_DOM_DEFINE)try {
@@ -21381,153 +15974,42 @@
 	};
 
 /***/ },
-/* 189 */
+/* 96 */
 /***/ function(module, exports) {
 
 	
 
 /***/ },
-/* 190 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(180)('asyncIterator');
+	__webpack_require__(87)('asyncIterator');
 
 /***/ },
-/* 191 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(180)('observable');
+	__webpack_require__(87)('observable');
 
 /***/ },
-/* 192 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _keys = __webpack_require__(193);
-
-	var _keys2 = _interopRequireDefault(_keys);
-
-	var _typeof2 = __webpack_require__(124);
-
-	var _typeof3 = _interopRequireDefault(_typeof2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var clone = function clone(obj) {
-	    if (Array.isArray(obj)) {
-	        return obj.map(clone);
-	    } else if (obj && (typeof obj === 'undefined' ? 'undefined' : (0, _typeof3.default)(obj)) === 'object') {
-	        var cloned = {};
-	        var keys = (0, _keys2.default)(obj);
-	        for (var i = 0, l = keys.length; i < l; i++) {
-	            var key = keys[i];
-	            cloned[key] = clone(obj[key]);
-	        }
-	        return cloned;
-	    } else {
-	        return obj;
-	    }
-	};
-
-	module.exports = clone;
-
-/***/ },
-/* 193 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(194), __esModule: true };
-
-/***/ },
-/* 194 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(195);
-	module.exports = __webpack_require__(135).Object.keys;
-
-/***/ },
-/* 195 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 19.1.2.14 Object.keys(O)
-	var toObject = __webpack_require__(170)
-	  , $keys    = __webpack_require__(154);
-
-	__webpack_require__(196)('keys', function(){
-	  return function keys(it){
-	    return $keys(toObject(it));
-	  };
-	});
-
-/***/ },
-/* 196 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// most Object methods by ES6 should accept primitives
-	var $export = __webpack_require__(133)
-	  , core    = __webpack_require__(135)
-	  , fails   = __webpack_require__(144);
-	module.exports = function(KEY, exec){
-	  var fn  = (core.Object || {})[KEY] || Object[KEY]
-	    , exp = {};
-	  exp[KEY] = exec(fn);
-	  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
-	};
-
-/***/ },
-/* 197 */
+/* 99 */
 /***/ function(module, exports) {
 
-	'use strict';
-
-	function fuzzysearch (needle, haystack) {
-	  var tlen = haystack.length;
-	  var qlen = needle.length;
-	  if (qlen > tlen) {
-	    return false;
-	  }
-	  if (qlen === tlen) {
-	    return needle === haystack;
-	  }
-	  outer: for (var i = 0, j = 0; i < qlen; i++) {
-	    var nch = needle.charCodeAt(i);
-	    while (j < tlen) {
-	      if (haystack.charCodeAt(j++) === nch) {
-	        continue outer;
-	      }
-	    }
-	    return false;
-	  }
-	  return true;
-	}
-
-	module.exports = fuzzysearch;
-
+	module.exports = "\r\n<div class=\"xcui-datapicker {{className}}\">\r\n    <div :class=\"{'input-group':btnShow,'bg-pr':!btnShow}\">\r\n        <input class=\"form-control\"  type=\"text\" v-model=\"value\" placeholder=\"请输入日期\" @click=\"showCalendar\">\r\n        <div @click.stop=\"\"\r\n             @touchstart.stop=\"\"\r\n             class=\"calendar\"\r\n             v-show=\"show\">\r\n            <div class=\"calendar-tools\" v-if=\"type!='time'\">\r\n                <i class=\"glyphicon glyphicon-chevron-left float left\"\r\n                   @click=\"prev\"></i>\r\n                <i class=\"glyphicon glyphicon-chevron-right float right\"\r\n                   @click=\"next\"></i>\r\n                <div class=\"calendar-tit\">\r\n                    <span @click=\"changeTitSelect(year, 'year')\"><input v-model=\"year\" class=\"calendar-tit-year\" type=\"text\" @change=\"changeTitSelect(year,'year')\"/>年</span>\r\n                    <span class=\"calendar-tit-month\" @click=\"changeTitSelect(month-1, 'month')\">{{month+1}}月</span>\r\n                </div>\r\n            </div>\r\n            <div v-show=\"dataTableShow\">\r\n                <table cellpadding=\"5\" v-if=\"type!='time'\">\r\n                    <thead>\r\n                        <tr>\r\n                            <td v-for=\"week in weeks\" class=\"week\">{{week}}</td>\r\n                        </tr>\r\n                    </thead>\r\n                    <tr v-for=\"(k1,day) in days\">\r\n                        <td\r\n                        v-for=\"(k2,child) in day\"\r\n                        :class=\"{'today':child.today,'off':child.disabled,'noclick':child.noClick}\"\r\n                        :style=\"{'background':color&&child.today?color:''}\"\r\n                        @click=\"select(k1,k2,$event)\">\r\n                        {{child.day}}\r\n                        <div class=\"lunar\" v-if=\"showLunar\">{{child.lunar}}</div>\r\n                        </td>\r\n                    </tr>\r\n                </table>\r\n                <div class=\"calendar-time\" v-show=\"type=='datetime'|| type=='time'\">\r\n                    <div  class=\"timer clearfix\">\r\n                        <div class=\"timer-item\">\r\n                            <label @click=\"dropTimeList('hour')\">{{hour}}</label>:\r\n                            <ul class=\"drop-down\" v-show=\"hourListShow\">\r\n                                <li v-for=\"item in hourList\" @click=\"selectTimeItem($event,'hour')\">{{item}}</li>\r\n                            </ul>\r\n                        </div>\r\n                        <div class=\"timer-item\">\r\n                            <label @click=\"dropTimeList('minute')\">{{minute}}</label>:\r\n                            <ul class=\"drop-down\" v-show=\"minuteListShow\">\r\n                                <li v-for=\"item in minuteList\" @click=\"selectTimeItem($event,'minute')\">{{item}}</li>\r\n                            </ul>\r\n                        </div>\r\n                        <div class=\"timer-item\">\r\n                            <label @click=\"dropTimeList('second')\">{{second}}</label>\r\n                            <ul class=\"drop-down\" v-show=\"secondListShow\">\r\n                                <li v-for=\"item in secondList\" @click=\"selectTimeItem($event,'second')\">{{item}}</li>\r\n                            </ul>\r\n                        </div>\r\n                        <div class=\"timer-item\">\r\n                            <div class=\"timer-item-current\"\r\n                                @click=\"currentTime\"\r\n                                :style=\"{'color':color}\">当前</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"calendar-button\" v-show=\"type=='datetime'|| type=='time' || range\">\r\n                    <button @click=\"ok\" :style=\"{'background':color}\">确定</button>\r\n                    <button @click=\"cancel\" class=\"cancel\">取消</button>\r\n                </div>\r\n            </div>\r\n            <table cellpadding=\"6\" v-show=\"yearTableShow\">\r\n                <tr v-show=\"selectRangeShow\">\r\n                    <td colspan =\"3\">{{selectRange}}</td>\r\n                </tr>\r\n                <tr v-for=\"selects in selectRangeList\">\r\n                    <td v-for=\"select in selects\" @click=\"selectItem(select)\">{{select}}</td>\r\n                </tr>\r\n            </table>\r\n        </div>\r\n        <span class=\"input-group-btn\" v-if=\"btnShow\" @click=\"showCalendar\" >\r\n            <button class=\"btn btn-default\">\r\n                <span class=\"glyphicon glyphicon-calendar\"></span>\r\n            </button>\r\n        </span>\r\n    </div>\r\n</div>\r\n";
 
 /***/ },
-/* 198 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div tabindex=\"0\"\n     :class=\"getWrapCls\"\n     @focus=\"activate()\"\n     @blur=\"showSearch ? false : deactivate()\"\n     @keydown.enter.stop.prevent.self=\"enterSearchValue()\">\n    <div class=\"xcui-select-selection\">\n        <div class=\"xcui-select-selection-rendered\"\n             @mousedown.stop=\"toggle()\">\n            <input\n                type=\"text\"\n                name=\"search\"\n                v-el:search\n                autocomplete=\"off\"\n                class=\"xcui-select-search-input\"\n                v-if=\"showSearch\"\n                v-model=\"searchValue\"\n                @focus.prevent=\"activate()\"\n                @blur.prevent=\"deactivate()\"\n                @keyup.down=\"keyNext()\"\n                @keyup.up=\"keyPrev()\"\n                @keydown.enter.stop.prevent.self=\"enterSearchValue()\"\n                @change.prevent.stop=\"\"\n                :placeholder=\"placeholder\">\n            <span\n                class=\"xcui-select-selection-text\"\n                v-if=\"!showSearch\"\n                v-text=\"currentOptionLabel || placeholder\">\n            </span>\n            <i class=\"glyphicon xcui-select-arrow\"\n               @mousedown.prevent.stop=\"toggle()\"\n               :class=\"{'glyphicon-triangle-bottom':(!isOpen),'glyphicon-triangle-top':(isOpen)}\"></i>\n        </div>\n    </div>\n    <div class=\"xcui-select-menu-dropdown\"\n         v-show=\"(isOpen && filteredOptions.length>0) || (isOpen && multiple)\">\n        <ul\n            v-el:list\n            aria-activedescendant\n            class=\"xcui-select-menu\">\n            <li class=\"xcui-select-menu-item\"\n                v-if=\"multiple && multipleMax === value.length\">\n                最多可选{{multipleMax}}项!\n            </li>\n            <li class=\"xcui-select-menu-item\"\n                v-if=\"filteredOptions.length<1 && searchEmptyText\"\n                v-text=\"searchEmptyText\">\n            </li>\n            <template\n                      v-for=\"item in filteredOptions\">\n                <li class=\"xcui-select-menu-item\"\n                    v-if=\"!optgroup\"\n                    tabindex=\"1\"\n                    :class=\"{'xcui-select-menu-item-selected': isSelected(item), 'xcui-select-menu-item-key': $index === selectIndex,'disabled': item.disable}\"\n                    @mouseenter.prevent.stop.self=\"indexSet($index)\"\n                    @mousedown.prevent=\"select(item)\">\n                    <partial :name=\"optionPartial\"\n                             class=\"xcui-select-menu-item-partial\"\n                             v-if=\"optionPartial.length\"></partial>\n                    <span v-else v-text=\"getOptionLabel(item)\"></span>\n                </li>\n            </template>\n            <template\n                v-for=\"item in filteredOptions\">\n                <li class=\"xcui-select-menu-group\" v-if=\"optgroup\">\n                    <div class=\"xcui-select-menu-group-title\">{{item.name}}</div>\n                    <ul>\n                        <template v-for=\"option in item.options\">\n                            <li class=\"xcui-select-menu-group-item\"\n                                :class=\"{'xcui-select-menu-group-item-selected': isSelected(option,$parent.$index,$index), 'disabled': option.disable}\"\n                                @mousedown.prevent.stop.self=\"optgroupSelect($parent.$index,$index,option)\">\n                                <partial :name=\"optionPartial\"\n                                         class=\"xcui-select-menu-item-partial\"\n                                         v-if=\"optionPartial.length\"></partial>\n                                <span v-else v-text=\"getOptionLabel(option)\"></span>\n                            </li>\n                        </template>\n                    </ul>\n                </li>\n            </template>\n        </ul>\n    </div>\n</div>\n";
-
-/***/ },
-/* 199 */
-/***/ function(module, exports) {
-
-	module.exports = "<div><h1>Select多功能选择框</h1>\n<h2>使用场景</h2>\n<ol>\n<li>替代原生下拉框，支持多选</li>\n<li>支持Array, Object等格式</li>\n<li>支持进行输入建议，远程搜索等</li>\n<li>支持optionGroup</li>\n</ol>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>single - 基本模式 options(Array)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\r\n                     :custom-label=\"reRender\"\r\n                     :close-after-select=\"closeAfterSelect\"\r\n                     :selected=\"defaultValue\"\r\n                     @change=\"selectChange2\"\r\n                     @select=\"onSelect2\"\r\n                     :options=\"dataSource2\">\r\n        </xcui-select>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Select one<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:custom-label</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>reRender<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:close-after-select</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>closeAfterSelect<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:selected</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>defaultValue<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>selectChange2<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@select</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>onSelect2<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>dataSource2<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>single - 基本模式 options(Object)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\r\n                     @change=\"selectChange\"\r\n                     @select=\"onSelect\"\r\n                     :options=\"dataSource\"></xcui-select>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Select one<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>selectChange<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@select</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>onSelect<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>dataSource<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>自定义label的字段(label='text')</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\r\n                     label=\"text\"\n                     @change=\"selectChange\"\r\n                     :options=\"dataSource\"></xcui-select>\r\n        <pre>\r\n    {\n        name: 'jake',\n        label: 'jake',\n        text: '测试1',\n        disable: true\n    }</pre>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Select one<span class=\"token punctuation\" >\"</span></span>\r\n                  <span class=\"token attr-name\" >label</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text<span class=\"token punctuation\" >\"</span></span>\n                  <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>selectChange<span class=\"token punctuation\" >\"</span></span>\r\n                  <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>dataSource<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>pre</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token punctuation\">{</span>\n     name: 'jake',\n     label: 'jake',\n     text: '测试1',\n     disable: true\n <span class=\"token punctuation\">}</span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>pre</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>禁用(:disabled)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"disable\"\r\n                     :disabled=\"disable\"\r\n                     @change=\"selectChange\"\r\n                     :options=\"dataSource\"></xcui-select>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>disable<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:disabled</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>disable<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>selectChange<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>dataSource<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>禁用单个option(:disabled)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"disable\"\r\n                     @change=\"selectChange\"\r\n                     :options=\"dataSourceDisable\"></xcui-select>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>disable<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>selectChange<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>dataSourceDisable<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>定制label(:custom-label)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\r\n                     :custom-label=\"reRenderLabel\"\r\n                     @change=\"selectChange2\" :options=\"dataSource\"></xcui-select>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Select one<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:custom-label</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>reRenderLabel<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>selectChange2<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>dataSource<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>定制 option list(option-partial && Vue.partial)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"Select one\"\r\n                     option-partial=\"customOptionPartial\" :custom-label=\"reRender\"\n                     @change=\"selectChange2\" :options=\"partialSource\"></xcui-select>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Select one<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >option-partial</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>customOptionPartial<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:custom-label</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>reRender<span class=\"token punctuation\" >\"</span></span>\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>selectChange2<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>partialSource<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>省市联动</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择省\"\r\n                     @change=\"provinceChange\" :options=\"provinceData\"></xcui-select>\r\n        <xcui-select v-if=\"selectCityData.length>0\" class-name=\"select-demo\" placeholder=\"选择市\"\r\n                     @change=\"cityChange\" :options=\"selectCityData\"></xcui-select>\r\n        {{selectProvinceValue}} - {{selectCityValue}}\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>选择省<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>provinceChange<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>provinceData<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >v-if</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>selectCityData.length<span class=\"token punctuation\" >></span>0<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>选择市<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>cityChange<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>selectCityData<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token punctuation\">{</span><span class=\"token punctuation\">{</span>selectProvinceValue<span class=\"token punctuation\">}</span><span class=\"token punctuation\">}</span> - <span class=\"token punctuation\">{</span><span class=\"token punctuation\">{</span>selectCityValue<span class=\"token punctuation\">}</span><span class=\"token punctuation\">}</span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>input Local Search</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择一个城市\"\r\n                     show-search search-empty-text=\"没有搜索结果哎...\"\n                     @search-change=\"searchChange\"\r\n                     @change=\"localSearchChange\"\r\n                     :options=\"localSearchSource\">\r\n        </xcui-select>\r\n        输入值: {{localSearchValue}}\r\n        选择结果: {{localSearchResult}}\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>选择一个城市<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >show-search</span> <span class=\"token attr-name\" >search-empty-text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>没有搜索结果哎...<span class=\"token punctuation\" >\"</span></span>\n              <span class=\"token attr-name\" >@search-change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>searchChange<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>localSearchChange<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>localSearchSource<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\r\n 输入值: <span class=\"token punctuation\">{</span><span class=\"token punctuation\">{</span>localSearchValue<span class=\"token punctuation\">}</span><span class=\"token punctuation\">}</span>\r\n 选择结果: <span class=\"token punctuation\">{</span><span class=\"token punctuation\">{</span>localSearchResult<span class=\"token punctuation\">}</span><span class=\"token punctuation\">}</span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>智能输入</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"输入邮箱\"\r\n                     show-search\r\n                     @search-change=\"asyncSearchChange\"\r\n                     @change=\"asyncSearchOnChange\"\r\n                     :options=\"asyncSearchSource\">\r\n        </xcui-select>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>输入邮箱<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >show-search</span>\r\n              <span class=\"token attr-name\" >@search-change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>asyncSearchChange<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>asyncSearchOnChange<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>asyncSearchSource<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>远程数据</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        远程搜索\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\r\n                     show-search\r\n                     clear-on-select\r\n                     @search-change=\"serverSearchChange\"\r\n                     @change=\"serverSearchOnChange\"\r\n                     :options=\"serverSearchSource\">\r\n        </xcui-select>\r\n        {{serverSearchValue}}\n        <br>\r\n        ajax请求不能耦合select组件, 提供EVENT(@search-change)让使用者进行数据获取 & options赋值\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n 远程搜索\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>搜索<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >show-search</span>\r\n              <span class=\"token attr-name\" >clear-on-select</span>\r\n              <span class=\"token attr-name\" >@search-change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>serverSearchChange<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>serverSearchOnChange<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>serverSearchSource<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token punctuation\">{</span><span class=\"token punctuation\">{</span>serverSearchValue<span class=\"token punctuation\">}</span><span class=\"token punctuation\">}</span>\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>br</span><span class=\"token punctuation\" >></span></span>\r\n ajax请求不能耦合select组件, 提供EVENT(@search-change)让使用者进行数据获取 &amp; options赋值</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>option Group (数据格式一)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\r\n                     optgroup\r\n                     @change=\"optgroupOnChange\"\r\n                     :selected=\"optgroupDefaultValue\"\r\n                     option-partial=\"optgroupPartial\"\n                     :options=\"optgroupSource\">\r\n        </xcui-select>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>搜索<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >optgroup</span>\r\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>optgroupOnChange<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:selected</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>optgroupDefaultValue<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >option-partial</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>optgroupPartial<span class=\"token punctuation\" >\"</span></span>\n              <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>optgroupSource<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>option Group (数据格式二)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\r\n                     optgroup\r\n                     label=\"name\"\n                     @change=\"optgroupOnChange2\"\r\n                     :options=\"optgroupSource2\">\r\n        </xcui-select>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>搜索<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >optgroup</span>\r\n              <span class=\"token attr-name\" >label</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>name<span class=\"token punctuation\" >\"</span></span>\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>optgroupOnChange2<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>optgroupSource2<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>multiple select</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择多个\"\r\n                     multiple\r\n                     :multiple-max=2\r\n                     :selected=\"multipleDefaultValue\"\r\n                     @change=\"multipleOnChange\"\r\n                     @remove=\"multipleOnRemove\"\r\n                     :options=\"dataSource2\">\r\n        </xcui-select>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>选择多个<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >multiple</span>\r\n              <span class=\"token attr-name\" >:multiple-max</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span>2</span>\r\n              <span class=\"token attr-name\" >:selected</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>multipleDefaultValue<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@change</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>multipleOnChange<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >@remove</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>multipleOnRemove<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>dataSource2<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>multiple select</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择多个\"\r\n                     multiple\r\n                     :multiple-max=2\r\n                     :selected=\"multipleDefaultValue2\"\r\n                     :options=\"dataSource\">\r\n        </xcui-select>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-select</span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>select-demo<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>选择多个<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >multiple</span>\r\n              <span class=\"token attr-name\" >:multiple-max</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span>2</span>\r\n              <span class=\"token attr-name\" >:selected</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>multipleDefaultValue2<span class=\"token punctuation\" >\"</span></span>\r\n              <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>dataSource<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n</div>\n<h2>组件依赖</h2>\n<blockquote>\n<p><a href=\"https://www.npmjs.com/package/fuzzysearch\">fuzzysearch</a> 模糊搜索模块</p>\n</blockquote>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>className</td>\n<td>String</td>\n<td>无</td>\n<td>自定义css类名</td>\n<td>否</td>\n</tr>\n<tr>\n<td>placeholder</td>\n<td>String</td>\n<td>无</td>\n<td>选择框默认文字</td>\n<td>否</td>\n</tr>\n<tr>\n<td>optgroup</td>\n<td>Boolean</td>\n<td>false</td>\n<td>列表分组模式(结合options使用)</td>\n<td>否</td>\n</tr>\n<tr>\n<td>multiple</td>\n<td>Boolean</td>\n<td>false</td>\n<td>多选</td>\n<td>否</td>\n</tr>\n<tr>\n<td>showSearch</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否展示搜索框</td>\n<td>否</td>\n</tr>\n<tr>\n<td>clearOnSelect</td>\n<td>Boolean</td>\n<td>false</td>\n<td>选择完以后清除搜索内容</td>\n<td>否</td>\n</tr>\n<tr>\n<td>label</td>\n<td>String</td>\n<td>无</td>\n<td>自定义label展现key(对应数据中key)</td>\n<td>否</td>\n</tr>\n<tr>\n<td>optionPartial</td>\n<td>Vue.partial</td>\n<td>无</td>\n<td>option可定制</td>\n<td>否</td>\n</tr>\n<tr>\n<td>:customLabel</td>\n<td>Function</td>\n<td>无</td>\n<td>option内容定制</td>\n<td>否</td>\n</tr>\n<tr>\n<td>:options</td>\n<td>Array</td>\n<td>无</td>\n<td>默认数据,optgroup模式下数据结构有要求(具体查看demo#option Group)</td>\n<td>是</td>\n</tr>\n<tr>\n<td>:disabled</td>\n<td>Boolean</td>\n<td>false</td>\n<td>禁用</td>\n<td>否</td>\n</tr>\n<tr>\n<td>:selected</td>\n<td>String</td>\n<td>无</td>\n<td>默认已选的值</td>\n<td>否</td>\n</tr>\n<tr>\n<td>@change</td>\n<td>function(value) / function(value,groupIndex,valueIndex)</td>\n<td>无</td>\n<td>值发生变化的时候(2种模式: 普通模式/分组模式)</td>\n<td>否</td>\n</tr>\n<tr>\n<td>@select</td>\n<td>function(value) / function(value,groupIndex,valueIndex)</td>\n<td>无</td>\n<td>发生了选择的时候(2种模式: 普通模式/分组模式)</td>\n<td>否</td>\n</tr>\n<tr>\n<td>@searchChange</td>\n<td>function(searchValue)</td>\n<td>无</td>\n<td>搜索值发生变化的时候</td>\n<td>否</td>\n</tr>\n<tr>\n<td>@remove</td>\n<td>function(removeValue)</td>\n<td>无</td>\n<td>多选模式下移除一个选值的时候</td>\n<td>否</td>\n</tr>\n</tbody>\n</table>\n<h3>模式说明</h3>\n<ul>\n<li>\n<p>单选模式:</p>\n<pre>options数据格式一<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n    <span class=\"token string\" >'item1'</span><span class=\"token punctuation\" >,</span>\n    <span class=\"token string\" >'item2'</span>\n<span class=\"token punctuation\" >]</span>\noptions数据格式二<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n    <span class=\"token punctuation\" >{</span>\n        label<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'1'</span><span class=\"token punctuation\" >,</span>\n        disable<span class=\"token punctuation\" >:</span> <span class=\"token boolean\" >true</span><span class=\"token punctuation\" >,</span>\n        name<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'1'</span>\n    <span class=\"token punctuation\" >}</span>\n<span class=\"token punctuation\" >]</span>\n</pre>\n</li>\n<li>\n<p>分组模式:</p>\n<pre>optgroup    【必选】\nshowSearch  【不支持】\noptions数据格式一 <span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n    <span class=\"token punctuation\" >{</span>\n        name<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'opt group 1'</span><span class=\"token punctuation\" >,</span>\n        options<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n            <span class=\"token string\" >'item1'</span><span class=\"token punctuation\" >,</span>\n            <span class=\"token string\" >'item2'</span>\n        <span class=\"token punctuation\" >]</span>\n    <span class=\"token punctuation\" >}</span>\n<span class=\"token punctuation\" >]</span>\noptions数据格式二 <span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n    <span class=\"token punctuation\" >{</span>\n        name<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'opt group 2'</span><span class=\"token punctuation\" >,</span>\n        options<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n            <span class=\"token punctuation\" >{</span>\n                label<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'1'</span><span class=\"token punctuation\" >,</span>\n                disable<span class=\"token punctuation\" >:</span> <span class=\"token boolean\" >true</span>\n            <span class=\"token punctuation\" >}</span>\n        <span class=\"token punctuation\" >]</span>\n    <span class=\"token punctuation\" >}</span>\n<span class=\"token punctuation\" >]</span>\n</pre>\n</li>\n<li>\n<p>多选模式:</p>\n<pre>multiple 【必选】\nshowSearch  【不支持】\nselected<span class=\"token punctuation\" >:</span> Array\n</pre>\n</li>\n</ul>\n<h3>参考</h3>\n<p><a href=\"https://select2.github.io/\">select2</a><br />\n<a href=\"http://ant.design/components/select/\">antd-select</a><br />\n<a href=\"http://monterail.github.io/vue-multiselect/\">vue-multiselect</a><br />\n<a href=\"https://josephuspaye.github.io/Keen-UI/#/ui-select-docs\">Keen-UI - select</a><br />\n<a href=\"http://amazeui.org/javascript/selected\">http://amazeui.org/javascript/selected</a></p>\n</div>";
-
-/***/ },
-/* 200 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(201)
+	__webpack_require__(101)
+	__vue_script__ = __webpack_require__(103)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\toaster.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(207)
+	  console.warn("[vue-loader] src\\components\\daterangepicker\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(107)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -21543,7 +16025,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-32f971a7/toaster.vue"
+	  var id = "_v-4376e854/index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -21552,79 +16034,16 @@
 	})()}
 
 /***/ },
-/* 201 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _toaster = __webpack_require__(202);
-
-	var _toaster2 = _interopRequireDefault(_toaster);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	    components: {
-	        Toaster: _toaster2.default
-	    },
-	    data: function data() {
-	        return {
-	            options: {}
-	        };
-	    }
-	};
-
-/***/ },
-/* 202 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(203)
-	__vue_script__ = __webpack_require__(205)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\toaster\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(206)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-1311ad15/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 203 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(204);
+	var content = __webpack_require__(102);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -21641,97 +16060,136 @@
 	}
 
 /***/ },
-/* 204 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(11)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".toaster {\n  width: 300px;\n  border-radius: 5px;\n  text-align: center;\n  box-shadow: 0 1px 8px rgba(99, 99, 99, 0.2);\n  padding: 5px 10px;\n  font-size: 16px;\n  z-index: 1000;\n  position: fixed;\n  top: 150px;\n  left: calc(50% - 150px);\n  background: #fff;\n}\n.toaster .toaster-icon {\n  vertical-align: middle;\n}\n.toaster .toaster-desc {\n  display: inline-block;\n  margin-left: 10px;\n  margin-bottom: 0px;\n  vertical-align: middle;\n}\n", ""]);
+	exports.push([module.id, ".xcui-datarangepicker {\n  position: relative;\n}\n.xcui-datarangepicker .calendar {\n  width: 240px;\n  padding: 10px;\n  background: #fff;\n  position: absolute;\n  border: 1px solid #DEDEDE;\n  border-radius: 2px;\n  -webkit-transition: all .5s ease;\n  transition: all .5s ease;\n  left: 0;\n  top: 38px;\n}\n.xcui-datarangepicker .calendar-enter .calendar-leave {\n  opacity: 0;\n  -webkit-transform: translate3d(0, -10px, 0);\n          transform: translate3d(0, -10px, 0);\n}\n.xcui-datarangepicker .calendar-tit {\n  text-align: center;\n  margin: 0 auto;\n  width: 104px;\n  font-weight: bold;\n}\n.xcui-datarangepicker .calendar-tit input {\n  color: #333;\n  height: 24px;\n  outline: medium;\n  text-align: center;\n  border: none;\n  background-color: transparent;\n}\n.xcui-datarangepicker .calendar-tit-year {\n  width: 36px;\n}\n.xcui-datarangepicker .calendar-tit-month {\n  width: 18px;\n  margin-left: 2px;\n}\n.xcui-datarangepicker .calendar:before {\n  position: absolute;\n  left: 30px;\n  top: -10px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #DEDEDE;\n}\n.xcui-datarangepicker .calendar:after {\n  position: absolute;\n  left: 30px;\n  top: -9px;\n  content: \"\";\n  border: 5px solid rgba(0, 0, 0, 0);\n  border-bottom-color: #fff;\n}\n.xcui-datarangepicker .calendar-tools {\n  height: 32px;\n  font-size: 14px;\n  line-height: 32px;\n  color: #333;\n}\n.xcui-datarangepicker .calendar-tools .float.left {\n  float: left;\n}\n.xcui-datarangepicker .calendar-tools .float.right {\n  float: right;\n}\n.xcui-datarangepicker .calendar-tools > i {\n  margin: 0 10px;\n  line-height: 32px;\n  cursor: pointer;\n  color: #707070;\n}\n.xcui-datarangepicker .calendar-tools > i:hover {\n  color: #333;\n}\n.xcui-datarangepicker .calendar table {\n  clear: both;\n  width: 100%;\n  margin-bottom: 10px;\n  border-collapse: collapse;\n  color: #444;\n}\n.xcui-datarangepicker .calendar table td {\n  margin: 2px !important;\n  padding: 5px 0;\n  width: 14.28571429%;\n  text-align: center;\n  vertical-align: middle;\n  font-size: 14px;\n  line-height: 125%;\n  cursor: pointer;\n  border: 0;\n}\n.xcui-datarangepicker .calendar table td:hover {\n  background: #f3f8fa;\n}\n.xcui-datarangepicker .calendar table td.week {\n  pointer-events: none !important;\n  cursor: default !important;\n}\n.xcui-datarangepicker .calendar table td.off {\n  color: #c0c0c0;\n}\n.xcui-datarangepicker .calendar table td.today {\n  background-color: #46c3c1;\n  color: #fff;\n  font-size: 14px;\n  border-radius: 4px;\n}\n.xcui-datarangepicker .calendar table td.today .lunar {\n  color: #fff;\n}\n.xcui-datarangepicker .calendar table td.todayleft {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.xcui-datarangepicker .calendar table td.todayright {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n}\n.xcui-datarangepicker .calendar table td.range {\n  background: #e2eff5;\n}\n.xcui-datarangepicker .calendar table thead td {\n  text-transform: uppercase;\n}\n.xcui-datarangepicker .calendar .timer {\n  margin: 0 auto 10px;\n  width: 120px;\n}\n.xcui-datarangepicker .calendar .timer input {\n  border-radius: 2px;\n  padding: 5px;\n  font-size: 14px;\n  line-height: 18px;\n  color: #46c3c1;\n  width: 50px;\n  text-align: center;\n  border: 1px solid #efefef;\n}\n.xcui-datarangepicker .calendar .timer input:focus {\n  border: 1px solid #46c3c1;\n}\n.xcui-datarangepicker .calendar .timer-item {\n  float: left;\n  text-align: center;\n  position: relative;\n  cursor: pointer;\n}\n.xcui-datarangepicker .calendar .timer-item-current {\n  color: #46c3c1;\n  line-height: 24px;\n  font-size: 14px;\n}\n.xcui-datarangepicker .calendar .timer label {\n  margin: 0;\n  width: 30px;\n  padding: 5px;\n  line-height: 14px;\n  margin-right: 4px;\n  font-weight: normal;\n}\n.xcui-datarangepicker .calendar-button {\n  text-align: center;\n}\n.xcui-datarangepicker .calendar-button button {\n  border: none;\n  cursor: pointer;\n  display: inline-block;\n  min-height: 1em;\n  vertical-align: baseline;\n  background: #46c3c1;\n  color: #fff;\n  margin: 0 .3em 0 0;\n  padding: .6em 2em;\n  font-size: 1em;\n  line-height: 1em;\n  text-align: center;\n  border-radius: .3em;\n}\n.xcui-datarangepicker .calendar-button button.cancel {\n  background: #efefef;\n  color: #666;\n}\n.xcui-datarangepicker .calendar .lunar {\n  font-size: 11px;\n  line-height: 150%;\n  color: #aaa;\n}\n.xcui-datarangepicker .calendar .drop-down {\n  position: absolute;\n  top: 24px;\n  left: -10px;\n  width: 50px;\n  height: 140px;\n  background: #fff;\n  border: 1px solid #efefef;\n  padding: 0;\n  margin: 0;\n  overflow-y: scroll;\n}\n.xcui-datarangepicker .calendar .drop-down li {\n  width: 50px;\n  list-style: none;\n}\n.xcui-datarangepicker .calendar .drop-down li.on {\n  background: #eee;\n}\n.xcui-datarangepicker .calendar .drop-down li:hover {\n  background: #eee;\n}\n.xcui-datarangepicker .double-calendar {\n  width: 490px;\n  z-index: 999;\n}\n.xcui-datarangepicker .double-calendar-left {\n  width: 220px;\n  float: left;\n}\n.xcui-datarangepicker .double-calendar-right {\n  width: 220px;\n  float: right;\n}\n.xcui-datarangepicker .double-calendar .calendar-button {\n  padding-top: 10px;\n  border-top: 1px solid #ddd;\n}\n.xcui-datarangepicker .clearfix {\n  zoom: 1;\n}\n.xcui-datarangepicker .clearfix:after {\n  display: block;\n  width: 0;\n  height: 0;\n  visibility: hidden;\n  content: '';\n  clear: both;\n}\n.xcui-datarangepicker .bg-pr {\n  position: relative;\n}\n.xcui-datarangepicker .btn-default {\n  color: #666;\n  border-radius: 0 4px 4px 0;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 205 */
-/***/ function(module, exports) {
+/* 103 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _calendar = __webpack_require__(104);
+
+	var _calendar2 = _interopRequireDefault(_calendar);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	exports.default = {
-	    name: 'xcui-toaster',
+	    name: 'xcui-daterangepicker',
 	    props: {
-	        options: {
+	        startDate: {
+	            twoWay: true,
+	            default: ''
+	        },
+	        endDate: {
+	            twoWay: true,
+	            default: ''
+	        },
+	        minDate: {},
+	        maxDate: {},
+	        format: {
+	            type: String,
+	            default: 'YYYY-MM-DD'
+	        },
+	        hourRange: {},
+	        minuteRange: {},
+	        secondRange: {},
+	        color: {
+	            type: String,
+	            default: ''
+	        },
+	        dateLimit: {
 	            type: Object,
-	            default: function _default() {
-	                return {};
-	            }
+	            default: null
+	        },
+	        className: String,
+	        btnShow: {
+	            type: Boolean,
+	            default: false
 	        }
+	    },
+	    components: {
+	        calendar: _calendar2.default
 	    },
 	    data: function data() {
 	        return {
-	            timers: [],
-	            show: false
+	            show: false,
+	            value: '',
+	            renderStar: '',
+	            renderEnd: '',
+	            initialStartDate: '',
+	            initialEndDate: ''
 	        };
 	    },
 
-	    methods: {
-	        close: function close() {
-	            var _this = this;
-
-	            var t = setTimeout(function () {
-	                _this.show = false;
-	                _this.options = {};
-	            }, this.options.duration || 2000);
-	            this.timers.push(t);
+	    watch: {
+	        startDate: function startDate(val) {
+	            if (val > this.endDate) {
+	                this.endDate = val;
+	            }
+	        },
+	        endDate: function endDate(val) {
+	            if (val < this.startDate) {
+	                this.startDate = val;
+	            }
 	        }
 	    },
-	    watch: {
-	        options: function options() {
-	            if (this.options.content) {
-	                this.show = true;
-	                this.timers.forEach(function (timer) {
-	                    window.clearTimeout(timer);
-	                });
-	                this.timers = [];
-	                this.close();
-	            } else {
-	                this.show = false;
-	            }
+	    methods: {
+	        ok: function ok() {
+	            this.value = this.startDate + ' 至 ' + this.endDate;
+	            this.show = false;
+	            this.$emit('on-change', this.startDate, this.endDate);
+	            this.initialStartDate = this.startDate;
+	            this.initialEndDate = this.endDate;
+	        },
+	        cancel: function cancel() {
+	            this.show = false;
+	            this.renderStar = this.startDate = this.initialStartDate;
+	            this.renderEnd = this.endDate = this.initialEndDate;
+	        },
+	        showCalendar: function showCalendar(e) {
+	            var me = this;
+	            e.stopPropagation();
+	            me.show = true;
+	            var bindHide = function bindHide(e) {
+	                e.stopPropagation();
+	                me.show = false;
+	                document.removeEventListener('click', bindHide, false);
+	            };
+	            setTimeout(function () {
+	                document.addEventListener('click', bindHide, false);
+	            }, 500);
 	        }
 	    }
 	};
 
 /***/ },
-/* 206 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div class=\"toaster\"\n:class=\"{\n    'text-info': options.type === 'info' || options.type == undefined,\n    'text-success': options.type === 'success',\n    'text-danger': options.type === 'error',\n    'text-warning': options.type === 'warning'\n}\" v-show=\"show\">\n    <span class=\"toaster-icon glyphicon\"\n    :class=\"{\n        'glyphicon-info-sign': options.type === 'info' || options.type == undefined,\n        'glyphicon-ok': options.type === 'success',\n        'glyphicon-remove': options.type === 'error',\n        'glyphicon-warning-sign': options.type === 'warning'\n    }\"></span>\n    <p class=\"toaster-desc\">\n        {{options.content}}\n    </p>\n</div>\n";
-
-/***/ },
-/* 207 */
-/***/ function(module, exports) {
-
-	module.exports = "<div><h1>Toaster信息提示</h1>\n<p>Toaster提供一种不打断用户操作的轻量级提示方式，顶部居中显示并自动消失。</p>\n<h4>支持4种信息类型</h4>\n<ul>\n<li>info：普通信息提示</li>\n<li>success：成功信息提示</li>\n<li>error：错误信息提示</li>\n<li>warning：警告信息提示</li>\n</ul>\n<h1>DEMO</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>信息提示组件</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <button class=\"btn btn-info\" @click=\"options={type:'info',content:'this is a info message',duration:1000}\">info</button>\r\n        <button class=\"btn btn-success\" @click=\"options={type:'success',content:'this is a success message',duration:2000}\">success</button>\r\n        <button class=\"btn btn-danger\" @click=\"options={type:'error',content:'this is a error message',duration:3000}\">error</button>\r\n        <button class=\"btn btn-warning\" @click=\"options={type:'warning',content:'this is a warning message',duration:1000}\">warning</button>\r\n        <Toaster :options=\"options\"></Toaster>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-info<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >=</span><span class=\"token punctuation\">{</span>type:<span class=\"token punctuation\" >'</span>info<span class=\"token punctuation\" >'</span>,content:<span class=\"token punctuation\" >'</span>this is a info message<span class=\"token punctuation\" >'</span>,duration:1000<span class=\"token punctuation\">}</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>info<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-success<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >=</span><span class=\"token punctuation\">{</span>type:<span class=\"token punctuation\" >'</span>success<span class=\"token punctuation\" >'</span>,content:<span class=\"token punctuation\" >'</span>this is a success message<span class=\"token punctuation\" >'</span>,duration:2000<span class=\"token punctuation\">}</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>success<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-danger<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >=</span><span class=\"token punctuation\">{</span>type:<span class=\"token punctuation\" >'</span>error<span class=\"token punctuation\" >'</span>,content:<span class=\"token punctuation\" >'</span>this is a error message<span class=\"token punctuation\" >'</span>,duration:3000<span class=\"token punctuation\">}</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>error<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-warning<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >=</span><span class=\"token punctuation\">{</span>type:<span class=\"token punctuation\" >'</span>warning<span class=\"token punctuation\" >'</span>,content:<span class=\"token punctuation\" >'</span>this is a warning message<span class=\"token punctuation\" >'</span>,duration:1000<span class=\"token punctuation\">}</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>warning<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Toaster</span> <span class=\"token attr-name\" >:options</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>options<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Toaster</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>options</td>\n<td>Object</td>\n<td>无</td>\n<td>type：指定提示信息的类型，默认为info类型；可自行配置，有四种选择info、success、error、warning<br>content：必选项，提示信息内容<br>duration：默认2秒自动关闭，可自行配置</td>\n</tr>\n</tbody>\n</table>\n</div>";
-
-/***/ },
-/* 208 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(209)
-	__vue_script__ = __webpack_require__(211)
+	__vue_script__ = __webpack_require__(105)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\demos\\modal.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(235)
+	  console.warn("[vue-loader] src\\components\\daterangepicker\\calendar.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(106)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -21747,7 +16205,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-24e80580/modal.vue"
+	  var id = "_v-76cf4ea8/calendar.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -21756,47 +16214,7 @@
 	})()}
 
 /***/ },
-/* 209 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(210);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./modal.vue", function() {
-				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./modal.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 210 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(12)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".xcui-modal-demo-title {\n  color: #66ccff;\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 211 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21805,173 +16223,273 @@
 	    value: true
 	});
 
-	var _vue = __webpack_require__(5);
+	var _calendarMixins = __webpack_require__(30);
 
-	var _vue2 = _interopRequireDefault(_vue);
-
-	var _index = __webpack_require__(212);
-
-	var _index2 = _interopRequireDefault(_index);
+	var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_vue2.default.use(_index2.default);
-	var Modal = _index2.default.Modal;
-
-	var ModalDemo = {
-	    components: {
-	        Modal: Modal
+	exports.default = {
+	    mixins: [_calendarMixins2.default],
+	    props: {
+	        otherValue: {
+	            type: String,
+	            default: ''
+	        },
+	        right: {
+	            type: Boolean,
+	            default: false
+	        },
+	        renderStar: {
+	            type: String,
+	            default: ''
+	        },
+	        renderEnd: {
+	            type: String,
+	            default: ''
+	        },
+	        dateLimit: {
+	            type: Object,
+	            default: null
+	        },
+	        initialDate: String
 	    },
-	    data: function data() {
-	        return {
-	            modal1: false,
-	            modal2: false,
-	            modal3: false,
-	            modal4: false,
-	            modal5: false,
-	            modal6: false,
-	            modal7: false,
-	            modal8: false,
-	            modal9: false,
-	            modal10: false
-	        };
+	    watch: {
+	        renderStar: function renderStar(val) {
+	            if (val === '' || this.right) {
+	                return false;
+	            }
+	            this.output(val);
+	            var params = this.dateParams;
+	            this.year = params.year;
+	            this.month = params.month;
+	            this.hour = params.hour;
+	            this.day = params.day;
+	            this.minute = params.minute;
+	            this.second = params.second;
+	            this.render(params.year, params.month);
+	        },
+	        renderEnd: function renderEnd(val) {
+	            if (val === '' || !this.right) {
+	                return false;
+	            }
+	            this.output(val);
+	            var params = this.dateParams;
+	            this.year = params.year;
+	            this.month = params.month;
+	            this.day = params.day;
+	            this.hour = params.hour;
+	            this.minute = params.minute;
+	            this.second = params.second;
+	            this.render(params.year, params.month);
+	        }
+	    },
+	    created: function created() {
+	        this.initialDate = this.output(this.value);
 	    },
 
 	    methods: {
-	        modal1OK: function modal1OK() {
-	            console.log('modal1OK');
+	        renderElse: function renderElse(y, m, i, temp, line) {
+	            var me = this;
+	            me.otherValue = me.otherValue && me.otherValue !== '' ? me.otherValue : me.value;
+	            var format = me.defaultFormat;
+	            var today = me.output([y, m, i], format);
+	            var value = me.output(me.value, format);
+	            var otherDate = me.output(me.otherValue, format);
+	            var isMinDate = me.minDate && me.minDate !== '' && today < me.output(me.minDate, format);
+	            var isMaxDate = me.maxDate && me.maxDate !== '' && today > me.output(me.maxDate, format);
+	            if (isMinDate || isMaxDate) {
+	                temp[line].push({ day: i, disabled: true, range: false, noclick: true });
+	            } else if (!me.right && today > value && today <= otherDate) {
+	                temp[line].push({ day: i, disabled: false, range: true });
+	            } else if (me.right && today < value && today >= otherDate) {
+	                temp[line].push({ day: i, disabled: false, range: true });
+	            } else if (me.right && today < otherDate) {
+	                temp[line].push({ day: i, disabled: true, range: false, prev: true });
+	            } else {
+	                temp[line].push({ day: i, today: false, range: false });
+	            }
+	        },
+	        select: function select(k1, k2, e) {
+	            if (e !== undefined) {
+	                e.stopPropagation();
+	            }
+	            var className = e.target.className;
+	            if (className === 'off todayright prev' || className.indexOf('noclick') !== -1) {
+	                return false;
+	            }
+	            var me = this;
+	            var daySeleted = me.days[k1][k2];
+
+	            me.output(me.value);
+	            var va = me.dateParams;
+	            if (me.today.length > 0 && me.month === va.month && me.year === va.year) {
+	                me.days[me.today[0]][me.today[1]].today = false;
+	            }
+
+	            daySeleted.today = true;
+	            daySeleted.range = false;
+	            me.day = this.zero(me.days[k1][k2].day);
+	            me.today = [k1, k2];
+	            if (daySeleted.disabled) {
+	                me.month = k1 === 0 ? me.month - 1 : me.month + 1;
+	                var om = me.outputMonth(me.month, me.year);
+	                me.year = om.y;
+	                me.month = om.m;
+	                me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+	                me.render(me.year, me.month);
+	            } else {
+	                me.today = [k1, k2];
+	                me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+	            }
+	            me.otherValue = me.bindLimitDate();
+	            me.changeOtherCalender();
+	        },
+	        changeOtherCalender: function changeOtherCalender() {
+	            var me = this;
+	            if (!me.right) {
+	                if (me.value > me.otherValue) {
+	                    me.otherValue = me.value;
+	                }
+	                me.$parent.renderStar = me.output(me.value);
+	                me.$parent.renderEnd = me.output(me.otherValue);
+	            } else if (me.right) {
+	                if (me.value < me.otherValue) {
+	                    me.otherValue = me.value;
+	                }
+	                me.$parent.renderStar = me.output(me.otherValue);
+	                me.$parent.renderEnd = me.output(me.value);
+	            }
+	        },
+	        getYearMonth: function getYearMonth(date) {
+	            this.output(date);
+	            var params = this.dateParams;
+	            return params.year * 12 + params.month;
+	        },
+	        bindLimitDate: function bindLimitDate() {
+	            var me = this;
+	            var format = me.defaultFormat;
+	            var oValue = me.output(me.otherValue, format);
+	            var ovs = me.dateParams;
+	            var bg = me.minDate;
+	            var ed = me.maxDate;
+	            var y = ovs.year;
+	            var m = ovs.month;
+	            var d = ovs.day;
+	            var meValue = me.output(me.value, format);
+	            var meDate = me.dateParams.day;
+	            var AddDayCount = 0;
+	            var params = null;
+	            var otherTime = '';
+	            if (me.right && me.dateLimit) {
+	                if (me.dateLimit.hasOwnProperty('months')) {
+	                    for (var i1 = 0; i1 < me.dateLimit.months; i1++) {
+	                        AddDayCount += new Date(y, m + i1 + 1, 0).getDate();
+	                    }
+	                } else if (me.dateLimit.hasOwnProperty('days')) {
+	                    AddDayCount += me.dateLimit.days;
+	                }
+	                if (meValue > me.getDataStr(AddDayCount, oValue).val) {
+	                    AddDayCount = 0;
+	                    var diffDate = 0;
+	                    if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
+	                        var limitMonth = me.dateLimit.months;
+	                        for (var i2 = 0; i2 < limitMonth; i2++) {
+	                            var count = meDate === me.lastDateOfMonth ? 0 : 1;
+	                            var nextMaxDate = new Date(y, m - i2 + count, 0).getDate();
+	                            AddDayCount -= nextMaxDate;
+	                        }
+	                        diffDate = meDate - new Date(y, m - limitMonth + 1, 0).getDate();
+	                        if (meDate !== me.lastDateOfMonth && diffDate > 0) {
+	                            AddDayCount += diffDate;
+	                        }
+	                    } else if (me.dateLimit.hasOwnProperty('days')) {
+	                        AddDayCount -= me.dateLimit.days;
+	                    }
+	                    params = me.getDataStr(AddDayCount, meValue);
+	                    y = params.y;
+	                    m = params.m;
+	                    d = params.d;
+	                }
+	            } else if (me.dateLimit) {
+	                if (me.dateLimit.hasOwnProperty('months')) {
+	                    for (var k1 = 0; k1 < me.dateLimit.months; k1++) {
+	                        AddDayCount -= new Date(y, m - k1, 0).getDate();
+	                    }
+	                } else if (me.dateLimit.hasOwnProperty('days')) {
+	                    AddDayCount -= me.dateLimit.days;
+	                }
+	                if (meValue < me.getDataStr(AddDayCount, oValue).val || meValue > oValue) {
+	                    AddDayCount = 0;
+	                    var diffDate2 = 0;
+	                    if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
+	                        var _limitMonth = me.dateLimit.months;
+	                        for (var k2 = 0; k2 < _limitMonth; k2++) {
+	                            var count2 = meDate === me.lastDateOfMonth ? 2 : 1;
+	                            var nextMaxDate2 = new Date(me.year, me.month + k2 + count2, 0).getDate();
+	                            AddDayCount += nextMaxDate2;
+	                        }
+	                        diffDate2 = meDate - new Date(me.year, me.month + _limitMonth + 1, 0).getDate();
+	                        if (meDate !== me.lastDateOfMonth && diffDate2 > 0) {
+	                            AddDayCount -= diffDate2;
+	                        }
+	                    } else if (me.dateLimit.hasOwnProperty('days')) {
+	                        AddDayCount += me.dateLimit.days;
+	                    }
+	                    params = me.getDataStr(AddDayCount, meValue);
+	                    y = params.y;
+	                    m = params.m;
+	                    d = params.d;
+	                }
+	            }
+	            otherTime = me.output([y, m, d, me.hour, me.minute, me.second]);
+	            if (bg) {
+	                otherTime = otherTime < bg ? bg : otherTime > ed ? ed : otherTime;
+	            }
+	            return otherTime;
+	        },
+	        getDataStr: function getDataStr(AddDayCount, nowDate) {
+	            var me = this;
+	            var date = new Date(nowDate);
+	            date.setDate(date.getDate() + AddDayCount);
+	            var y = date.getFullYear();
+	            var m = date.getMonth();
+	            var d = date.getDate();
+	            return {
+	                val: y + '-' + me.zero(m + 1) + '-' + me.zero(d),
+	                y: y,
+	                m: m,
+	                d: d
+	            };
 	        }
 	    }
 	};
 
-	exports.default = ModalDemo;
+/***/ },
+/* 106 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"calendar-tools\" v-if=\"type!='time'\">\n    <i class=\"glyphicon glyphicon-chevron-left float left\"\n       @click=\"prev\"></i>\n    <i class=\"glyphicon glyphicon-chevron-right float right\"\n   @click=\"next\"></i>\n    <div class=\"calendar-tit\">\n        <span @click=\"changeTitSelect(year, 'year')\">\n            <input v-model=\"year\" class=\"calendar-tit-year\" type=\"text\" @change=\"changeTitSelect(year,'year')\"/>年\n        </span>\n        <span class=\"calendar-tit-month\" @click=\"changeTitSelect(month-1, 'month')\">{{month+1}}月</span>\n    </div>\n</div>\n<div v-show=\"dataTableShow\">\n    <table cellpadding=\"5\" v-if=\"type!='time'\">\n        <thead>\n            <tr>\n                <td v-for=\"week in weeks\" class=\"week\">{{week}}</td>\n            </tr>\n        </thead>\n        <tr v-for=\"(k1,day) in days\">\n            <td\n            v-for=\"(k2,child) in day\"\n            :class=\"{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right,'prev':child.prev, 'noclick':child.noclick}\"\n            :style=\"{'background':color&&child.today?color:''}\"\n            @click=\"select(k1,k2,$event)\">\n            {{child.day}}\n            </td>\n        </tr>\n    </table>\n    <div class=\"calendar-time\" v-show=\"type=='datetime' || type=='time'\">\n        <div class=\"timer clearfix\">\n            <div class=\"timer-item\">\n                <label @click=\"dropTimeList('hour')\">{{hour}}</label>:\n                <ul class=\"drop-down\" v-show=\"hourListShow\">\n                    <li v-for=\"item in hourList\" @click=\"selectTimeItem($event,'hour')\">{{item}}</li>\n                </ul>\n            </div>\n            <div class=\"timer-item\">\n                <label @click=\"dropTimeList('minute')\">{{minute}}</label>:\n                <ul class=\"drop-down\" v-show=\"minuteListShow\">\n                    <li v-for=\"item in minuteList\" @click=\"selectTimeItem($event,'minute')\">{{item}}</li>\n                </ul>\n            </div>\n            <div class=\"timer-item\">\n                <label @click=\"dropTimeList('second')\">{{second}}</label>\n                <ul class=\"drop-down\" v-show=\"secondListShow\">\n                    <li v-for=\"item in secondList\" @click=\"selectTimeItem($event,'second')\">{{item}}</li>\n                </ul>\n            </div>\n        </div>\n    </div>\n</div>\n<table cellpadding=\"6\" v-show=\"yearTableShow\">\n    <tr v-show=\"selectRangeShow\">\n        <td colspan =\"3\">{{selectRange}}</td>\n    </tr>\n    <tr v-for=\"selects in selectRangeList\">\n        <td v-for=\"select in selects\" @click=\"selectItem(select)\">{{select}}</td>\n    </tr>\n</table>\n";
 
 /***/ },
-/* 212 */
-/***/ function(module, exports, __webpack_require__) {
+/* 107 */
+/***/ function(module, exports) {
 
-	'use strict';
-
-	var _suggestion = __webpack_require__(72);
-
-	var _suggestion2 = _interopRequireDefault(_suggestion);
-
-	var _datepicker = __webpack_require__(92);
-
-	var _datepicker2 = _interopRequireDefault(_datepicker);
-
-	var _daterangepicker = __webpack_require__(103);
-
-	var _daterangepicker2 = _interopRequireDefault(_daterangepicker);
-
-	var _inputNumber = __webpack_require__(213);
-
-	var _inputNumber2 = _interopRequireDefault(_inputNumber);
-
-	var _loading = __webpack_require__(40);
-
-	var _loading2 = _interopRequireDefault(_loading);
-
-	var _modal = __webpack_require__(218);
-
-	var _modal2 = _interopRequireDefault(_modal);
-
-	var _pageloading = __webpack_require__(223);
-
-	var _pageloading2 = _interopRequireDefault(_pageloading);
-
-	var _pagination = __webpack_require__(30);
-
-	var _pagination2 = _interopRequireDefault(_pagination);
-
-	var _popover = __webpack_require__(50);
-
-	var _popover2 = _interopRequireDefault(_popover);
-
-	var _progress = __webpack_require__(228);
-
-	var _progress2 = _interopRequireDefault(_progress);
-
-	var _select = __webpack_require__(120);
-
-	var _select2 = _interopRequireDefault(_select);
-
-	var _tag = __webpack_require__(82);
-
-	var _tag2 = _interopRequireDefault(_tag);
-
-	var _toaster = __webpack_require__(202);
-
-	var _toaster2 = _interopRequireDefault(_toaster);
-
-	var _tooltip = __webpack_require__(62);
-
-	var _tooltip2 = _interopRequireDefault(_tooltip);
-
-	var _install = __webpack_require__(233);
-
-	var _install2 = _interopRequireDefault(_install);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var install = function install(Vue) {
-	    if (install.installed) {
-	        return;
-	    }
-	    Vue.component(_suggestion2.default.name, _suggestion2.default);
-	    Vue.component(_datepicker2.default.name, _datepicker2.default);
-	    Vue.component(_daterangepicker2.default.name, _daterangepicker2.default);
-	    Vue.component(_inputNumber2.default.name, _inputNumber2.default);
-	    Vue.component(_loading2.default.name, _loading2.default);
-	    Vue.component(_modal2.default.name, _modal2.default);
-	    Vue.component(_pageloading2.default.name, _pageloading2.default);
-	    Vue.component(_pagination2.default.name, _pagination2.default);
-	    Vue.component(_popover2.default.name, _popover2.default);
-	    Vue.component(_progress2.default.name, _progress2.default);
-	    Vue.component(_select2.default.name, _select2.default);
-	    Vue.component(_tag2.default.name, _tag2.default);
-	    Vue.component(_toaster2.default.name, _toaster2.default);
-	    Vue.component(_tooltip2.default.name, _tooltip2.default);
-
-	    Vue.use(_install2.default);
-	};
-
-	var xcui = {
-	    version: '1.0.0-alpha',
-	    Suggestion: _suggestion2.default,
-	    Datepicker: _datepicker2.default,
-	    DateRangePicker: _daterangepicker2.default,
-	    InputNumber: _inputNumber2.default,
-	    Loading: _loading2.default,
-	    Modal: _modal2.default,
-	    PageLoading: _pageloading2.default,
-	    Pagination: _pagination2.default,
-	    Popover: _popover2.default,
-	    Progress: _progress2.default,
-	    Select: _select2.default,
-	    Tag: _tag2.default,
-	    Toaster: _toaster2.default,
-	    Tooltip: _tooltip2.default,
-
-	    install: install,
-	    xcuiInstall: _install2.default
-	};
-
-	module.exports = xcui;
+	module.exports = "\n\r\n<div class=\"xcui-datarangepicker\" :class=\"className\">\r\n    <div :class=\"{'input-group':btnShow}\">\r\n        <input class=\"form-control col-md-3\" type=\"text\" v-model=\"value\" placeholder=\"请输入日期\" @click=\"showCalendar\">\r\n        <!-- 双日历 -->\r\n        <div @click.stop=\"\"\r\n             @touchstart.stop=\"\"\r\n             class=\"calendar double-calendar\"\r\n             v-show=\"show\">\r\n             <div class=\"clearfix\">\r\n                 <div class=\"double-calendar-left\">\r\n                    <calendar\r\n                        :value.sync=\"startDate\"\r\n                        :format=\"format\"\r\n                        :other-value.sync=\"endDate\"\r\n                        :min-date=\"minDate\"\r\n                        :max-date=\"maxDate\"\r\n                        :hour-range=\"hourRange\"\r\n                        :minute-range=\"minuteRange\"\r\n                        :second-range=\"secondRange\"\r\n                        :color=\"color\"\r\n                        :date-limit=\"dateLimit\"\r\n                        :initial-date.sync=\"initialStartDate\"\r\n                        :render-star=\"renderStar\"></calendar>\r\n                 </div>\r\n                 <div class=\"double-calendar-right\">\r\n                    <calendar\r\n                        :value.sync=\"endDate\"\r\n                        :format=\"format\"\r\n                        :other-value.sync=\"startDate\"\r\n                        :right=\"true\"\r\n                        :min-date=\"minDate\"\r\n                        :max-date=\"maxDate\"\r\n                        :hour-range=\"hourRange\"\r\n                        :minute-range=\"minuteRange\"\r\n                        :second-range=\"secondRange\"\r\n                        :color=\"color\"\r\n                        :date-limit=\"dateLimit\"\r\n                        :initial-date.sync=\"initialEndDate\"\r\n                        :render-end=\"renderEnd\"></calendar>\r\n                 </div>\r\n             </div>\r\n             <div class=\"calendar-button\">\r\n                <button @click=\"ok\" :style=\"{'background':color}\">确定</button>\r\n                <button @click=\"cancel\" class=\"cancel\">取消</button>\r\n             </div>\r\n        </div>\r\n        <!-- end 双日历 -->\r\n        <span class=\"input-group-btn\" v-if=\"btnShow\" @click=\"showCalendar\" >\r\n            <button class=\"btn btn-default\">\r\n                <span class=\"glyphicon glyphicon-calendar\"></span>\r\n            </button>\r\n        </span>\r\n    </div>\r\n</div>\r\n";
 
 /***/ },
-/* 213 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(214)
-	__vue_script__ = __webpack_require__(216)
+	__webpack_require__(109)
+	__vue_script__ = __webpack_require__(111)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\inputNumber\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(217)
+	__vue_template__ = __webpack_require__(112)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -21987,7 +16505,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-6083a918/index.vue"
+	  var id = "_v-9ee36d2c/index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -21996,16 +16514,16 @@
 	})()}
 
 /***/ },
-/* 214 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(215);
+	var content = __webpack_require__(110);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22022,10 +16540,10 @@
 	}
 
 /***/ },
-/* 215 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(11)();
 	// imports
 
 
@@ -22036,7 +16554,7 @@
 
 
 /***/ },
-/* 216 */
+/* 111 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22143,24 +16661,24 @@
 	};
 
 /***/ },
-/* 217 */
+/* 112 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div v-el:outer class=\"outer\" :class=\"size\">\n\t<div class=\"up-down-wrap\">\n\t\t<a href=\"\" class=\"up-wrap glyphicon glyphicon-chevron-up\" @mouse.down=\"preventDefault\" @click=\"upValue\">\n\t\t\t<!-- <span class=\"up\"></span> -->\n\t\t</a>\n\t\t<a href=\"\" class=\"down-wrap glyphicon glyphicon-chevron-down\" @mouse.down=\"preventDefault\" @click=\"downValue\">\n\t\t\t<!-- <span class=\"down\"></span> -->\n\t\t</a>\n\t</div>\n\t<div class=\"input-wrap\">\n\t\t<input type='text' v-el='input' class=\"middle\" v-model=\"inputValue\" @keyup=\"changeValue($event)\" :placeholder=\"textTips\"\n\t\t:disabled =\"isDisable\" :class=\"className\"/>\n\t</div>\n</div>\n";
 
 /***/ },
-/* 218 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(219)
-	__vue_script__ = __webpack_require__(221)
+	__webpack_require__(114)
+	__vue_script__ = __webpack_require__(116)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\modal\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(222)
+	  console.warn("[vue-loader] src\\components\\loading\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(117)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -22176,7 +16694,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-07346fa4/index.vue"
+	  var id = "_v-14d75033/index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -22185,16 +16703,16 @@
 	})()}
 
 /***/ },
-/* 219 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(220);
+	var content = __webpack_require__(115);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22211,21 +16729,298 @@
 	}
 
 /***/ },
-/* 220 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(11)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".xcui-modal-wrapper {\n  z-index: 1000;\n  overflow: auto;\n}\n.xcui-modal-wrapper,\n.xcui-modal-mask {\n  position: fixed;\n  top: 0;\n  right: 0;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  -webkit-transition: opacity 0.2s ease;\n  transition: opacity 0.2s ease;\n  background-color: rgba(55, 55, 55, 0.6);\n}\n.xcui-modal {\n  font-size: 14px;\n  position: relative;\n  margin: 0 auto;\n  top: 100px;\n  background-color: #fff;\n  padding: 0;\n  background-color: white;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px 1;\n  -webkit-transition: all 0.2s ease;\n  transition: all 0.2s ease;\n  max-height: 100vh;\n  max-width: 100vw;\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n.xcui-modal.large {\n  width: 45rem;\n}\n.xcui-modal-body {\n  padding: 1.6rem;\n  border-bottom: 1px solid #f3f3f3;\n  min-height: 8rem;\n}\n.xcui-modal-header {\n  font-size: 1.6rem;\n  padding: .6rem;\n  border-bottom: 1px solid #f3f3f3;\n  text-align: center;\n}\n.xcui-modal-header-close {\n  position: absolute;\n  right: 8px;\n  top: 8px;\n  color: #000;\n  opacity: .2;\n  font-weight: 700;\n  line-height: 1;\n  font-size: 20px;\n  outline: 0;\n}\n.xcui-modal-header-close:hover {\n  cursor: pointer;\n  text-decoration: none;\n  opacity: .5;\n}\n.xcui-modal-footer {\n  padding: .5rem 1rem;\n  text-align: center;\n}\n.xcui-modal-footer .xcui-modal-btn {\n  margin-right: .5rem;\n  background-color: #46C3C1;\n  color: #fff;\n  border: #46c3c1 solid 1px;\n  min-width: 75px;\n}\n.xcui-modal-footer .xcui-modal-btn:hover {\n  background-color: #2b9d9b;\n  border: #2b9d9b solid 1px;\n}\n.xcui-modal-footer .xcui-modal-btn:active {\n  background-color: #2b9d9b;\n  border: #2b9d9b solid 1px;\n  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);\n}\n.xcui-modal-footer .xcui-modal-cancel-btn {\n  min-width: 75px;\n}\n.xcui-modal-size-small {\n  width: 22%;\n}\n.xcui-modal-size-middle {\n  width: 30%;\n}\n.xcui-modal-size-large {\n  width: 60%;\n}\n.xcui-modal-size-full {\n  width: 99%;\n}\n", ""]);
+	exports.push([module.id, ".xcui-loading {\n  display: block;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  z-index: 999;\n  background: rgba(255, 255, 255, 0.7);\n}\n.loader {\n  position: absolute;\n  left: 0;\n  right: 0;\n  margin: 0 auto;\n}\n/*loading-1********************/\n.load1 .loader {\n  top: 40%;\n  color: #46C3C1;\n  font-size: 13px;\n  width: 1em;\n  height: 1em;\n  border-radius: 50%;\n  text-indent: -9999em;\n  -webkit-animation: load1 1.3s infinite linear;\n  animation: load1 1.3s infinite linear;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n}\n@-webkit-keyframes load1 {\n  0%,\n  100% {\n    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;\n  }\n  12.5% {\n    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  25% {\n    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  37.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  50% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  62.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;\n  }\n  75% {\n    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;\n  }\n  87.5% {\n    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;\n  }\n}\n@keyframes load1 {\n  0%,\n  100% {\n    box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;\n  }\n  12.5% {\n    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  25% {\n    box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;\n  }\n  37.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  50% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;\n  }\n  62.5% {\n    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;\n  }\n  75% {\n    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;\n  }\n  87.5% {\n    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;\n  }\n}\n/*loading-2********************/\n.load2 .loader {\n  top: 30%;\n  color: #46C3C1;\n  font-size: 60px;\n  text-indent: -9999em;\n  overflow: hidden;\n  width: 1em;\n  height: 1em;\n  border-radius: 50%;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation: load2 1.7s infinite ease;\n  animation: load2 1.7s infinite ease;\n}\n@-webkit-keyframes load2 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  5%,\n  95% {\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  10%,\n  59% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;\n  }\n  20% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;\n  }\n  38% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n}\n@keyframes load2 {\n  0% {\n    -webkit-transform: rotate(0deg);\n    transform: rotate(0deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  5%,\n  95% {\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n  10%,\n  59% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;\n  }\n  20% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;\n  }\n  38% {\n    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;\n  }\n  100% {\n    -webkit-transform: rotate(360deg);\n    transform: rotate(360deg);\n    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;\n  }\n}\n/*loading-3********************/\n.load3 .loader,\n.load3 .loader:before,\n.load3 .loader:after {\n  top: 20%;\n  border-radius: 50%;\n  width: 1.5em;\n  height: 1.5em;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n  -webkit-animation: load3 1.8s infinite ease-in-out;\n  animation: load3 1.8s infinite ease-in-out;\n}\n.load3 .loader {\n  color: #46C3C1;\n  font-size: 10px;\n  text-indent: -9999em;\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  -webkit-animation-delay: -0.16s;\n  animation-delay: -0.16s;\n}\n.load3 .loader:before,\n.load3 .loader:after {\n  content: '';\n  position: absolute;\n  top: 0;\n}\n.load3 .loader:before {\n  left: -3em;\n  -webkit-animation-delay: -0.32s;\n  animation-delay: -0.32s;\n}\n.load3 .loader:after {\n  left: 3em;\n}\n@-webkit-keyframes load3 {\n  0%,\n  80%,\n  100% {\n    box-shadow: 0 2.5em 0 -1.3em;\n  }\n  40% {\n    box-shadow: 0 2.5em 0 0;\n  }\n}\n@keyframes load3 {\n  0%,\n  80%,\n  100% {\n    box-shadow: 0 2.5em 0 -1.3em;\n  }\n  40% {\n    box-shadow: 0 2.5em 0 0;\n  }\n}\n.sm .loader {\n  font-size: 10px;\n}\n.sm.load2 .loader {\n  font-size: 40px;\n}\n.md .loader {\n  font-size: 14px;\n}\n.md.load2 .loader {\n  font-size: 60px;\n}\n.lg .loader {\n  font-size: 18px;\n}\n.lg.load2 .loader {\n  font-size: 80px;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 221 */
+/* 116 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    name: 'xcui-loading',
+	    props: {
+	        'show': {
+	            type: Boolean,
+	            default: false
+	        },
+	        'type': {
+	            type: String,
+	            default: 'load2'
+	        },
+	        'classname': {
+	            type: String,
+	            default: ''
+	        },
+	        'color': {
+	            type: String,
+	            default: ''
+	        },
+	        'size': {
+	            type: String,
+	            default: 'md'
+	        }
+	    },
+	    methods: {}
+	};
+
+/***/ },
+/* 117 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div v-show=\"show\" class=\"xcui-loading load-container\" :class=\"[type,size,classname]\">\n    <div class=\"loader\" :style=\"{'color' : color}\"></div>\n</div>\n";
+
+/***/ },
+/* 118 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(119)
+	__vue_script__ = __webpack_require__(121)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\message\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(122)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-4f7dad3e/index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 119 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(120);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 120 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".fade-transition {\n  -webkit-transition: all .3s ease;\n  transition: all .3s ease;\n}\n.fade-enter,\n.fade-leave {\n  opacity: 0;\n}\n.xcui-message {\n  min-width: 200px;\n  max-width: 600px;\n  width: 300px;\n  border-radius: 5px;\n  text-align: center;\n  box-shadow: 0 1px 8px rgba(99, 99, 99, 0.4);\n  padding: 5px 10px;\n  font-size: 16px;\n  z-index: 1000;\n  position: fixed;\n  top: 150px;\n  left: calc(50% - 150px);\n  background: #fff;\n}\n.xcui-message .xcui-message-icon {\n  vertical-align: middle;\n}\n.xcui-message .xcui-message-desc {\n  color: #000;\n  display: inline-block;\n  margin-left: 10px;\n  margin-bottom: 0px;\n  vertical-align: middle;\n}\n.xcui-message-info {\n  color: #3a87ad;\n}\n.xcui-message-success {\n  color: #468847;\n}\n.xcui-message-warning {\n  color: #c09853;\n}\n.xcui-message-error {\n  color: #b94a48;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 121 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    name: 'xcui-message',
+	    props: {
+	        show: {
+	            type: Boolean,
+	            default: false
+	        },
+	        type: {
+	            type: String,
+	            default: 'info'
+	        },
+	        content: {
+	            type: String,
+	            default: ''
+	        },
+	        duration: {
+	            type: Number,
+	            default: 3000
+	        }
+	    },
+	    computed: {
+	        styleClass: function styleClass() {
+	            return 'xcui-message-' + this.type;
+	        },
+	        iconClass: function iconClass() {
+	            switch (this.type) {
+	                case 'info':
+	                    return 'glyphicon-info-sign';
+	                case 'success':
+	                    return 'glyphicon-ok';
+	                case 'error':
+	                    return 'glyphicon-remove';
+	                case 'warning':
+	                    return 'glyphicon-warning-sign';
+	                default:
+	                    return 'glyphicon-info-sign';
+	            }
+	        }
+	    },
+	    data: function data() {
+	        return {
+	            timer: null,
+	            closed: false
+	        };
+	    },
+
+	    methods: {
+	        clearTimer: function clearTimer() {
+	            clearTimeout(this.timer);
+	        },
+	        resetTimer: function resetTimer() {
+	            var _this = this;
+
+	            if (!this.duration) {
+	                this.duration = 3000;
+	            }
+	            this.timer = setTimeout(function () {
+	                _this.show = false;
+	            }, this.duration);
+	        },
+	        onShow: function onShow() {
+	            this.show = true;
+	            this.clearTimer();
+	            this.resetTimer();
+	        }
+	    }
+	};
+
+/***/ },
+/* 122 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"xcui-message\"\n:class=\"styleClass\"\ntransition=\"fade\"\nv-show=\"show\">\n    <span class=\"xcui-message-icon glyphicon\"\n    :class=\"iconClass\"></span>\n    <p class=\"xcui-message-desc\">\n        {{content}}\n    </p>\n</div>\n";
+
+/***/ },
+/* 123 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(124)
+	__vue_script__ = __webpack_require__(126)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\modal\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(127)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-4b4916a4/index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 124 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(125);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 125 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".xcui-modal-wrapper {\n  z-index: 1000;\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n.xcui-modal-wrapper,\n.xcui-modal-mask {\n  position: fixed;\n  top: 0;\n  right: 0;\n  left: 0;\n  bottom: 0;\n  -webkit-transition: opacity 0.2s ease;\n  transition: opacity 0.2s ease;\n  background-color: rgba(55, 55, 55, 0.6);\n}\n.xcui-modal {\n  z-index: 1001;\n  font-size: 14px;\n  position: relative;\n  margin: 100px auto 30px;\n  background-color: #fff;\n  padding: 0;\n  background-color: white;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px 1;\n  -webkit-transition: all 0.2s ease;\n  transition: all 0.2s ease;\n  max-width: 100vw;\n}\n.xcui-modal.large {\n  width: 45rem;\n}\n.xcui-modal-body {\n  padding: 1.6rem;\n  border-bottom: 1px solid #f3f3f3;\n  min-height: 8rem;\n}\n.xcui-modal-header {\n  font-size: 1.6rem;\n  padding: .6rem;\n  border-bottom: 1px solid #f3f3f3;\n  text-align: center;\n}\n.xcui-modal-header-close {\n  position: absolute;\n  right: 8px;\n  top: 8px;\n  color: #000;\n  opacity: .2;\n  font-weight: 700;\n  line-height: 1;\n  font-size: 20px;\n  outline: 0;\n}\n.xcui-modal-header-close:hover {\n  cursor: pointer;\n  text-decoration: none;\n  opacity: .5;\n}\n.xcui-modal-footer {\n  padding: .5rem 1rem;\n  text-align: center;\n}\n.xcui-modal-footer .xcui-modal-btn {\n  margin-right: .5rem;\n  background-color: #46C3C1;\n  color: #fff;\n  border: #46c3c1 solid 1px;\n  min-width: 75px;\n}\n.xcui-modal-footer .xcui-modal-btn:hover {\n  background-color: #2b9d9b;\n  border: #2b9d9b solid 1px;\n}\n.xcui-modal-footer .xcui-modal-btn:active {\n  background-color: #2b9d9b;\n  border: #2b9d9b solid 1px;\n  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);\n}\n.xcui-modal-footer .xcui-modal-cancel-btn {\n  min-width: 75px;\n}\n.xcui-modal-size-small {\n  width: 22%;\n}\n.xcui-modal-size-middle {\n  width: 30%;\n}\n.xcui-modal-size-large {\n  width: 60%;\n}\n.xcui-modal-size-full {\n  width: 99%;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 126 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22239,6 +17034,10 @@
 	        title: {
 	            type: String,
 	            default: '提示'
+	        },
+	        content: {
+	            type: String,
+	            default: ''
 	        },
 	        show: {
 	            type: Boolean,
@@ -22324,8 +17123,8 @@
 	        close: function close(e) {
 	            this.show = false;
 	        },
-	        maskClose: function maskClose() {
-	            if (this.maskClosable) {
+	        maskClose: function maskClose(e) {
+	            if (this.maskClosable && e.target === this.$els.modalMask) {
 	                this.cancel();
 	            }
 	        },
@@ -22345,24 +17144,24 @@
 	};
 
 /***/ },
-/* 222 */
+/* 127 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"xcui-modal-wrapper\" v-show=\"show\">\n    <div class=\"xcui-modal-mask\" @click=\"maskClose\" v-el:modal-mask></div>\n    <div class=\"xcui-modal\" tabindex=\"-1\" @keydown.esc=\"cancel\" :style=\"style\" :class=\"[sizeClass,className]\">\n        <div class=\"xcui-modal-header\" v-if=\"showHeader\">\n            <slot name=\"header\">\n                <span class=\"xcui-modal-title\">{{title}}</span>\n            </slot>\n            <slot name=\"close\">\n                <!-- <div class=\"xcui-modal-header-close\" @click=\"cancel\" v-if=\"showCloseButton\">X</div> -->\n                <i class=\"xcui-modal-header-close glyphicon glyphicon-remove\" @click=\"cancel\" v-if=\"showCloseButton\"></i>\n            </slot>\n        </div>\n        <div class=\"xcui-modal-body\" :style=\"contentStyle\">\n            <slot></slot>\n        </div>\n        <div class=\"xcui-modal-footer\" v-if=\"showFooter\">\n            <slot name=\"footer\">\n                <button type=\"button\" name=\"button\" v-if=\"showOkButton\" @click=\"ok\"\n                    class=\"btn xcui-modal-btn btn-primary\">{{okText}}</button>\n                <button type=\"button\" name=\"button\" v-if=\"showCancelButton\" @click=\"cancel\"\n                    class=\"btn xcui-modal-cancel-btn btn-default\">{{cancelText}}</button>\n            </slot>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"xcui-modal-wrapper xcui-modal-mask\" @click=\"maskClose\" v-el:modal-mask v-show=\"show\">\n    <div class=\"xcui-modal\" tabindex=\"-1\" @keydown.esc=\"cancel\" :style=\"style\" :class=\"[sizeClass,className]\">\n        <div class=\"xcui-modal-header\" v-if=\"showHeader\">\n            <slot name=\"header\">\n                <span class=\"xcui-modal-title\">{{title}}</span>\n            </slot>\n            <slot name=\"close\">\n                <!-- <div class=\"xcui-modal-header-close\" @click=\"cancel\" v-if=\"showCloseButton\">X</div> -->\n                <i class=\"xcui-modal-header-close glyphicon glyphicon-remove\" @click=\"cancel\" v-if=\"showCloseButton\"></i>\n            </slot>\n        </div>\n        <div class=\"xcui-modal-body\" :style=\"contentStyle\">\n            <slot>{{content}}</slot>\n        </div>\n        <div class=\"xcui-modal-footer\" v-if=\"showFooter\">\n            <slot name=\"footer\">\n                <button type=\"button\" name=\"button\" v-if=\"showOkButton\" @click=\"ok\"\n                    class=\"btn xcui-modal-btn btn-primary\">{{okText}}</button>\n                <button type=\"button\" name=\"button\" v-if=\"showCancelButton\" @click=\"cancel\"\n                    class=\"btn xcui-modal-cancel-btn btn-default\">{{cancelText}}</button>\n            </slot>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 223 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(224)
-	__vue_script__ = __webpack_require__(226)
+	__webpack_require__(129)
+	__vue_script__ = __webpack_require__(131)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src\\components\\pageloading\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(227)
+	__vue_template__ = __webpack_require__(132)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -22378,7 +17177,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-43aff9e4/index.vue"
+	  var id = "_v-820fbdf8/index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -22387,16 +17186,16 @@
 	})()}
 
 /***/ },
-/* 224 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(225);
+	var content = __webpack_require__(130);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22413,10 +17212,10 @@
 	}
 
 /***/ },
-/* 225 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(11)();
 	// imports
 
 
@@ -22427,7 +17226,7 @@
 
 
 /***/ },
-/* 226 */
+/* 131 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22772,24 +17571,24 @@
 	};
 
 /***/ },
-/* 227 */
+/* 132 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"xcui-pageloading\">\n    <div class=\"bar\" role=\"bar\">\n        <div class=\"peg\"></div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 228 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(229)
-	__vue_script__ = __webpack_require__(231)
+	__webpack_require__(134)
+	__vue_script__ = __webpack_require__(136)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\progress\\index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(232)
+	  console.warn("[vue-loader] src\\components\\pagination\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(137)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -22805,7 +17604,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-6367ee68/index.vue"
+	  var id = "_v-2095839f/index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -22814,16 +17613,16 @@
 	})()}
 
 /***/ },
-/* 229 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(230);
+	var content = __webpack_require__(135);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22840,10 +17639,484 @@
 	}
 
 /***/ },
-/* 230 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".v-pagination-wrap {\n  -webkit-user-select: none;\n}\n.v-pagination-wrap .v-pagination-standard {\n  vertical-align: bottom;\n  margin: 0;\n}\n.v-pagination-wrap .v-pagination-standard .btn a {\n  padding: 5px 12px;\n}\n.v-pagination-wrap .v-pagination-standard .btn a:focus {\n  background-color: initial;\n}\n.v-pagination-wrap .v-pagination-standard .btn a,\n.v-pagination-wrap .v-pagination-standard .btn a:hover,\n.v-pagination-wrap .v-pagination-standard .btn a:active {\n  text-decoration: none;\n}\n.v-pagination-wrap .v-pagination-standard .page-btn {\n  padding: 6px 3px;\n}\n.v-pagination-wrap .v-pagination-standard .page-btn.active {\n  background-color: #46c3c1;\n  border-color: #46c3c1;\n  outline: none;\n}\n.v-pagination-wrap .v-pagination-standard .page-btn.active a {\n  color: #fff;\n}\n.v-pagination-wrap .v-pagination-standard .apostrophe {\n  border-color: transparent;\n  border-left-color: #ddd;\n}\n.v-pagination-wrap .v-pagination-standard .apostrophe:hover {\n  background-color: inherit;\n}\n.v-pagination-wrap .v-pagination-page-size {\n  line-height: 34px;\n}\n.v-pagination-wrap .v-pagination-mini .prev-trigger {\n  margin: 0 10px;\n  padding: 2px 12px;\n}\n.v-pagination-wrap .v-pagination-mini .prev-trigger span {\n  -webkit-transform: rotate(90deg);\n  transform: rotate(90deg);\n}\n.v-pagination-wrap .v-pagination-mini .next-trigger {\n  margin: 0 0 0 10px;\n  padding: 2px 12px;\n}\n.v-pagination-wrap .v-pagination-mini .next-trigger span {\n  -webkit-transform: rotate(-90deg);\n  transform: rotate(-90deg);\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 136 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    name: 'xcui-pagination',
+	    props: {
+	        'type': {
+	            type: String,
+	            default: 'standard' },
+	        'currentPageNo': {
+	            type: Number,
+	            default: 1
+	        },
+	        'total': {
+	            type: Number,
+	            default: 0
+	        },
+	        'pageSize': {
+	            type: Number,
+	            default: 20
+	        },
+	        'class': String,
+	        'withPageSize': {
+	            type: Boolean,
+	            default: true
+	        },
+	        'pageSizeRange': {
+	            type: Array,
+	            default: function _default() {
+	                return [10, 20, 50, 100];
+	            }
+	        },
+	        'rangeLength': {
+	            type: Number,
+	            default: 10,
+	            coerce: function coerce(val) {
+	                if (val < 1) {
+	                    return 1;
+	                }
+	                return val;
+	            }
+	        }
+	    },
+	    computed: {
+	        totalPageCount: function totalPageCount() {
+	            return Math.ceil(this.total / this.pageSize);
+	        },
+	        getRangePage: function getRangePage() {
+	            var curPage = this.currentPageNo;
+	            var midpoint = curPage;
+
+	            var pageRange = this.rangeLength - 1;
+
+	            var leftHand = Math.floor(pageRange / 2);
+
+	            var rightHand = Math.ceil(pageRange / 2);
+	            var totalPage = this.totalPageCount;
+	            var result = {
+	                begin: 1,
+	                end: 1
+	            };
+
+	            if (!midpoint) {
+	                result.begin = curPage - leftHand;
+	                result.end = curPage + rightHand;
+	            } else {
+	                result.begin = midpoint - leftHand;
+	                result.end = midpoint + rightHand;
+	            }
+
+	            if (result.begin < 1) {
+	                result.end = result.end - result.begin + 1;
+
+	                result.begin = 1;
+	                if (result.end > totalPage) {
+	                    result.end = totalPage;
+	                }
+	            } else if (result.end > totalPage) {
+	                result.begin += totalPage - result.end;
+	                result.end = totalPage;
+	                if (result.begin < 1) {
+	                    result.begin = 1;
+	                }
+	            }
+	            return result;
+	        }
+	    },
+	    watch: {
+	        pageSize: function pageSize(val) {
+	            this.$emit('change-pagesize', this.pageSize);
+	            this.$emit('go-to-page', 1, this.currentPageNo);
+	        }
+	    },
+	    methods: {
+	        turnToPage: function turnToPage(pageNo) {
+	            if (pageNo > 0 && pageNo <= this.totalPageCount) {
+	                this.$emit('go-to-page', pageNo, this.currentPageNo);
+	                this.currentPageNo = pageNo;
+	            }
+	        },
+	        prev: function prev() {
+	            this.turnToPage(this.currentPageNo - 1);
+	        },
+	        next: function next() {
+	            this.turnToPage(this.currentPageNo + 1);
+	        },
+	        isActive: function isActive(number) {
+	            return number + this.getRangePage.begin === this.currentPageNo;
+	        }
+	    }
+	};
+
+/***/ },
+/* 137 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"v-pagination-wrap {{ class || '' }}\">\n    <template v-if=\"type === 'standard' \">\n        <div class=\"row\">\n            <div v-if=\"withPageSize\" class=\"v-pagination-page-size col-md-3\">\n                共<span v-text=\"total\"></span>条\n                &nbsp;&nbsp;\n                每页\n                <select v-model=\"pageSize\">\n                    <option v-for=\"opt in pageSizeRange\" :value=\"opt\" v-text=\"opt\">1</option>\n                </select>\n                条\n            </div>\n            <div class=\"v-pagination-standard col-md-9 text-right\">\n                <div class=\"btn-group\">\n                    <button\n                        @click=\"prev\"\n                        class=\"btn btn-default\"\n                        :class=\"{'disabled': currentPageNo == 1}\">上一页</button>\n\n                    <button class=\"btn btn-default page-btn\" v-if=\"getRangePage.begin > 1\">\n                        <a href=\"javascript:void(0);\" @click=\"turnToPage(1)\">1</a>\n                    </button>\n                    <button class=\"btn btn-default page-btn\" v-if=\"getRangePage.begin > 1\">\n                        <a class=\"apostrophe\">...</a>\n                    </button>\n\n                    <button class=\"btn btn-default page-btn\" v-for=\"number in (getRangePage.end - getRangePage.begin + 1)\" :class=\"{'active': isActive(number)}\">\n                        <a v-if=\"isActive(number)\" href=\"javascript:void(0);\"  v-text=\"number + getRangePage.begin\"></a>\n                        <a v-else href=\"javascript:void(0);\"  v-text=\"number + getRangePage.begin\" @click=\"turnToPage(number + getRangePage.begin)\"></a>\n                    </button>\n\n                    <button class=\"btn btn-default page-btn\" v-if=\"getRangePage.end < totalPageCount\">\n                        <a class=\"apostrophe\">...</a>\n                    </button>\n                    <button class=\"btn btn-default page-btn\" v-if=\"getRangePage.end < totalPageCount\">\n                        <a href=\"javascript:void(0);\" v-text=\"totalPageCount\" @click=\"turnToPage(totalPageCount)\"></a>\n                    </button>\n\n                    <button\n                        @click=\"next\"\n                        class=\"btn btn-default\"\n                        :class=\"{'disabled': currentPageNo == totalPageCount}\">下一页</button>\n                </div>\n            </div>\n        </div>\n    </template>\n    <div v-else class=\"v-pagination-mini\">\n        <span>共<span v-text=\"total\"></span>条</span>\n        <button class=\"btn btn-default prev-trigger\" :class=\"{'disabled': currentPageNo < 2}\" @click=\"prev\">\n            <span class=\"caret\"></span>\n        </button>\n        <span v-text=\"currentPageNo\"></span>/<span v-text=\"totalPageCount\"></span>\n        <button class=\"btn btn-default next-trigger\" :class=\"{'disabled': currentPageNo == totalPageCount}\" @click=\"next\">\n            <span class=\"caret\"></span>\n        </button>\n    </div>\n</div>\n";
+
+/***/ },
+/* 138 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(139)
+	__vue_script__ = __webpack_require__(141)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\popover\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(144)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-e5c44348/index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 139 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(140);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 140 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".xcui-popover .scale-transition,\n.xcui-popover .fadein-transition {\n  display: inline-table;\n}\n.xcui-popover .fadein-enter {\n  -webkit-animation: fadein-in 0.3s ease-in;\n          animation: fadein-in 0.3s ease-in;\n}\n.xcui-popover .fadein-leave {\n  -webkit-animation: fadein-out 0.3s ease-out;\n          animation: fadein-out 0.3s ease-out;\n}\n.xcui-popover .scale-enter {\n  -webkit-animation: scale-in 0.15s ease-in;\n          animation: scale-in 0.15s ease-in;\n}\n.xcui-popover .scale-leave {\n  -webkit-animation: scale-out 0.15s ease-out;\n          animation: scale-out 0.15s ease-out;\n}\n@-webkit-keyframes fadein-in {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@keyframes fadein-in {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@-webkit-keyframes fadein-out {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n@keyframes fadein-out {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n@-webkit-keyframes scale-in {\n  0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes scale-in {\n  0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n}\n@-webkit-keyframes scale-out {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n}\n@keyframes scale-out {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 141 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _popoverMixins = __webpack_require__(142);
+
+	var _popoverMixins2 = _interopRequireDefault(_popoverMixins);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    name: 'xcui-popover',
+	    mixins: [_popoverMixins2.default],
+	    props: {
+	        trigger: {
+	            type: String,
+	            default: 'hover'
+	        },
+	        effect: {
+	            type: String,
+	            default: 'scale'
+	        },
+	        tooltipClass: {
+	            type: String,
+	            default: ''
+	        },
+	        titleClass: {
+	            type: String,
+	            default: 'scale'
+	        },
+	        contentClass: {
+	            type: String,
+	            default: 'scale'
+	        }
+	    }
+	};
+
+/***/ },
+/* 142 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _eventlistener = __webpack_require__(143);
+
+	var _eventlistener2 = _interopRequireDefault(_eventlistener);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    'props': {
+	        'trigger': {
+	            'type': String,
+	            'default': 'click'
+	        },
+	        'effect': {
+	            'type': String,
+	            'default': 'fadein'
+	        },
+	        'title': {
+	            'type': String
+	        },
+	        'content': {
+	            'type': String
+	        },
+	        'placement': {
+	            'type': String
+	        }
+	    },
+	    data: function data() {
+	        return {
+	            'position': {
+	                'top': 0,
+	                'left': 0
+	            },
+	            'show': true
+	        };
+	    },
+
+	    methods: {
+	        toggle: function toggle() {
+	            this.show = !this.show;
+	        },
+	        fixPosition: function fixPosition(triger, popover, placement) {
+	            popover.style.display = '';
+	            switch (placement) {
+	                case 'top':
+	                    this.position.left = triger.offsetLeft - popover.offsetWidth / 2 + triger.offsetWidth / 2;
+	                    this.position.top = triger.offsetTop - popover.offsetHeight;
+	                    break;
+	                case 'left':
+	                    this.position.left = triger.offsetLeft - popover.offsetWidth;
+	                    this.position.top = triger.offsetTop + triger.offsetHeight / 2 - popover.offsetHeight / 2;
+	                    break;
+	                case 'right':
+	                    this.position.left = triger.offsetLeft + triger.offsetWidth;
+	                    this.position.top = triger.offsetTop + triger.offsetHeight / 2 - popover.offsetHeight / 2;
+	                    break;
+	                case 'bottom':
+	                    this.position.left = triger.offsetLeft - popover.offsetWidth / 2 + triger.offsetWidth / 2;
+	                    this.position.top = triger.offsetTop + triger.offsetHeight;
+	                    break;
+	                default:
+	            }
+	            popover.style.top = this.position.top + 'px';
+	            popover.style.left = this.position.left + 'px';
+	            popover.style.display = 'none';
+	            this.show = !this.show;
+	        }
+	    },
+	    ready: function ready() {
+	        var triger = this.$els.trigger.children[0];
+	        var me = this;
+	        if (this.trigger === 'hover') {
+	            this._mouseenterEvent = _eventlistener2.default.listen(triger, 'mouseenter', function () {
+	                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
+	                me.show = true;
+	            });
+	            this._mouseleaveEvent = _eventlistener2.default.listen(triger, 'mouseleave', function () {
+	                me.show = false;
+	            });
+	        } else if (this.trigger === 'focus') {
+	            this._focusEvent = _eventlistener2.default.listen(triger, 'focus', function () {
+	                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
+	                me.show = true;
+	            });
+	            this._blurEvent = _eventlistener2.default.listen(triger, 'blur', function () {
+	                me.show = false;
+	            });
+	        } else {
+	            this._clickEvent = _eventlistener2.default.listen(triger, 'click', function () {
+	                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
+	                me.toggle;
+	            });
+	        }
+
+	        this.fixPosition(this.$els.trigger.children[0], this.$els.popover, this.placement);
+	    },
+	    beforeDestroy: function beforeDestroy() {
+	        if (this._blurEvent) {
+	            this._blurEvent.remove();
+	            this._focusEvent.remove();
+	        }
+	        if (this._mouseenterEvent) {
+	            this._mouseenterEvent.remove();
+	            this._mouseleaveEvent.remove();
+	        }
+	        if (this._clickEvent) {
+	            this._clickEvent.remove();
+	        }
+	    }
+	};
+
+/***/ },
+/* 143 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    listen: function listen(target, eventType, callback) {
+	        if (target.addEventListener) {
+	            target.addEventListener(eventType, callback, false);
+	            return {
+	                remove: function remove() {
+	                    target.removeEventListener(eventType, callback, false);
+	                }
+	            };
+	        } else if (target.attachEvent) {
+	            target.attachEvent('on' + eventType, callback);
+	            return {
+	                remove: function remove() {
+	                    target.detachEvent('on' + eventType, callback);
+	                }
+	            };
+	        }
+	    }
+	};
+
+/***/ },
+/* 144 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div v-el:outer style=\"position:relative; display: inline-block\" class=\"xcui-popover\">\n    <span v-el:trigger>\n      <slot>\n      </slot>\n    </span>\n    <div class=\"popover\"\n      v-bind:class=\"{\n      'top':placement === 'top',\n      'left':placement === 'left',\n      'right':placement === 'right',\n      'bottom':placement === 'bottom'\n      }\"\n      v-el:popover\n      v-show=\"show\"\n      :transition=\"effect\">\n        <div class=\"arrow\"></div>\n        <div class=\"popover-title\" :class=\"titleClass\" v-show=\"title\">\n            <slot name=\"title\">\n              {{title}}\n            </slot>\n        </div>\n        <div class=\"popover-content\" :class=\"contentClass\">\n          <slot name=\"content\">\n              {{{content}}}\n          </slot>\n        </div>\n    </div>\n</div>\n";
+
+/***/ },
+/* 145 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(146)
+	__vue_script__ = __webpack_require__(148)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\progress\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(149)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-ad60f79c/index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 146 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(147);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 147 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
 	// imports
 
 
@@ -22854,7 +18127,7 @@
 
 
 /***/ },
-/* 231 */
+/* 148 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22889,13 +18162,89 @@
 	};
 
 /***/ },
-/* 232 */
+/* 149 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"xcui-progress\" >\n    <div class=\"xcui-progress-container\">\n        <div class=\"xcui-progress-outer\">\n             <div class=\"xcui-progress-inner\" :style=\"{width:percent+'%',height:height+'px'}\"></div>\n        </div>\n    </div>\n    <div :class=\"['infoClassName',!showInfo ? 'hidden':'']\" >\n        {{percentInfo}}\n    </div>\n<div>\n";
 
 /***/ },
-/* 233 */
+/* 150 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(151)
+	__vue_script__ = __webpack_require__(153)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\select\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(160)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-638c7bfe/index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 151 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(152);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 152 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".xcui-select {\n  display: inline-block;\n  box-sizing: content-box;\n  position: relative;\n  vertical-align: middle;\n  color: #666;\n  font-size: 14px;\n  z-index: 10;\n  width: 100%;\n}\n.xcui-select-open .xcui-select-selection {\n  border-color: #66afe9 !important;\n  outline: 0;\n  box-shadow: 0 0 0 2px #2db7f533;\n}\n.xcui-select.disabled .xcui-select-selection {\n  color: #ccc;\n  background: #f7f7f7;\n  cursor: not-allowed;\n}\n.xcui-select-selection {\n  outline: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  box-sizing: border-box;\n  display: block;\n  background-color: #fff;\n  border-radius: 4px;\n  border: 1px solid #ccc;\n  padding: 2px 6px;\n  -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n}\n.xcui-select-selection-rendered {\n  height: 26px;\n  display: block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  /*padding-left: 8px;*/\n  padding-right: 24px;\n  line-height: 26px;\n}\n.xcui-select-selection-text {\n  display: block;\n  font-size: 14px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n.xcui-select-menu-dropdown {\n  background-color: #fff;\n  /*box-shadow: 0 1px 6px #63636333;*/\n  border-radius: 4px;\n  box-sizing: border-box;\n  z-index: 1050;\n  /*left: -9999px;*/\n  /*top: -9999px;*/\n  position: absolute;\n  top: 100%;\n  width: 100%;\n  margin-top: 2px;\n  outline: none;\n  overflow: hidden;\n  font-size: 12px;\n  max-height: 200px;\n  border: 1px solid rgba(0, 0, 0, 0.15);\n  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);\n  z-index: 1;\n}\n.xcui-select-menu,\n.xcui-select-menu-group {\n  outline: none;\n  margin-bottom: 0;\n  padding-left: 0;\n  list-style: none;\n  max-height: 200px;\n  overflow: auto;\n}\n.xcui-select-menu-item,\n.xcui-select-menu-group-item {\n  position: relative;\n  display: block;\n  padding: 7px 15px;\n  font-weight: 400;\n  color: #262626;\n  cursor: pointer;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  -webkit-transition: background .3s ease;\n  transition: background .3s ease;\n}\n.xcui-select-menu-item-select,\n.xcui-select-menu-group-item-select {\n  font-weight: 500;\n  color: #666;\n  background-color: #f7f7f7;\n}\n.xcui-select-menu-item.disabled,\n.xcui-select-menu-group-item.disabled {\n  color: #ccc !important;\n  cursor: not-allowed !important;\n}\n.xcui-select-menu-item-selected,\n.xcui-select-menu-group-item-selected {\n  background-color: #337ab7;\n  font-weight: 700;\n  color: #fff;\n}\n.xcui-select-menu-item-selected:after,\n.xcui-select-menu-group-item-selected:after {\n  font-family: 'Glyphicons Halflings';\n  content: \"\\E013\";\n  position: absolute;\n  right: 6px;\n  top: 6px;\n  font-size: 12px;\n}\n.xcui-select-menu-item-selected:hover,\n.xcui-select-menu-group-item-selected:hover {\n  background-color: #f7f7f7;\n  font-weight: 700;\n  color: #666;\n}\n.xcui-select-menu-item:hover,\n.xcui-select-menu-group-item:hover {\n  background-color: #f5f5f5;\n}\n.xcui-select-menu-item-partial,\n.xcui-select-menu-group-item-partial {\n  background: red;\n}\n.xcui-select-menu-item-key,\n.xcui-select-menu-group-item-key {\n  background-color: #f5f5f5;\n}\n.xcui-select-menu-group-title {\n  color: #999;\n  line-height: 1.5;\n  padding: 8px 12px;\n}\n.xcui-select-menu-group-item {\n  padding-left: 20px;\n}\n.xcui-select-menu-group-item-selected {\n  background-color: #337ab7;\n  font-weight: 700;\n  color: #fff;\n}\n.xcui-select-menu-group-item-selected:after {\n  font-family: 'Glyphicons Halflings';\n  content: \"\\E013\";\n  position: absolute;\n  right: 6px;\n  top: 6px;\n  font-size: 12px;\n}\n.xcui-select-menu-group-item-selected:hover {\n  background-color: #f7f7f7;\n  font-weight: 700;\n  color: #666;\n}\n.xcui-select-menu-group > ul {\n  margin: 0;\n  padding: 0;\n}\n.xcui-select-search-input {\n  width: 100%;\n  border: 0;\n  font-size: 100%;\n  height: 100%;\n  outline: 0;\n  border-radius: 6px;\n}\n.xcui-select .glyphicon {\n  font-size: 12px;\n}\n.xcui-select .xcui-select-arrow {\n  position: absolute;\n  right: 10px;\n  top: 10px;\n  color: #ccc;\n}\n.xcui-select > ul > li > a {\n  padding: 0;\n  background-color: #fff;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22904,9 +18253,1038 @@
 	    value: true
 	});
 
-	var _install = __webpack_require__(234);
+	var _typeof2 = __webpack_require__(31);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	var _clone = __webpack_require__(154);
+
+	var _clone2 = _interopRequireDefault(_clone);
+
+	var _fuzzysearch = __webpack_require__(159);
+
+	var _fuzzysearch2 = _interopRequireDefault(_fuzzysearch);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    name: 'xcui-select',
+	    props: {
+	        className: {
+	            type: String
+	        },
+
+	        selected: [String, Array],
+
+	        placeholder: {
+	            type: String
+	        },
+
+	        disabled: {
+	            type: Boolean,
+	            default: false
+	        },
+
+	        showSearch: {
+	            type: Boolean,
+	            default: false
+	        },
+
+	        clearOnSelect: {
+	            type: Boolean,
+	            default: false
+	        },
+
+	        searchEmptyText: {
+	            type: String,
+	            default: ''
+	        },
+
+	        optgroup: {
+	            type: Boolean,
+	            default: false
+	        },
+
+	        customLabel: {
+	            type: Function
+	        },
+
+	        options: {
+	            type: Array
+	        },
+
+	        multiple: {
+	            type: Boolean,
+	            default: false
+	        },
+	        multipleMax: {
+	            type: Number,
+	            default: 0
+	        },
+
+	        label: {
+	            type: String,
+	            default: ''
+	        },
+
+	        closeAfterSelect: {
+	            type: Boolean,
+	            default: true
+	        }
+	    },
+	    data: function data() {
+	        return {
+	            searchValue: '',
+	            isOpen: false,
+	            selectIndex: 0,
+	            value: this.selected ? (0, _clone2.default)(this.selected) : this.multiple ? [] : null
+	        };
+	    },
+
+	    methods: {
+	        activate: function activate() {
+	            if (this.isOpen || this.disabled) {
+	                return;
+	            }
+	            this.isOpen = true;
+	            if (this.showSearch) {
+	                if (this.clearOnSelect) {
+	                    this.searchValue = '';
+	                    this.options = [];
+	                }
+	                this.$els.search.focus();
+	            } else {
+	                this.$el.focus();
+	            }
+	        },
+	        deactivate: function deactivate() {
+	            if (!this.isOpen) {
+	                return;
+	            }
+	            if (this.showSearch) {
+	                this.$els.search.blur();
+	                this.adjustSearch();
+	            }
+	            this.isOpen = false;
+	        },
+	        toggle: function toggle(key) {
+	            if (!this.isOpen) {
+	                this.activate();
+	            } else {
+	                this.deactivate();
+	            }
+	        },
+	        getOptionLabel: function getOptionLabel(option) {
+	            if (option !== null && (typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
+	                if (this.customLabel) {
+	                    return this.customLabel(option);
+	                } else if (this.label && option[this.label]) {
+	                    return option[this.label];
+	                }
+	                return option.label;
+	            }
+	            return option;
+	        },
+	        optgroupSelect: function optgroupSelect(parentIndex, index, option) {
+	            if (this.selectIndex === parentIndex + '-' + index && this.value === option) {
+	                return;
+	            }
+	            this.value = option;
+	            this.selectIndex = parentIndex + '-' + index;
+	            this.$emit('change', (0, _clone2.default)(this.value), parentIndex, index);
+	            this.$emit('select', (0, _clone2.default)(this.value), parentIndex, index);
+	            this.closeAfterSelect && this.deactivate();
+	        },
+	        select: function select(option) {
+	            var isSelected = this.isSelected(option);
+	            if (!option || option.disable) {
+	                return;
+	            }
+	            if (this.multiple) {
+	                var optionValue = option;
+	                if ((typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
+	                    optionValue = option[this.label] || option.label;
+	                }
+	                if (isSelected) {
+	                    this.removeOption(option);
+	                } else {
+	                    if (this.multipleMax > this.value.length || !this.multipleMax) {
+	                        if ((typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
+	                            this.value.push(option);
+	                        } else {
+	                            this.value.push(optionValue);
+	                        }
+	                    }
+	                }
+	            } else {
+	                if (isSelected) {
+	                    return;
+	                }
+	                this.value = isSelected ? null : option;
+	            }
+	            this.$emit('change', (0, _clone2.default)(this.value));
+	            this.$emit('select', (0, _clone2.default)(this.value));
+	            this.closeAfterSelect && this.deactivate();
+	        },
+	        isSelected: function isSelected(option, groupIndex, index) {
+	            var me = this;
+	            if (!this.value) {
+	                return false;
+	            }
+	            if (this.optgroup) {
+	                return this.selectIndex === groupIndex + '-' + index;
+	            }
+	            if (this.multiple) {
+	                if ((typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
+	                    return this.value.indexOf(option) > -1;
+	                }
+	                return this.value.indexOf(option) > -1;
+	            }
+	            if (this.showSearch) {
+	                if ((typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
+	                    return this.searchValue === option[me.label];
+	                }
+	                return this.searchValue === option;
+	            }
+	            if (this.value === option && !option.disable) {
+	                return true;
+	            }
+	            return false;
+	        },
+	        removeOption: function removeOption(option) {
+	            if (this.value.length === 0) {
+	                return;
+	            }
+	            if ((typeof option === 'undefined' ? 'undefined' : (0, _typeof3.default)(option)) === 'object') {
+	                if (this.value.indexOf(option) !== -1) {
+	                    this.value.splice(this.value.indexOf(option), 1);
+	                }
+	            }
+	            this.value.$remove(option);
+	            this.$emit('remove', (0, _clone2.default)(option));
+	        },
+	        indexSet: function indexSet(parentIndex, index) {
+	            if (this.optgroup) {
+	                this.selectIndex = parentIndex + '-' + index;
+	                return;
+	            }
+	            this.selectIndex = index;
+	        },
+	        enterSearchValue: function enterSearchValue() {
+	            if (this.filteredOptions.length > 0) {
+	                this.select(this.filteredOptions[this.selectIndex]);
+	            }
+	            this.resetSelectIndex();
+	        },
+	        keyNext: function keyNext() {
+	            var filterLen = this.filteredOptions.length;
+	            if (this.selectIndex < filterLen - 1) {
+	                this.selectIndex++;
+	            }
+	            this.resetSearchScrollTop();
+	        },
+	        keyPrev: function keyPrev() {
+	            if (this.selectIndex > 0) {
+	                this.selectIndex--;
+	            }
+	            this.resetSearchScrollTop();
+	        },
+	        resetSearchScrollTop: function resetSearchScrollTop() {
+	            var index = this.selectIndex;
+	            var scrollTop = this.$els.list.scrollTop;
+	            var _getDropDownHeight = this.getDropDownHeight,
+	                itemHeight = _getDropDownHeight.itemHeight,
+	                listHeight = _getDropDownHeight.listHeight;
+
+	            var listViewLen = Math.floor(listHeight / itemHeight);
+	            var indexPos = index * itemHeight;
+	            if (scrollTop <= indexPos - listViewLen * itemHeight) {
+	                this.$els.list.scrollTop = indexPos - (listViewLen - 1) * itemHeight;
+	            }
+	            if (scrollTop >= indexPos) {
+	                this.$els.list.scrollTop = indexPos;
+	            }
+	        },
+	        resetSelectIndex: function resetSelectIndex() {
+	            this.selectIndex = 0;
+	            this.closeAfterSelect && this.deactivate();
+	        },
+	        adjustSearch: function adjustSearch() {
+	            if (!this.showSearch) {
+	                return;
+	            }
+	            this.searchValue = this.value ? this.currentOptionLabel : '';
+	        },
+	        reset: function reset() {
+	            this.selected = '';
+	            this.value = null;
+	        }
+	    },
+	    computed: {
+	        getWrapCls: function getWrapCls() {
+	            var me = this;
+	            var cls = ['xcui-select'];
+	            if (this.disabled) {
+	                cls.push('disabled');
+	            }
+	            if (this.isOpen) {
+	                cls.push('xcui-select-open');
+	            }
+	            if (this.className) {
+	                cls.push(me.className);
+	            }
+	            return cls.join(' ');
+	        },
+	        filteredOptions: function filteredOptions() {
+	            var value = this.searchValue;
+	            var me = this;
+	            if (this.showSearch && this.options.length) {
+	                return this.options.filter(function (item) {
+	                    if (typeof item !== 'string') {
+	                        return (0, _fuzzysearch2.default)(value, item[me.label || 'label']);
+	                    }
+	                    return (0, _fuzzysearch2.default)(value, item);
+	                });
+	            }
+	            return this.options || [];
+	        },
+	        currentOptionLabel: function currentOptionLabel() {
+	            var _this = this;
+
+	            if (!this.value) {
+	                return this.placeholder;
+	            }
+	            if (this.multiple) {
+	                return this.value.map(function (k) {
+	                    if ((typeof k === 'undefined' ? 'undefined' : (0, _typeof3.default)(k)) !== 'object') {
+	                        return k;
+	                    }
+	                    var label = _this.label || 'label';
+	                    return k[label];
+	                }).join(',');
+	            }
+	            if (typeof this.value === 'string') {
+	                return this.value;
+	            } else if (this.label) {
+	                return this.value[this.label];
+	            }
+	            return this.value.label || '';
+	        },
+	        getDropDownHeight: function getDropDownHeight() {
+	            var list = this.$els.list;
+	            var item = list.children[0];
+	            var itemHeight = item.currentStyle ? item.currentStyle.height : getComputedStyle(item, false).height;
+	            var listHeight = list.currentStyle ? list.currentStyle.height : getComputedStyle(list, false).height;
+	            return {
+	                listHeight: listHeight.replace('px', ''),
+	                itemHeight: itemHeight.replace('px', '')
+	            };
+	        },
+	        optgroupDefaultIndex: function optgroupDefaultIndex() {
+	            var me = this;
+	            var selected = this.selected;
+	            var indexs = [];
+	            this.options.forEach(function (item, index) {
+	                item.options.forEach(function (subItem, subIndex) {
+	                    if (typeof subItem === 'string' && selected === subItem) {
+	                        indexs = [index, subIndex];
+	                        return;
+	                    }
+	                    if (subItem[me.label] && subItem[me.label] === selected) {
+	                        if (subItem[me.label].disable) {
+	                            return;
+	                        }
+	                        indexs = [index, subIndex];
+	                        return;
+	                    }
+	                });
+	            });
+	            return indexs;
+	        },
+	        multipleMaxShow: function multipleMaxShow() {
+	            if (!this.multiple) {
+	                return false;
+	            }
+	            return this.multiple && this.multipleMax !== 0 && this.value && this.multipleMax === this.value.length;
+	        }
+	    },
+	    watch: {
+	        'options': function options() {
+	            if (this.showSearch) {
+	                return;
+	            }
+	            this.reset();
+	        },
+	        'filteredOptions': function filteredOptions() {
+	            var filterLen = this.filteredOptions.length;
+	            if (this.selectIndex >= filterLen) {
+	                this.selectIndex = filterLen > 0 ? filterLen - 1 : 0;
+	            }
+	        },
+	        'searchValue': function searchValue(oldVal, newVal) {
+	            if (this.searchValue !== this.currentOptionLabel) {
+	                this.$emit('search-change', this.searchValue);
+	            }
+	        },
+	        'selected': function selected() {
+	            if (this.optgroup) {
+	                this.value = this.selected;
+	                var indexs = this.optgroupDefaultIndex;
+	                this.selectIndex = indexs.join('-');
+	            } else {
+	                this.value = this.selected;
+	            }
+	        }
+	    }
+	};
+
+/***/ },
+/* 154 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _keys = __webpack_require__(155);
+
+	var _keys2 = _interopRequireDefault(_keys);
+
+	var _typeof2 = __webpack_require__(31);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var clone = function clone(obj) {
+	    if (Array.isArray(obj)) {
+	        return obj.map(clone);
+	    } else if (obj && (typeof obj === 'undefined' ? 'undefined' : (0, _typeof3.default)(obj)) === 'object') {
+	        var cloned = {};
+	        var keys = (0, _keys2.default)(obj);
+	        for (var i = 0, l = keys.length; i < l; i++) {
+	            var key = keys[i];
+	            cloned[key] = clone(obj[key]);
+	        }
+	        return cloned;
+	    } else {
+	        return obj;
+	    }
+	};
+
+	module.exports = clone;
+
+/***/ },
+/* 155 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(156), __esModule: true };
+
+/***/ },
+/* 156 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(157);
+	module.exports = __webpack_require__(42).Object.keys;
+
+/***/ },
+/* 157 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.14 Object.keys(O)
+	var toObject = __webpack_require__(77)
+	  , $keys    = __webpack_require__(61);
+
+	__webpack_require__(158)('keys', function(){
+	  return function keys(it){
+	    return $keys(toObject(it));
+	  };
+	});
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// most Object methods by ES6 should accept primitives
+	var $export = __webpack_require__(40)
+	  , core    = __webpack_require__(42)
+	  , fails   = __webpack_require__(51);
+	module.exports = function(KEY, exec){
+	  var fn  = (core.Object || {})[KEY] || Object[KEY]
+	    , exp = {};
+	  exp[KEY] = exec(fn);
+	  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
+	};
+
+/***/ },
+/* 159 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	function fuzzysearch (needle, haystack) {
+	  var tlen = haystack.length;
+	  var qlen = needle.length;
+	  if (qlen > tlen) {
+	    return false;
+	  }
+	  if (qlen === tlen) {
+	    return needle === haystack;
+	  }
+	  outer: for (var i = 0, j = 0; i < qlen; i++) {
+	    var nch = needle.charCodeAt(i);
+	    while (j < tlen) {
+	      if (haystack.charCodeAt(j++) === nch) {
+	        continue outer;
+	      }
+	    }
+	    return false;
+	  }
+	  return true;
+	}
+
+	module.exports = fuzzysearch;
+
+
+/***/ },
+/* 160 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div tabindex=\"0\"\n     :class=\"getWrapCls\"\n     @focus=\"activate()\"\n     @blur=\"showSearch ? false : deactivate()\"\n     @keydown.enter.stop.prevent.self=\"enterSearchValue()\">\n    <div class=\"xcui-select-selection\">\n        <div class=\"xcui-select-selection-rendered\"\n             @mousedown.stop=\"toggle()\">\n            <input\n                type=\"text\"\n                name=\"search\"\n                v-el:search\n                autocomplete=\"off\"\n                class=\"xcui-select-search-input\"\n                v-if=\"showSearch\"\n                v-model=\"searchValue\"\n                @focus.prevent=\"activate()\"\n                @blur.prevent=\"deactivate()\"\n                @keyup.down=\"keyNext()\"\n                @keyup.up=\"keyPrev()\"\n                @keydown.enter.stop.prevent.self=\"enterSearchValue()\"\n                @change.prevent.stop=\"\"\n                :placeholder=\"placeholder\">\n            <span\n                class=\"xcui-select-selection-text\"\n                v-if=\"!showSearch\"\n                v-text=\"currentOptionLabel || placeholder\">\n            </span>\n            <i class=\"glyphicon xcui-select-arrow\"\n               @mousedown.prevent.stop=\"toggle()\"\n               :class=\"{'glyphicon-triangle-bottom':(!isOpen),'glyphicon-triangle-top':(isOpen)}\"></i>\n        </div>\n    </div>\n    <div class=\"xcui-select-menu-dropdown\"\n         v-show=\"(isOpen && filteredOptions.length>0) || (isOpen && multiple)\">\n        <ul\n            v-el:list\n            aria-activedescendant\n            class=\"xcui-select-menu\">\n            <li class=\"xcui-select-menu-item\"\n                v-if=\"multipleMaxShow\">\n                最多可选{{multipleMax}}项!\n            </li>\n            <li class=\"xcui-select-menu-item\"\n                v-if=\"filteredOptions.length<1 && searchEmptyText\"\n                v-text=\"searchEmptyText\">\n            </li>\n            <template\n                      v-for=\"item in filteredOptions\">\n                <li class=\"xcui-select-menu-item\"\n                    v-if=\"!optgroup\"\n                    tabindex=\"1\"\n                    :class=\"{'xcui-select-menu-item-selected': isSelected(item), 'xcui-select-menu-item-key': $index === selectIndex,'disabled': item.disable}\"\n                    @mouseenter.prevent.stop.self=\"indexSet($index)\"\n                    @mousedown.prevent=\"select(item)\">\n                    <span v-text=\"getOptionLabel(item)\"></span>\n                </li>\n            </template>\n            <template\n                v-for=\"item in filteredOptions\">\n                <li class=\"xcui-select-menu-group\" v-if=\"optgroup\">\n                    <div class=\"xcui-select-menu-group-title\">{{item.name}}</div>\n                    <ul>\n                        <template v-for=\"option in item.options\">\n                            <li class=\"xcui-select-menu-group-item\"\n                                :class=\"{'xcui-select-menu-group-item-selected': isSelected(option,$parent.$index,$index), 'disabled': option.disable}\"\n                                @mousedown.prevent.stop.self=\"optgroupSelect($parent.$index,$index,option)\">\n                                <span v-text=\"getOptionLabel(option)\"></span>\n                            </li>\n                        </template>\n                    </ul>\n                </li>\n            </template>\n        </ul>\n    </div>\n</div>\n";
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(162)
+	__vue_script__ = __webpack_require__(164)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\suggestion\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(165)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-aa78ccee/index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(163);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".xcui-suggestion {\n  position: relative;\n  width: 100%;\n}\n.xcui-suggestion .xcui-show {\n  display: block;\n}\n.xcui-suggestion .xcui-suggestion-list {\n  min-width: 100%;\n  max-height: 400px;\n  overflow: auto;\n}\n.xcui-suggestion .xcui-suggestion-list li.current {\n  background: #ddd;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 164 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    name: 'xcui-suggestion',
+	    data: function data() {
+	        return {
+	            list: [],
+	            localList: [],
+	            currentIndex: -1
+	        };
+	    },
+
+	    props: {
+	        id: {
+	            type: String,
+	            default: ''
+	        },
+	        name: {
+	            type: String,
+	            default: ''
+	        },
+	        className: {
+	            type: String,
+	            default: ''
+	        },
+	        disabled: {
+	            type: Boolean,
+	            default: false
+	        },
+	        placeholder: {
+	            type: String,
+	            default: ''
+	        },
+	        suggestions: {
+	            type: Array,
+	            default: function _default() {
+	                return [];
+	            }
+	        },
+	        'dataText': {
+	            type: String,
+	            default: ''
+	        },
+	        'dataValue': {
+	            type: [String, Number],
+	            default: ''
+	        },
+	        'check': {
+	            type: Boolean,
+	            default: true
+	        },
+	        'inputCallback': {
+	            type: Function,
+	            default: function _default() {
+	                return function () {};
+	            }
+	        }
+	    },
+	    computed: {
+	        show: function show() {
+	            return this.list.length > 0 && this.$el.getElementsByTagName('input')[0] === document.activeElement;
+	        }
+	    },
+	    watch: {
+	        suggestions: function suggestions() {
+	            this.arrangeLocalList();
+	            this.getLocalSug();
+	        }
+	    },
+	    methods: {
+	        onInput: function onInput() {
+	            var me = this;
+	            setTimeout(function () {
+	                me.currentIndex = -1;
+	                me.getLocalSug();
+	                me.autoSetItem();
+	                me.inputCallback && me.inputCallback();
+	            }, 100);
+	        },
+	        onBlur: function onBlur() {
+	            var me = this;
+
+	            setTimeout(function () {
+	                me.currentIndex = -1;
+	                me.list = [];
+	            }, 200);
+	        },
+	        changeCurrent: function changeCurrent(offset) {
+	            this.currentIndex += offset;
+
+	            if (offset > 0 && this.currentIndex >= this.list.length) {
+	                this.currentIndex = 0;
+	            } else if (offset < 0 && this.currentIndex < 0) {
+	                this.currentIndex = this.list.length - 1;
+	            }
+
+	            var currentItem = this.list[this.currentIndex];
+
+	            this.setItem(currentItem);
+	        },
+	        convert2standard: function convert2standard(data) {
+	            var res = [];
+
+	            res = data.map(function (item, index) {
+	                return {
+	                    text: item,
+	                    value: item
+	                };
+	            });
+
+	            return res;
+	        },
+	        arrangeLocalList: function arrangeLocalList() {
+	            var sugs = this.suggestions;
+
+	            if (this.isArray(sugs) && sugs.length > 0 && typeof sugs[0] === 'string') {
+	                this.localList = this.convert2standard(sugs);
+	            } else {
+	                this.localList = sugs;
+	            }
+	        },
+	        autoSetItem: function autoSetItem() {
+	            var word = this.dataText;
+
+	            var match = this.list.filter(function (item) {
+	                return item.text === word;
+	            });
+
+	            if (match.length) {
+	                this.setItem(match[0]);
+	            } else {
+	                this.dataValue = '';
+	            }
+	        },
+	        getLocalSug: function getLocalSug() {
+	            var _this = this;
+
+	            var word = this.dataText;
+
+	            this.list = this.localList.filter(function (item) {
+	                return word && _this.check ? item.text.indexOf(word) > -1 : true;
+	            });
+	        },
+	        setItem: function setItem(item) {
+	            this.dataValue = item.value;
+	            this.dataText = item.text;
+	        },
+	        logError: function logError(msg) {
+	            throw new Error('[xcui] - ' + msg);
+	        },
+	        isArray: function isArray(arr) {
+	            return Object.prototype.toString.call(arr) === '[object Array]';
+	        },
+	        clearText: function clearText() {
+	            this.dataText = '';
+	            this.dataValue = '';
+	        }
+	    },
+	    ready: function ready() {
+	        this.arrangeLocalList();
+	    }
+	};
+
+/***/ },
+/* 165 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"xcui-suggestion {{className}}\">\n    <input type=\"text\"\n            class=\"form-control xcui-suggestion-input\"\n            autocomplete=\"off\"\n            :id=\"id\"\n            :name=\"name\"\n            :disabled=\"disabled\"\n            :placeholder=\"placeholder\"\n            v-model=\"dataText\"\n            @input=\"onInput\"\n            @focus=\"onInput\"\n            @blur=\"onBlur\"\n            @keyDown.up=\"changeCurrent(-1)\"\n            @keyDown.down=\"changeCurrent(1)\"\n            @keyDown.enter=\"onBlur\">\n\n    <ul class=\"xcui-suggestion-list dropdown-menu\" :class=\"{'show':show}\">\n        <li v-for=\"(index,item) in list\" :class=\"{'current' : currentIndex==index}\">\n            <a href=\"javascript:void(0)\" @click=\"setItem(item)\">\n                {{item.text}}\n            </a>\n        </li>\n    </ul>\n</div>\n";
+
+/***/ },
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(167)
+	__vue_script__ = __webpack_require__(169)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\tag\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(170)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-c4c224de/index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(168);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".xcui-tag {\n  display: inline-block;\n  line-height: 25px;\n  height: 27px;\n  border-radius: 6px;\n  border: 1px solid #e9e9e9;\n  background: #fff;\n  font-size: 12px;\n  vertical-align: middle;\n  opacity: 1;\n  margin: 2px 4px 2px 0;\n  cursor: pointer;\n}\n.xcui-tag .xcui-tag-text {\n  padding: 0 8px;\n}\n.xcui-disabled {\n  background: #f5f5f5;\n  cursor: default;\n  opacity: .85;\n}\n.xcui-tag:hover {\n  opacity: 0.85;\n}\n.xcui-cross {\n  display: inline-block;\n  font-style: normal;\n  font-size: 17px;\n  zoom: 1;\n  cursor: pointer;\n  font-weight: 700;\n  margin-left: 3px;\n  color: #666;\n  opacity: 0.66;\n}\n.xcui-cross:before {\n  content: \"\\D7\";\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 169 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    name: 'xcui-tag',
+	    props: {
+	        text: {
+	            type: String,
+	            default: ''
+	        },
+	        closeable: {
+	            type: Boolean,
+	            default: false
+	        },
+	        disabled: {
+	            type: Boolean,
+	            default: false
+	        },
+	        showTag: {
+	            type: Boolean,
+	            default: true
+	        },
+	        classname: {
+	            type: String,
+	            default: ''
+	        },
+	        key: {
+	            type: String,
+	            default: ''
+	        },
+	        aftercloseisshow: {
+	            type: Boolean,
+	            default: false,
+	            twoway: true
+	        }
+	    },
+	    methods: {
+	        onCloseClick: function onCloseClick() {
+	            this.$emit('close');
+	            if (this.aftercloseisshow === false) {
+	                this.showTag = false;
+	            };
+	        },
+	        onClick: function onClick() {
+	            this.$emit('click');
+	        }
+	    }
+	};
+
+/***/ },
+/* 170 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\t<div :class=\"['xcui-tag', disabled ? ' xcui-disabled':'']\" @click=\"onClick\" v-if=\"showTag\" >\n        <div class=\"{{classname!='' ? classname : ''}}\" >\n\t\t<span class=\"xcui-tag-text\"><slot></slot>{{text}}<span>\n        <i class=\"xcui-cross\" v-if=\"closeable\" @click.stop=\"onCloseClick\"></i>\n        </div>\n\t</div>\n";
+
+/***/ },
+/* 171 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(172)
+	__vue_script__ = __webpack_require__(174)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\components\\tooltip\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(175)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-2f709b8c/index.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(173);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/.0.23.1@css-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".xcui-tooltip .tooltip {\n  opacity: .9;\n}\n.xcui-tooltip .scale-transition,\n.xcui-tooltip .fadein-transition {\n  display: inline-table;\n}\n.xcui-tooltip .fadein-enter {\n  -webkit-animation: fadein-in 0.3s ease-in;\n          animation: fadein-in 0.3s ease-in;\n}\n.xcui-tooltip .fadein-leave {\n  -webkit-animation: fadein-out 0.3s ease-out;\n          animation: fadein-out 0.3s ease-out;\n}\n.xcui-tooltip .scale-enter {\n  -webkit-animation: scale-in 0.15s ease-in;\n          animation: scale-in 0.15s ease-in;\n}\n.xcui-tooltip .scale-leave {\n  -webkit-animation: scale-out 0.15s ease-out;\n          animation: scale-out 0.15s ease-out;\n}\n@-webkit-keyframes fadein-in {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@keyframes fadein-in {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}\n@-webkit-keyframes fadein-out {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n@keyframes fadein-out {\n  0% {\n    opacity: 1;\n  }\n  100% {\n    opacity: 0;\n  }\n}\n@-webkit-keyframes scale-in {\n  0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes scale-in {\n  0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n}\n@-webkit-keyframes scale-out {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n}\n@keyframes scale-out {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n    opacity: 0;\n  }\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _popoverMixins = __webpack_require__(142);
+
+	var _popoverMixins2 = _interopRequireDefault(_popoverMixins);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    name: 'xcui-tooltip',
+	    mixins: [_popoverMixins2.default],
+	    props: {
+	        trigger: {
+	            type: String,
+	            default: 'hover'
+	        },
+	        effect: {
+	            type: String,
+	            default: 'scale'
+	        },
+	        tooltipClass: {
+	            type: String,
+	            default: ''
+	        },
+	        titleClass: {
+	            type: String,
+	            default: 'scale'
+	        },
+	        contentClass: {
+	            type: String,
+	            default: 'scale'
+	        }
+	    }
+	};
+
+/***/ },
+/* 175 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div v-el:outer style=\"position:relative; display: inline-block\" class=\"xcui-tooltip\">\n     <span v-el:trigger>\n        <slot>\n        </slot>\n    </span>\n    <div class=\"tooltip\"\n        v-bind:class=\"{\n            'top':    placement === 'top',\n            'left':   placement === 'left',\n            'right':  placement === 'right',\n            'bottom': placement === 'bottom'\n        }\"\n        v-el:popover\n        v-show=\"show\"\n        :transition=\"effect\"\n        role=\"tooltip\">\n            <div class=\"tooltip-arrow\"></div>\n            <div class=\"tooltip-inner\" :class=\"tooltipClass\">\n                <slot name=\"content\">\n                    {{{content}}}\n                </slot>\n            </div>\n    </div>\n</div>\n";
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _install = __webpack_require__(177);
 
 	var _install2 = _interopRequireDefault(_install);
+
+	var _install3 = __webpack_require__(178);
+
+	var _install4 = _interopRequireDefault(_install3);
+
+	var _install5 = __webpack_require__(179);
+
+	var _install6 = _interopRequireDefault(_install5);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22914,18 +19292,25 @@
 	xcuiInstall.install = function (Vue) {
 	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
 	        Modal: true,
-	        Toaster: true
+	        Message: true,
+	        Loading: true
 	    };
 
 	    if (options.Modal) {
 	        (0, _install2.default)(Vue);
+	    }
+	    if (options.Message) {
+	        (0, _install4.default)(Vue);
+	    }
+	    if (options.Loading) {
+	        (0, _install6.default)(Vue);
 	    }
 	};
 
 	exports.default = xcuiInstall;
 
 /***/ },
-/* 234 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22934,109 +19319,110 @@
 	    value: true
 	});
 
-	var _typeof2 = __webpack_require__(124);
+	var _typeof2 = __webpack_require__(31);
 
 	var _typeof3 = _interopRequireDefault(_typeof2);
 
-	var _keys = __webpack_require__(193);
+	var _keys = __webpack_require__(155);
 
 	var _keys2 = _interopRequireDefault(_keys);
 
-	var _index = __webpack_require__(218);
+	var _index = __webpack_require__(123);
 
 	var _index2 = _interopRequireDefault(_index);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var modalInstance = void 0;
-	var newModalInstance = function newModalInstance(Vue) {
-	    var camelcaseToHyphen = function camelcaseToHyphen(str) {
-	        return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-	    };
-
-	    var isEmptyObject = function isEmptyObject(obj) {
-	        return !(0, _keys2.default)(obj).length;
-	    };
-
-	    var PROPERTIES = ['title', 'style', 'contentStyle', 'size', 'className', 'showFooter', 'showHeader', 'showCloseButton', 'showOkButton', 'showCancelButton', 'maskClosable', 'scrollable', 'okText', 'cancelText', 'onOk', 'onCancel'];
-
-	    var div = document.createElement('div');
-	    var propsString = PROPERTIES.reduce(function (preValue, curValue) {
-	        return preValue + ' :' + camelcaseToHyphen(curValue) + '="' + curValue + '"';
-	    }, '');
-	    div.innerHTML = '\n        <Modal' + propsString + ' :show.sync="show">\n            <template v-if="!isRawHTML">\n                {{content}}\n            </template>\n            <div v-else>\n                {{{content}}}\n            </div>\n        </Modal>\n    ';
-	    document.body.appendChild(div);
-
-	    var modalVM = new Vue({
-	        el: div,
-	        components: {
-	            Modal: _index2.default
-	        },
-	        data: function data() {
-	            return {
-	                show: false,
-	                content: '',
-	                isRawHTML: false,
-
-	                title: '提示',
-	                style: {},
-	                contentStyle: {},
-	                size: 'middle',
-	                className: '',
-	                showFooter: true,
-	                showHeader: true,
-	                showCloseButton: true,
-	                showOkButton: true,
-	                showCancelButton: true,
-	                maskClosable: true,
-	                scrollable: false,
-	                okText: '确定',
-	                cancelText: '取消',
-	                onOk: function onOk() {},
-	                onCancel: function onCancel() {}
-	            };
-	        }
-	    });
-
-	    return {
-	        show: function show(props) {
-	            props = !props || isEmptyObject(props) ? {} : props;
-	            modalVM.content = props.content ? props.content : '';
-
-	            (0, _keys2.default)(props).forEach(function (propKey) {
-	                modalVM[propKey] = props[propKey];
-	            });
-	            modalVM.show = true;
-	        },
-	        remove: function remove() {
-	            modalVM.show = false;
-	        },
-	        _chooseContentMode: function _chooseContentMode(isRawHTML) {
-	            modalVM.isRawHTML = !!isRawHTML;
-	        }
-	    };
+	var camelcaseToHyphen = function camelcaseToHyphen(str) {
+	    return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 	};
-
-	var getModalInstance = function getModalInstance(Vue, isRawHTML) {
-	    modalInstance = modalInstance || newModalInstance(Vue);
-	    modalInstance._chooseContentMode(isRawHTML);
-	    return modalInstance;
+	var isEmptyObject = function isEmptyObject(obj) {
+	    return !(0, _keys2.default)(obj).length;
 	};
 
 	var ModalInstall = function ModalInstall(Vue) {
+	    var modalInstance = void 0;
+
+	    var newModalInstance = function newModalInstance() {
+	        var PROPERTIES = ['title', 'style', 'contentStyle', 'size', 'className', 'showFooter', 'showHeader', 'showCloseButton', 'showOkButton', 'showCancelButton', 'maskClosable', 'scrollable', 'okText', 'cancelText', 'onOk', 'onCancel'];
+
+	        var div = document.createElement('div');
+	        var propsString = PROPERTIES.reduce(function (preValue, curValue) {
+	            return preValue + ' :' + camelcaseToHyphen(curValue) + '="' + curValue + '"';
+	        }, '');
+	        div.innerHTML = '\n            <Modal' + propsString + ' :show.sync="show">\n                <template v-if="!isRawHTML">\n                    {{content}}\n                </template>\n                <div v-else>\n                    {{{content}}}\n                </div>\n            </Modal>\n        ';
+	        document.body.appendChild(div);
+
+	        var modalVM = new Vue({
+	            el: div,
+	            components: {
+	                Modal: _index2.default
+	            },
+	            data: function data() {
+	                return {
+	                    show: false,
+	                    content: '',
+	                    isRawHTML: false,
+
+	                    title: '提示',
+	                    style: {},
+	                    contentStyle: {},
+	                    size: 'middle',
+	                    className: '',
+	                    showFooter: true,
+	                    showHeader: true,
+	                    showCloseButton: true,
+	                    showOkButton: true,
+	                    showCancelButton: true,
+	                    maskClosable: true,
+	                    scrollable: false,
+	                    okText: '确定',
+	                    cancelText: '取消',
+	                    onOk: function onOk() {},
+	                    onCancel: function onCancel() {}
+	                };
+	            }
+	        });
+
+	        return {
+	            show: function show(props) {
+	                props = !props || isEmptyObject(props) ? {} : props;
+	                modalVM.content = props.content ? props.content : '';
+
+	                (0, _keys2.default)(props).forEach(function (propKey) {
+	                    modalVM[propKey] = props[propKey];
+	                });
+	                modalVM.show = true;
+	            },
+	            remove: function remove() {
+	                modalVM.show = false;
+	            },
+	            _chooseContentMode: function _chooseContentMode(isRawHTML) {
+	                modalVM.isRawHTML = !!isRawHTML;
+	            }
+	        };
+	    };
+
+	    var getModalInstance = function getModalInstance(isRawHTML) {
+	        modalInstance = modalInstance || newModalInstance();
+	        modalInstance._chooseContentMode(isRawHTML);
+	        return modalInstance;
+	    };
+
 	    var modalFunc = {
 	        show: function show(options, isRawHTML) {
-	            var instance = getModalInstance(Vue, isRawHTML);
+	            var instance = getModalInstance(isRawHTML);
 	            instance.show(options);
 	        },
 	        close: function close() {
 	            if (!modalInstance) {
 	                return false;
 	            }
-	            var instance = getModalInstance(Vue);
+	            var instance = getModalInstance();
 	            instance.remove();
 	        }
 	    };
+
 	    Vue.prototype.$Modal = modalFunc;
 	    Vue.prototype.$confirm = function (title, content, onOk, onCancel, isRawHTML) {
 	        var options = {};
@@ -23071,10 +19457,2224 @@
 	exports.default = ModalInstall;
 
 /***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _keys = __webpack_require__(155);
+
+	var _keys2 = _interopRequireDefault(_keys);
+
+	var _index = __webpack_require__(118);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var isEmptyObject = function isEmptyObject(obj) {
+	    return !(0, _keys2.default)(obj).length;
+	};
+
+	var MessageInstall = function MessageInstall(Vue) {
+	    var messageInstance = void 0;
+	    var newMessageInstance = function newMessageInstance() {
+	        var div = document.createElement('div');
+	        div.innerHTML = '\n            <Message :content="content"\n                :type="type"\n                :duration="duration"\n                :show.sync="show">\n            </Message>\n        ';
+	        document.body.appendChild(div);
+
+	        var messageVM = new Vue({
+	            el: div,
+	            components: {
+	                Message: _index2.default
+	            },
+	            data: function data() {
+	                return {
+	                    show: false,
+	                    content: '',
+	                    duration: 3000,
+	                    type: 'info'
+	                };
+	            }
+	        });
+
+	        return {
+	            _show: function _show(props) {
+	                props = !props || isEmptyObject(props) ? {} : props;
+	                (0, _keys2.default)(props).forEach(function (propKey) {
+	                    messageVM[propKey] = props[propKey];
+	                });
+	                messageVM.$children[0].onShow();
+	            }
+	        };
+	    };
+
+	    var getMessageInstance = function getMessageInstance() {
+	        messageInstance = messageInstance || newMessageInstance();
+	        return messageInstance;
+	    };
+
+	    Vue.prototype.$Message = {
+	        show: function show(content, type, duration) {
+	            var instance = getMessageInstance();
+	            instance._show({
+	                content: content,
+	                type: type,
+	                duration: duration
+	            });
+	        }
+	    };
+	};
+
+	exports.default = MessageInstall;
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _typeof2 = __webpack_require__(31);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	var _keys = __webpack_require__(155);
+
+	var _keys2 = _interopRequireDefault(_keys);
+
+	var _index = __webpack_require__(113);
+
+	var _index2 = _interopRequireDefault(_index);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var isEmptyObject = function isEmptyObject(obj) {
+	    return !(0, _keys2.default)(obj).length;
+	};
+
+	var LoadingInstall = function LoadingInstall(Vue) {
+	    var loadingInstance = void 0;
+	    var newLoadingInstance = function newLoadingInstance() {
+	        var div = document.createElement('div');
+	        div.innerHTML = '\n            <Loading :show="show"\n                 :type="type"\n                 :color="color"\n                 :size="size"\n                 :classname="classname">\n             </Loading>\n        ';
+	        document.body.appendChild(div);
+
+	        var loadingVM = new Vue({
+	            el: div,
+	            components: {
+	                Loading: _index2.default
+	            },
+	            data: function data() {
+	                return {
+	                    show: false,
+	                    type: 'load1',
+	                    size: 'sm',
+	                    color: '',
+	                    classname: ''
+	                };
+	            }
+	        });
+	        return {
+	            _show: function _show(props) {
+	                props = !props || isEmptyObject(props) ? {} : props;
+	                (0, _keys2.default)(props).forEach(function (propKey) {
+	                    loadingVM[propKey] = props[propKey];
+	                });
+	                loadingVM.show = true;
+	            },
+	            _remove: function _remove() {
+	                loadingVM.show = false;
+	            }
+	        };
+	    };
+
+	    var getloadingInstance = function getloadingInstance() {
+	        loadingInstance = loadingInstance || newLoadingInstance();
+	        return loadingInstance;
+	    };
+
+	    Vue.prototype.$Loading = {
+	        show: function show(type, size, color, classname) {
+	            var options = {};
+	            if ((typeof type === 'undefined' ? 'undefined' : (0, _typeof3.default)(type)) === 'object') {
+	                options = type;
+	            } else {
+	                options.type = type;
+	                options.size = size;
+	                options.color = color;
+	                options.classname = classname;
+	            }
+	            var instance = getloadingInstance();
+	            instance._show(options);
+	        },
+	        close: function close() {
+	            if (!loadingInstance) {
+	                return false;
+	            }
+	            var instance = getloadingInstance();
+	            instance._remove();
+	        }
+	    };
+	};
+
+	exports.default = LoadingInstall;
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(181)
+	__vue_script__ = __webpack_require__(183)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\pagination.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(184)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-7b8af24d/pagination.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(182);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./pagination.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./pagination.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".table {\n  border: 1px solid #ddd;\n  background-color: #fff;\n  margin-top: 15px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 183 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    data: function data() {
+	        return {
+	            currentPageNo: 1,
+	            pageSize: 10,
+	            list: [],
+	            total: 0
+	        };
+	    },
+
+	    methods: {
+	        genId: function genId() {
+	            return Math.floor(Math.random() * 100);
+	        },
+	        fetch: function fetch(pageNo) {
+	            var _this = this;
+
+	            return {
+	                list: new Array(this.pageSize).fill(undefined).map(function (item) {
+	                    return {
+	                        name: 'example',
+	                        id: _this.genId()
+	                    };
+	                }),
+	                total: 55
+	            };
+	        },
+	        turnToPage: function turnToPage(pageNo, oldPageNo) {
+	            var _fetch = this.fetch(pageNo),
+	                list = _fetch.list,
+	                total = _fetch.total;
+
+	            this.list = list;
+	            this.total = total;
+	            this.currentPageNum = pageNo;
+	        }
+	    },
+	    ready: function ready() {
+	        this.turnToPage(1);
+	    }
+	};
+
+/***/ },
+/* 184 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>Pagination页码</h1>\n<h2>使用场景</h2>\n<ul>\n<li>表格或其他需要分页的页面元素。</li>\n<li>支持两种类型的页码： <code>Standard</code> 标准页码, 一般用于元素顶部； <code>Mini</code> 迷你页码，一般用于元素底部。</li>\n</ul>\n<h1>Demo</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>两种翻页展示</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <div class=\"row\">\n            <div class=\"col-md-12 text-right\">\n                <xcui-pagination\n                    type=\"mini\"\n            @go-to-page=\"turnToPage\"\n                    :current-page-no.sync=\"currentPageNo\"\n                    :total=\"total\"\n                    :page-size.sync=\"pageSize\"\n                    ></xcui-pagination>\n            </div>\n        </div>\n        <table class=\"table table-hover table-condensed\">\n            <thead>\n                <tr>\n                    <th>ID</th>\n                    <th>Name</th>\n                </tr>\n            </thead>\n            <tr v-for=\"item in list\">\n                <td v-text=\"item.id\"></td>\n                <td v-text=\"item.name\"></td>\n            </tr>\n        </table>\n        <xcui-pagination\n            @go-to-page=\"turnToPage\"\n            :current-page-no.sync=\"currentPageNo\"\n            :total=\"total\"\n            :page-size.sync=\"pageSize\"\n            ></xcui-pagination>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>row<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>col-md-12 text-right<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n        &lt;xcui-pagination\n            type=\"mini\"\n            @go-to-page=\"turnToPage\"\n            :current-page-no.sync=\"currentPageNo\"\n            :total=\"total\"\n            :page-size.sync=\"pageSize\"\n            ><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-pagination</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>table</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>table table-hover table-condensed<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>thead</span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>tr</span><span class=\"token punctuation\" >></span></span>\n            <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>th</span><span class=\"token punctuation\" >></span></span>ID<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>th</span><span class=\"token punctuation\" >></span></span>\n            <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>th</span><span class=\"token punctuation\" >></span></span>Name<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>th</span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>tr</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>thead</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>tr</span> <span class=\"token attr-name\" >v-for</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item in list<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>td</span> <span class=\"token attr-name\" >v-text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item.id<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>td</span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>td</span> <span class=\"token attr-name\" >v-text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item.name<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>td</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>tr</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>table</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-pagination\n    @go-to-page=\"turnToPage\"\n    :current-page-no.sync=\"currentPageNo\"\n    :total=\"total\"\n    :page-size.sync=\"pageSize\"\n    ><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-pagination</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>可选范围</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>standard</td>\n<td>控制样式选择</td>\n<td>standard,mini</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>currentPageNo</td>\n<td>Number</td>\n<td>1</td>\n<td>当前页码</td>\n<td>&gt; 0</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>total</td>\n<td>Number</td>\n<td>0</td>\n<td>总条数</td>\n<td>&gt;= 0</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>pageSize</td>\n<td>Number</td>\n<td>20</td>\n<td>每页条数</td>\n<td>取自<code>pageSizeRange</code></td>\n<td>可选</td>\n</tr>\n<tr>\n<td>withPageSize</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否展示<code>pageSize</code>设置挂件</td>\n<td></td>\n<td>可选</td>\n</tr>\n<tr>\n<td>pageSizeRange</td>\n<td>Array</td>\n<td>[10, 20, 50, 100]</td>\n<td><code>pageSize</code>设置挂件的下拉菜单选项范围 <code>withPageSize</code>为 true 时生效</td>\n<td></td>\n<td>可选</td>\n</tr>\n<tr>\n<td>rangeLength</td>\n<td>Number</td>\n<td>10</td>\n<td>页码按钮的展示个数</td>\n<td>&gt; 1</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(186)
+	__vue_script__ = __webpack_require__(188)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\loading.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(189)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-3d10be99/loading.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(187);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-3d10be99&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./loading.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-3d10be99&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./loading.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".loadWrap[_v-3d10be99] {\n  padding: 30px;\n  position: relative;\n}\np[_v-3d10be99] {\n  text-align: left;\n  text-indent: 2em;\n}\n.btnGroup[_v-3d10be99] {\n  margin-top: 15px;\n}\n.btnGroup label[_v-3d10be99] {\n  width: 10%;\n  position: relative;\n  top: 5px;\n  text-align: right;\n}\nselect[_v-3d10be99],\noption[_v-3d10be99],\nbutton[_v-3d10be99] {\n  outline: none;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 188 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    data: function data() {
+	        return {
+	            show: true,
+	            type: 'load2',
+	            showBtn: 'hide',
+	            classname: 'myclass',
+	            color: '',
+	            size: 'md'
+	        };
+	    },
+	    ready: function ready() {
+	        window.Z = this;
+	    },
+
+	    methods: {
+	        toogleShow: function toogleShow() {
+	            this.show = !this.show;
+	            this.showBtn = this.show ? 'hide' : 'show';
+	        }
+	    }
+	};
+
+/***/ },
+/* 189 */
+/***/ function(module, exports) {
+
+	module.exports = "<div _v-3d10be99=\"\"><h1 _v-3d10be99=\"\">Loading 加载组件</h1>\n<h2 _v-3d10be99=\"\">使用场景</h2>\n<p _v-3d10be99=\"\">在ajax加载或其他长耗时操作时，在一个页面元素上加入加载中图标，当耗时操作完成后隐藏。</p>\n<h2 _v-3d10be99=\"\">组件能力</h2>\n<ul _v-3d10be99=\"\">\n<li _v-3d10be99=\"\">提供3种css加载样式。</li>\n<li _v-3d10be99=\"\">loading需要放在一个拥有定位属性的容器，组件蒙层大小为父元素大小。</li>\n<li _v-3d10be99=\"\">css动画颜色可定制。</li>\n<li _v-3d10be99=\"\">提供三种可选尺寸。</li>\n<li _v-3d10be99=\"\">可通过自定义类名增加特殊定制。</li>\n</ul>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\" _v-3d10be99=\"\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-3d10be99=\"\">\n                    <h3 _v-3d10be99=\"\">加载组件</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-3d10be99=\"\">\n      <div class=\"loadWrap\" _v-3d10be99=\"\">\n          <p _v-3d10be99=\"\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n          <xcui-loading :show=\"show\" :type=\"type\" :color=\"color\" :size=\"size\" :classname=\"classname\" _v-3d10be99=\"\"></xcui-loading>\n      </div>\n        <div class=\"btnGroup clearfix\" _v-3d10be99=\"\">\n            <label class=\"control-label col-md-4\" _v-3d10be99=\"\">show：</label>\n            <div class=\"col-md-6\" _v-3d10be99=\"\">\n                <button class=\"btn btn-primary\" @click=\"toogleShow\" _v-3d10be99=\"\">{{showBtn}}</button>\n            </div>\n        </div>\n        <div class=\"btnGroup clearfix\" _v-3d10be99=\"\">\n            <label class=\"control-label col-md-4\" _v-3d10be99=\"\">type：</label>\n            <div class=\"col-md-6\" _v-3d10be99=\"\">\n                <select class=\"form-control\" v-model=\"type\" _v-3d10be99=\"\">\n                    <option _v-3d10be99=\"\">load1</option>\n                    <option _v-3d10be99=\"\">load2</option>\n                    <option _v-3d10be99=\"\">load3</option>\n                </select>\n            </div>\n        </div>\n        <div class=\"btnGroup clearfix\" _v-3d10be99=\"\">\n            <label class=\"control-label col-md-4\" _v-3d10be99=\"\">size：</label>\n            <div class=\"col-md-6\" _v-3d10be99=\"\">\n                <select class=\"form-control\" v-model=\"size\" _v-3d10be99=\"\">\n                    <option _v-3d10be99=\"\">sm</option>\n                    <option _v-3d10be99=\"\">md</option>\n                    <option _v-3d10be99=\"\">lg</option>\n                </select>\n            </div>\n        </div>\n        <div class=\"btnGroup clearfix\" _v-3d10be99=\"\">\n            <label class=\"control-label col-md-4\" _v-3d10be99=\"\">color：</label>\n            <div class=\"col-md-6\" _v-3d10be99=\"\">\n                <input class=\"form-control\" type=\"text\" v-model=\"color\" placeholder=\"支持css颜色格式\" _v-3d10be99=\"\">\n            </div>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-3d10be99=\"\"><pre _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>loadWrap<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>p</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>p</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n    &lt;xcui-loading :show=\"show\"\n             :type=\"type\"\n             :color=\"color\"\n             :size=\"size\"\n             :classname=\"classname\"&gt;<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>xcui-loading</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>btnGroup clearfix<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>label</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>control-label col-md-4<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>show：<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>col-md-6<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>button</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>btn btn-primary<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span> <span class=\"token attr-name\" _v-3d10be99=\"\">@click</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>toogleShow<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">{</span><span class=\"token punctuation\" _v-3d10be99=\"\">{</span>showBtn<span class=\"token punctuation\" _v-3d10be99=\"\">}</span><span class=\"token punctuation\" _v-3d10be99=\"\">}</span><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>button</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>btnGroup clearfix<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>label</span>  <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>control-label col-md-4<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>type：<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>col-md-6<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>select</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>form-control<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span> <span class=\"token attr-name\" _v-3d10be99=\"\">v-model</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>type<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>load1<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>load2<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>load3<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>select</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>btnGroup clearfix<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>label</span>  <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>control-label col-md-4<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>size：<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>col-md-6<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>select</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>form-control<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span> <span class=\"token attr-name\" _v-3d10be99=\"\">v-model</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>size<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>sm<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>md<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>option</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>lg<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>option</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>select</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>btnGroup clearfix<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>label</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>control-label col-md-4<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>color：<span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>label</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>col-md-6<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;</span>input</span> <span class=\"token attr-name\" _v-3d10be99=\"\">class</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>form-control<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span> <span class=\"token attr-name\" _v-3d10be99=\"\">type</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>text<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span> <span class=\"token attr-name\" _v-3d10be99=\"\">v-model</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>color<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span> <span class=\"token attr-name\" _v-3d10be99=\"\">placeholder</span><span class=\"token attr-value\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">=</span><span class=\"token punctuation\" _v-3d10be99=\"\">\"</span>支持css颜色格式<span class=\"token punctuation\" _v-3d10be99=\"\">\"</span></span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token tag\" _v-3d10be99=\"\"><span class=\"token punctuation\" _v-3d10be99=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-3d10be99=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n</div>\n<h2 _v-3d10be99=\"\">Props</h2>\n<table class=\"table\" _v-3d10be99=\"\">\n<thead _v-3d10be99=\"\">\n<tr _v-3d10be99=\"\">\n<th _v-3d10be99=\"\">名字</th>\n<th _v-3d10be99=\"\">类型</th>\n<th _v-3d10be99=\"\">默认</th>\n<th _v-3d10be99=\"\">描述</th>\n<th _v-3d10be99=\"\">可选范围</th>\n<th _v-3d10be99=\"\">是否必选</th>\n</tr>\n</thead>\n<tbody _v-3d10be99=\"\">\n<tr _v-3d10be99=\"\">\n<td _v-3d10be99=\"\">show</td>\n<td _v-3d10be99=\"\">Boolean</td>\n<td _v-3d10be99=\"\">false</td>\n<td _v-3d10be99=\"\">控制显示隐藏</td>\n<td _v-3d10be99=\"\">true/false</td>\n<td _v-3d10be99=\"\">必选</td>\n</tr>\n<tr _v-3d10be99=\"\">\n<td _v-3d10be99=\"\">type</td>\n<td _v-3d10be99=\"\">String</td>\n<td _v-3d10be99=\"\">load2</td>\n<td _v-3d10be99=\"\">控制样式选择</td>\n<td _v-3d10be99=\"\">load1-load3</td>\n<td _v-3d10be99=\"\">可选</td>\n</tr>\n<tr _v-3d10be99=\"\">\n<td _v-3d10be99=\"\">size</td>\n<td _v-3d10be99=\"\">String</td>\n<td _v-3d10be99=\"\">md</td>\n<td _v-3d10be99=\"\">控制大小</td>\n<td _v-3d10be99=\"\">sm/md/lg</td>\n<td _v-3d10be99=\"\">可选</td>\n</tr>\n<tr _v-3d10be99=\"\">\n<td _v-3d10be99=\"\">color</td>\n<td _v-3d10be99=\"\">String</td>\n<td _v-3d10be99=\"\">无</td>\n<td _v-3d10be99=\"\">控制颜色</td>\n<td _v-3d10be99=\"\">css色值</td>\n<td _v-3d10be99=\"\">可选</td>\n</tr>\n<tr _v-3d10be99=\"\">\n<td _v-3d10be99=\"\">classname</td>\n<td _v-3d10be99=\"\">String</td>\n<td _v-3d10be99=\"\">无</td>\n<td _v-3d10be99=\"\">自定义类名</td>\n<td _v-3d10be99=\"\"></td>\n<td _v-3d10be99=\"\">可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(191)
+	__vue_script__ = __webpack_require__(193)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\popover.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(194)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-58435f82/popover.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(192);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./popover.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./popover.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 192 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.container{\r\n    margin-top:100px;\r\n}\r\n.define-class{\r\n    background:#ffab47;\r\n    color:#fff;\r\n    width: 100px;\r\n}\r\n.title-class{\r\n    background:#46c3c1;\r\n    color:#fff;\r\n    width: 150px;\r\n}\r\n.content-class{\r\n    width: 150px;\r\n}\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 193 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    data: function data() {
+	        return {
+	            htmlContent: '<h3>This is h3</h3><h4>This is h4</h4>'
+	        };
+	    }
+	};
+
+/***/ },
+/* 194 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>Popover 工具提示</h1>\n<h2>使用场景</h2>\n<ul>\n<li>需要hover或click时悬浮提示更多详情</li>\n<li>支持自定义提示框样式</li>\n<li>支持两种悬浮框过渡样式:  <code>scale</code> 和 <code>fadein</code></li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>Popover</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-popover effect=\"fadein\" placement=\"bottom\" title=\"This is Title\" trigger=\"click\" :content=\"htmlContent\">\n          <button class=\"btn btn-default \">Click Popover on bottom</button>\n        </xcui-popover>\n        <xcui-popover effect=\"scale\" placement=\"left\" title=\"This is Title\" trigger=\"click\"  content=\"Popover on left\">\n          <button class=\"btn btn-default \">Click Popover on left</button>\n        </xcui-popover>\n        <xcui-popover effect=\"fadein\" placement=\"top\" title=\"This is Title\"  content=\"Popover on top\">\n          <button class=\"btn btn-default \"> Hover Popover on top</button>\n        </xcui-popover>\n        <xcui-popover effect=\"scale\" placement=\"right\" title=\"This is Title\" :title-class=\"'title-class'\" :content-class=\"'content-class'\" content=\"Popover on right\">\n          <button class=\"btn btn-default \">Hover Popover on right</button>\n        </xcui-popover>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-popover</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>bottom<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>htmlContent<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Click Popover on bottom<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-popover</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-popover</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>left<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Popover on left<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Click Popover on left<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-popover</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-popover</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>top<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Popover on top<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span> Hover Popover on top<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-popover</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-popover</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>right<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:title-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>title-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:content-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>content-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Popover on right<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Hover Popover on right<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-popover</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>popover</td>\n<td>提示类型</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>trigger</td>\n<td>String</td>\n<td>hover</td>\n<td>悬浮触发方式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>effect</td>\n<td>String</td>\n<td>scale</td>\n<td>悬浮过渡样式</td>\n<td>可选, scale/fadein</td>\n</tr>\n<tr>\n<td>placement</td>\n<td>String</td>\n<td>空字符串</td>\n<td>悬浮相对位置</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>空字符串</td>\n<td>popover提示标题</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>空字符串</td>\n<td>提示内容</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>classname</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>tooltip-class</td>\n<td>String</td>\n<td>Object</td>\n<td>tootip提示框样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>title-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover标题样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover内容样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(196)
+	__vue_script__ = __webpack_require__(198)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\tooltip.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(199)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-7cd8f1e0/tooltip.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 196 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(197);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./tooltip.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./tooltip.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 197 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.container{\r\n    margin-top:100px;\r\n}\r\n.define-class{\r\n    background:#ffab47;\r\n    color:#fff;\r\n    width: 100px;\r\n}\r\n.title-class{\r\n    background:#46c3c1;\r\n    color:#fff;\r\n    width: 150px;\r\n}\r\n.content-class{\r\n    width: 150px;\r\n}\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 198 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    data: function data() {
+	        return {
+	            htmlContent: '<h3>This is h3</h3><h4>This is h4</h4>'
+	        };
+	    }
+	};
+
+/***/ },
+/* 199 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>Tooltip 工具提示</h1>\n<h2>使用场景</h2>\n<ul>\n<li>需要hover或click时悬浮提示更多详情</li>\n<li>支持自定义提示框样式</li>\n<li>支持两种悬浮框过渡样式:  <code>scale</code> 和 <code>fadein</code></li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>Popover</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-tooltip effect=\"fadein\" placement=\"bottom\" title=\"This is Title\" :content=\"htmlContent\">\n          <button class=\"btn btn-default \">Hover tooltip on bottom</button>\n        </xcui-tooltip>\n        <xcui-tooltip effect=\"scale\" placement=\"left\" title=\"This is Title\" content=\"Tooltip on left\">\n          <button class=\"btn btn-default \">Hover tooltip on left</button>\n        </xcui-tooltip>\n        <xcui-tooltip effect=\"fadein\" placement=\"top\" title=\"This is Title\"  trigger=\"click\"  content=\"Tooltip on top\">\n          <button class=\"btn btn-default \"> Click tooltip on top</button>\n        </xcui-tooltip>\n        <xcui-tooltip effect=\"scale\" placement=\"right\" title=\"This is Title\" trigger=\"click\"  :title-class=\"'title-class'\" :content-class=\"'content-class'\" content=\"Tooltip on right\">\n          <button class=\"btn btn-default \">Click tooltip on right</button>\n        </xcui-tooltip>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tooltip</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>bottom<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>htmlContent<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Hover tooltip on bottom<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tooltip</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tooltip</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>left<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Tooltip on left<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Hover tooltip on left<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tooltip</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tooltip</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>fadein<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>top<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Tooltip on top<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span> Click tooltip on top<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tooltip</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tooltip</span> <span class=\"token attr-name\" >effect</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>scale<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placement</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>right<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>This is Title<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >trigger</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span>  <span class=\"token attr-name\" >:title-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>title-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:content-class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>content-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >content</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Tooltip on right<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default <span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Click tooltip on right<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tooltip</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>popover</td>\n<td>提示类型</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>trigger</td>\n<td>String</td>\n<td>hover</td>\n<td>悬浮触发方式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>effect</td>\n<td>String</td>\n<td>scale</td>\n<td>悬浮过渡样式</td>\n<td>可选, scale/fadein</td>\n</tr>\n<tr>\n<td>placement</td>\n<td>String</td>\n<td>空字符串</td>\n<td>悬浮相对位置</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>空字符串</td>\n<td>popover提示标题</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>空字符串</td>\n<td>提示内容</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>classname</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>tooltip-class</td>\n<td>String</td>\n<td>Object</td>\n<td>tootip提示框样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>title-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover标题样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content-class</td>\n<td>Object</td>\n<td>Object</td>\n<td>popover内容样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(201)
+	__vue_script__ = __webpack_require__(203)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\suggestion.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(204)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-6fd23fb7/suggestion.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(202);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-6fd23fb7&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./suggestion.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js?id=_v-6fd23fb7&scoped=true!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./suggestion.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".block-item[_v-6fd23fb7] {\n  margin: 0 30px 50px;\n  float: left;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 203 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    data: function data() {
+	        return {
+	            cityName: '',
+	            cityId: '',
+	            citySuggestions: [{
+	                text: '北京',
+	                value: '131'
+	            }, {
+	                text: '上海',
+	                value: '289'
+	            }, {
+	                text: '海口',
+	                value: '125'
+	            }, {
+	                text: '三亚',
+	                value: '121'
+	            }, {
+	                text: '杭州',
+	                value: '179'
+	            }, {
+	                text: '成都',
+	                value: '75'
+	            }, {
+	                text: '贵阳',
+	                value: '146'
+	            }],
+	            constellation: '',
+	            constellationValue: '',
+	            constellationSuggestions: ['水瓶', '双鱼', '白羊', '金牛', '双子', '巨蟹', '狮子', '处女', '天秤', '天蝎', '射手', '魔羯'],
+	            requestWord: '',
+	            remoteSug: [],
+	            remoteUrl: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=window.bdsug.sug&wd=',
+	            requestWord2: 'w',
+	            requestValue2: '',
+	            remoteSug2: [],
+	            remoteUrl2: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=window.bdsug.sug2&wd='
+	        };
+	    },
+
+	    watch: {},
+	    methods: {
+	        setSug: function setSug(s) {
+	            this.remoteSug = s;
+	        },
+	        setSug2: function setSug2(s) {
+	            this.remoteSug2 = s.map(function (item, index) {
+	                return {
+	                    text: item,
+	                    value: index
+	                };
+	            });
+	        },
+	        request: function request() {
+	            var url = this.remoteUrl + this.requestWord;
+	            var script = document.createElement('script');
+	            script.src = url;
+	            document.body.appendChild(script);
+	            script.onload = function (res) {
+	                document.body.removeChild(script);
+	            };
+	        },
+	        request2: function request2() {
+	            var url = this.remoteUrl2 + this.requestWord2;
+	            var script = document.createElement('script');
+	            script.src = url;
+	            document.body.appendChild(script);
+	            script.onload = function (res) {
+	                document.body.removeChild(script);
+	            };
+	        }
+	    },
+	    ready: function ready() {
+	        var me = this;
+	        window.bdsug = {
+	            sug: function sug(res) {
+	                me.setSug(res.s);
+	            },
+	            sug2: function sug2(res) {
+	                me.setSug2(res.s);
+	            }
+	        };
+	    }
+	};
+
+/***/ },
+/* 204 */
+/***/ function(module, exports) {
+
+	module.exports = "<div _v-6fd23fb7=\"\"><h1 _v-6fd23fb7=\"\">Suggestion 自动完成/建议</h1>\n<h2 _v-6fd23fb7=\"\">使用场景</h2>\n<p _v-6fd23fb7=\"\">用户输入相关词语时进行输入建议(suggestions), 自动完成</p>\n<h1 _v-6fd23fb7=\"\">Demo</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\" _v-6fd23fb7=\"\">\n<div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-6fd23fb7=\"\">\n                    <h3 _v-6fd23fb7=\"\">string数组 sugs:</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-6fd23fb7=\"\">\n  <table class=\"table\" style=\"width:400px\" _v-6fd23fb7=\"\">\n    <thead _v-6fd23fb7=\"\">\n        <tr _v-6fd23fb7=\"\">\n            <th _v-6fd23fb7=\"\">dataText</th>\n            <th _v-6fd23fb7=\"\">dataValue</th>\n        </tr>\n    </thead>\n    <tbody _v-6fd23fb7=\"\">\n        <tr _v-6fd23fb7=\"\">\n            <td _v-6fd23fb7=\"\">constellation : {{constellation}}</td>\n            <td _v-6fd23fb7=\"\">constellationValue : {{constellationValue}}</td>\n        </tr>\n    </tbody>\n  </table>\n  <div style=\"width:200px\" _v-6fd23fb7=\"\">\n      <xcui-suggestion id=\"constellation\" name=\"constellation\" placeholder=\"请输入星座\" :data-text.sync=\"constellation\" :data-value.sync=\"constellationValue\" :suggestions=\"constellationSuggestions\" _v-6fd23fb7=\"\">\n      </xcui-suggestion>\n  </div>\n</div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-6fd23fb7=\"\"><pre _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-6fd23fb7=\"\">class</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">=</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span>table<span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-6fd23fb7=\"\"><span class=\"token attr-name\" _v-6fd23fb7=\"\"> <span class=\"token attr-name\" _v-6fd23fb7=\"\">style</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">=\"</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token property\" _v-6fd23fb7=\"\">width</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">:</span>400px</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>constellation : <span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span>constellation<span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>constellationValue : <span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span>constellationValue<span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-6fd23fb7=\"\"><span class=\"token attr-name\" _v-6fd23fb7=\"\"> <span class=\"token attr-name\" _v-6fd23fb7=\"\">style</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">=\"</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token property\" _v-6fd23fb7=\"\">width</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">:</span>200px</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n    &lt;xcui-suggestion\n      id=\"constellation\"\n        name=\"constellation\"\n        placeholder=\"请输入星座\"\n        :data-text.sync=\"constellation\"\n      :data-value.sync=\"constellationValue\"\n      :suggestions=\"constellationSuggestions\"&gt;\n    <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>xcui-suggestion</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-6fd23fb7=\"\">\n                    <h3 _v-6fd23fb7=\"\">object数组 sugs:</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-6fd23fb7=\"\">\n        <table class=\"table\" style=\"width:400px\" _v-6fd23fb7=\"\">\n              <thead _v-6fd23fb7=\"\">\n                  <tr _v-6fd23fb7=\"\">\n                      <th _v-6fd23fb7=\"\">dataText</th>\n                      <th _v-6fd23fb7=\"\">dataValue</th>\n                  </tr>\n              </thead>\n              <tbody _v-6fd23fb7=\"\">\n                  <tr _v-6fd23fb7=\"\">\n                      <td _v-6fd23fb7=\"\">cityName : {{cityName}}</td>\n                      <td _v-6fd23fb7=\"\">cityId : {{cityId}}</td>\n                  </tr>\n              </tbody>\n          </table>\n          <div style=\"width:200px\" _v-6fd23fb7=\"\">\n              <xcui-suggestion id=\"city\" name=\"city\" placeholder=\"请输入城市\" :data-text.sync=\"cityName\" :data-value.sync=\"cityId\" :suggestions=\"citySuggestions\" _v-6fd23fb7=\"\">\n              </xcui-suggestion>\n          </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-6fd23fb7=\"\"><pre _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-6fd23fb7=\"\">class</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">=</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span>table<span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-6fd23fb7=\"\"><span class=\"token attr-name\" _v-6fd23fb7=\"\"> <span class=\"token attr-name\" _v-6fd23fb7=\"\">style</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">=\"</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token property\" _v-6fd23fb7=\"\">width</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">:</span>400px</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>cityName : <span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span>cityName<span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>cityId : <span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span>cityId<span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-6fd23fb7=\"\"><span class=\"token attr-name\" _v-6fd23fb7=\"\"> <span class=\"token attr-name\" _v-6fd23fb7=\"\">style</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">=\"</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token property\" _v-6fd23fb7=\"\">width</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">:</span>200px</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>xcui-suggestion</span> <span class=\"token attr-name\" _v-6fd23fb7=\"\">id</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">=</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span>city<span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span> <span class=\"token attr-name\" _v-6fd23fb7=\"\">name</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">=</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span>city<span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span> <span class=\"token attr-name\" _v-6fd23fb7=\"\">placeholder</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">=</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span>请输入城市<span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span> <span class=\"token attr-name\" _v-6fd23fb7=\"\">:data-text.sync</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">=</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span>cityName<span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span> <span class=\"token attr-name\" _v-6fd23fb7=\"\">:data-value.sync</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">=</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span>cityId<span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span> <span class=\"token attr-name\" _v-6fd23fb7=\"\">:suggestions</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">=</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span>citySuggestions<span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>xcui-suggestion</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-6fd23fb7=\"\">\n                    <h3 _v-6fd23fb7=\"\">远程sug，string数组 sugs:</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-6fd23fb7=\"\">\n      <table class=\"table\" style=\"width:400px\" _v-6fd23fb7=\"\">\n          <thead _v-6fd23fb7=\"\">\n              <tr _v-6fd23fb7=\"\">\n                  <th _v-6fd23fb7=\"\">dataText</th>\n                  <th _v-6fd23fb7=\"\">dataValue</th>\n              </tr>\n          </thead>\n          <tbody _v-6fd23fb7=\"\">\n              <tr _v-6fd23fb7=\"\">\n                  <td _v-6fd23fb7=\"\">requestWord : {{requestWord}}</td>\n                  <td _v-6fd23fb7=\"\"> </td>\n              </tr>\n          </tbody>\n      </table>\n      <div style=\"width:200px\" _v-6fd23fb7=\"\">\n              <xcui-suggestion placeholder=\"\" :check=\"false\" :data-text.sync=\"requestWord\" :suggestions=\"remoteSug\" :input-callback=\"request\" _v-6fd23fb7=\"\">&gt;\n              </xcui-suggestion>\n      </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-6fd23fb7=\"\"><pre _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-6fd23fb7=\"\">class</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">=</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span>table<span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-6fd23fb7=\"\"><span class=\"token attr-name\" _v-6fd23fb7=\"\"> <span class=\"token attr-name\" _v-6fd23fb7=\"\">style</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">=\"</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token property\" _v-6fd23fb7=\"\">width</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">:</span>400px</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>requestWord : <span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span>requestWord<span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n            <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span> <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n        <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n    <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-6fd23fb7=\"\"><span class=\"token attr-name\" _v-6fd23fb7=\"\"> <span class=\"token attr-name\" _v-6fd23fb7=\"\">style</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">=\"</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token property\" _v-6fd23fb7=\"\">width</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">:</span>200px</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n        &lt;xcui-suggestion placeholder=\"\"\n                    :check=false\n                    :data-text.sync=\"requestWord\"\n                    :suggestions=\"remoteSug\"\n                    :input-callback=\"request\"&gt;&gt;\n        <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>xcui-suggestion</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\" _v-6fd23fb7=\"\">\n                    <h3 _v-6fd23fb7=\"\">远程sug，object数组 sugs:</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\" _v-6fd23fb7=\"\">\n        <div class=\"block-item\" _v-6fd23fb7=\"\">\n          <table class=\"table table-striped table-bordered\" style=\"width:400px\" _v-6fd23fb7=\"\">\n              <thead _v-6fd23fb7=\"\">\n                  <tr _v-6fd23fb7=\"\">\n                      <th _v-6fd23fb7=\"\">dataText</th>\n                      <th _v-6fd23fb7=\"\">dataValue</th>\n                  </tr>\n              </thead>\n              <tbody _v-6fd23fb7=\"\">\n                  <tr _v-6fd23fb7=\"\">\n                      <td _v-6fd23fb7=\"\">requestWord2 : {{requestWord2}}</td>\n                      <td _v-6fd23fb7=\"\">requestValue2 : {{requestValue2}}</td>\n                  </tr>\n              </tbody>\n          </table>\n          <div style=\"width:200px\" _v-6fd23fb7=\"\">\n                  <xcui-suggestion placeholder=\"\" :check=\"false\" :data-text.sync=\"requestWord2\" :data-value.sync=\"requestValue2\" :suggestions=\"remoteSug2\" :input-callback=\"request2\" _v-6fd23fb7=\"\">\n                  </xcui-suggestion>\n          </div>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\" _v-6fd23fb7=\"\"><pre _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>div</span> <span class=\"token attr-name\" _v-6fd23fb7=\"\">class</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">=</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span>block-item<span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>table</span> <span class=\"token attr-name\" _v-6fd23fb7=\"\">class</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">=</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span>table table-striped table-bordered<span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token style-attr language-css\" _v-6fd23fb7=\"\"><span class=\"token attr-name\" _v-6fd23fb7=\"\"> <span class=\"token attr-name\" _v-6fd23fb7=\"\">style</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">=\"</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token property\" _v-6fd23fb7=\"\">width</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">:</span>400px</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>thead</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>dataText<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>dataValue<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>th</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>thead</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>tbody</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>requestWord2 : <span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span>requestWord2<span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n              <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>requestValue2 : <span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span>requestValue2<span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>td</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>tr</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n      <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>tbody</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>table</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;</span>div</span><span class=\"token style-attr language-css\" _v-6fd23fb7=\"\"><span class=\"token attr-name\" _v-6fd23fb7=\"\"> <span class=\"token attr-name\" _v-6fd23fb7=\"\">style</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">=\"</span><span class=\"token attr-value\" _v-6fd23fb7=\"\"><span class=\"token property\" _v-6fd23fb7=\"\">width</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">:</span>200px</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">\"</span></span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n          &lt;xcui-suggestion placeholder=\"\"\n                      :check=false\n                      :data-text.sync=\"requestWord2\"\n                      :data-value.sync=\"requestValue2\"\n                      :suggestions=\"remoteSug2\"\n                      :input-callback=\"request2\"&gt;\n          <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>xcui-suggestion</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n  <span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n<span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token tag\" _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">&lt;/</span>div</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">&gt;</span></span>\n</pre></div>\n                    </div>\n</div>\n<h2 _v-6fd23fb7=\"\">数据格式支持</h2>\n<p _v-6fd23fb7=\"\">组件支持两种<code _v-6fd23fb7=\"\">数据格式</code>：</p>\n<ul _v-6fd23fb7=\"\">\n<li _v-6fd23fb7=\"\">Object:</li>\n</ul>\n<pre _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">[</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span>\n    text<span class=\"token punctuation\" _v-6fd23fb7=\"\">:</span><span class=\"token string\" _v-6fd23fb7=\"\">\"北京\"</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">,</span>\n    value<span class=\"token punctuation\" _v-6fd23fb7=\"\">:</span><span class=\"token string\" _v-6fd23fb7=\"\">\"103\"</span>\n<span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">,</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">{</span>\n    text<span class=\"token punctuation\" _v-6fd23fb7=\"\">:</span><span class=\"token string\" _v-6fd23fb7=\"\">\"上海\"</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">,</span>\n    value<span class=\"token punctuation\" _v-6fd23fb7=\"\">:</span><span class=\"token string\" _v-6fd23fb7=\"\">\"131\"</span>\n<span class=\"token punctuation\" _v-6fd23fb7=\"\">}</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">,</span>\n    ……\n<span class=\"token punctuation\" _v-6fd23fb7=\"\">]</span>\n</pre>\n<ul _v-6fd23fb7=\"\">\n<li _v-6fd23fb7=\"\">Array:</li>\n</ul>\n<pre _v-6fd23fb7=\"\"><span class=\"token punctuation\" _v-6fd23fb7=\"\">[</span><span class=\"token string\" _v-6fd23fb7=\"\">\"北京\"</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">,</span><span class=\"token string\" _v-6fd23fb7=\"\">\"上海\"</span><span class=\"token punctuation\" _v-6fd23fb7=\"\">,</span>……<span class=\"token punctuation\" _v-6fd23fb7=\"\">]</span>\n</pre>\n<h2 _v-6fd23fb7=\"\">参数说明</h2>\n<table class=\"table\" _v-6fd23fb7=\"\">\n<thead _v-6fd23fb7=\"\">\n<tr _v-6fd23fb7=\"\">\n<th _v-6fd23fb7=\"\">参数</th>\n<th _v-6fd23fb7=\"\">类型</th>\n<th _v-6fd23fb7=\"\">双向</th>\n<th _v-6fd23fb7=\"\">说明</th>\n</tr>\n</thead>\n<tbody _v-6fd23fb7=\"\">\n<tr _v-6fd23fb7=\"\">\n<td _v-6fd23fb7=\"\">id</td>\n<td _v-6fd23fb7=\"\">String</td>\n<td _v-6fd23fb7=\"\"></td>\n<td _v-6fd23fb7=\"\">input的id</td>\n</tr>\n<tr _v-6fd23fb7=\"\">\n<td _v-6fd23fb7=\"\">name</td>\n<td _v-6fd23fb7=\"\">String</td>\n<td _v-6fd23fb7=\"\"></td>\n<td _v-6fd23fb7=\"\">input的name属性</td>\n</tr>\n<tr _v-6fd23fb7=\"\">\n<td _v-6fd23fb7=\"\">className</td>\n<td _v-6fd23fb7=\"\">String</td>\n<td _v-6fd23fb7=\"\"></td>\n<td _v-6fd23fb7=\"\">类名</td>\n</tr>\n<tr _v-6fd23fb7=\"\">\n<td _v-6fd23fb7=\"\">disabled</td>\n<td _v-6fd23fb7=\"\">Boolean</td>\n<td _v-6fd23fb7=\"\"></td>\n<td _v-6fd23fb7=\"\">input的disabled属性</td>\n</tr>\n<tr _v-6fd23fb7=\"\">\n<td _v-6fd23fb7=\"\">placeholder</td>\n<td _v-6fd23fb7=\"\">String</td>\n<td _v-6fd23fb7=\"\"></td>\n<td _v-6fd23fb7=\"\">input提示</td>\n</tr>\n<tr _v-6fd23fb7=\"\">\n<td _v-6fd23fb7=\"\">dataText</td>\n<td _v-6fd23fb7=\"\">String</td>\n<td _v-6fd23fb7=\"\">是</td>\n<td _v-6fd23fb7=\"\">sug文本,展示给用户的sug值</td>\n</tr>\n<tr _v-6fd23fb7=\"\">\n<td _v-6fd23fb7=\"\">dataValue</td>\n<td _v-6fd23fb7=\"\">String or Object</td>\n<td _v-6fd23fb7=\"\">是</td>\n<td _v-6fd23fb7=\"\">所选sug项</td>\n</tr>\n<tr _v-6fd23fb7=\"\">\n<td _v-6fd23fb7=\"\">suggestions</td>\n<td _v-6fd23fb7=\"\">Array</td>\n<td _v-6fd23fb7=\"\"></td>\n<td _v-6fd23fb7=\"\">sug list</td>\n</tr>\n<tr _v-6fd23fb7=\"\">\n<td _v-6fd23fb7=\"\">check</td>\n<td _v-6fd23fb7=\"\">Boolean@default:false</td>\n<td _v-6fd23fb7=\"\"></td>\n<td _v-6fd23fb7=\"\">是否要做sug匹配，如果想用本组件实现远程sug，设为false</td>\n</tr>\n<tr _v-6fd23fb7=\"\">\n<td _v-6fd23fb7=\"\">inputCallback</td>\n<td _v-6fd23fb7=\"\">Function</td>\n<td _v-6fd23fb7=\"\"></td>\n<td _v-6fd23fb7=\"\">input事件回调，可以本时机触发远程sug异步请求</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 205 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(206)
+	__vue_script__ = __webpack_require__(208)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\tag.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(209)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-f4b72f12/tag.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 206 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(207);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./tag.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./tag.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 207 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.define-class{\r\n    background:#ffab47;\r\n    color:#fff;\r\n    border-radius: 6px;\r\n}\r\n\r\n.define-class:hover{\r\n    background:red;\r\n}\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 208 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    data: function data() {
+	        return {
+	            tags: [{ text: '新标签', key: 'test' }],
+	            showTag: false,
+	            index: 1,
+	            key: 'data',
+	            afterCloseIsShowTag: true
+	        };
+	    },
+
+	    methods: {
+	        closeclick: function closeclick() {
+	            alert('testValidateSuccess');
+	        },
+	        addTag: function addTag() {
+	            if (this.tags === null) {
+	                this.tags = [];
+	            }
+	            this.tags.push({ text: '\u65B0\u6807\u7B7E' + this.index++, key: this.index });
+	        },
+	        click: function click() {
+	            alert('clicksuccess');
+	        }
+	    }
+	};
+
+/***/ },
+/* 209 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>Tag标签</h1>\n<h2>使用场景</h2>\n<ul>\n<li>标记事物的属性、分类等特性</li>\n<li>支持关闭标签、点击标签</li>\n<li>支持禁用标签</li>\n<li>支持自定义标签样式</li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n\t<div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>基本使用</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-tag :text=\"'标签'\"></xcui-tag>\n        <xcui-tag :disabled=\"true\" :text=\"'禁用标签'\"></xcui-tag>\n        <xcui-tag :closeable=\"true\" :text=\"'关闭'\" @close=\"closeclick\"></xcui-tag>\n        <xcui-tag :closeable=\"true\" @close=\"closeclick\" :key.sync=\"key\" :text=\"'点击不关闭'\" :aftercloseisshow.sync=\"afterCloseIsShowTag\" @click=\"click\"></xcui-tag>\n        <xcui-tag  :classname=\"'define-class'\" :text=\"'自定义样式'\" @click=\"click\" ></xcui-tag>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>标签<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span> <span class=\"token attr-name\" >:disabled</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>禁用标签<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@close</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>closeclick<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@close</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>closeclick<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:key.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>key<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>点击不关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:aftercloseisshow.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>afterCloseIsShowTag<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span>  <span class=\"token attr-name\" >:classname</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>define-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>自定义样式<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>click<span class=\"token punctuation\" >\"</span></span> <span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>添加标签</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <template v-for=\"item in tags\">\n            <xcui-tag :closeable=\"true\" :text=\"item.text\"></xcui-tag>\n        </template>\n        <input type=\"button\" class=\"btn btn-primary\" value=\"添加\" @click=\"addTag\"/>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>template</span> <span class=\"token attr-name\" >v-for</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item in tags<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>item.text<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>template</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>input</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>button<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>添加<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>addTag<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >/></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>text</td>\n<td>String</td>\n<td>空字符串</td>\n<td>内容</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>disabled</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否禁用</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>closeable</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否可关闭</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>close</td>\n<td>function</td>\n<td>无</td>\n<td>关闭时回调</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>click</td>\n<td>function</td>\n<td>无</td>\n<td>点击标签事件</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>showTag</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否展示tag</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>aftercloseisshow</td>\n<td>Boolean</td>\n<td>false</td>\n<td>关闭回调后是否展示Tag</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>key</td>\n<td>String</td>\n<td>空字符串</td>\n<td>存储数据</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>classname</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 210 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(211)
+	__vue_script__ = __webpack_require__(213)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\datepicker.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(214)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-19625122/datepicker.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(212);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./datepicker.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./datepicker.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "p {\n  padding-left: 30px;\n  font-size: 14px;\n  color: #666;\n}\n.class-name {\n  width: 200px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 213 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    data: function data() {
+	        return {
+	            date: {
+	                value: 1477980088896,
+	                begin: '2015-12-20',
+	                end: '2016-09-09'
+	            },
+	            datetime: {
+	                value: new Date(),
+	                begin: new Date(),
+	                end: '2017-02-01 00:00:00'
+	            },
+	            time: {
+	                value: ''
+	            }
+	        };
+	    },
+
+	    methods: {
+	        onChange: function onChange(val, oldVal) {
+	            console.log(val);
+	            console.log(oldVal);
+	        }
+	    }
+	};
+
+/***/ },
+/* 214 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>datepicker 日期选择框</h1>\n<h2>使用场景</h2>\n<ul>\n<li>支持日历筛选，日历＋时间，时间筛选</li>\n<li>可以配置日期的筛选范围，日期格式</li>\n<li>对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60</li>\n<li>可以直接获取当前的时间</li>\n<li>年筛选可以直接输入，可以筛选</li>\n<li>支持定制皮肤颜色</li>\n</ul>\n<h1>DEMO</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>simple</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-datepicker :value.sync=\"''\">\n        </xcui-datepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-datepicker</span> <span class=\"token attr-name\" >:value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <p> 最简单的用法，value双向绑定，日期</p>\n    <p> value：可以传不同日期格式，例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262，也可以不传，默认当天，date.value值为 时间戳1477980088896</p>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日期格式</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n    <xcui-datepicker\n        :value.sync=\"date.value\"\n        format=\"YYYY-MM-DD\"\n        :min-date=\"datetime.begin\"\n        :max-date=\"'2016-11-10'\">\n    </xcui-datepicker>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-datepicker\n    :value.sync=\"date.value\"\n    format=\"YYYY-MM-DD\"\n        :min-date=\"datetime.begin\"\n    :max-date=\"'2016-11-10'\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <p> format：展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年/月/日 时：分：秒 YYYY/MM/DD hh:mm:ss， 时:分:秒 hh:mm:ss</p>\n  <p> min-date：日期可选最小值，值类型同value，datetime.begin值为 new Date()</p>\n  <p> max-date：日期可选最大值，值类型同value</p>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日期+时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n    <xcui-datepicker\n        :value.sync=\"datetime.value\"\n        format=\"YYYY/MM/DD hh:mm:ss\"\n        :hour-range=\"'3'\"\n        :minute-range=\"'10'\"\n        :second-range=\"'20'\"\n        :min-date=\"datetime.begin\"\n        :max-date=\"datetime.end\">\n    </xcui-datepicker>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-datepicker\n    :value.sync=\"datetime.value\"\n    format=\"YYYY/MM/DD hh:mm:ss\"\n        :hour-range=\"'3'\"\n    :minute-range=\"'10'\"\n    :second-range=\"'20'\"\n    :min-date=\"datetime.begin\"\n    :max-date=\"datetime.end\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <p> hour-range：小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12</p>\n  <p> minute-range：分钟可选值设置，同上</p>\n  <p> second-range：分钟可选值设置，同上</p>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>样式以及回调配置</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n    <xcui-datepicker\n        class-name=\"class-name\"\n        color=\"pink\"\n        format=\"YYYY-MM-DD hh:mm:ss\"\n        :btn-show=\"true\"\n        @on-change=\"onChange\"\n        :value.sync=\"datetime.value\"\n        :hour-range=\"'3'\">\n    </xcui-datepicker>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-datepicker\n    class-name=\"class-name\"\n        color=\"pink\"\n        format=\"YYYY-MM-DD hh:mm:ss\"\n        :btn-show=\"true\"\n    @on-change=\"onChange\"\n    :value.sync=\"datetime.value\"\n    :hour-range=\"'3'\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <p> class-name：日历样式，class名字</p>\n  <p> color：按钮颜色，值为颜色值，例如：#f00,pink</p>\n  <p> on-change：选择日期后的回调，参数 val(当前值) oldval(上次值)，onChange(val, oldVal) {}</p>\n  <p> btn-show: 按钮是否显示</p>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n      <div class=\"input-group\">\n        <xcui-datepicker\n            value.sync=\"''\"\n            format=\"hh:mm:ss\">\n        </xcui-datepicker>\n      </div>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>input-group<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-datepicker\n</span>            <span class=\"token attr-name\" >value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span>\n            <span class=\"token attr-name\" >format</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>hh:mm:ss<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <p> 最简单的时间用法</p>\n</div>\n<h2>组件依赖</h2>\n<blockquote>\n<p>无</p>\n</blockquote>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否双向绑定</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>value</td>\n<td>String/object/Number</td>\n<td>无</td>\n<td>日期 例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262</td>\n<td>双向绑定</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>format</td>\n<td>String</td>\n<td>YYYY-MM-DD</td>\n<td>展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年-月-日 时：分：秒 YYYY-MM-DD hh:mm:ss， 时/分/秒 hh/mm/ss</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minDate</td>\n<td>String</td>\n<td>无</td>\n<td>日期可选最小值</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>maxDate</td>\n<td>String</td>\n<td>无</td>\n<td>日期可选最大值</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>hourRange</td>\n<td>Number</td>\n<td>1</td>\n<td>小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12 …）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minuteRange</td>\n<td>Number</td>\n<td>1</td>\n<td>分可选值设置（例如：值为 20 时，分可选值为0, 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>secondRange</td>\n<td>Number</td>\n<td>1</td>\n<td>秒可选值设置（例如：值为 20 时，分可选值为0, 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>color</td>\n<td>String</td>\n<td>无</td>\n<td>订制按钮颜色，值为颜色值，例如：#f00,pink</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>btnShow</td>\n<td>boolean</td>\n<td>无</td>\n<td>是否显示日历后面的按钮</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>class-name</td>\n<td>String</td>\n<td>无</td>\n<td>日历样式，class名字</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>onChange</td>\n<td>object</td>\n<td>无</td>\n<td>选择日期后的回调，参数 val(当前值) oldval(上次值) @onChange</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(216)
+	__vue_script__ = __webpack_require__(218)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\dateRangePicker.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(219)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-10ac7b7a/dateRangePicker.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(217);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./dateRangePicker.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./dateRangePicker.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".class-name {\n  width: 400px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 218 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = {
+	    data: function data() {
+	        return {
+	            date: {
+	                type: 'date',
+	                begin: '2015-12-20',
+	                end: '2016-11-20',
+	                dateLimit: {
+	                    months: 1
+	                },
+	                color: '#f00'
+	            },
+	            datetime: {
+	                type: 'datetime',
+	                begin: '2015-12-20',
+	                end: '2017-11-20',
+	                dateLimit: {
+	                    days: 5
+	                },
+	                color: '#f00',
+	                btnShow: true
+	            },
+	            time: {
+	                type: 'time',
+	                inputClass: 'class-name',
+	                btnShow: true
+	            }
+	        };
+	    },
+
+	    methods: {
+	        onChange: function onChange(startDate, endDate) {
+	            console.log('startDate' + startDate);
+	            console.log('endDate' + endDate);
+	        }
+	    }
+	};
+
+/***/ },
+/* 219 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>daterangepicker 双日期选择框</h1>\n<h2>使用场景</h2>\n<ul>\n<li>支持日历筛选，日历＋时间，时间筛选</li>\n<li>可以配置日期的筛选范围，日期格式</li>\n<li>对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60</li>\n<li>可以直接获取当前的时间</li>\n<li>年筛选可以直接输入，可以筛选</li>\n<li>支持定制皮肤颜色</li>\n</ul>\n<h2>应用指南</h2>\n<p>要把datepicker放在一个拥有定位属性的容器中,因为datepicker是相对父级元素定位的。</p>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>simple</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-daterangepicker\n            :start-date.sync=\"''\"\n            :end-date.sync=\"''\">\n        </xcui-daterangepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-daterangepicker\n    :start-date.sync=\"''\"\n    :end-date.sync=\"''\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-daterangepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <p> 最简单的用法，startDate：日期开始时间，endDate：日期结束时间, 格式</p>\n    <p> startDate／endDate：可以传不同日期格式，例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262，也可以不传，默认当天，date.value值为 时间戳1477980088896</p>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日期格式</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-daterangepicker\n            :start-date.sync=\"''\"\n            :end-date.sync=\"''\"\n            :min-date=\"'2015/12/20'\"\n            :max-date=\"'2016/11/20'\"\n            :date-limit=\"date.dateLimit\">\n        </xcui-daterangepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-daterangepicker\n    :start-date.sync=\"''\"\n    :end-date.sync=\"''\"\n    :min-date=\"'2015/12/20'\"\n    :max-date=\"'2016/11/20'\"\n    :date-limit=\"date.dateLimit\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-daterangepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <p> format,min-date,max-date同datapicker组件配置</p>\n    <p> date-limit：可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天</p>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日期 + 时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-daterangepicker\n              format=\"YYYY-MM-DD hh:mm:ss\"\n              :start-date.sync=\"'2016-09-08 00:02:00'\"\n              :end-date.sync=\"'2016-09-13 00:02:00'\"\n              :hour-range=\"'3'\"\n              :minute-range=\"'10'\"\n              :second-range=\"'20'\">\n        </xcui-daterangepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-daterangepicker\n      format=\"YYYY-MM-DD hh:mm:ss\"\n              :start-date.sync=\"'2016-09-08 00:02:00'\"\n      :end-date.sync=\"'2016-09-13 00:02:00'\"\n      :hour-range=\"'3'\"\n      :minute-range=\"'10'\"\n      :second-range=\"'20'\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-daterangepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <p> hour-range：小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12</p>\n    <p> minute-range：分钟可选值设置，同上</p>\n    <p> second-range：分钟可选值设置，同上</p>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>样式以及回调配置</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-daterangepicker\n            class-name=\"class-name\"\n            color=\"pink\"\n            format=\"YYYY-MM-DD hh:mm:ss\"\n            :btn-show=\"true\"\n            @on-change=\"onChange\"\n            :hour-range=\"'3'\">\n        </xcui-daterangepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-daterangepicker\n    class-name=\"class-name\"\n            color=\"pink\"\n            format=\"YYYY-MM-DD hh:mm:ss\"\n            :btn-show=\"true\"\n    @on-change=\"onChange\"\n    :hour-range=\"'3'\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-daterangepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <p> class-name：日历样式，class名字</p>\n    <p> color：按钮颜色，值为颜色值，例如：#f00,pink</p>\n    <p> on-change：选择日期后的回调，参数 val(当前值) oldval(上次值)，onChange(val, oldVal) {}</p>\n    <p> btn-show: 按钮是否显示</p>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-daterangepicker\n              :start-date.sync=\"'04:02:03'\"\n              :end-date.sync=\"'05:02:03'\"\n              format=\"hh:mm:ss\">\n        </xcui-daterangepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-daterangepicker\n      :start-date.sync=\"'04:02:03'\"\n      :end-date.sync=\"'05:02:03'\"\n      format=\"hh:mm:ss\">\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-daterangepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h3>日历选择，日期＋时间选择</h3>\n<h4>Props</h4>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否双向绑定</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>startDate</td>\n<td>String</td>\n<td>无</td>\n<td>日期开始时间</td>\n<td>双向绑定</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>endDate</td>\n<td>String</td>\n<td>无</td>\n<td>日期结束时间</td>\n<td>双向绑定</td>\n<td>必选</td>\n</tr>\n<tr>\n<td>minDate</td>\n<td>String</td>\n<td>无</td>\n<td>日期可选最小值</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>maxdate</td>\n<td>String</td>\n<td>无</td>\n<td>日期可选最大值</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>format</td>\n<td>String</td>\n<td>YYYY-MM-DD</td>\n<td>展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年-月-日 时：分：秒 YYYY-MM-DD hh:mm:ss， 时/分/秒 hh/mm/ss</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>dateLimit</td>\n<td>object</td>\n<td>null</td>\n<td>可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>hourRange</td>\n<td>Number</td>\n<td>1</td>\n<td>小时可选值设置（例如：值为 3 时，小时可选值为0，3，6，9，12 …）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minuteRange</td>\n<td>Number</td>\n<td>1</td>\n<td>分可选值设置（例如：值为 20 时，分可选值为0，20，40）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>secondRange</td>\n<td>Number</td>\n<td>1</td>\n<td>秒可选值设置（例如：值为 20 时，分可选值为0，20，40）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>color</td>\n<td>String</td>\n<td>无</td>\n<td>订制按钮颜色，值为颜色值，例如：#f00,pink</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>btnShow</td>\n<td>boolean</td>\n<td>无</td>\n<td>是否显示日历后面的按钮</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>inputClass</td>\n<td>Array</td>\n<td>无</td>\n<td>日历input输入框的样式，class名字</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>onChange</td>\n<td>object</td>\n<td>无</td>\n<td>选择日期后的回调，参数 val(当前值) oldval(上次值) @onChange</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(221)
+	__vue_script__ = __webpack_require__(223)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\select.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(228)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-8f2797a2/select.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(222);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./select.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./select.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".select-demo,\n.xcui-select {\n  width: 200px !important;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 223 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _jsonp = __webpack_require__(224);
+
+	var _jsonp2 = _interopRequireDefault(_jsonp);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	    data: function data() {
+	        return {
+	            dataSource: [{
+	                name: 'jake',
+	                label: 'jake',
+	                text: '测试1',
+	                disable: true
+	            }, {
+	                name: 2,
+	                label: 2,
+	                text: '测试2'
+	            }, {
+	                name: 3,
+	                label: 3,
+	                text: '测试3'
+	            }, {
+	                name: 4,
+	                label: 4,
+	                text: '测试4'
+	            }],
+	            dataSourceDisable: [{
+	                name: 'jake',
+	                label: 'jake',
+	                text: '测试1',
+	                disable: true
+	            }, {
+	                name: 2,
+	                label: 2,
+	                text: '测试2'
+	            }, {
+	                name: 3,
+	                label: 3,
+	                text: '测试3'
+	            }, {
+	                name: 4,
+	                label: 4,
+	                text: '测试4'
+	            }],
+	            dataSource2: ['js', 'python', 'java', 'ruby', 'markdown', 'php', 'css', 'less'],
+	            asyncSearchSource: [],
+	            serverSearchSource: [],
+	            serverSearchValue: '',
+	            localSearchSource: ['北京', '南京', '天津', '上海', '静安', '刘安', '安徽', '南充', '广州', '西宁', 'angular', 'vue', 'test', 'fis', 'node', 'express', 'koa', 'connect'],
+	            localSearchValue: '',
+	            localSearchResult: '',
+	            optgroupDefaultValue: '1',
+	            optgroupSource: [{
+	                name: 'group 1',
+	                options: ['1', '2', '3']
+	            }, {
+	                name: 'group 2',
+	                options: ['11', '12', '13']
+	            }],
+	            optgroupSource2: [{
+	                name: 'group 1',
+	                options: [{
+	                    name: 'name1',
+	                    label: 1,
+	                    text: '测试1',
+	                    disable: true
+	                }, {
+	                    name: 'name2',
+	                    label: 2,
+	                    text: '测试2'
+	                }, {
+	                    name: 'name3',
+	                    label: 3,
+	                    text: '测试3'
+	                }, {
+	                    name: 'name4',
+	                    label: 4,
+	                    text: '测试4'
+	                }]
+	            }],
+	            optgroupValue: '',
+	            multipleObjOptions: [{
+	                name: '1',
+	                label: '1',
+	                disabled: true
+	            }, {
+	                name: '2',
+	                label: '2',
+	                disabled: true
+	            }, {
+	                name: '3',
+	                label: '3',
+	                disabled: true
+	            }],
+	            multipleDefaultValue: [],
+	            multipleDefaultValue2: [2, 4],
+	            value: '',
+	            value2: '',
+	            disable: true,
+	            defaultValue: 'css',
+	            closeAfterSelect: true,
+
+	            selectProvinceValue: '',
+	            selectCityValue: '',
+	            provinceData: ['浙江', '江苏'],
+	            selectCityData: [],
+	            cityData: {
+	                浙江: ['杭州', '宁波', '温州'],
+	                江苏: ['南京', '苏州', '镇江']
+	            }
+	        };
+	    },
+
+	    watch: {
+	        'selectProvinceValue': function selectProvinceValue(province) {
+	            this.selectCityData = this.cityData[province] || null;
+	            this.selectCityValue = '';
+	        }
+	    },
+	    created: function created() {
+	        var me = this;
+	        setTimeout(function () {
+	            me.optgroupDefaultValue = '11';
+	        }, 1000);
+	    },
+
+	    methods: {
+	        selectChange: function selectChange(v) {
+	            this.value = v;
+	        },
+	        selectChange2: function selectChange2(v) {
+	            this.value2 = v;
+	        },
+	        reRenderLabel: function reRenderLabel(item) {
+	            return item.text + ' - ' + item.name;
+	        },
+	        reRender: function reRender(item) {
+	            return '' + item;
+	        },
+	        onSelect: function onSelect(_ref) {
+	            var name = _ref.name;
+	        },
+	        onSelect2: function onSelect2(value) {
+	            this.defaultValue = value;
+	        },
+	        provinceChange: function provinceChange(value) {
+	            this.selectProvinceValue = value;
+	        },
+	        cityChange: function cityChange(value) {
+	            this.selectCityValue = value;
+	        },
+	        searchChange: function searchChange(v) {
+	            this.localSearchValue = v;
+	        },
+	        localSearchChange: function localSearchChange(value) {
+	            this.localSearchResult = value;
+	        },
+	        asyncSearchChange: function asyncSearchChange(v) {
+	            var emails = ['gmail.com', '163.com', 'qq.com'];
+	            if (v && v.indexOf('@') < 1) {
+	                this.asyncSearchSource = emails.map(function (item) {
+	                    return v + '@' + item;
+	                });
+	            } else {
+	                this.asyncSearchSource = [];
+	            }
+	        },
+	        asyncSearchOnChange: function asyncSearchOnChange(v) {
+	            console.log('asycn select:' + v);
+	        },
+	        serverSearchChange: function serverSearchChange(v) {
+	            var me = this;
+	            window.selectsug = function (res) {
+	                me.serverSearchSource = res.s;
+	            };
+	            (0, _jsonp2.default)('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=window.selectsug&wd=' + v);
+	        },
+	        serverSearchOnChange: function serverSearchOnChange(v) {
+	            this.serverSearchValue = v;
+	        },
+	        optgroupOnChange: function optgroupOnChange(value, groupIndex, valueIndex) {
+	            console.log('optgroupOnChange: ', value, 'groupIndex:', groupIndex, 'valueIndex:', valueIndex);
+	        },
+	        optgroupOnChange2: function optgroupOnChange2(value, groupIndex, valueIndex) {
+	            console.log('optgroupOnChange2: ', value, 'groupIndex:', groupIndex, 'valueIndex:', valueIndex);
+	        },
+	        multipleOnChange: function multipleOnChange(v) {
+	            console.log('multipleOnChange', v);
+	        },
+	        multipleOnRemove: function multipleOnRemove(v) {
+	            console.log('multipleOnRemove', v);
+	        },
+	        multipleObjectOnChange: function multipleObjectOnChange(v) {
+	            console.log('multipleObjectOnChange', v);
+	        },
+	        multipleObjectOnRemove: function multipleObjectOnRemove(v) {
+	            console.log('multipleObjectOnRemove', v);
+	        }
+	    }
+	};
+
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Module dependencies
+	 */
+
+	var debug = __webpack_require__(225)('jsonp');
+
+	/**
+	 * Module exports.
+	 */
+
+	module.exports = jsonp;
+
+	/**
+	 * Callback index.
+	 */
+
+	var count = 0;
+
+	/**
+	 * Noop function.
+	 */
+
+	function noop(){}
+
+	/**
+	 * JSONP handler
+	 *
+	 * Options:
+	 *  - param {String} qs parameter (`callback`)
+	 *  - prefix {String} qs parameter (`__jp`)
+	 *  - name {String} qs parameter (`prefix` + incr)
+	 *  - timeout {Number} how long after a timeout error is emitted (`60000`)
+	 *
+	 * @param {String} url
+	 * @param {Object|Function} optional options / callback
+	 * @param {Function} optional callback
+	 */
+
+	function jsonp(url, opts, fn){
+	  if ('function' == typeof opts) {
+	    fn = opts;
+	    opts = {};
+	  }
+	  if (!opts) opts = {};
+
+	  var prefix = opts.prefix || '__jp';
+
+	  // use the callback name that was passed if one was provided.
+	  // otherwise generate a unique name by incrementing our counter.
+	  var id = opts.name || (prefix + (count++));
+
+	  var param = opts.param || 'callback';
+	  var timeout = null != opts.timeout ? opts.timeout : 60000;
+	  var enc = encodeURIComponent;
+	  var target = document.getElementsByTagName('script')[0] || document.head;
+	  var script;
+	  var timer;
+
+
+	  if (timeout) {
+	    timer = setTimeout(function(){
+	      cleanup();
+	      if (fn) fn(new Error('Timeout'));
+	    }, timeout);
+	  }
+
+	  function cleanup(){
+	    if (script.parentNode) script.parentNode.removeChild(script);
+	    window[id] = noop;
+	    if (timer) clearTimeout(timer);
+	  }
+
+	  function cancel(){
+	    if (window[id]) {
+	      cleanup();
+	    }
+	  }
+
+	  window[id] = function(data){
+	    debug('jsonp got', data);
+	    cleanup();
+	    if (fn) fn(null, data);
+	  };
+
+	  // add qs component
+	  url += (~url.indexOf('?') ? '&' : '?') + param + '=' + enc(id);
+	  url = url.replace('?&', '?');
+
+	  debug('jsonp req "%s"', url);
+
+	  // create script
+	  script = document.createElement('script');
+	  script.src = url;
+	  target.parentNode.insertBefore(script, target);
+
+	  return cancel;
+	}
+
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * This is the web browser implementation of `debug()`.
+	 *
+	 * Expose `debug()` as the module.
+	 */
+
+	exports = module.exports = __webpack_require__(226);
+	exports.log = log;
+	exports.formatArgs = formatArgs;
+	exports.save = save;
+	exports.load = load;
+	exports.useColors = useColors;
+
+	/**
+	 * Use chrome.storage.local if we are in an app
+	 */
+
+	var storage;
+
+	if (typeof chrome !== 'undefined' && typeof chrome.storage !== 'undefined')
+	  storage = chrome.storage.local;
+	else
+	  storage = localstorage();
+
+	/**
+	 * Colors.
+	 */
+
+	exports.colors = [
+	  'lightseagreen',
+	  'forestgreen',
+	  'goldenrod',
+	  'dodgerblue',
+	  'darkorchid',
+	  'crimson'
+	];
+
+	/**
+	 * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+	 * and the Firebug extension (any Firefox version) are known
+	 * to support "%c" CSS customizations.
+	 *
+	 * TODO: add a `localStorage` variable to explicitly enable/disable colors
+	 */
+
+	function useColors() {
+	  // is webkit? http://stackoverflow.com/a/16459606/376773
+	  return ('WebkitAppearance' in document.documentElement.style) ||
+	    // is firebug? http://stackoverflow.com/a/398120/376773
+	    (window.console && (console.firebug || (console.exception && console.table))) ||
+	    // is firefox >= v31?
+	    // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+	    (navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31);
+	}
+
+	/**
+	 * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+	 */
+
+	exports.formatters.j = function(v) {
+	  return JSON.stringify(v);
+	};
+
+
+	/**
+	 * Colorize log arguments if enabled.
+	 *
+	 * @api public
+	 */
+
+	function formatArgs() {
+	  var args = arguments;
+	  var useColors = this.useColors;
+
+	  args[0] = (useColors ? '%c' : '')
+	    + this.namespace
+	    + (useColors ? ' %c' : ' ')
+	    + args[0]
+	    + (useColors ? '%c ' : ' ')
+	    + '+' + exports.humanize(this.diff);
+
+	  if (!useColors) return args;
+
+	  var c = 'color: ' + this.color;
+	  args = [args[0], c, 'color: inherit'].concat(Array.prototype.slice.call(args, 1));
+
+	  // the final "%c" is somewhat tricky, because there could be other
+	  // arguments passed either before or after the %c, so we need to
+	  // figure out the correct index to insert the CSS into
+	  var index = 0;
+	  var lastC = 0;
+	  args[0].replace(/%[a-z%]/g, function(match) {
+	    if ('%%' === match) return;
+	    index++;
+	    if ('%c' === match) {
+	      // we only are interested in the *last* %c
+	      // (the user may have provided their own)
+	      lastC = index;
+	    }
+	  });
+
+	  args.splice(lastC, 0, c);
+	  return args;
+	}
+
+	/**
+	 * Invokes `console.log()` when available.
+	 * No-op when `console.log` is not a "function".
+	 *
+	 * @api public
+	 */
+
+	function log() {
+	  // this hackery is required for IE8/9, where
+	  // the `console.log` function doesn't have 'apply'
+	  return 'object' === typeof console
+	    && console.log
+	    && Function.prototype.apply.call(console.log, console, arguments);
+	}
+
+	/**
+	 * Save `namespaces`.
+	 *
+	 * @param {String} namespaces
+	 * @api private
+	 */
+
+	function save(namespaces) {
+	  try {
+	    if (null == namespaces) {
+	      storage.removeItem('debug');
+	    } else {
+	      storage.debug = namespaces;
+	    }
+	  } catch(e) {}
+	}
+
+	/**
+	 * Load `namespaces`.
+	 *
+	 * @return {String} returns the previously persisted debug modes
+	 * @api private
+	 */
+
+	function load() {
+	  var r;
+	  try {
+	    r = storage.debug;
+	  } catch(e) {}
+	  return r;
+	}
+
+	/**
+	 * Enable namespaces listed in `localStorage.debug` initially.
+	 */
+
+	exports.enable(load());
+
+	/**
+	 * Localstorage attempts to return the localstorage.
+	 *
+	 * This is necessary because safari throws
+	 * when a user disables cookies/localstorage
+	 * and you attempt to access it.
+	 *
+	 * @return {LocalStorage}
+	 * @api private
+	 */
+
+	function localstorage(){
+	  try {
+	    return window.localStorage;
+	  } catch (e) {}
+	}
+
+
+/***/ },
+/* 226 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * This is the common logic for both the Node.js and web browser
+	 * implementations of `debug()`.
+	 *
+	 * Expose `debug()` as the module.
+	 */
+
+	exports = module.exports = debug;
+	exports.coerce = coerce;
+	exports.disable = disable;
+	exports.enable = enable;
+	exports.enabled = enabled;
+	exports.humanize = __webpack_require__(227);
+
+	/**
+	 * The currently active debug mode names, and names to skip.
+	 */
+
+	exports.names = [];
+	exports.skips = [];
+
+	/**
+	 * Map of special "%n" handling functions, for the debug "format" argument.
+	 *
+	 * Valid key names are a single, lowercased letter, i.e. "n".
+	 */
+
+	exports.formatters = {};
+
+	/**
+	 * Previously assigned color.
+	 */
+
+	var prevColor = 0;
+
+	/**
+	 * Previous log timestamp.
+	 */
+
+	var prevTime;
+
+	/**
+	 * Select a color.
+	 *
+	 * @return {Number}
+	 * @api private
+	 */
+
+	function selectColor() {
+	  return exports.colors[prevColor++ % exports.colors.length];
+	}
+
+	/**
+	 * Create a debugger with the given `namespace`.
+	 *
+	 * @param {String} namespace
+	 * @return {Function}
+	 * @api public
+	 */
+
+	function debug(namespace) {
+
+	  // define the `disabled` version
+	  function disabled() {
+	  }
+	  disabled.enabled = false;
+
+	  // define the `enabled` version
+	  function enabled() {
+
+	    var self = enabled;
+
+	    // set `diff` timestamp
+	    var curr = +new Date();
+	    var ms = curr - (prevTime || curr);
+	    self.diff = ms;
+	    self.prev = prevTime;
+	    self.curr = curr;
+	    prevTime = curr;
+
+	    // add the `color` if not set
+	    if (null == self.useColors) self.useColors = exports.useColors();
+	    if (null == self.color && self.useColors) self.color = selectColor();
+
+	    var args = Array.prototype.slice.call(arguments);
+
+	    args[0] = exports.coerce(args[0]);
+
+	    if ('string' !== typeof args[0]) {
+	      // anything else let's inspect with %o
+	      args = ['%o'].concat(args);
+	    }
+
+	    // apply any `formatters` transformations
+	    var index = 0;
+	    args[0] = args[0].replace(/%([a-z%])/g, function(match, format) {
+	      // if we encounter an escaped % then don't increase the array index
+	      if (match === '%%') return match;
+	      index++;
+	      var formatter = exports.formatters[format];
+	      if ('function' === typeof formatter) {
+	        var val = args[index];
+	        match = formatter.call(self, val);
+
+	        // now we need to remove `args[index]` since it's inlined in the `format`
+	        args.splice(index, 1);
+	        index--;
+	      }
+	      return match;
+	    });
+
+	    if ('function' === typeof exports.formatArgs) {
+	      args = exports.formatArgs.apply(self, args);
+	    }
+	    var logFn = enabled.log || exports.log || console.log.bind(console);
+	    logFn.apply(self, args);
+	  }
+	  enabled.enabled = true;
+
+	  var fn = exports.enabled(namespace) ? enabled : disabled;
+
+	  fn.namespace = namespace;
+
+	  return fn;
+	}
+
+	/**
+	 * Enables a debug mode by namespaces. This can include modes
+	 * separated by a colon and wildcards.
+	 *
+	 * @param {String} namespaces
+	 * @api public
+	 */
+
+	function enable(namespaces) {
+	  exports.save(namespaces);
+
+	  var split = (namespaces || '').split(/[\s,]+/);
+	  var len = split.length;
+
+	  for (var i = 0; i < len; i++) {
+	    if (!split[i]) continue; // ignore empty strings
+	    namespaces = split[i].replace(/\*/g, '.*?');
+	    if (namespaces[0] === '-') {
+	      exports.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+	    } else {
+	      exports.names.push(new RegExp('^' + namespaces + '$'));
+	    }
+	  }
+	}
+
+	/**
+	 * Disable debug output.
+	 *
+	 * @api public
+	 */
+
+	function disable() {
+	  exports.enable('');
+	}
+
+	/**
+	 * Returns true if the given mode name is enabled, false otherwise.
+	 *
+	 * @param {String} name
+	 * @return {Boolean}
+	 * @api public
+	 */
+
+	function enabled(name) {
+	  var i, len;
+	  for (i = 0, len = exports.skips.length; i < len; i++) {
+	    if (exports.skips[i].test(name)) {
+	      return false;
+	    }
+	  }
+	  for (i = 0, len = exports.names.length; i < len; i++) {
+	    if (exports.names[i].test(name)) {
+	      return true;
+	    }
+	  }
+	  return false;
+	}
+
+	/**
+	 * Coerce `val`.
+	 *
+	 * @param {Mixed} val
+	 * @return {Mixed}
+	 * @api private
+	 */
+
+	function coerce(val) {
+	  if (val instanceof Error) return val.stack || val.message;
+	  return val;
+	}
+
+
+/***/ },
+/* 227 */
+/***/ function(module, exports) {
+
+	/**
+	 * Helpers.
+	 */
+
+	var s = 1000;
+	var m = s * 60;
+	var h = m * 60;
+	var d = h * 24;
+	var y = d * 365.25;
+
+	/**
+	 * Parse or format the given `val`.
+	 *
+	 * Options:
+	 *
+	 *  - `long` verbose formatting [false]
+	 *
+	 * @param {String|Number} val
+	 * @param {Object} options
+	 * @return {String|Number}
+	 * @api public
+	 */
+
+	module.exports = function(val, options){
+	  options = options || {};
+	  if ('string' == typeof val) return parse(val);
+	  return options.long
+	    ? long(val)
+	    : short(val);
+	};
+
+	/**
+	 * Parse the given `str` and return milliseconds.
+	 *
+	 * @param {String} str
+	 * @return {Number}
+	 * @api private
+	 */
+
+	function parse(str) {
+	  var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(str);
+	  if (!match) return;
+	  var n = parseFloat(match[1]);
+	  var type = (match[2] || 'ms').toLowerCase();
+	  switch (type) {
+	    case 'years':
+	    case 'year':
+	    case 'yrs':
+	    case 'yr':
+	    case 'y':
+	      return n * y;
+	    case 'days':
+	    case 'day':
+	    case 'd':
+	      return n * d;
+	    case 'hours':
+	    case 'hour':
+	    case 'hrs':
+	    case 'hr':
+	    case 'h':
+	      return n * h;
+	    case 'minutes':
+	    case 'minute':
+	    case 'mins':
+	    case 'min':
+	    case 'm':
+	      return n * m;
+	    case 'seconds':
+	    case 'second':
+	    case 'secs':
+	    case 'sec':
+	    case 's':
+	      return n * s;
+	    case 'milliseconds':
+	    case 'millisecond':
+	    case 'msecs':
+	    case 'msec':
+	    case 'ms':
+	      return n;
+	  }
+	}
+
+	/**
+	 * Short format for `ms`.
+	 *
+	 * @param {Number} ms
+	 * @return {String}
+	 * @api private
+	 */
+
+	function short(ms) {
+	  if (ms >= d) return Math.round(ms / d) + 'd';
+	  if (ms >= h) return Math.round(ms / h) + 'h';
+	  if (ms >= m) return Math.round(ms / m) + 'm';
+	  if (ms >= s) return Math.round(ms / s) + 's';
+	  return ms + 'ms';
+	}
+
+	/**
+	 * Long format for `ms`.
+	 *
+	 * @param {Number} ms
+	 * @return {String}
+	 * @api private
+	 */
+
+	function long(ms) {
+	  return plural(ms, d, 'day')
+	    || plural(ms, h, 'hour')
+	    || plural(ms, m, 'minute')
+	    || plural(ms, s, 'second')
+	    || ms + ' ms';
+	}
+
+	/**
+	 * Pluralization helper.
+	 */
+
+	function plural(ms, n, name) {
+	  if (ms < n) return;
+	  if (ms < n * 1.5) return Math.floor(ms / n) + ' ' + name;
+	  return Math.ceil(ms / n) + ' ' + name + 's';
+	}
+
+
+/***/ },
+/* 228 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>Select多功能选择框</h1>\n<h2>使用场景</h2>\n<ol>\n<li>替代原生下拉框，支持多选</li>\n<li>支持Array, Object等格式</li>\n<li>支持进行输入建议，远程搜索等</li>\n<li>支持optionGroup</li>\n</ol>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>single - 基本模式 options(Array)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select\n            @change=\"selectChange2\"\n            :options=\"dataSource2\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select\n    @change=\"selectChange2\"\n    :options=\"dataSource2\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>single - 基本模式 options(Object)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select\n             @change=\"selectChange\"\n             :options=\"dataSource\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select\n     @change=\"selectChange\"\n     :options=\"dataSource\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>自定义label的字段(label='text')</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select label=\"text\"\n            @change=\"selectChange\"\n            :options=\"dataSource\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select label=\"text\"\n    @change=\"selectChange\"\n    :options=\"dataSource\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>禁用(:disabled)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select :disabled=\"disable\"\n             @change=\"selectChange\"\n             :options=\"dataSource\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select :disabled=\"disable\"\n     @change=\"selectChange\"\n     :options=\"dataSource\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>定制label(:custom-label)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select :custom-label=\"reRenderLabel\"\n            @change=\"selectChange2\"\n            :options=\"dataSource\"></xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select :custom-label=\"reRenderLabel\"\n    @change=\"selectChange2\"\n    :options=\"dataSource\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>省市联动</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select placeholder=\"选择省\"\n            @change=\"provinceChange\"\n            :options=\"provinceData\"></xcui-select>\n        <xcui-select placeholder=\"选择市\"\n            @change=\"cityChange\"\n            :options=\"selectCityData\"></xcui-select>\n        <p>\n            {{selectProvinceValue}} - {{selectCityValue}}\n        </p>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select placeholder=\"选择省\"\n    @change=\"provinceChange\"\n    :options=\"provinceData\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-select placeholder=\"选择市\"\n    @change=\"cityChange\"\n    :options=\"selectCityData\"><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>p</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token punctuation\">{</span><span class=\"token punctuation\">{</span>selectProvinceValue<span class=\"token punctuation\">}</span><span class=\"token punctuation\">}</span> - <span class=\"token punctuation\">{</span><span class=\"token punctuation\">{</span>selectCityValue<span class=\"token punctuation\">}</span><span class=\"token punctuation\">}</span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>p</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>input Local Search</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择一个城市\"\n             show-search search-empty-text=\"没有搜索结果哎...\"\n             @search-change=\"searchChange\"\n             @change=\"localSearchChange\"\n             :options=\"localSearchSource\">\n        </xcui-select>\n        输入值: {{localSearchValue}}\n        选择结果: {{localSearchResult}}\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"选择一个城市\"\n     show-search search-empty-text=\"没有搜索结果哎...\"\n             @search-change=\"searchChange\"\n     @change=\"localSearchChange\"\n     :options=\"localSearchSource\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n输入值: <span class=\"token punctuation\">{</span><span class=\"token punctuation\">{</span>localSearchValue<span class=\"token punctuation\">}</span><span class=\"token punctuation\">}</span>\n选择结果: <span class=\"token punctuation\">{</span><span class=\"token punctuation\">{</span>localSearchResult<span class=\"token punctuation\">}</span><span class=\"token punctuation\">}</span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>智能输入</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"输入邮箱\"\n             show-search\n             @search-change=\"asyncSearchChange\"\n             @change=\"asyncSearchOnChange\"\n             :options=\"asyncSearchSource\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"输入邮箱\"\n     show-search\n     @search-change=\"asyncSearchChange\"\n     @change=\"asyncSearchOnChange\"\n     :options=\"asyncSearchSource\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>远程数据</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        远程搜索\n        <xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n             show-search\n             clear-on-select\n             @search-change=\"serverSearchChange\"\n             @change=\"serverSearchOnChange\"\n             :options=\"serverSearchSource\">\n        </xcui-select>\n        {{serverSearchValue}}\n        <br>\n        ajax请求不能耦合select组件, 提供EVENT(@search-change)让使用者进行数据获取 & options赋值\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n远程搜索\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n     show-search\n     clear-on-select\n     @search-change=\"serverSearchChange\"\n     @change=\"serverSearchOnChange\"\n     :options=\"serverSearchSource\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token punctuation\">{</span><span class=\"token punctuation\">{</span>serverSearchValue<span class=\"token punctuation\">}</span><span class=\"token punctuation\">}</span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>br</span><span class=\"token punctuation\" >></span></span>\najax请求不能耦合select组件, 提供EVENT(@search-change)让使用者进行数据获取 &amp; options赋值\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>option Group (数据格式一)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n                     optgroup\n                     @change=\"optgroupOnChange\"\n                     :selected=\"optgroupDefaultValue\"\n                     :options=\"optgroupSource\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n             optgroup\n             @change=\"optgroupOnChange\"\n             :selected=\"optgroupDefaultValue\"\n             :options=\"optgroupSource\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>option Group (数据格式二)</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n                     optgroup\n                     label=\"name\"\n                     @change=\"optgroupOnChange2\"\n                     :options=\"optgroupSource2\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"搜索\"\n             optgroup\n             label=\"name\"\n                     @change=\"optgroupOnChange2\"\n             :options=\"optgroupSource2\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>multiple select</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择多个\"\n                     multiple\n                     :selected=\"multipleDefaultValue\"\n                     @change=\"multipleOnChange\"\n                     @remove=\"multipleOnRemove\"\n                     :options=\"dataSource2\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"选择多个\"\n             multiple\n             :selected=\"multipleDefaultValue\"\n             @change=\"multipleOnChange\"\n             @remove=\"multipleOnRemove\"\n             :options=\"dataSource2\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>multiple select</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\" placeholder=\"选择多个\"\n                     multiple\n                     :multiple-max=2\n                     :selected=\"multipleDefaultValue2\"\n                     :options=\"dataSource\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\" placeholder=\"选择多个\"\n             multiple\n             :multiple-max=2\n             :selected=\"multipleDefaultValue2\"\n             :options=\"dataSource\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>multiple select object</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-select class-name=\"select-demo\"\n                     placeholder=\"选择多个\"\n                     multiple\n                     @change=\"multipleObjectOnChange\"\n                     @remove=\"multipleObjectOnRemove\"\n                     :options=\"multipleObjOptions\">\n        </xcui-select>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-select class-name=\"select-demo\"\n             placeholder=\"选择多个\"\n                     multiple\n             @change=\"multipleObjectOnChange\"\n             @remove=\"multipleObjectOnRemove\"\n             :options=\"multipleObjOptions\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-select</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>组件依赖</h2>\n<blockquote>\n<p><a href=\"https://www.npmjs.com/package/fuzzysearch\">fuzzysearch</a> 模糊搜索模块</p>\n</blockquote>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>className</td>\n<td>String</td>\n<td>无</td>\n<td>自定义css类名</td>\n<td>否</td>\n</tr>\n<tr>\n<td>placeholder</td>\n<td>String</td>\n<td>无</td>\n<td>选择框默认文字</td>\n<td>否</td>\n</tr>\n<tr>\n<td>optgroup</td>\n<td>Boolean</td>\n<td>false</td>\n<td>列表分组模式(结合options使用)</td>\n<td>否</td>\n</tr>\n<tr>\n<td>multiple</td>\n<td>Boolean</td>\n<td>false</td>\n<td>多选</td>\n<td>否</td>\n</tr>\n<tr>\n<td>showSearch</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否展示搜索框</td>\n<td>否</td>\n</tr>\n<tr>\n<td>clearOnSelect</td>\n<td>Boolean</td>\n<td>false</td>\n<td>选择完以后清除搜索内容</td>\n<td>否</td>\n</tr>\n<tr>\n<td>label</td>\n<td>String</td>\n<td>无</td>\n<td>自定义label展现key(对应数据中key)</td>\n<td>否</td>\n</tr>\n<tr>\n<td>:multiple-max</td>\n<td>Number</td>\n<td>无</td>\n<td>多选模式下 最多选择数据项，默认0</td>\n<td></td>\n</tr>\n<tr>\n<td>:customLabel</td>\n<td>Function</td>\n<td>无</td>\n<td>option内容定制</td>\n<td>否</td>\n</tr>\n<tr>\n<td>:options</td>\n<td>Array</td>\n<td>无</td>\n<td>默认数据,optgroup模式下数据结构有要求(具体查看demo#option Group)</td>\n<td>是</td>\n</tr>\n<tr>\n<td>:disabled</td>\n<td>Boolean</td>\n<td>false</td>\n<td>禁用</td>\n<td>否</td>\n</tr>\n<tr>\n<td>:selected</td>\n<td>String</td>\n<td>无</td>\n<td>默认已选的值</td>\n<td>否</td>\n</tr>\n<tr>\n<td>@change</td>\n<td>function(value) / function(value,groupIndex,valueIndex)</td>\n<td>无</td>\n<td>值发生变化的时候(2种模式: 普通模式/分组模式)</td>\n<td>否</td>\n</tr>\n<tr>\n<td>@select</td>\n<td>function(value) / function(value,groupIndex,valueIndex)</td>\n<td>无</td>\n<td>发生了选择的时候(2种模式: 普通模式/分组模式)</td>\n<td>否</td>\n</tr>\n<tr>\n<td>@searchChange</td>\n<td>function(searchValue)</td>\n<td>无</td>\n<td>搜索值发生变化的时候</td>\n<td>否</td>\n</tr>\n<tr>\n<td>@remove</td>\n<td>function(removeValue)</td>\n<td>无</td>\n<td>多选模式下移除一个选值的时候</td>\n<td>否</td>\n</tr>\n</tbody>\n</table>\n<h3>模式说明</h3>\n<ul>\n<li>\n<p>单选模式:</p>\n<pre>options数据格式一<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n    <span class=\"token string\" >'item1'</span><span class=\"token punctuation\" >,</span>\n    <span class=\"token string\" >'item2'</span>\n<span class=\"token punctuation\" >]</span>\noptions数据格式二<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n    <span class=\"token punctuation\" >{</span>\n        label<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'1'</span><span class=\"token punctuation\" >,</span>\n        disable<span class=\"token punctuation\" >:</span> <span class=\"token boolean\" >true</span><span class=\"token punctuation\" >,</span>\n        name<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'1'</span>\n    <span class=\"token punctuation\" >}</span>\n<span class=\"token punctuation\" >]</span>\n</pre>\n</li>\n<li>\n<p>分组模式:</p>\n<pre>optgroup    【必选】\nshowSearch  【不支持】\noptions数据格式一 <span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n    <span class=\"token punctuation\" >{</span>\n        name<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'opt group 1'</span><span class=\"token punctuation\" >,</span>\n        options<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n            <span class=\"token string\" >'item1'</span><span class=\"token punctuation\" >,</span>\n            <span class=\"token string\" >'item2'</span>\n        <span class=\"token punctuation\" >]</span>\n    <span class=\"token punctuation\" >}</span>\n<span class=\"token punctuation\" >]</span>\noptions数据格式二 <span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n    <span class=\"token punctuation\" >{</span>\n        name<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'opt group 2'</span><span class=\"token punctuation\" >,</span>\n        options<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >[</span>\n            <span class=\"token punctuation\" >{</span>\n                label<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'1'</span><span class=\"token punctuation\" >,</span>\n                disable<span class=\"token punctuation\" >:</span> <span class=\"token boolean\" >true</span>\n            <span class=\"token punctuation\" >}</span>\n        <span class=\"token punctuation\" >]</span>\n    <span class=\"token punctuation\" >}</span>\n<span class=\"token punctuation\" >]</span>\n</pre>\n</li>\n<li>\n<p>多选模式:</p>\n<pre>multiple 【必选】\nshowSearch  【不支持】\nselected<span class=\"token punctuation\" >:</span> Array\n</pre>\n</li>\n</ul>\n<h3>参考</h3>\n<p><a href=\"https://select2.github.io/\">select2</a><br />\n<a href=\"http://ant.design/components/select/\">antd-select</a><br />\n<a href=\"http://monterail.github.io/vue-multiselect/\">vue-multiselect</a><br />\n<a href=\"https://josephuspaye.github.io/Keen-UI/#/ui-select-docs\">Keen-UI - select</a><br />\n<a href=\"http://amazeui.org/javascript/selected\">http://amazeui.org/javascript/selected</a></p>\n</div>";
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__vue_template__ = __webpack_require__(230)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-16d87fe4/message.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 230 */
+/***/ function(module, exports) {
+
+	module.exports = "<div><h1>Message信息提示</h1>\n<p>Message提供一种不打断用户操作的轻量级提示方式，顶部居中显示并自动消失。常用于主动操作后的信息提示。</p>\n<h4>支持4种信息展示类型</h4>\n<ul>\n<li>info：普通信息提示</li>\n<li>success：成功信息提示</li>\n<li>error：错误信息提示</li>\n<li>warning：警告信息提示</li>\n</ul>\n<p><code>this.$Message.show(content:String, type: String, duration: Number)</code></p>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>基础用法</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <button class=\"btn btn-info\" @click=\"$Message.show('this is an info message')\">info</button>\n        <button class=\"btn btn-success\" @click=\"$Message.show('this is a success message', 'success')\">success</button>\n        <button class=\"btn btn-danger\" @click=\"$Message.show('this is an error message', 'error')\">error</button>\n        <button class=\"btn btn-warning\" @click=\"$Message.show('this is a info warning', 'warning')\">warning</button>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-info<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>$Message.show(<span class=\"token punctuation\" >'</span>this is an info message<span class=\"token punctuation\" >'</span>)<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>info<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-success<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>$Message.show(<span class=\"token punctuation\" >'</span>this is a success message<span class=\"token punctuation\" >'</span>, <span class=\"token punctuation\" >'</span>success<span class=\"token punctuation\" >'</span>)<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>success<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-danger<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>$Message.show(<span class=\"token punctuation\" >'</span>this is an error message<span class=\"token punctuation\" >'</span>, <span class=\"token punctuation\" >'</span>error<span class=\"token punctuation\" >'</span>)<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>error<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-warning<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>$Message.show(<span class=\"token punctuation\" >'</span>this is a info warning<span class=\"token punctuation\" >'</span>, <span class=\"token punctuation\" >'</span>warning<span class=\"token punctuation\" >'</span>)<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>warning<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>-</td>\n<td>提示信息内容</td>\n<td><strong>必选</strong></td>\n</tr>\n<tr>\n<td>type</td>\n<td>String</td>\n<td>info</td>\n<td>指定提示信息的类型，默认为info类型；可自行配置，有四种选择: info、success、error、warning</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>duration</td>\n<td>Number</td>\n<td>-</td>\n<td>单位: ms, 默认<strong>3000</strong>毫秒后自动关闭。设置0无效</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__webpack_require__(232)
+	__vue_script__ = __webpack_require__(234)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\demos\\modal.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(235)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-064524ca/modal.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(233);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(12)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./modal.vue", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./modal.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(11)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".xcui-modal-demo-title {\n  color: #66ccff;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 234 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var ModalDemo = {
+	    data: function data() {
+	        return {
+	            modal1: false,
+	            modal2: false,
+	            modal3: false,
+	            modal4: false,
+	            modal5: false,
+	            modal6: false,
+	            modal7: false,
+	            modal8: false,
+	            modal9: false,
+	            modal10: false
+	        };
+	    },
+
+	    methods: {
+	        modal1OK: function modal1OK() {
+	            console.log('modal1OK');
+	        }
+	    }
+	};
+
+	exports.default = ModalDemo;
+
+/***/ },
 /* 235 */
 /***/ function(module, exports) {
 
-	module.exports = "<div><h2>Modal 模态窗口</h2>\n<h3>使用场景</h3>\n<p>模拟浏览器的 <code>alert</code>、<code>confirm</code></p>\n<h3>Demo</h3>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>基础使用</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <button class=\"btn btn-default\" @click=\"this.modal1 = true\">显示对话框</button>\r\n        <Modal\r\n        :show.sync=\"modal1\"\r\n        title=\"基础弹窗\"\n        :on-ok=\"modal1OK\">\r\n        <div>XCUI，做有品质的外卖UI</div>\r\n        </Modal>\r\n        <div>通过控制show来显示/隐藏对话框，需要将show设置为.sync双向绑定</div>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal1 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>显示对话框<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Modal</span>\r\n <span class=\"token attr-name\" >:show.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>modal1<span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>基础弹窗<span class=\"token punctuation\" >\"</span></span>\n <span class=\"token attr-name\" >:on-ok</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>modal1OK<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>XCUI，做有品质的外卖UI<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>通过控制show来显示/隐藏对话框，需要将show设置为.sync双向绑定<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>定义元素的显示</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <button class=\"btn btn-default\" @click=\"this.modal2 = true\">自定义页头</button>\r\n        <button class=\"btn btn-default\" @click=\"this.modal3 = true\">不带标题栏</button>\r\n        <button class=\"btn btn-default\" @click=\"this.modal4 = true\">不带关闭按钮</button>\r\n        <button class=\"btn btn-default\" @click=\"this.modal5 = true\">不带页脚</button>\r\n        <button class=\"btn btn-default\" @click=\"this.modal6 = true\">不带关闭按钮和页脚</button>\r\n        <Modal\r\n        :show.sync=\"modal2\"\r\n        title=\"自定义页头（有slot则无效）\">\n        <span slot=\"header\" class=\"xcui-modal-demo-title\">不一样的页头</span>\r\n        <div>我跟你不一样，我有你没有的头脑</div>\r\n        </Modal>\r\n        <Modal\r\n        :show.sync=\"modal3\"\r\n        :show-header=\"false\">\r\n        <div>无头骑士。生前是一名勇猛的骑士，由于在战场上不幸阵亡，首级被敌人割去，因此每逢月黑风高的夜晚他便会骑着一匹同为亡灵的马出没于沉睡谷，四处寻找自己遗失的首级；而每当看见与自己生前长相相似者便会斩其头颅带回。</div>\r\n        </Modal>\r\n        <Modal\r\n        :show.sync=\"modal4\"\r\n        title=\"不带关闭按钮\"\n        :show-close-button=\"false\">\r\n        <div>不带关闭按钮</div>\r\n        </Modal>\r\n        <Modal\r\n        :show.sync=\"modal5\"\r\n        title=\"不带页脚\"\n        :show-footer=\"false\">\r\n        <div>即使我失去了双脚，我依然顶天立地</div>\r\n        </Modal>\r\n        <Modal\r\n        :show.sync=\"modal6\"\r\n        :show-close-button=\"false\"\r\n        :show-footer=\"false\">\r\n        <div>我且问你，除了刷新，你能如何关闭我？</div>\r\n        </Modal>\r\n        <div>Modal提供了灵活的组件化API和Slot，可以自由控制整个Modal的组成部分。比如，页头、页脚和关闭按钮</div>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal2 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>自定义页头<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal3 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不带标题栏<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal4 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不带关闭按钮<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal5 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不带页脚<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal6 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不带关闭按钮和页脚<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Modal</span>\r\n <span class=\"token attr-name\" >:show.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>modal2<span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>自定义页头（有slot则无效）<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>span</span> <span class=\"token attr-name\" >slot</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>header<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>xcui-modal-demo-title<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不一样的页头<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>span</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>我跟你不一样，我有你没有的头脑<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Modal</span>\r\n <span class=\"token attr-name\" >:show.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>modal3<span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >:show-header</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>false<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>无头骑士。生前是一名勇猛的骑士，由于在战场上不幸阵亡，首级被敌人割去，因此每逢月黑风高的夜晚他便会骑着一匹同为亡灵的马出没于沉睡谷，四处寻找自己遗失的首级；而每当看见与自己生前长相相似者便会斩其头颅带回。<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Modal</span>\r\n <span class=\"token attr-name\" >:show.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>modal4<span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>不带关闭按钮<span class=\"token punctuation\" >\"</span></span>\n <span class=\"token attr-name\" >:show-close-button</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>false<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>不带关闭按钮<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Modal</span>\r\n <span class=\"token attr-name\" >:show.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>modal5<span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>不带页脚<span class=\"token punctuation\" >\"</span></span>\n <span class=\"token attr-name\" >:show-footer</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>false<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>即使我失去了双脚，我依然顶天立地<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Modal</span>\r\n <span class=\"token attr-name\" >:show.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>modal6<span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >:show-close-button</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>false<span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >:show-footer</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>false<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>我且问你，除了刷新，你能如何关闭我？<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>Modal提供了灵活的组件化API和Slot，可以自由控制整个Modal的组成部分。比如，页头、页脚和关闭按钮<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>自定义样式</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <button class=\"btn btn-default\" @click=\"this.modal7 = true\">Full对话框</button>\r\n        <button class=\"btn btn-default\" @click=\"this.modal8 = true\">Small对话框</button>\r\n        <button class=\"btn btn-default\" @click=\"this.modal9 = true\">自定义Style</button>\r\n        <button class=\"btn btn-default\" @click=\"this.modal10 = true\">自定义class-name</button>\r\n        <Modal\r\n        :show.sync=\"modal7\"\r\n        :size=\"'full'\"\r\n        title=\"Full对话框\">\n        <div>心宽体肥，宅心仁厚。</div>\r\n        </Modal>\r\n        <Modal\r\n        :show.sync=\"modal8\"\r\n        :size=\"'small'\"\r\n        title=\"Small对话框\">\n        <div>即使我小，这世间也会有我的一席之地。因为我小巧玲珑，精灵剔透。</div>\r\n        </Modal>\r\n        <Modal\r\n        :show.sync=\"modal9\"\r\n        :style=\"{'transform': 'rotate(-10deg)'}\"\r\n        title=\"自定义Style\">\n        <div>身正不怕影子斜</div>\r\n        </Modal>\r\n        <Modal\r\n        :show.sync=\"modal10\"\r\n        title=\"自定义class-name\"\n        :class-name=\"'xcui-modal-demo-class'\">\r\n        <div>欲与天公试比高</div>\r\n        </Modal>\r\n        <style>\r\n        .Modal-demo-class { top: 0; }\n        </style>\r\n        <div>通过设置size可以快速设置对话框的宽度大小，也可以设置class-name和style自定义Modal的样式</div>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal7 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Full对话框<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal8 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Small对话框<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal9 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>自定义Style<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal10 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>自定义class-name<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Modal</span>\r\n <span class=\"token attr-name\" >:show.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>modal7<span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >:size</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>full<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Full对话框<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>心宽体肥，宅心仁厚。<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Modal</span>\r\n <span class=\"token attr-name\" >:show.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>modal8<span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >:size</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>small<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>Small对话框<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>即使我小，这世间也会有我的一席之地。因为我小巧玲珑，精灵剔透。<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Modal</span>\r\n <span class=\"token attr-name\" >:show.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>modal9<span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >:</span><span class=\"token style-attr language-css\" ><span class=\"token attr-name\" ><span class=\"token attr-name\" >style</span></span><span class=\"token punctuation\" >=\"</span><span class=\"token attr-value\" ><span class=\"token punctuation\" ><span class=\"token punctuation\">{</span></span><span class=\"token string\" >'transform'</span><span class=\"token punctuation\" >:</span> <span class=\"token string\" >'rotate(-10deg)'</span><span class=\"token punctuation\" ><span class=\"token punctuation\">}</span></span></span><span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>自定义Style<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>身正不怕影子斜<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>Modal</span>\r\n <span class=\"token attr-name\" >:show.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>modal10<span class=\"token punctuation\" >\"</span></span>\r\n <span class=\"token attr-name\" >title</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>自定义class-name<span class=\"token punctuation\" >\"</span></span>\n <span class=\"token attr-name\" >:class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>xcui-modal-demo-class<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>欲与天公试比高<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>Modal</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>style</span><span class=\"token punctuation\" >></span></span><span class=\"token style language-css\" >\r\n <span class=\"token selector\" >.Modal-demo-class</span> <span class=\"token punctuation\" ><span class=\"token punctuation\">{</span></span> <span class=\"token property\" >top</span><span class=\"token punctuation\" >:</span> 0<span class=\"token punctuation\" >;</span> <span class=\"token punctuation\" ><span class=\"token punctuation\">}</span></span>\n </span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>style</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>通过设置size可以快速设置对话框的宽度大小，也可以设置class-name和style自定义Modal的样式<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>show</td>\n<td>Boolean</td>\n<td>false</td>\n<td>对话框是否显示,需要.sync双向绑定</td>\n<td><strong>必选</strong></td>\n</tr>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的标题，如果slot定义了header，则title无效</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>mask-closable</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否允许点击遮罩层关闭对话框</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>scrollable</td>\n<td>Boolean</td>\n<td>false</td>\n<td>打开Modal后，是否允许底页可滚动</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-close-button</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示右上角的关闭按钮</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-ok-button</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示确定按钮</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-cancel-button</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示取消按钮</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-header</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示整个标题栏</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-footer</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示整个底边栏</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>ok-text</td>\n<td>String</td>\n<td>确定</td>\n<td>确定按钮的文字</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>cancel-text</td>\n<td>String</td>\n<td>取消</td>\n<td>取消按钮的文字</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>size</td>\n<td>String</td>\n<td>middle</td>\n<td>预设对话框浮层的宽度大小。可选值：small/middle/large/full</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>class-name</td>\n<td>String</td>\n<td>-</td>\n<td>自定义样式类名</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>style</td>\n<td>object</td>\n<td>-</td>\n<td>设置对话框浮层的样式，调整浮层位置等。该属性设置的是.Modal的样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content-style</td>\n<td>object</td>\n<td>-</td>\n<td>设置对话框内容主体的样式。该属性设置的是.Modal-body的样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h2>Events</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>on-ok</td>\n<td>点击确定的回调函数。回调函数如果返回真值(true)，则不再关闭对话框；如果返回假值(false)或不返回，则默认执行on-ok后关闭对话框</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>on-cancel</td>\n<td>点击取消和右上角关闭的回调函数。回调函数如果返回真值(true)，则不再关闭对话框；如果返回假值(false)或不返回，则默认执行on-cancel后关闭对话框</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h2>Slot</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>描述</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>header</td>\n<td>自定义页头</td>\n</tr>\n<tr>\n<td>footer</td>\n<td>自定义页脚内容</td>\n</tr>\n<tr>\n<td>close</td>\n<td>自定义右上角关闭按钮</td>\n</tr>\n<tr>\n<td>-</td>\n<td>对话框的主体内容</td>\n</tr>\n</tbody>\n</table>\n<h2>Modal 全局方法</h2>\n<p>XCUI为Modal提供了便捷的调用方式。在Vue.prototype中添加了快捷的方法：$Modal.show,$Modal.close, $confirm和$alert。因此，在Vue实例代码中，可以使用this.$Modal等方法快捷地创建一个对话框。<br />\n但需要在调用这些全局方法之前，先在项目中引入XCUI或xcuiInstall，并调用Vue.use安装。</p>\n<p>引入方式一：</p>\n<pre><span class=\"token keyword\" >import</span> Vue <span class=\"token keyword\" >from</span> <span class=\"token string\" >'vue'</span>\n<span class=\"token keyword\" >import</span> XCUI <span class=\"token keyword\" >from</span> <span class=\"token string\" >'xcui'</span> <span class=\"token comment\" spellcheck=\"true\">// 全局引入</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>XCUI<span class=\"token punctuation\" >)</span>\n</pre>\n<p>引入方式二：</p>\n<pre><span class=\"token keyword\" >import</span> Vue <span class=\"token keyword\" >from</span> <span class=\"token string\" >'vue'</span>\n<span class=\"token keyword\" >import</span> <span class=\"token punctuation\" >{</span>xcuiInstall<span class=\"token punctuation\" >}</span> <span class=\"token keyword\" >from</span> <span class=\"token string\" >'xcui'</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcuiInstall<span class=\"token punctuation\" >)</span>\n</pre>\n<p>做好以上准备工作后，即可在组件任何位置调用vm.$confirm等来隐式地创建一个对话框了。</p>\n<ol>\n<li><strong>this.$Modal.show(options)</strong></li>\n</ol>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>options</td>\n<td>Object</td>\n<td>-</td>\n<td>对话框的参数，属性同props</td>\n<td><strong>必选</strong></td>\n</tr>\n</tbody>\n</table>\n<ol start=\"2\">\n<li><strong>this.$Modal.close()</strong></li>\n</ol>\n<p><code>$Modal.close()</code>提供隐式地关闭对话框全局实例的能力。</p>\n<ol start=\"3\">\n<li><strong>this.$confirm(title, content, onOk, onCancel, isRawHTML)</strong> 或 <strong>this.$confirm(options, isRawHTML)</strong></li>\n</ol>\n<p>写法1：</p>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的标题</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的内容，可通过isRawHTML指定是否解析为原生HTML</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>onOk</td>\n<td>Function</td>\n<td>-</td>\n<td>点击确定按钮的回调函数</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>onCancel</td>\n<td>Function</td>\n<td>-</td>\n<td>点击取消按钮或关闭按钮的回调函数</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>options</td>\n<td>Object</td>\n<td>-</td>\n<td>对content(String)是否解析为原生HTML</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<p>写法2：</p>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>options</td>\n<td>Object</td>\n<td>-</td>\n<td>对话框的参数，属性同props</td>\n<td><strong>必选</strong></td>\n</tr>\n<tr>\n<td>isRawHTML</td>\n<td>Boolean</td>\n<td>false</td>\n<td>对options.content(String)是否解析为原生HTML</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<ol start=\"4\">\n<li><strong>this.$alert(content, onOk)</strong></li>\n</ol>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的内容</td>\n<td><strong>必选</strong></td>\n</tr>\n<tr>\n<td>onOk</td>\n<td>Function</td>\n<td>-</td>\n<td>点击确定按钮的回调函数</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+	module.exports = "<div><h1>Modal 模态窗口</h1>\n<h2>使用场景</h2>\n<p>模态对话框，模拟浏览器的 <code>alert</code>、<code>confirm</code>。在浮层中显示，引导用户进行相关操作。<br />\n<code>Modal</code>提供了两种用法，基础组件使用和封装好的全局实例调用。</p>\n<h2>Demo</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>基础使用</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <button class=\"btn btn-default\" @click=\"this.modal1 = true\">显示对话框</button>\n        <xcui-modal\n        :show.sync=\"modal1\"\n        title=\"基础弹窗\"\n        :on-ok=\"modal1OK\">\n        <div>XCUI，做有品质的外卖UI</div>\n        </xcui-modal>\n        <div>通过控制show来显示/隐藏对话框，需要将show设置为.sync双向绑定</div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal1 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>显示对话框<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-modal\n:show.sync=\"modal1\"\ntitle=\"基础弹窗\"\n        :on-ok=\"modal1OK\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>XCUI，做有品质的外卖UI<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-modal</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>通过控制show来显示/隐藏对话框，需要将show设置为.sync双向绑定<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>定义元素的显示</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <button class=\"btn btn-default\" @click=\"this.modal2 = true\">自定义页头</button>\n        <button class=\"btn btn-default\" @click=\"this.modal3 = true\">不带标题栏</button>\n        <button class=\"btn btn-default\" @click=\"this.modal4 = true\">不带关闭按钮</button>\n        <button class=\"btn btn-default\" @click=\"this.modal5 = true\">不带页脚</button>\n        <button class=\"btn btn-default\" @click=\"this.modal6 = true\">不带关闭按钮和页脚</button>\n        <xcui-modal\n        :show.sync=\"modal2\"\n        title=\"自定义页头（有slot则无效）\">\n        <span slot=\"header\" class=\"xcui-modal-demo-title\">不一样的页头</span>\n        <div>我跟你不一样，我有你没有的头脑</div>\n        </xcui-modal>\n        <xcui-modal\n        :show.sync=\"modal3\"\n        :show-header=\"false\">\n        <div>无头骑士。生前是一名勇猛的骑士，由于在战场上不幸阵亡，首级被敌人割去，因此每逢月黑风高的夜晚他便会骑着一匹同为亡灵的马出没于沉睡谷，四处寻找自己遗失的首级；而每当看见与自己生前长相相似者便会斩其头颅带回。</div>\n        </xcui-modal>\n        <xcui-modal\n        :show.sync=\"modal4\"\n        title=\"不带关闭按钮\"\n        :show-close-button=\"false\">\n        <div>不带关闭按钮</div>\n        </xcui-modal>\n        <xcui-modal\n        :show.sync=\"modal5\"\n        title=\"不带页脚\"\n        :show-footer=\"false\">\n        <div>即使我失去了双脚，我依然顶天立地</div>\n        </xcui-modal>\n        <xcui-modal\n        :show.sync=\"modal6\"\n        :show-close-button=\"false\"\n        :show-footer=\"false\">\n        <div>我且问你，除了刷新，你能如何关闭我？</div>\n        </xcui-modal>\n        <div>Modal提供了灵活的组件化API和Slot，可以自由控制整个Modal的组成部分。比如，页头、页脚和关闭按钮</div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal2 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>自定义页头<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal3 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不带标题栏<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal4 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不带关闭按钮<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal5 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不带页脚<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal6 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不带关闭按钮和页脚<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-modal\n:show.sync=\"modal2\"\ntitle=\"自定义页头（有slot则无效）\">\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>span</span> <span class=\"token attr-name\" >slot</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>header<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>xcui-modal-demo-title<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>不一样的页头<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>span</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>我跟你不一样，我有你没有的头脑<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-modal</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-modal\n:show.sync=\"modal3\"\n:show-header=\"false\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>无头骑士。生前是一名勇猛的骑士，由于在战场上不幸阵亡，首级被敌人割去，因此每逢月黑风高的夜晚他便会骑着一匹同为亡灵的马出没于沉睡谷，四处寻找自己遗失的首级；而每当看见与自己生前长相相似者便会斩其头颅带回。<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-modal</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-modal\n:show.sync=\"modal4\"\ntitle=\"不带关闭按钮\"\n        :show-close-button=\"false\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>不带关闭按钮<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-modal</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-modal\n:show.sync=\"modal5\"\ntitle=\"不带页脚\"\n        :show-footer=\"false\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>即使我失去了双脚，我依然顶天立地<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-modal</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-modal\n:show.sync=\"modal6\"\n:show-close-button=\"false\"\n:show-footer=\"false\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>我且问你，除了刷新，你能如何关闭我？<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-modal</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>Modal提供了灵活的组件化API和Slot，可以自由控制整个Modal的组成部分。比如，页头、页脚和关闭按钮<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>自定义样式</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <button class=\"btn btn-default\" @click=\"this.modal7 = true\">Full对话框</button>\n        <button class=\"btn btn-default\" @click=\"this.modal8 = true\">Small对话框</button>\n        <button class=\"btn btn-default\" @click=\"this.modal9 = true\">自定义Style</button>\n        <button class=\"btn btn-default\" @click=\"this.modal10 = true\">自定义class-name</button>\n        <xcui-modal\n        :show.sync=\"modal7\"\n        :size=\"'full'\"\n        title=\"Full对话框\">\n        <div>心宽体肥，宅心仁厚。</div>\n        </xcui-modal>\n        <xcui-modal\n        :show.sync=\"modal8\"\n        :size=\"'small'\"\n        title=\"Small对话框\">\n        <div>即使我小，这世间也会有我的一席之地。因为我小巧玲珑，精灵剔透。</div>\n        </xcui-modal>\n        <xcui-modal\n        :show.sync=\"modal9\"\n        :style=\"{'transform': 'rotate(-10deg)'}\"\n        title=\"自定义Style\">\n        <div>身正不怕影子斜</div>\n        </xcui-modal>\n        <xcui-modal\n        :show.sync=\"modal10\"\n        title=\"自定义class-name\"\n        :class-name=\"'xcui-modal-demo-class'\">\n        <div>欲与天公试比高</div>\n        </xcui-modal>\n        <style>\n        .Modal-demo-class { top: 0; }\n        </style>\n        <div>通过设置size可以快速设置对话框的宽度大小，也可以设置class-name和style自定义Modal的样式</div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal7 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Full对话框<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal8 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>Small对话框<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal9 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>自定义Style<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-default<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>this.modal10 <span class=\"token punctuation\" >=</span> true<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>自定义class-name<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-modal\n:show.sync=\"modal7\"\n:size=\"'full'\"\ntitle=\"Full对话框\">\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>心宽体肥，宅心仁厚。<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-modal</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-modal\n:show.sync=\"modal8\"\n:size=\"'small'\"\ntitle=\"Small对话框\">\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>即使我小，这世间也会有我的一席之地。因为我小巧玲珑，精灵剔透。<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-modal</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-modal\n:show.sync=\"modal9\"\n:style=\"<span class=\"token punctuation\">{</span>'transform': 'rotate(-10deg)'<span class=\"token punctuation\">}</span>\"\ntitle=\"自定义Style\">\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>身正不怕影子斜<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-modal</span><span class=\"token punctuation\" >></span></span>\n&lt;xcui-modal\n:show.sync=\"modal10\"\ntitle=\"自定义class-name\"\n        :class-name=\"'xcui-modal-demo-class'\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>欲与天公试比高<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-modal</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>style</span><span class=\"token punctuation\" >></span></span><span class=\"token style language-css\" ><span class=\"token selector\" >\n.Modal-demo-class</span> <span class=\"token punctuation\" ><span class=\"token punctuation\">{</span></span> <span class=\"token property\" >top</span><span class=\"token punctuation\" >:</span> 0<span class=\"token punctuation\" >;</span> <span class=\"token punctuation\" ><span class=\"token punctuation\">}</span></span>\n        </span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>style</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token punctuation\" >></span></span>通过设置size可以快速设置对话框的宽度大小，也可以设置class-name和style自定义Modal的样式<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>show</td>\n<td>Boolean</td>\n<td>false</td>\n<td>对话框是否显示,需要.sync双向绑定</td>\n<td><strong>必选</strong></td>\n</tr>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的主体内容，如果使用了默认slot的方式，则content无效</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的标题，如果slot定义了header，则title无效</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>mask-closable</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否允许点击遮罩层关闭对话框</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>scrollable</td>\n<td>Boolean</td>\n<td>false</td>\n<td>打开Modal后，是否允许底页可滚动</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-close-button</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示右上角的关闭按钮</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-ok-button</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示确定按钮</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-cancel-button</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示取消按钮</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-header</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示整个标题栏</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-footer</td>\n<td>Boolean</td>\n<td>true</td>\n<td>是否显示整个底边栏</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>ok-text</td>\n<td>String</td>\n<td>确定</td>\n<td>确定按钮的文字</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>cancel-text</td>\n<td>String</td>\n<td>取消</td>\n<td>取消按钮的文字</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>size</td>\n<td>String</td>\n<td>middle</td>\n<td>预设对话框浮层的宽度大小。可选值：small/middle/large/full</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>class-name</td>\n<td>String</td>\n<td>-</td>\n<td>自定义样式类名</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>style</td>\n<td>object</td>\n<td>-</td>\n<td>设置对话框浮层的样式，调整浮层位置等。该属性设置的是.Modal的样式</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content-style</td>\n<td>object</td>\n<td>-</td>\n<td>设置对话框内容主体的样式。该属性设置的是.Modal-body的样式</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h2>Events</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>on-ok</td>\n<td>点击确定的回调函数。回调函数如果返回真值(true)，则不再关闭对话框；如果返回假值(false)或不返回，则默认执行on-ok后关闭对话框</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>on-cancel</td>\n<td>点击取消和右上角关闭的回调函数。回调函数如果返回真值(true)，则不再关闭对话框；如果返回假值(false)或不返回，则默认执行on-cancel后关闭对话框</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h2>Slot</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>描述</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>header</td>\n<td>自定义页头</td>\n</tr>\n<tr>\n<td>footer</td>\n<td>自定义页脚内容</td>\n</tr>\n<tr>\n<td>close</td>\n<td>自定义右上角关闭按钮</td>\n</tr>\n<tr>\n<td>-</td>\n<td>对话框的主体内容</td>\n</tr>\n</tbody>\n</table>\n<h2>Modal 全局方法</h2>\n<p>XCUI为Modal提供了便捷的调用方式。在Vue.prototype中添加了快捷的方法：$Modal.show,$Modal.close, $confirm和$alert。因此，在Vue实例代码中，可以使用this.$Modal等方法快捷地创建一个对话框。<br />\n但需要在调用这些全局方法之前，先在项目中引入XCUI或xcuiInstall，并调用Vue.use安装。</p>\n<p>引入方式一：</p>\n<pre><span class=\"token keyword\" >import</span> Vue <span class=\"token keyword\" >from</span> <span class=\"token string\" >'vue'</span>\n<span class=\"token keyword\" >import</span> XCUI <span class=\"token keyword\" >from</span> <span class=\"token string\" >'xcui'</span> <span class=\"token comment\" spellcheck=\"true\">// 全局引入</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>XCUI<span class=\"token punctuation\" >)</span>\n</pre>\n<p>引入方式二：</p>\n<pre><span class=\"token keyword\" >import</span> Vue <span class=\"token keyword\" >from</span> <span class=\"token string\" >'vue'</span>\n<span class=\"token keyword\" >import</span> <span class=\"token punctuation\" >{</span>xcuiInstall<span class=\"token punctuation\" >}</span> <span class=\"token keyword\" >from</span> <span class=\"token string\" >'xcui'</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcuiInstall<span class=\"token punctuation\" >)</span>\n</pre>\n<p>做好以上准备工作后，即可在组件任何位置调用vm.$confirm等来隐式地创建一个对话框了。</p>\n<ol>\n<li><strong>this.$Modal.show(options)</strong></li>\n</ol>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>options</td>\n<td>Object</td>\n<td>-</td>\n<td>对话框的参数，属性同props(props.show除外)。注意：使用驼峰式变量名，如<strong>onOk</strong>，而非on-ok</td>\n<td><strong>必选</strong></td>\n</tr>\n</tbody>\n</table>\n<ol start=\"2\">\n<li><strong>this.$Modal.close()</strong></li>\n</ol>\n<p><code>$Modal.close()</code>提供隐式地关闭对话框全局实例的能力。</p>\n<ol start=\"3\">\n<li><strong>this.$confirm(title, content, onOk, onCancel, isRawHTML)</strong> 或 <strong>this.$confirm(options, isRawHTML)</strong></li>\n</ol>\n<p>写法1：</p>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>title</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的标题</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的内容，可通过isRawHTML指定是否解析为原生HTML</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>onOk</td>\n<td>Function</td>\n<td>-</td>\n<td>点击确定按钮的回调函数</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>onCancel</td>\n<td>Function</td>\n<td>-</td>\n<td>点击取消按钮或关闭按钮的回调函数</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>options</td>\n<td>Object</td>\n<td>-</td>\n<td>对content(String)是否解析为原生HTML</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<p>写法2：</p>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>options</td>\n<td>Object</td>\n<td>-</td>\n<td>对话框的参数，属性同props(props.show除外)。注意：使用驼峰式变量名，如<strong>onOk</strong>，而非on-ok</td>\n<td><strong>必选</strong></td>\n</tr>\n<tr>\n<td>isRawHTML</td>\n<td>Boolean</td>\n<td>false</td>\n<td>对options.content(String)是否解析为原生HTML</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<ol start=\"4\">\n<li><strong>this.$alert(content, onOk)</strong></li>\n</ol>\n<table class=\"table\">\n<thead>\n<tr>\n<th>参数</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>content</td>\n<td>String</td>\n<td>-</td>\n<td>对话框的内容</td>\n<td><strong>必选</strong></td>\n</tr>\n<tr>\n<td>onOk</td>\n<td>Function</td>\n<td>-</td>\n<td>点击确定按钮的回调函数</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
 
 /***/ },
 /* 236 */
@@ -23104,7 +21704,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-8e1d0174/inputNumber.vue"
+	  var id = "_v-e76f01e0/inputNumber.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -23122,7 +21722,7 @@
 	var content = __webpack_require__(238);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -23142,36 +21742,26 @@
 /* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(11)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.input-define-class{\r\n    color: blue;\r\n    width: 190px;\r\n    font-size: 20px;\r\n}\r\n", ""]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n.input-define-class{\r\n    color: blue;\r\n    width: 190px;\r\n    font-size: 20px;\r\n}\r\n", ""]);
 
 	// exports
 
 
 /***/ },
 /* 239 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	var _inputNumber = __webpack_require__(213);
-
-	var _inputNumber2 = _interopRequireDefault(_inputNumber);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	exports.default = {
-	    components: {
-	        vInputNumber: _inputNumber2.default
-	    },
 	    data: function data() {
 	        return {};
 	    },
@@ -23184,7 +21774,7 @@
 /* 240 */
 /***/ function(module, exports) {
 
-	module.exports = "<div><h1>InputNumber数字输入框</h1>\n<h2>使用场景</h2>\n<ul>\n<li>数字专用输入框</li>\n<li>支持限制输入整数数字范围</li>\n<li>支持设置增减数字幅度</li>\n<li>支持自定义框内提示文案</li>\n<li>支持自定义输入框样式</li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n\t<div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>InputNumber</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n\t\t\t<div id=\"container\">\r\n\t\t\t\t<v-input-number :max-value=\"100\" :min-value=\"3\" :step=\"2\" :is-disable=\"false\" text-tips=\"请输入整数\" ></v-input-number>\r\n\t\t\t\t<p>支持键盘输入整数，以2为步长，最小值为3，最大值为100</p>\r\n\t\t\t\t</br>\r\n\t\t\t\t<v-input-number :max-value=\"100\" :min-value=\"-25\" :input-value.sync=\"6\" :step=\"5\" class-name=\"input-define-class\" :is-disable=\"true\" size=\"normal\"></v-input-number>\r\n\t\t\t\t<p>默认值为6，禁止手动输入，以5为步长，最小值为-25，最大值为100，自定义输入框与字体样式</p>\r\n\t\t\t</div>\r\n\t</div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >id</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>container<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n\t\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-input-number</span> <span class=\"token attr-name\" >:max-value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>100<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:min-value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>3<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:step</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>2<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:is-disable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>false<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >text-tips</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>请输入整数<span class=\"token punctuation\" >\"</span></span> <span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-input-number</span><span class=\"token punctuation\" >></span></span>\r\n\t\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>p</span><span class=\"token punctuation\" >></span></span>支持键盘输入整数，以2为步长，最小值为3，最大值为100<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>p</span><span class=\"token punctuation\" >></span></span>\r\n\t\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>br</span><span class=\"token punctuation\" >></span></span>\r\n\t\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-input-number</span> <span class=\"token attr-name\" >:max-value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>100<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:min-value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>-25<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:input-value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>6<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:step</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>5<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>input-define-class<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:is-disable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >size</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>normal<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-input-number</span><span class=\"token punctuation\" >></span></span>\r\n\t\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>p</span><span class=\"token punctuation\" >></span></span>默认值为6，禁止手动输入，以5为步长，最小值为-25，最大值为100，自定义输入框与字体样式<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>p</span><span class=\"token punctuation\" >></span></span>\r\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n<th>可选值</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>max-value</td>\n<td>Number</td>\n<td>100</td>\n<td>最大值</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>min-value</td>\n<td>Number</td>\n<td>1</td>\n<td>最小值</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>input-value</td>\n<td>Number</td>\n<td>空</td>\n<td>默认显示数值</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>step</td>\n<td>Number</td>\n<td>1</td>\n<td>增减步长</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>is-disable</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否禁用键盘输入</td>\n<td>可选</td>\n<td>true,false</td>\n</tr>\n<tr>\n<td>class-name</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>size</td>\n<td>String</td>\n<td>large</td>\n<td>可选尺寸</td>\n<td>可选</td>\n<td>large,normal</td>\n</tr>\n<tr>\n<td>text-tips</td>\n<td>String</td>\n<td>请输入范围内整数</td>\n<td>自定义提示文案</td>\n<td>可选</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n</div>";
+	module.exports = "<div><h1>InputNumber数字输入框</h1>\n<h2>使用场景</h2>\n<ul>\n<li>数字专用输入框</li>\n<li>支持限制输入整数数字范围</li>\n<li>支持设置增减数字幅度</li>\n<li>支持自定义框内提示文案</li>\n<li>支持自定义输入框样式</li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n\t<div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>InputNumber</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n\t\t\t<div id=\"container\">\n\t\t\t\t<xcui-inputnumber :max-value=\"100\" :min-value=\"3\" :step=\"2\" :is-disable=\"false\" text-tips=\"请输入整数\" ></xcui-inputnumber>\n\t\t\t\t<p>支持键盘输入整数，以2为步长，最小值为3，最大值为100</p>\n\t\t\t\t</br>\n\t\t\t\t<xcui-inputnumber :max-value=\"100\" :min-value=\"-25\" :input-value.sync=\"6\" :step=\"5\" class-name=\"input-define-class\" :is-disable=\"true\" size=\"normal\"></xcui-inputnumber>\n\t\t\t\t<p>默认值为6，禁止手动输入，以5为步长，最小值为-25，最大值为100，自定义输入框与字体样式</p>\n\t\t\t</div>\n\t</div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >id</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>container<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-inputnumber</span> <span class=\"token attr-name\" >:max-value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>100<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:min-value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>3<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:step</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>2<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:is-disable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>false<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >text-tips</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>请输入整数<span class=\"token punctuation\" >\"</span></span> <span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-inputnumber</span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>p</span><span class=\"token punctuation\" >></span></span>支持键盘输入整数，以2为步长，最小值为3，最大值为100<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>p</span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>br</span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-inputnumber</span> <span class=\"token attr-name\" >:max-value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>100<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:min-value</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>-25<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:input-value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>6<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:step</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>5<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>input-define-class<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:is-disable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >size</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>normal<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-inputnumber</span><span class=\"token punctuation\" >></span></span>\n\t<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>p</span><span class=\"token punctuation\" >></span></span>默认值为6，禁止手动输入，以5为步长，最小值为-25，最大值为100，自定义输入框与字体样式<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>p</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n<th>可选值</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>max-value</td>\n<td>Number</td>\n<td>100</td>\n<td>最大值</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>min-value</td>\n<td>Number</td>\n<td>1</td>\n<td>最小值</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>input-value</td>\n<td>Number</td>\n<td>空</td>\n<td>默认显示数值</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>step</td>\n<td>Number</td>\n<td>1</td>\n<td>增减步长</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>is-disable</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否禁用键盘输入</td>\n<td>可选</td>\n<td>true,false</td>\n</tr>\n<tr>\n<td>class-name</td>\n<td>String</td>\n<td>空字符串</td>\n<td>自定义样式</td>\n<td>可选</td>\n<td></td>\n</tr>\n<tr>\n<td>size</td>\n<td>String</td>\n<td>large</td>\n<td>可选尺寸</td>\n<td>可选</td>\n<td>large,normal</td>\n</tr>\n<tr>\n<td>text-tips</td>\n<td>String</td>\n<td>请输入范围内整数</td>\n<td>自定义提示文案</td>\n<td>可选</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n</div>";
 
 /***/ },
 /* 241 */
@@ -23214,7 +21804,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-6a8961aa/progress.vue"
+	  var id = "_v-3e458620/progress.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -23232,7 +21822,7 @@
 	var content = __webpack_require__(243);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(13)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -23252,36 +21842,26 @@
 /* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(12)();
+	exports = module.exports = __webpack_require__(11)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.info{\n    float: left;\n    padding-right: 10px;\n}\n", ""]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.info{\n    float: left;\n    padding-right: 10px;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
 /* 244 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	var _progress = __webpack_require__(228);
-
-	var _progress2 = _interopRequireDefault(_progress);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	exports.default = {
-	    components: {
-	        vProgress: _progress2.default
-	    },
 	    data: function data() {
 	        return {
 	            percent: 50,
@@ -23295,7 +21875,7 @@
 /* 245 */
 /***/ function(module, exports) {
 
-	module.exports = "<div><h1>Progress进度条</h1>\n<h2>使用场景</h2>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>basic</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <v-progress :percent-info='percentInfo' :percent='percent' :show-info='true'></v-progress>\r\n        <div style=\"width:200px\">\r\n        <v-progress :info-class-name=\"'info'\" :percent='percent' :percent-info=\"'50%'\" :height='height'></v-progress>\r\n        </div>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-progress</span> <span class=\"token attr-name\" >:percent-info</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>percentInfo<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >:percent</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>percent<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >:show-info</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>true<span class=\"token punctuation\" >'</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-progress</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token style-attr language-css\" ><span class=\"token attr-name\" > <span class=\"token attr-name\" >style</span></span><span class=\"token punctuation\" >=\"</span><span class=\"token attr-value\" ><span class=\"token property\" >width</span><span class=\"token punctuation\" >:</span>200px</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-progress</span> <span class=\"token attr-name\" >:info-class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>info<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:percent</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>percent<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >:percent-info</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>50%<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:height</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>height<span class=\"token punctuation\" >'</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-progress</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>percent-info</td>\n<td>Number</td>\n<td>0</td>\n<td>百分比</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>height</td>\n<td>Number</td>\n<td>10</td>\n<td>高度</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-info</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否展示信息</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+	module.exports = "<div><h1>Progress进度条</h1>\n<h2>使用场景</h2>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>basic</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-progress :percent-info='percentInfo' :percent='percent' :show-info='true'></xcui-progress>\n        <div style=\"width:200px\">\n        <xcui-progress :info-class-name=\"'info'\" :percent='percent' :percent-info=\"'50%'\" :height='height'></xcui-progress>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-progress</span> <span class=\"token attr-name\" >:percent-info</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>percentInfo<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >:percent</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>percent<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >:show-info</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>true<span class=\"token punctuation\" >'</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-progress</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span><span class=\"token style-attr language-css\" ><span class=\"token attr-name\" > <span class=\"token attr-name\" >style</span></span><span class=\"token punctuation\" >=\"</span><span class=\"token attr-value\" ><span class=\"token property\" >width</span><span class=\"token punctuation\" >:</span>200px</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-progress</span> <span class=\"token attr-name\" >:info-class-name</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>info<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:percent</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>percent<span class=\"token punctuation\" >'</span></span> <span class=\"token attr-name\" >:percent-info</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>50%<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:height</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >'</span>height<span class=\"token punctuation\" >'</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-progress</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>percent-info</td>\n<td>Number</td>\n<td>0</td>\n<td>百分比</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>height</td>\n<td>Number</td>\n<td>10</td>\n<td>高度</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>show-info</td>\n<td>Boolean</td>\n<td>false</td>\n<td>是否展示信息</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
 
 /***/ },
 /* 246 */
@@ -23324,7 +21904,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-19d8db40/pageloading.vue"
+	  var id = "_v-732adbac/pageloading.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -23342,7 +21922,7 @@
 	    value: true
 	});
 
-	var _pageloading = __webpack_require__(223);
+	var _pageloading = __webpack_require__(128);
 
 	var _pageloading2 = _interopRequireDefault(_pageloading);
 
@@ -23378,7 +21958,7 @@
 /* 248 */
 /***/ function(module, exports) {
 
-	module.exports = "<div><h1>PageLoading页面加载进度条</h1>\n<h2>使用场景</h2>\n<ul>\n<li>路由页面切换时提供顶部加载进度条。</li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>顶部加载条</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\r\n        <v-pageloading v-ref:page-loading></v-pageloading>\r\n        <div class=\"form-group\">\r\n            <button class=\"btn btn-primary\" @click=\"start\">start</button>\r\n            <button class=\"btn btn-primary\" @click=\"done\">done</button>\r\n            <button class=\"btn btn-primary\" @click=\"inc\">inc</button>\r\n            <button class=\"btn btn-primary\" @click=\"setPercent\">set</button>\r\n        </div>\r\n        <div class=\"input-group\">\r\n            <input type=\"text\" class=\"form-control\" v-model=\"toppercent\" placeholder=\"设置进度条速度\"/>\r\n        </div>\r\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>v-pageloading</span> <span class=\"token attr-name\" ><span class=\"token namespace\" >v-ref:</span>page-loading</span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>v-pageloading</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>form-group<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>start<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>start<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>done<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>done<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>inc<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>inc<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>setPercent<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>set<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>input-group<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\r\n     <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>input</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>form-control<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >v-model</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>toppercent<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>设置进度条速度<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >/></span></span>\r\n <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span></pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>speed</td>\n<td>Number</td>\n<td>350</td>\n<td>速度</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h2>Methods</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>start</td>\n<td>function</td>\n<td>-</td>\n<td>开始</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>done</td>\n<td>function</td>\n<td>-</td>\n<td>结束</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>set</td>\n<td>function</td>\n<td>0.08</td>\n<td>设置进度条进度，取值范围（0.08 ~ 1）</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>inc</td>\n<td>function</td>\n<td>-</td>\n<td>增加一小段进度</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h3>方法调用</h3>\n<blockquote>\n<ul>\n<li>this.$refs.pageLoading.start();</li>\n<li>this.$refs.pageLoading.done();</li>\n<li>this.$refs.pageLoading.set(0.5);</li>\n<li>this.$refs.pageLoading.inc();</li>\n</ul>\n</blockquote>\n<p>备注：先执行set(0.X)，再执行inc()，即可看到inc的执行效果</p>\n</div>";
+	module.exports = "<div><h1>PageLoading页面加载进度条</h1>\n<h2>使用场景</h2>\n<ul>\n<li>路由页面切换时提供顶部加载进度条。</li>\n</ul>\n<h2>DEMO</h2>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>顶部加载条</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-pageloading v-ref:page-loading></xcui-pageloading>\n        <div class=\"form-group\">\n            <button class=\"btn btn-primary\" @click=\"start\">start</button>\n            <button class=\"btn btn-primary\" @click=\"done\">done</button>\n            <button class=\"btn btn-primary\" @click=\"inc\">inc</button>\n            <button class=\"btn btn-primary\" @click=\"setPercent\">set</button>\n        </div>\n        <div class=\"input-group\">\n            <input type=\"text\" class=\"form-control\" v-model=\"toppercent\" placeholder=\"设置进度条速度\"/>\n        </div>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-pageloading</span> <span class=\"token attr-name\" ><span class=\"token namespace\" >v-ref:</span>page-loading</span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-pageloading</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>form-group<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>start<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>start<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>done<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>done<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>inc<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>inc<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>button</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>btn btn-primary<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >@click</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>setPercent<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>set<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>button</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>input-group<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>input</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>form-control<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >v-model</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>toppercent<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >placeholder</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>设置进度条速度<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >/></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n</div>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>speed</td>\n<td>Number</td>\n<td>350</td>\n<td>速度</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h2>Methods</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>start</td>\n<td>function</td>\n<td>-</td>\n<td>开始</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>done</td>\n<td>function</td>\n<td>-</td>\n<td>结束</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>set</td>\n<td>function</td>\n<td>0.08</td>\n<td>设置进度条进度，取值范围（0.08 ~ 1）</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>inc</td>\n<td>function</td>\n<td>-</td>\n<td>增加一小段进度</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n<h3>方法调用</h3>\n<blockquote>\n<ul>\n<li>this.$refs.pageLoading.start();</li>\n<li>this.$refs.pageLoading.done();</li>\n<li>this.$refs.pageLoading.set(0.5);</li>\n<li>this.$refs.pageLoading.inc();</li>\n</ul>\n</blockquote>\n<p>备注：先执行set(0.X)，再执行inc()，即可看到inc的执行效果</p>\n</div>";
 
 /***/ }
 /******/ ]);
