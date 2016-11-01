@@ -26,7 +26,7 @@
                     <tr v-for="(k1,day) in days">
                         <td
                         v-for="(k2,child) in day"
-                        :class="{'today':child.today,'off':child.disabled}"
+                        :class="{'today':child.today,'off':child.disabled,'noclick':child.noClick}"
                         :style="{'background':color&&child.today?color:''}"
                         @click="select(k1,k2,$event)">
                         {{child.day}}
@@ -104,7 +104,7 @@
         methods: {
             renderElse(y, m, i, temp, line, currentTime) {
                 let me = this;
-                let thisTime = Number(new Date(me.year, me.month, i));
+                let thisTime = new Date(me.output([me.year, me.month, i], me.defaultFormat)).getTime();
                 let options = {day: i, today: false};
                 options = me.bindSingerTime(thisTime, currentTime, options);
                 temp[line].push(options);
@@ -112,38 +112,31 @@
             // 1.判断begin和end的日期
             bindSingerTime(thisTime, currentTime, options) {
                 let me = this;
-                if (me.begin !== undefined) {
-                    let beginSplit = me.begin.split(me.sep);
-                    let beginSplit1 = parseInt(beginSplit[0], 10);
-                    let beginSplit2 = parseInt(beginSplit[1], 10) - 1;
-                    let beginSplit3 = parseInt(beginSplit[2], 10);
-                    let beginTime = Number(new Date(beginSplit1, beginSplit2, beginSplit3));
+                let format = me.defaultFormat;
+                if (me.minDate) {
+                    let beginTime = new Date(me.output(me.minDate, format)).getTime();
                     if (beginTime > thisTime) {
                         options.disabled = true;
-                    }
-                    if (beginTime > currentTime) {
-                        me.currentTimeBtnShow = false;
+                        options.noClick = true;
                     }
                 }
-                if (me.end !== undefined) {
-                    let endSplit = me.end.split(me.sep);
-                    let endSplit1 = parseInt(endSplit[0], 10);
-                    let endSplit2 = parseInt(endSplit[1], 10) - 1;
-                    let endSplit3 = parseInt(endSplit[2], 10);
-                    let endTime = Number(new Date(endSplit1, endSplit2, endSplit3));
+                if (me.maxDate) {
+                    let endTime = new Date(me.output(me.maxDate, format)).getTime();
                     if (endTime < thisTime) {
                         options.disabled = true;
-                    }
-                    if (endTime < currentTime) {
-                        me.currentTimeBtnShow = false;
+                        options.noClick = true;
                     }
                 }
                 return options;
             },
             select(k1, k2, e) {
+                if (e.target.className.indexOf('noclick') !== -1) {
+                    return false;
+                }
                 let me = this;
                 let days = this.days;
                 let daySeleted = days[k1][k2];
+                let oldValue = this.value = me.output(this.value);
                 // 取消上次选中
                 if (this.today.length > 0) {
                     days[this.today[0]][this.today[1]].today = false;
@@ -164,38 +157,34 @@
                     me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
                 }
                 if (me.type === 'date') {
+                    this.$emit('on-change', this.value, oldValue);
                     me.showFalse();
                 }
             },
             currentTime() {
-                let date = new Date();
-                let year = date.getFullYear();
-                let month = date.getMonth();
-                let hour = this.zero(date.getHours());
-                let day = this.zero(date.getDate());
-                let minute = this.zero(date.getMinutes());
-                let second = this.zero(date.getSeconds());
                 let me = this;
-                this.year = year;
-                this.month = month;
-                this.day = day;
-                this.hour = hour;
-                this.minute = minute;
-                this.second = second;
-                this.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-                if (this.currentTimeBtnShow) {
-                    this.render(year, month);
+                me.value = me.output(new Date());
+                let params = this.dateParams;
+                me.year = params.year;
+                me.month = params.month;
+                me.day = params.day;
+                me.hour = params.hour;
+                me.minute = params.minute;
+                me.second = params.second;
+                if (me.currentTimeBtnShow) {
+                    me.render(me.year, me.month);
                 }
-                this.hourListShow = false;
-                this.minuteListShow = false;
-                this.secondListShow = false;
+                me.hourListShow = false;
+                me.minuteListShow = false;
+                me.secondListShow = false;
             },
             ok() {
-                this.value = this.value !== '' ? this.value : this.initialValue;
                 this.showFalse();
+                this.$emit('on-change', this.value, this.initialValue);
+                this.initialValue = this.value;
             },
             cancel() {
-                this.value = this.initialValue === '' ? this.value : this.initialValue;
+                this.value = this.initialValue;
                 this.showFalse();
             },
             showFalse() {
@@ -207,7 +196,17 @@
             showCalendar(e) {
                 let me = this;
                 e.stopPropagation();
-                this.show = true;
+                me.show = true;
+                if (me.value !== '') {
+                    me.output(me.value);
+                    let params = me.dateParams;
+                    me.year = params.year;
+                    me.month = params.month;
+                    me.hour = params.hour;
+                    me.minute = params.minute;
+                    me.second = params.second;
+                }
+                me.render(me.year, me.month);
                 let bindHide = function (e) {
                     e.stopPropagation();
                     me.showFalse();
