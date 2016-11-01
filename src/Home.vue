@@ -26,7 +26,7 @@
                 <a v-link="{ path: '/component/suggestion' }" href="javascript:;">Suggestion</a>
             </li>
             <li>
-                <a v-link="{ path: '/component/paginations' }" href="javascript:;">Paginations</a>
+                <a v-link="{ path: '/component/pagination' }" href="javascript:;">Pagination</a>
             </li>
             <li>
                 <a v-link="{ path: '/component/popover' }" href="javascript:;">Popover</a>
@@ -72,9 +72,11 @@ export default {
         };
     },
     ready() {
-        this.$route.router.go({
-            name: 'home'
-        });
+        if (this.$route.path === '/') {
+            this.$route.router.go({
+                name: 'home'
+            });
+        }
     }
 };
 

@@ -11,15 +11,15 @@
 ## DEMO
 <demo>
 	<example title="基本使用">
-        <v-tag :text="'标签'"></v-tag>
-        <v-tag :disabled="true" :text="'禁用标签'"></v-tag>
-        <v-tag :closeable="true" :text="'关闭'" @close="closeclick"></v-tag>
-        <v-tag :closeable="true" @close="closeclick" :key.sync="key" :text="'点击不关闭'" :aftercloseisshow.sync="afterCloseIsShowTag" @click="click"></v-tag>
-        <v-tag  :classname="'define-class'" :text="'自定义样式'" @click="click" ></v-tag>
+        <xcui-tag :text="'标签'"></xcui-tag>
+        <xcui-tag :disabled="true" :text="'禁用标签'"></xcui-tag>
+        <xcui-tag :closeable="true" :text="'关闭'" @close="closeclick"></xcui-tag>
+        <xcui-tag :closeable="true" @close="closeclick" :key.sync="key" :text="'点击不关闭'" :aftercloseisshow.sync="afterCloseIsShowTag" @click="click"></xcui-tag>
+        <xcui-tag  :classname="'define-class'" :text="'自定义样式'" @click="click" ></xcui-tag>
     </example>
     <example title="添加标签">
         <template v-for="item in tags">
-            <v-tag :closeable="true" :text="item.text"></v-tag>
+            <xcui-tag :closeable="true" :text="item.text"></xcui-tag>
         </template>
         <input type="button" class="btn btn-primary" value="添加" @click="addTag"/>
     </example>
@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import vTag from '../components/tag';
 export default {
     data() {
         return {
@@ -51,9 +50,6 @@ export default {
             key: 'data',
             afterCloseIsShowTag: true
         };
-    },
-    components: {
-        vTag
     },
     methods: {
         closeclick() {

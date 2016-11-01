@@ -9,18 +9,18 @@
 ## DEMO
 <demo>
     <example title="Popover">
-        <v-popover effect="fadein" placement="bottom" title="This is Title" trigger="click" :content="htmlContent">
+        <xcui-popover effect="fadein" placement="bottom" title="This is Title" trigger="click" :content="htmlContent">
           <button class="btn btn-default ">Click Popover on bottom</button>
-        </v-popover>
-        <v-popover effect="scale" placement="left" title="This is Title" trigger="click"  content="Popover on left">
+        </xcui-popover>
+        <xcui-popover effect="scale" placement="left" title="This is Title" trigger="click"  content="Popover on left">
           <button class="btn btn-default ">Click Popover on left</button>
-        </v-popover>
-        <v-popover effect="fadein" placement="top" title="This is Title"  content="Popover on top">
+        </xcui-popover>
+        <xcui-popover effect="fadein" placement="top" title="This is Title"  content="Popover on top">
           <button class="btn btn-default "> Hover Popover on top</button>
-        </v-popover>
-        <v-popover effect="scale" placement="right" title="This is Title" :title-class="'title-class'" :content-class="'content-class'" content="Popover on right">
+        </xcui-popover>
+        <xcui-popover effect="scale" placement="right" title="This is Title" :title-class="'title-class'" :content-class="'content-class'" content="Popover on right">
           <button class="btn btn-default ">Hover Popover on right</button>
-        </v-popover>
+        </xcui-popover>
     </example>
 </demo>
 
@@ -42,11 +42,7 @@
 
 </template>
 <script>
-import vPopover from '../components/popover';
 export default {
-    components: {
-        vPopover
-    },
     data() {
         return {
             htmlContent: '<h3>This is h3</h3><h4>This is h4</h4>'

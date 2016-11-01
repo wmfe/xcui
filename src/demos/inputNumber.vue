@@ -13,10 +13,10 @@
 <demo>
 	<example title="InputNumber">
 			<div id="container">
-				<v-input-number :max-value="100" :min-value="3" :step="2" :is-disable="false" text-tips="请输入整数" ></v-input-number>
+				<xcui-inputnumber :max-value="100" :min-value="3" :step="2" :is-disable="false" text-tips="请输入整数" ></xcui-inputnumber>
 				<p>支持键盘输入整数，以2为步长，最小值为3，最大值为100</p>
 				</br>
-				<v-input-number :max-value="100" :min-value="-25" :input-value.sync="6" :step="5" class-name="input-define-class" :is-disable="true" size="normal"></v-input-number>
+				<xcui-inputnumber :max-value="100" :min-value="-25" :input-value.sync="6" :step="5" class-name="input-define-class" :is-disable="true" size="normal"></xcui-inputnumber>
 				<p>默认值为6，禁止手动输入，以5为步长，最小值为-25，最大值为100，自定义输入框与字体样式</p>
 			</div>
 	</example>
@@ -35,11 +35,7 @@
 |text-tips| String|请输入范围内整数|自定义提示文案|可选||
 </template>
 <script>
-	import vInputNumber from '../components/inputNumber';
 	export default {
-	    components: {
-	        vInputNumber
-	    },
 	    data() {
 	        return {
 	        };

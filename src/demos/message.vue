@@ -31,16 +31,3 @@ Message提供一种不打断用户操作的轻量级提示方式，顶部居中�
 |duration|Number|-|单位: ms, 默认**3000**毫秒后自动关闭。设置0无效|可选|
 
 </template>
-
-<script>
-import Vue from 'vue';
-import XCUI from '../components/index.js';
-Vue.use(XCUI);
-let Message = XCUI.Message;
-
-export default {
-    components: {
-        Message
-    }
-};
-</script>
