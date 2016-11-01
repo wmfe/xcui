@@ -32,8 +32,8 @@
   <p> max-date：日期可选最大值，值类型同value</p>
   <example title="日期+时间选择">
     <xcui-datepicker
-        :value.sync="datetime.value"
-        format="YYYY-MM-DD hh:mm:ss"
+        :value.sync="datetime.value1"
+        format="YYYY/MM/DD hh:mm:ss"
         :hour-range="'3'"
         :minute-range="'10'"
         :second-range="'20'"
@@ -51,7 +51,7 @@
         format="YYYY-MM-DD hh:mm:ss"
         :btn-show="true"
         @on-change="onChange"
-        :value.sync="datetime.value"
+        :value.sync="datetime.value2"
         :hour-range="'3'">
     </xcui-datepicker>
   </example>
@@ -99,7 +99,8 @@ export default {
                 end: '2016-09-09'
             },
             datetime: {
-                value: new Date(),
+                value1: new Date(),
+                value2: '2016/09/09',
                 begin: new Date(),
                 end: '2017-02-01 00:00:00'
             },
