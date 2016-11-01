@@ -10,18 +10,18 @@
 ## DEMO
 <demo>
     <example title="Popover">
-        <v-tooltip effect="fadein" placement="bottom" title="This is Title" :content="htmlContent">
+        <xcui-tooltip effect="fadein" placement="bottom" title="This is Title" :content="htmlContent">
           <button class="btn btn-default ">Hover tooltip on bottom</button>
-        </v-tooltip>
-        <v-tooltip effect="scale" placement="left" title="This is Title" content="Tooltip on left">
+        </xcui-tooltip>
+        <xcui-tooltip effect="scale" placement="left" title="This is Title" content="Tooltip on left">
           <button class="btn btn-default ">Hover tooltip on left</button>
-        </v-tooltip>
-        <v-tooltip effect="fadein" placement="top" title="This is Title"  trigger="click"  content="Tooltip on top">
+        </xcui-tooltip>
+        <xcui-tooltip effect="fadein" placement="top" title="This is Title"  trigger="click"  content="Tooltip on top">
           <button class="btn btn-default "> Click tooltip on top</button>
-        </v-tooltip>
-        <v-tooltip effect="scale" placement="right" title="This is Title" trigger="click"  :title-class="'title-class'" :content-class="'content-class'" content="Tooltip on right">
+        </xcui-tooltip>
+        <xcui-tooltip effect="scale" placement="right" title="This is Title" trigger="click"  :title-class="'title-class'" :content-class="'content-class'" content="Tooltip on right">
           <button class="btn btn-default ">Click tooltip on right</button>
-        </v-tooltip>
+        </xcui-tooltip>
     </example>
 </demo>
 
@@ -43,11 +43,7 @@
 
 </template>
 <script>
-import vTooltip from '../components/tooltip';
 export default {
-    components: {
-        vTooltip
-    },
     data() {
         return {
             htmlContent: '<h3>This is h3</h3><h4>This is h4</h4>'

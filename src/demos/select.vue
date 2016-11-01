@@ -211,7 +211,6 @@
 </style>
 <script>
     import jsonp from 'jsonp';
-    import select from '../components/select/index.vue';
     export default{
         data() {
             return {
@@ -386,9 +385,6 @@
                 this.selectCityValue = '';
             }
         },
-        components: {
-            'xcui-select': select
-        },
         created() {
             let me = this;
             setTimeout(function () {
@@ -444,18 +440,11 @@
                 console.log('asycn select:' + v);
             },
             serverSearchChange(v) {
-                //
                 let me = this;
-                jsonp(`http://suggest.taobao.com/sug?code=utf-8&q=${v}`, (err, d) => {
-                    if (err) {
-                        me.serverSearchSource = [];
-                    }
-                    else {
-                        me.serverSearchSource = d.result.map(v => {
-                            return v[0];
-                        });
-                    }
-                });
+                window.selectsug = function (res) {
+                    me.serverSearchSource = res.s;
+                };
+                jsonp(`https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=window.selectsug&wd=${v}`);
             },
             serverSearchOnChange(v) {
                 this.serverSearchValue = v;
