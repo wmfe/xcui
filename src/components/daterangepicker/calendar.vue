@@ -74,14 +74,7 @@
                 type: Boolean,
                 default: false
             },
-            renderStar: {
-                type: String,
-                default: ''
-            },
-            renderEnd: {
-                type: String,
-                default: ''
-            },
+            startRender: null,
             dateLimit: {
                 type: Object,
                 default: null
@@ -89,30 +82,16 @@
             initialDate: String
         },
         watch: {
-            renderStar(val) {
-                if (val === '' || this.right) {
+            startRender(val) {
+                if (!val) {
                     return false;
                 }
-                this.output(val);
+                this.value = this.output(this.value);
                 let params = this.dateParams;
                 this.year = params.year;
                 this.month = params.month;
                 this.hour = params.hour;
                 this.day = params.day;
-                this.minute = params.minute;
-                this.second = params.second;
-                this.render(params.year, params.month);
-            },
-            renderEnd(val) {
-                if (val === '' || !this.right) {
-                    return false;
-                }
-                this.output(val);
-                let params = this.dateParams;
-                this.year = params.year;
-                this.month = params.month;
-                this.day = params.day;
-                this.hour = params.hour;
                 this.minute = params.minute;
                 this.second = params.second;
                 this.render(params.year, params.month);
@@ -124,13 +103,12 @@
         methods: {
             renderElse(y, m, i, temp, line) {
                 let me = this;
-                me.otherValue = me.otherValue && me.otherValue !== '' ? me.otherValue : me.value;
                 let format = me.defaultFormat;
                 let today = me.output([y, m, i], format);
                 let value = me.output(me.value, format);
                 let otherDate = me.output(me.otherValue, format);
-                let isMinDate = me.minDate && me.minDate !== '' && (today < me.output(me.minDate, format));
-                let isMaxDate = me.maxDate && me.maxDate !== '' && (today > me.output(me.maxDate, format));
+                let isMinDate = me.minDate && (today < me.output(me.minDate, format));
+                let isMaxDate = me.maxDate && (today > me.output(me.maxDate, format));
                 if (isMinDate || isMaxDate) {
                     temp[line].push({day: i, disabled: true, range: false, noclick: true});
                 }
@@ -185,20 +163,18 @@
             },
             changeOtherCalender() {
                 let me = this;
+                let time = new Date().getTime();
                 if (!me.right) {
                     if (me.value > me.otherValue) {
                         me.otherValue = me.value;
                     }
-                    me.$parent.renderStar = me.output(me.value);
-                    me.$parent.renderEnd = me.output(me.otherValue);
                 }
                 else if (me.right) {
                     if (me.value < me.otherValue) {
                         me.otherValue = me.value;
                     }
-                    me.$parent.renderStar = me.output(me.otherValue);
-                    me.$parent.renderEnd = me.output(me.value);
                 }
+                me.$parent.startRender = time;
             },
             getYearMonth(date) {
                 this.output(date);
@@ -208,10 +184,11 @@
             bindLimitDate() {
                 let me = this;
                 let format = me.defaultFormat;
+                me.otherValue = me.otherValue ? me.output(me.otherValue) : me.value;
                 let oValue = me.output(me.otherValue, format);
                 let ovs = me.dateParams;
-                let bg = me.minDate;
-                let ed = me.maxDate;
+                let bg = me.minDate && me.output(me.minDate, format);
+                let ed = me.maxDate && me.output(me.maxDate, format);
                 let y = ovs.year;
                 let m = ovs.month;
                 let d = ovs.day;
@@ -286,7 +263,7 @@
                         d = params.d;
                     }
                 }
-                otherTime = me.output([y, m, d, me.hour, me.minute, me.second]);
+                otherTime = me.output([y, m, d], format);
                 if (bg) {
                     otherTime = otherTime < bg ? bg : (otherTime > ed ? ed : otherTime);
                 }
