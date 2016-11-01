@@ -208,11 +208,11 @@
               ],
               requestWord: '',
               remoteSug: [],
-              remoteUrl: 'http://suggestion.baidu.com/su?cb=window.bdsug.sug&wd=',
+              remoteUrl: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=window.bdsug.sug&wd=',
               requestWord2: 'w',
               requestValue2: '',
               remoteSug2: [],
-              remoteUrl2: 'http://suggestion.baidu.com/su?cb=window.bdsug.sug2&wd='
+              remoteUrl2: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=window.bdsug.sug2&wd='
           };
       },
       watch: {

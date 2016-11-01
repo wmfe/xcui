@@ -27,7 +27,7 @@
 
 <script>
     export default {
-        name: 'xcui-autocomplete',
+        name: 'xcui-suggestion',
         data() {
             return {
                 list: [],
