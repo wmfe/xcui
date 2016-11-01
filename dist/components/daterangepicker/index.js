@@ -23,20 +23,16 @@
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(8);
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"> <input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年 </span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'range\':child.range,\'off\':child.disabled,\'todayleft\':!right,\'todayright\':right,\'prev\':child.prev}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\' || type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> </div> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> ';
-    }, function(module, exports) {
-        module.exports = ' <div class=xcui-datarangepicker :class=className> <div :class="{\'input-group\':btnShow}"> <input class="form-control col-md-3" type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class="calendar double-calendar" v-show=show> <div class=clearfix> <div class=double-calendar-left> <calendar :type=type :value.sync=beginCalenderVal :sep=sep :other-value.sync=endCalenderVal :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-star=renderStar></calendar> </div> <div class=double-calendar-right> <calendar :type=type :value.sync=endCalenderVal :sep=sep :other-value.sync=beginCalenderVal :right=true :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-end=renderEnd></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
-        var _calendarMixins = __webpack_require__(6);
+        var _calendarMixins = __webpack_require__(3);
         var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = {
@@ -44,23 +40,23 @@
             props: {
                 otherValue: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 right: {
                     type: Boolean,
-                    default: false
+                    "default": false
                 },
                 renderStar: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 renderEnd: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 dateLimit: {
                     type: Object,
-                    default: null
+                    "default": null
                 }
             },
             watch: {
@@ -283,7 +279,7 @@
         var _calendar2 = _interopRequireDefault(_calendar);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = {
@@ -292,53 +288,53 @@
                 show: {
                     type: Boolean,
                     twoWay: true,
-                    default: false
+                    "default": false
                 },
                 type: {
                     type: String,
-                    default: "date"
+                    "default": "date"
                 },
                 value: {
                     type: String,
                     twoWay: true,
-                    default: ""
+                    "default": ""
                 },
                 begin: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 end: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 hourRange: {
                     type: Number,
-                    default: 1
+                    "default": 1
                 },
                 minuteRange: {
                     type: Number,
-                    default: 1
+                    "default": 1
                 },
                 secondRange: {
                     type: Number,
-                    default: 1
+                    "default": 1
                 },
                 sep: {
                     type: String,
-                    default: "-"
+                    "default": "-"
                 },
                 color: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 dateLimit: {
                     type: Object,
-                    default: null
+                    "default": null
                 },
                 className: String,
                 btnShow: {
                     type: Boolean,
-                    default: false
+                    "default": false
                 }
             },
             components: {
@@ -407,36 +403,36 @@
             props: {
                 type: {
                     type: String,
-                    default: "date"
+                    "default": "date"
                 },
                 value: {
                     type: String,
                     twoWay: true,
-                    default: ""
+                    "default": ""
                 },
                 begin: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 end: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 hourRange: {
                     type: [ Number, String ],
-                    default: 1
+                    "default": 1
                 },
                 minuteRange: {
                     type: [ Number, String ],
-                    default: 1
+                    "default": 1
                 },
                 secondRange: {
                     type: [ Number, String ],
-                    default: 1
+                    "default": 1
                 },
                 sep: {
                     type: String,
-                    default: "-"
+                    "default": "-"
                 },
                 color: String,
                 className: String
@@ -752,43 +748,29 @@
                 }
             }
         };
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = ' <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"> <input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年 </span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'range\':child.range,\'off\':child.disabled,\'todayleft\':!right,\'todayright\':right,\'prev\':child.prev}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\' || type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> </div> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> ';
+    }, function(module, exports) {
+        module.exports = ' <div class=xcui-datarangepicker :class=className> <div :class="{\'input-group\':btnShow}"> <input class="form-control col-md-3" type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class="calendar double-calendar" v-show=show> <div class=clearfix> <div class=double-calendar-left> <calendar :type=type :value.sync=beginCalenderVal :sep=sep :other-value.sync=endCalenderVal :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-star=renderStar></calendar> </div> <div class=double-calendar-right> <calendar :type=type :value.sync=endCalenderVal :sep=sep :other-value.sync=beginCalenderVal :right=true :begin=begin :end=end :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :render-end=renderEnd></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        var __vue_styles__ = {};
-        __vue_script__ = __webpack_require__(4);
-        __vue_template__ = __webpack_require__(2);
+        __vue_script__ = __webpack_require__(1);
+        __vue_template__ = __webpack_require__(5);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
-        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            __vue_options__.template = __vue_template__;
+            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
         }
-        if (!__vue_options__.computed) __vue_options__.computed = {};
-        Object.keys(__vue_styles__).forEach(function(key) {
-            var module = __vue_styles__[key];
-            __vue_options__.computed[key] = function() {
-                return module;
-            };
-        });
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        var __vue_styles__ = {};
-        __webpack_require__(1);
-        __vue_script__ = __webpack_require__(5);
-        __vue_template__ = __webpack_require__(3);
+        __webpack_require__(4);
+        __vue_script__ = __webpack_require__(2);
+        __vue_template__ = __webpack_require__(6);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
-        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            __vue_options__.template = __vue_template__;
+            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
         }
-        if (!__vue_options__.computed) __vue_options__.computed = {};
-        Object.keys(__vue_styles__).forEach(function(key) {
-            var module = __vue_styles__[key];
-            __vue_options__.computed[key] = function() {
-                return module;
-            };
-        });
     } ]);
 });
 
