@@ -23,8 +23,6 @@
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(4);
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div :class=\"['xcui-tag', disabled ? ' xcui-disabled':'']\" @click=onClick v-if=showTag> <div class=\"{{classname!='' ? classname : ''}}\"> <span class=xcui-tag-text><slot></slot>{{text}}<span> <i class=xcui-cross v-if=closeable @click.stop=onCloseClick></i> </span></span></div> </div> ";
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -75,12 +73,14 @@
                 }
             }
         };
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = " <div :class=\"['xcui-tag', disabled ? ' xcui-disabled':'']\" @click=onClick v-if=showTag> <div class=\"{{classname!='' ? classname : ''}}\"> <span class=xcui-tag-text><slot></slot>{{text}}<span> <i class=xcui-cross v-if=closeable @click.stop=onCloseClick></i> </span></span></div> </div> ";
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};
-        __webpack_require__(1);
-        __vue_script__ = __webpack_require__(3);
-        __vue_template__ = __webpack_require__(2);
+        __webpack_require__(2);
+        __vue_script__ = __webpack_require__(1);
+        __vue_template__ = __webpack_require__(3);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
         var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;

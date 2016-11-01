@@ -61,13 +61,13 @@ export default {
     created() {
         let me = this;
         me.getType();
-        this.initialValue = this.value;
         if (me.value) {
             me.value = me.output(me.value);
         }
         else {
             me.value = me.output(new Date());
         }
+        this.initialValue = this.value;
         let params = me.dateParams;
         me.year = params.year;
         me.month = params.month;
@@ -94,7 +94,6 @@ export default {
         else {
             this.initialValue = this.value;
         }
-        this.type;
     },
     methods: {
         zero(n) {
@@ -196,6 +195,8 @@ export default {
                 this.selectRangeList = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]];
                 this.selectRangeShow = false;
             }
+            this.dataTableShow = false;
+            this.yearTableShow = true;
         },
         selectItem(select) {
             let me = this;

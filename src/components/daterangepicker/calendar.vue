@@ -97,6 +97,9 @@
                 this.render(params.year, params.month);
             }
         },
+        created() {
+            this.initialDate = this.output(this.value);
+        },
         methods: {
             renderElse(y, m, i, temp, line) {
                 let me = this;

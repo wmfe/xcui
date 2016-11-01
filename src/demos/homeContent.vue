@@ -1,7 +1,7 @@
 <template lang="md">
 # 关于XCUI
 
-![logo](/src/assets/logo_nobg_128x128@2x.png)
+![logo](https://github.com/wmfe/xcui/raw/master/src/assets/logo_nobg_128x128@2x.png)
 
 XCUI 是基于`Vue`和 `Bootstrap.css` 的**桌面端组件库**。
 

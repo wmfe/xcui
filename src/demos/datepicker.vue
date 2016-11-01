@@ -17,8 +17,8 @@
         <xcui-datepicker :value.sync="''">
         </xcui-datepicker>
     </example>
-    <p>> 最简单的用法，value双向绑定，日期</p>
-    <p>> value：可以传不同日期格式，例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262，也可以不传，默认当天，date.value值为 时间戳1477980088896</p>
+    <p> 最简单的用法，value双向绑定，日期</p>
+    <p> value：可以传不同日期格式，例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262，也可以不传，默认当天，date.value值为 时间戳1477980088896</p>
   <example title="日期格式">
     <xcui-datepicker
         :value.sync="date.value"
@@ -27,13 +27,13 @@
         :max-date="'2016-11-10'">
     </xcui-datepicker>
   </example>
-  <p>> format：展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年/月/日 时：分：秒 YYYY/MM/DD hh:mm:ss， 时:分:秒 hh:mm:ss</p>
-  <p>> min-date：日期可选最小值，值类型同value，datetime.begin值为 new Date()</p>
-  <p>> max-date：日期可选最大值，值类型同value</p>
+  <p> format：展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年/月/日 时：分：秒 YYYY/MM/DD hh:mm:ss， 时:分:秒 hh:mm:ss</p>
+  <p> min-date：日期可选最小值，值类型同value，datetime.begin值为 new Date()</p>
+  <p> max-date：日期可选最大值，值类型同value</p>
   <example title="日期+时间选择">
     <xcui-datepicker
         :value.sync="datetime.value"
-        format="YYYY/MM/DD hh:mm:ss"
+        format="YYYY-MM-DD hh:mm:ss"
         :hour-range="'3'"
         :minute-range="'10'"
         :second-range="'20'"
@@ -41,9 +41,9 @@
         :max-date="datetime.end">
     </xcui-datepicker>
   </example>
-  <p>> hour-range：小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12</p>
-  <p>> minute-range：分钟可选值设置，同上</p>
-  <p>> second-range：分钟可选值设置，同上</p>
+  <p> hour-range：小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12</p>
+  <p> minute-range：分钟可选值设置，同上</p>
+  <p> second-range：分钟可选值设置，同上</p>
   <example title="样式以及回调配置">
     <xcui-datepicker
         class-name="class-name"
@@ -55,10 +55,10 @@
         :hour-range="'3'">
     </xcui-datepicker>
   </example>
-  <p>> class-name：日历样式，class名字</p>
-  <p>> color：按钮颜色，值为颜色值，例如：#f00,pink</p>
-  <p>> on-change：选择日期后的回调，参数 val(当前值) oldval(上次值)，onChange(val, oldVal) {}</p>
-  <p>> btn-show: 按钮是否显示</p>
+  <p> class-name：日历样式，class名字</p>
+  <p> color：按钮颜色，值为颜色值，例如：#f00,pink</p>
+  <p> on-change：选择日期后的回调，参数 val(当前值) oldval(上次值)，onChange(val, oldVal) {}</p>
+  <p> btn-show: 按钮是否显示</p>
   <example title="时间选择">
       <div class="input-group">
         <xcui-datepicker
@@ -67,7 +67,7 @@
         </xcui-datepicker>
       </div>
   </example>
-  <p>> 最简单的时间用法</p>
+  <p> 最简单的时间用法</p>
 </demo>
 
 ## 组件依赖
