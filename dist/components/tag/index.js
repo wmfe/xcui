@@ -33,31 +33,31 @@
             props: {
                 text: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 closeable: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 disabled: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 showTag: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 },
                 classname: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 key: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 aftercloseisshow: {
                     type: Boolean,
-                    "default": false,
+                    default: false,
                     twoway: true
                 }
             },
@@ -73,21 +73,27 @@
                 }
             }
         };
-<<<<<<< HEAD
     }, function(module, exports) {}, function(module, exports) {
         module.exports = " <div :class=\"['xcui-tag', disabled ? ' xcui-disabled':'']\" @click=onClick v-if=showTag> <div class=\"{{classname!='' ? classname : ''}}\"> <span class=xcui-tag-text><slot></slot>{{text}}<span> <i class=xcui-cross v-if=closeable @click.stop=onCloseClick></i> </span></span></div> </div> ";
-=======
->>>>>>> 6db40f0cf5c7d086f4dce3548a6339ee03328252
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
         __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(3);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     } ]);
 });
 
