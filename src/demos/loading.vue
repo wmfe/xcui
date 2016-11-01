@@ -87,6 +87,9 @@ export default {
             size: 'md'
         };
     },
+    ready() {
+        window.Z = this;
+    },
     methods: {
         toogleShow() {
             this.show = !this.show;
@@ -98,10 +101,10 @@ export default {
 
 <style lang="less" scoped>
 	.loadWrap
-		{
-            padding: 30px;
-			position: relative;
-		}
+	{
+        padding: 30px;
+		position: relative;
+	}
 
     p{
         text-align: left;

@@ -18,7 +18,7 @@
             <li>
                  <a v-link="{ path: '/component/loading' }" href="javascript:;">Loading</a>
             </li>
-            
+
             <li>
                  <a v-link="{ path: '/component/modal' }" href="javascript:;">Modal</a>
             </li>
@@ -44,7 +44,7 @@
                 <a v-link="{ path: '/component/tag' }" href="javascript:;">Tag</a>
             </li>
             <li>
-                 <a v-link="{ path: '/component/toaster' }" href="javascript:;">Toaster</a>
+                 <a v-link="{ path: '/component/message' }" href="javascript:;">Message</a>
             </li>
             <li>
                 <a v-link="{ path: '/component/select' }" href="javascript:;">Select</a>

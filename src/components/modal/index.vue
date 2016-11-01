@@ -11,7 +11,7 @@
                 </slot>
             </div>
             <div class="xcui-modal-body" :style="contentStyle">
-                <slot></slot>
+                <slot>{{content}}</slot>
             </div>
             <div class="xcui-modal-footer" v-if="showFooter">
                 <slot name="footer">
@@ -32,6 +32,10 @@ export default {
         title: {
             type: String,
             default: '提示'
+        },
+        content: {
+            type: String,
+            default: ''
         },
         show: {
             type: Boolean,

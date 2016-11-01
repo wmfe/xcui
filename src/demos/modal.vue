@@ -1,10 +1,11 @@
 <template lang="md">
-## Modal 模态窗口
+# Modal 模态窗口
 
-### 使用场景
- 模拟浏览器的 `alert`、`confirm`
+## 使用场景
+模态对话框，模拟浏览器的 `alert`、`confirm`。在浮层中显示，引导用户进行相关操作。
+`Modal`提供了两种用法，基础组件使用和封装好的全局实例调用。
 
-### Demo
+## Demo
 
 <demo>
     <example title="基础使用">
@@ -59,7 +60,6 @@
         <button class="btn btn-default" @click="this.modal8 = true">Small对话框</button>
         <button class="btn btn-default" @click="this.modal9 = true">自定义Style</button>
         <button class="btn btn-default" @click="this.modal10 = true">自定义class-name</button>
-        <button class="btn btn-default" @click="this.modal11 = true">滚动Modal</button>
         <Modal
         :show.sync="modal7"
         :size="'full'"
@@ -84,11 +84,6 @@
         :class-name="'xcui-modal-demo-class'">
         <div>欲与天公试比高</div>
         </Modal>
-        <Modal
-        :show.sync="modal11"
-        title="滚动Modal">
-        <div>{{modal11LargeContent}}</div>
-        </Modal>
         <style>
         .Modal-demo-class { top: 0; }
         </style>
@@ -100,6 +95,7 @@
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|
 |show|Boolean|false|对话框是否显示,需要.sync双向绑定|**必选**|
+|content|String|-|对话框的主体内容，如果使用了默认slot的方式，则content无效|可选|
 |title|String|-|对话框的标题，如果slot定义了header，则title无效|可选|
 |mask-closable|Boolean|true|是否允许点击遮罩层关闭对话框|可选|
 |scrollable|Boolean|false|打开Modal后，是否允许底页可滚动|可选|
@@ -155,7 +151,7 @@ Vue.use(xcuiInstall)
 
 | 参数 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|
-|options|Object|-|对话框的参数，属性同props|**必选**|
+|options|Object|-|对话框的参数，属性同props(props.show除外)。注意：使用驼峰式变量名，如**onOk**，而非on-ok|**必选**|
 
 2. **this.$Modal.close()**
 
@@ -175,7 +171,7 @@ Vue.use(xcuiInstall)
 写法2：
 | 参数 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|
-|options|Object|-|对话框的参数，属性同props|**必选**|
+|options|Object|-|对话框的参数，属性同props(props.show除外)。注意：使用驼峰式变量名，如**onOk**，而非on-ok|**必选**|
 |isRawHTML|Boolean|false|对options.content(String)是否解析为原生HTML|可选|
 
 
@@ -207,12 +203,7 @@ let ModalDemo = {
             modal7: false,
             modal8: false,
             modal9: false,
-            modal10: false,
-            modal11: false,
-            modal11LargeContent: `谁念西风独自凉 萧萧黄叶闭疏窗 
-沉思往事立残阳 被酒莫惊春睡重
-读书消得泼发香 当时只道是寻常
-`.repeat(300)
+            modal10: false
         };
     },
     methods: {

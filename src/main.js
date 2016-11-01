@@ -18,7 +18,7 @@ import TagDemo from './demos/tag';
 import datepicker from './demos/datepicker';
 import daterangepicker from './demos/dateRangePicker';
 import Select from './demos/select.vue';
-import Toaster from './demos/toaster';
+import Message from './demos/message';
 import Modal from './demos/modal';
 import InputNumber from './demos/inputNumber';
 import Progress from './demos/progress';
@@ -85,9 +85,9 @@ router.map({
                     resolve(Loading);
                 }
             },
-            '/component/toaster': {
+            '/component/message': {
                 component(resolve) {
-                    resolve(Toaster);
+                    resolve(Message);
                 }
             },
             '/component/modal': {
