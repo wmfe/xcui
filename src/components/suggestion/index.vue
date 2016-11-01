@@ -100,7 +100,7 @@
                     me.getLocalSug();
                     me.autoSetItem();
                     me.inputCallback && me.inputCallback();
-                }, 100);
+                }, 50);
             },
             onBlur() {
                 let me = this;
