@@ -5,11 +5,11 @@
 
 import Vue from 'vue';
 import Router from 'vue-router';
-import VueResource from 'vue-resource';
 import App from './App';
 import Home from './Home';
 import Homecontent from './demos/homeContent';
-import Paginations from './demos/paginations';
+import xcui from './components/index';
+import Pagination from './demos/pagination';
 import Loading from './demos/loading';
 import Popover from './demos/popover';
 import Tooltip from './demos/tooltip';
@@ -25,7 +25,7 @@ import Progress from './demos/progress';
 import PageLoading from './demos/pageloading';
 
 Vue.use(Router);
-Vue.use(VueResource);
+Vue.use(xcui);
 Vue.config.devtools = true;
 
 const router = new Router();
@@ -40,9 +40,9 @@ router.map({
                     resolve(Homecontent);
                 }
             },
-            '/component/paginations': {
+            '/component/pagination': {
                 component(resolve) {
-                    resolve(Paginations);
+                    resolve(Pagination);
                 }
             },
             '/component/popover': {

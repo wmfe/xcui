@@ -9,12 +9,12 @@
 <demo>
     <example title="基础使用">
         <button class="btn btn-default" @click="this.modal1 = true">显示对话框</button>
-        <Modal
+        <xcui-modal
         :show.sync="modal1"
         title="基础弹窗"
         :on-ok="modal1OK">
         <div>XCUI，做有品质的外卖UI</div>
-        </Modal>
+        </xcui-modal>
         <div>通过控制show来显示/隐藏对话框，需要将show设置为.sync双向绑定</div>
     </example>
     <example title="定义元素的显示">
@@ -23,35 +23,35 @@
         <button class="btn btn-default" @click="this.modal4 = true">不带关闭按钮</button>
         <button class="btn btn-default" @click="this.modal5 = true">不带页脚</button>
         <button class="btn btn-default" @click="this.modal6 = true">不带关闭按钮和页脚</button>
-        <Modal
+        <xcui-modal
         :show.sync="modal2"
         title="自定义页头（有slot则无效）">
         <span slot="header" class="xcui-modal-demo-title">不一样的页头</span>
         <div>我跟你不一样，我有你没有的头脑</div>
-        </Modal>
-        <Modal
+        </xcui-modal>
+        <xcui-modal
         :show.sync="modal3"
         :show-header="false">
         <div>无头骑士。生前是一名勇猛的骑士，由于在战场上不幸阵亡，首级被敌人割去，因此每逢月黑风高的夜晚他便会骑着一匹同为亡灵的马出没于沉睡谷，四处寻找自己遗失的首级；而每当看见与自己生前长相相似者便会斩其头颅带回。</div>
-        </Modal>
-        <Modal
+        </xcui-modal>
+        <xcui-modal
         :show.sync="modal4"
         title="不带关闭按钮"
         :show-close-button="false">
         <div>不带关闭按钮</div>
-        </Modal>
-        <Modal
+        </xcui-modal>
+        <xcui-modal
         :show.sync="modal5"
         title="不带页脚"
         :show-footer="false">
         <div>即使我失去了双脚，我依然顶天立地</div>
-        </Modal>
-        <Modal
+        </xcui-modal>
+        <xcui-modal
         :show.sync="modal6"
         :show-close-button="false"
         :show-footer="false">
         <div>我且问你，除了刷新，你能如何关闭我？</div>
-        </Modal>
+        </xcui-modal>
         <div>Modal提供了灵活的组件化API和Slot，可以自由控制整个Modal的组成部分。比如，页头、页脚和关闭按钮</div>
     </example>
     <example title="自定义样式">
@@ -59,30 +59,30 @@
         <button class="btn btn-default" @click="this.modal8 = true">Small对话框</button>
         <button class="btn btn-default" @click="this.modal9 = true">自定义Style</button>
         <button class="btn btn-default" @click="this.modal10 = true">自定义class-name</button>
-        <Modal
+        <xcui-modal
         :show.sync="modal7"
         :size="'full'"
         title="Full对话框">
         <div>心宽体肥，宅心仁厚。</div>
-        </Modal>
-        <Modal
+        </xcui-modal>
+        <xcui-modal
         :show.sync="modal8"
         :size="'small'"
         title="Small对话框">
         <div>即使我小，这世间也会有我的一席之地。因为我小巧玲珑，精灵剔透。</div>
-        </Modal>
-        <Modal
+        </xcui-modal>
+        <xcui-modal
         :show.sync="modal9"
         :style="{'transform': 'rotate(-10deg)'}"
         title="自定义Style">
         <div>身正不怕影子斜</div>
-        </Modal>
-        <Modal
+        </xcui-modal>
+        <xcui-modal
         :show.sync="modal10"
         title="自定义class-name"
         :class-name="'xcui-modal-demo-class'">
         <div>欲与天公试比高</div>
-        </Modal>
+        </xcui-modal>
         <style>
         .Modal-demo-class { top: 0; }
         </style>
@@ -182,16 +182,7 @@ Vue.use(xcuiInstall)
 
 </template>
 <script>
-import Vue from 'vue';
-import XCUI from '../components/index.js';
-Vue.use(XCUI);
-let Modal = XCUI.Modal;
-// window.XCUI = XCUI;
-// window.Vue = Vue;
 let ModalDemo = {
-    components: {
-        Modal
-    },
     data() {
         return {
             modal1: false,

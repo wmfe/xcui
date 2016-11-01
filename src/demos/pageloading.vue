@@ -8,7 +8,7 @@
 ## DEMO
 <demo>
     <example title="顶部加载条">
-        <v-pageloading v-ref:page-loading></v-pageloading>
+        <xcui-pageloading v-ref:page-loading></xcui-pageloading>
         <div class="form-group">
             <button class="btn btn-primary" @click="start">start</button>
             <button class="btn btn-primary" @click="done">done</button>
