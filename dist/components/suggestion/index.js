@@ -23,18 +23,13 @@
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(4);
-<<<<<<< HEAD:dist/components/autocomplete/index.js
-=======
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class="xcui-suggestion {{className}}"> <input type=text class="form-control xcui-suggestion-input" :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @focus=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter=onBlur> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'xcui-show\':show}"> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}"> <a href=javascript:void(0) @click=setItem(item)> {{item.text}} </a> </li> </ul> <button @click=clearText type=button title=点击清除输入内容 class=close tabindex=-1 style="position: absolute; right: 8px; top: 4px">×</button> </div> ';
->>>>>>> 6db40f0cf5c7d086f4dce3548a6339ee03328252:dist/components/suggestion/index.js
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
         exports.default = {
-            name: "xcui-autocomplete",
+            name: "xcui-suggestion",
             data: function data() {
                 return {
                     list: [],
@@ -45,45 +40,45 @@
             props: {
                 id: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 name: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 className: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 disabled: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 placeholder: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 suggestions: {
                     type: Array,
-                    "default": function _default() {
+                    default: function _default() {
                         return [];
                     }
                 },
                 dataText: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 dataValue: {
                     type: [ String, Number ],
-                    "default": ""
+                    default: ""
                 },
                 check: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 },
                 inputCallback: {
                     type: Function,
-                    "default": function _default() {
+                    default: function _default() {
                         return function() {};
                     }
                 }
@@ -97,17 +92,17 @@
                 suggestions: function suggestions() {
                     this.arrangeLocalList();
                     this.getLocalSug();
-                },
-                dataText: function dataText() {
-                    this.onInput();
                 }
             },
             methods: {
                 onInput: function onInput() {
-                    this.currentIndex = -1;
-                    this.getLocalSug();
-                    this.autoSetItem();
-                    this.inputCallback && this.inputCallback();
+                    var me = this;
+                    setTimeout(function() {
+                        me.currentIndex = -1;
+                        me.getLocalSug();
+                        me.autoSetItem();
+                        me.inputCallback && me.inputCallback();
+                    }, 100);
                 },
                 onBlur: function onBlur() {
                     var me = this;
@@ -181,21 +176,27 @@
                 this.arrangeLocalList();
             }
         };
-<<<<<<< HEAD:dist/components/autocomplete/index.js
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class="xcui-suggestion {{className}}"> <input type=text class="form-control xcui-suggestion-input" :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @focus=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter=onBlur> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'xcui-show\':show}"> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}"> <a href=javascript:void(0) @click=setItem(item)> {{item.text}} </a> </li> </ul> <button @click=clearText type=button title=点击清除输入内容 class=close tabindex=-1 style="position: absolute; right: 8px; top: 4px">×</button> </div> ';
-=======
->>>>>>> 6db40f0cf5c7d086f4dce3548a6339ee03328252:dist/components/suggestion/index.js
+        module.exports = ' <div class="xcui-suggestion {{className}}"> <input type=text class="form-control xcui-suggestion-input" autocomplete=off :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @input=onInput @focus=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter=onBlur> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'show\':show}"> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}"> <a href=javascript:void(0) @click=setItem(item)> {{item.text}} </a> </li> </ul> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
         __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(3);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     } ]);
 });
 

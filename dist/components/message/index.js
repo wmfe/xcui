@@ -29,7 +29,7 @@
             value: true
         });
         exports.default = {
-            name: "xcui-loading",
+            name: "xcui-message",
             props: {
                 show: {
                     type: Boolean,
@@ -37,25 +37,68 @@
                 },
                 type: {
                     type: String,
-                    default: "load2"
+                    default: "info"
                 },
-                classname: {
+                content: {
                     type: String,
                     default: ""
                 },
-                color: {
-                    type: String,
-                    default: ""
-                },
-                size: {
-                    type: String,
-                    default: "md"
+                duration: {
+                    type: Number,
+                    default: 3e3
                 }
             },
-            methods: {}
+            computed: {
+                styleClass: function styleClass() {
+                    return "xcui-message-" + this.type;
+                },
+                iconClass: function iconClass() {
+                    switch (this.type) {
+                      case "info":
+                        return "glyphicon-info-sign";
+
+                      case "success":
+                        return "glyphicon-ok";
+
+                      case "error":
+                        return "glyphicon-remove";
+
+                      case "warning":
+                        return "glyphicon-warning-sign";
+
+                      default:
+                        return "glyphicon-info-sign";
+                    }
+                }
+            },
+            data: function data() {
+                return {
+                    timer: null,
+                    closed: false
+                };
+            },
+            methods: {
+                clearTimer: function clearTimer() {
+                    clearTimeout(this.timer);
+                },
+                resetTimer: function resetTimer() {
+                    var _this = this;
+                    if (!this.duration) {
+                        this.duration = 3e3;
+                    }
+                    this.timer = setTimeout(function() {
+                        _this.show = false;
+                    }, this.duration);
+                },
+                onShow: function onShow() {
+                    this.show = true;
+                    this.clearTimer();
+                    this.resetTimer();
+                }
+            }
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname]> <div class=loader :style="{\'color\' : color}"></div> </div> ';
+        module.exports = ' <div class=xcui-message :class=styleClass transition=fade v-show=show> <span class="xcui-message-icon glyphicon" :class=iconClass></span> <p class=xcui-message-desc> {{content}} </p> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};
