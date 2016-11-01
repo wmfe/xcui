@@ -22,7 +22,7 @@
                         :color="color"
                         :date-limit="dateLimit"
                         :initial-date.sync="initialStartDate"
-                        :render-star="renderStar"></calendar>
+                        :start-render="startRender"></calendar>
                  </div>
                  <div class="double-calendar-right">
                     <calendar
@@ -38,7 +38,7 @@
                         :color="color"
                         :date-limit="dateLimit"
                         :initial-date.sync="initialEndDate"
-                        :render-end="renderEnd"></calendar>
+                        :start-render="startRender"></calendar>
                  </div>
              </div>
              <div class="calendar-button">
@@ -60,6 +60,11 @@
     export default {
         name: 'xcui-daterangepicker',
         props: {
+            minDate: null,
+            maxDate: null,
+            hourRange: null,
+            minuteRange: null,
+            secondRange: null,
             startDate: {
                 twoWay: true,
                 default: ''
@@ -68,15 +73,10 @@
                 twoWay: true,
                 default: ''
             },
-            minDate: {},
-            maxDate: {},
             format: {
                 type: String,
                 default: 'YYYY-MM-DD'
             },
-            hourRange: {},
-            minuteRange: {},
-            secondRange: {},
             color: {
                 type: String,
                 default: ''
@@ -98,8 +98,7 @@
             return {
                 show: false,
                 value: '',
-                renderStar: '',
-                renderEnd: '',
+                startRender: '',
                 initialStartDate: '',
                 initialEndDate: ''
             };
@@ -123,11 +122,13 @@
                 this.$emit('on-change', this.startDate, this.endDate);
                 this.initialStartDate = this.startDate;
                 this.initialEndDate = this.endDate;
+                this.startRender = new Date().getTime();
             },
             cancel() {
                 this.show = false;
-                this.renderStar = this.startDate = this.initialStartDate;
-                this.renderEnd = this.endDate = this.initialEndDate;
+                this.startRender = new Date().getTime();
+                this.startDate = this.initialStartDate;
+                this.endDate = this.initialEndDate;
             },
             showCalendar(e) {
                 let me = this;

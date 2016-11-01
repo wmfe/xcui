@@ -49,31 +49,20 @@ export default {
             selectRangeShow: true,
             selectRange: '',
             dateParams: null,
-            defaultFormat: 'YYYY-MM-DD'
+            defaultFormat: 'YYYY-MM-DD',
+            type: 'date'
         };
     },
     computed: {
-        type() {
-            let type = 'date';
-            let format = this.format;
-            let hasY = format.indexOf('YYYY') !== -1;
-            let hasH = format.indexOf('hh') !== -1 || format.indexOf('HH') !== -1;
-            if (hasY && hasH) {
-                type = 'datetime';
-            }
-            else if (hasH) {
-                type = 'time';
-            }
-            return type;
-        },
         formatValue() {
             return this.output(this.value);
         }
     },
     created() {
         let me = this;
+        me.getType();
         this.initialValue = this.value;
-        if (me.value !== '') {
+        if (me.value) {
             me.value = me.output(me.value);
         }
         else {
@@ -105,6 +94,7 @@ export default {
         else {
             this.initialValue = this.value;
         }
+        this.type;
     },
     methods: {
         zero(n) {
@@ -206,8 +196,6 @@ export default {
                 this.selectRangeList = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]];
                 this.selectRangeShow = false;
             }
-            this.dataTableShow = false;
-            this.yearTableShow = true;
         },
         selectItem(select) {
             let me = this;
@@ -274,12 +262,15 @@ export default {
         output(d, format) {
             let fmt = format || this.format;
             let me = this;
-            if (this.value && this.value !== '' && this.type === 'time' && typeof (d) === 'string') {
-                d = '1970-01-01 ' + d;
-            }
             let date = new Date(d);
-            if (typeof (d) === 'object' && d.length > 0) {
+            if (this.value && this.type === 'time' && typeof (d) === 'string') {
+                date = new Date('1970-01-01 ' + d);
+            }
+            else if (typeof (d) === 'object' && d.length > 0) {
                 date = new Date(d[0], d[1], d[2], d[3] || '00', d[4] || '00', d[5] || '00');
+            }
+            else if (!this.value) {
+                date = new Date();
             }
             let year = date.getFullYear();
             let month = date.getMonth();
@@ -349,6 +340,17 @@ export default {
                 minute: me.zero(minute),
                 second: me.zero(second)
             };
+        },
+        getType() {
+            let format = this.format;
+            let hasY = format.indexOf('YYYY') !== -1; // 包含年
+            let hasH = format.indexOf('hh') !== -1 || format.indexOf('HH') !== -1;// 包含小时
+            if (hasY && hasH) {
+                this.type = 'datetime';
+            }
+            else if (hasH) {
+                this.type = 'time';
+            }
         }
     }
 };
