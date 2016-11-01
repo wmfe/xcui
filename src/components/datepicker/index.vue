@@ -87,7 +87,7 @@
     import CalendarMixins from '../daterangepicker/calendarMixins.js';
     export default {
         mixins: [CalendarMixins],
-        name: 'xcui-datapicker',
+        name: 'xcui-datepicker',
         props: {
             btnShow: {
                 type: Boolean,

@@ -58,7 +58,7 @@
 <script>
     import calendar from './calendar';
     export default {
-        name: 'xcui-datarangepicker',
+        name: 'xcui-daterangepicker',
         props: {
             startDate: {
                 twoWay: true,
