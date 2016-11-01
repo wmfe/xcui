@@ -57,12 +57,8 @@
 </template>
 
 <script>
-import xcuiPagination from '../components/pagination';
 
 export default {
-    components: {
-        xcuiPagination
-    },
     data() {
         return {
             currentPageNo: 1,

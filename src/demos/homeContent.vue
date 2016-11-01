@@ -79,6 +79,7 @@ Vue.use(xcui);
 ```
 
 > **说明**
+>
 > XCUI在使用`Vue.use(xcui)`后，会默认以`xcui-`前缀注册所有组件，在Vue实例中可直接使用而**不用在`components`中声明**。如：
 
 ```html
@@ -111,7 +112,7 @@ this.$Modal.show(options) // 模态框
 
 ## 开发
 
-#### clone the doc repo
+#### clone the repo
 ```
 $ git clone git@github.com:wmfe/xcui.git
 ```

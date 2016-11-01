@@ -56,7 +56,6 @@ const xcui = {
     Tag,
     Toaster,
     Tooltip,
-
     install,
     xcuiInstall
 };
