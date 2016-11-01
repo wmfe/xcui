@@ -7,7 +7,6 @@
                 :name="name"
                 :disabled="disabled"
                 :placeholder="placeholder"
-                debounce＝100
                 v-model="dataText"
                 @input="onInput"
                 @focus="onInput"
@@ -84,7 +83,7 @@
         },
         computed: {
             show() {
-                return this.list.length > 0;
+                return this.list.length > 0 && this.$el.getElementsByTagName('input')[0] === document.activeElement;
             }
         },
         watch: {
@@ -101,7 +100,7 @@
                     me.getLocalSug();
                     me.autoSetItem();
                     me.inputCallback && me.inputCallback();
-                }, 100);
+                }, 50);
             },
             onBlur() {
                 let me = this;
