@@ -22,7 +22,7 @@
   <example title="日期格式">
     <xcui-datepicker
         :value.sync="date.value"
-        format = "YYYY-MM-DD"
+        format="YYYY-MM-DD"
         :min-date="datetime.begin"
         :max-date="'2016-11-10'">
     </xcui-datepicker>
@@ -33,7 +33,7 @@
   <example title="日期+时间选择">
     <xcui-datepicker
         :value.sync="datetime.value"
-        format = "YYYY/MM/DD hh:mm:ss"
+        format="YYYY/MM/DD hh:mm:ss"
         :hour-range="'3'"
         :minute-range="'10'"
         :second-range="'20'"
@@ -48,7 +48,7 @@
     <xcui-datepicker
         class-name="class-name"
         color="pink"
-        format = "YYYY-MM-DD hh:mm:ss"
+        format="YYYY-MM-DD hh:mm:ss"
         :btn-show="true"
         @on-change="onChange"
         :value.sync="datetime.value"

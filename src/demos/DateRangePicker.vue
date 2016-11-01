@@ -39,7 +39,7 @@
         <p>> date-limit：可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天</p>
         <example title="日期 + 时间选择">
             <xcui-daterangepicker
-                  format = "YYYY-MM-DD hh:mm:ss"
+                  format="YYYY-MM-DD hh:mm:ss"
                   :start-date.sync="'2016-09-08 00:02:00'"
                   :end-date.sync="'2016-09-13 00:02:00'"
                   :hour-range="'3'"
@@ -54,7 +54,7 @@
             <xcui-daterangepicker
                 class-name="class-name"
                 color="pink"
-                format = "YYYY-MM-DD hh:mm:ss"
+                format="YYYY-MM-DD hh:mm:ss"
                 :btn-show="true"
                 @on-change="onChange"
                 :hour-range="'3'">
@@ -68,7 +68,7 @@
             <xcui-daterangepicker
                   :start-date.sync="'04:02:03'"
                   :end-date.sync="'05:02:03'"
-                  format = "hh:mm:ss">
+                  format="hh:mm:ss">
             </xcui-daterangepicker>
         </example>
     </demo>
