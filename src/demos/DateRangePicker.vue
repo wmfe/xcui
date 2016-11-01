@@ -24,8 +24,8 @@
                 :end-date.sync="''">
             </xcui-daterangepicker>
         </example>
-        <p>> 最简单的用法，startDate：日期开始时间，endDate：日期结束时间, 格式</p>
-        <p>> startDate／endDate：可以传不同日期格式，例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262，也可以不传，默认当天，date.value值为 时间戳1477980088896</p>
+        <p> 最简单的用法，startDate：日期开始时间，endDate：日期结束时间, 格式</p>
+        <p> startDate／endDate：可以传不同日期格式，例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262，也可以不传，默认当天，date.value值为 时间戳1477980088896</p>
         <example title="日期格式">
             <xcui-daterangepicker
                 :start-date.sync="''"
@@ -35,11 +35,11 @@
                 :date-limit="date.dateLimit">
             </xcui-daterangepicker>
         </example>
-        <p>> format,min-date,max-date同datapicker组件配置</p>
-        <p>> date-limit：可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天</p>
+        <p> format,min-date,max-date同datapicker组件配置</p>
+        <p> date-limit：可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天</p>
         <example title="日期 + 时间选择">
             <xcui-daterangepicker
-                  format = "YYYY-MM-DD hh:mm:ss"
+                  format="YYYY-MM-DD hh:mm:ss"
                   :start-date.sync="'2016-09-08 00:02:00'"
                   :end-date.sync="'2016-09-13 00:02:00'"
                   :hour-range="'3'"
@@ -47,28 +47,28 @@
                   :second-range="'20'">
             </xcui-daterangepicker>
         </example>
-        <p>> hour-range：小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12</p>
-        <p>> minute-range：分钟可选值设置，同上</p>
-        <p>> second-range：分钟可选值设置，同上</p>
+        <p> hour-range：小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12</p>
+        <p> minute-range：分钟可选值设置，同上</p>
+        <p> second-range：分钟可选值设置，同上</p>
         <example title="样式以及回调配置">
             <xcui-daterangepicker
                 class-name="class-name"
                 color="pink"
-                format = "YYYY-MM-DD hh:mm:ss"
+                format="YYYY-MM-DD hh:mm:ss"
                 :btn-show="true"
                 @on-change="onChange"
                 :hour-range="'3'">
             </xcui-daterangepicker>
         </example>
-        <p>> class-name：日历样式，class名字</p>
-        <p>> color：按钮颜色，值为颜色值，例如：#f00,pink</p>
-        <p>> on-change：选择日期后的回调，参数 val(当前值) oldval(上次值)，onChange(val, oldVal) {}</p>
-        <p>> btn-show: 按钮是否显示</p>
+        <p> class-name：日历样式，class名字</p>
+        <p> color：按钮颜色，值为颜色值，例如：#f00,pink</p>
+        <p> on-change：选择日期后的回调，参数 val(当前值) oldval(上次值)，onChange(val, oldVal) {}</p>
+        <p> btn-show: 按钮是否显示</p>
         <example title="时间选择">
             <xcui-daterangepicker
                   :start-date.sync="'04:02:03'"
                   :end-date.sync="'05:02:03'"
-                  format = "hh:mm:ss">
+                  format="hh:mm:ss">
             </xcui-daterangepicker>
         </example>
     </demo>

@@ -24,10 +24,13 @@
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(4);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     }, function(module, exports) {}, function(module, exports) {
         module.exports = ' <div v-el:outer class=outer :class=size> <div class=up-down-wrap> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue> </a> </div> <div class=input-wrap> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className /> </div> </div> ';
 >>>>>>> 6db40f0cf5c7d086f4dce3548a6339ee03328252
+=======
+>>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -128,12 +131,20 @@
             ready: function ready() {}
         };
 <<<<<<< HEAD
+<<<<<<< HEAD
     }, function(module, exports) {}, function(module, exports) {
         module.exports = ' <div v-el:outer class=outer :class=size> <div class=up-down-wrap> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue> </a> </div> <div class=input-wrap> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className /> </div> </div> ';
 =======
 >>>>>>> 6db40f0cf5c7d086f4dce3548a6339ee03328252
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+=======
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = ' <div v-el:outer class=outer :class=size> <div class=up-down-wrap> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue> </a> </div> <div class=input-wrap> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className /> </div> </div> ';
+    }, function(module, exports, __webpack_require__) {
+        var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
+>>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466
         __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(3);
