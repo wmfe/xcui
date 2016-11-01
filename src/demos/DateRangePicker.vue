@@ -98,7 +98,6 @@ export default {
     data() {
         return {
             date: {
-                type: 'date',
                 begin: '2015-12-20',
                 end: '2016-11-20',
                 dateLimit: {
@@ -107,7 +106,6 @@ export default {
                 color: '#f00'
             },
             datetime: {
-                type: 'datetime',
                 begin: '2015-12-20',
                 end: '2017-11-20',
                 dateLimit: {
@@ -117,7 +115,6 @@ export default {
                 btnShow: true
             },
             time: {
-                type: 'time',
                 inputClass: 'class-name',
                 btnShow: true
             }
