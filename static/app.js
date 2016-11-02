@@ -13867,7 +13867,7 @@
 
 	module.exports = {
 		"name": "xcui",
-		"version": "0.1.0",
+		"version": "1.0.1",
 		"description": "Desktop web UI based on Vue and Bootstrap",
 		"keywords": [
 			"xcui",
@@ -13897,10 +13897,10 @@
 			"array-map": "^0.0.0",
 			"array-shuffle": "^1.0.0",
 			"countup": "^1.6.1",
-			"fuzzysearch": "^1.0.3",
-			"xcui-demo-loader": "^0.1.4"
+			"fuzzysearch": "^1.0.3"
 		},
 		"devDependencies": {
+			"xcui-demo-loader": "^0.1.4",
 			"babel-core": "^6.9.1",
 			"babel-loader": "^6.0.0",
 			"babel-plugin-transform-runtime": "^6.9.0",
@@ -14012,7 +14012,7 @@
 /* 24 */
 /***/ function(module, exports) {
 
-	module.exports = "<div><h1>关于XCUI</h1>\n<p><img src=\"https://github.com/wmfe/xcui/raw/master/src/assets/logo_nobg_128x128@2x.png\" alt=\"logo\" /></p>\n<p>XCUI 是基于<code>Vue</code>和 <code>Bootstrap.css</code> 的<strong>桌面端组件库</strong>。</p>\n<h2>XCUI的目标是：</h2>\n<ul>\n<li>满足桌面端页面大部分基础组件需求。</li>\n<li>快速开发基于 <code>vue</code> 构建的项目。</li>\n<li>保持小体积, 无其他js库依赖(不依赖<code>jquery</code>, <code>Boostrap.js</code>), 仅使用 <code>Boostrap.css</code> 。</li>\n<li>简洁优雅。</li>\n</ul>\n<h2>版本支持</h2>\n<p>XCUI目前支持<code>vue 1.x</code>版本；推荐使用<code>vue 1.0.26</code>及以上版本。后续XCUI会增加支持<code>vue 2.x</code>的版本，敬请期待。</p>\n<blockquote>\n<p>XCUI需要在页面中引入<code>bootstrap.css</code>。</p>\n</blockquote>\n<h2>如何使用</h2>\n<p>通过<code>npm</code>安装，或在<a href=\"https://github.com/wmfe/xcui\">这里</a>下载打包好的版本：</p>\n<pre>npm install xcui\n</pre>\n<p><code>xcui</code>使用<code>umd</code>方式打包，支持各种模块加载器。</p>\n<p>在页面根实例中引入：</p>\n<pre><span class=\"token keyword\" >import</span> Vue <span class=\"token keyword\" >from</span> <span class=\"token string\" >'vue'</span>\n<span class=\"token keyword\" >import</span> xcui <span class=\"token keyword\" >from</span> <span class=\"token string\" >'xcui'</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n</pre>\n<p>或者：</p>\n<pre><span class=\"token keyword\" >var</span> Vue <span class=\"token operator\" >=</span> <span class=\"token function\" >require</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'vue'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> xcui <span class=\"token operator\" >=</span> <span class=\"token function\" >require</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'xcui'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n</pre>\n<p>在页面中声明标签，即可使用。举例：</p>\n<pre><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n</pre>\n<p>除了使用npm进行安装外，还可直接将xcui的js和css文件使用标签形式引入，举例：</p>\n<pre><span class=\"token doctype\" >&lt;!DOCTYPE html></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>html</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>head</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>title</span><span class=\"token punctuation\" >></span></span>Hello XCUI<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>title</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>link</span> <span class=\"token attr-name\" >rel</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>stylesheet<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >href</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>bootstrap/css/bootstrap.css<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>link</span> <span class=\"token attr-name\" >rel</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>stylesheet<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >href</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>xcui.css<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>script</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text/javascript<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >src</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>vue.js<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token script language-javascript\" ></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>script</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>script</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text/javascript<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >src</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>xcui.js<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token script language-javascript\" ></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>script</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>head</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>body</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >id</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>app<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>script</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text/javascript<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token script language-javascript\" >\n        Vue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n        <span class=\"token keyword\" >new</span> <span class=\"token class-name\" >Vue</span><span class=\"token punctuation\" >(</span><span class=\"token punctuation\" >{</span>\n            el<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'#app'</span><span class=\"token punctuation\" >,</span>\n            ready<span class=\"token punctuation\" >:</span> <span class=\"token keyword\" >function</span> <span class=\"token punctuation\" >(</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >{</span>\n                <span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$alert</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'Hello XCUI!'</span><span class=\"token punctuation\" >)</span>\n            <span class=\"token punctuation\" >}</span>\n        <span class=\"token punctuation\" >}</span><span class=\"token punctuation\" >)</span>\n    </span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>script</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>body</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>html</span><span class=\"token punctuation\" >></span></span>\n</pre>\n<blockquote>\n<p><strong>说明</strong></p>\n<p>XCUI在使用<code>Vue.use(xcui)</code>后，会默认以<code>xcui-</code>前缀注册所有组件，在Vue实例中可直接使用而<strong>不用在<code>components</code>中声明</strong>。如：</p>\n</blockquote>\n<pre><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n</pre>\n<p>当然，您也可以按以下方式使用xcui组件：</p>\n<pre><span class=\"token keyword\" >import</span> <span class=\"token punctuation\" >{</span>Tag<span class=\"token punctuation\" >,</span> Select<span class=\"token punctuation\" >}</span> <span class=\"token keyword\" >from</span> xcui<span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >export</span> <span class=\"token keyword\" >default</span> <span class=\"token punctuation\" >{</span>\n    components<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >{</span>Tag<span class=\"token punctuation\" >,</span> Select<span class=\"token punctuation\" >}</span>\n<span class=\"token punctuation\" >}</span>\n</pre>\n<h2>全局方法</h2>\n<p><code>xcui</code>把一些使用频率高的操作挂载到<code>Vue</code>的根实例，便于调用。如, 在一个<code>components</code>组件中可以这样调用 ( <strong>且不用在页面中显式地声明html标签</strong> )：</p>\n<pre><span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$alert</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'alert message'</span><span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 警告提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$confirm</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'是否确认?'</span><span class=\"token punctuation\" >,</span> content<span class=\"token punctuation\" >,</span> onOk<span class=\"token punctuation\" >,</span> onCancel<span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 确认提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$toaster</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'toaster message'</span><span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 信息提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span>$Modal<span class=\"token punctuation\" >.</span><span class=\"token function\" >show</span><span class=\"token punctuation\" >(</span>options<span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 模态框</span>\n</pre>\n<p>具体请见<a href=\"https://wmfe.github.io/xcui/#!/component/modal\">modal</a> 中的说明。</p>\n<h2>开发</h2>\n<h4>clone the repo</h4>\n<pre>$ git clone git@github<span class=\"token punctuation\" >.</span>com<span class=\"token punctuation\" >:</span>wmfe<span class=\"token operator\" >/</span>xcui<span class=\"token punctuation\" >.</span>git\n</pre>\n<h4>安装依赖</h4>\n<pre>$ npm i\n</pre>\n<h4>run dev server</h4>\n<pre>$ npm run dev\n</pre>\n<h4>build components</h4>\n<pre>$ npm run build\n</pre>\n<h2>加入我们</h2>\n<h4>提交issue</h4>\n<p>在使用过程中有问题，请在<a href=\"https://github.com/wmfe/xcui/issues\">这里</a>给我们提交<code>issue</code>。</p>\n<h4>提交pull request</h4>\n<p>代码有问题？请在<a href=\"https://github.com/wmfe/xcui/pulls\">这里</a>给我们提交<code>pull request</code>。</p>\n<h4>加入开发团队</h4>\n<p>加入<a href=\"https://github.com/wmfe\">wmfe</a>团队，一起开发通用组件，交流vue组件开发的心得~</p>\n</div>";
+	module.exports = "<div><h1>关于XCUI</h1>\n<p><img src=\"https://github.com/wmfe/xcui/raw/master/src/assets/logo_nobg_128x128@2x.png\" alt=\"logo\" /></p>\n<p>XCUI 是基于<code>Vue</code>和 <code>Bootstrap.css</code> 的<strong>桌面端组件库</strong>。</p>\n<h2>XCUI的目标是：</h2>\n<ul>\n<li>满足桌面端页面大部分基础组件需求。</li>\n<li>快速开发基于 <code>vue</code> 构建的项目。</li>\n<li>保持小体积, 无其他js库依赖(不依赖<code>jquery</code>, <code>Boostrap.js</code>), 仅使用 <code>Boostrap.css</code> 。</li>\n<li>简洁优雅。</li>\n</ul>\n<h2>版本支持</h2>\n<p>XCUI目前支持<code>vue 1.x</code>版本；推荐使用<code>vue 1.0.26</code>及以上版本。后续XCUI会增加支持<code>vue 2.x</code>的版本，敬请期待。</p>\n<blockquote>\n<p>XCUI需要在页面中引入<code>bootstrap.css</code>。</p>\n</blockquote>\n<h2>如何使用</h2>\n<p>通过<code>npm</code>安装，或在<a href=\"https://github.com/wmfe/xcui/releases\">这里</a>下载打包好的版本：</p>\n<pre>npm install xcui\n</pre>\n<p><code>xcui</code>使用<code>umd</code>方式打包，支持各种模块加载器。</p>\n<p>在页面根实例中引入：</p>\n<pre><span class=\"token keyword\" >import</span> Vue <span class=\"token keyword\" >from</span> <span class=\"token string\" >'vue'</span>\n<span class=\"token keyword\" >import</span> xcui <span class=\"token keyword\" >from</span> <span class=\"token string\" >'xcui'</span>\n<span class=\"token keyword\" >import</span> <span class=\"token string\" >'xcui/dist/xcui.css'</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n</pre>\n<p>或者：</p>\n<pre><span class=\"token keyword\" >var</span> Vue <span class=\"token operator\" >=</span> <span class=\"token function\" >require</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'vue'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >var</span> xcui <span class=\"token operator\" >=</span> <span class=\"token function\" >require</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'xcui'</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\nVue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n</pre>\n<p>在页面中声明标签，即可使用。举例：</p>\n<pre><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n</pre>\n<p>除了使用npm进行安装外，还可直接将xcui的js和css文件使用标签形式引入，举例：</p>\n<pre><span class=\"token doctype\" >&lt;!DOCTYPE html></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>html</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>head</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>title</span><span class=\"token punctuation\" >></span></span>Hello XCUI<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>title</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>link</span> <span class=\"token attr-name\" >rel</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>stylesheet<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >href</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>bootstrap/css/bootstrap.css<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>link</span> <span class=\"token attr-name\" >rel</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>stylesheet<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >href</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>xcui.css<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>script</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text/javascript<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >src</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>vue.js<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token script language-javascript\" ></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>script</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>script</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text/javascript<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >src</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>xcui.js<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token script language-javascript\" ></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>script</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>head</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>body</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >id</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>app<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span> <span class=\"token attr-name\" >:closeable</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>true<span class=\"token punctuation\" >\"</span></span> <span class=\"token attr-name\" >:text</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span>关闭<span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n    <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>script</span> <span class=\"token attr-name\" >type</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>text/javascript<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span><span class=\"token script language-javascript\" >\n        Vue<span class=\"token punctuation\" >.</span><span class=\"token function\" >use</span><span class=\"token punctuation\" >(</span>xcui<span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >;</span>\n        <span class=\"token keyword\" >new</span> <span class=\"token class-name\" >Vue</span><span class=\"token punctuation\" >(</span><span class=\"token punctuation\" >{</span>\n            el<span class=\"token punctuation\" >:</span> <span class=\"token string\" >'#app'</span><span class=\"token punctuation\" >,</span>\n            ready<span class=\"token punctuation\" >:</span> <span class=\"token keyword\" >function</span> <span class=\"token punctuation\" >(</span><span class=\"token punctuation\" >)</span><span class=\"token punctuation\" >{</span>\n                <span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$alert</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'Hello XCUI!'</span><span class=\"token punctuation\" >)</span>\n            <span class=\"token punctuation\" >}</span>\n        <span class=\"token punctuation\" >}</span><span class=\"token punctuation\" >)</span>\n    </span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>script</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>body</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>html</span><span class=\"token punctuation\" >></span></span>\n</pre>\n<blockquote>\n<p><strong>说明</strong></p>\n<p>XCUI在使用<code>Vue.use(xcui)</code>后，会默认以<code>xcui-</code>前缀注册所有组件，在Vue实例中可直接使用而<strong>不用在<code>components</code>中声明</strong>。如：</p>\n</blockquote>\n<pre><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-tag</span><span class=\"token punctuation\" >></span></span><span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-tag</span><span class=\"token punctuation\" >></span></span>\n</pre>\n<p>当然，您也可以按以下方式使用xcui组件：</p>\n<pre><span class=\"token keyword\" >import</span> <span class=\"token punctuation\" >{</span>Tag<span class=\"token punctuation\" >,</span> Select<span class=\"token punctuation\" >}</span> <span class=\"token keyword\" >from</span> xcui<span class=\"token punctuation\" >;</span>\n<span class=\"token keyword\" >export</span> <span class=\"token keyword\" >default</span> <span class=\"token punctuation\" >{</span>\n    components<span class=\"token punctuation\" >:</span> <span class=\"token punctuation\" >{</span>Tag<span class=\"token punctuation\" >,</span> Select<span class=\"token punctuation\" >}</span>\n<span class=\"token punctuation\" >}</span>\n</pre>\n<h2>全局方法</h2>\n<p><code>xcui</code>把一些使用频率高的操作挂载到<code>Vue</code>的根实例，便于调用。如, 在一个<code>components</code>组件中可以这样调用 ( <strong>且不用在页面中显式地声明html标签</strong> )：</p>\n<pre><span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$alert</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'alert message'</span><span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 警告提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$confirm</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'是否确认?'</span><span class=\"token punctuation\" >,</span> content<span class=\"token punctuation\" >,</span> onOk<span class=\"token punctuation\" >,</span> onCancel<span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 确认提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span><span class=\"token function\" >$toaster</span><span class=\"token punctuation\" >(</span><span class=\"token string\" >'toaster message'</span><span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 信息提示</span>\n<span class=\"token keyword\" >this</span><span class=\"token punctuation\" >.</span>$Modal<span class=\"token punctuation\" >.</span><span class=\"token function\" >show</span><span class=\"token punctuation\" >(</span>options<span class=\"token punctuation\" >)</span> <span class=\"token comment\" spellcheck=\"true\">// 模态框</span>\n</pre>\n<p>具体请见<a href=\"https://wmfe.github.io/xcui/#!/component/modal\">modal</a> 中的说明。</p>\n<h2>开发</h2>\n<h4>clone the repo</h4>\n<pre>$ git clone git@github<span class=\"token punctuation\" >.</span>com<span class=\"token punctuation\" >:</span>wmfe<span class=\"token operator\" >/</span>xcui<span class=\"token punctuation\" >.</span>git\n</pre>\n<h4>安装依赖</h4>\n<pre>$ npm i\n</pre>\n<h4>run dev server</h4>\n<pre>$ npm run dev\n</pre>\n<h4>build components</h4>\n<pre>$ npm run build\n</pre>\n<h2>加入我们</h2>\n<h4>提交issue</h4>\n<p>在使用过程中有问题，请在<a href=\"https://github.com/wmfe/xcui/issues\">这里</a>给我们提交<code>issue</code>。</p>\n<h4>提交pull request</h4>\n<p>代码有问题？请在<a href=\"https://github.com/wmfe/xcui/pulls\">这里</a>给我们提交<code>pull request</code>。</p>\n<h4>加入开发团队</h4>\n<p>加入<a href=\"https://github.com/wmfe\">wmfe</a>团队，一起开发通用组件，交流vue组件开发的心得~</p>\n</div>";
 
 /***/ },
 /* 25 */
@@ -14418,35 +14418,25 @@
 	            selectRangeShow: true,
 	            selectRange: '',
 	            dateParams: null,
-	            defaultFormat: 'YYYY-MM-DD'
+	            defaultFormat: 'YYYY-MM-DD',
+	            type: 'date'
 	        };
 	    },
 
 	    computed: {
-	        type: function type() {
-	            var type = 'date';
-	            var format = this.format;
-	            var hasY = format.indexOf('YYYY') !== -1;
-	            var hasH = format.indexOf('hh') !== -1 || format.indexOf('HH') !== -1;
-	            if (hasY && hasH) {
-	                type = 'datetime';
-	            } else if (hasH) {
-	                type = 'time';
-	            }
-	            return type;
-	        },
 	        formatValue: function formatValue() {
 	            return this.output(this.value);
 	        }
 	    },
 	    created: function created() {
 	        var me = this;
-	        this.initialValue = this.value;
-	        if (me.value !== '') {
+	        me.getType();
+	        if (me.value) {
 	            me.value = me.output(me.value);
 	        } else {
 	            me.value = me.output(new Date());
 	        }
+	        this.initialValue = this.value;
 	        var params = me.dateParams;
 	        me.year = params.year;
 	        me.month = params.month;
@@ -14631,12 +14621,13 @@
 	        output: function output(d, format) {
 	            var fmt = format || this.format;
 	            var me = this;
-	            if (this.value && this.value !== '' && this.type === 'time' && typeof d === 'string') {
-	                d = '1970-01-01 ' + d;
-	            }
 	            var date = new Date(d);
-	            if ((typeof d === 'undefined' ? 'undefined' : (0, _typeof3.default)(d)) === 'object' && d.length > 0) {
+	            if (this.value && this.type === 'time' && typeof d === 'string') {
+	                date = new Date('1970-01-01 ' + d);
+	            } else if ((typeof d === 'undefined' ? 'undefined' : (0, _typeof3.default)(d)) === 'object' && d.length > 0) {
 	                date = new Date(d[0], d[1], d[2], d[3] || '00', d[4] || '00', d[5] || '00');
+	            } else if (!this.value) {
+	                date = new Date();
 	            }
 	            var year = date.getFullYear();
 	            var month = date.getMonth();
@@ -14704,6 +14695,16 @@
 	                minute: me.zero(minute),
 	                second: me.zero(second)
 	            };
+	        },
+	        getType: function getType() {
+	            var format = this.format;
+	            var hasY = format.indexOf('YYYY') !== -1;
+	            var hasH = format.indexOf('hh') !== -1 || format.indexOf('HH') !== -1;
+	            if (hasY && hasH) {
+	                this.type = 'datetime';
+	            } else if (hasH) {
+	                this.type = 'time';
+	            }
 	        }
 	    }
 	};
@@ -16092,6 +16093,11 @@
 	exports.default = {
 	    name: 'xcui-daterangepicker',
 	    props: {
+	        minDate: null,
+	        maxDate: null,
+	        hourRange: null,
+	        minuteRange: null,
+	        secondRange: null,
 	        startDate: {
 	            twoWay: true,
 	            default: ''
@@ -16100,15 +16106,10 @@
 	            twoWay: true,
 	            default: ''
 	        },
-	        minDate: {},
-	        maxDate: {},
 	        format: {
 	            type: String,
 	            default: 'YYYY-MM-DD'
 	        },
-	        hourRange: {},
-	        minuteRange: {},
-	        secondRange: {},
 	        color: {
 	            type: String,
 	            default: ''
@@ -16130,8 +16131,7 @@
 	        return {
 	            show: false,
 	            value: '',
-	            renderStar: '',
-	            renderEnd: '',
+	            startRender: '',
 	            initialStartDate: '',
 	            initialEndDate: ''
 	        };
@@ -16156,11 +16156,13 @@
 	            this.$emit('on-change', this.startDate, this.endDate);
 	            this.initialStartDate = this.startDate;
 	            this.initialEndDate = this.endDate;
+	            this.startRender = new Date().getTime();
 	        },
 	        cancel: function cancel() {
 	            this.show = false;
-	            this.renderStar = this.startDate = this.initialStartDate;
-	            this.renderEnd = this.endDate = this.initialEndDate;
+	            this.startRender = new Date().getTime();
+	            this.startDate = this.initialStartDate;
+	            this.endDate = this.initialEndDate;
 	        },
 	        showCalendar: function showCalendar(e) {
 	            var me = this;
@@ -16240,14 +16242,7 @@
 	            type: Boolean,
 	            default: false
 	        },
-	        renderStar: {
-	            type: String,
-	            default: ''
-	        },
-	        renderEnd: {
-	            type: String,
-	            default: ''
-	        },
+	        startRender: null,
 	        dateLimit: {
 	            type: Object,
 	            default: null
@@ -16255,30 +16250,16 @@
 	        initialDate: String
 	    },
 	    watch: {
-	        renderStar: function renderStar(val) {
-	            if (val === '' || this.right) {
+	        startRender: function startRender(val) {
+	            if (!val) {
 	                return false;
 	            }
-	            this.output(val);
+	            this.value = this.output(this.value);
 	            var params = this.dateParams;
 	            this.year = params.year;
 	            this.month = params.month;
 	            this.hour = params.hour;
 	            this.day = params.day;
-	            this.minute = params.minute;
-	            this.second = params.second;
-	            this.render(params.year, params.month);
-	        },
-	        renderEnd: function renderEnd(val) {
-	            if (val === '' || !this.right) {
-	                return false;
-	            }
-	            this.output(val);
-	            var params = this.dateParams;
-	            this.year = params.year;
-	            this.month = params.month;
-	            this.day = params.day;
-	            this.hour = params.hour;
 	            this.minute = params.minute;
 	            this.second = params.second;
 	            this.render(params.year, params.month);
@@ -16291,13 +16272,13 @@
 	    methods: {
 	        renderElse: function renderElse(y, m, i, temp, line) {
 	            var me = this;
-	            me.otherValue = me.otherValue && me.otherValue !== '' ? me.otherValue : me.value;
 	            var format = me.defaultFormat;
 	            var today = me.output([y, m, i], format);
 	            var value = me.output(me.value, format);
+	            me.otherValue = me.otherValue ? me.output(me.otherValue) : me.value;
 	            var otherDate = me.output(me.otherValue, format);
-	            var isMinDate = me.minDate && me.minDate !== '' && today < me.output(me.minDate, format);
-	            var isMaxDate = me.maxDate && me.maxDate !== '' && today > me.output(me.maxDate, format);
+	            var isMinDate = me.minDate && today < me.output(me.minDate, format);
+	            var isMaxDate = me.maxDate && today > me.output(me.maxDate, format);
 	            if (isMinDate || isMaxDate) {
 	                temp[line].push({ day: i, disabled: true, range: false, noclick: true });
 	            } else if (!me.right && today > value && today <= otherDate) {
@@ -16347,19 +16328,17 @@
 	        },
 	        changeOtherCalender: function changeOtherCalender() {
 	            var me = this;
+	            var time = new Date().getTime();
 	            if (!me.right) {
 	                if (me.value > me.otherValue) {
 	                    me.otherValue = me.value;
 	                }
-	                me.$parent.renderStar = me.output(me.value);
-	                me.$parent.renderEnd = me.output(me.otherValue);
 	            } else if (me.right) {
 	                if (me.value < me.otherValue) {
 	                    me.otherValue = me.value;
 	                }
-	                me.$parent.renderStar = me.output(me.otherValue);
-	                me.$parent.renderEnd = me.output(me.value);
 	            }
+	            me.$parent.startRender = time;
 	        },
 	        getYearMonth: function getYearMonth(date) {
 	            this.output(date);
@@ -16369,10 +16348,11 @@
 	        bindLimitDate: function bindLimitDate() {
 	            var me = this;
 	            var format = me.defaultFormat;
+	            me.otherValue = me.otherValue ? me.output(me.otherValue) : me.value;
 	            var oValue = me.output(me.otherValue, format);
 	            var ovs = me.dateParams;
-	            var bg = me.minDate;
-	            var ed = me.maxDate;
+	            var bg = me.minDate && me.output(me.minDate, format);
+	            var ed = me.maxDate && me.output(me.maxDate, format);
 	            var y = ovs.year;
 	            var m = ovs.month;
 	            var d = ovs.day;
@@ -16442,7 +16422,7 @@
 	                    d = params.d;
 	                }
 	            }
-	            otherTime = me.output([y, m, d, me.hour, me.minute, me.second]);
+	            otherTime = me.output([y, m, d], format);
 	            if (bg) {
 	                otherTime = otherTime < bg ? bg : otherTime > ed ? ed : otherTime;
 	            }
@@ -16475,7 +16455,7 @@
 /* 107 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\r\n<div class=\"xcui-datarangepicker\" :class=\"className\">\r\n    <div :class=\"{'input-group':btnShow}\">\r\n        <input class=\"form-control col-md-3\" type=\"text\" v-model=\"value\" placeholder=\"请输入日期\" @click=\"showCalendar\">\r\n        <!-- 双日历 -->\r\n        <div @click.stop=\"\"\r\n             @touchstart.stop=\"\"\r\n             class=\"calendar double-calendar\"\r\n             v-show=\"show\">\r\n             <div class=\"clearfix\">\r\n                 <div class=\"double-calendar-left\">\r\n                    <calendar\r\n                        :value.sync=\"startDate\"\r\n                        :format=\"format\"\r\n                        :other-value.sync=\"endDate\"\r\n                        :min-date=\"minDate\"\r\n                        :max-date=\"maxDate\"\r\n                        :hour-range=\"hourRange\"\r\n                        :minute-range=\"minuteRange\"\r\n                        :second-range=\"secondRange\"\r\n                        :color=\"color\"\r\n                        :date-limit=\"dateLimit\"\r\n                        :initial-date.sync=\"initialStartDate\"\r\n                        :render-star=\"renderStar\"></calendar>\r\n                 </div>\r\n                 <div class=\"double-calendar-right\">\r\n                    <calendar\r\n                        :value.sync=\"endDate\"\r\n                        :format=\"format\"\r\n                        :other-value.sync=\"startDate\"\r\n                        :right=\"true\"\r\n                        :min-date=\"minDate\"\r\n                        :max-date=\"maxDate\"\r\n                        :hour-range=\"hourRange\"\r\n                        :minute-range=\"minuteRange\"\r\n                        :second-range=\"secondRange\"\r\n                        :color=\"color\"\r\n                        :date-limit=\"dateLimit\"\r\n                        :initial-date.sync=\"initialEndDate\"\r\n                        :render-end=\"renderEnd\"></calendar>\r\n                 </div>\r\n             </div>\r\n             <div class=\"calendar-button\">\r\n                <button @click=\"ok\" :style=\"{'background':color}\">确定</button>\r\n                <button @click=\"cancel\" class=\"cancel\">取消</button>\r\n             </div>\r\n        </div>\r\n        <!-- end 双日历 -->\r\n        <span class=\"input-group-btn\" v-if=\"btnShow\" @click=\"showCalendar\" >\r\n            <button class=\"btn btn-default\">\r\n                <span class=\"glyphicon glyphicon-calendar\"></span>\r\n            </button>\r\n        </span>\r\n    </div>\r\n</div>\r\n";
+	module.exports = "\n\r\n<div class=\"xcui-datarangepicker\" :class=\"className\">\r\n    <div :class=\"{'input-group':btnShow}\">\r\n        <input class=\"form-control col-md-3\" type=\"text\" v-model=\"value\" placeholder=\"请输入日期\" @click=\"showCalendar\">\r\n        <!-- 双日历 -->\r\n        <div @click.stop=\"\"\r\n             @touchstart.stop=\"\"\r\n             class=\"calendar double-calendar\"\r\n             v-show=\"show\">\r\n             <div class=\"clearfix\">\r\n                 <div class=\"double-calendar-left\">\r\n                    <calendar\r\n                        :value.sync=\"startDate\"\r\n                        :format=\"format\"\r\n                        :other-value.sync=\"endDate\"\r\n                        :min-date=\"minDate\"\r\n                        :max-date=\"maxDate\"\r\n                        :hour-range=\"hourRange\"\r\n                        :minute-range=\"minuteRange\"\r\n                        :second-range=\"secondRange\"\r\n                        :color=\"color\"\r\n                        :date-limit=\"dateLimit\"\r\n                        :initial-date.sync=\"initialStartDate\"\r\n                        :start-render=\"startRender\"></calendar>\r\n                 </div>\r\n                 <div class=\"double-calendar-right\">\r\n                    <calendar\r\n                        :value.sync=\"endDate\"\r\n                        :format=\"format\"\r\n                        :other-value.sync=\"startDate\"\r\n                        :right=\"true\"\r\n                        :min-date=\"minDate\"\r\n                        :max-date=\"maxDate\"\r\n                        :hour-range=\"hourRange\"\r\n                        :minute-range=\"minuteRange\"\r\n                        :second-range=\"secondRange\"\r\n                        :color=\"color\"\r\n                        :date-limit=\"dateLimit\"\r\n                        :initial-date.sync=\"initialEndDate\"\r\n                        :start-render=\"startRender\"></calendar>\r\n                 </div>\r\n             </div>\r\n             <div class=\"calendar-button\">\r\n                <button @click=\"ok\" :style=\"{'background':color}\">确定</button>\r\n                <button @click=\"cancel\" class=\"cancel\">取消</button>\r\n             </div>\r\n        </div>\r\n        <!-- end 双日历 -->\r\n        <span class=\"input-group-btn\" v-if=\"btnShow\" @click=\"showCalendar\" >\r\n            <button class=\"btn btn-default\">\r\n                <span class=\"glyphicon glyphicon-calendar\"></span>\r\n            </button>\r\n        </span>\r\n    </div>\r\n</div>\r\n";
 
 /***/ },
 /* 108 */
@@ -20460,7 +20440,8 @@
 	                end: '2016-09-09'
 	            },
 	            datetime: {
-	                value: new Date(),
+	                value1: new Date(),
+	                value2: '2016/09/09',
 	                begin: new Date(),
 	                end: '2017-02-01 00:00:00'
 	            },
@@ -20482,7 +20463,7 @@
 /* 214 */
 /***/ function(module, exports) {
 
-	module.exports = "<div><h1>datepicker 日期选择框</h1>\n<h2>使用场景</h2>\n<ul>\n<li>支持日历筛选，日历＋时间，时间筛选</li>\n<li>可以配置日期的筛选范围，日期格式</li>\n<li>对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60</li>\n<li>可以直接获取当前的时间</li>\n<li>年筛选可以直接输入，可以筛选</li>\n<li>支持定制皮肤颜色</li>\n</ul>\n<h1>DEMO</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>simple</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-datepicker :value.sync=\"''\">\n        </xcui-datepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-datepicker</span> <span class=\"token attr-name\" >:value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <p> 最简单的用法，value双向绑定，日期</p>\n    <p> value：可以传不同日期格式，例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262，也可以不传，默认当天，date.value值为 时间戳1477980088896</p>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日期格式</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n    <xcui-datepicker\n        :value.sync=\"date.value\"\n        format=\"YYYY-MM-DD\"\n        :min-date=\"datetime.begin\"\n        :max-date=\"'2016-11-10'\">\n    </xcui-datepicker>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-datepicker\n    :value.sync=\"date.value\"\n    format=\"YYYY-MM-DD\"\n        :min-date=\"datetime.begin\"\n    :max-date=\"'2016-11-10'\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <p> format：展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年/月/日 时：分：秒 YYYY/MM/DD hh:mm:ss， 时:分:秒 hh:mm:ss</p>\n  <p> min-date：日期可选最小值，值类型同value，datetime.begin值为 new Date()</p>\n  <p> max-date：日期可选最大值，值类型同value</p>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日期+时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n    <xcui-datepicker\n        :value.sync=\"datetime.value\"\n        format=\"YYYY/MM/DD hh:mm:ss\"\n        :hour-range=\"'3'\"\n        :minute-range=\"'10'\"\n        :second-range=\"'20'\"\n        :min-date=\"datetime.begin\"\n        :max-date=\"datetime.end\">\n    </xcui-datepicker>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-datepicker\n    :value.sync=\"datetime.value\"\n    format=\"YYYY/MM/DD hh:mm:ss\"\n        :hour-range=\"'3'\"\n    :minute-range=\"'10'\"\n    :second-range=\"'20'\"\n    :min-date=\"datetime.begin\"\n    :max-date=\"datetime.end\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <p> hour-range：小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12</p>\n  <p> minute-range：分钟可选值设置，同上</p>\n  <p> second-range：分钟可选值设置，同上</p>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>样式以及回调配置</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n    <xcui-datepicker\n        class-name=\"class-name\"\n        color=\"pink\"\n        format=\"YYYY-MM-DD hh:mm:ss\"\n        :btn-show=\"true\"\n        @on-change=\"onChange\"\n        :value.sync=\"datetime.value\"\n        :hour-range=\"'3'\">\n    </xcui-datepicker>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-datepicker\n    class-name=\"class-name\"\n        color=\"pink\"\n        format=\"YYYY-MM-DD hh:mm:ss\"\n        :btn-show=\"true\"\n    @on-change=\"onChange\"\n    :value.sync=\"datetime.value\"\n    :hour-range=\"'3'\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <p> class-name：日历样式，class名字</p>\n  <p> color：按钮颜色，值为颜色值，例如：#f00,pink</p>\n  <p> on-change：选择日期后的回调，参数 val(当前值) oldval(上次值)，onChange(val, oldVal) {}</p>\n  <p> btn-show: 按钮是否显示</p>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n      <div class=\"input-group\">\n        <xcui-datepicker\n            value.sync=\"''\"\n            format=\"hh:mm:ss\">\n        </xcui-datepicker>\n      </div>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>input-group<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-datepicker\n</span>            <span class=\"token attr-name\" >value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span>\n            <span class=\"token attr-name\" >format</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>hh:mm:ss<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <p> 最简单的时间用法</p>\n</div>\n<h2>组件依赖</h2>\n<blockquote>\n<p>无</p>\n</blockquote>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否双向绑定</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>value</td>\n<td>String/object/Number</td>\n<td>无</td>\n<td>日期 例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262</td>\n<td>双向绑定</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>format</td>\n<td>String</td>\n<td>YYYY-MM-DD</td>\n<td>展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年-月-日 时：分：秒 YYYY-MM-DD hh:mm:ss， 时/分/秒 hh/mm/ss</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minDate</td>\n<td>String</td>\n<td>无</td>\n<td>日期可选最小值</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>maxDate</td>\n<td>String</td>\n<td>无</td>\n<td>日期可选最大值</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>hourRange</td>\n<td>Number</td>\n<td>1</td>\n<td>小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12 …）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minuteRange</td>\n<td>Number</td>\n<td>1</td>\n<td>分可选值设置（例如：值为 20 时，分可选值为0, 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>secondRange</td>\n<td>Number</td>\n<td>1</td>\n<td>秒可选值设置（例如：值为 20 时，分可选值为0, 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>color</td>\n<td>String</td>\n<td>无</td>\n<td>订制按钮颜色，值为颜色值，例如：#f00,pink</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>btnShow</td>\n<td>boolean</td>\n<td>无</td>\n<td>是否显示日历后面的按钮</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>class-name</td>\n<td>String</td>\n<td>无</td>\n<td>日历样式，class名字</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>onChange</td>\n<td>object</td>\n<td>无</td>\n<td>选择日期后的回调，参数 val(当前值) oldval(上次值) @onChange</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
+	module.exports = "<div><h1>datepicker 日期选择框</h1>\n<h2>使用场景</h2>\n<ul>\n<li>支持日历筛选，日历＋时间，时间筛选</li>\n<li>可以配置日期的筛选范围，日期格式</li>\n<li>对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60</li>\n<li>可以直接获取当前的时间</li>\n<li>年筛选可以直接输入，可以筛选</li>\n<li>支持定制皮肤颜色</li>\n</ul>\n<h1>DEMO</h1>\n<div class=\"xcui-demo-container col-md-12 col-xs-12 col-lg-12\">\n    <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>simple</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n        <xcui-datepicker :value.sync=\"''\">\n        </xcui-datepicker>\n    </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-datepicker</span> <span class=\"token attr-name\" >:value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n    <p> 最简单的用法，value双向绑定，日期</p>\n    <p> value：可以传不同日期格式，例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262，也可以不传，默认当天，date.value值为 时间戳1477980088896</p>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日期格式</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n    <xcui-datepicker\n        :value.sync=\"date.value\"\n        format=\"YYYY-MM-DD\"\n        :min-date=\"datetime.begin\"\n        :max-date=\"'2016-11-10'\">\n    </xcui-datepicker>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-datepicker\n    :value.sync=\"date.value\"\n    format=\"YYYY-MM-DD\"\n        :min-date=\"datetime.begin\"\n    :max-date=\"'2016-11-10'\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <p> format：展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年/月/日 时：分：秒 YYYY/MM/DD hh:mm:ss， 时:分:秒 hh:mm:ss</p>\n  <p> min-date：日期可选最小值，值类型同value，datetime.begin值为 new Date()</p>\n  <p> max-date：日期可选最大值，值类型同value</p>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>日期+时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n    <xcui-datepicker\n        :value.sync=\"datetime.value1\"\n        format=\"YYYY/MM/DD hh:mm:ss\"\n        :hour-range=\"'3'\"\n        :minute-range=\"'10'\"\n        :second-range=\"'20'\"\n        :min-date=\"datetime.begin\"\n        :max-date=\"datetime.end\">\n    </xcui-datepicker>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-datepicker\n    :value.sync=\"datetime.value1\"\n    format=\"YYYY/MM/DD hh:mm:ss\"\n        :hour-range=\"'3'\"\n    :minute-range=\"'10'\"\n    :second-range=\"'20'\"\n    :min-date=\"datetime.begin\"\n    :max-date=\"datetime.end\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <p> hour-range：小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12</p>\n  <p> minute-range：分钟可选值设置，同上</p>\n  <p> second-range：分钟可选值设置，同上</p>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>样式以及回调配置</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n    <xcui-datepicker\n        class-name=\"class-name\"\n        color=\"pink\"\n        format=\"YYYY-MM-DD hh:mm:ss\"\n        :btn-show=\"true\"\n        @on-change=\"onChange\"\n        :value.sync=\"datetime.value2\"\n        :hour-range=\"'3'\">\n    </xcui-datepicker>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n&lt;xcui-datepicker\n    class-name=\"class-name\"\n        color=\"pink\"\n        format=\"YYYY-MM-DD hh:mm:ss\"\n        :btn-show=\"true\"\n    @on-change=\"onChange\"\n    :value.sync=\"datetime.value2\"\n    :hour-range=\"'3'\">\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <p> class-name：日历样式，class名字</p>\n  <p> color：按钮颜色，值为颜色值，例如：#f00,pink</p>\n  <p> on-change：选择日期后的回调，参数 val(当前值) oldval(上次值)，onChange(val, oldVal) {}</p>\n  <p> btn-show: 按钮是否显示</p>\n  <div class=\"col-md-12 col-xs-12 col-lg-12 xcui-example-container\">\n                    <h3>时间选择</h3>\n                    <div class=\"xcui-demo-wrap col-xs-12 col-md-6 col-lg-6\">\n      <div class=\"input-group\">\n        <xcui-datepicker\n            value.sync=\"''\"\n            format=\"hh:mm:ss\">\n        </xcui-datepicker>\n      </div>\n  </div>\n                    <div class=\"xcui-code-wrap col-xs-12 col-md-6 col-lg-6\"><pre>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>div</span> <span class=\"token attr-name\" >class</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>input-group<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n  <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;</span>xcui-datepicker\n</span>            <span class=\"token attr-name\" >value.sync</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span><span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >'</span><span class=\"token punctuation\" >\"</span></span>\n            <span class=\"token attr-name\" >format</span><span class=\"token attr-value\" ><span class=\"token punctuation\" >=</span><span class=\"token punctuation\" >\"</span>hh:mm:ss<span class=\"token punctuation\" >\"</span></span><span class=\"token punctuation\" >></span></span>\n        <span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>xcui-datepicker</span><span class=\"token punctuation\" >></span></span>\n<span class=\"token tag\" ><span class=\"token tag\" ><span class=\"token punctuation\" >&lt;/</span>div</span><span class=\"token punctuation\" >></span></span>\n</pre></div>\n                    </div>\n  <p> 最简单的时间用法</p>\n</div>\n<h2>组件依赖</h2>\n<blockquote>\n<p>无</p>\n</blockquote>\n<h2>Props</h2>\n<table class=\"table\">\n<thead>\n<tr>\n<th>名字</th>\n<th>类型</th>\n<th>默认</th>\n<th>描述</th>\n<th>是否双向绑定</th>\n<th>是否必选</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>value</td>\n<td>String/object/Number</td>\n<td>无</td>\n<td>日期 例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262</td>\n<td>双向绑定</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>format</td>\n<td>String</td>\n<td>YYYY-MM-DD</td>\n<td>展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年/月/日 时：分：秒 YYYY/MM/DD hh:mm:ss， 时:分:秒 hh:mm:ss</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minDate</td>\n<td>String</td>\n<td>无</td>\n<td>日期可选最小值</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>maxDate</td>\n<td>String</td>\n<td>无</td>\n<td>日期可选最大值</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>hourRange</td>\n<td>Number</td>\n<td>1</td>\n<td>小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12 …）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>minuteRange</td>\n<td>Number</td>\n<td>1</td>\n<td>分可选值设置（例如：值为 20 时，分可选值为0, 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>secondRange</td>\n<td>Number</td>\n<td>1</td>\n<td>秒可选值设置（例如：值为 20 时，分可选值为0, 20，40，60）</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>color</td>\n<td>String</td>\n<td>无</td>\n<td>订制按钮颜色，值为颜色值，例如：#f00,pink</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>btnShow</td>\n<td>boolean</td>\n<td>无</td>\n<td>是否显示日历后面的按钮</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>class-name</td>\n<td>String</td>\n<td>无</td>\n<td>日历样式，class名字</td>\n<td>静态属性</td>\n<td>可选</td>\n</tr>\n<tr>\n<td>onChange</td>\n<td>object</td>\n<td>无</td>\n<td>选择日期后的回调，参数 val(当前值) oldval(上次值) @onChange</td>\n<td>否</td>\n<td>可选</td>\n</tr>\n</tbody>\n</table>\n</div>";
 
 /***/ },
 /* 215 */
@@ -20573,7 +20554,6 @@
 	    data: function data() {
 	        return {
 	            date: {
-	                type: 'date',
 	                begin: '2015-12-20',
 	                end: '2016-11-20',
 	                dateLimit: {
@@ -20582,7 +20562,6 @@
 	                color: '#f00'
 	            },
 	            datetime: {
-	                type: 'datetime',
 	                begin: '2015-12-20',
 	                end: '2017-11-20',
 	                dateLimit: {
@@ -20592,7 +20571,6 @@
 	                btnShow: true
 	            },
 	            time: {
-	                type: 'time',
 	                inputClass: 'class-name',
 	                btnShow: true
 	            }
