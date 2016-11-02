@@ -853,6 +853,7 @@
                     var format = me.defaultFormat;
                     var today = me.output([ y, m, i ], format);
                     var value = me.output(me.value, format);
+                    me.otherValue = me.otherValue ? me.output(me.otherValue) : me.value;
                     var otherDate = me.output(me.otherValue, format);
                     var isMinDate = me.minDate && today < me.output(me.minDate, format);
                     var isMaxDate = me.maxDate && today > me.output(me.maxDate, format);
