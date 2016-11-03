@@ -32,7 +32,7 @@
             return hasOwnProperty.call(it, key);
         };
     }, function(module, exports, __webpack_require__) {
-        var IObject = __webpack_require__(53), defined = __webpack_require__(15);
+        var IObject = __webpack_require__(51), defined = __webpack_require__(15);
         module.exports = function(it) {
             return IObject(defined(it));
         };
@@ -53,7 +53,7 @@
             return object;
         };
     }, function(module, exports, __webpack_require__) {
-        var anObject = __webpack_require__(11), IE8_DOM_DEFINE = __webpack_require__(31), toPrimitive = __webpack_require__(25), dP = Object.defineProperty;
+        var anObject = __webpack_require__(11), IE8_DOM_DEFINE = __webpack_require__(30), toPrimitive = __webpack_require__(25), dP = Object.defineProperty;
         exports.f = __webpack_require__(4) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
             anObject(O);
             P = toPrimitive(P, true);
@@ -85,7 +85,7 @@
             }
         };
     }, function(module, exports, __webpack_require__) {
-        var $keys = __webpack_require__(36), enumBugKeys = __webpack_require__(16);
+        var $keys = __webpack_require__(35), enumBugKeys = __webpack_require__(16);
         module.exports = Object.keys || function keys(O) {
             return $keys(O, enumBugKeys);
         };
@@ -121,7 +121,7 @@
     }, function(module, exports) {
         module.exports = "constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",");
     }, function(module, exports, __webpack_require__) {
-        var global = __webpack_require__(1), core = __webpack_require__(8), ctx = __webpack_require__(50), hide = __webpack_require__(5), PROTOTYPE = "prototype";
+        var global = __webpack_require__(1), core = __webpack_require__(8), ctx = __webpack_require__(48), hide = __webpack_require__(5), PROTOTYPE = "prototype";
         var $export = function(type, name, source) {
             var IS_FORCED = type & $export.F, IS_GLOBAL = type & $export.G, IS_STATIC = type & $export.S, IS_PROTO = type & $export.P, IS_BIND = type & $export.B, IS_WRAP = type & $export.W, exports = IS_GLOBAL ? core : core[name] || (core[name] = {}), expProto = exports[PROTOTYPE], target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE], key, own, out;
             if (IS_GLOBAL) source = name;
@@ -213,6 +213,7 @@
         };
     }, function(module, exports, __webpack_require__) {
         exports.f = __webpack_require__(7);
+<<<<<<< HEAD
     }, function(module, exports, __webpack_require__) {
         "use strict";
         exports.__esModule = true;
@@ -235,6 +236,8 @@
         } : function(obj) {
             return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
         };
+=======
+>>>>>>> d9794581c5983ae5d91429ce41755b660d50184d
     }, function(module, exports) {
         var toString = {}.toString;
         module.exports = function(it) {
@@ -247,7 +250,7 @@
         };
     }, function(module, exports, __webpack_require__) {
         module.exports = !__webpack_require__(4) && !__webpack_require__(9)(function() {
-            return Object.defineProperty(__webpack_require__(30)("div"), "a", {
+            return Object.defineProperty(__webpack_require__(29)("div"), "a", {
                 get: function() {
                     return 7;
                 }
@@ -255,7 +258,7 @@
         });
     }, function(module, exports, __webpack_require__) {
         "use strict";
-        var LIBRARY = __webpack_require__(19), $export = __webpack_require__(17), redefine = __webpack_require__(37), hide = __webpack_require__(5), has = __webpack_require__(2), Iterators = __webpack_require__(18), $iterCreate = __webpack_require__(55), setToStringTag = __webpack_require__(21), getPrototypeOf = __webpack_require__(62), ITERATOR = __webpack_require__(7)("iterator"), BUGGY = !([].keys && "next" in [].keys()), FF_ITERATOR = "@@iterator", KEYS = "keys", VALUES = "values";
+        var LIBRARY = __webpack_require__(19), $export = __webpack_require__(17), redefine = __webpack_require__(36), hide = __webpack_require__(5), has = __webpack_require__(2), Iterators = __webpack_require__(18), $iterCreate = __webpack_require__(53), setToStringTag = __webpack_require__(21), getPrototypeOf = __webpack_require__(60), ITERATOR = __webpack_require__(7)("iterator"), BUGGY = !([].keys && "next" in [].keys()), FF_ITERATOR = "@@iterator", KEYS = "keys", VALUES = "values";
         var returnThis = function() {
             return this;
         };
@@ -310,11 +313,11 @@
             return methods;
         };
     }, function(module, exports, __webpack_require__) {
-        var anObject = __webpack_require__(11), dPs = __webpack_require__(59), enumBugKeys = __webpack_require__(16), IE_PROTO = __webpack_require__(22)("IE_PROTO"), Empty = function() {}, PROTOTYPE = "prototype";
+        var anObject = __webpack_require__(11), dPs = __webpack_require__(57), enumBugKeys = __webpack_require__(16), IE_PROTO = __webpack_require__(22)("IE_PROTO"), Empty = function() {}, PROTOTYPE = "prototype";
         var createDict = function() {
-            var iframe = __webpack_require__(30)("iframe"), i = enumBugKeys.length, lt = "<", gt = ">", iframeDocument;
+            var iframe = __webpack_require__(29)("iframe"), i = enumBugKeys.length, lt = "<", gt = ">", iframeDocument;
             iframe.style.display = "none";
-            __webpack_require__(52).appendChild(iframe);
+            __webpack_require__(50).appendChild(iframe);
             iframe.src = "javascript:";
             iframeDocument = iframe.contentWindow.document;
             iframeDocument.open();
@@ -335,14 +338,14 @@
             return Properties === undefined ? result : dPs(result, Properties);
         };
     }, function(module, exports, __webpack_require__) {
-        var $keys = __webpack_require__(36), hiddenKeys = __webpack_require__(16).concat("length", "prototype");
+        var $keys = __webpack_require__(35), hiddenKeys = __webpack_require__(16).concat("length", "prototype");
         exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
             return $keys(O, hiddenKeys);
         };
     }, function(module, exports) {
         exports.f = Object.getOwnPropertySymbols;
     }, function(module, exports, __webpack_require__) {
-        var has = __webpack_require__(2), toIObject = __webpack_require__(3), arrayIndexOf = __webpack_require__(49)(false), IE_PROTO = __webpack_require__(22)("IE_PROTO");
+        var has = __webpack_require__(2), toIObject = __webpack_require__(3), arrayIndexOf = __webpack_require__(47)(false), IE_PROTO = __webpack_require__(22)("IE_PROTO");
         module.exports = function(object, names) {
             var O = toIObject(object), i = 0, result = [], key;
             for (key in O) if (key != IE_PROTO) has(O, key) && result.push(key);
@@ -360,20 +363,22 @@
         };
     }, function(module, exports, __webpack_require__) {
         "use strict";
-        Object.defineProperty(exports, "__esModule", {
-            value: true
-        });
-        var _typeof2 = __webpack_require__(28);
-        var _typeof3 = _interopRequireDefault(_typeof2);
-        var _clone = __webpack_require__(40);
-        var _clone2 = _interopRequireDefault(_clone);
-        var _fuzzysearch = __webpack_require__(76);
-        var _fuzzysearch2 = _interopRequireDefault(_fuzzysearch);
+        exports.__esModule = true;
+        var _iterator = __webpack_require__(75);
+        var _iterator2 = _interopRequireDefault(_iterator);
+        var _symbol = __webpack_require__(74);
+        var _symbol2 = _interopRequireDefault(_symbol);
+        var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function(obj) {
+            return typeof obj;
+        } : function(obj) {
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj;
+        };
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
                 "default": obj
             };
         }
+<<<<<<< HEAD
         exports.default = {
             name: "xcui-select",
             props: {
@@ -425,15 +430,93 @@
                 closeAfterSelect: {
                     type: Boolean,
                     "default": true
+=======
+        exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function(obj) {
+            return typeof obj === "undefined" ? "undefined" : _typeof(obj);
+        } : function(obj) {
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+        };
+    }, function(module, exports) {}, function(module, exports) {
+        "use strict";
+        function fuzzysearch(needle, haystack) {
+            var tlen = haystack.length;
+            var qlen = needle.length;
+            if (qlen > tlen) {
+                return false;
+            }
+            if (qlen === tlen) {
+                return needle === haystack;
+            }
+            outer: for (var i = 0, j = 0; i < qlen; i++) {
+                var nch = needle.charCodeAt(i);
+                while (j < tlen) {
+                    if (haystack.charCodeAt(j++) === nch) {
+                        continue outer;
+                    }
+>>>>>>> d9794581c5983ae5d91429ce41755b660d50184d
                 }
-            },
-            data: function data() {
-                return {
-                    searchValue: "",
-                    isOpen: false,
-                    selectIndex: 0,
-                    value: this.selected ? (0, _clone2.default)(this.selected) : this.multiple ? [] : null
+                return false;
+            }
+            return true;
+        }
+        module.exports = fuzzysearch;
+    }, function(module, exports) {
+        module.exports = ' <div tabindex=0 :class=getWrapCls @focus=activate() @blur="showSearch ? false : deactivate()" @keydown.enter.stop.prevent.self=enterSearchValue()> <div class=xcui-select-selection> <div class=xcui-select-selection-rendered @mousedown.stop=toggle()> <input type=text name=search v-el:search autocomplete=off class=xcui-select-search-input v-if=showSearch v-model=searchValue @focus.prevent=activate() @blur.prevent=deactivate() @keyup.down=keyNext() @keyup.up=keyPrev() @keydown.enter.stop.prevent.self=enterSearchValue() @change.prevent.stop="" :placeholder=placeholder> <span class=xcui-select-selection-text v-if=!showSearch v-text="currentOptionLabel || placeholder"> </span> <i class="glyphicon xcui-select-arrow" @mousedown.prevent.stop=toggle() :class="{\'glyphicon-triangle-bottom\':(!isOpen),\'glyphicon-triangle-top\':(isOpen)}"></i> </div> </div> <div class=xcui-select-menu-dropdown v-show="(isOpen && filteredOptions.length>0) || (isOpen && multiple)"> <ul v-el:list aria-activedescendant class=xcui-select-menu> <li class=xcui-select-menu-item v-if=multipleMaxShow> 最多可选{{multipleMax}}项! </li> <li class=xcui-select-menu-item v-if="filteredOptions.length<1 && searchEmptyText" v-text=searchEmptyText> </li> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-item v-if=!optgroup tabindex=1 :class="{\'xcui-select-menu-item-selected\': isSelected(item), \'xcui-select-menu-item-key\': $index === selectIndex,\'disabled\': item.disable}" @mouseenter.prevent.stop.self=indexSet($index) @mousedown.prevent=select(item)> <span v-text=getOptionLabel(item)></span> </li> </template> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-group v-if=optgroup> <div class=xcui-select-menu-group-title>{{item.name}}</div> <ul> <template v-for="option in item.options"> <li class=xcui-select-menu-group-item :class="{\'xcui-select-menu-group-item-selected\': isSelected(option,$parent.$index,$index), \'disabled\': option.disable}" @mousedown.prevent.stop.self=optgroupSelect($parent.$index,$index,option)> <span v-text=getOptionLabel(option)></span> </li> </template> </ul> </li> </template> </ul> </div> </div> ';
+    }, function(module, exports, __webpack_require__) {
+        __webpack_require__(66);
+        module.exports = __webpack_require__(8).Object.keys;
+    }, function(module, exports, __webpack_require__) {
+        __webpack_require__(69);
+        __webpack_require__(67);
+        __webpack_require__(70);
+        __webpack_require__(71);
+        module.exports = __webpack_require__(8).Symbol;
+    }, function(module, exports, __webpack_require__) {
+        __webpack_require__(68);
+        __webpack_require__(72);
+        module.exports = __webpack_require__(27).f("iterator");
+    }, function(module, exports) {
+        module.exports = function(it) {
+            if (typeof it != "function") throw TypeError(it + " is not a function!");
+            return it;
+        };
+    }, function(module, exports) {
+        module.exports = function() {};
+    }, function(module, exports, __webpack_require__) {
+        var toIObject = __webpack_require__(3), toLength = __webpack_require__(64), toIndex = __webpack_require__(63);
+        module.exports = function(IS_INCLUDES) {
+            return function($this, el, fromIndex) {
+                var O = toIObject($this), length = toLength(O.length), index = toIndex(fromIndex, length), value;
+                if (IS_INCLUDES && el != el) while (length > index) {
+                    value = O[index++];
+                    if (value != value) return true;
+                } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
+                    if (O[index] === el) return IS_INCLUDES || index || 0;
+                }
+                return !IS_INCLUDES && -1;
+            };
+        };
+    }, function(module, exports, __webpack_require__) {
+        var aFunction = __webpack_require__(45);
+        module.exports = function(fn, that, length) {
+            aFunction(fn);
+            if (that === undefined) return fn;
+            switch (length) {
+              case 1:
+                return function(a) {
+                    return fn.call(that, a);
                 };
+
+              case 2:
+                return function(a, b) {
+                    return fn.call(that, a, b);
+                };
+
+              case 3:
+                return function(a, b, c) {
+                    return fn.call(that, a, b, c);
+                };
+<<<<<<< HEAD
             },
             methods: {
                 activate: function activate() {
@@ -727,9 +810,15 @@
                         this.value = this.selected;
                     }
                 }
+=======
+>>>>>>> d9794581c5983ae5d91429ce41755b660d50184d
             }
+            return function() {
+                return fn.apply(that, arguments);
+            };
         };
     }, function(module, exports, __webpack_require__) {
+<<<<<<< HEAD
         "use strict";
         var _keys = __webpack_require__(41);
         var _keys2 = _interopRequireDefault(_keys);
@@ -753,10 +842,19 @@
                 return cloned;
             } else {
                 return obj;
+=======
+        var getKeys = __webpack_require__(10), gOPS = __webpack_require__(34), pIE = __webpack_require__(20);
+        module.exports = function(it) {
+            var result = getKeys(it), getSymbols = gOPS.f;
+            if (getSymbols) {
+                var symbols = getSymbols(it), isEnum = pIE.f, i = 0, key;
+                while (symbols.length > i) if (isEnum.call(it, key = symbols[i++])) result.push(key);
+>>>>>>> d9794581c5983ae5d91429ce41755b660d50184d
             }
+            return result;
         };
-        module.exports = clone;
     }, function(module, exports, __webpack_require__) {
+<<<<<<< HEAD
         module.exports = {
             "default": __webpack_require__(44),
             __esModule: true
@@ -849,12 +947,22 @@
         };
     }, function(module, exports, __webpack_require__) {
         var cof = __webpack_require__(29);
+=======
+        module.exports = __webpack_require__(1).document && document.documentElement;
+    }, function(module, exports, __webpack_require__) {
+        var cof = __webpack_require__(28);
+        module.exports = Object("z").propertyIsEnumerable(0) ? Object : function(it) {
+            return cof(it) == "String" ? it.split("") : Object(it);
+        };
+    }, function(module, exports, __webpack_require__) {
+        var cof = __webpack_require__(28);
+>>>>>>> d9794581c5983ae5d91429ce41755b660d50184d
         module.exports = Array.isArray || function isArray(arg) {
             return cof(arg) == "Array";
         };
     }, function(module, exports, __webpack_require__) {
         "use strict";
-        var create = __webpack_require__(33), descriptor = __webpack_require__(13), setToStringTag = __webpack_require__(21), IteratorPrototype = {};
+        var create = __webpack_require__(32), descriptor = __webpack_require__(13), setToStringTag = __webpack_require__(21), IteratorPrototype = {};
         __webpack_require__(5)(IteratorPrototype, __webpack_require__(7)("iterator"), function() {
             return this;
         });
@@ -930,7 +1038,7 @@
             return O;
         };
     }, function(module, exports, __webpack_require__) {
-        var pIE = __webpack_require__(20), createDesc = __webpack_require__(13), toIObject = __webpack_require__(3), toPrimitive = __webpack_require__(25), has = __webpack_require__(2), IE8_DOM_DEFINE = __webpack_require__(31), gOPD = Object.getOwnPropertyDescriptor;
+        var pIE = __webpack_require__(20), createDesc = __webpack_require__(13), toIObject = __webpack_require__(3), toPrimitive = __webpack_require__(25), has = __webpack_require__(2), IE8_DOM_DEFINE = __webpack_require__(30), gOPD = Object.getOwnPropertyDescriptor;
         exports.f = __webpack_require__(4) ? gOPD : function getOwnPropertyDescriptor(O, P) {
             O = toIObject(O);
             P = toPrimitive(P, true);
@@ -940,7 +1048,7 @@
             if (has(O, P)) return createDesc(!pIE.f.call(O, P), O[P]);
         };
     }, function(module, exports, __webpack_require__) {
-        var toIObject = __webpack_require__(3), gOPN = __webpack_require__(34).f, toString = {}.toString;
+        var toIObject = __webpack_require__(3), gOPN = __webpack_require__(33).f, toString = {}.toString;
         var windowNames = typeof window == "object" && window && Object.getOwnPropertyNames ? Object.getOwnPropertyNames(window) : [];
         var getWindowNames = function(it) {
             try {
@@ -953,7 +1061,7 @@
             return windowNames && toString.call(it) == "[object Window]" ? getWindowNames(it) : gOPN(toIObject(it));
         };
     }, function(module, exports, __webpack_require__) {
-        var has = __webpack_require__(2), toObject = __webpack_require__(38), IE_PROTO = __webpack_require__(22)("IE_PROTO"), ObjectProto = Object.prototype;
+        var has = __webpack_require__(2), toObject = __webpack_require__(37), IE_PROTO = __webpack_require__(22)("IE_PROTO"), ObjectProto = Object.prototype;
         module.exports = Object.getPrototypeOf || function(O) {
             O = toObject(O);
             if (has(O, IE_PROTO)) return O[IE_PROTO];
@@ -994,8 +1102,8 @@
         };
     }, function(module, exports, __webpack_require__) {
         "use strict";
-        var addToUnscopables = __webpack_require__(48), step = __webpack_require__(56), Iterators = __webpack_require__(18), toIObject = __webpack_require__(3);
-        module.exports = __webpack_require__(32)(Array, "Array", function(iterated, kind) {
+        var addToUnscopables = __webpack_require__(46), step = __webpack_require__(54), Iterators = __webpack_require__(18), toIObject = __webpack_require__(3);
+        module.exports = __webpack_require__(31)(Array, "Array", function(iterated, kind) {
             this._t = toIObject(iterated);
             this._i = 0;
             this._k = kind;
@@ -1014,16 +1122,16 @@
         addToUnscopables("values");
         addToUnscopables("entries");
     }, function(module, exports, __webpack_require__) {
-        var toObject = __webpack_require__(38), $keys = __webpack_require__(10);
-        __webpack_require__(63)("keys", function() {
+        var toObject = __webpack_require__(37), $keys = __webpack_require__(10);
+        __webpack_require__(61)("keys", function() {
             return function keys(it) {
                 return $keys(toObject(it));
             };
         });
     }, function(module, exports) {}, function(module, exports, __webpack_require__) {
         "use strict";
-        var $at = __webpack_require__(64)(true);
-        __webpack_require__(32)(String, "String", function(iterated) {
+        var $at = __webpack_require__(62)(true);
+        __webpack_require__(31)(String, "String", function(iterated) {
             this._t = String(iterated);
             this._i = 0;
         }, function() {
@@ -1041,7 +1149,7 @@
         });
     }, function(module, exports, __webpack_require__) {
         "use strict";
-        var global = __webpack_require__(1), has = __webpack_require__(2), DESCRIPTORS = __webpack_require__(4), $export = __webpack_require__(17), redefine = __webpack_require__(37), META = __webpack_require__(58).KEY, $fails = __webpack_require__(9), shared = __webpack_require__(23), setToStringTag = __webpack_require__(21), uid = __webpack_require__(14), wks = __webpack_require__(7), wksExt = __webpack_require__(27), wksDefine = __webpack_require__(26), keyOf = __webpack_require__(57), enumKeys = __webpack_require__(51), isArray = __webpack_require__(54), anObject = __webpack_require__(11), toIObject = __webpack_require__(3), toPrimitive = __webpack_require__(25), createDesc = __webpack_require__(13), _create = __webpack_require__(33), gOPNExt = __webpack_require__(61), $GOPD = __webpack_require__(60), $DP = __webpack_require__(6), $keys = __webpack_require__(10), gOPD = $GOPD.f, dP = $DP.f, gOPN = gOPNExt.f, $Symbol = global.Symbol, $JSON = global.JSON, _stringify = $JSON && $JSON.stringify, PROTOTYPE = "prototype", HIDDEN = wks("_hidden"), TO_PRIMITIVE = wks("toPrimitive"), isEnum = {}.propertyIsEnumerable, SymbolRegistry = shared("symbol-registry"), AllSymbols = shared("symbols"), OPSymbols = shared("op-symbols"), ObjectProto = Object[PROTOTYPE], USE_NATIVE = typeof $Symbol == "function", QObject = global.QObject;
+        var global = __webpack_require__(1), has = __webpack_require__(2), DESCRIPTORS = __webpack_require__(4), $export = __webpack_require__(17), redefine = __webpack_require__(36), META = __webpack_require__(56).KEY, $fails = __webpack_require__(9), shared = __webpack_require__(23), setToStringTag = __webpack_require__(21), uid = __webpack_require__(14), wks = __webpack_require__(7), wksExt = __webpack_require__(27), wksDefine = __webpack_require__(26), keyOf = __webpack_require__(55), enumKeys = __webpack_require__(49), isArray = __webpack_require__(52), anObject = __webpack_require__(11), toIObject = __webpack_require__(3), toPrimitive = __webpack_require__(25), createDesc = __webpack_require__(13), _create = __webpack_require__(32), gOPNExt = __webpack_require__(59), $GOPD = __webpack_require__(58), $DP = __webpack_require__(6), $keys = __webpack_require__(10), gOPD = $GOPD.f, dP = $DP.f, gOPN = gOPNExt.f, $Symbol = global.Symbol, $JSON = global.JSON, _stringify = $JSON && $JSON.stringify, PROTOTYPE = "prototype", HIDDEN = wks("_hidden"), TO_PRIMITIVE = wks("toPrimitive"), isEnum = {}.propertyIsEnumerable, SymbolRegistry = shared("symbol-registry"), AllSymbols = shared("symbols"), OPSymbols = shared("op-symbols"), ObjectProto = Object[PROTOTYPE], USE_NATIVE = typeof $Symbol == "function", QObject = global.QObject;
         var setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
         var setSymbolDesc = DESCRIPTORS && $fails(function() {
             return _create(dP({}, "a", {
@@ -1142,9 +1250,9 @@
             });
             $GOPD.f = $getOwnPropertyDescriptor;
             $DP.f = $defineProperty;
-            __webpack_require__(34).f = gOPNExt.f = $getOwnPropertyNames;
+            __webpack_require__(33).f = gOPNExt.f = $getOwnPropertyNames;
             __webpack_require__(20).f = $propertyIsEnumerable;
-            __webpack_require__(35).f = $getOwnPropertySymbols;
+            __webpack_require__(34).f = $getOwnPropertySymbols;
             if (DESCRIPTORS && !__webpack_require__(19)) {
                 redefine(ObjectProto, "propertyIsEnumerable", $propertyIsEnumerable, true);
             }
@@ -1209,43 +1317,436 @@
     }, function(module, exports, __webpack_require__) {
         __webpack_require__(26)("observable");
     }, function(module, exports, __webpack_require__) {
-        __webpack_require__(67);
+        __webpack_require__(65);
         var global = __webpack_require__(1), hide = __webpack_require__(5), Iterators = __webpack_require__(18), TO_STRING_TAG = __webpack_require__(7)("toStringTag");
         for (var collections = [ "NodeList", "DOMTokenList", "MediaList", "StyleSheetList", "CSSRuleList" ], i = 0; i < 5; i++) {
             var NAME = collections[i], Collection = global[NAME], proto = Collection && Collection.prototype;
             if (proto && !proto[TO_STRING_TAG]) hide(proto, TO_STRING_TAG, NAME);
             Iterators[NAME] = Iterators.Array;
         }
-    }, function(module, exports) {}, function(module, exports) {
+    }, function(module, exports, __webpack_require__) {
+        module.exports = {
+            default: __webpack_require__(42),
+            __esModule: true
+        };
+    }, function(module, exports, __webpack_require__) {
+        module.exports = {
+            default: __webpack_require__(43),
+            __esModule: true
+        };
+    }, function(module, exports, __webpack_require__) {
+        module.exports = {
+            default: __webpack_require__(44),
+            __esModule: true
+        };
+    }, function(module, exports, __webpack_require__) {
         "use strict";
-        function fuzzysearch(needle, haystack) {
-            var tlen = haystack.length;
-            var qlen = needle.length;
-            if (qlen > tlen) {
-                return false;
-            }
-            if (qlen === tlen) {
-                return needle === haystack;
-            }
-            outer: for (var i = 0, j = 0; i < qlen; i++) {
-                var nch = needle.charCodeAt(i);
-                while (j < tlen) {
-                    if (haystack.charCodeAt(j++) === nch) {
-                        continue outer;
+        Object.defineProperty(exports, "__esModule", {
+            value: true
+        });
+        var _typeof2 = __webpack_require__(38);
+        var _typeof3 = _interopRequireDefault(_typeof2);
+        var _clone = __webpack_require__(77);
+        var _clone2 = _interopRequireDefault(_clone);
+        var _fuzzysearch = __webpack_require__(40);
+        var _fuzzysearch2 = _interopRequireDefault(_fuzzysearch);
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
+        }
+        exports.default = {
+            name: "xcui-select",
+            props: {
+                className: {
+                    type: String
+                },
+                selected: [ String, Array ],
+                placeholder: {
+                    type: String
+                },
+                disabled: {
+                    type: Boolean,
+                    default: false
+                },
+                showSearch: {
+                    type: Boolean,
+                    default: false
+                },
+                clearOnSelect: {
+                    type: Boolean,
+                    default: false
+                },
+                searchEmptyText: {
+                    type: String,
+                    default: ""
+                },
+                optgroup: {
+                    type: Boolean,
+                    default: false
+                },
+                customLabel: {
+                    type: Function
+                },
+                options: {
+                    type: Array
+                },
+                multiple: {
+                    type: Boolean,
+                    default: false
+                },
+                multipleMax: {
+                    type: Number,
+                    default: 0
+                },
+                label: {
+                    type: String,
+                    default: ""
+                },
+                closeAfterSelect: {
+                    type: Boolean,
+                    default: true
+                }
+            },
+            data: function data() {
+                return {
+                    searchValue: "",
+                    isOpen: false,
+                    selectIndex: 0,
+                    value: this.selected ? (0, _clone2.default)(this.selected) : this.multiple ? [] : null
+                };
+            },
+            methods: {
+                activate: function activate() {
+                    if (this.isOpen || this.disabled) {
+                        return;
+                    }
+                    this.isOpen = true;
+                    if (this.showSearch) {
+                        if (this.clearOnSelect) {
+                            this.searchValue = "";
+                            this.options = [];
+                        }
+                        this.$els.search.focus();
+                    } else {
+                        this.$el.focus();
+                    }
+                },
+                deactivate: function deactivate() {
+                    if (!this.isOpen) {
+                        return;
+                    }
+                    if (this.showSearch) {
+                        this.$els.search.blur();
+                        this.adjustSearch();
+                    }
+                    this.isOpen = false;
+                },
+                toggle: function toggle(key) {
+                    if (!this.isOpen) {
+                        this.activate();
+                    } else {
+                        this.deactivate();
+                    }
+                },
+                getOptionLabel: function getOptionLabel(option) {
+                    if (option !== null && (typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
+                        if (this.customLabel) {
+                            return this.customLabel(option);
+                        } else if (this.label && option[this.label]) {
+                            return option[this.label];
+                        }
+                        return option.label;
+                    }
+                    return option;
+                },
+                optgroupSelect: function optgroupSelect(parentIndex, index, option) {
+                    if (this.selectIndex === parentIndex + "-" + index && this.value === option) {
+                        return;
+                    }
+                    this.value = option;
+                    this.selectIndex = parentIndex + "-" + index;
+                    this.$emit("change", (0, _clone2.default)(this.value), parentIndex, index);
+                    this.$emit("select", (0, _clone2.default)(this.value), parentIndex, index);
+                    this.closeAfterSelect && this.deactivate();
+                },
+                select: function select(option) {
+                    var isSelected = this.isSelected(option);
+                    if (!option || option.disable) {
+                        return;
+                    }
+                    if (this.multiple) {
+                        var optionValue = option;
+                        if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
+                            optionValue = option[this.label] || option.label;
+                        }
+                        if (isSelected) {
+                            this.removeOption(option);
+                        } else {
+                            if (this.multipleMax > this.value.length || !this.multipleMax) {
+                                if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
+                                    this.value.push(option);
+                                } else {
+                                    this.value.push(optionValue);
+                                }
+                            }
+                        }
+                    } else {
+                        if (isSelected) {
+                            return;
+                        }
+                        this.value = isSelected ? null : option;
+                    }
+                    this.$emit("change", (0, _clone2.default)(this.value));
+                    this.$emit("select", (0, _clone2.default)(this.value));
+                    this.closeAfterSelect && this.deactivate();
+                },
+                isSelected: function isSelected(option, groupIndex, index) {
+                    var me = this;
+                    if (!this.value) {
+                        return false;
+                    }
+                    if (this.optgroup) {
+                        return this.selectIndex === groupIndex + "-" + index;
+                    }
+                    if (this.multiple) {
+                        if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
+                            return this.value.indexOf(option) > -1;
+                        }
+                        return this.value.indexOf(option) > -1;
+                    }
+                    if (this.showSearch) {
+                        if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
+                            return this.searchValue === option[me.label];
+                        }
+                        return this.searchValue === option;
+                    }
+                    if (this.value === option && !option.disable) {
+                        return true;
+                    }
+                    return false;
+                },
+                removeOption: function removeOption(option) {
+                    if (this.value.length === 0) {
+                        return;
+                    }
+                    if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
+                        if (this.value.indexOf(option) !== -1) {
+                            this.value.splice(this.value.indexOf(option), 1);
+                        }
+                    }
+                    this.value.$remove(option);
+                    this.$emit("remove", (0, _clone2.default)(option));
+                },
+                indexSet: function indexSet(parentIndex, index) {
+                    if (this.optgroup) {
+                        this.selectIndex = parentIndex + "-" + index;
+                        return;
+                    }
+                    this.selectIndex = index;
+                },
+                enterSearchValue: function enterSearchValue() {
+                    if (this.filteredOptions.length > 0) {
+                        this.select(this.filteredOptions[this.selectIndex]);
+                    }
+                    this.resetSelectIndex();
+                },
+                keyNext: function keyNext() {
+                    var filterLen = this.filteredOptions.length;
+                    if (this.selectIndex < filterLen - 1) {
+                        this.selectIndex++;
+                    }
+                    this.resetSearchScrollTop();
+                },
+                keyPrev: function keyPrev() {
+                    if (this.selectIndex > 0) {
+                        this.selectIndex--;
+                    }
+                    this.resetSearchScrollTop();
+                },
+                resetSearchScrollTop: function resetSearchScrollTop() {
+                    var index = this.selectIndex;
+                    var scrollTop = this.$els.list.scrollTop;
+                    var _getDropDownHeight = this.getDropDownHeight, itemHeight = _getDropDownHeight.itemHeight, listHeight = _getDropDownHeight.listHeight;
+                    var listViewLen = Math.floor(listHeight / itemHeight);
+                    var indexPos = index * itemHeight;
+                    if (scrollTop <= indexPos - listViewLen * itemHeight) {
+                        this.$els.list.scrollTop = indexPos - (listViewLen - 1) * itemHeight;
+                    }
+                    if (scrollTop >= indexPos) {
+                        this.$els.list.scrollTop = indexPos;
+                    }
+                },
+                resetSelectIndex: function resetSelectIndex() {
+                    this.selectIndex = 0;
+                    this.closeAfterSelect && this.deactivate();
+                },
+                adjustSearch: function adjustSearch() {
+                    if (!this.showSearch) {
+                        return;
+                    }
+                    this.searchValue = this.value ? this.currentOptionLabel : "";
+                },
+                reset: function reset() {
+                    this.selected = "";
+                    this.value = null;
+                }
+            },
+            computed: {
+                getWrapCls: function getWrapCls() {
+                    var me = this;
+                    var cls = [ "xcui-select" ];
+                    if (this.disabled) {
+                        cls.push("disabled");
+                    }
+                    if (this.isOpen) {
+                        cls.push("xcui-select-open");
+                    }
+                    if (this.className) {
+                        cls.push(me.className);
+                    }
+                    return cls.join(" ");
+                },
+                filteredOptions: function filteredOptions() {
+                    var value = this.searchValue;
+                    var me = this;
+                    if (this.showSearch && this.options.length) {
+                        return this.options.filter(function(item) {
+                            if (typeof item !== "string") {
+                                return (0, _fuzzysearch2.default)(value, item[me.label || "label"]);
+                            }
+                            return (0, _fuzzysearch2.default)(value, item);
+                        });
+                    }
+                    return this.options || [];
+                },
+                currentOptionLabel: function currentOptionLabel() {
+                    var _this = this;
+                    if (!this.value) {
+                        return this.placeholder;
+                    }
+                    if (this.multiple) {
+                        return this.value.map(function(k) {
+                            if ((typeof k === "undefined" ? "undefined" : (0, _typeof3.default)(k)) !== "object") {
+                                return k;
+                            }
+                            var label = _this.label || "label";
+                            return k[label];
+                        }).join(",");
+                    }
+                    if (typeof this.value === "string") {
+                        return this.value;
+                    } else if (this.label) {
+                        return this.value[this.label];
+                    }
+                    return this.value.label || "";
+                },
+                getDropDownHeight: function getDropDownHeight() {
+                    var list = this.$els.list;
+                    var item = list.children[0];
+                    var itemHeight = item.currentStyle ? item.currentStyle.height : getComputedStyle(item, false).height;
+                    var listHeight = list.currentStyle ? list.currentStyle.height : getComputedStyle(list, false).height;
+                    return {
+                        listHeight: listHeight.replace("px", ""),
+                        itemHeight: itemHeight.replace("px", "")
+                    };
+                },
+                optgroupDefaultIndex: function optgroupDefaultIndex() {
+                    var me = this;
+                    var selected = this.selected;
+                    var indexs = [];
+                    this.options.forEach(function(item, index) {
+                        item.options.forEach(function(subItem, subIndex) {
+                            if (typeof subItem === "string" && selected === subItem) {
+                                indexs = [ index, subIndex ];
+                                return;
+                            }
+                            if (subItem[me.label] && subItem[me.label] === selected) {
+                                if (subItem[me.label].disable) {
+                                    return;
+                                }
+                                indexs = [ index, subIndex ];
+                                return;
+                            }
+                        });
+                    });
+                    return indexs;
+                },
+                multipleMaxShow: function multipleMaxShow() {
+                    if (!this.multiple) {
+                        return false;
+                    }
+                    return this.multiple && this.multipleMax !== 0 && this.value && this.multipleMax === this.value.length;
+                }
+            },
+            watch: {
+                options: function options() {
+                    if (this.showSearch) {
+                        return;
+                    }
+                    this.reset();
+                },
+                filteredOptions: function filteredOptions() {
+                    var filterLen = this.filteredOptions.length;
+                    if (this.selectIndex >= filterLen) {
+                        this.selectIndex = filterLen > 0 ? filterLen - 1 : 0;
+                    }
+                },
+                searchValue: function searchValue(oldVal, newVal) {
+                    if (this.searchValue !== this.currentOptionLabel) {
+                        this.$emit("search-change", this.searchValue);
+                    }
+                },
+                selected: function selected() {
+                    if (this.optgroup) {
+                        this.value = this.selected;
+                        var indexs = this.optgroupDefaultIndex;
+                        this.selectIndex = indexs.join("-");
+                    } else {
+                        this.value = this.selected;
                     }
                 }
-                return false;
             }
-            return true;
+        };
+    }, function(module, exports, __webpack_require__) {
+        "use strict";
+        var _keys = __webpack_require__(73);
+        var _keys2 = _interopRequireDefault(_keys);
+        var _typeof2 = __webpack_require__(38);
+        var _typeof3 = _interopRequireDefault(_typeof2);
+        function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : {
+                default: obj
+            };
         }
-        module.exports = fuzzysearch;
-    }, function(module, exports) {
-        module.exports = ' <div tabindex=0 :class=getWrapCls @focus=activate() @blur="showSearch ? false : deactivate()" @keydown.enter.stop.prevent.self=enterSearchValue()> <div class=xcui-select-selection> <div class=xcui-select-selection-rendered @mousedown.stop=toggle()> <input type=text name=search v-el:search autocomplete=off class=xcui-select-search-input v-if=showSearch v-model=searchValue @focus.prevent=activate() @blur.prevent=deactivate() @keyup.down=keyNext() @keyup.up=keyPrev() @keydown.enter.stop.prevent.self=enterSearchValue() @change.prevent.stop="" :placeholder=placeholder> <span class=xcui-select-selection-text v-if=!showSearch v-text="currentOptionLabel || placeholder"> </span> <i class="glyphicon xcui-select-arrow" @mousedown.prevent.stop=toggle() :class="{\'glyphicon-triangle-bottom\':(!isOpen),\'glyphicon-triangle-top\':(isOpen)}"></i> </div> </div> <div class=xcui-select-menu-dropdown v-show="(isOpen && filteredOptions.length>0) || (isOpen && multiple)"> <ul v-el:list aria-activedescendant class=xcui-select-menu> <li class=xcui-select-menu-item v-if=multipleMaxShow> 最多可选{{multipleMax}}项! </li> <li class=xcui-select-menu-item v-if="filteredOptions.length<1 && searchEmptyText" v-text=searchEmptyText> </li> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-item v-if=!optgroup tabindex=1 :class="{\'xcui-select-menu-item-selected\': isSelected(item), \'xcui-select-menu-item-key\': $index === selectIndex,\'disabled\': item.disable}" @mouseenter.prevent.stop.self=indexSet($index) @mousedown.prevent=select(item)> <span v-text=getOptionLabel(item)></span> </li> </template> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-group v-if=optgroup> <div class=xcui-select-menu-group-title>{{item.name}}</div> <ul> <template v-for="option in item.options"> <li class=xcui-select-menu-group-item :class="{\'xcui-select-menu-group-item-selected\': isSelected(option,$parent.$index,$index), \'disabled\': option.disable}" @mousedown.prevent.stop.self=optgroupSelect($parent.$index,$index,option)> <span v-text=getOptionLabel(option)></span> </li> </template> </ul> </li> </template> </ul> </div> </div> ';
+        var clone = function clone(obj) {
+            if (Array.isArray(obj)) {
+                return obj.map(clone);
+            } else if (obj && (typeof obj === "undefined" ? "undefined" : (0, _typeof3.default)(obj)) === "object") {
+                var cloned = {};
+                var keys = (0, _keys2.default)(obj);
+                for (var i = 0, l = keys.length; i < l; i++) {
+                    var key = keys[i];
+                    cloned[key] = clone(obj[key]);
+                }
+                return cloned;
+            } else {
+                return obj;
+            }
+        };
+        module.exports = clone;
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+<<<<<<< HEAD
         __webpack_require__(75);
         __vue_script__ = __webpack_require__(39);
         __vue_template__ = __webpack_require__(77);
+=======
+        var __vue_styles__ = {};
+        __webpack_require__(39);
+        __vue_script__ = __webpack_require__(76);
+        __vue_template__ = __webpack_require__(41);
+>>>>>>> d9794581c5983ae5d91429ce41755b660d50184d
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
         if (__vue_template__) {

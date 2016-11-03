@@ -1,6 +1,6 @@
 # 关于XCUI
 
-![logo](/src/assets/logo_nobg_128x128@2x.png)
+![logo](https://github.com/wmfe/xcui/raw/master/src/assets/logo_nobg_128x128@2x.png)
 
 XCUI 是基于`Vue`和 `Bootstrap.css` 的**桌面端组件库**。
 
@@ -18,7 +18,7 @@ XCUI目前支持`vue 1.x`版本；推荐使用`vue 1.0.26`及以上版本。后�
 
 ## 如何使用
 
-通过`npm`安装，或在[这里](https://github.com/wmfe/xcui)下载打包好的版本：
+通过`npm`安装，或在[这里](https://github.com/wmfe/xcui/releases)下载打包好的版本：
 
 ```bash
 npm install xcui
@@ -31,6 +31,7 @@ npm install xcui
 ```javascript
 import Vue from 'vue'
 import xcui from 'xcui'
+import 'xcui/dist/xcui.css'
 Vue.use(xcui);
 ```
 

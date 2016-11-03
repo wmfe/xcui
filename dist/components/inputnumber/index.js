@@ -23,6 +23,8 @@
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(4);
+    }, function(module, exports) {}, function(module, exports) {
+        module.exports = ' <div v-el:outer class=outer :class=size> <div class=up-down-wrap> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue> </a> </div> <div class=input-wrap> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className /> </div> </div> ';
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -122,13 +124,18 @@
             },
             ready: function ready() {}
         };
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div v-el:outer class=outer :class=size> <div class=up-down-wrap> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue> </a> </div> <div class=input-wrap> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className /> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+<<<<<<< HEAD
         __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(3);
+=======
+        var __vue_styles__ = {};
+        __webpack_require__(1);
+        __vue_script__ = __webpack_require__(3);
+        __vue_template__ = __webpack_require__(2);
+>>>>>>> d9794581c5983ae5d91429ce41755b660d50184d
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
         if (__vue_template__) {

@@ -19,7 +19,7 @@ XCUI目前支持`vue 1.x`版本；推荐使用`vue 1.0.26`及以上版本。后�
 
 ## 如何使用
 
-通过`npm`安装，或在[这里](https://github.com/wmfe/xcui)下载打包好的版本：
+通过`npm`安装，或在[这里](https://github.com/wmfe/xcui/releases)下载打包好的版本：
 
 ```bash
 npm install xcui
@@ -32,6 +32,7 @@ npm install xcui
 ```javascript
 import Vue from 'vue'
 import xcui from 'xcui'
+import 'xcui/dist/xcui.css'
 Vue.use(xcui);
 ```
 

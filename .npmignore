@@ -3,10 +3,14 @@ node_modules/
 examples/
 src/
 test/
-dist/components
 buildSite.sh
 yarn.lock
 favicon.ico
 logo.png
 CNAME
 circle.yml
+.babelrc
+.editorconfig
+.eslintignore
+.eslintrc.js
+.gitignore
