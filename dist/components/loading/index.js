@@ -23,14 +23,6 @@
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
         module.exports = __webpack_require__(4);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname]> <div class=loader :style="{\'color\' : color}"></div> </div> ';
->>>>>>> 6db40f0cf5c7d086f4dce3548a6339ee03328252
-=======
->>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -45,11 +37,7 @@
                 },
                 type: {
                     type: String,
-<<<<<<< HEAD
                     "default": "load2"
-=======
-                    default: "load2"
->>>>>>> 6db40f0cf5c7d086f4dce3548a6339ee03328252
                 },
                 classname: {
                     type: String,
@@ -66,21 +54,10 @@
             },
             methods: {}
         };
-<<<<<<< HEAD
-<<<<<<< HEAD
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname]> <div class=loader :style="{\'color\' : color}"></div> </div> ';
-=======
->>>>>>> 6db40f0cf5c7d086f4dce3548a6339ee03328252
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
-=======
     }, function(module, exports) {}, function(module, exports) {
         module.exports = ' <div v-show=show class="xcui-loading load-container" :class=[type,size,classname]> <div class=loader :style="{\'color\' : color}"></div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        var __vue_styles__ = {};
->>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466
         __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(3);

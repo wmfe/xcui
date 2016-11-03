@@ -22,16 +22,7 @@
         __webpack_require__.p = "";
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
-<<<<<<< HEAD
-        module.exports = __webpack_require__(5);
-=======
         module.exports = __webpack_require__(6);
-<<<<<<< HEAD
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div v-el:outer style=\"position:relative; display: inline-block\" class=xcui-popover> <span v-el:trigger> <slot> </slot> </span> <div class=popover v-bind:class=\"{\n      'top':placement === 'top',\n      'left':placement === 'left',\n      'right':placement === 'right',\n      'bottom':placement === 'bottom'\n      }\" v-el:popover v-show=show :transition=effect> <div class=arrow></div> <div class=popover-title :class=titleClass v-show=title> <slot name=title> {{title}} </slot> </div> <div class=popover-content :class=contentClass> <slot name=content> {{{content}}} </slot> </div> </div> </div> ";
->>>>>>> 6db40f0cf5c7d086f4dce3548a6339ee03328252
-=======
->>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466
     }, function(module, exports, __webpack_require__) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -79,7 +70,7 @@
         var _eventlistener2 = _interopRequireDefault(_eventlistener);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = {
@@ -186,15 +177,6 @@
                 }
             }
         };
-<<<<<<< HEAD
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div v-el:outer style=\"position:relative; display: inline-block\" class=xcui-popover> <span v-el:trigger> <slot> </slot> </span> <div class=popover v-bind:class=\"{\n      'top':placement === 'top',\n      'left':placement === 'left',\n      'right':placement === 'right',\n      'bottom':placement === 'bottom'\n      }\" v-el:popover v-show=show :transition=effect> <div class=arrow></div> <div class=popover-title :class=titleClass v-show=title> <slot name=title> {{title}} </slot> </div> <div class=popover-content :class=contentClass> <slot name=content> {{{content}}} </slot> </div> </div> </div> ";
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
-        __webpack_require__(3);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(4);
-=======
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -223,17 +205,9 @@
         module.exports = " <div v-el:outer style=\"position:relative; display: inline-block\" class=xcui-popover> <span v-el:trigger> <slot> </slot> </span> <div class=popover v-bind:class=\"{\n      'top':placement === 'top',\n      'left':placement === 'left',\n      'right':placement === 'right',\n      'bottom':placement === 'bottom'\n      }\" v-el:popover v-show=show :transition=effect> <div class=arrow></div> <div class=popover-title :class=titleClass v-show=title> <slot name=title> {{title}} </slot> </div> <div class=popover-content :class=contentClass> <slot name=content> {{{content}}} </slot> </div> </div> </div> ";
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        var __vue_styles__ = {};
-<<<<<<< HEAD
-        __webpack_require__(1);
-        __vue_script__ = __webpack_require__(3);
-        __vue_template__ = __webpack_require__(2);
->>>>>>> 6db40f0cf5c7d086f4dce3548a6339ee03328252
-=======
         __webpack_require__(4);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(5);
->>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
         if (__vue_template__) {

@@ -336,11 +336,7 @@
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
-<<<<<<< HEAD
-        var _calendarMixins = __webpack_require__(2);
-=======
         var _calendarMixins = __webpack_require__(38);
->>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466
         var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
@@ -488,35 +484,18 @@
         var _typeof3 = _interopRequireDefault(_typeof2);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = {
             props: {
-<<<<<<< HEAD
-                type: {
-                    type: String,
-                    "default": "date"
-                },
-=======
->>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466
                 value: {
                     twoWay: true,
                     "default": ""
                 },
-<<<<<<< HEAD
-                begin: {
-                    type: String,
-                    "default": ""
-                },
-                end: {
-                    type: String,
-                    "default": ""
-=======
                 format: {
                     type: String,
-                    default: "YYYY-MM-DD"
->>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466
+                    "default": "YYYY-MM-DD"
                 },
                 minDate: {},
                 maxDate: {},
@@ -532,13 +511,6 @@
                     type: [ Number, String ],
                     "default": 1
                 },
-<<<<<<< HEAD
-                sep: {
-                    type: String,
-                    "default": "-"
-                },
-=======
->>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466
                 color: String,
                 className: String
             },
@@ -871,19 +843,14 @@
                 }
             }
         };
-<<<<<<< HEAD
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class="xcui-datapicker {{className}}"> <div :class="{\'input-group\':btnShow,\'bg-pr\':!btnShow}"> <input class=form-control type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class=calendar v-show=show> <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"><input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年</span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'off\':child.disabled}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} <div class=lunar v-if=showLunar>{{child.lunar}}</div> </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\'|| type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> <div class=timer-item> <div class=timer-item-current @click=currentTime :style="{\'color\':color}">当前</div> </div> </div> </div> <div class=calendar-button v-show="type==\'datetime\'|| type==\'time\' || range"> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
-=======
->>>>>>> 6db40f0cf5c7d086f4dce3548a6339ee03328252
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            default: __webpack_require__(42),
+            "default": __webpack_require__(42),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            default: __webpack_require__(43),
+            "default": __webpack_require__(43),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
@@ -896,17 +863,17 @@
         var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function(obj) {
             return typeof obj;
         } : function(obj) {
-            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj;
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj;
         };
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function(obj) {
             return typeof obj === "undefined" ? "undefined" : _typeof(obj);
         } : function(obj) {
-            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
         };
     }, function(module, exports, __webpack_require__) {
         __webpack_require__(67);
@@ -1281,7 +1248,7 @@
         for (var symbols = "hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","), i = 0; symbols.length > i; ) wks(symbols[i++]);
         for (var symbols = $keys(wks.store), i = 0; symbols.length > i; ) wksDefine(symbols[i++]);
         $export($export.S + $export.F * !USE_NATIVE, "Symbol", {
-            for: function(key) {
+            "for": function(key) {
                 return has(SymbolRegistry, key += "") ? SymbolRegistry[key] : SymbolRegistry[key] = $Symbol(key);
             },
             keyFor: function keyFor(key) {
@@ -1343,16 +1310,9 @@
         module.exports = ' <div class="xcui-datapicker {{className}}"> <div :class="{\'input-group\':btnShow,\'bg-pr\':!btnShow}"> <input class=form-control type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class=calendar v-show=show> <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"><input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年</span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'off\':child.disabled,\'noclick\':child.noClick}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} <div class=lunar v-if=showLunar>{{child.lunar}}</div> </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\'|| type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> <div class=timer-item> <div class=timer-item-current @click=currentTime :style="{\'color\':color}">当前</div> </div> </div> </div> <div class=calendar-button v-show="type==\'datetime\'|| type==\'time\' || range"> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-<<<<<<< HEAD
-        __webpack_require__(3);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(4);
-=======
-        var __vue_styles__ = {};
         __webpack_require__(71);
         __vue_script__ = __webpack_require__(37);
         __vue_template__ = __webpack_require__(72);
->>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
         if (__vue_template__) {

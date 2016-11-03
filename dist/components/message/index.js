@@ -31,27 +31,21 @@
         exports.default = {
             name: "xcui-message",
             props: {
-<<<<<<< HEAD:dist/components/toaster/index.js
-                options: {
-                    type: Object,
-                    "default": function _default() {
-                        return {};
-=======
                 show: {
                     type: Boolean,
-                    default: false
+                    "default": false
                 },
                 type: {
                     type: String,
-                    default: "info"
+                    "default": "info"
                 },
                 content: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 duration: {
                     type: Number,
-                    default: 3e3
+                    "default": 3e3
                 }
             },
             computed: {
@@ -74,7 +68,6 @@
 
                       default:
                         return "glyphicon-info-sign";
->>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466:dist/components/message/index.js
                     }
                 }
             },
@@ -105,16 +98,9 @@
             }
         };
     }, function(module, exports) {}, function(module, exports) {
-<<<<<<< HEAD:dist/components/toaster/index.js
-        module.exports = " <div class=toaster :class=\"{\n    'text-info': options.type === 'info' || options.type == undefined,\n    'text-success': options.type === 'success',\n    'text-danger': options.type === 'error',\n    'text-warning': options.type === 'warning'\n}\" v-show=show> <span class=\"toaster-icon glyphicon\" :class=\"{\n        'glyphicon-info-sign': options.type === 'info' || options.type == undefined,\n        'glyphicon-ok': options.type === 'success',\n        'glyphicon-remove': options.type === 'error',\n        'glyphicon-warning-sign': options.type === 'warning'\n    }\"></span> <p class=toaster-desc> {{options.content}} </p> </div> ";
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
-=======
         module.exports = ' <div class=xcui-message :class=styleClass transition=fade v-show=show> <span class="xcui-message-icon glyphicon" :class=iconClass></span> <p class=xcui-message-desc> {{content}} </p> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        var __vue_styles__ = {};
->>>>>>> 60ad8a70faf1215424008d4b5ef887d6a1b14466:dist/components/message/index.js
         __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(3);
