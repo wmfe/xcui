@@ -24,14 +24,14 @@
     </tbody>
   </table>
   <div style="width:200px">
-      <Suggestion
+      <xcui-suggestion
         id="constellation"
         name="constellation"
         placeholder="请输入星座"
         :data-text.sync="constellation"
         :data-value.sync="constellationValue"
         :suggestions="constellationSuggestions">
-      </Suggestion>
+      </xcui-suggestion>
   </div>
 </example>
     <example title="object数组 sugs:">
@@ -50,8 +50,8 @@
               </tbody>
           </table>
           <div style="width:200px">
-              <Suggestion id="city" name="city" placeholder="请输入城市" :data-text.sync="cityName" :data-value.sync="cityId" :suggestions="citySuggestions">
-              </Suggestion>
+              <xcui-suggestion id="city" name="city" placeholder="请输入城市" :data-text.sync="cityName" :data-value.sync="cityId" :suggestions="citySuggestions">
+              </xcui-suggestion>
           </div>
     </example>
     <example title="远程sug，string数组 sugs:">
@@ -70,12 +70,12 @@
           </tbody>
       </table>
       <div style="width:200px">
-              <Suggestion placeholder=""
+              <xcui-suggestion placeholder=""
                           :check=false
                           :data-text.sync="requestWord"
                           :suggestions="remoteSug"
                           :input-callback="request">>
-              </Suggestion>
+              </xcui-suggestion>
       </div>
     </example>
     <example title="远程sug，object数组 sugs:">
@@ -95,13 +95,13 @@
               </tbody>
           </table>
           <div style="width:200px">
-                  <Suggestion placeholder=""
+                  <xcui-suggestion placeholder=""
                               :check=false
                               :data-text.sync="requestWord2"
                               :data-value.sync="requestValue2"
                               :suggestions="remoteSug2"
                               :input-callback="request2">
-                  </Suggestion>
+                  </xcui-suggestion>
           </div>
         </div>
     </example>
@@ -149,13 +149,8 @@
 </template>
 
 <script>
-  import Suggestion from '../components/suggestion';
 
   export default {
-      name: 'xcui-suggestion',
-      components: {
-          Suggestion
-      },
       data() {
           return {
               cityName: '',
