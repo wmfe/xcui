@@ -29,52 +29,75 @@
             value: true
         });
         exports.default = {
-            name: "xcui-tag",
+            name: "xcui-message",
             props: {
-                text: {
-                    type: String,
-                    "default": ""
-                },
-                closeable: {
+                show: {
                     type: Boolean,
                     "default": false
                 },
-                disabled: {
-                    type: Boolean,
-                    "default": false
+                type: {
+                    type: String,
+                    "default": "info"
                 },
-                showTag: {
-                    type: Boolean,
-                    "default": true
-                },
-                classname: {
+                content: {
                     type: String,
                     "default": ""
                 },
-                key: {
-                    type: String,
-                    "default": ""
-                },
-                aftercloseisshow: {
-                    type: Boolean,
-                    "default": false,
-                    twoway: true
+                duration: {
+                    type: Number,
+                    "default": 3e3
                 }
             },
-            methods: {
-                onCloseClick: function onCloseClick() {
-                    this.$emit("close");
-                    if (this.aftercloseisshow === false) {
-                        this.showTag = false;
-                    }
+            computed: {
+                styleClass: function styleClass() {
+                    return "xcui-message-" + this.type;
                 },
-                onClick: function onClick() {
-                    this.$emit("click");
+                iconClass: function iconClass() {
+                    switch (this.type) {
+                      case "info":
+                        return "glyphicon-info-sign";
+
+                      case "success":
+                        return "glyphicon-ok";
+
+                      case "error":
+                        return "glyphicon-remove";
+
+                      case "warning":
+                        return "glyphicon-warning-sign";
+
+                      default:
+                        return "glyphicon-info-sign";
+                    }
+                }
+            },
+            data: function data() {
+                return {
+                    timer: null
+                };
+            },
+            methods: {
+                clearTimer: function clearTimer() {
+                    clearTimeout(this.timer);
+                },
+                resetTimer: function resetTimer() {
+                    var _this = this;
+                    if (!this.duration) {
+                        this.duration = 3e3;
+                    }
+                    this.timer = setTimeout(function() {
+                        _this.show = false;
+                    }, this.duration);
+                },
+                onShow: function onShow() {
+                    this.show = true;
+                    this.clearTimer();
+                    this.resetTimer();
                 }
             }
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div :class=\"['xcui-tag', disabled ? ' xcui-disabled':'']\" @click=onClick v-if=showTag> <div class=\"{{classname!='' ? classname : ''}}\"> <span class=xcui-tag-text><slot></slot>{{text}}<span> <i class=xcui-cross v-if=closeable @click.stop=onCloseClick></i> </span></span></div> </div> ";
+        module.exports = ' <div class=xcui-message :class=styleClass transition=fade v-show=show> <span class="xcui-message-icon glyphicon" :class=iconClass></span> <p class=xcui-message-desc> {{content}} </p> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(2);

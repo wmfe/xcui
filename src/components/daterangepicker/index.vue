@@ -3,6 +3,7 @@
 <div class="xcui-datarangepicker" :class="className">
     <div :class="{'input-group':btnShow}">
         <input class="form-control col-md-3" type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
+        <button v-show="show" type="button" class="close close_btn" :style="{'right':btnShow?'50px':'10px'}" @click="closeBtn" title="点击关闭"><span aria-hidden="true">×</span></button>
         <!-- 双日历 -->
         <div @click.stop=""
              @touchstart.stop=""
@@ -11,34 +12,34 @@
              <div class="clearfix">
                  <div class="double-calendar-left">
                     <calendar
-                        :type="type"
-                        :value.sync="beginCalenderVal"
-                        :sep="sep"
-                        :other-value.sync="endCalenderVal"
-                        :begin="begin"
-                        :end="end"
+                        :value.sync="newStartDate"
+                        :format="format"
+                        :other-value.sync="newEndDate"
+                        :min-date="minDate"
+                        :max-date="maxDate"
                         :hour-range="hourRange"
                         :minute-range="minuteRange"
                         :second-range="secondRange"
                         :color="color"
                         :date-limit="dateLimit"
-                        :render-star="renderStar"></calendar>
+                        :initial-date.sync="initialStartDate"
+                        :start-render="startRender"></calendar>
                  </div>
                  <div class="double-calendar-right">
                     <calendar
-                        :type="type"
-                        :value.sync="endCalenderVal"
-                        :sep="sep"
-                        :other-value.sync="beginCalenderVal"
+                        :value.sync="newEndDate"
+                        :format="format"
+                        :other-value.sync="newStartDate"
                         :right="true"
-                        :begin="begin"
-                        :end="end"
+                        :min-date="minDate"
+                        :max-date="maxDate"
                         :hour-range="hourRange"
                         :minute-range="minuteRange"
                         :second-range="secondRange"
                         :color="color"
                         :date-limit="dateLimit"
-                        :render-end="renderEnd"></calendar>
+                        :initial-date.sync="initialEndDate"
+                        :start-render="startRender"></calendar>
                  </div>
              </div>
              <div class="calendar-button">
@@ -58,45 +59,24 @@
 <script>
     import calendar from './calendar';
     export default {
-        name: 'xcui-datarangepicker',
+        name: 'xcui-daterangepicker',
         props: {
-            show: {
-                type: Boolean,
-                twoWay: true,
-                default: false
-            },
-            type: {
-                type: String,
-                default: 'date'
-            },
-            value: {
-                type: String,
+            minDate: null,
+            maxDate: null,
+            hourRange: null,
+            minuteRange: null,
+            secondRange: null,
+            startDate: {
                 twoWay: true,
                 default: ''
             },
-            begin: {
-                type: String,
+            endDate: {
+                twoWay: true,
                 default: ''
             },
-            end: {
+            format: {
                 type: String,
-                default: ''
-            },
-            hourRange: {
-                type: Number,
-                default: 1
-            },
-            minuteRange: {
-                type: Number,
-                default: 1
-            },
-            secondRange: {
-                type: Number,
-                default: 1
-            },
-            sep: {
-                type: String,
-                default: '-'
+                default: 'YYYY-MM-DD'
             },
             color: {
                 type: String,
@@ -117,42 +97,55 @@
         },
         data() {
             return {
-                beginCalenderVal: '',
-                endCalenderVal: '',
-                renderStar: '',
-                renderEnd: ''
+                show: false,
+                value: '',
+                startRender: '',
+                initialStartDate: '',
+                initialEndDate: '',
+                newStartDate: '',
+                newEndDate: ''
             };
         },
-        created() {
-            if (this.value !== '') {
-                let values = this.value.split('至');
-                this.beginCalenderVal = values[0].trim();
-                this.endCalenderVal = values[1].trim();
-                if (this.beginCalenderVal > this.endCalenderVal) {
-                    this.endCalenderVal = this.beginCalenderVal;
-                    this.value = this.beginCalenderVal + ' 至 ' + this.endCalenderVal;
+        watch: {
+            value(val) {
+                if (!val) {
+                    this.startDate = this.endDate = '';
                 }
             }
         },
-        watch: {
-            beginCalenderVal(val) {
-                if (val > this.endCalenderVal) {
-                    this.endCalenderVal = val;
-                }
-            },
-            endCalenderVal(val) {
-                if (val < this.beginCalenderVal) {
-                    this.beginCalenderVal = val;
-                }
+        created() {
+            this.newStartDate = this.startDate;
+            this.newEndDate = this.endDate;
+            if (this.startDate > this.endDate) {
+                this.newEndDate = this.startDate;
+            }
+            if (this.endDate < this.startDate) {
+                this.newStartDate = this.endDate;
             }
         },
         methods: {
-            ok() {
-                this.value = this.beginCalenderVal + ' 至 ' + this.endCalenderVal;
+            ok(e) {
+                e.preventDefault();
+                if (this.newStartDate && this.newEndDate) {
+                    this.value = this.newStartDate + ' 至 ' + this.newEndDate;
+                    this.startDate = this.newStartDate;
+                    this.endDate = this.newEndDate;
+                }
+                else {
+                    this.value = this.startDate = this.endDate = '';
+                }
                 this.show = false;
+                this.$emit('on-change', this.startDate, this.endDate);
+                this.initialStartDate = this.startDate;
+                this.initialEndDate = this.endDate;
+                this.startRender = new Date().getTime();
             },
-            cancel() {
+            cancel(e) {
+                e.preventDefault();
                 this.show = false;
+                this.startRender = new Date().getTime();
+                this.newStartDate = this.initialStartDate;
+                this.newEndDate = this.initialEndDate;
             },
             showCalendar(e) {
                 let me = this;
@@ -166,6 +159,9 @@
                 setTimeout(function () {
                     document.addEventListener('click', bindHide, false);
                 }, 500);
+            },
+            closeBtn() {
+                this.value = this.startDate = this.endDate = '';
             }
         }
     };
@@ -177,6 +173,13 @@
     @base-size:14px;
     @tit-color:#333;
     position:relative;
+    .close_btn{
+        position:absolute;
+        top:50%;
+        right:10px;
+        margin-top:-11px;
+        z-index:9999;
+    }
     .calendar{
         width: 240px;
         padding: 10px;

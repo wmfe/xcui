@@ -1,10 +1,11 @@
 <template lang="md">
-## Modal 模态窗口
+# Modal 模态窗口
 
-### 使用场景
- 模拟浏览器的 `alert`、`confirm`
+## 使用场景
+模态对话框，模拟浏览器的 `alert`、`confirm`。在浮层中显示，引导用户进行相关操作。
+`Modal`提供了两种用法，基础组件使用和封装好的全局实例调用。
 
-### Demo
+## Demo
 
 <demo>
     <example title="基础使用">
@@ -94,6 +95,7 @@
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|
 |show|Boolean|false|对话框是否显示,需要.sync双向绑定|**必选**|
+|content|String|-|对话框的主体内容，如果使用了默认slot的方式，则content无效|可选|
 |title|String|-|对话框的标题，如果slot定义了header，则title无效|可选|
 |mask-closable|Boolean|true|是否允许点击遮罩层关闭对话框|可选|
 |scrollable|Boolean|false|打开Modal后，是否允许底页可滚动|可选|
@@ -149,7 +151,7 @@ Vue.use(xcuiInstall)
 
 | 参数 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|
-|options|Object|-|对话框的参数，属性同props|**必选**|
+|options|Object|-|对话框的参数，属性同props(props.show除外)。注意：使用驼峰式变量名，如**onOk**，而非on-ok|**必选**|
 
 2. **this.$Modal.close()**
 
@@ -169,7 +171,7 @@ Vue.use(xcuiInstall)
 写法2：
 | 参数 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|
-|options|Object|-|对话框的参数，属性同props|**必选**|
+|options|Object|-|对话框的参数，属性同props(props.show除外)。注意：使用驼峰式变量名，如**onOk**，而非on-ok|**必选**|
 |isRawHTML|Boolean|false|对options.content(String)是否解析为原生HTML|可选|
 
 

@@ -21,7 +21,7 @@
             <tr v-for="(k1,day) in days">
                 <td
                 v-for="(k2,child) in day"
-                :class="{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right,'prev':child.prev}"
+                :class="{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right,'prev':child.prev, 'noclick':child.noclick}"
                 :style="{'background':color&&child.today?color:''}"
                 @click="select(k1,k2,$event)">
                 {{child.day}}
@@ -74,47 +74,44 @@
                 type: Boolean,
                 default: false
             },
-            renderStar: {
-                type: String,
-                default: ''
-            },
-            renderEnd: {
-                type: String,
-                default: ''
-            },
+            startRender: null,
             dateLimit: {
                 type: Object,
                 default: null
-            }
+            },
+            initialDate: String
         },
         watch: {
-            renderStar(val) {
-                if (val === '' || this.right) {
+            startRender(val) {
+                if (!val) {
                     return false;
                 }
-                let params = this.getValueParams(val);
+                this.value = this.output(this.value);
+                let params = this.dateParams;
                 this.year = params.year;
                 this.month = params.month;
-                this.render(params.year, params.month);
-            },
-            renderEnd(val) {
-                if (val === '' || !this.right) {
-                    return false;
-                }
-                let params = this.getValueParams(val);
-                this.year = params.year;
-                this.month = params.month;
+                this.hour = params.hour;
+                this.day = params.day;
+                this.minute = params.minute;
+                this.second = params.second;
                 this.render(params.year, params.month);
             }
+        },
+        created() {
+            this.initialDate = this.output(this.value);
         },
         methods: {
             renderElse(y, m, i, temp, line) {
                 let me = this;
-                let today = y + me.sep + me.zero(m + 1) + me.sep + me.zero(i);
-                let otherDate = me.otherValue.substring(0, 10);
-                let value = me.value.substring(0, 10);
-                if (today < me.begin || today > me.end) {
-                    temp[line].push({day: i, disabled: true, range: false});
+                let format = me.defaultFormat;
+                let today = me.output([y, m, i], format);
+                let value = me.output(me.value, format);
+                me.otherValue = me.otherValue ? me.output(me.otherValue) : me.value;
+                let otherDate = me.output(me.otherValue, format);
+                let isMinDate = me.minDate && (today < me.output(me.minDate, format));
+                let isMaxDate = me.maxDate && (today > me.output(me.maxDate, format));
+                if (isMinDate || isMaxDate) {
+                    temp[line].push({day: i, disabled: true, range: false, noclick: true});
                 }
                 else if (!me.right && today > value && today <= otherDate) {
                     temp[line].push({day: i, disabled: false, range: true});
@@ -123,7 +120,7 @@
                     temp[line].push({day: i, disabled: false, range: true});
                 }
                 else if (me.right && today < otherDate) {
-                    temp[line].push({day: i, disabled: true, range: false});
+                    temp[line].push({day: i, disabled: true, range: false, prev: true});
                 }
                 else {
                     temp[line].push({day: i, today: false, range: false});
@@ -133,13 +130,15 @@
                 if (e !== undefined) {
                     e.stopPropagation();
                 }
-                if (e.target.className === 'off todayright prev') {
+                let className = e.target.className;
+                if (className === 'off todayright prev' || className.indexOf('noclick') !== -1) {
                     return false;
                 }
                 let me = this;
                 let daySeleted = me.days[k1][k2];
                 // 取消上次选中
-                let va = me.getValueParams(me.value);
+                me.output(me.value);
+                let va = me.dateParams;
                 if (me.today.length > 0 && me.month === va.month && me.year === va.year) {
                     me.days[me.today[0]][me.today[1]].today = false;
                 }
@@ -165,54 +164,47 @@
             },
             changeOtherCalender() {
                 let me = this;
-                let params = me.getValueParams(me.value);
-                let monthStar = me.month;
-                let monthEnd = me.month;
+                let time = new Date().getTime();
                 if (!me.right) {
                     if (me.value > me.otherValue) {
                         me.otherValue = me.value;
-                    }
-                    else if (me.getYearMonth(me.otherValue) > (me.getYearMonth(me.value) + 1)) {
-                        monthEnd = monthEnd + 1;
                     }
                 }
                 else if (me.right) {
                     if (me.value < me.otherValue) {
                         me.otherValue = me.value;
                     }
-                    else if (me.getYearMonth(me.value) > (me.getYearMonth(me.otherValue) + 1)) {
-                        monthStar = monthStar - 1;
-                    }
                 }
-                me.$parent.renderStar = me.output([me.year, monthStar, params.day, me.hour, me.minute, me.second]);
-                me.$parent.renderEnd = me.output([me.year, monthEnd, params.day, me.hour, me.minute, me.second]);
+                me.$parent.startRender = time;
             },
             getYearMonth(date) {
-                let me = this;
-                let dates = date.split(me.sep);
-                return dates[0] * 12 + dates[1];
+                this.output(date);
+                let params = this.dateParams;
+                return params.year * 12 + params.month;
             },
             bindLimitDate() {
                 let me = this;
-                let oValue = me.otherValue;
-                let ovs = me.getValueParams(oValue);
-                let bg = me.begin;
-                let ed = me.end;
+                let format = me.defaultFormat;
+                me.otherValue = me.otherValue ? me.output(me.otherValue) : me.value;
+                let oValue = me.output(me.otherValue, format);
+                let ovs = me.dateParams;
+                let bg = me.minDate && me.output(me.minDate, format);
+                let ed = me.maxDate && me.output(me.maxDate, format);
                 let y = ovs.year;
                 let m = ovs.month;
                 let d = ovs.day;
-                let meValue = me.year + me.sep + me.zero(me.month + 1) + me.sep + me.zero(me.day);
-                let meDate = new Date(me.year, me.month, me.day).getDate();
+                let meValue = me.output(me.value, format);
+                let meDate = me.dateParams.day;
                 let AddDayCount = 0;
                 let params = null;
                 let otherTime = '';
-                if (me.right) {
-                    if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
+                if (me.right && me.dateLimit) {
+                    if (me.dateLimit.hasOwnProperty('months')) {
                         for (let i1 = 0; i1 < me.dateLimit.months; i1++) {
                             AddDayCount += new Date(y, (m + i1 + 1), 0).getDate();
                         }
                     }
-                    else if (this.dateLimit.hasOwnProperty('days')) {
+                    else if (me.dateLimit.hasOwnProperty('days')) {
                         AddDayCount += me.dateLimit.days;
                     }
                     if (meValue > me.getDataStr(AddDayCount, oValue).val) {
@@ -230,7 +222,7 @@
                                 AddDayCount += diffDate;
                             }
                         }
-                        else if (this.dateLimit.hasOwnProperty('days')) {
+                        else if (me.dateLimit.hasOwnProperty('days')) {
                             AddDayCount -= me.dateLimit.days;
                         }
                         params = me.getDataStr(AddDayCount, meValue);
@@ -239,13 +231,13 @@
                         d = params.d;
                     }
                 }
-                else {
-                    if (me.dateLimit && me.dateLimit.hasOwnProperty('months')) {
+                else if (me.dateLimit) {
+                    if (me.dateLimit.hasOwnProperty('months')) {
                         for (let k1 = 0; k1 < me.dateLimit.months; k1++) {
                             AddDayCount -= new Date(y, (m - k1), 0).getDate();
                         }
                     }
-                    else if (this.dateLimit.hasOwnProperty('days')) {
+                    else if (me.dateLimit.hasOwnProperty('days')) {
                         AddDayCount -= me.dateLimit.days;
                     }
                     if (meValue < me.getDataStr(AddDayCount, oValue).val || meValue > oValue) {
@@ -263,7 +255,7 @@
                                 AddDayCount -= diffDate2;
                             }
                         }
-                        else if (this.dateLimit.hasOwnProperty('days')) {
+                        else if (me.dateLimit.hasOwnProperty('days')) {
                             AddDayCount += me.dateLimit.days;
                         }
                         params = me.getDataStr(AddDayCount, meValue);
@@ -272,23 +264,24 @@
                         d = params.d;
                     }
                 }
-                otherTime = me.output([y, m, d, me.hour, me.minute, me.second]);
-                otherTime = otherTime < bg ? bg : (otherTime > ed ? ed : otherTime);
+                otherTime = me.output([y, m, d], format);
+                if (bg) {
+                    otherTime = otherTime < bg ? bg : (otherTime > ed ? ed : otherTime);
+                }
                 return otherTime;
             },
             getDataStr(AddDayCount, nowDate) {
+                let me = this;
                 let date = new Date(nowDate);
                 date.setDate(date.getDate() + AddDayCount);
                 let y = date.getFullYear();
-                let m = date.getMonth() + 1;
+                let m = date.getMonth();
                 let d = date.getDate();
-                m = this.zero(m);
-                d = this.zero(d);
                 return {
-                    val: y + this.sep + m + this.sep + d,
+                    val: y + '-' + me.zero(m + 1) + '-' + me.zero(d),
                     y: y,
-                    m: parseInt(m, 10) - 1,
-                    d: parseInt(d, 10)
+                    m: m,
+                    d: d
                 };
             }
         }

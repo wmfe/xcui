@@ -13,7 +13,7 @@
                 @blur="onBlur"
                 @keyDown.up="changeCurrent(-1)"
                 @keyDown.down="changeCurrent(1)"
-                @keyDown.enter="onBlur">
+                @keyDown.enter.stop.prevent="onBlur">
 
         <ul class="xcui-suggestion-list dropdown-menu" :class="{'show':show}">
             <li v-for="(index,item) in list" :class="{'current' : currentIndex==index}">
