@@ -340,7 +340,7 @@
         var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = {
@@ -349,7 +349,7 @@
             props: {
                 btnShow: {
                     type: Boolean,
-                    default: false
+                    "default": false
                 }
             },
             data: function data() {
@@ -435,12 +435,14 @@
                     me.minuteListShow = false;
                     me.secondListShow = false;
                 },
-                ok: function ok() {
+                ok: function ok(e) {
+                    e.preventDefault();
                     this.showFalse();
                     this.$emit("on-change", this.value, this.initialValue);
                     this.initialValue = this.value;
                 },
-                cancel: function cancel() {
+                cancel: function cancel(e) {
+                    e.preventDefault();
                     this.value = this.initialValue;
                     this.showFalse();
                 },
@@ -484,32 +486,32 @@
         var _typeof3 = _interopRequireDefault(_typeof2);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = {
             props: {
                 value: {
                     twoWay: true,
-                    default: ""
+                    "default": ""
                 },
                 format: {
                     type: String,
-                    default: "YYYY-MM-DD"
+                    "default": "YYYY-MM-DD"
                 },
                 minDate: {},
                 maxDate: {},
                 hourRange: {
                     type: [ Number, String ],
-                    default: 1
+                    "default": 1
                 },
                 minuteRange: {
                     type: [ Number, String ],
-                    default: 1
+                    "default": 1
                 },
                 secondRange: {
                     type: [ Number, String ],
-                    default: 1
+                    "default": 1
                 },
                 color: String,
                 className: String
@@ -538,34 +540,24 @@
                     selectRangeShow: true,
                     selectRange: "",
                     dateParams: null,
-                    defaultFormat: "YYYY-MM-DD"
+                    defaultFormat: "YYYY-MM-DD",
+                    type: "date"
                 };
             },
             computed: {
-                type: function type() {
-                    var type = "date";
-                    var format = this.format;
-                    var hasY = format.indexOf("YYYY") !== -1;
-                    var hasH = format.indexOf("hh") !== -1 || format.indexOf("HH") !== -1;
-                    if (hasY && hasH) {
-                        type = "datetime";
-                    } else if (hasH) {
-                        type = "time";
-                    }
-                    return type;
-                },
                 formatValue: function formatValue() {
                     return this.output(this.value);
                 }
             },
             created: function created() {
                 var me = this;
-                this.initialValue = this.value;
-                if (me.value !== "") {
+                me.getType();
+                if (me.value) {
                     me.value = me.output(me.value);
                 } else {
                     me.value = me.output(new Date());
                 }
+                this.initialValue = this.value;
                 var params = me.dateParams;
                 me.year = params.year;
                 me.month = params.month;
@@ -767,12 +759,13 @@
                 output: function output(d, format) {
                     var fmt = format || this.format;
                     var me = this;
-                    if (this.value && this.value !== "" && this.type === "time" && typeof d === "string") {
-                        d = "1970-01-01 " + d;
-                    }
                     var date = new Date(d);
-                    if ((typeof d === "undefined" ? "undefined" : (0, _typeof3.default)(d)) === "object" && d.length > 0) {
+                    if (this.value && this.type === "time" && typeof d === "string") {
+                        date = new Date("1970-01-01 " + d);
+                    } else if ((typeof d === "undefined" ? "undefined" : (0, _typeof3.default)(d)) === "object" && d.length > 0) {
                         date = new Date(d[0], d[1], d[2], d[3] || "00", d[4] || "00", d[5] || "00");
+                    } else if (!this.value) {
+                        date = new Date();
                     }
                     var year = date.getFullYear();
                     var month = date.getMonth();
@@ -840,17 +833,27 @@
                         minute: me.zero(minute),
                         second: me.zero(second)
                     };
+                },
+                getType: function getType() {
+                    var format = this.format;
+                    var hasY = format.indexOf("YYYY") !== -1;
+                    var hasH = format.indexOf("hh") !== -1 || format.indexOf("HH") !== -1;
+                    if (hasY && hasH) {
+                        this.type = "datetime";
+                    } else if (hasH) {
+                        this.type = "time";
+                    }
                 }
             }
         };
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            default: __webpack_require__(42),
+            "default": __webpack_require__(42),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            default: __webpack_require__(43),
+            "default": __webpack_require__(43),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
@@ -863,17 +866,17 @@
         var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function(obj) {
             return typeof obj;
         } : function(obj) {
-            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj;
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj;
         };
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function(obj) {
             return typeof obj === "undefined" ? "undefined" : _typeof(obj);
         } : function(obj) {
-            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
         };
     }, function(module, exports, __webpack_require__) {
         __webpack_require__(67);
@@ -1248,7 +1251,7 @@
         for (var symbols = "hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","), i = 0; symbols.length > i; ) wks(symbols[i++]);
         for (var symbols = $keys(wks.store), i = 0; symbols.length > i; ) wksDefine(symbols[i++]);
         $export($export.S + $export.F * !USE_NATIVE, "Symbol", {
-            for: function(key) {
+            "for": function(key) {
                 return has(SymbolRegistry, key += "") ? SymbolRegistry[key] : SymbolRegistry[key] = $Symbol(key);
             },
             keyFor: function keyFor(key) {
@@ -1310,23 +1313,14 @@
         module.exports = ' <div class="xcui-datapicker {{className}}"> <div :class="{\'input-group\':btnShow,\'bg-pr\':!btnShow}"> <input class=form-control type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class=calendar v-show=show> <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"><input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年</span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'off\':child.disabled,\'noclick\':child.noClick}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} <div class=lunar v-if=showLunar>{{child.lunar}}</div> </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\'|| type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> <div class=timer-item> <div class=timer-item-current @click=currentTime :style="{\'color\':color}">当前</div> </div> </div> </div> <div class=calendar-button v-show="type==\'datetime\'|| type==\'time\' || range"> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        var __vue_styles__ = {};
         __webpack_require__(71);
         __vue_script__ = __webpack_require__(37);
         __vue_template__ = __webpack_require__(72);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
-        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            __vue_options__.template = __vue_template__;
+            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
         }
-        if (!__vue_options__.computed) __vue_options__.computed = {};
-        Object.keys(__vue_styles__).forEach(function(key) {
-            var module = __vue_styles__[key];
-            __vue_options__.computed[key] = function() {
-                return module;
-            };
-        });
     } ]);
 });
 

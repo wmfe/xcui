@@ -32,7 +32,7 @@
         var _popoverMixins2 = _interopRequireDefault(_popoverMixins);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = {
@@ -41,23 +41,23 @@
             props: {
                 trigger: {
                     type: String,
-                    default: "hover"
+                    "default": "hover"
                 },
                 effect: {
                     type: String,
-                    default: "scale"
+                    "default": "scale"
                 },
                 tooltipClass: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 titleClass: {
                     type: String,
-                    default: "scale"
+                    "default": "scale"
                 },
                 contentClass: {
                     type: String,
-                    default: "scale"
+                    "default": "scale"
                 }
             }
         };
@@ -70,18 +70,18 @@
         var _eventlistener2 = _interopRequireDefault(_eventlistener);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = {
             props: {
                 trigger: {
                     type: String,
-                    default: "click"
+                    "default": "click"
                 },
                 effect: {
                     type: String,
-                    default: "fadein"
+                    "default": "fadein"
                 },
                 title: {
                     type: String
@@ -205,23 +205,14 @@
         module.exports = " <div v-el:outer style=\"position:relative; display: inline-block\" class=xcui-tooltip> <span v-el:trigger> <slot> </slot> </span> <div class=tooltip v-bind:class=\"{\n            'top':    placement === 'top',\n            'left':   placement === 'left',\n            'right':  placement === 'right',\n            'bottom': placement === 'bottom'\n        }\" v-el:popover v-show=show :transition=effect role=tooltip> <div class=tooltip-arrow></div> <div class=tooltip-inner :class=tooltipClass> <slot name=content> {{{content}}} </slot> </div> </div> </div> ";
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        var __vue_styles__ = {};
         __webpack_require__(4);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(5);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
-        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            __vue_options__.template = __vue_template__;
+            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
         }
-        if (!__vue_options__.computed) __vue_options__.computed = {};
-        Object.keys(__vue_styles__).forEach(function(key) {
-            var module = __vue_styles__[key];
-            __vue_options__.computed[key] = function() {
-                return module;
-            };
-        });
     } ]);
 });
 

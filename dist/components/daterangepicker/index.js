@@ -340,7 +340,7 @@
         var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = {
@@ -348,51 +348,30 @@
             props: {
                 otherValue: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 right: {
                     type: Boolean,
-                    default: false
+                    "default": false
                 },
-                renderStar: {
-                    type: String,
-                    default: ""
-                },
-                renderEnd: {
-                    type: String,
-                    default: ""
-                },
+                startRender: null,
                 dateLimit: {
                     type: Object,
-                    default: null
+                    "default": null
                 },
                 initialDate: String
             },
             watch: {
-                renderStar: function renderStar(val) {
-                    if (val === "" || this.right) {
+                startRender: function startRender(val) {
+                    if (!val) {
                         return false;
                     }
-                    this.output(val);
+                    this.value = this.output(this.value);
                     var params = this.dateParams;
                     this.year = params.year;
                     this.month = params.month;
                     this.hour = params.hour;
                     this.day = params.day;
-                    this.minute = params.minute;
-                    this.second = params.second;
-                    this.render(params.year, params.month);
-                },
-                renderEnd: function renderEnd(val) {
-                    if (val === "" || !this.right) {
-                        return false;
-                    }
-                    this.output(val);
-                    var params = this.dateParams;
-                    this.year = params.year;
-                    this.month = params.month;
-                    this.day = params.day;
-                    this.hour = params.hour;
                     this.minute = params.minute;
                     this.second = params.second;
                     this.render(params.year, params.month);
@@ -404,13 +383,13 @@
             methods: {
                 renderElse: function renderElse(y, m, i, temp, line) {
                     var me = this;
-                    me.otherValue = me.otherValue && me.otherValue !== "" ? me.otherValue : me.value;
                     var format = me.defaultFormat;
                     var today = me.output([ y, m, i ], format);
                     var value = me.output(me.value, format);
+                    me.otherValue = me.otherValue ? me.output(me.otherValue) : me.value;
                     var otherDate = me.output(me.otherValue, format);
-                    var isMinDate = me.minDate && me.minDate !== "" && today < me.output(me.minDate, format);
-                    var isMaxDate = me.maxDate && me.maxDate !== "" && today > me.output(me.maxDate, format);
+                    var isMinDate = me.minDate && today < me.output(me.minDate, format);
+                    var isMaxDate = me.maxDate && today > me.output(me.maxDate, format);
                     if (isMinDate || isMaxDate) {
                         temp[line].push({
                             day: i,
@@ -480,19 +459,17 @@
                 },
                 changeOtherCalender: function changeOtherCalender() {
                     var me = this;
+                    var time = new Date().getTime();
                     if (!me.right) {
                         if (me.value > me.otherValue) {
                             me.otherValue = me.value;
                         }
-                        me.$parent.renderStar = me.output(me.value);
-                        me.$parent.renderEnd = me.output(me.otherValue);
                     } else if (me.right) {
                         if (me.value < me.otherValue) {
                             me.otherValue = me.value;
                         }
-                        me.$parent.renderStar = me.output(me.otherValue);
-                        me.$parent.renderEnd = me.output(me.value);
                     }
+                    me.$parent.startRender = time;
                 },
                 getYearMonth: function getYearMonth(date) {
                     this.output(date);
@@ -502,10 +479,11 @@
                 bindLimitDate: function bindLimitDate() {
                     var me = this;
                     var format = me.defaultFormat;
+                    me.otherValue = me.otherValue ? me.output(me.otherValue) : me.value;
                     var oValue = me.output(me.otherValue, format);
                     var ovs = me.dateParams;
-                    var bg = me.minDate;
-                    var ed = me.maxDate;
+                    var bg = me.minDate && me.output(me.minDate, format);
+                    var ed = me.maxDate && me.output(me.maxDate, format);
                     var y = ovs.year;
                     var m = ovs.month;
                     var d = ovs.day;
@@ -575,7 +553,7 @@
                             d = params.d;
                         }
                     }
-                    otherTime = me.output([ y, m, d, me.hour, me.minute, me.second ]);
+                    otherTime = me.output([ y, m, d ], format);
                     if (bg) {
                         otherTime = otherTime < bg ? bg : otherTime > ed ? ed : otherTime;
                     }
@@ -606,41 +584,41 @@
         var _calendar2 = _interopRequireDefault(_calendar);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = {
             name: "xcui-daterangepicker",
             props: {
+                minDate: null,
+                maxDate: null,
+                hourRange: null,
+                minuteRange: null,
+                secondRange: null,
                 startDate: {
                     twoWay: true,
-                    default: ""
+                    "default": ""
                 },
                 endDate: {
                     twoWay: true,
-                    default: ""
+                    "default": ""
                 },
-                minDate: {},
-                maxDate: {},
                 format: {
                     type: String,
-                    default: "YYYY-MM-DD"
+                    "default": "YYYY-MM-DD"
                 },
-                hourRange: {},
-                minuteRange: {},
-                secondRange: {},
                 color: {
                     type: String,
-                    default: ""
+                    "default": ""
                 },
                 dateLimit: {
                     type: Object,
-                    default: null
+                    "default": null
                 },
                 className: String,
                 btnShow: {
                     type: Boolean,
-                    default: false
+                    "default": false
                 }
             },
             components: {
@@ -650,8 +628,7 @@
                 return {
                     show: false,
                     value: "",
-                    renderStar: "",
-                    renderEnd: "",
+                    startRender: "",
                     initialStartDate: "",
                     initialEndDate: ""
                 };
@@ -669,17 +646,21 @@
                 }
             },
             methods: {
-                ok: function ok() {
+                ok: function ok(e) {
+                    e.preventDefault();
                     this.value = this.startDate + " 至 " + this.endDate;
                     this.show = false;
                     this.$emit("on-change", this.startDate, this.endDate);
                     this.initialStartDate = this.startDate;
                     this.initialEndDate = this.endDate;
+                    this.startRender = new Date().getTime();
                 },
-                cancel: function cancel() {
+                cancel: function cancel(e) {
+                    e.preventDefault();
                     this.show = false;
-                    this.renderStar = this.startDate = this.initialStartDate;
-                    this.renderEnd = this.endDate = this.initialEndDate;
+                    this.startRender = new Date().getTime();
+                    this.startDate = this.initialStartDate;
+                    this.endDate = this.initialEndDate;
                 },
                 showCalendar: function showCalendar(e) {
                     var me = this;
@@ -705,32 +686,32 @@
         var _typeof3 = _interopRequireDefault(_typeof2);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = {
             props: {
                 value: {
                     twoWay: true,
-                    default: ""
+                    "default": ""
                 },
                 format: {
                     type: String,
-                    default: "YYYY-MM-DD"
+                    "default": "YYYY-MM-DD"
                 },
                 minDate: {},
                 maxDate: {},
                 hourRange: {
                     type: [ Number, String ],
-                    default: 1
+                    "default": 1
                 },
                 minuteRange: {
                     type: [ Number, String ],
-                    default: 1
+                    "default": 1
                 },
                 secondRange: {
                     type: [ Number, String ],
-                    default: 1
+                    "default": 1
                 },
                 color: String,
                 className: String
@@ -759,34 +740,24 @@
                     selectRangeShow: true,
                     selectRange: "",
                     dateParams: null,
-                    defaultFormat: "YYYY-MM-DD"
+                    defaultFormat: "YYYY-MM-DD",
+                    type: "date"
                 };
             },
             computed: {
-                type: function type() {
-                    var type = "date";
-                    var format = this.format;
-                    var hasY = format.indexOf("YYYY") !== -1;
-                    var hasH = format.indexOf("hh") !== -1 || format.indexOf("HH") !== -1;
-                    if (hasY && hasH) {
-                        type = "datetime";
-                    } else if (hasH) {
-                        type = "time";
-                    }
-                    return type;
-                },
                 formatValue: function formatValue() {
                     return this.output(this.value);
                 }
             },
             created: function created() {
                 var me = this;
-                this.initialValue = this.value;
-                if (me.value !== "") {
+                me.getType();
+                if (me.value) {
                     me.value = me.output(me.value);
                 } else {
                     me.value = me.output(new Date());
                 }
+                this.initialValue = this.value;
                 var params = me.dateParams;
                 me.year = params.year;
                 me.month = params.month;
@@ -988,12 +959,13 @@
                 output: function output(d, format) {
                     var fmt = format || this.format;
                     var me = this;
-                    if (this.value && this.value !== "" && this.type === "time" && typeof d === "string") {
-                        d = "1970-01-01 " + d;
-                    }
                     var date = new Date(d);
-                    if ((typeof d === "undefined" ? "undefined" : (0, _typeof3.default)(d)) === "object" && d.length > 0) {
+                    if (this.value && this.type === "time" && typeof d === "string") {
+                        date = new Date("1970-01-01 " + d);
+                    } else if ((typeof d === "undefined" ? "undefined" : (0, _typeof3.default)(d)) === "object" && d.length > 0) {
                         date = new Date(d[0], d[1], d[2], d[3] || "00", d[4] || "00", d[5] || "00");
+                    } else if (!this.value) {
+                        date = new Date();
                     }
                     var year = date.getFullYear();
                     var month = date.getMonth();
@@ -1061,17 +1033,27 @@
                         minute: me.zero(minute),
                         second: me.zero(second)
                     };
+                },
+                getType: function getType() {
+                    var format = this.format;
+                    var hasY = format.indexOf("YYYY") !== -1;
+                    var hasH = format.indexOf("hh") !== -1 || format.indexOf("HH") !== -1;
+                    if (hasY && hasH) {
+                        this.type = "datetime";
+                    } else if (hasH) {
+                        this.type = "time";
+                    }
                 }
             }
         };
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            default: __webpack_require__(43),
+            "default": __webpack_require__(43),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            default: __webpack_require__(44),
+            "default": __webpack_require__(44),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
@@ -1084,17 +1066,17 @@
         var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function(obj) {
             return typeof obj;
         } : function(obj) {
-            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj;
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj;
         };
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                default: obj
+                "default": obj
             };
         }
         exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function(obj) {
             return typeof obj === "undefined" ? "undefined" : _typeof(obj);
         } : function(obj) {
-            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
         };
     }, function(module, exports, __webpack_require__) {
         __webpack_require__(68);
@@ -1469,7 +1451,7 @@
         for (var symbols = "hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","), i = 0; symbols.length > i; ) wks(symbols[i++]);
         for (var symbols = $keys(wks.store), i = 0; symbols.length > i; ) wksDefine(symbols[i++]);
         $export($export.S + $export.F * !USE_NATIVE, "Symbol", {
-            for: function(key) {
+            "for": function(key) {
                 return has(SymbolRegistry, key += "") ? SymbolRegistry[key] : SymbolRegistry[key] = $Symbol(key);
             },
             keyFor: function keyFor(key) {
@@ -1530,44 +1512,26 @@
     }, function(module, exports) {}, function(module, exports) {
         module.exports = ' <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"> <input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年 </span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'range\':child.range,\'off\':child.disabled,\'todayleft\':!right,\'todayright\':right,\'prev\':child.prev, \'noclick\':child.noclick}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\' || type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> </div> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> ';
     }, function(module, exports) {
-        module.exports = ' <div class=xcui-datarangepicker :class=className> <div :class="{\'input-group\':btnShow}"> <input class="form-control col-md-3" type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class="calendar double-calendar" v-show=show> <div class=clearfix> <div class=double-calendar-left> <calendar :value.sync=startDate :format=format :other-value.sync=endDate :min-date=minDate :max-date=maxDate :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :initial-date.sync=initialStartDate :render-star=renderStar></calendar> </div> <div class=double-calendar-right> <calendar :value.sync=endDate :format=format :other-value.sync=startDate :right=true :min-date=minDate :max-date=maxDate :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :initial-date.sync=initialEndDate :render-end=renderEnd></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
+        module.exports = ' <div class=xcui-datarangepicker :class=className> <div :class="{\'input-group\':btnShow}"> <input class="form-control col-md-3" type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class="calendar double-calendar" v-show=show> <div class=clearfix> <div class=double-calendar-left> <calendar :value.sync=startDate :format=format :other-value.sync=endDate :min-date=minDate :max-date=maxDate :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :initial-date.sync=initialStartDate :start-render=startRender></calendar> </div> <div class=double-calendar-right> <calendar :value.sync=endDate :format=format :other-value.sync=startDate :right=true :min-date=minDate :max-date=maxDate :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :initial-date.sync=initialEndDate :start-render=startRender></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        var __vue_styles__ = {};
         __vue_script__ = __webpack_require__(37);
         __vue_template__ = __webpack_require__(73);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
-        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            __vue_options__.template = __vue_template__;
+            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
         }
-        if (!__vue_options__.computed) __vue_options__.computed = {};
-        Object.keys(__vue_styles__).forEach(function(key) {
-            var module = __vue_styles__[key];
-            __vue_options__.computed[key] = function() {
-                return module;
-            };
-        });
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
-        var __vue_styles__ = {};
         __webpack_require__(72);
         __vue_script__ = __webpack_require__(38);
         __vue_template__ = __webpack_require__(74);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
-        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            __vue_options__.template = __vue_template__;
+            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
         }
-        if (!__vue_options__.computed) __vue_options__.computed = {};
-        Object.keys(__vue_styles__).forEach(function(key) {
-            var module = __vue_styles__[key];
-            __vue_options__.computed[key] = function() {
-                return module;
-            };
-        });
     } ]);
 });
 

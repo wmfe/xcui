@@ -53,8 +53,7 @@ export default {
     },
     data() {
         return {
-            timer: null,
-            closed: false
+            timer: null
         };
     },
     methods: {
@@ -110,6 +109,9 @@ export default {
             margin-left:10px;
             margin-bottom:0px;
             vertical-align: middle;
+        }
+        p {
+            padding-left: 10px;
         }
     }
     .xcui-message-info {
