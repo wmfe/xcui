@@ -20,7 +20,7 @@
     <demo>
         <example title="simple">
             <xcui-daterangepicker
-                :start-date.sync="''"
+                :start-date.sync="valueDemo"
                 :end-date.sync="''">
             </xcui-daterangepicker>
         </example>
@@ -40,8 +40,8 @@
         <example title="日期 + 时间选择">
             <xcui-daterangepicker
                   format="YYYY-MM-DD hh:mm:ss"
-                  :start-date.sync="'2016-09-08 00:02:00'"
-                  :end-date.sync="'2016-09-13 00:02:00'"
+                  :start-date.sync="startdate"
+                  :end-date.sync="enddate"
                   :hour-range="'3'"
                   :minute-range="'10'"
                   :second-range="'20'">
@@ -97,6 +97,9 @@
 export default {
     data() {
         return {
+            valueDemo: '',
+            startdate: '2016-09-08 00:02:00',
+            enddate: '2016-09-13 00:02:00',
             date: {
                 begin: '2015-12-20',
                 end: '2016-11-20',
@@ -119,6 +122,14 @@ export default {
                 btnShow: true
             }
         };
+    },
+    watch: {
+        valueDemo(val) {
+            console.log('simple: ' + val);
+        },
+        startdate(val) {
+            console.log('日期 + 时间选择: ' + val);
+        }
     },
     methods: {
         onChange(startDate, endDate) {
