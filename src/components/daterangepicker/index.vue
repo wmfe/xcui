@@ -116,7 +116,8 @@
             }
         },
         methods: {
-            ok() {
+            ok(e) {
+                e.preventDefault();
                 this.value = this.startDate + ' 至 ' + this.endDate;
                 this.show = false;
                 this.$emit('on-change', this.startDate, this.endDate);
@@ -124,7 +125,8 @@
                 this.initialEndDate = this.endDate;
                 this.startRender = new Date().getTime();
             },
-            cancel() {
+            cancel(e) {
+                e.preventDefault();
                 this.show = false;
                 this.startRender = new Date().getTime();
                 this.startDate = this.initialStartDate;

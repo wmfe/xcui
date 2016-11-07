@@ -178,12 +178,14 @@
                 me.minuteListShow = false;
                 me.secondListShow = false;
             },
-            ok() {
+            ok(e) {
+                e.preventDefault();
                 this.showFalse();
                 this.$emit('on-change', this.value, this.initialValue);
                 this.initialValue = this.value;
             },
-            cancel() {
+            cancel(e) {
+                e.preventDefault();
                 this.value = this.initialValue;
                 this.showFalse();
             },
