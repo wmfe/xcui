@@ -34,7 +34,7 @@ let MessageInstall = (Vue) => {
             _show(props) {
                 props = !props || isEmptyObject(props) ? {} : props;
                 Object.keys(props).forEach(propKey => {
-                    messageVM[propKey] = props[propKey];
+                    messageVM.$children[0][propKey] = props[propKey];
                 });
                 messageVM.$children[0].onShow();
             }
