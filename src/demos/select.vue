@@ -117,6 +117,7 @@
         <xcui-select class-name="select-demo"
                      placeholder="选择多个"
                      multiple
+                     :selected="multipleDefaultValue"
                      @change="multipleObjectOnChange"
                      @remove="multipleObjectOnRemove"
                      :options="multipleObjOptions">
@@ -143,6 +144,10 @@
 | :options | Array |无|默认数据,optgroup模式下数据结构有要求(具体查看demo#option Group) | 是|
 | :disabled | Boolean | false | 禁用 | 否 |
 | :selected | String | 无 | 默认已选的值 |否|
+## Events
+
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |
+|-----|-----|-----|-----|----|
 | @change | function(value) / function(value,groupIndex,valueIndex)  | 无 | 值发生变化的时候(2种模式: 普通模式/分组模式) | 否|
 | @select | function(value) / function(value,groupIndex,valueIndex)  | 无 | 发生了选择的时候(2种模式: 普通模式/分组模式)|否|
 | @searchChange | function(searchValue) | 无 | 搜索值发生变化的时候 | 否
@@ -347,18 +352,21 @@
                     {
                         name: '1',
                         label: '1',
-                        disabled: true
+                        disable: false
                     }, {
                         name: '2',
                         label: '2',
-                        disabled: true
+                        disable: false
                     }, {
                         name: '3',
                         label: '3',
-                        disabled: true
+                        disable: false
                     }
                 ],
-                multipleDefaultValue: [],
+                multipleDefaultValue: [
+                    '3',
+                    '2'
+                ],
                 multipleDefaultValue2: [
                     2,
                     4
