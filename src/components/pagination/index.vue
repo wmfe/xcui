@@ -11,7 +11,7 @@
                     </select>
                     条
                 </div>
-                <div class="v-pagination-standard col-md-9 text-right">
+                <div class="v-pagination-standard text-right" :class="[ withPageSize ? 'col-md-9' :'col-md-12']">
                     <div class="btn-group">
                         <button
                             @click="prev"
