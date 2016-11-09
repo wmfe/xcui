@@ -1,90 +1,103 @@
 <template lang="md">
-    ## daterangepicker 双日期选择框
+    # daterangepicker 双日期选择框
 
-    1、支持日历筛选，日历＋时间，时间筛选
-    2、可以配置日期的筛选范围，日期格式
-    3、对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60
-    4、可以直接获取当前的时间
-    5、年筛选可以直接输入，可以筛选
-    6、支持定制皮肤颜色
+    ## 使用场景
+
+    - 支持日历筛选，日历＋时间，时间筛选
+    - 可以配置日期的筛选范围，日期格式
+    - 对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60
+    - 可以直接获取当前的时间
+    - 年筛选可以直接输入，可以筛选
+    - 支持定制皮肤颜色
 
     ## 应用指南
-    1.要把datepicker放在一个拥有定位属性的容器中,因为datepicker是相对父级元素定位的。
+
+    要把datepicker放在一个拥有定位属性的容器中,因为datepicker是相对父级元素定位的。
+
+
+    ## DEMO
     
     <demo>
-        <example title="日历选择">
-            <daterangepicker
-                  :value.sync = "date.value"
-                  :sep = 'date.sep'
-                  :type="date.type"
-                  :begin="date.begin"
-                  :end="date.end"
-                  :date-limit="date.dateLimit"
-                  ></daterangepicker>
+        <example title="simple">
+            <xcui-daterangepicker
+                :start-date.sync="''"
+                :end-date.sync="''">
+            </xcui-daterangepicker>
         </example>
+        <p> 最简单的用法，startDate：日期开始时间，endDate：日期结束时间, 格式</p>
+        <p> startDate／endDate：可以传不同日期格式，例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262，也可以不传，默认当天，date.value值为 时间戳1477980088896</p>
+        <example title="日期格式">
+            <xcui-daterangepicker
+                :start-date.sync="''"
+                :end-date.sync="''"
+                :min-date="'2015/12/20'"
+                :max-date="'2016/11/20'"
+                :date-limit="date.dateLimit">
+            </xcui-daterangepicker>
+        </example>
+        <p> format,min-date,max-date同datapicker组件配置</p>
+        <p> date-limit：可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天</p>
         <example title="日期 + 时间选择">
-            <daterangepicker
-                  :value.sync = "datetime.value"
-                  :sep = 'datetime.sep'
-                  :type="datetime.type"
-                  :begin="datetime.begin"
-                  :end="datetime.end"
-                  :date-limit="datetime.dateLimit"
-                  :btn-show="datetime.btnShow"
-                  ></daterangepicker>
+            <xcui-daterangepicker
+                  format="YYYY-MM-DD hh:mm:ss"
+                  :start-date.sync="'2016-09-08 00:02:00'"
+                  :end-date.sync="'2016-09-13 00:02:00'"
+                  :hour-range="'3'"
+                  :minute-range="'10'"
+                  :second-range="'20'">
+            </xcui-daterangepicker>
         </example>
+        <p> hour-range：小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12</p>
+        <p> minute-range：分钟可选值设置，同上</p>
+        <p> second-range：分钟可选值设置，同上</p>
+        <example title="样式以及回调配置">
+            <xcui-daterangepicker
+                class-name="class-name"
+                color="pink"
+                format="YYYY-MM-DD hh:mm:ss"
+                :btn-show="true"
+                @on-change="onChange"
+                :hour-range="'3'">
+            </xcui-daterangepicker>
+        </example>
+        <p> class-name：日历样式，class名字</p>
+        <p> color：按钮颜色，值为颜色值，例如：#f00,pink</p>
+        <p> on-change：选择日期后的回调，参数 val(当前值) oldval(上次值)，onChange(val, oldVal) {}</p>
+        <p> btn-show: 按钮是否显示</p>
         <example title="时间选择">
-            <daterangepicker
-                  :value.sync = "time.value"
-                  :type="time.type"
-                  :input-class="time.inputClass"
-                  :btn-show="time.btnShow"
-                  ></daterangepicker>
+            <xcui-daterangepicker
+                  :start-date.sync="'04:02:03'"
+                  :end-date.sync="'05:02:03'"
+                  format="hh:mm:ss">
+            </xcui-daterangepicker>
         </example>
     </demo>
     
-    ### 日历选择，日期＋时间选择 type: date、datetime
+    ### 日历选择，日期＋时间选择
     #### Props
 
     | 名字 | 类型 | 默认 | 描述 | 是否双向绑定 | 是否必选 |
     |-----|-----|-----|-----|----|----|
-    | value | String | 无 | 默认日期 | 双向绑定 | 必选 |
-    | type| String | date | date: 日历  datetime: 日期＋时间 time: 时间| 否 | 可选 |
-    | sep | String | - | 日期格式设置 例如：2016-08-06 | 否 | 可选 |
-    | begin | String | 无 | 可选日期范围的开始时间 | 否 | 可选|
-    | end | String | 无 | 可选日期范围的结束时间 | 否 | 可选|
-    | hourRange | Number | 1 | 小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12） | 否 | 可选 |
-    | minuteRange | Number | 1 | 分可选值设置（例如：值为 20 时，分可选值为 20，40，60） | 否 | 可选 |
-    | secondRange | Number | 1 | 秒可选值设置（例如：值为 20 时，分可选值为 20，40，60） | 否 | 可选 |
+    | startDate | String | 无 | 日期开始时间 | 双向绑定 | 必选 |
+    | endDate | String | 无 | 日期结束时间 | 双向绑定 | 必选 |
+    | minDate | String | 无 | 日期可选最小值 | 否 | 可选|
+    | maxdate | String | 无 | 日期可选最大值 | 否 | 可选|
+    | format | String | YYYY-MM-DD | 展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年-月-日 时：分：秒 YYYY-MM-DD hh:mm:ss， 时/分/秒 hh/mm/ss | 静态属性 | 可选 |
     | dateLimit | object | null | 可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天| 否 | 可选 |
+    | hourRange | Number | 1 | 小时可选值设置（例如：值为 3 时，小时可选值为0，3，6，9，12 .....） | 否 | 可选 |
+    | minuteRange | Number | 1 | 分可选值设置（例如：值为 20 时，分可选值为0，20，40） | 否 | 可选 |
+    | secondRange | Number | 1 | 秒可选值设置（例如：值为 20 时，分可选值为0，20，40） | 否 | 可选 |
     | color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 否 | 可选 |
     | btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
     | inputClass | Array | 无 | 日历input输入框的样式，class名字 | 否 | 可选 |
-
-    ### 时间选择 type: time
-    #### Props
-
-    | 名字 | 类型 | 默认 | 描述 | 是否双向绑定 | 是否必选 |
-    |-----|-----|-----|-----|----|----|
-    | show | Boolean | false | 控制日历选择框显示隐藏 | 双向绑定 | 必选 |
-    | value | String | 无 | 默认日期 | 双向绑定 | 可选 |
-    | type| String | date | date: 日历  datetime: 日期＋时间 time: 时间| 否 | 可选 |
-    | hourRange | Number | 1 | 小时可选值设置（例如：值为 3 时，小时可选值为 3，6，9，12） | 否 | 可选 |
-    | minuteRange | Number | 1 | 分可选值设置（例如：值为 20 时，分可选值为 20，40，60） | 否 | 可选 |
-    | secondRange | Number | 1 | 秒可选值设置（例如：值为 20 时，分可选值为 20，40，60） | 否 | 可选 |
-    | btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
-    | inputClass | Array | 无 | 日历input输入框的样式，class名字 | 否 | 可选 |
+    | onChange | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @onChange | 否 | 可选 |
 </template>
 
 <script>
-import daterangepicker from '../components/daterangepicker';
 export default {
     data() {
         return {
             date: {
-                type: 'date',
-                value: '2016-09-08 至 2016-10-08',
-                sep: '-',
                 begin: '2015-12-20',
                 end: '2016-11-20',
                 dateLimit: {
@@ -93,11 +106,8 @@ export default {
                 color: '#f00'
             },
             datetime: {
-                type: 'datetime',
-                value: '2016-09-08 00:02:03 至 2016-09-13 00:00:00',
-                sep: '-',
                 begin: '2015-12-20',
-                end: '2016-11-20',
+                end: '2017-11-20',
                 dateLimit: {
                     days: 5
                 },
@@ -105,15 +115,21 @@ export default {
                 btnShow: true
             },
             time: {
-                type: 'time',
-                value: '04:02:03 至 00:02:03',
-                inputClass: ['col-md-6'],
+                inputClass: 'class-name',
                 btnShow: true
             }
         };
     },
-    components: {
-        daterangepicker
+    methods: {
+        onChange(startDate, endDate) {
+            console.log('startDate' + startDate);
+            console.log('endDate' + endDate);
+        }
     }
 };
 </script>
+<style lang="less">
+    .class-name{
+        width:400px;
+    }
+</style>

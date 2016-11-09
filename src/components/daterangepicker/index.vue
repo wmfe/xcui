@@ -1,6 +1,7 @@
 
 <template>
-    <div class="bg-pr" :class="inputClass">
+<div class="xcui-datarangepicker" :class="className">
+    <div :class="{'input-group':btnShow}">
         <input class="form-control col-md-3" type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
         <!-- 双日历 -->
         <div @click.stop=""
@@ -10,34 +11,34 @@
              <div class="clearfix">
                  <div class="double-calendar-left">
                     <calendar
-                        :type="type"
-                        :value.sync="beginCalenderVal"
-                        :sep="sep"
-                        :other-value.sync="endCalenderVal"
-                        :begin="begin"
-                        :end="end"
+                        :value.sync="startDate"
+                        :format="format"
+                        :other-value.sync="endDate"
+                        :min-date="minDate"
+                        :max-date="maxDate"
                         :hour-range="hourRange"
                         :minute-range="minuteRange"
                         :second-range="secondRange"
                         :color="color"
                         :date-limit="dateLimit"
-                        :render-star="renderStar"></calendar>
+                        :initial-date.sync="initialStartDate"
+                        :start-render="startRender"></calendar>
                  </div>
                  <div class="double-calendar-right">
                     <calendar
-                        :type="type"
-                        :value.sync="endCalenderVal"
-                        :sep="sep"
-                        :other-value.sync="beginCalenderVal"
+                        :value.sync="endDate"
+                        :format="format"
+                        :other-value.sync="startDate"
                         :right="true"
-                        :begin="begin"
-                        :end="end"
+                        :min-date="minDate"
+                        :max-date="maxDate"
                         :hour-range="hourRange"
                         :minute-range="minuteRange"
                         :second-range="secondRange"
                         :color="color"
                         :date-limit="dateLimit"
-                        :render-end="renderEnd"></calendar>
+                        :initial-date.sync="initialEndDate"
+                        :start-render="startRender"></calendar>
                  </div>
              </div>
              <div class="calendar-button">
@@ -52,48 +53,29 @@
             </button>
         </span>
     </div>
+</div>
 </template>
 <script>
     import calendar from './calendar';
     export default {
+        name: 'xcui-daterangepicker',
         props: {
-            show: {
-                type: Boolean,
-                twoWay: true,
-                default: false
-            },
-            type: {
-                type: String,
-                default: 'date'
-            },
-            value: {
-                type: String,
+            minDate: null,
+            maxDate: null,
+            hourRange: null,
+            minuteRange: null,
+            secondRange: null,
+            startDate: {
                 twoWay: true,
                 default: ''
             },
-            begin: {
-                type: String,
+            endDate: {
+                twoWay: true,
                 default: ''
             },
-            end: {
+            format: {
                 type: String,
-                default: ''
-            },
-            hourRange: {
-                type: Number,
-                default: 1
-            },
-            minuteRange: {
-                type: Number,
-                default: 1
-            },
-            secondRange: {
-                type: Number,
-                default: 1
-            },
-            sep: {
-                type: String,
-                default: '-'
+                default: 'YYYY-MM-DD'
             },
             color: {
                 type: String,
@@ -103,12 +85,7 @@
                 type: Object,
                 default: null
             },
-            inputClass: {
-                type: Array,
-                default: function () {
-                    return [];
-                }
-            },
+            className: String,
             btnShow: {
                 type: Boolean,
                 default: false
@@ -119,33 +96,41 @@
         },
         data() {
             return {
-                beginCalenderVal: '',
-                endCalenderVal: '',
-                renderStar: '',
-                renderEnd: ''
+                show: false,
+                value: '',
+                startRender: '',
+                initialStartDate: '',
+                initialEndDate: ''
             };
         },
-        created() {
-            if (this.btnShow) {
-                this.inputClass.push('input-group');
-            }
-            if (this.value !== '') {
-                let values = this.value.split('至');
-                this.beginCalenderVal = values[0].trim();
-                this.endCalenderVal = values[1].trim();
-                if (this.type === 'datetime') {
-                    this.beginCalenderVal = this.beginCalenderVal + ' 00:00:00';
-                    this.endCalenderVal = this.endCalenderVal + ' 00:00:00';
+        watch: {
+            startDate(val) {
+                if (val > this.endDate) {
+                    this.endDate = val;
+                }
+            },
+            endDate(val) {
+                if (val < this.startDate) {
+                    this.startDate = val;
                 }
             }
         },
         methods: {
-            ok() {
-                this.value = this.beginCalenderVal + ' 至 ' + this.endCalenderVal;
+            ok(e) {
+                e.preventDefault();
+                this.value = this.startDate + ' 至 ' + this.endDate;
                 this.show = false;
+                this.$emit('on-change', this.startDate, this.endDate);
+                this.initialStartDate = this.startDate;
+                this.initialEndDate = this.endDate;
+                this.startRender = new Date().getTime();
             },
-            cancel() {
+            cancel(e) {
+                e.preventDefault();
                 this.show = false;
+                this.startRender = new Date().getTime();
+                this.startDate = this.initialStartDate;
+                this.endDate = this.initialEndDate;
             },
             showCalendar(e) {
                 let me = this;
@@ -165,10 +150,11 @@
 </script>
  
 <style lang="less">
+.xcui-datarangepicker{
     @base-color:#46c3c1;
     @base-size:14px;
     @tit-color:#333;
-
+    position:relative;
     .calendar{
         width: 240px;
         padding: 10px;
@@ -176,7 +162,6 @@
         position: absolute;
         border: 1px solid #DEDEDE;
         border-radius: 2px;
-        opacity: .95;
         transition: all .5s ease;
         left:0;
         top:38px;
@@ -269,10 +254,8 @@
                     pointer-events:none !important;
                     cursor: default !important;
                 }
-                &.disabled{
+                &.off{
                     color: #c0c0c0;
-                    pointer-events: none !important;
-                    cursor: default !important;
                 }
                 &.today{
                     background-color: @base-color;
@@ -282,6 +265,14 @@
                     .lunar{
                         color:#fff;
                     }
+                }
+                &.todayleft{
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+                &.todayright{
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
                 }
                 &.range{
                     background:#e2eff5;
@@ -412,9 +403,7 @@
     }
     .btn-default {
         color: #666;
-        border: #ccc solid 1px;
-        background-color: #fff;
-        margin-left: -1px;
         border-radius: 0 4px 4px 0;
     }
+}
 </style>

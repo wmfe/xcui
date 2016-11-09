@@ -1,22 +1,24 @@
 <template lang="html">
-    <div class="xcui-modal-wrapper" v-show="show">
-        <div class="xcui-modal-mask" @click="maskClose" v-el:modal-mask></div>
+    <div class="xcui-modal-wrapper xcui-modal-mask" @click="maskClose" v-el:modal-mask v-show="show">
         <div class="xcui-modal" tabindex="-1" @keydown.esc="cancel" :style="style" :class="[sizeClass,className]">
             <div class="xcui-modal-header" v-if="showHeader">
                 <slot name="header">
                     <span class="xcui-modal-title">{{title}}</span>
                 </slot>
                 <slot name="close">
+                    <!-- <div class="xcui-modal-header-close" @click="cancel" v-if="showCloseButton">X</div> -->
                     <i class="xcui-modal-header-close glyphicon glyphicon-remove" @click="cancel" v-if="showCloseButton"></i>
                 </slot>
             </div>
-            <div class="xcui-modal-body">
-                <slot></slot>
+            <div class="xcui-modal-body" :style="contentStyle">
+                <slot>{{content}}</slot>
             </div>
             <div class="xcui-modal-footer" v-if="showFooter">
                 <slot name="footer">
-                    <button type="button" name="button" @click="ok" class="btn xcui-btn btn-primary">{{okText}}</button>
-                    <button type="button" name="button" @click="cancel" class="btn btn-default">{{cancelText}}</button>
+                    <button type="button" name="button" v-if="showOkButton" @click="ok"
+                        class="btn xcui-modal-btn btn-primary">{{okText}}</button>
+                    <button type="button" name="button" v-if="showCancelButton" @click="cancel"
+                        class="btn xcui-modal-cancel-btn btn-default">{{cancelText}}</button>
                 </slot>
             </div>
         </div>
@@ -31,11 +33,18 @@ export default {
             type: String,
             default: '提示'
         },
+        content: {
+            type: String,
+            default: ''
+        },
         show: {
             type: Boolean,
             default: false
         },
         style: {
+            type: Object
+        },
+        contentStyle: {
             type: Object
         },
         size: {
@@ -58,9 +67,21 @@ export default {
             type: Boolean,
             default: true
         },
+        showOkButton: {
+            type: Boolean,
+            default: true
+        },
+        showCancelButton: {
+            type: Boolean,
+            default: true
+        },
         maskClosable: {
             type: Boolean,
             default: true
+        },
+        scrollable: {
+            type: Boolean,
+            default: false
         },
         okText: {
             type: String,
@@ -79,6 +100,19 @@ export default {
             default: () => {}
         }
     },
+    watch: {
+        show(val) {
+            if (this.scrollable) {
+                return;
+            }
+            if (val) {
+                document.body.style.overflow = 'hidden';
+            }
+            else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+    },
     computed: {
         sizeClass() {
             return `xcui-modal-size-${this.size}`;
@@ -88,8 +122,8 @@ export default {
         close(e) {
             this.show = false;
         },
-        maskClose() {
-            if (this.maskClosable) {
+        maskClose(e) {
+            if (this.maskClosable && e.target === this.$els.modalMask) {
                 this.cancel();
             }
         },
@@ -112,6 +146,8 @@ export default {
 <style lang="less">
 .xcui-modal-wrapper {
     z-index: 1000;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .xcui-modal-wrapper, .xcui-modal-mask {
     position: fixed;
@@ -119,54 +155,62 @@ export default {
     right: 0;
     left: 0;
     bottom: 0;
-    width: 100%;
-    height: 100%;
     transition: opacity 0.2s ease;
     background-color: rgba(55, 55, 55, 0.6);
 }
 .xcui-modal {
+    z-index: 1001;
     font-size: 14px;
     position: relative;
-    margin: 0 auto;
-    top: 100px;
+    margin: 100px auto 30px;
     background-color: #fff;
     padding: 0;
     background-color: white;
     border-radius: 2px;
     box-shadow: 0 2px 8px alpha(black, 0.33);
     transition: all 0.2s ease;
-    max-height: 100vh;
     max-width: 100vw;
-    overflow-x: hidden;
-    overflow-y: auto;
     &.large {
         width: 45rem;
     }
 
 }
 .xcui-modal-body {
-    padding: 1rem;
+    padding: 1.6rem;
     border-bottom: 1px solid #f3f3f3;
     min-height: 8rem;
 }
 .xcui-modal-header {
-    font-size: 2rem;
+    font-size: 1.6rem;
     padding: .6rem;
     border-bottom: 1px solid #f3f3f3;
+    text-align: center;
 }
 .xcui-modal-header-close {
-    float: right;
-    cursor: pointer;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    color: #000;
+    opacity: .2;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 20px;
+    outline: 0;
+    &:hover{
+        cursor: pointer;
+        text-decoration: none;
+        opacity: .5;
+    }
 }
 .xcui-modal-footer {
-    display: flex;
-    justify-content: flex-end;
     padding: .5rem 1rem;
-    .xcui-btn {
+    text-align: center;
+    .xcui-modal-btn {
         margin-right: .5rem;
         background-color: #46C3C1;
         color: #fff;
         border: #46c3c1 solid 1px;
+        min-width: 75px;
         &:hover {
             background-color: #2b9d9b;
             border: #2b9d9b solid 1px;
@@ -177,6 +221,9 @@ export default {
             -webkit-box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
             box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.2);
         }
+    }
+    .xcui-modal-cancel-btn {
+        min-width: 75px;
     }
 }
 .xcui-modal-size-small {

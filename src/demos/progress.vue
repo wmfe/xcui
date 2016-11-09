@@ -6,9 +6,9 @@
 ## DEMO
 <demo>
     <example title="basic">
-        <v-progress :percent-info='percentInfo' :percent='percent' :show-info='true'></v-progress>
+        <xcui-progress :percent-info='percentInfo' :percent='percent' :show-info='true'></xcui-progress>
         <div style="width:200px">
-        <v-progress :info-class-name="'info'" :percent='percent' :percent-info="'50%'" :height='height'></v-progress>
+        <xcui-progress :info-class-name="'info'" :percent='percent' :percent-info="'50%'" :height='height'></xcui-progress>
         </div>
     </example>
 </demo>
@@ -25,11 +25,7 @@
 
 
 <script>
-    import vProgress from '../components/progress';
     export default {
-        components: {
-            vProgress
-        },
         data() {
             return {
                 percent: 50,

@@ -1,10 +1,11 @@
 <template lang="md">
-## Modal 模态窗口
+# Modal 模态窗口
 
-### 使用场景
-> 模拟浏览器的 **alert**、**confirm**和**prompt**
+## 使用场景
+模态对话框，模拟浏览器的 `alert`、`confirm`。在浮层中显示，引导用户进行相关操作。
+`Modal`提供了两种用法，基础组件使用和封装好的全局实例调用。
 
-### Demo
+## Demo
 
 <demo>
     <example title="基础使用">
@@ -84,7 +85,7 @@
         <div>欲与天公试比高</div>
         </xcui-modal>
         <style>
-        .xcui-modal-demo-class { top: 0; }
+        .Modal-demo-class { top: 0; }
         </style>
         <div>通过设置size可以快速设置对话框的宽度大小，也可以设置class-name和style自定义Modal的样式</div>
     </example>
@@ -94,16 +95,21 @@
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|
 |show|Boolean|false|对话框是否显示,需要.sync双向绑定|**必选**|
+|content|String|-|对话框的主体内容，如果使用了默认slot的方式，则content无效|可选|
 |title|String|-|对话框的标题，如果slot定义了header，则title无效|可选|
 |mask-closable|Boolean|true|是否允许点击遮罩层关闭对话框|可选|
+|scrollable|Boolean|false|打开Modal后，是否允许底页可滚动|可选|
 |show-close-button|Boolean|true|是否显示右上角的关闭按钮|可选|
+|show-ok-button|Boolean|true|是否显示确定按钮|可选|
+|show-cancel-button|Boolean|true|是否显示取消按钮|可选|
 |show-header|Boolean|true|是否显示整个标题栏|可选|
 |show-footer|Boolean|true|是否显示整个底边栏|可选|
 |ok-text|String|确定|确定按钮的文字|可选|
 |cancel-text|String|取消|取消按钮的文字|可选|
 |size|String|middle|预设对话框浮层的宽度大小。可选值：small/middle/large/full|可选|
 |class-name|String|-|自定义样式类名|可选|
-|style|object|-|设置对话框浮层的样式，调整浮层位置等。该属性设置的是.xcui-modal的样式|可选|
+|style|object|-|设置对话框浮层的样式，调整浮层位置等。该属性设置的是.Modal的样式|可选|
+|content-style|object|-|设置对话框内容主体的样式。该属性设置的是.Modal-body的样式|可选|
 
 ## Events
 | 名字 | 描述 | 是否必选 |
@@ -119,14 +125,66 @@
 |close|自定义右上角关闭按钮|
 |-|对话框的主体内容|
 
+## Modal 全局方法
+
+XCUI为Modal提供了便捷的调用方式。在Vue.prototype中添加了快捷的方法：$Modal.show,$Modal.close, $confirm和$alert。因此，在Vue实例代码中，可以使用this.$Modal等方法快捷地创建一个对话框。
+但需要在调用这些全局方法之前，先在项目中引入XCUI或xcuiInstall，并调用Vue.use安装。
+
+引入方式一：
+
+```js
+import Vue from 'vue'
+import XCUI from 'xcui' // 全局引入
+Vue.use(XCUI)
+```
+
+引入方式二：
+
+```js
+import Vue from 'vue'
+import {xcuiInstall} from 'xcui'
+Vue.use(xcuiInstall)
+```
+做好以上准备工作后，即可在组件任何位置调用vm.$confirm等来隐式地创建一个对话框了。
+
+1. **this.$Modal.show(options)**
+
+| 参数 | 类型 | 默认 | 描述 | 是否必选 |
+|-----|-----|-----|-----|----|
+|options|Object|-|对话框的参数，属性同props(props.show除外)。注意：使用驼峰式变量名，如**onOk**，而非on-ok|**必选**|
+
+2. **this.$Modal.close()**
+
+`$Modal.close()`提供隐式地关闭对话框全局实例的能力。
+
+3. **this.$confirm(title, content, onOk, onCancel, isRawHTML)** 或 **this.$confirm(options, isRawHTML)**
+
+写法1：
+| 参数 | 类型 | 默认 | 描述 | 是否必选 |
+|-----|-----|-----|-----|----|
+|title|String|-|对话框的标题|可选|
+|content|String|-|对话框的内容，可通过isRawHTML指定是否解析为原生HTML|可选|
+|onOk|Function|-|点击确定按钮的回调函数|可选|
+|onCancel|Function|-|点击取消按钮或关闭按钮的回调函数|可选|
+|options|Object|-|对content(String)是否解析为原生HTML|可选|
+
+写法2：
+| 参数 | 类型 | 默认 | 描述 | 是否必选 |
+|-----|-----|-----|-----|----|
+|options|Object|-|对话框的参数，属性同props(props.show除外)。注意：使用驼峰式变量名，如**onOk**，而非on-ok|**必选**|
+|isRawHTML|Boolean|false|对options.content(String)是否解析为原生HTML|可选|
+
+
+4. **this.$alert(content, onOk)**
+
+| 参数 | 类型 | 默认 | 描述 | 是否必选 |
+|-----|-----|-----|-----|----|
+|content|String|-|对话框的内容|**必选**|
+|onOk|Function|-|点击确定按钮的回调函数|可选|
+
 </template>
 <script>
-import xcuiModal from '../components/modal';
-
 let ModalDemo = {
-    components: {
-        xcuiModal
-    },
     data() {
         return {
             modal1: false,
@@ -150,7 +208,7 @@ let ModalDemo = {
 
 export default ModalDemo;
 </script>
-<style lang="less" scoped>
+<style lang="less">
 .xcui-modal-demo-title {
     color: #66ccff;
 }

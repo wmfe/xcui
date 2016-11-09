@@ -365,8 +365,8 @@
         });
         var _typeof2 = __webpack_require__(28);
         var _typeof3 = _interopRequireDefault(_typeof2);
-        var _deepClone = __webpack_require__(40);
-        var _deepClone2 = _interopRequireDefault(_deepClone);
+        var _clone = __webpack_require__(40);
+        var _clone2 = _interopRequireDefault(_clone);
         var _fuzzysearch = __webpack_require__(76);
         var _fuzzysearch2 = _interopRequireDefault(_fuzzysearch);
         function _interopRequireDefault(obj) {
@@ -404,10 +404,6 @@
                     type: Boolean,
                     "default": false
                 },
-                optionPartial: {
-                    type: String,
-                    "default": ""
-                },
                 customLabel: {
                     type: Function
                 },
@@ -419,7 +415,8 @@
                     "default": false
                 },
                 multipleMax: {
-                    type: Number
+                    type: Number,
+                    "default": 0
                 },
                 label: {
                     type: String,
@@ -435,7 +432,7 @@
                     searchValue: "",
                     isOpen: false,
                     selectIndex: 0,
-                    value: this.selected ? (0, _deepClone2.default)(this.selected) : this.multiple ? [] : null
+                    value: this.selected ? (0, _clone2.default)(this.selected) : this.multiple ? [] : null
                 };
             },
             methods: {
@@ -447,6 +444,7 @@
                     if (this.showSearch) {
                         if (this.clearOnSelect) {
                             this.searchValue = "";
+                            this.options = [];
                         }
                         this.$els.search.focus();
                     } else {
@@ -487,8 +485,8 @@
                     }
                     this.value = option;
                     this.selectIndex = parentIndex + "-" + index;
-                    this.$emit("change", (0, _deepClone2.default)(this.value), parentIndex, index);
-                    this.$emit("select", (0, _deepClone2.default)(this.value), parentIndex, index);
+                    this.$emit("change", (0, _clone2.default)(this.value), parentIndex, index);
+                    this.$emit("select", (0, _clone2.default)(this.value), parentIndex, index);
                     this.closeAfterSelect && this.deactivate();
                 },
                 select: function select(option) {
@@ -502,10 +500,14 @@
                             optionValue = option[this.label] || option.label;
                         }
                         if (isSelected) {
-                            this.removeOption(optionValue);
+                            this.removeOption(option);
                         } else {
-                            if (this.multipleMax > this.value.length) {
-                                this.value.push(optionValue);
+                            if (this.multipleMax > this.value.length || !this.multipleMax) {
+                                if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
+                                    this.value.push(option);
+                                } else {
+                                    this.value.push(optionValue);
+                                }
                             }
                         }
                     } else {
@@ -514,8 +516,8 @@
                         }
                         this.value = isSelected ? null : option;
                     }
-                    this.$emit("change", (0, _deepClone2.default)(this.value));
-                    this.$emit("select", (0, _deepClone2.default)(this.value));
+                    this.$emit("change", (0, _clone2.default)(this.value));
+                    this.$emit("select", (0, _clone2.default)(this.value));
                     this.closeAfterSelect && this.deactivate();
                 },
                 isSelected: function isSelected(option, groupIndex, index) {
@@ -528,9 +530,15 @@
                     }
                     if (this.multiple) {
                         if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
-                            return this.value.indexOf(option[me.label] || option.label) > -1;
+                            return this.value.indexOf(option) > -1;
                         }
                         return this.value.indexOf(option) > -1;
+                    }
+                    if (this.showSearch) {
+                        if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
+                            return this.searchValue === option[me.label];
+                        }
+                        return this.searchValue === option;
                     }
                     if (this.value === option && !option.disable) {
                         return true;
@@ -542,10 +550,12 @@
                         return;
                     }
                     if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
-                        this.values.map(function(e) {});
+                        if (this.value.indexOf(option) !== -1) {
+                            this.value.splice(this.value.indexOf(option), 1);
+                        }
                     }
                     this.value.$remove(option);
-                    this.$emit("remove", (0, _deepClone2.default)(option));
+                    this.$emit("remove", (0, _clone2.default)(option));
                 },
                 indexSet: function indexSet(parentIndex, index) {
                     if (this.optgroup) {
@@ -620,19 +630,30 @@
                 },
                 filteredOptions: function filteredOptions() {
                     var value = this.searchValue;
+                    var me = this;
                     if (this.showSearch && this.options.length) {
                         return this.options.filter(function(item) {
+                            if (typeof item !== "string") {
+                                return (0, _fuzzysearch2.default)(value, item[me.label || "label"]);
+                            }
                             return (0, _fuzzysearch2.default)(value, item);
                         });
                     }
                     return this.options || [];
                 },
                 currentOptionLabel: function currentOptionLabel() {
+                    var _this = this;
                     if (!this.value) {
                         return this.placeholder;
                     }
                     if (this.multiple) {
-                        return this.value.join(",");
+                        return this.value.map(function(k) {
+                            if ((typeof k === "undefined" ? "undefined" : (0, _typeof3.default)(k)) !== "object") {
+                                return k;
+                            }
+                            var label = _this.label || "label";
+                            return k[label];
+                        }).join(",");
                     }
                     if (typeof this.value === "string") {
                         return this.value;
@@ -671,6 +692,12 @@
                         });
                     });
                     return indexs;
+                },
+                multipleMaxShow: function multipleMaxShow() {
+                    if (!this.multiple) {
+                        return false;
+                    }
+                    return this.multiple && this.multipleMax !== 0 && this.value && this.multipleMax === this.value.length;
                 }
             },
             watch: {
@@ -713,22 +740,22 @@
                 "default": obj
             };
         }
-        var deepClone = function deepClone(obj) {
+        var clone = function clone(obj) {
             if (Array.isArray(obj)) {
-                return obj.map(deepClone);
+                return obj.map(clone);
             } else if (obj && (typeof obj === "undefined" ? "undefined" : (0, _typeof3.default)(obj)) === "object") {
                 var cloned = {};
                 var keys = (0, _keys2.default)(obj);
                 for (var i = 0, l = keys.length; i < l; i++) {
                     var key = keys[i];
-                    cloned[key] = deepClone(obj[key]);
+                    cloned[key] = clone(obj[key]);
                 }
                 return cloned;
             } else {
                 return obj;
             }
         };
-        module.exports = deepClone;
+        module.exports = clone;
     }, function(module, exports, __webpack_require__) {
         module.exports = {
             "default": __webpack_require__(44),
@@ -1213,7 +1240,7 @@
         }
         module.exports = fuzzysearch;
     }, function(module, exports) {
-        module.exports = ' <div tabindex=0 :class=getWrapCls @focus=activate() @blur="showSearch ? false : deactivate()" @keydown.enter.stop.prevent.self=enterSearchValue()> <div class=xcui-select-selection> <div class=xcui-select-selection-rendered @mousedown.stop=toggle()> <input type=text name=search v-el:search autocomplete=off class=xcui-select-search-input v-if=showSearch v-model=searchValue @focus.prevent=activate() @blur.prevent=deactivate() @keyup.down=keyNext() @keyup.up=keyPrev() @keydown.enter.stop.prevent.self=enterSearchValue() @change.prevent.stop="" :placeholder=placeholder> <span class=xcui-select-selection-text v-if=!showSearch v-text="currentOptionLabel || placeholder"> </span> <i class="glyphicon xcui-select-arrow" @mousedown.prevent.stop=toggle() :class="{\'glyphicon-triangle-bottom\':(!isOpen),\'glyphicon-triangle-top\':(isOpen)}"></i> </div> </div> <div class=xcui-select-menu-dropdown v-show="(isOpen && filteredOptions.length>0) || (isOpen && multiple)"> <ul v-el:list aria-activedescendant class=xcui-select-menu> <li class=xcui-select-menu-item v-if="multiple && multipleMax === value.length"> 最多可选{{multipleMax}}项! </li> <li class=xcui-select-menu-item v-if="filteredOptions.length<1 && searchEmptyText" v-text=searchEmptyText> </li> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-item v-if=!optgroup track-by=$index tabindex=1 :class="{\'xcui-select-menu-item-selected\': isSelected(item), \'xcui-select-menu-item-key\': $index === selectIndex,\'disabled\': item.disable}" @mouseenter.prevent.stop.self=indexSet($index) @mousedown.prevent.stop.self=select(item)> <partial :name=optionPartial class=xcui-select-menu-item-partial v-if=optionPartial.length></partial> <span v-else v-text=getOptionLabel(item)></span> </li> </template> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-group v-if=optgroup> <div class=xcui-select-menu-group-title>{{item.name}}</div> <ul> <template v-for="option in item.options"> <li class=xcui-select-menu-group-item :class="{\'xcui-select-menu-group-item-selected\': isSelected(option,$parent.$index,$index), \'disabled\': option.disable}" @mousedown.prevent.stop.self=optgroupSelect($parent.$index,$index,option)> <partial :name=optionPartial class=xcui-select-menu-item-partial v-if=optionPartial.length></partial> <span v-else v-text=getOptionLabel(option)></span> </li> </template> </ul> </li> </template> </ul> </div> </div> ';
+        module.exports = ' <div tabindex=0 :class=getWrapCls @focus=activate() @blur="showSearch ? false : deactivate()" @keydown.enter.stop.prevent.self=enterSearchValue()> <div class=xcui-select-selection> <div class=xcui-select-selection-rendered @mousedown.stop=toggle()> <input type=text name=search v-el:search autocomplete=off class=xcui-select-search-input v-if=showSearch v-model=searchValue @focus.prevent=activate() @blur.prevent=deactivate() @keyup.down=keyNext() @keyup.up=keyPrev() @keydown.enter.stop.prevent.self=enterSearchValue() @change.prevent.stop="" :placeholder=placeholder> <span class=xcui-select-selection-text v-if=!showSearch v-text="currentOptionLabel || placeholder"> </span> <i class="glyphicon xcui-select-arrow" @mousedown.prevent.stop=toggle() :class="{\'glyphicon-triangle-bottom\':(!isOpen),\'glyphicon-triangle-top\':(isOpen)}"></i> </div> </div> <div class=xcui-select-menu-dropdown v-show="(isOpen && filteredOptions.length>0) || (isOpen && multiple)"> <ul v-el:list aria-activedescendant class=xcui-select-menu> <li class=xcui-select-menu-item v-if=multipleMaxShow> 最多可选{{multipleMax}}项! </li> <li class=xcui-select-menu-item v-if="filteredOptions.length<1 && searchEmptyText" v-text=searchEmptyText> </li> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-item v-if=!optgroup tabindex=1 :class="{\'xcui-select-menu-item-selected\': isSelected(item), \'xcui-select-menu-item-key\': $index === selectIndex,\'disabled\': item.disable}" @mouseenter.prevent.stop.self=indexSet($index) @mousedown.prevent=select(item)> <span v-text=getOptionLabel(item)></span> </li> </template> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-group v-if=optgroup> <div class=xcui-select-menu-group-title>{{item.name}}</div> <ul> <template v-for="option in item.options"> <li class=xcui-select-menu-group-item :class="{\'xcui-select-menu-group-item-selected\': isSelected(option,$parent.$index,$index), \'disabled\': option.disable}" @mousedown.prevent.stop.self=optgroupSelect($parent.$index,$index,option)> <span v-text=getOptionLabel(option)></span> </li> </template> </ul> </li> </template> </ul> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(75);

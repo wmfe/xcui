@@ -16,6 +16,7 @@
 </template>
 <script>
 export default {
+    name: 'xcui-inputnumber',
     props: {
         maxValue: {
             type: Number
@@ -116,7 +117,7 @@ export default {
     }
 };
 </script>
-<style lang="less" scoped>
+<style lang="less">
 
 .outer{
     overflow: hidden;

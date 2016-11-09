@@ -1,95 +1,80 @@
 <template lang="md">
-## xcui-select
+# Select多功能选择框
 
 
-### 使用场景
-> 替代原生下拉框
-### DEMO
+## 使用场景
+
+1. 替代原生下拉框，支持多选
+2. 支持Array, Object等格式
+3. 支持进行输入建议，远程搜索等
+4. 支持optionGroup
+
+## DEMO
 
 <demo>
     <example title="single - 基本模式 options(Array)">
-        <xcui-select class-name="select-demo" placeholder="Select one"
-                     :custom-label="reRender"
-                     :close-after-select="closeAfterSelect"
-                     :selected="defaultValue"
-                     @change="selectChange2"
-                     @select="onSelect2"
-                     :options="dataSource2">
+        <xcui-select
+            @change="selectChange2"
+            :options="dataSource2">
         </xcui-select>
     </example>
     <example title="single - 基本模式 options(Object)">
-        <xcui-select class-name="select-demo" placeholder="Select one"
-                     @change="selectChange"
-                     @select="onSelect"
-                     :options="dataSource"></xcui-select>
+        <xcui-select
+             @change="selectChange"
+             :options="dataSource"></xcui-select>
     </example>
     <example title="自定义label的字段(label='text')">
-        <xcui-select class-name="select-demo" placeholder="Select one"
-                     label="text"
-                     @change="selectChange"
-                     :options="dataSource"></xcui-select>
-        <pre>
-    {
-        name: 'jake',
-        label: 'jake',
-        text: '测试1',
-        disable: true
-    }</pre>
+        <xcui-select label="text"
+            @change="selectChange"
+            :options="dataSource"></xcui-select>
     </example>
     <example title="禁用(:disabled)">
-        <xcui-select class-name="select-demo" placeholder="disable"
-                     :disabled="disable"
-                     @change="selectChange"
-                     :options="dataSource"></xcui-select>
-    </example>
-    <example title="禁用单个option(:disabled)">
-        <xcui-select class-name="select-demo" placeholder="disable"
-                     @change="selectChange"
-                     :options="dataSourceDisable"></xcui-select>
+        <xcui-select :disabled="disable"
+             @change="selectChange"
+             :options="dataSource"></xcui-select>
     </example>
     <example title="定制label(:custom-label)">
-        <xcui-select class-name="select-demo" placeholder="Select one"
-                     :custom-label="reRenderLabel"
-                     @change="selectChange2" :options="dataSource"></xcui-select>
-    </example>
-    <example title="定制 option list(option-partial && Vue.partial)">
-        <xcui-select class-name="select-demo" placeholder="Select one"
-                     option-partial="customOptionPartial" :custom-label="reRender"
-                     @change="selectChange2" :options="partialSource"></xcui-select>
+        <xcui-select :custom-label="reRenderLabel"
+            @change="selectChange2"
+            :options="dataSource"></xcui-select>
     </example>
     <example title="省市联动">
-        <xcui-select class-name="select-demo" placeholder="选择省"
-                     @change="provinceChange" :options="provinceData"></xcui-select>
-        <xcui-select v-if="selectCityData.length>0" class-name="select-demo" placeholder="选择市"
-                     @change="cityChange" :options="selectCityData"></xcui-select>
-        {{selectProvinceValue}} - {{selectCityValue}}
+        <xcui-select placeholder="选择省"
+            @change="provinceChange"
+            :options="provinceData"></xcui-select>
+        <xcui-select placeholder="选择市"
+            @change="cityChange"
+            :options="selectCityData"></xcui-select>
+        <p>
+            {{selectProvinceValue}} - {{selectCityValue}}
+        </p>
     </example>
     <example title="input Local Search">
         <xcui-select class-name="select-demo" placeholder="选择一个城市"
-                     show-search search-empty-text="没有搜索结果哎..."
-                     @search-change="searchChange"
-                     @change="localSearchChange"
-                     :options="localSearchSource">
+             show-search search-empty-text="没有搜索结果哎..."
+             @search-change="searchChange"
+             @change="localSearchChange"
+             :options="localSearchSource">
         </xcui-select>
         输入值: {{localSearchValue}}
         选择结果: {{localSearchResult}}
     </example>
     <example title="智能输入">
         <xcui-select class-name="select-demo" placeholder="输入邮箱"
-                     show-search
-                     @search-change="asyncSearchChange"
-                     @change="asyncSearchOnChange"
-                     :options="asyncSearchSource">
+             show-search
+             @search-change="asyncSearchChange"
+             @change="asyncSearchOnChange"
+             :options="asyncSearchSource">
         </xcui-select>
     </example>
     <example title="远程数据">
         远程搜索
         <xcui-select class-name="select-demo" placeholder="搜索"
-                     show-search
-                     clear-on-select
-                     @search-change="serverSearchChange"
-                     @change="serverSearchOnChange"
-                     :options="serverSearchSource">
+             show-search
+             clear-on-select
+             @search-change="serverSearchChange"
+             @change="serverSearchOnChange"
+             :options="serverSearchSource">
         </xcui-select>
         {{serverSearchValue}}
         <br>
@@ -100,7 +85,6 @@
                      optgroup
                      @change="optgroupOnChange"
                      :selected="optgroupDefaultValue"
-                     option-partial="optgroupPartial"
                      :options="optgroupSource">
         </xcui-select>
     </example>
@@ -115,7 +99,6 @@
     <example title="multiple select">
         <xcui-select class-name="select-demo" placeholder="选择多个"
                      multiple
-                     :multiple-max=2
                      :selected="multipleDefaultValue"
                      @change="multipleOnChange"
                      @remove="multipleOnRemove"
@@ -128,6 +111,16 @@
                      :multiple-max=2
                      :selected="multipleDefaultValue2"
                      :options="dataSource">
+        </xcui-select>
+    </example>
+    <example title="multiple select object">
+        <xcui-select class-name="select-demo"
+                     placeholder="选择多个"
+                     multiple
+                     :selected="multipleDefaultValue"
+                     @change="multipleObjectOnChange"
+                     @remove="multipleObjectOnRemove"
+                     :options="multipleObjOptions">
         </xcui-select>
     </example>
 </demo>
@@ -146,11 +139,15 @@
 | showSearch | Boolean | false | 是否展示搜索框 | 否 |
 | clearOnSelect | Boolean | false | 选择完以后清除搜索内容 | 否 |
 | label | String | 无 | 自定义label展现key(对应数据中key)  | 否 |
-| optionPartial | Vue.partial | 无 | option可定制 | 否 |
+| :multiple-max| Number | 无 | 多选模式下 最多选择数据项，默认0|
 | :customLabel | Function | 无| option内容定制|否
 | :options | Array |无|默认数据,optgroup模式下数据结构有要求(具体查看demo#option Group) | 是|
 | :disabled | Boolean | false | 禁用 | 否 |
 | :selected | String | 无 | 默认已选的值 |否|
+## Events
+
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |
+|-----|-----|-----|-----|----|
 | @change | function(value) / function(value,groupIndex,valueIndex)  | 无 | 值发生变化的时候(2种模式: 普通模式/分组模式) | 否|
 | @select | function(value) / function(value,groupIndex,valueIndex)  | 无 | 发生了选择的时候(2种模式: 普通模式/分组模式)|否|
 | @searchChange | function(searchValue) | 无 | 搜索值发生变化的时候 | 否
@@ -212,17 +209,13 @@
 [Keen-UI - select](https://josephuspaye.github.io/Keen-UI/#/ui-select-docs)
 [http://amazeui.org/javascript/selected](http://amazeui.org/javascript/selected)
 </template>
-<style lang="less" scoped>
-    .select-demo{
-        width:200px;
+<style lang="less">
+    .select-demo,.xcui-select{
+        width:200px !important;
     }
 </style>
 <script>
-    import Vue from 'vue';
     import jsonp from 'jsonp';
-    import select from '../components/select/index.vue';
-    Vue.partial('customOptionPartial', '<p><i class={{item}}></i> - {{item}}</p>');
-    Vue.partial('optgroupPartial', '<span>test - {{option|json}}</span>');
     export default{
         data() {
             return {
@@ -355,9 +348,24 @@
                     }
                 ],
                 optgroupValue: '',
+                multipleObjOptions: [
+                    {
+                        name: '1',
+                        label: '1',
+                        disable: false
+                    }, {
+                        name: '2',
+                        label: '2',
+                        disable: false
+                    }, {
+                        name: '3',
+                        label: '3',
+                        disable: false
+                    }
+                ],
                 multipleDefaultValue: [
-                    'java',
-                    'ruby'
+                    '3',
+                    '2'
                 ],
                 multipleDefaultValue2: [
                     2,
@@ -368,14 +376,6 @@
                 disable: true,
                 defaultValue: 'css',
                 closeAfterSelect: true,
-                //
-                partialSource: [
-                    'glyphicon glyphicon-envelope',
-                    'glyphicon glyphicon-heart',
-                    'glyphicon glyphicon-music',
-                    'glyphicon glyphicon-user',
-                    'glyphicon glyphicon-road'
-                ],
                 // 省市联动数据
                 selectProvinceValue: '',
                 selectCityValue: '',
@@ -392,9 +392,6 @@
                 this.selectCityData = this.cityData[province] || null;
                 this.selectCityValue = '';
             }
-        },
-        components: {
-            'xcui-select': select
         },
         created() {
             let me = this;
@@ -451,18 +448,11 @@
                 console.log('asycn select:' + v);
             },
             serverSearchChange(v) {
-                //
                 let me = this;
-                jsonp(`http://suggest.taobao.com/sug?code=utf-8&q=${v}`, (err, d) => {
-                    if (err) {
-                        me.serverSearchSource = [];
-                    }
-                    else {
-                        me.serverSearchSource = d.result.map(v => {
-                            return v[0];
-                        });
-                    }
-                });
+                window.selectsug = function (res) {
+                    me.serverSearchSource = res.s;
+                };
+                jsonp(`https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=window.selectsug&wd=${v}`);
             },
             serverSearchOnChange(v) {
                 this.serverSearchValue = v;
@@ -478,6 +468,12 @@
             },
             multipleOnRemove(v) {
                 console.log('multipleOnRemove', v);
+            },
+            multipleObjectOnChange(v) {
+                console.log('multipleObjectOnChange', v);
+            },
+            multipleObjectOnRemove(v) {
+                console.log('multipleObjectOnRemove', v);
             }
         }
     };

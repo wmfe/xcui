@@ -1,28 +1,22 @@
-import xcuiModal from './components/modal'
-let modalInstall = (Vue, $root) => {
-    Vue.set($root, 'XCUI_MODAL', {
-        show: false,
-        title: '',
-        ok: ()=>{},
-        cancel: ()=>{}
-    });
-    Vue.prototype.$Modal = {
-        open(title, text, onOk, onCancel, rawHTML) {
-            $root.XCUI_MODAL = {
+import ModalInstall from './modal/install.js';
+import MessageInstall from './message/install.js';
+import LoadingInstall from './loading/install.js';
 
-            }
-        },
-        close() {
-
-        },
-        alert() {
-
-        },
-        confirm() {
-            
-        }
-    };
+let xcuiInstall = {};
+xcuiInstall.install = (Vue, options = {
+    Modal: true,
+    Message: true,
+    Loading: true
+}) => {
+    if (options.Modal) {
+        ModalInstall(Vue);
+    }
+    if (options.Message) {
+        MessageInstall(Vue);
+    }
+    if (options.Loading) {
+        LoadingInstall(Vue);
+    }
 };
-const install = (Vue, options) => {
 
-};
+export default xcuiInstall;

@@ -2,23 +2,24 @@
 # Tag标签
 
 ## 使用场景
-1、标记事物的属性、分类等特性
-2、支持关闭标签、点击标签
-3、支持禁用标签
-4、支持自定义标签样式
+
+- 标记事物的属性、分类等特性
+- 支持关闭标签、点击标签
+- 支持禁用标签
+- 支持自定义标签样式
 
 ## DEMO
 <demo>
 	<example title="基本使用">
-        <v-tag :text="'标签'"></v-tag>
-        <v-tag :disabled="true" :text="'禁用标签'"></v-tag>
-        <v-tag :closeable="true" :text="'关闭'" @close="closeclick"></v-tag>
-        <v-tag :closeable="true" @close="closeclick" :key.sync="key" :text="'点击不关闭'" :aftercloseisshow.sync="afterCloseIsShowTag" @click="click"></v-tag>
-        <v-tag  :classname="'define-class'" :text="'自定义样式'" @click="click" ></v-tag>
+        <xcui-tag :text="'标签'"></xcui-tag>
+        <xcui-tag :disabled="true" :text="'禁用标签'"></xcui-tag>
+        <xcui-tag :closeable="true" :text="'关闭'" @close="closeclick"></xcui-tag>
+        <xcui-tag :closeable="true" @close="closeclick" :key.sync="key" :text="'点击不关闭'" :aftercloseisshow.sync="afterCloseIsShowTag" @click="click"></xcui-tag>
+        <xcui-tag  :classname="'define-class'" :text="'自定义样式'" @click="click" ></xcui-tag>
     </example>
     <example title="添加标签">
         <template v-for="item in tags">
-            <v-tag :closeable="true" :text="item.text"></v-tag>
+            <xcui-tag :closeable="true" :text="item.text"></xcui-tag>
         </template>
         <input type="button" class="btn btn-primary" value="添加" @click="addTag"/>
     </example>
@@ -40,7 +41,6 @@
 </template>
 
 <script>
-import vTag from '../components/tag';
 export default {
     data() {
         return {
@@ -50,9 +50,6 @@ export default {
             key: 'data',
             afterCloseIsShowTag: true
         };
-    },
-    components: {
-        vTag
     },
     methods: {
         closeclick() {

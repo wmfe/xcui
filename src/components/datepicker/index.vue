@@ -1,5 +1,6 @@
 <template>
-    <div class="bg-pr" :class="inputClass">
+<div class="xcui-datapicker {{className}}">
+    <div :class="{'input-group':btnShow,'bg-pr':!btnShow}">
         <input class="form-control"  type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
         <div @click.stop=""
              @touchstart.stop=""
@@ -25,7 +26,7 @@
                     <tr v-for="(k1,day) in days">
                         <td
                         v-for="(k2,child) in day"
-                        :class="{'today':child.today,'disabled':child.disabled}"
+                        :class="{'today':child.today,'off':child.disabled,'noclick':child.noClick}"
                         :style="{'background':color&&child.today?color:''}"
                         @click="select(k1,k2,$event)">
                         {{child.day}}
@@ -80,35 +81,30 @@
             </button>
         </span>
     </div>
+</div>
 </template>
 <script>
     import CalendarMixins from '../daterangepicker/calendarMixins.js';
     export default {
         mixins: [CalendarMixins],
+        name: 'xcui-datepicker',
         props: {
             btnShow: {
                 type: Boolean,
                 default: false
-            },
-            inputClass: {
-                type: Array,
-                default: function () {
-                    return [];
-                }
             }
         },
         data() {
             return {
                 show: false,
                 currentMonth: Number,
-                selectValue: '',
                 currentTimeBtnShow: true
             };
         },
         methods: {
             renderElse(y, m, i, temp, line, currentTime) {
                 let me = this;
-                let thisTime = Number(new Date(me.year, me.month, i));
+                let thisTime = new Date(me.output([me.year, me.month, i], me.defaultFormat)).getTime();
                 let options = {day: i, today: false};
                 options = me.bindSingerTime(thisTime, currentTime, options);
                 temp[line].push(options);
@@ -116,84 +112,81 @@
             // 1.判断begin和end的日期
             bindSingerTime(thisTime, currentTime, options) {
                 let me = this;
-                if (me.begin !== undefined) {
-                    let beginSplit = me.begin.split(me.sep);
-                    let beginSplit1 = parseInt(beginSplit[0], 10);
-                    let beginSplit2 = parseInt(beginSplit[1], 10) - 1;
-                    let beginSplit3 = parseInt(beginSplit[2], 10);
-                    let beginTime = Number(new Date(beginSplit1, beginSplit2, beginSplit3));
+                let format = me.defaultFormat;
+                if (me.minDate) {
+                    let beginTime = new Date(me.output(me.minDate, format)).getTime();
                     if (beginTime > thisTime) {
                         options.disabled = true;
-                    }
-                    if (beginTime > currentTime) {
-                        me.currentTimeBtnShow = false;
+                        options.noClick = true;
                     }
                 }
-                if (me.end !== undefined) {
-                    let endSplit = me.end.split(me.sep);
-                    let endSplit1 = parseInt(endSplit[0], 10);
-                    let endSplit2 = parseInt(endSplit[1], 10) - 1;
-                    let endSplit3 = parseInt(endSplit[2], 10);
-                    let endTime = Number(new Date(endSplit1, endSplit2, endSplit3));
+                if (me.maxDate) {
+                    let endTime = new Date(me.output(me.maxDate, format)).getTime();
                     if (endTime < thisTime) {
                         options.disabled = true;
-                    }
-                    if (endTime < currentTime) {
-                        me.currentTimeBtnShow = false;
+                        options.noClick = true;
                     }
                 }
                 return options;
             },
             select(k1, k2, e) {
-                if (e !== undefined) {
-                    e.stopPropagation();
+                if (e.target.className.indexOf('noclick') !== -1) {
+                    return false;
                 }
                 let me = this;
+                let days = this.days;
+                let daySeleted = days[k1][k2];
+                let oldValue = this.value = me.output(this.value);
                 // 取消上次选中
                 if (this.today.length > 0) {
-                    this.days[this.today[0]][this.today[1]].today = false;
+                    days[this.today[0]][this.today[1]].today = false;
                 }
                 // 设置当前选中天
-                this.days[k1][k2].today = true;
-                this.day = me.zero(me.days[k1][k2].day);
-                this.today = [k1, k2];
-                this.selectValue = this.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-                if (this.type === 'date') {
-                    this.value = this.selectValue;
-                    this.showFalse();
+                daySeleted.today = true;
+                me.day = me.zero(daySeleted.day);
+                if (daySeleted.disabled) {
+                    me.month = k1 === 0 ? (me.month - 1) : (me.month + 1);
+                    let om = me.outputMonth(me.month, me.year);
+                    me.year = om.y;
+                    me.month = om.m;
+                    me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+                    me.render(me.year, me.month);
+                }
+                else {
+                    me.today = [k1, k2];
+                    me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+                }
+                if (me.type === 'date') {
+                    this.$emit('on-change', this.value, oldValue);
+                    me.showFalse();
                 }
             },
             currentTime() {
-                let date = new Date();
-                let year = date.getFullYear();
-                let month = date.getMonth();
-                let hour = this.zero(date.getHours());
-                let day = this.zero(date.getDate());
-                let minute = this.zero(date.getMinutes());
-                let second = this.zero(date.getSeconds());
                 let me = this;
-                let value = this.value;
-                this.year = year;
-                this.month = month;
-                this.day = day;
-                this.hour = hour;
-                this.minute = minute;
-                this.second = second;
-                this.selectValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
-                this.value = this.selectValue;
-                if (this.currentTimeBtnShow) {
-                    this.render(year, month);
+                me.value = me.output(new Date());
+                let params = this.dateParams;
+                me.year = params.year;
+                me.month = params.month;
+                me.day = params.day;
+                me.hour = params.hour;
+                me.minute = params.minute;
+                me.second = params.second;
+                if (me.currentTimeBtnShow) {
+                    me.render(me.year, me.month);
                 }
-                this.value = value;
-                this.hourListShow = false;
-                this.minuteListShow = false;
-                this.secondListShow = false;
+                me.hourListShow = false;
+                me.minuteListShow = false;
+                me.secondListShow = false;
             },
-            ok() {
-                this.value = this.selectValue !== '' ? this.selectValue : this.value;
+            ok(e) {
+                e.preventDefault();
                 this.showFalse();
+                this.$emit('on-change', this.value, this.initialValue);
+                this.initialValue = this.value;
             },
-            cancel() {
+            cancel(e) {
+                e.preventDefault();
+                this.value = this.initialValue;
                 this.showFalse();
             },
             showFalse() {
@@ -205,7 +198,17 @@
             showCalendar(e) {
                 let me = this;
                 e.stopPropagation();
-                this.show = true;
+                me.show = true;
+                if (me.value !== '') {
+                    me.output(me.value);
+                    let params = me.dateParams;
+                    me.year = params.year;
+                    me.month = params.month;
+                    me.hour = params.hour;
+                    me.minute = params.minute;
+                    me.second = params.second;
+                }
+                me.render(me.year, me.month);
                 let bindHide = function (e) {
                     e.stopPropagation();
                     me.showFalse();
@@ -218,13 +221,13 @@
         }
     };
 </script>
- 
-<style lang="less" scoped>
-    @base-color:#46c3c1;
-    @base-size:14px;
-    @tit-color:#333;
 
+<style lang="less">
+.xcui-datapicker{
     .calendar {
+        @base-color:#46c3c1;
+        @base-size:14px;
+        @tit-color:#333;
         width: 240px;
         padding: 10px;
         background: #fff;
@@ -234,7 +237,6 @@
         top:38px;
         border: 1px solid #DEDEDE;
         border-radius: 2px;
-        opacity: .95;
         transition: all .5s ease;
         &-enter{
             .calendar-leave{
@@ -326,10 +328,8 @@
                 pointer-events:none !important;
                 cursor: default !important;
             }
-            &.disabled{
+            &.off{
                 color: #c0c0c0;
-                pointer-events: none !important;
-                cursor: default !important;
             }
             &.today{
                 background-color: @base-color;
@@ -443,15 +443,13 @@
             content: '';
             clear: both;
         }
+        .btn-default {
+            color: #666;
+            border-radius: 0 4px 4px 0;
+        }
     }
     .bg-pr{
         position:relative;
     }
-    .btn-default {
-        color: #666;
-        border: #ccc solid 1px;
-        background-color: #fff;
-        margin-left:-1px;
-        border-radius: 0 4px 4px 0;
-    }
+}
 </style>

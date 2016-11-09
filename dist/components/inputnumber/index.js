@@ -29,6 +29,7 @@
             value: true
         });
         exports.default = {
+            name: "xcui-inputnumber",
             props: {
                 maxValue: {
                     type: Number
@@ -57,8 +58,7 @@
                     "default": "large"
                 },
                 inputValue: {
-                    type: String,
-                    "default": ""
+                    type: Number
                 }
             },
             data: function data() {
@@ -66,7 +66,7 @@
             },
             methods: {
                 changeValue: function changeValue(event) {
-                    if (this.isAvailbale(event.keyCode)) {
+                    if (this.isAvailbale(event.keyCode) && this.isNumber(this.inputValue + "")) {
                         this.inputValue = this.limitValue(this.inputValue) + "";
                     } else {
                         this.inputValue = "";
@@ -91,16 +91,14 @@
                     if (keyCode >= 96 && keyCode <= 105) {
                         return true;
                     }
-                    if (keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 39) {
+                    if (keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 39 || keyCode === 189) {
                         return true;
                     }
                     return false;
                 },
                 isNumber: function isNumber(num) {
-                    if (window.parseInt(num) === window.Number(num)) {
-                        return true;
-                    }
-                    return false;
+                    var result = /^(-)?\d*$/.test(num);
+                    return result;
                 },
                 upValue: function upValue(e) {
                     if (this.isNumber(this.inputValue)) {
@@ -125,7 +123,7 @@
             ready: function ready() {}
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div v-el:outer="" class=outer :class=size _v-6042a108=""> <div class=up-down-wrap _v-6042a108=""> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue _v-6042a108=""> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue _v-6042a108=""> </a> </div> <div class=input-wrap _v-6042a108=""> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className _v-6042a108=""> </div> </div> ';
+        module.exports = ' <div v-el:outer class=outer :class=size> <div class=up-down-wrap> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue> </a> </div> <div class=input-wrap> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className /> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(2);

@@ -666,6 +666,10 @@ ol.linenums {
     margin-bottom: 0
 }
 
+ul li{
+    padding: 5px;
+}
+
 li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 {
     list-style-type: none
 }
@@ -824,7 +828,9 @@ code, pre {
 }
 
 code {
-    white-space: normal
+    white-space: normal;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 pre, pre.prettyprint {
@@ -884,7 +890,7 @@ blockquote {
 
 blockquote p {
     margin-bottom: 1.1em;
-    font-size: 1em;
+    font-size: 15px;
     line-height: 1.45
 }
 

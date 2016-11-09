@@ -5,26 +5,27 @@
 
 import Vue from 'vue';
 import Router from 'vue-router';
-import VueResource from 'vue-resource';
 import App from './App';
 import Home from './Home';
 import Homecontent from './demos/homeContent';
-import Paginations from './demos/paginations';
+import xcui from './components/index';
+import Pagination from './demos/pagination';
 import Loading from './demos/loading';
 import Popover from './demos/popover';
-import Autocomplete from './demos/autocomplete';
+import Tooltip from './demos/tooltip';
+import Suggestion from './demos/suggestion';
 import TagDemo from './demos/tag';
 import datepicker from './demos/datepicker';
-import daterangepicker from './demos/daterangepicker';
+import daterangepicker from './demos/dateRangePicker';
 import Select from './demos/select.vue';
-import Toaster from './demos/toaster';
+import Message from './demos/message';
 import Modal from './demos/modal';
 import InputNumber from './demos/inputNumber';
 import Progress from './demos/progress';
 import PageLoading from './demos/pageloading';
 
 Vue.use(Router);
-Vue.use(VueResource);
+Vue.use(xcui);
 Vue.config.devtools = true;
 
 const router = new Router();
@@ -33,14 +34,15 @@ router.map({
     '/': {
         component: Home,
         subRoutes: {
-            '/': {
+            '/home': {
+                name: 'home',
                 component(resolve) {
                     resolve(Homecontent);
                 }
             },
-            '/component/paginations': {
+            '/component/pagination': {
                 component(resolve) {
-                    resolve(Paginations);
+                    resolve(Pagination);
                 }
             },
             '/component/popover': {
@@ -48,9 +50,14 @@ router.map({
                     resolve(Popover);
                 }
             },
-            '/component/autocomplete': {
+            '/component/tooltip': {
                 component(resolve) {
-                    resolve(Autocomplete);
+                    resolve(Tooltip);
+                }
+            },
+            '/component/suggestion': {
+                component(resolve) {
+                    resolve(Suggestion);
                 }
             },
             '/component/tag': {
@@ -78,9 +85,9 @@ router.map({
                     resolve(Loading);
                 }
             },
-            '/component/toaster': {
+            '/component/message': {
                 component(resolve) {
-                    resolve(Toaster);
+                    resolve(Message);
                 }
             },
             '/component/modal': {

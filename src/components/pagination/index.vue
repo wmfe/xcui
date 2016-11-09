@@ -2,7 +2,7 @@
     <div class="v-pagination-wrap {{ class || '' }}">
         <template v-if="type === 'standard' ">
             <div class="row">
-                <div v-if="withPageSize" class="v-pagination-page-size col-md-6">
+                <div v-if="withPageSize" class="v-pagination-page-size col-md-3">
                     共<span v-text="total"></span>条
                     &nbsp;&nbsp;
                     每页
@@ -11,37 +11,37 @@
                     </select>
                     条
                 </div>
-                <div class="v-pagination-standard col-md-6 text-right">
-                    <button
-                        @click="prev"
-                        class="btn btn-default"
-                        :class="{'disabled': currentPageNo == 1}">上一页</button>
+                <div class="v-pagination-standard col-md-9 text-right">
+                    <div class="btn-group">
+                        <button
+                            @click="prev"
+                            class="btn btn-default"
+                            :class="{'disabled': currentPageNo == 1}">上一页</button>
 
-                    <ul class="pagination">
-                        <li v-if="getRangePage.begin > 1">
+                        <button class="btn btn-default page-btn" v-if="getRangePage.begin > 1">
                             <a href="javascript:void(0);" @click="turnToPage(1)">1</a>
-                        </li>
-                        <li v-if="getRangePage.begin > 1">
+                        </button>
+                        <button class="btn btn-default page-btn" v-if="getRangePage.begin > 1">
                             <a class="apostrophe">...</a>
-                        </li>
+                        </button>
 
-                        <li v-for="number in (getRangePage.end - getRangePage.begin + 1)" :class="{'active': isActive(number)}">
+                        <button class="btn btn-default page-btn" v-for="number in (getRangePage.end - getRangePage.begin + 1)" :class="{'active': isActive(number)}">
                             <a v-if="isActive(number)" href="javascript:void(0);"  v-text="number + getRangePage.begin"></a>
                             <a v-else href="javascript:void(0);"  v-text="number + getRangePage.begin" @click="turnToPage(number + getRangePage.begin)"></a>
-                        </li>
+                        </button>
 
-                        <li v-if="getRangePage.end < totalPageCount">
+                        <button class="btn btn-default page-btn" v-if="getRangePage.end < totalPageCount">
                             <a class="apostrophe">...</a>
-                        </li>
-                        <li v-if="getRangePage.end < totalPageCount">
+                        </button>
+                        <button class="btn btn-default page-btn" v-if="getRangePage.end < totalPageCount">
                             <a href="javascript:void(0);" v-text="totalPageCount" @click="turnToPage(totalPageCount)"></a>
-                        </li>
-                    </ul>
+                        </button>
 
-                    <button
-                        @click="next"
-                        class="btn btn-default"
-                        :class="{'disabled': currentPageNo == totalPageCount}">下一页</button>
+                        <button
+                            @click="next"
+                            class="btn btn-default"
+                            :class="{'disabled': currentPageNo == totalPageCount}">下一页</button>
+                    </div>
                 </div>
             </div>
         </template>
@@ -60,6 +60,7 @@
 
 <script>
 export default {
+    name: 'xcui-pagination',
     props: {
         'type': {
             type: String,
@@ -69,7 +70,10 @@ export default {
             type: Number,
             default: 1
         },
-        'total': Number,
+        'total': {
+            type: Number,
+            default: 0
+        },
         'pageSize': {
             type: Number,
             default: 20
@@ -85,7 +89,13 @@ export default {
         },
         'rangeLength': {
             type: Number,
-            default: 10
+            default: 10,
+            coerce(val) {
+                if (val < 1) {
+                    return 1;
+                }
+                return val;
+            }
         }
     },
     computed: {
@@ -161,28 +171,39 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .v-pagination-wrap{
     -webkit-user-select: none;
     // standard
-    .pagination{
+    .v-pagination-standard{
         vertical-align: bottom;
         margin: 0;
-        li > a{
-            padding: 5px 12px;
-            &:focus{
-                background-color: initial;
+        .btn{
+            a{
+                padding: 5px 12px;
+                &:focus{
+                    background-color: initial;
+                }
             }
-        }
-        li.active{
             a,
             a:hover,
             a:active{
+                text-decoration: none;
+            }
+        }
+        // 枚举的页码按钮
+        .page-btn{
+            padding: 6px 3px;
+            &.active{
                 background-color: #46c3c1;
                 border-color: #46c3c1;
                 outline: none;
+                a{
+                    color:#fff;
+                }
             }
         }
+
         .apostrophe{
             border-color: transparent;
             border-left-color: #ddd;

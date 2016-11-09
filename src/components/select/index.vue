@@ -39,7 +39,7 @@
                 aria-activedescendant
                 class="xcui-select-menu">
                 <li class="xcui-select-menu-item"
-                    v-if="multiple && multipleMax === value.length">
+                    v-if="multipleMaxShow">
                     最多可选{{multipleMax}}项!
                 </li>
                 <li class="xcui-select-menu-item"
@@ -54,10 +54,7 @@
                         :class="{'xcui-select-menu-item-selected': isSelected(item), 'xcui-select-menu-item-key': $index === selectIndex,'disabled': item.disable}"
                         @mouseenter.prevent.stop.self="indexSet($index)"
                         @mousedown.prevent="select(item)">
-                        <partial :name="optionPartial"
-                                 class="xcui-select-menu-item-partial"
-                                 v-if="optionPartial.length"></partial>
-                        <span v-else v-text="getOptionLabel(item)"></span>
+                        <span v-text="getOptionLabel(item)"></span>
                     </li>
                 </template>
                 <template
@@ -69,10 +66,7 @@
                                 <li class="xcui-select-menu-group-item"
                                     :class="{'xcui-select-menu-group-item-selected': isSelected(option,$parent.$index,$index), 'disabled': option.disable}"
                                     @mousedown.prevent.stop.self="optgroupSelect($parent.$index,$index,option)">
-                                    <partial :name="optionPartial"
-                                             class="xcui-select-menu-item-partial"
-                                             v-if="optionPartial.length"></partial>
-                                    <span v-else v-text="getOptionLabel(option)"></span>
+                                    <span v-text="getOptionLabel(option)"></span>
                                 </li>
                             </template>
                         </ul>
@@ -83,7 +77,7 @@
     </div>
 </template>
 <script>
-    import clone from 'clone';
+    import clone from '../../utils/clone';
     import fuzzysearch from 'fuzzysearch';
     export default {
         name: 'xcui-select',
@@ -123,11 +117,6 @@
                 type: Boolean,
                 default: false
             },
-            // vue partial element
-            optionPartial: {
-                type: String,
-                default: ''
-            },
             // 定制label
             customLabel: {
                 type: Function
@@ -142,7 +131,8 @@
                 default: false
             },
             multipleMax: {
-                type: Number
+                type: Number,
+                default: 0
             },
             // label默认选择字段
             label: {
@@ -232,11 +222,16 @@
                         optionValue = option[this.label] || option.label;
                     }
                     if (isSelected) {
-                        this.removeOption(optionValue);
+                        this.removeOption(option);
                     }
                     else {
-                        if (this.multipleMax > this.value.length) {
-                            this.value.push(optionValue);
+                        if ((this.multipleMax > this.value.length) || !this.multipleMax) {
+                            if (typeof option === 'object') {
+                                this.value.push(option);
+                            }
+                            else {
+                                this.value.push(optionValue);
+                            }
                         }
                     }
                 }
@@ -267,7 +262,22 @@
                 }
                 if (this.multiple) {
                     if (typeof option === 'object') {
-                        return this.value.indexOf(option[me.label] || option.label) > -1;
+                        let value = option.label;
+                        if (this.label && option[this.label]) {
+                            value = option[this.label];
+                        }
+                        let isMatched = false;
+                        let valueLen = this.value.length;
+                        for (let i = 0; i < valueLen; i++) {
+                            if (typeof this.value[i] === 'string') {
+                                // if string mean defaultValue set
+                                if (value === this.value[i]) {
+                                    isMatched = true;
+                                    this.value[i] = option;
+                                }
+                            }
+                        }
+                        return this.value.indexOf(option) > -1 || isMatched;
                     }
                     return this.value.indexOf(option) > -1;
                 }
@@ -287,8 +297,9 @@
                     return;
                 }
                 if (typeof option === 'object') {
-                    this.values.map(e => {
-                    });
+                    if (this.value.indexOf(option) !== -1) {
+                        this.value.splice(this.value.indexOf(option), 1);
+                    }
                 }
                 this.value.$remove(option);
                 this.$emit('remove', clone(option));
@@ -381,7 +392,13 @@
                     return this.placeholder;
                 }
                 if (this.multiple) {
-                    return this.value.join(',');
+                    return this.value.map(k => {
+                        if (typeof k !== 'object') {
+                            return k;
+                        }
+                        let label = this.label || 'label';
+                        return k[label];
+                    }).join(',');
                 }
                 if (typeof this.value === 'string') {
                     return this.value;
@@ -393,7 +410,7 @@
             },
             getDropDownHeight() {
                 let list = this.$els.list;
-                let item = list.children[0];
+                let item = list.children[0] || null;
                 let itemHeight = item.currentStyle ? item.currentStyle.height : getComputedStyle(item, false).height;
                 let listHeight = list.currentStyle ? list.currentStyle.height : getComputedStyle(list, false).height;
                 return {
@@ -405,8 +422,11 @@
                 let me = this;
                 let selected = this.selected;
                 let indexs = [];
+                if (!this.options) {
+                    return indexs;
+                }
                 this.options.forEach((item, index) => {
-                    item.options.forEach((subItem, subIndex) => {
+                    item.options && item.options.forEach((subItem, subIndex) => {
                         if (typeof subItem === 'string' && selected === subItem) {
                             indexs = [index, subIndex];
                             return;
@@ -421,6 +441,15 @@
                     });
                 });
                 return indexs;
+            },
+            multipleMaxShow() {
+                if (!this.multiple) {
+                    return false;
+                }
+                return this.multiple
+                    && this.multipleMax !== 0
+                    && this.value
+                    && this.multipleMax === this.value.length;
             }
         },
         watch: {
@@ -465,6 +494,7 @@
         color: #666;
         font-size: 14px;
         z-index: 10;
+        width:100%;
         &-open {
             .xcui-select-selection {
                 border-color: #66afe9 !important;
@@ -530,7 +560,7 @@
             max-height: 200px;
             border: 1px solid rgba(0,0,0,.15);
             box-shadow: 0 6px 12px rgba(0,0,0,.175);
-
+            z-index: 1;
         }
         &-menu ,&-menu-group{
             outline: none;

@@ -1,7 +1,7 @@
 <template>
   <div>
       <div id="header">
-          <a href="#" class="logo">
+          <a v-link="{ path: '/home' }" href="javascript:;" class="logo">
             <img :src="logoUrl">
               XCUI Components
           </a>

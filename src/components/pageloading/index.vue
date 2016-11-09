@@ -8,7 +8,7 @@
 
 <script>
     export default {
-        name: 'xcui-page-loading',
+        name: 'xcui-pageloading',
         data() {
             return {
                 easing: 'linear',
@@ -383,6 +383,3 @@
 }
 
 </style>
-
-
-

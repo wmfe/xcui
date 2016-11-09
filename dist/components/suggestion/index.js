@@ -29,6 +29,7 @@
             value: true
         });
         exports.default = {
+            name: "xcui-suggestion",
             data: function data() {
                 return {
                     list: [],
@@ -91,17 +92,17 @@
                 suggestions: function suggestions() {
                     this.arrangeLocalList();
                     this.getLocalSug();
-                },
-                dataText: function dataText() {
-                    this.onInput();
                 }
             },
             methods: {
                 onInput: function onInput() {
-                    this.currentIndex = -1;
-                    this.getLocalSug();
-                    this.autoSetItem();
-                    this.inputCallback && this.inputCallback();
+                    var me = this;
+                    setTimeout(function() {
+                        me.currentIndex = -1;
+                        me.getLocalSug();
+                        me.autoSetItem();
+                        me.inputCallback && me.inputCallback();
+                    }, 100);
                 },
                 onBlur: function onBlur() {
                     var me = this;
@@ -176,7 +177,7 @@
             }
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class="xcui-suggestion {{className}}" _v-042c2cdb=""> <input type=text class="form-control xcui-suggestion-input" :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @focus=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter=onBlur _v-042c2cdb=""> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'xcui-show\':show}" _v-042c2cdb=""> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}" _v-042c2cdb=""> <a href=javascript:void(0) @click=setItem(item) _v-042c2cdb=""> {{item.text}} </a> </li> </ul> <button @click=clearText type=button title=点击清除输入内容 class=close tabindex=-1 style="position: absolute; right: 8px; top: 4px" _v-042c2cdb="">×</button> </div> ';
+        module.exports = ' <div class="xcui-suggestion {{className}}"> <input type=text class="form-control xcui-suggestion-input" autocomplete=off :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @input=onInput @focus=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter.stop.prevent=onBlur> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'show\':show}"> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}"> <a href=javascript:void(0) @click=setItem(item)> {{item.text}} </a> </li> </ul> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         __webpack_require__(2);

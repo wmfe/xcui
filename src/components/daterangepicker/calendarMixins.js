@@ -1,42 +1,29 @@
 export default {
     props: {
-        type: {
-            type: String,
-            default: 'date'
-        },
         value: {
-            type: String,
             twoWay: true,
             default: ''
         },
-        begin: {
+        format: {
             type: String,
-            default: ''
+            default: 'YYYY-MM-DD'
         },
-        end: {
-            type: String,
-            default: ''
-        },
+        minDate: {},
+        maxDate: {},
         hourRange: {
             type: [Number, String],
             default: 1
         },
         minuteRange: {
-            type: Number,
+            type: [Number, String],
             default: 1
         },
         secondRange: {
-            type: Number,
+            type: [Number, String],
             default: 1
         },
-        sep: {
-            type: String,
-            default: '-'
-        },
-        color: {
-            type: String,
-            default: ''
-        }
+        color: String,
+        className: String
     },
     data() {
         return {
@@ -60,32 +47,34 @@ export default {
             yearTableShow: false,
             selectRangeList: [],
             selectRangeShow: true,
-            selectRange: ''
+            selectRange: '',
+            dateParams: null,
+            defaultFormat: 'YYYY-MM-DD',
+            type: 'date'
         };
+    },
+    computed: {
+        formatValue() {
+            return this.output(this.value);
+        }
     },
     created() {
         let me = this;
-        let now = me.getCurrentParams();
-        if (this.btnShow) {
-            this.inputClass.push('input-group');
-        }
-        if (me.value !== '') {
-            let params = me.getValueParams(me.value);
-            me.year = params.year;
-            me.month = params.month;
-            me.day = params.day;
-            me.hour = params.hour;
-            me.minute = params.minute;
-            me.second = params.second;
+        me.getType();
+        if (me.value) {
+            me.value = me.output(me.value);
         }
         else {
-            me.year = now.year;
-            me.month = now.month;
-            me.day = now.day;
-            me.hour = now.hour;
-            me.minute = now.minute;
-            me.second = now.second;
+            me.value = me.output(new Date());
         }
+        this.initialValue = this.value;
+        let params = me.dateParams;
+        me.year = params.year;
+        me.month = params.month;
+        me.day = params.day;
+        me.hour = params.hour;
+        me.minute = params.minute;
+        me.second = params.second;
         for (let i = 0; i < 60; i++) {
             if (i % me.minuteRange === 0) {
                 me.minuteList.push(me.zero(i));
@@ -94,13 +83,16 @@ export default {
                 me.secondList.push(me.zero(i));
             }
         }
-        for (let i = 1; i < 24; i++) {
+        for (let i = 0; i < 24; i++) {
             if (i % me.hourRange === 0) {
                 me.hourList.push(me.zero(i));
             }
         }
         if (me.type !== 'time') {
             me.render(me.year, me.month);
+        }
+        else {
+            this.initialValue = this.value;
         }
     },
     methods: {
@@ -109,44 +101,49 @@ export default {
         },
         render(y, m) {
             let me = this;
-            let firstDayOfMonth = new Date(y, m, 1).getDay();// 当月第一天
-            let lastDateOfMonth = new Date(y, m + 1, 0).getDate();// 当月最后一天
-            let lastDayOfLastMonth = new Date(y, m, 0).getDate();// 前一个月的最后一天
-            let params = me.getValueParams(me.value);
+            if (me.type === 'time') {
+                return false;
+            }
+            me.firstDayOfMonth = new Date(y, m, 1).getDay();// 当月第一天
+            me.lastDateOfMonth = new Date(y, m + 1, 0).getDate();// 当月最后一天
+            me.lastDayOfLastMonth = new Date(y, m, 0).getDate();// 前一个月的最后一天
+            me.output(me.value);
+            let params = me.dateParams;
             let line = 0;
             let temp = [];
             let date = new Date();
             let currentTime = Number(new Date(date.getFullYear(), date.getMonth(), date.getDate()));
             me.year = y;
             me.currentMonth = me.months[m];
-            for (let i = 1; i <= lastDateOfMonth; i++) {
+            for (let i = 1; i <= me.lastDateOfMonth; i++) {
                 let dow = new Date(y, m, i).getDay();
-                let chk = new Date();
-                let chkY = chk.getFullYear();
-                let chkM = chk.getMonth();
-                let year = params.year === me.year;
-                let month = params.month === me.month;
-                let day = params.day === i;
-                let seletSplit4 = (me.begin !== undefined || me.end !== undefined);
+                let isYear = params.year === me.year;
+                let isMonth = params.month === me.month;
+                let isDay = Number(params.day) === i;
+                let format = me.defaultFormat;
+                let minDate = me.minDate && me.output(me.minDate, format);
+                let maxDate = me.maxDate && me.output(me.maxDate, format);
                 // 第一行
                 if (dow === 0) {
                     temp[line] = [];
                 }
                 else if (i === 1) {
                     temp[line] = [];
-                    let k = lastDayOfLastMonth - firstDayOfMonth + 1;
-                    for (let j = 0; j < firstDayOfMonth; j++) {
-                        temp[line].push({day: k, disabled: true});
+                    let k = me.lastDayOfLastMonth - me.firstDayOfMonth + 1;
+                    for (let j = 0; j < me.firstDayOfMonth; j++) {
+                        let nowDay = me.output([me.year, me.month, k], format);
+                        if (nowDay < minDate || nowDay > maxDate) {
+                            temp[line].push({day: k, disabled: true, prev: true, noClick: true});
+                        }
+                        else {
+                            temp[line].push({day: k, disabled: true, prev: true});
+                        }
                         k++;
                     }
                 }
-                if (year && month && day && seletSplit4) {
-                    temp[line].push({day: i, today: true});
+                if (isYear && isMonth && isDay) {
+                    temp[line].push({day: i, today: true, disabled: false});
                     me.today = [line, temp[line].length - 1];// 当天
-                }
-                else if (chkY === me.year && chkM === me.month && i === me.day && me.value === undefined) {
-                    temp[line].push({day: i, today: true});
-                    me.today = [line, temp[line].length - 1];
                 }
                 else {
                     me.renderElse(y, m, i, temp, line, currentTime);
@@ -155,10 +152,10 @@ export default {
                 if (dow === 6) {
                     line++;
                 }
-                else if (i === lastDateOfMonth) {
+                else if (i === me.lastDateOfMonth) {
                     let k = 1;
                     for (dow; dow < 6; dow++) {
-                        temp[line].push({day: k, disabled: true});
+                        temp[line].push({day: k, disabled: true, today: false});
                         k++;
                     }
                 }
@@ -168,25 +165,19 @@ export default {
         prev(e) {
             e.stopPropagation();
             let me = this;
-            if (me.month === 0) {
-                me.month = 11;
-                me.year = me.year - 1;
-            }
-            else {
-                me.month = parseInt(me.month, 10) - 1;
-            }
+            me.month -= 1;
+            let om = me.outputMonth(me.month, me.year);
+            me.year = om.y;
+            me.month = om.m;
             me.render(me.year, me.month);
         },
         next(e) {
             e.stopPropagation();
             let me = this;
-            if (me.month === 11) {
-                me.month = 0;
-                me.year = me.year + 1;
-            }
-            else {
-                me.month = parseInt(me.month, 10) + 1;
-            }
+            me.month += 1;
+            let om = me.outputMonth(me.month, me.year);
+            me.year = om.y;
+            me.month = om.m;
             me.render(me.year, me.month);
         },
         changeTitSelect(year, type) {
@@ -265,79 +256,102 @@ export default {
                     break;
                 default:
             };
-            me.selectValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+            // me.value = me.bindFormat(`me.year-me.month-me.day me.hour:me.minute:me.second`);
+            me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
         },
         // 格式化输出
-        output(args) {
+        output(d, format) {
+            let fmt = format || this.format;
             let me = this;
-            if (args[1] === 12) {
-                args[1] = 0;
-                args[0] += 1;
+            let date = new Date(d);
+            if (this.value && this.type === 'time' && typeof (d) === 'string') {
+                date = new Date('1970-01-01 ' + d);
             }
-            else if (args[1] === -1) {
-                args[1] = 11;
-                args[0] -= 1;
+            else if (typeof (d) === 'object' && d.length > 0) {
+                date = new Date(d[0], d[1], d[2], d[3] || '00', d[4] || '00', d[5] || '00');
             }
-            if (me.type === 'time') {
-                return me.zero(args[3]) + ':' + me.zero(args[4]) + ':' + me.zero(args[5]);
+            else if (!this.value) {
+                date = new Date();
             }
-            let args1 = me.zero(args[1] + 1);
-            let args2 = me.zero(args[2]);
-            if (me.type === 'datetime') {
-                let args3 = me.zero(args[3]);
-                let args4 = me.zero(args[4]);
-                let args5 = me.zero(args[5]);
-                return args[0] + me.sep + args1 + me.sep + args2 + ' ' + args3 + ':' + args4 + ':' + args5;
-            }
-            if (me.type === 'date') {
-                return args[0] + me.sep + args1 + me.sep + args2;
-            }
-        },
-        getValueParams(timeCur) {
-            let me = this;
-            let params = {};
-            if (me.type === 'date') {
-                let split = timeCur.split(me.sep);
-                params.year = parseInt(split[0], 10);
-                params.month = parseInt(split[1], 10) - 1;
-                params.day = parseInt(split[2], 10);
-            }
-            else if (me.type === 'datetime') {
-                let split = timeCur.split(' ');
-                let splitDate = split[0].split(me.sep);
-                params.year = parseInt(splitDate[0], 10);
-                params.month = parseInt(splitDate[1], 10) - 1;
-                params.day = parseInt(splitDate[2], 10);
-                if (split.length > 1) {
-                    let splitTime = split[1].split(':');
-                    params.hour = splitTime[0];
-                    params.minute = splitTime[1];
-                    params.second = splitTime[2];
-                }
-                else {
-                    params.hour = me.hour;
-                    params.minute = me.minute;
-                    params.second = me.second;
-                }
-            }
-            else if (me.type === 'time') {
-                let split = timeCur.split(':');
-                params.hour = me.hour = split[0];
-                params.minute = me.minute = split[1];
-                params.second = me.second = split[2];
-            }
-            return params;
-        },
-        getCurrentParams() {
-            let date = new Date();
-            return {
-                year: date.getFullYear(),
-                month: date.getMonth(),
-                day: this.zero(date.getDate()),
-                hour: this.zero(date.getHours()),
-                minute: this.zero(date.getMinutes()),
-                second: this.zero(date.getSeconds())
+            let year = date.getFullYear();
+            let month = date.getMonth();
+            let getDate = date.getDate();
+            let hour = date.getHours();
+            let minute = date.getMinutes();
+            let second = date.getSeconds();
+            let timeParams = me.getRangeTime(hour, minute, second);
+            hour = timeParams.hour;
+            minute = timeParams.minute;
+            second = timeParams.second;
+            let o = {
+                'M+': month + 1,
+                'D+': getDate,
+                'h+': hour,
+                'm+': minute,
+                's+': second,
+                'q+': Math.floor((date.getMonth() + 3) / 3),
+                'S': date.getMilliseconds()
             };
+            if (/(Y+)/.test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (year + '').substr(4 - RegExp.$1.length));
+            }
+            for (let k in o) {
+                if (new RegExp('(' + k + ')').test(fmt)) {
+                    let str = ('00' + o[k]).substr(('' + o[k]).length);
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : str);
+                }
+            }
+            me.dateParams = {
+                year: year,
+                month: month,
+                day: me.zero(getDate),
+                hour: me.zero(hour),
+                minute: me.zero(minute),
+                second: me.zero(second)
+            };
+            return fmt;
+        },
+        // 处理month的边缘case
+        outputMonth(month, year) {
+            let m = Number(month);
+            let y = Number(year);
+            if (m === -1) {
+                m = 11;
+                y -= 1;
+            }
+            else if (m === 12) {
+                m = 0;
+                y += 1;
+            }
+            return {
+                y: y,
+                m: m
+            };
+        },
+        getRangeTime(hour, minute, second) {
+            let me = this;
+            hour = Math.round(hour / me.hourRange) * me.hourRange;
+            minute = Math.round(minute / me.minuteRange) * me.minuteRange;
+            second = Math.round(second / me.secondRange) * me.secondRange;
+            hour = hour === 24 ? (hour - me.hourRange) : hour;
+            minute = minute === 60 ? (minute - me.minuteRange) : minute;
+            second = second === 60 ? (second - me.secondRange) : second;
+            return {
+                hour: me.zero(hour),
+                minute: me.zero(minute),
+                second: me.zero(second)
+            };
+        },
+        getType() {
+            let format = this.format;
+            let hasY = format.indexOf('YYYY') !== -1; // 包含年
+            let hasH = format.indexOf('hh') !== -1 || format.indexOf('HH') !== -1;// 包含小时
+            if (hasY && hasH) {
+                this.type = 'datetime';
+            }
+            else if (hasH) {
+                this.type = 'time';
+            }
         }
     }
 };
