@@ -11,7 +11,7 @@
                     </select>
                     条
                 </div>
-                <div class="v-pagination-standard col-md-9 text-right">
+                <div class="v-pagination-standard text-right" :class="[ withPageSize ? 'col-md-9' :'col-md-12']">
                     <div class="btn-group">
                         <button
                             @click="prev"
@@ -193,7 +193,8 @@ export default {
         }
         // 枚举的页码按钮
         .page-btn{
-            padding: 6px 3px;
+            padding-left: 3px;
+            padding-right: 3px;
             &.active{
                 background-color: #46c3c1;
                 border-color: #46c3c1;
