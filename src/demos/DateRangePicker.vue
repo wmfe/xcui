@@ -20,8 +20,8 @@
     <demo>
         <example title="simple">
             <xcui-daterangepicker
-                :start-date.sync="valueDemo"
-                :end-date.sync="''">
+                :start-date.sync="'2016-11-01'"
+                :end-date.sync="'2016-11-09'">
             </xcui-daterangepicker>
         </example>
         <p> 最简单的用法，startDate：日期开始时间，endDate：日期结束时间, 格式</p>
