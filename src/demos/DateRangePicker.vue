@@ -80,11 +80,11 @@
 
     | 名字 | 类型 | 默认 | 描述 | 是否双向绑定 | 是否必选 |
     |-----|-----|-----|-----|----|----|
-    | startDate | String,object,时间搓 | 无 | 日期开始时间 | 双向绑定 | 必选 |
-    | endDate | String,object,时间搓 | 无 | 日期结束时间 | 双向绑定 | 必选 |
-    | minDate | String,object,时间搓 | 无 | 日期可选最小值 | 否 | 可选|
-    | maxdate | String,object,时间搓 | 无 | 日期可选最大值 | 否 | 可选|
-    | sep | String | 至 | 双日历之间间隔符 | 否 | 可选|
+    | startDate | String,object,时间戳 | 无 | 日期开始时间 | 双向绑定 | 必选 |
+    | endDate | String,object,时间戳 | 无 | 日期结束时间 | 双向绑定 | 必选 |
+    | minDate | String,object,时间戳 | 无 | 日期可选最小值 | 否 | 可选|
+    | maxdate | String,object,时间戳 | 无 | 日期可选最大值 | 否 | 可选|
+    | sep | String | “至” | 双日历之间间隔符 | 否 | 可选|
     | format | String | YYYY-MM-DD | 展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年-月-日 时：分：秒 YYYY-MM-DD hh:mm:ss， 时/分/秒 hh/mm/ss | 静态属性 | 可选 |
     | dateLimit | object | null | 可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天| 否 | 可选 |
     | hourRange | Number | 1 | 小时可选值设置（例如：值为 3 时，小时可选值为0，3，6，9，12 .....） | 否 | 可选 |
