@@ -13,10 +13,13 @@
 <demo>
 	<example title="InputNumber">
 			<div id="container">
-				<xcui-inputnumber :max-value="100" :min-value="3" :step="2" :is-disable="false" text-tips="请输入整数" ></xcui-inputnumber>
+				<xcui-inputnumber :max-value="100" :min-value="3" :step="2" :is-disable="false" text-tips="请输入整数" size="small"></xcui-inputnumber>
 				<p>支持键盘输入整数，以2为步长，最小值为3，最大值为100</p>
 				</br>
-				<xcui-inputnumber :max-value="100" :min-value="-25" :input-value.sync="6" :step="5" class-name="input-define-class" :is-disable="true" size="normal"></xcui-inputnumber>
+				<xcui-inputnumber :max-value="100" :min-value="-10" :input-value.sync="-1" :step="2" :is-disable="false" text-tips="请输入整数" size="normal" ></xcui-inputnumber>
+				<p>支持键盘输入负整数，以2为步长，最小值为-10，最大值为100</p>
+				</br>
+				<xcui-inputnumber :max-value="100" :min-value="-25" :input-value.sync="6" :step="5" class-name="input-define-class" :is-disable="true" size="large"></xcui-inputnumber>
 				<p>默认值为6，禁止手动输入，以5为步长，最小值为-25，最大值为100，自定义输入框与字体样式</p>
 			</div>
 	</example>
@@ -31,7 +34,7 @@
 |step| Number| 1|增减步长|可选||
 |is-disable|Boolean|false|是否禁用键盘输入|可选|true,false|
 |class-name| String|空字符串|自定义样式|可选||
-|size| String|large|可选尺寸|可选|large,normal|
+|size| String|normal|可选尺寸|可选|large,normal,small|
 |text-tips| String|请输入范围内整数|自定义提示文案|可选||
 </template>
 <script>
