@@ -12,8 +12,7 @@
         <button class="btn btn-default" @click="this.modal1 = true">显示对话框</button>
         <xcui-modal
         :show.sync="modal1"
-        title="基础弹窗"
-        :on-ok="modal1OK">
+        title="基础弹窗">
         <div>XCUI，做有品质的外卖UI</div>
         </xcui-modal>
         <div>通过控制show来显示/隐藏对话框，需要将show设置为.sync双向绑定</div>
@@ -198,11 +197,6 @@ let ModalDemo = {
             modal9: false,
             modal10: false
         };
-    },
-    methods: {
-        modal1OK() {
-            console.log('modal1OK');
-        }
     }
 };
 

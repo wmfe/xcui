@@ -530,7 +530,21 @@
                     }
                     if (this.multiple) {
                         if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
-                            return this.value.indexOf(option) > -1;
+                            var value = option.label;
+                            if (this.label && option[this.label]) {
+                                value = option[this.label];
+                            }
+                            var isMatched = false;
+                            var valueLen = this.value.length;
+                            for (var i = 0; i < valueLen; i++) {
+                                if (typeof this.value[i] === "string") {
+                                    if (value === this.value[i]) {
+                                        isMatched = true;
+                                        this.value[i] = option;
+                                    }
+                                }
+                            }
+                            return this.value.indexOf(option) > -1 || isMatched;
                         }
                         return this.value.indexOf(option) > -1;
                     }
@@ -664,7 +678,7 @@
                 },
                 getDropDownHeight: function getDropDownHeight() {
                     var list = this.$els.list;
-                    var item = list.children[0];
+                    var item = list.children[0] || null;
                     var itemHeight = item.currentStyle ? item.currentStyle.height : getComputedStyle(item, false).height;
                     var listHeight = list.currentStyle ? list.currentStyle.height : getComputedStyle(list, false).height;
                     return {
@@ -676,8 +690,11 @@
                     var me = this;
                     var selected = this.selected;
                     var indexs = [];
+                    if (!this.options) {
+                        return indexs;
+                    }
                     this.options.forEach(function(item, index) {
-                        item.options.forEach(function(subItem, subIndex) {
+                        item.options && item.options.forEach(function(subItem, subIndex) {
                             if (typeof subItem === "string" && selected === subItem) {
                                 indexs = [ index, subIndex ];
                                 return;
