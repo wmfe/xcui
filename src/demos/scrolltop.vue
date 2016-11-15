@@ -11,31 +11,8 @@
 
 ## DEMO
 <demo>
-	<example title="ScrollTop">
-		<div id="container">
-			<div id="content1">
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-			</div>
-			<div id="content2">
-				<label>回到此处回到此处回到此处</label>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-				<p>底部按钮可以拖拽至边框位置文档文档</p>
-			</div>
+	<example title="基本使用">
 			<xcui-scrolltop target-element="" :during="60" @finish="finishBack" class-name=""></xcui-scrolltop>
-		</div>
 	</example>
 </demo>
 
@@ -54,17 +31,10 @@ export default {
         };
     },
     methods: {
-        letCallback() {
-            // alert('let high up!');
-        },
         finishBack() {
-            alert('hello');
         }
     },
     ready() {
-        this.$on('finish', function () {
-            this.letCallback();
-        });
     }
 };
 </script>

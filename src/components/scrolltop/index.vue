@@ -1,11 +1,11 @@
 <template>
-	<div v-el:outer class="outer">
-		<div  v-el:dropa id="a" class="atrea-wrap area-a" :class="{'dropain':dropin.a}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
-            <div draggable="true" v-el:dragele id="dragEle" class="glyphicon glyphicon-circle-arrow-up scrolltop-init" @dragstart="dragStart($event)" @dragleave="dragleave($event)" @dragend="dragend($event)" @click="backTop($event)" transition="fadein" v-show="show" :class="className"></div>
+	<div class="xcui-scrolltop">
+		<div v-el:dropa id="corner" class="xcui-scrolltop-area xcui-scrolltop-corner" :class="{'xcui-scrolltop-dropin':dropin.corner}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
+            <div draggable="true" v-el:dragele id="dragEle" class="glyphicon glyphicon-circle-arrow-up xcui-scrolltop-init" @dragstart="dragStart($event)" @dragleave="dragleave($event)" @dragend="dragend($event)" @click="backTop($event)" transition="fadein" v-show="show" :class="className"></div>
 		</div>
-		<div  v-el:dropb id="b" class="atrea-wrap area-b" :class="{'dropbin.b':dropin.b}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
+		<div v-el:dropb id="bottom" class="xcui-scrolltop-area xcui-scrolltop-bottom" :class="{'xcui-scrolltop-dropin':dropin.bottom}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
         </div>
-		<div  v-el:dropc id="c" class="atrea-wrap area-c" :class="{'dropcin':dropin.c}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" ></div>
+		<div v-el:dropc id="right" class="xcui-scrolltop-area xcui-scrolltop-right" :class="{'xcui-scrolltop-dropin':dropin.right}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" ></div>
 	</div>
 </template>
 <script>
@@ -50,11 +50,12 @@ export default {
     data() {
         return {
             dropin: {
-                a: true,
-                b: false,
-                c: false
+                corner: true,
+                bottom: false,
+                right: false
             },
-            show: false
+            show: false,
+            scrollListener: null
         };
     },
     methods: {
@@ -102,11 +103,7 @@ export default {
                 let result = begin + locTop;
                 document.body.scrollTop = result;
                 if (start < during) {
-                    console.log(start);
                     window.requestAnimationFrame(moveAction);
-                }
-                else {
-                    // console.log('stop');
                 }
             }
         }
@@ -117,49 +114,44 @@ export default {
             targetElement = document.getElementById(this.targetElement);
         }
         let me = this;
-        EventListener.listen(window, 'scroll', function () {
+        let scrollCall = function () {
             if (targetElement.getBoundingClientRect().top < 0) {
                 me.show = true;
             }
             else {
                 me.show = false;
             }
-        });
+        };
+        me.scrollListener = EventListener.listen(window, 'scroll', scrollCall);
+    },
+    destroyed() {
+        this.scrollListener.remove();
     }
 };
 </script>
-<style lang="less" scoped>
-.outer{
-	.scrolltop-init{
+<style lang="less">
+.xcui-scrolltop{
+	.xcui-scrolltop-init{
 		cursor: pointer;
         width: auto;
         display: inline-block;
 	}
-	.area-a{
+	.xcui-scrolltop-corner{
 		position: fixed;
 		bottom: 10px;
 		right: 10px;
-		/*&:hover{
-			border: 1px dashed #c1c1c1;
-		}*/
 	}
-	.area-b{
+	.xcui-scrolltop-bottom{
 		position: fixed;
 		bottom: 10px;
 		left: 50%;
-		/*&:hover{
-			border: 1px dashed #c1c1c1;
-		}*/
 	}
-	.area-c{
+	.xcui-scrolltop-right{
 		position: fixed;
 		top: 30%;
 		right: 10px;
-		/*&:hover{
-			border: 1px dashed #c1c1c1;
-		}*/
 	}
-    .atrea-wrap{
+    .xcui-scrolltop-area{
         width: 100px;
         height: 100px;
         font-size: 50px;
@@ -170,7 +162,7 @@ export default {
             color: #3071a9;
         }
     }
-	.dropain,.dropbin,.dropcin{
+	.xcui-scrolltop-dropin{
 		border: none !important;
 	}
 
