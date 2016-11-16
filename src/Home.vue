@@ -49,6 +49,9 @@
             <li>
                 <a v-link="{ path: '/component/select' }" href="javascript:;">Select</a>
             </li>
+            <li>
+                <a v-link="{ path: '/component/scrolltop' }" href="javascript:;">ScrollTop</a>
+            </li>
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
