@@ -105,7 +105,8 @@ export default {
             },
             time: {
                 value: ''
-            }
+            },
+            demo: ''
         };
     },
     watch: {
