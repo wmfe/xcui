@@ -1,7 +1,7 @@
 <template>
 <div class="xcui-datapicker {{className}}">
     <div :class="{'input-group':btnShow,'bg-pr':!btnShow}">
-        <input class="form-control"  type="text" v-model="newValue" placeholder="请输入日期" @click="showCalendar">
+        <input class="form-control"  type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
         <button v-show="show" type="button" class="close close_btn" :style="{'right':btnShow?'50px':'10px'}" @click="closeBtn" title="点击关闭"><span aria-hidden="true">×</span></button>
         <div @click.stop=""
              @touchstart.stop=""
@@ -107,10 +107,11 @@
         },
         watch: {
             value(val) {
+                let nowDate = this.output(new Date());
                 if (this.newValue || this.count !== 0) {
                     this.newValue = val;
                 }
-                if (!this.newValue) {
+                if (!this.newValue && (val === nowDate)) {
                     this.value = '';
                 }
                 this.count += 1;

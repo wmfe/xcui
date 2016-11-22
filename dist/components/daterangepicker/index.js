@@ -619,6 +619,10 @@
                 btnShow: {
                     type: Boolean,
                     "default": false
+                },
+                sep: {
+                    type: String,
+                    "default": " 至 "
                 }
             },
             components: {
@@ -651,12 +655,13 @@
                 if (this.endDate < this.startDate) {
                     this.newStartDate = this.endDate;
                 }
+                this.value = this.newStartDate && this.newEndDate && this.newStartDate + this.sep + this.newEndDate;
             },
             methods: {
                 ok: function ok(e) {
                     e.preventDefault();
                     if (this.newStartDate && this.newEndDate) {
-                        this.value = this.newStartDate + " 至 " + this.newEndDate;
+                        this.value = this.newStartDate + this.sep + this.newEndDate;
                         this.startDate = this.newStartDate;
                         this.endDate = this.newEndDate;
                     } else {
@@ -1531,23 +1536,41 @@
         module.exports = ' <div class=xcui-datarangepicker :class=className> <div :class="{\'input-group\':btnShow}"> <input class="form-control col-md-3" type=text v-model=value placeholder=请输入日期 @click=showCalendar> <button v-show=show type=button class="close close_btn" :style="{\'right\':btnShow?\'50px\':\'10px\'}" @click=closeBtn title=点击关闭><span aria-hidden=true>×</span></button> <div @click.stop="" @touchstart.stop="" class="calendar double-calendar" v-show=show> <div class=clearfix> <div class=double-calendar-left> <calendar :value.sync=newStartDate :format=format :other-value.sync=newEndDate :min-date=minDate :max-date=maxDate :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :initial-date.sync=initialStartDate :start-render=startRender></calendar> </div> <div class=double-calendar-right> <calendar :value.sync=newEndDate :format=format :other-value.sync=newStartDate :right=true :min-date=minDate :max-date=maxDate :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :initial-date.sync=initialEndDate :start-render=startRender></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
         __vue_script__ = __webpack_require__(37);
         __vue_template__ = __webpack_require__(73);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
         __webpack_require__(72);
         __vue_script__ = __webpack_require__(38);
         __vue_template__ = __webpack_require__(74);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     } ]);
 });
 
