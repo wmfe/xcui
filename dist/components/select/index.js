@@ -530,7 +530,21 @@
                     }
                     if (this.multiple) {
                         if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
-                            return this.value.indexOf(option) > -1;
+                            var value = option.label;
+                            if (this.label && option[this.label]) {
+                                value = option[this.label];
+                            }
+                            var isMatched = false;
+                            var valueLen = this.value.length;
+                            for (var i = 0; i < valueLen; i++) {
+                                if (typeof this.value[i] === "string") {
+                                    if (value === this.value[i]) {
+                                        isMatched = true;
+                                        this.value[i] = option;
+                                    }
+                                }
+                            }
+                            return this.value.indexOf(option) > -1 || isMatched;
                         }
                         return this.value.indexOf(option) > -1;
                     }
@@ -664,7 +678,7 @@
                 },
                 getDropDownHeight: function getDropDownHeight() {
                     var list = this.$els.list;
-                    var item = list.children[0];
+                    var item = list.children[0] || null;
                     var itemHeight = item.currentStyle ? item.currentStyle.height : getComputedStyle(item, false).height;
                     var listHeight = list.currentStyle ? list.currentStyle.height : getComputedStyle(list, false).height;
                     return {
@@ -676,8 +690,11 @@
                     var me = this;
                     var selected = this.selected;
                     var indexs = [];
+                    if (!this.options) {
+                        return indexs;
+                    }
                     this.options.forEach(function(item, index) {
-                        item.options.forEach(function(subItem, subIndex) {
+                        item.options && item.options.forEach(function(subItem, subIndex) {
                             if (typeof subItem === "string" && selected === subItem) {
                                 indexs = [ index, subIndex ];
                                 return;
@@ -1243,14 +1260,23 @@
         module.exports = ' <div tabindex=0 :class=getWrapCls @focus=activate() @blur="showSearch ? false : deactivate()" @keydown.enter.stop.prevent.self=enterSearchValue()> <div class=xcui-select-selection> <div class=xcui-select-selection-rendered @mousedown.stop=toggle()> <input type=text name=search v-el:search autocomplete=off class=xcui-select-search-input v-if=showSearch v-model=searchValue @focus.prevent=activate() @blur.prevent=deactivate() @keyup.down=keyNext() @keyup.up=keyPrev() @keydown.enter.stop.prevent.self=enterSearchValue() @change.prevent.stop="" :placeholder=placeholder> <span class=xcui-select-selection-text v-if=!showSearch v-text="currentOptionLabel || placeholder"> </span> <i class="glyphicon xcui-select-arrow" @mousedown.prevent.stop=toggle() :class="{\'glyphicon-triangle-bottom\':(!isOpen),\'glyphicon-triangle-top\':(isOpen)}"></i> </div> </div> <div class=xcui-select-menu-dropdown v-show="(isOpen && filteredOptions.length>0) || (isOpen && multiple)"> <ul v-el:list aria-activedescendant class=xcui-select-menu> <li class=xcui-select-menu-item v-if=multipleMaxShow> 最多可选{{multipleMax}}项! </li> <li class=xcui-select-menu-item v-if="filteredOptions.length<1 && searchEmptyText" v-text=searchEmptyText> </li> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-item v-if=!optgroup tabindex=1 :class="{\'xcui-select-menu-item-selected\': isSelected(item), \'xcui-select-menu-item-key\': $index === selectIndex,\'disabled\': item.disable}" @mouseenter.prevent.stop.self=indexSet($index) @mousedown.prevent=select(item)> <span v-text=getOptionLabel(item)></span> </li> </template> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-group v-if=optgroup> <div class=xcui-select-menu-group-title>{{item.name}}</div> <ul> <template v-for="option in item.options"> <li class=xcui-select-menu-group-item :class="{\'xcui-select-menu-group-item-selected\': isSelected(option,$parent.$index,$index), \'disabled\': option.disable}" @mousedown.prevent.stop.self=optgroupSelect($parent.$index,$index,option)> <span v-text=getOptionLabel(option)></span> </li> </template> </ul> </li> </template> </ul> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
         __webpack_require__(75);
         __vue_script__ = __webpack_require__(39);
         __vue_template__ = __webpack_require__(77);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     } ]);
 });
 
