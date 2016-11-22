@@ -9,7 +9,7 @@
 			</a>
 		</div>
 		<div class="input-wrap">
-			<input type='text' v-el='input' class="middle" v-model="inputValue" @keyup="changeValue($event)" :placeholder="textTips"
+			<input type='text' v-el='input' class="middle form-control" v-model="inputValue" @keyup="changeValue($event)" :placeholder="textTips"
 			:disabled ="isDisable" :class="className"/>
 		</div>
 	</div>
@@ -42,7 +42,7 @@ export default {
         },
         size: {
             type: String,
-            default: 'large'
+            default: 'normal'
         },
         inputValue: {
             type: Number
@@ -125,7 +125,7 @@ export default {
     border: 1px solid #c1c1c1;
     border-radius: 5px;
     &:hover{
-        border: 1px solid #2db7f5;
+        border: 1px solid #66afe9;
         .up-down-wrap{
             border-left: 1px solid #c1c1c1;
             .up-wrap{
@@ -140,7 +140,9 @@ export default {
     }
     .input-wrap{
         float: right;
+        height: 100%;
         input{
+            height: 100%;
             padding-left: 5px;
             float: right;
             background-color: #ffffff;
@@ -158,12 +160,16 @@ export default {
         text-align: center;
         float: right;
         position: relative;
-
+        height: 100%;
         .up-wrap{
+            font-size: 1px;
+            margin: 0;
             border: none;
             display: block;
         }
         .down-wrap{
+            font-size: 1px;
+            margin-top: 0px;
             border: none;
             display: block;
         }
@@ -172,50 +178,24 @@ export default {
             text-decoration: none;
         }
         a:hover,a:active{
-            color: #2db7f5 !important;
+            color: #66afe9 !important;
             text-decoration: none;
         }
     }
 }
 .large{
-    height: 45px !important;
-
-    .input-wrap{
-        input{
-            height: 40px !important;
-        }
-    }
+    height: 35px !important;
     .up-down-wrap{
-        height: 100% !important;
         .up-wrap{
-            margin-top: 4px !important;
-        }
-        .down-wrap{
-            margin-top: 4px !important;
+            margin-top: 3px !important;
         }
     }
 }
 .normal{
-    height: 100% !important;
-    vertical-align: middle;
-    .input-wrap{
-        input{
-            height: 30px !important;
-
-        }
-    }
-    .up-down-wrap{
-        height: 30px !important;
-
-        .up-wrap{
-            font-size: 1px !important;
-            margin: 0 !important;
-        }
-        .down-wrap{
-            font-size: 1px !important;
-            margin: 0 !important;
-        }
-    }
+    height: 30px !important;
+}
+.small{
+    height: 28px !important;
 }
 
 </style>
