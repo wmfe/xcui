@@ -18,7 +18,8 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.vue'],
         alias: {
-            'src': path.resolve(__dirname, '../src')
+            'src': path.resolve(__dirname, '../src'),
+            'vue$': 'vue/dist/vue.js'
         }
     },
     stats: {

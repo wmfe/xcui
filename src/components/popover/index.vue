@@ -17,12 +17,12 @@
             <div class="arrow"></div>
             <div class="popover-title" :class="titleClass" v-show="title">
                 <slot name="title">
-                  {{title}}
+                  <template v-html="title"></template>
                 </slot>
             </div>
             <div class="popover-content" :class="contentClass">
               <slot name="content">
-                  {{{content}}}
+                  <template v-html="content"></template>
               </slot>
             </div>
         </div>

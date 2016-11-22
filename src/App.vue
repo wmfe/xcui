@@ -1,18 +1,20 @@
 <template>
   <div>
       <div id="header">
-          <a v-link="{ path: '/home' }" href="javascript:;" class="logo">
+          <router-link to="home" class="logo">
             <img :src="logoUrl">
               XCUI Components
-          </a>
+          </router-link>
       </div>
-    <router-view></router-view>
+      <router-view></router-view>
   </div>
 </template>
 
 <script>
     import logoUrl from './assets/logo_nobg_32x32@2x.png';
+    import router from './router';
     export default {
+        router: router,
         data() {
             return {
                 logoUrl: logoUrl

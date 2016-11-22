@@ -107,8 +107,6 @@
     </example>
 </demo>
 
-
-
 ## 数据格式支持
 
 组件支持两种`数据格式`：
@@ -145,11 +143,9 @@
 |check|Boolean@default:false| |是否要做sug匹配，如果想用本组件实现远程sug，设为false|
 |inputCallback|Function| |input事件回调，可以本时机触发远程sug异步请求|
 
-
 </template>
 
 <script>
-
   export default {
       data() {
           return {

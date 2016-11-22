@@ -18,7 +18,7 @@
                 <div class="tooltip-arrow"></div>
                 <div class="tooltip-inner" :class="tooltipClass">
                     <slot name="content">
-                        {{{content}}}
+                        <template v-html="content"></template>
                     </slot>
                 </div>
         </div>

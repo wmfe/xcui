@@ -1,5 +1,5 @@
 <template>
-    <div class="v-pagination-wrap {{ class || '' }}">
+    <div class="v-pagination-wrap" :class="className">
         <template v-if="type === 'standard' ">
             <div class="row">
                 <div v-if="withPageSize" class="v-pagination-page-size col-md-3">
@@ -78,7 +78,7 @@ export default {
             type: Number,
             default: 20
         },
-        'class': String,
+        'className': String,
         'withPageSize': {// only for starndard type
             type: Boolean,
             default: true

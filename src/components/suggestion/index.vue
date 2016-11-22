@@ -1,5 +1,5 @@
 <template>
-    <div class="xcui-suggestion {{className}}">
+    <div class="xcui-suggestion" :class="className">
         <input type="text"
                 class="form-control xcui-suggestion-input"
                 autocomplete="off"

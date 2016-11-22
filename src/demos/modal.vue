@@ -83,9 +83,6 @@
         :class-name="'xcui-modal-demo-class'">
         <div>欲与天公试比高</div>
         </xcui-modal>
-        <style>
-        .Modal-demo-class { top: 0; }
-        </style>
         <div>通过设置size可以快速设置对话框的宽度大小，也可以设置class-name和style自定义Modal的样式</div>
     </example>
 </demo>
