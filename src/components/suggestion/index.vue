@@ -9,7 +9,7 @@
                 :placeholder="placeholder"
                 v-model="dataText"
                 @input="onInput"
-                @focus="onInput"
+                @focus="onFocus"
                 @blur="onBlur"
                 @keyDown.up="changeCurrent(-1)"
                 @keyDown.down="changeCurrent(1)"
@@ -101,6 +101,11 @@
                     me.autoSetItem();
                     me.inputCallback && me.inputCallback();
                 }, 100);
+            },
+            onFocus() {
+                let me = this;
+                me.getLocalSug();
+                me.inputCallback && me.inputCallback();
             },
             onBlur() {
                 let me = this;
