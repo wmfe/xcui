@@ -31,7 +31,7 @@ export default {
             type: String,
             default: ''
         },
-        key: {
+        keys: {
             type: String,
             default: ''
         },

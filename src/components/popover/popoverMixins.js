@@ -30,7 +30,8 @@ export default {
                 'top': 0,
                 'left': 0
             },
-            'show': true
+            'show': true,
+            'firstInit': true
         };
     },
     methods: {
@@ -38,7 +39,7 @@ export default {
             this.show = !this.show;
         },
         fixPosition(triger, popover, placement) {
-            popover.style.display = '';
+            popover.style.display = 'inline-table';
             switch (placement) {
                 case 'top':
                     this.position.left = triger.offsetLeft - popover.offsetWidth / 2 + triger.offsetWidth / 2;
@@ -53,46 +54,52 @@ export default {
                     this.position.top = triger.offsetTop + triger.offsetHeight / 2 - popover.offsetHeight / 2;
                     break;
                 case 'bottom':
+                    debugger;
                     this.position.left = triger.offsetLeft - popover.offsetWidth / 2 + triger.offsetWidth / 2;
                     this.position.top = triger.offsetTop + triger.offsetHeight;
                     break;
                 default:
             }
+            debugger;
             popover.style.top = this.position.top + 'px';
             popover.style.left = this.position.left + 'px';
-            popover.style.display = 'none';
+            if (this.firstInit) {
+                this.firstInit = false;
+                popover.style.display = 'none';
+            }
             this.show = !this.show;
         }
     },
-    ready() {
-        const triger = this.$els.trigger.children[0];
-        let me = this;
-        if (this.trigger === 'hover') {
-            this._mouseenterEvent = EventListener.listen(triger, 'mouseenter', function () {
-                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
-                me.show = true;
-            });
-            this._mouseleaveEvent = EventListener.listen(triger, 'mouseleave', function () {
-                me.show = false;
-            });
-        }
-        else if (this.trigger === 'focus') {
-            this._focusEvent = EventListener.listen(triger, 'focus', function () {
-                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
-                me.show = true;
-            });
-            this._blurEvent = EventListener.listen(triger, 'blur', function () {
-                me.show = false;
-            });
-        }
-        else {
-            this._clickEvent = EventListener.listen(triger, 'click', function () {
-                me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
-                me.toggle;
-            });
-        }
-
-        this.fixPosition(this.$els.trigger.children[0], this.$els.popover, this.placement);
+    mounted() {
+        this.$nextTick(() => {
+            const triger = this.$refs.trigger.children[0];
+            let me = this;
+            if (this.trigger === 'hover') {
+                this._mouseenterEvent = EventListener.listen(triger, 'mouseenter', function () {
+                    me.fixPosition(me.$refs.trigger.children[0], me.$refs.popover, me.placement);
+                    me.show = true;
+                });
+                this._mouseleaveEvent = EventListener.listen(triger, 'mouseleave', function () {
+                    me.show = false;
+                });
+            }
+            else if (this.trigger === 'focus') {
+                this._focusEvent = EventListener.listen(triger, 'focus', function () {
+                    me.fixPosition(me.$refs.trigger.children[0], me.$refs.popover, me.placement);
+                    me.show = true;
+                });
+                this._blurEvent = EventListener.listen(triger, 'blur', function () {
+                    me.show = false;
+                });
+            }
+            else {
+                this._clickEvent = EventListener.listen(triger, 'click', function () {
+                    me.fixPosition(me.$refs.trigger.children[0], me.$refs.popover, me.placement);
+                    me.toggle;
+                });
+            }
+            this.fixPosition(this.$refs.trigger.children[0], this.$refs.popover, this.placement);
+        });
     },
     beforeDestroy() {
         if (this._blurEvent) {

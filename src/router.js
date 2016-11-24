@@ -28,52 +28,52 @@ const router = new VueRouter({
         component: Home,
         children: [
             {
-                path: 'home',
+                path: '/home',
                 component: Homecontent
             }, {
-                path: 'component/pagination',
+                path: '/component/pagination',
                 component: Pagination
             }, {
-                path: 'component/popover',
+                path: '/component/popover',
                 component: Popover
             }, {
-                path: 'component/tooltip',
+                path: '/component/tooltip',
                 component: Tooltip
             }, {
-                path: 'component/suggestion',
+                path: '/component/suggestion',
                 component: Suggestion
             }, {
-                path: 'component/tag',
+                path: '/component/tag',
                 component: Tag
             }, {
-                path: 'component/datepicker',
+                path: '/component/datepicker',
                 component: Datepicker
             }, {
-                path: 'component/daterangepicker',
+                path: '/component/daterangepicker',
                 component: Daterangepicker
             }, {
-                path: 'component/loading',
+                path: '/component/loading',
                 component: Loading
             }, {
-                path: 'component/message',
+                path: '/component/message',
                 component: Message
             }, {
-                path: 'component/modal',
+                path: '/component/modal',
                 component: Modal
             }, {
-                path: 'component/select',
+                path: '/component/select',
                 component: Select
             }, {
-                path: 'component/inputnumber',
+                path: '/component/inputnumber',
                 component: InputNumber
             }, {
-                path: 'component/progress',
+                path: '/component/progress',
                 component: Progress
             }, {
-                path: 'component/pageloading',
+                path: '/component/pageloading',
                 component: PageLoading
             }, {
-                path: 'component/scrolltop',
+                path: '/component/scrolltop',
                 component: ScrollTop
             }
         ]

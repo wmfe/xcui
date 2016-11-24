@@ -4,53 +4,53 @@
     <div id="sidebar-wrapper" class="col-md-2">
         <ul class="sidebar-nav">
             <li>
-                <router-link to="home">关于XCUI</router-link>
+                <router-link to="/home">关于XCUI</router-link>
             </li>
             <li>
-                <router-link to="component/datepicker">DatePicker</router-link>
+                <router-link to="/component/datepicker">DatePicker</router-link>
             </li>
             <li>
-                <router-link to="component/daterangepicker">DateRangePicker</router-link>
+                <router-link to="/component/daterangepicker">DateRangePicker</router-link>
             </li>
             <li>
-                 <router-link to="component/inputNumber">InputNumber</router-link>
+                 <router-link to="/component/inputNumber">InputNumber</router-link>
             </li>
             <li>
-                 <router-link to="component/loading">Loading</router-link>
+                 <router-link to="/component/loading">Loading</router-link>
             </li>
 
             <li>
-                 <router-link to="component/modal">Modal</router-link>
+                 <router-link to="/component/modal">Modal</router-link>
             </li>
             <li>
-                <router-link to="component/suggestion">Suggestion</router-link>
+                <router-link to="/component/suggestion">Suggestion</router-link>
             </li>
             <li>
-                <router-link to="component/pagination">Pagination</router-link>
+                <router-link to="/component/pagination">Pagination</router-link>
             </li>
             <li>
-                <router-link to="component/popover">Popover</router-link>
+                <router-link to="/component/popover">Popover</router-link>
             </li>
             <li>
-                <router-link to="component/progress">Progress</router-link>
+                <router-link to="/component/progress">Progress</router-link>
             </li>
             <li>
-                <router-link to="component/pageloading">PageLoading</router-link>
+                <router-link to="/component/pageloading">PageLoading</router-link>
             </li>
             <li>
-                <router-link to="component/tooltip">Tooltip</router-link>
+                <router-link to="/component/tooltip">Tooltip</router-link>
             </li>
             <li>
-                <router-link to="component/tag">Tag</router-link>
+                <router-link to="/component/tag">Tag</router-link>
             </li>
             <li>
-                 <router-link to="component/message">Message</router-link>
+                 <router-link to="/component/message">Message</router-link>
             </li>
             <li>
-                <router-link to="component/select">Select</router-link>
+                <router-link to="/component/select">Select</router-link>
             </li>
             <li>
-                <router-link to="component/scrolltop">ScrollTop</router-link>
+                <router-link to="/component/scrolltop">ScrollTop</router-link>
             </li>
         </ul>
     </div>

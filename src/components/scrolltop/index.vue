@@ -1,11 +1,13 @@
 <template>
 	<div class="xcui-scrolltop">
-		<div v-el:dropa id="corner" class="xcui-scrolltop-area xcui-scrolltop-corner" :class="{'xcui-scrolltop-dropin':dropin.corner}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
-            <div draggable="true" v-el:dragele id="dragEle" class="glyphicon glyphicon-circle-arrow-up xcui-scrolltop-init" @dragstart="dragStart($event)" @dragleave="dragleave($event)" @dragend="dragend($event)" @click="backTop($event)" transition="fadein" v-show="show" :class="className"></div>
+		<div ref="dropa" id="corner" class="xcui-scrolltop-area xcui-scrolltop-corner" :class="{'xcui-scrolltop-dropin':dropin.corner}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
+            <transition name="fadein">
+                <div draggable="true" ref="dragele" id="dragEle" class="glyphicon glyphicon-circle-arrow-up xcui-scrolltop-init" @dragstart="dragStart($event)" @dragleave="dragleave($event)" @dragend="dragend($event)" @click="backTop($event)" v-show="show" :class="className"></div>
+            </transition>
 		</div>
-		<div v-el:dropb id="bottom" class="xcui-scrolltop-area xcui-scrolltop-bottom" :class="{'xcui-scrolltop-dropin':dropin.bottom}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
+		<div ref="dropb" id="bottom" class="xcui-scrolltop-area xcui-scrolltop-bottom" :class="{'xcui-scrolltop-dropin':dropin.bottom}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
         </div>
-		<div v-el:dropc id="right" class="xcui-scrolltop-area xcui-scrolltop-right" :class="{'xcui-scrolltop-dropin':dropin.right}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" ></div>
+		<div ref="dropc" id="right" class="xcui-scrolltop-area xcui-scrolltop-right" :class="{'xcui-scrolltop-dropin':dropin.right}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" ></div>
 	</div>
 </template>
 <script>
@@ -74,7 +76,7 @@ export default {
                     this.dropin[i] = false;
                 }
             }
-            $event.currentTarget.appendChild(this.$els.dragele);
+            $event.currentTarget.appendChild(this.$refs.dragele);
             let dropId = $event.currentTarget.id;
             this.dropin[dropId] = true;
         },
@@ -108,21 +110,23 @@ export default {
             }
         }
     },
-    ready() {
-        let targetElement = document.body;
-        if (this.targetElement) {
-            targetElement = document.getElementById(this.targetElement);
-        }
-        let me = this;
-        let scrollCall = function () {
-            if (targetElement.getBoundingClientRect().top < 0) {
-                me.show = true;
+    mounted() {
+        this.$nextTick(() => {
+            let targetElement = document.body;
+            if (this.targetElement) {
+                targetElement = document.getElementById(this.targetElement);
             }
-            else {
-                me.show = false;
-            }
-        };
-        me.scrollListener = EventListener.listen(window, 'scroll', scrollCall);
+            let me = this;
+            let scrollCall = function () {
+                if (targetElement.getBoundingClientRect().top < 0) {
+                    me.show = true;
+                }
+                else {
+                    me.show = false;
+                }
+            };
+            me.scrollListener = EventListener.listen(window, 'scroll', scrollCall);
+        });
     },
     destroyed() {
         this.scrollListener.remove();
@@ -165,15 +169,14 @@ export default {
 	.xcui-scrolltop-dropin{
 		border: none !important;
 	}
-
 }
-.fadein-transition {
+.fadein-enter-active, .fadein-leave-active {
     display: block;
 }
 .fadein-enter {
     animation:fadein-in 0.3s ease-in;
 }
-.fadein-leave {
+.fadein-leave-active {
     animation:fadein-out 0.3s ease-out;
 }
 @keyframes fadein-in {

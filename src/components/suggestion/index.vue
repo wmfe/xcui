@@ -16,7 +16,7 @@
                 @keyDown.enter.stop.prevent="onBlur">
 
         <ul class="xcui-suggestion-list dropdown-menu" :class="{'show':show}">
-            <li v-for="(index,item) in list" :class="{'current' : currentIndex==index}">
+            <li v-for="(item,index) in list" :class="{'current' : currentIndex==index}">
                 <a href="javascript:void(0)" @click="setItem(item)">
                     {{item.text}}
                 </a>
@@ -182,7 +182,7 @@
                 this.dataValue = '';
             }
         },
-        ready() {
+        mounted() {
             this.arrangeLocalList();
         }
     };

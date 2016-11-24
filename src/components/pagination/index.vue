@@ -89,16 +89,13 @@ export default {
         },
         'rangeLength': {
             type: Number,
-            default: 10,
-            coerce(val) {
-                if (val < 1) {
-                    return 1;
-                }
-                return val;
-            }
+            default: 10
         }
     },
     computed: {
+        validRangeLength() {
+            return this.rangeLength < 1 ? 1 : this.rangeLength;
+        },
         totalPageCount() {
             return Math.ceil(this.total / this.pageSize);
         },
@@ -106,7 +103,7 @@ export default {
             let curPage = this.currentPageNo;
             let midpoint = curPage;
             // 减1的目的是刨除midpoint占位
-            let pageRange = this.rangeLength - 1;
+            let pageRange = this.validRangeLength - 1;
             // 中点左边显示的页码范围
             let leftHand = Math.floor(pageRange / 2);
             // 中点右边显示的页码范围

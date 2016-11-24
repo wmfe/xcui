@@ -1,7 +1,7 @@
 <template>
 <div class="xcui-datapicker" :class="className">
     <div :class="{'input-group':btnShow,'bg-pr':!btnShow}">
-        <input class="form-control"  type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
+        <input class="form-control"  type="text" v-model="internalValue" placeholder="请输入日期" @click="showCalendar">
         <button v-show="show" type="button" class="close close_btn" :style="{'right':btnShow?'50px':'10px'}" @click="closeBtn" title="点击关闭"><span aria-hidden="true">×</span></button>
         <div @click.stop=""
              @touchstart.stop=""
@@ -24,9 +24,9 @@
                             <td v-for="week in weeks" class="week">{{week}}</td>
                         </tr>
                     </thead>
-                    <tr v-for="(k1,day) in days">
+                    <tr v-for="(day,k1) in days">
                         <td
-                        v-for="(k2,child) in day"
+                        v-for="(child,k2) in day"
                         :class="{'today':child.today,'off':child.disabled,'noclick':child.noClick}"
                         :style="{'background':color&&child.today?color:''}"
                         @click="select(k1,k2,$event)">
@@ -100,9 +100,10 @@
                 show: false,
                 currentMonth: Number,
                 currentTimeBtnShow: true,
-                newValue: this.value,
+                newValue: this,
                 count: 0,
-                closeBtnNow: false
+                closeBtnNow: false,
+                oldValue: null
             };
         },
         watch: {
@@ -112,7 +113,7 @@
                     this.newValue = val;
                 }
                 if (!this.newValue && (val === nowDate)) {
-                    this.value = '';
+                    this.internalValue = '';
                 }
                 this.count += 1;
             }
@@ -152,7 +153,7 @@
                 let me = this;
                 let days = this.days;
                 let daySeleted = days[k1][k2];
-                let oldValue = this.value = me.output(this.value);
+                this.oldValue = this.internalValue = me.output(this.internalValue);
                 // 取消上次选中
                 if (this.today.length > 0) {
                     days[this.today[0]][this.today[1]].today = false;
@@ -165,21 +166,21 @@
                     let om = me.outputMonth(me.month, me.year);
                     me.year = om.y;
                     me.month = om.m;
-                    me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+                    me.internalValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
                     me.render(me.year, me.month);
                 }
                 else {
                     me.today = [k1, k2];
-                    me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+                    me.internalValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
                 }
                 if (me.type === 'date') {
-                    this.$emit('on-change', this.value, oldValue);
+                    this.$emit('mutate', this.internalValue, this.oldValue);
                     me.showFalse();
                 }
             },
             currentTime() {
                 let me = this;
-                me.value = me.output(new Date());
+                me.internalValue = me.output(new Date());
                 let params = this.dateParams;
                 me.year = params.year;
                 me.month = params.month;
@@ -197,13 +198,15 @@
             ok(e) {
                 e.preventDefault();
                 this.showFalse();
-                this.$emit('on-change', this.value, this.initialValue);
-                this.value = this.initialValue = this.value || this.initialValue;
+                this.$emit('mutate', this.internalValue, this.oldValue);
+                this.internalValue = this.oldValue = this.internalValue || this.oldValue;
                 this.closeBtnNow = false;
             },
             cancel(e) {
-                e.preventDefault();
-                this.value = this.closeBtnNow ? '' : this.initialValue;
+                e && e.preventDefault();
+                if (this.type !== 'date') {
+                    this.internalValue = this.oldValue;
+                }
                 this.showFalse();
             },
             showFalse() {
@@ -211,13 +214,14 @@
                 this.minuteListShow = false;
                 this.secondListShow = false;
                 this.show = false;
+                document.removeEventListener('click', this.bindHide, false);
             },
             showCalendar(e) {
                 let me = this;
                 e.stopPropagation();
                 me.show = true;
-                if (me.value !== '') {
-                    me.output(me.value);
+                if (me.internalValue !== '') {
+                    me.output(me.internalValue);
                     let params = me.dateParams;
                     me.year = params.year;
                     me.month = params.month;
@@ -226,24 +230,30 @@
                     me.second = params.second;
                 }
                 else {
-                    me.value = me.initialValue;
+                    me.internalValue = me.initialValue;
                     this.count = 0;
                 }
+                if (me.oldValue === null) {
+                    me.oldValue = me.internalValue;
+                }
                 me.render(me.year, me.month);
-                let bindHide = function (e) {
-                    e.stopPropagation();
-                    me.showFalse();
-                    document.removeEventListener('click', bindHide, false);
-                };
                 setTimeout(function () {
-                    document.addEventListener('click', bindHide, false);
+                    document.addEventListener('click', me.bindHide, false);
                 }, 500);
             },
             closeBtn() {
-                this.value = '';
+                this.internalValue = '';
                 this.count = 0;
                 this.closeBtnNow = true;
+            },
+            bindHide(e) {
+                e.stopPropagation();
+                this.cancel();
+                document.removeEventListener('click', this.bindHide, false);
             }
+        },
+        destroyed() {
+            document.removeEventListener('click', this.bindHide, false);
         }
     };
 </script>

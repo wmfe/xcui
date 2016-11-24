@@ -1,5 +1,5 @@
 <template>
-	<div v-el:outer class="outer" :class="size">
+	<div ref="outer" class="outer" :class="size">
 		<div class="up-down-wrap">
 			<a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down="preventDefault" @click="upValue">
 				<!-- <span class="up"></span> -->
@@ -112,8 +112,6 @@ export default {
         preventDefault(e) {
             e.preventDefault();
         }
-    },
-    ready() {
     }
 };
 </script>
