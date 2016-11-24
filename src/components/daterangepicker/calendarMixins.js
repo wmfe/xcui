@@ -1,7 +1,6 @@
 export default {
     props: {
         value: {
-            twoWay: true,
             default: ''
         },
         format: {
@@ -50,24 +49,26 @@ export default {
             selectRange: '',
             dateParams: null,
             defaultFormat: 'YYYY-MM-DD',
-            type: 'date'
+            type: 'date',
+            internalValue: '',
+            initialValue: ''
         };
     },
     computed: {
         formatValue() {
-            return this.output(this.value);
+            return this.output(this.internalValue);
         }
     },
     created() {
         let me = this;
         me.getType();
         if (me.value) {
-            me.value = me.output(me.value);
+            me.internalValue = me.output(me.value);
         }
         else {
-            me.value = me.output(new Date());
+            me.internalValue = me.output(new Date());
         }
-        this.initialValue = this.value;
+        this.initialValue = this.internalValue;
         let params = me.dateParams;
         me.year = params.year;
         me.month = params.month;
@@ -92,7 +93,7 @@ export default {
             me.render(me.year, me.month);
         }
         else {
-            this.initialValue = this.value;
+            this.initialValue = this.internalValue;
         }
     },
     methods: {
@@ -107,7 +108,7 @@ export default {
             me.firstDayOfMonth = new Date(y, m, 1).getDay();// 当月第一天
             me.lastDateOfMonth = new Date(y, m + 1, 0).getDate();// 当月最后一天
             me.lastDayOfLastMonth = new Date(y, m, 0).getDate();// 前一个月的最后一天
-            me.output(me.value);
+            me.output(me.internalValue);
             let params = me.dateParams;
             let line = 0;
             let temp = [];
@@ -257,20 +258,20 @@ export default {
                 default:
             };
             // me.value = me.bindFormat(`me.year-me.month-me.day me.hour:me.minute:me.second`);
-            me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+            me.internalValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
         },
         // 格式化输出
         output(d, format) {
             let fmt = format || this.format;
             let me = this;
             let date = new Date(d);
-            if (this.value && this.type === 'time' && typeof (d) === 'string') {
+            if (this.internalValue && this.type === 'time' && typeof (d) === 'string') {
                 date = new Date('1970-01-01 ' + d);
             }
             else if (typeof (d) === 'object' && d.length > 0) {
                 date = new Date(d[0], d[1], d[2], d[3] || '00', d[4] || '00', d[5] || '00');
             }
-            else if (!this.value) {
+            else if (!this.internalValue) {
                 date = new Date();
             }
             let year = date.getFullYear();

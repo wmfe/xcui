@@ -1,5 +1,5 @@
 <template>
-    <div class="xcui-suggestion {{className}}">
+    <div class="xcui-suggestion" :class="className">
         <input type="text"
                 class="form-control xcui-suggestion-input"
                 autocomplete="off"
@@ -9,14 +9,14 @@
                 :placeholder="placeholder"
                 v-model="dataText"
                 @input="onInput"
-                @focus="onInput"
+                @focus="onFocus"
                 @blur="onBlur"
                 @keyDown.up="changeCurrent(-1)"
                 @keyDown.down="changeCurrent(1)"
-                @keyDown.enter="onBlur">
+                @keyDown.enter.stop.prevent="onBlur">
 
         <ul class="xcui-suggestion-list dropdown-menu" :class="{'show':show}">
-            <li v-for="(index,item) in list" :class="{'current' : currentIndex==index}">
+            <li v-for="(item,index) in list" :class="{'current' : currentIndex==index}">
                 <a href="javascript:void(0)" @click="setItem(item)">
                     {{item.text}}
                 </a>
@@ -102,6 +102,11 @@
                     me.inputCallback && me.inputCallback();
                 }, 100);
             },
+            onFocus() {
+                let me = this;
+                me.getLocalSug();
+                me.inputCallback && me.inputCallback();
+            },
             onBlur() {
                 let me = this;
 
@@ -182,7 +187,7 @@
                 this.dataValue = '';
             }
         },
-        ready() {
+        mounted() {
             this.arrangeLocalList();
         }
     };

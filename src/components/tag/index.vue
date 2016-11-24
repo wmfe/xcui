@@ -1,6 +1,6 @@
 <template>
 	<div :class="['xcui-tag', disabled ? ' xcui-disabled':'']" @click="onClick" v-if="showTag" >
-        <div class="{{classname!='' ? classname : ''}}" >
+        <div :class="className" >
 		<span class="xcui-tag-text"><slot></slot>{{text}}<span>
         <i class="xcui-cross" v-if="closeable" @click.stop="onCloseClick"></i>
         </div>
@@ -27,11 +27,11 @@ export default {
             type: Boolean,
             default: true
         },
-        classname: {
+        className: {
             type: String,
             default: ''
         },
-        key: {
+        keys: {
             type: String,
             default: ''
         },

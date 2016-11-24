@@ -262,7 +262,22 @@
                 }
                 if (this.multiple) {
                     if (typeof option === 'object') {
-                        return this.value.indexOf(option) > -1;
+                        let value = option.label;
+                        if (this.label && option[this.label]) {
+                            value = option[this.label];
+                        }
+                        let isMatched = false;
+                        let valueLen = this.value.length;
+                        for (let i = 0; i < valueLen; i++) {
+                            if (typeof this.value[i] === 'string') {
+                                // if string mean defaultValue set
+                                if (value === this.value[i]) {
+                                    isMatched = true;
+                                    this.value[i] = option;
+                                }
+                            }
+                        }
+                        return this.value.indexOf(option) > -1 || isMatched;
                     }
                     return this.value.indexOf(option) > -1;
                 }
@@ -395,7 +410,7 @@
             },
             getDropDownHeight() {
                 let list = this.$els.list;
-                let item = list.children[0];
+                let item = list.children[0] || null;
                 let itemHeight = item.currentStyle ? item.currentStyle.height : getComputedStyle(item, false).height;
                 let listHeight = list.currentStyle ? list.currentStyle.height : getComputedStyle(list, false).height;
                 return {
@@ -407,8 +422,11 @@
                 let me = this;
                 let selected = this.selected;
                 let indexs = [];
+                if (!this.options) {
+                    return indexs;
+                }
                 this.options.forEach((item, index) => {
-                    item.options.forEach((subItem, subIndex) => {
+                    item.options && item.options.forEach((subItem, subIndex) => {
                         if (typeof subItem === 'string' && selected === subItem) {
                             indexs = [index, subIndex];
                             return;

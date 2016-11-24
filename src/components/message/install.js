@@ -10,7 +10,7 @@ let MessageInstall = (Vue) => {
             <Message :content="content"
                 :type="type"
                 :duration="duration"
-                :show.sync="show">
+                :show="show">
             </Message>
         `;
         document.body.appendChild(div);
@@ -34,7 +34,7 @@ let MessageInstall = (Vue) => {
             _show(props) {
                 props = !props || isEmptyObject(props) ? {} : props;
                 Object.keys(props).forEach(propKey => {
-                    messageVM[propKey] = props[propKey];
+                    messageVM.$children[0][propKey] = props[propKey];
                 });
                 messageVM.$children[0].onShow();
             }

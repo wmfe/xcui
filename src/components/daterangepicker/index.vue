@@ -1,8 +1,8 @@
-
 <template>
 <div class="xcui-datarangepicker" :class="className">
     <div :class="{'input-group':btnShow}">
         <input class="form-control col-md-3" type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
+        <button v-show="show" type="button" class="close close_btn" :style="{'right':btnShow?'50px':'10px'}" @click="closeBtn" title="点击关闭"><span aria-hidden="true">×</span></button>
         <!-- 双日历 -->
         <div @click.stop=""
              @touchstart.stop=""
@@ -11,9 +11,9 @@
              <div class="clearfix">
                  <div class="double-calendar-left">
                     <calendar
-                        :value.sync="startDate"
+                        :value.sync="newStartDate"
                         :format="format"
-                        :other-value.sync="endDate"
+                        :other-value.sync="newEndDate"
                         :min-date="minDate"
                         :max-date="maxDate"
                         :hour-range="hourRange"
@@ -26,9 +26,9 @@
                  </div>
                  <div class="double-calendar-right">
                     <calendar
-                        :value.sync="endDate"
+                        :value.sync="newEndDate"
                         :format="format"
-                        :other-value.sync="startDate"
+                        :other-value.sync="newStartDate"
                         :right="true"
                         :min-date="minDate"
                         :max-date="maxDate"
@@ -89,6 +89,10 @@
             btnShow: {
                 type: Boolean,
                 default: false
+            },
+            sep: {
+                type: String,
+                default: ' 至 '
             }
         },
         components: {
@@ -100,35 +104,52 @@
                 value: '',
                 startRender: '',
                 initialStartDate: '',
-                initialEndDate: ''
+                initialEndDate: '',
+                newStartDate: '',
+                newEndDate: ''
             };
         },
         watch: {
-            startDate(val) {
-                if (val > this.endDate) {
-                    this.endDate = val;
-                }
-            },
-            endDate(val) {
-                if (val < this.startDate) {
-                    this.startDate = val;
+            value(val) {
+                if (!val) {
+                    this.startDate = this.endDate = '';
                 }
             }
         },
+        created() {
+            this.newStartDate = this.startDate;
+            this.newEndDate = this.endDate;
+            if (this.startDate > this.endDate) {
+                this.newEndDate = this.startDate;
+            }
+            if (this.endDate < this.startDate) {
+                this.newStartDate = this.endDate;
+            }
+            this.value = this.newStartDate && this.newEndDate && (this.newStartDate + this.sep + this.newEndDate);
+        },
         methods: {
-            ok() {
-                this.value = this.startDate + ' 至 ' + this.endDate;
+            ok(e) {
+                e.preventDefault();
+                if (this.newStartDate && this.newEndDate) {
+                    this.value = this.newStartDate + this.sep + this.newEndDate;
+                    this.startDate = this.newStartDate;
+                    this.endDate = this.newEndDate;
+                }
+                else {
+                    this.value = this.startDate = this.endDate = '';
+                }
                 this.show = false;
                 this.$emit('on-change', this.startDate, this.endDate);
                 this.initialStartDate = this.startDate;
                 this.initialEndDate = this.endDate;
                 this.startRender = new Date().getTime();
             },
-            cancel() {
+            cancel(e) {
+                e.preventDefault();
                 this.show = false;
                 this.startRender = new Date().getTime();
-                this.startDate = this.initialStartDate;
-                this.endDate = this.initialEndDate;
+                this.newStartDate = this.initialStartDate;
+                this.newEndDate = this.initialEndDate;
             },
             showCalendar(e) {
                 let me = this;
@@ -142,6 +163,9 @@
                 setTimeout(function () {
                     document.addEventListener('click', bindHide, false);
                 }, 500);
+            },
+            closeBtn() {
+                this.value = this.startDate = this.endDate = '';
             }
         }
     };
@@ -153,6 +177,13 @@
     @base-size:14px;
     @tit-color:#333;
     position:relative;
+    .close_btn{
+        position:absolute;
+        top:50%;
+        right:10px;
+        margin-top:-11px;
+        z-index:9999;
+    }
     .calendar{
         width: 240px;
         padding: 10px;

@@ -28,12 +28,12 @@
                 type: Number,
                 default: 350
             },
-            trickle: {
+            trickled: {
                 type: Boolean,
                 default: true
             },
             trickleSpeed: {
-                type: Boolean,
+                type: Number,
                 default: 250
             }
         },
@@ -96,8 +96,7 @@
                         work();
                     }, this.trickleSpeed);
                 };
-
-                if (this.trickle) {
+                if (this.trickled) {
                     work();
                 }
 

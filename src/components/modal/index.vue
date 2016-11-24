@@ -1,13 +1,13 @@
 <template lang="html">
-    <div class="xcui-modal-wrapper xcui-modal-mask" @click="maskClose" v-el:modal-mask v-show="show">
-        <div class="xcui-modal" tabindex="-1" @keydown.esc="cancel" :style="style" :class="[sizeClass,className]">
+    <div class="xcui-modal-wrapper xcui-modal-mask" @click="maskClose" ref="modal-mask" v-show="show">
+        <div class="xcui-modal" tabindex="-1" @keydown.esc="cancel" :style="style" :class="modalClass">
             <div class="xcui-modal-header" v-if="showHeader">
                 <slot name="header">
                     <span class="xcui-modal-title">{{title}}</span>
                 </slot>
                 <slot name="close">
-                    <!-- <div class="xcui-modal-header-close" @click="cancel" v-if="showCloseButton">X</div> -->
-                    <i class="xcui-modal-header-close glyphicon glyphicon-remove" @click="cancel" v-if="showCloseButton"></i>
+                    <button type="button" class="xcui-modal-header-close" data-dismiss="modal"  @click="cancel" v-if="showCloseButton"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <!--<i class="xcui-modal-header-close glyphicon glyphicon-remove" @click="cancel" v-if="showCloseButton"></i>-->
                 </slot>
             </div>
             <div class="xcui-modal-body" :style="contentStyle">
@@ -29,17 +29,17 @@
 export default {
     name: 'xcui-modal',
     props: {
+        value: {
+            type: Boolean,
+            default: false
+        },
         title: {
             type: String,
-            default: '提示'
+            default: ''
         },
         content: {
             type: String,
             default: ''
-        },
-        show: {
-            type: Boolean,
-            default: false
         },
         style: {
             type: Object
@@ -100,8 +100,14 @@ export default {
             default: () => {}
         }
     },
+    data() {
+        return {
+            show: false
+        };
+    },
     watch: {
-        show(val) {
+        value(val) {
+            this.show = val;
             if (this.scrollable) {
                 return;
             }
@@ -111,11 +117,17 @@ export default {
             else {
                 document.body.style.overflow = 'auto';
             }
+        },
+        show(val) {
+            this.$emit('input', val);
         }
     },
     computed: {
         sizeClass() {
             return `xcui-modal-size-${this.size}`;
+        },
+        modalClass() {
+             return `${this.sizeClass} ${this.className}`;
         }
     },
     methods: {
@@ -123,7 +135,7 @@ export default {
             this.show = false;
         },
         maskClose(e) {
-            if (this.maskClosable && e.target === this.$els.modalMask) {
+            if (this.maskClosable && e.target === this.$refs.modalMask) {
                 this.cancel();
             }
         },
@@ -166,10 +178,13 @@ export default {
     background-color: #fff;
     padding: 0;
     background-color: white;
-    border-radius: 2px;
-    box-shadow: 0 2px 8px alpha(black, 0.33);
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
     transition: all 0.2s ease;
     max-width: 100vw;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
     &.large {
         width: 45rem;
     }
@@ -177,25 +192,28 @@ export default {
 }
 .xcui-modal-body {
     padding: 1.6rem;
-    border-bottom: 1px solid #f3f3f3;
     min-height: 8rem;
 }
 .xcui-modal-header {
     font-size: 1.6rem;
     padding: .6rem;
+    min-height: 3.1rem;
     border-bottom: 1px solid #f3f3f3;
     text-align: center;
 }
 .xcui-modal-header-close {
     position: absolute;
     right: 8px;
-    top: 8px;
+    top: 3px;
     color: #000;
     opacity: .2;
     font-weight: 700;
     line-height: 1;
-    font-size: 20px;
+    font-size: 27px;
     outline: 0;
+    border: 0;
+    background: 0;
+    padding: 0;
     &:hover{
         cursor: pointer;
         text-decoration: none;
@@ -203,10 +221,11 @@ export default {
     }
 }
 .xcui-modal-footer {
-    padding: .5rem 1rem;
+    padding: .8rem 1rem;
     text-align: center;
+    border-top: 1px solid #f3f3f3;
     .xcui-modal-btn {
-        margin-right: .5rem;
+        margin-right: 1rem;
         background-color: #46C3C1;
         color: #fff;
         border: #46c3c1 solid 1px;

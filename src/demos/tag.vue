@@ -14,13 +14,13 @@
         <xcui-tag :text="'标签'"></xcui-tag>
         <xcui-tag :disabled="true" :text="'禁用标签'"></xcui-tag>
         <xcui-tag :closeable="true" :text="'关闭'" @close="closeclick"></xcui-tag>
-        <xcui-tag :closeable="true" @close="closeclick" :key.sync="key" :text="'点击不关闭'" :aftercloseisshow.sync="afterCloseIsShowTag" @click="click"></xcui-tag>
-        <xcui-tag  :classname="'define-class'" :text="'自定义样式'" @click="click" ></xcui-tag>
+        <xcui-tag :closeable="true" @close="closeclick" :keys.sync="key" :text="'点击不关闭'" :aftercloseisshow.sync="afterCloseIsShowTag" @click="click"></xcui-tag>
+        <xcui-tag :classname="'define-class'" :text="'自定义样式'" @click="click" ></xcui-tag>
     </example>
     <example title="添加标签">
-        <template v-for="item in tags">
+        <span v-for="item in tags">
             <xcui-tag :closeable="true" :text="item.text"></xcui-tag>
-        </template>
+        </span>
         <input type="button" class="btn btn-primary" value="添加" @click="addTag"/>
     </example>
 </demo>
