@@ -265,13 +265,13 @@ export default {
             let fmt = format || this.format;
             let me = this;
             let date = new Date(d);
-            if (this.internalValue && this.type === 'time' && typeof (d) === 'string') {
+            if (this.value && this.type === 'time' && typeof (d) === 'string') {
                 date = new Date('1970-01-01 ' + d);
             }
             else if (typeof (d) === 'object' && d.length > 0) {
                 date = new Date(d[0], d[1], d[2], d[3] || '00', d[4] || '00', d[5] || '00');
             }
-            else if (!this.internalValue) {
+            else if (!this.value) {
                 date = new Date();
             }
             let year = date.getFullYear();

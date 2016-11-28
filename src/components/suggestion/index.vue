@@ -32,7 +32,9 @@
             return {
                 list: [],
                 localList: [],
-                currentIndex: -1
+                currentIndex: -1,
+                dataText: '',
+                dataValue: ''
             };
         },
         props: {
@@ -62,14 +64,6 @@
                     return [];
                 }
             },
-            'dataText': {
-                type: String,
-                default: ''
-            },
-            'dataValue': {
-                type: [String, Number],
-                default: ''
-            },
             'check': {
                 type: Boolean,
                 default: true
@@ -79,7 +73,22 @@
                 default() {
                     return () => {};
                 }
+            },
+            // v-model使用
+            value: {
+                type: Object,
+                default() {
+                    return {
+                        text: '',
+                        value: ''
+                    };
+                }
             }
+        },
+        created() {
+            this.dataText = this.value.text || '';
+            this.dataValue = this.value.value || '';
+            this.emitChange();
         },
         computed: {
             show() {
@@ -163,11 +172,11 @@
                 }
                 else {
                     this.dataValue = '';
+                    this.emitChange();
                 }
             },
             getLocalSug() {
                 let word = this.dataText;
-
                 this.list = this.localList.filter((item) => {
                     return (word && this.check) ? item.text.indexOf(word) > -1 : true;
                 });
@@ -175,6 +184,7 @@
             setItem(item) {
                 this.dataValue = item.value;
                 this.dataText = item.text;
+                this.emitChange();
             },
             logError(msg) {
                 throw new Error('[xcui] - ' + msg);
@@ -185,6 +195,13 @@
             clearText() {
                 this.dataText = '';
                 this.dataValue = '';
+                this.emitChange();
+            },
+            emitChange() {
+                this.$emit('input', {
+                    text: this.dataText,
+                    value: this.dataValue
+                });
             }
         },
         mounted() {

@@ -14,7 +14,7 @@
 
 <demo>
     <example title="simple">
-        <xcui-datepicker :value="valueDemo" v-on:mutate="simpleMutate">
+        <xcui-datepicker v-model="valueDemo">
         </xcui-datepicker>
     </example>
     <p> 最简单的用法，value双向绑定，日期</p>
@@ -22,7 +22,7 @@
     <p>Value值改变时会触发mutate事件。参数为[val, oldVal]，对应新日期和老日期</p>
     <example title="日期格式">
         <xcui-datepicker
-            :value="dateValue"
+            v-model="dateValue"
             format="YYYY-MM-DD"
             :min-date="'2016-01-01'"
             :max-date="'2017-11-10'">
@@ -33,7 +33,7 @@
     <p> max-date：日期可选最大值，值类型同value</p>
       <example title="日期+时间选择">
         <xcui-datepicker
-            :value="datetimeVal1"
+            v-model="datetimeVal1"
             format="YYYY/MM/DD hh:mm:ss"
             :hour-range="'1'"
             :minute-range="'1'"
@@ -52,7 +52,7 @@
             format="YYYY-MM-DD hh:mm:ss"
             :btn-show="true"
             @on-change="onChange"
-            :value="datetime.value2"
+            v-model="datetime.value2"
             :hour-range="'3'">
         </xcui-datepicker>
       </example>
@@ -62,7 +62,7 @@
       <p> btn-show: 按钮是否显示</p>
       <example title="时间选择">
         <xcui-datepicker
-            :value="timeValue"
+            v-model="timeValue"
             format="hh:mm:ss">
         </xcui-datepicker>
       </example>
@@ -92,7 +92,7 @@
 export default {
     data() {
         return {
-            valueDemo: '',
+            valueDemo: '2018-09-09',
             dateValue: 1477980088896,
             timeValue: '',
             datetimeVal1: new Date(),

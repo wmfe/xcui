@@ -15,7 +15,7 @@
         <xcui-tag :disabled="true" :text="'禁用标签'"></xcui-tag>
         <xcui-tag :closeable="true" :text="'关闭'" @close="closeclick"></xcui-tag>
         <xcui-tag :closeable="true" @close="closeclick" :keys.sync="key" :text="'点击不关闭'" :aftercloseisshow.sync="afterCloseIsShowTag" @click="click"></xcui-tag>
-        <xcui-tag :classname="'define-class'" :text="'自定义样式'" @click="click" ></xcui-tag>
+        <xcui-tag :class="'define-class'" :text="'自定义样式'" @click="click"></xcui-tag>
     </example>
     <example title="添加标签">
         <span v-for="item in tags">
@@ -37,7 +37,7 @@
 |showTag| Boolean|true|是否展示tag|可选|
 |aftercloseisshow| Boolean|false|关闭回调后是否展示Tag|可选|
 |key|String|空字符串|存储数据|可选|
-|classname|String|空字符串|自定义样式|可选|
+|class|String|空字符串|自定义样式|可选|
 </template>
 
 <script>

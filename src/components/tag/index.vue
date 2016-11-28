@@ -1,5 +1,5 @@
 <template>
-	<div :class="['xcui-tag', disabled ? ' xcui-disabled':'']" @click="onClick" v-if="showTag" >
+	<div :class="['xcui-tag', disabled ? ' xcui-disabled':'']" @click="onClick" v-if="show" >
         <div :class="className" >
 		<span class="xcui-tag-text"><slot></slot>{{text}}<span>
         <i class="xcui-cross" v-if="closeable" @click.stop="onCloseClick"></i>
@@ -41,11 +41,19 @@ export default {
             twoway: true
         }
     },
+    data() {
+        return {
+            show: true
+        };
+    },
+    created() {
+        this.show = this.showTag;
+    },
     methods: {
         onCloseClick() {
             this.$emit('close');
             if (this.aftercloseisshow === false) {
-                this.showTag = false;
+                this.show = false;
             };
         },
         onClick() {

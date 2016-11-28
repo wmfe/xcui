@@ -1,8 +1,8 @@
 <template>
     <div tabindex="0"
          :class="getWrapCls"
-         @focus="activate()"
-         @blur="showSearch ? false : deactivate()"
+         @focus="activateSelect()"
+         @blur="showSearch ? false : deactivateSelect()"
          @keydown.enter.stop.prevent.self="enterSearchValue()">
         <div class="xcui-select-selection">
             <div class="xcui-select-selection-rendered"
@@ -10,13 +10,13 @@
                 <input
                     type="text"
                     name="search"
-                    v-el:search
+                    ref="search"
                     autocomplete="off"
                     class="xcui-select-search-input"
                     v-if="showSearch"
                     v-model="searchValue"
-                    @focus.prevent="activate()"
-                    @blur.prevent="deactivate()"
+                    @focus.prevent="activateSelect()"
+                    @blur.prevent="deactivateSelect()"
                     @keyup.down="keyNext()"
                     @keyup.up="keyPrev()"
                     @keydown.enter.stop.prevent.self="enterSearchValue()"
@@ -35,7 +35,7 @@
         <div class="xcui-select-menu-dropdown"
              v-show="(isOpen && filteredOptions.length>0) || (isOpen && multiple)">
             <ul
-                v-el:list
+                ref="list"
                 aria-activedescendant
                 class="xcui-select-menu">
                 <li class="xcui-select-menu-item"
@@ -47,12 +47,12 @@
                     v-text="searchEmptyText">
                 </li>
                 <template
-                          v-for="item in filteredOptions">
+                          v-for="(item,index) in filteredOptions">
                     <li class="xcui-select-menu-item"
                         v-if="!optgroup"
                         tabindex="1"
-                        :class="{'xcui-select-menu-item-selected': isSelected(item), 'xcui-select-menu-item-key': $index === selectIndex,'disabled': item.disable}"
-                        @mouseenter.prevent.stop.self="indexSet($index)"
+                        :class="{'xcui-select-menu-item-selected': isSelected(item), 'xcui-select-menu-item-key': index === selectIndex,'disabled': item.disable}"
+                        @mouseenter.prevent.stop.self="indexSet(index)"
                         @mousedown.prevent="select(item)">
                         <span v-text="getOptionLabel(item)"></span>
                     </li>
@@ -62,10 +62,10 @@
                     <li class="xcui-select-menu-group" v-if="optgroup">
                         <div class="xcui-select-menu-group-title">{{item.name}}</div>
                         <ul>
-                            <template v-for="option in item.options">
+                            <template v-for="(option,index) in item.options">
                                 <li class="xcui-select-menu-group-item"
-                                    :class="{'xcui-select-menu-group-item-selected': isSelected(option,$parent.$index,$index), 'disabled': option.disable}"
-                                    @mousedown.prevent.stop.self="optgroupSelect($parent.$index,$index,option)">
+                                    :class="{'xcui-select-menu-group-item-selected': isSelected(option,$parent.index,index), 'disabled': option.disable}"
+                                    @mousedown.prevent.stop.self="optgroupSelect($parent.index,index,option)">
                                     <span v-text="getOptionLabel(option)"></span>
                                 </li>
                             </template>
@@ -154,7 +154,7 @@
             };
         },
         methods: {
-            activate() {
+            activateSelect() {
                 if (this.isOpen || this.disabled) {
                     return;
                 }
@@ -164,28 +164,28 @@
                         this.searchValue = '';
                         this.options = [];
                     }
-                    this.$els.search.focus();
+                    this.$refs.search.focus();
                 }
                 else {
                     this.$el.focus();
                 }
             },
-            deactivate() {
+            deactivateSelect() {
                 if (!this.isOpen) {
                     return;
                 }
                 if (this.showSearch) {
-                    this.$els.search.blur();
+                    this.$refs.search.blur();
                     this.adjustSearch();
                 }
                 this.isOpen = false;
             },
             toggle(key) {
                 if (!this.isOpen) {
-                    this.activate();
+                    this.activateSelect();
                 }
                 else {
-                    this.deactivate();
+                    this.deactivateSelect();
                 }
             },
             getOptionLabel(option) {
@@ -209,7 +209,7 @@
                 this.selectIndex = (parentIndex + '-' + index);
                 this.$emit('change', clone(this.value), parentIndex, index);
                 this.$emit('select', clone(this.value), parentIndex, index);
-                this.closeAfterSelect && this.deactivate();
+                this.closeAfterSelect && this.deactivateSelect();
             },
             select(option) {
                 const isSelected = this.isSelected(option);
@@ -243,7 +243,7 @@
                 }
                 this.$emit('change', clone(this.value));
                 this.$emit('select', clone(this.value));
-                this.closeAfterSelect && this.deactivate();
+                this.closeAfterSelect && this.deactivateSelect();
             },
             /**
              *  判断是否已选
@@ -301,7 +301,8 @@
                         this.value.splice(this.value.indexOf(option), 1);
                     }
                 }
-                this.value.$remove(option);
+                let index = this.value.indexOf(option);
+                this.value.splice(index, 1);
                 this.$emit('remove', clone(option));
             },
             indexSet(parentIndex, index) {
@@ -333,20 +334,20 @@
             },
             resetSearchScrollTop() {
                 let index = this.selectIndex;
-                let scrollTop = this.$els.list.scrollTop;
+                let scrollTop = this.$refs.list.scrollTop;
                 let {itemHeight, listHeight} = this.getDropDownHeight;
                 let listViewLen = Math.floor(listHeight / itemHeight);
                 let indexPos = index * itemHeight;
                 if (scrollTop <= (indexPos - listViewLen * itemHeight)) {
-                    this.$els.list.scrollTop = indexPos - ((listViewLen - 1) * itemHeight);
+                    this.$refs.list.scrollTop = indexPos - ((listViewLen - 1) * itemHeight);
                 }
                 if (scrollTop >= indexPos) {
-                    this.$els.list.scrollTop = indexPos;
+                    this.$refs.list.scrollTop = indexPos;
                 }
             },
             resetSelectIndex() {
                 this.selectIndex = 0;
-                this.closeAfterSelect && this.deactivate();
+                this.closeAfterSelect && this.deactivateSelect();
             },
             adjustSearch() {
                 if (!this.showSearch) {
@@ -409,7 +410,7 @@
                 return this.value.label || '';
             },
             getDropDownHeight() {
-                let list = this.$els.list;
+                let list = this.$refs.list;
                 let item = list.children[0] || null;
                 let itemHeight = item.currentStyle ? item.currentStyle.height : getComputedStyle(item, false).height;
                 let listHeight = list.currentStyle ? list.currentStyle.height : getComputedStyle(list, false).height;
