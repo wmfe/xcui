@@ -4,7 +4,7 @@
 ## 使用场景
 
 - 表格或其他需要分页的页面元素。
-- 支持两种类型的页码： `Standard` 标准页码, 一般用于元素顶部； `Mini` 迷你页码，一般用于元素底部。
+- 支持两种类型的页码： `Mini` 迷你页码，一般用于元素顶部， `Standard` 标准页码, 一般用于元素底部；
 
 # Demo
 
@@ -37,6 +37,7 @@
         <xcui-pagination
             v-show="total > 0"
             @go-to-page="goToPage"
+            @change-pagesize="onChangeSize"
             :current-page-num="currentPageNum"
             :total="total"
             :page-size="pageSize"
@@ -45,16 +46,21 @@
 </demo>
 
 ## Props
+| 名字           | 类型    | 是否必选 | 默认              | 可选范围            | 描述                                                              |
+|----------------|---------|----------|-------------------|---------------------|-------------------------------------------------------------------|
+| type           | String  | 否       | standard          | standard,mini       | 控制样式选择                                                      |
+| currentPageNum | Number  | 否       | 1                 | > 0                 | 当前页码                                                          |
+| total          | Number  | 是       | 0                 | >= 0                | 总条数                                                            |
+| pageSize       | Number  | 否       | 20                | 取自`pageSizeRange` | 每页条数                                                          |
+| withPageSize   | Boolean | 否       | true              |                     | 是否展示`pageSize`设置挂件                                        |
+| pageSizeRange  | Array   | 否       | [10, 20, 50, 100] |                     | `pageSize`设置挂件的下拉菜单选项范围 `withPageSize`为 true 时生效 |
+| rangeLength    | Number  | 否       | 10                | > 1                 | 页码按钮的展示个数                                                |
 
-| 名字           | 类型    | 默认              | 描述                                                              | 可选范围            | 是否必选 |
-|----------------|---------|-------------------|-------------------------------------------------------------------|---------------------|----------|
-| type           | String  | standard          | 控制样式选择                                                      | standard,mini       | 可选     |
-| currentPageNum | Number  | 1                 | 当前页码                                                          | > 0                 | 可选     |
-| total          | Number  | 0                 | 总条数                                                            | >= 0                | 必选     |
-| pageSize       | Number  | 20                | 每页条数                                                          | 取自`pageSizeRange` | 可选     |
-| withPageSize   | Boolean | true              | 是否展示`pageSize`设置挂件                                        |                     | 可选     |
-| pageSizeRange  | Array   | [10, 20, 50, 100] | `pageSize`设置挂件的下拉菜单选项范围 `withPageSize`为 true 时生效 |                     | 可选     |
-| rangeLength    | Number  | 10                | 页码按钮的展示个数                                                | > 1                 | 可选     |
+## Events
+| 名称           | 类型                      | 是否必选 | 描述                  |
+|----------------|---------------------------|----------|-----------------------|
+| goToPage       | function(pageNum){ ... }  | 是       | pageNum:跳转的页码    |
+| changePagesize | function(pageSize){ ... } | 否       | pageSize:每页展示条数 |
 </template>
 
 <script>
@@ -88,6 +94,10 @@ export default {
             this.list = list;
             this.total = total;
             this.currentPageNum = pageNo;
+        },
+        onChangeSize(pageSize) {
+            this.pageSize = pageSize;
+            this.goToPage(1);
         }
     },
     mounted() {
