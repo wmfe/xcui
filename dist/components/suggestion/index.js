@@ -180,14 +180,23 @@
         module.exports = ' <div class="xcui-suggestion {{className}}"> <input type=text class="form-control xcui-suggestion-input" autocomplete=off :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @input=onInput @focus=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter.stop.prevent=onBlur> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'show\':show}"> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}"> <a href=javascript:void(0) @click=setItem(item)> {{item.text}} </a> </li> </ul> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
         __webpack_require__(2);
         __vue_script__ = __webpack_require__(1);
         __vue_template__ = __webpack_require__(3);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     } ]);
 });
 

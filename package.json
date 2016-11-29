@@ -33,7 +33,6 @@
     "fuzzysearch": "^1.0.3"
   },
   "devDependencies": {
-    "xcui-demo-loader": "^0.1.4",
     "babel-core": "^6.9.1",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-runtime": "^6.9.0",
@@ -68,14 +67,16 @@
     "less-loader": "^2.2.2",
     "rimraf": "^2.5.0",
     "url-loader": "^0.5.7",
-    "vue": "^1.0.17",
+    "vue": "^2.0.5",
     "vue-hot-reload-api": "^1.2.0",
     "vue-html-loader": "^1.2.0",
-    "vue-loader": "^8.5.2",
-    "vue-router": "^0.7.11",
+    "vue-loader": "^9.0.0",
+    "vue-router": "^2.0.0",
     "vue-style-loader": "^1.0.0",
+    "vue-template-compiler-loader": "^1.0.3",
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.6.0"
+    "webpack-hot-middleware": "^2.6.0",
+    "xcui-demo-loader": "^0.1.4"
   }
 }

@@ -1,4 +1,3 @@
-
 <template>
 <div class="xcui-datarangepicker" :class="className">
     <div :class="{'input-group':btnShow}">
@@ -90,6 +89,10 @@
             btnShow: {
                 type: Boolean,
                 default: false
+            },
+            sep: {
+                type: String,
+                default: ' 至 '
             }
         },
         components: {
@@ -122,12 +125,13 @@
             if (this.endDate < this.startDate) {
                 this.newStartDate = this.endDate;
             }
+            this.value = this.newStartDate && this.newEndDate && (this.newStartDate + this.sep + this.newEndDate);
         },
         methods: {
             ok(e) {
                 e.preventDefault();
                 if (this.newStartDate && this.newEndDate) {
-                    this.value = this.newStartDate + ' 至 ' + this.newEndDate;
+                    this.value = this.newStartDate + this.sep + this.newEndDate;
                     this.startDate = this.newStartDate;
                     this.endDate = this.newEndDate;
                 }

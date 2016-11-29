@@ -19,12 +19,11 @@ let ModalInstall = (Vue) => {
             ''
         );
         div.innerHTML = `
-            <Modal${propsString} :show.sync="show">
+            <Modal${propsString} v-model="show">
                 <template v-if="!isRawHTML">
                     {{content}}
                 </template>
-                <div v-else>
-                    {{{content}}}
+                <div v-else v-html="content">
                 </div>
             </Modal>
         `;

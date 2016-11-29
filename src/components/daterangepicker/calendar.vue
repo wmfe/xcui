@@ -1,64 +1,66 @@
 <template>
-    <div class="calendar-tools" v-if="type!='time'">
-        <i class="glyphicon glyphicon-chevron-left float left"
-           @click="prev"></i>
-        <i class="glyphicon glyphicon-chevron-right float right"
-       @click="next"></i>
-        <div class="calendar-tit">
-            <span @click="changeTitSelect(year, 'year')">
-                <input v-model="year" class="calendar-tit-year" type="text" @change="changeTitSelect(year,'year')"/>年
-            </span>
-            <span class="calendar-tit-month" @click="changeTitSelect(month-1, 'month')">{{month+1}}月</span>
+    <div>
+        <div class="calendar-tools" v-if="type!='time'">
+            <i class="glyphicon glyphicon-chevron-left float left"
+               @click="prev"></i>
+            <i class="glyphicon glyphicon-chevron-right float right"
+           @click="next"></i>
+            <div class="calendar-tit">
+                <span @click="changeTitSelect(year, 'year')">
+                    <input v-model="year" class="calendar-tit-year" type="text" @change="changeTitSelect(year,'year')"/>年
+                </span>
+                <span class="calendar-tit-month" @click="changeTitSelect(month-1, 'month')">{{month+1}}月</span>
+            </div>
         </div>
-    </div>
-    <div v-show="dataTableShow">
-        <table cellpadding="5" v-if="type!='time'">
-            <thead>
-                <tr>
-                    <td v-for="week in weeks" class="week">{{week}}</td>
+        <div v-show="dataTableShow">
+            <table cellpadding="5" v-if="type!='time'">
+                <thead>
+                    <tr>
+                        <td v-for="week in weeks" class="week">{{week}}</td>
+                    </tr>
+                </thead>
+                <tr v-for="(k1,day) in days">
+                    <td
+                    v-for="(k2,child) in day"
+                    :class="{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right,'prev':child.prev, 'noclick':child.noclick}"
+                    :style="{'background':color&&child.today?color:''}"
+                    @click="select(k1,k2,$event)">
+                    {{child.day}}
+                    </td>
                 </tr>
-            </thead>
-            <tr v-for="(k1,day) in days">
-                <td
-                v-for="(k2,child) in day"
-                :class="{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right,'prev':child.prev, 'noclick':child.noclick}"
-                :style="{'background':color&&child.today?color:''}"
-                @click="select(k1,k2,$event)">
-                {{child.day}}
-                </td>
-            </tr>
-        </table>
-        <div class="calendar-time" v-show="type=='datetime' || type=='time'">
-            <div class="timer clearfix">
-                <div class="timer-item">
-                    <label @click="dropTimeList('hour')">{{hour}}</label>:
-                    <ul class="drop-down" v-show="hourListShow">
-                        <li v-for="item in hourList" @click="selectTimeItem($event,'hour')">{{item}}</li>
-                    </ul>
-                </div>
-                <div class="timer-item">
-                    <label @click="dropTimeList('minute')">{{minute}}</label>:
-                    <ul class="drop-down" v-show="minuteListShow">
-                        <li v-for="item in minuteList" @click="selectTimeItem($event,'minute')">{{item}}</li>
-                    </ul>
-                </div>
-                <div class="timer-item">
-                    <label @click="dropTimeList('second')">{{second}}</label>
-                    <ul class="drop-down" v-show="secondListShow">
-                        <li v-for="item in secondList" @click="selectTimeItem($event,'second')">{{item}}</li>
-                    </ul>
+            </table>
+            <div class="calendar-time" v-show="type=='datetime' || type=='time'">
+                <div class="timer clearfix">
+                    <div class="timer-item">
+                        <label @click="dropTimeList('hour')">{{hour}}</label>:
+                        <ul class="drop-down" v-show="hourListShow">
+                            <li v-for="item in hourList" @click="selectTimeItem($event,'hour')">{{item}}</li>
+                        </ul>
+                    </div>
+                    <div class="timer-item">
+                        <label @click="dropTimeList('minute')">{{minute}}</label>:
+                        <ul class="drop-down" v-show="minuteListShow">
+                            <li v-for="item in minuteList" @click="selectTimeItem($event,'minute')">{{item}}</li>
+                        </ul>
+                    </div>
+                    <div class="timer-item">
+                        <label @click="dropTimeList('second')">{{second}}</label>
+                        <ul class="drop-down" v-show="secondListShow">
+                            <li v-for="item in secondList" @click="selectTimeItem($event,'second')">{{item}}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+        <table cellpadding="6" v-show="yearTableShow">
+            <tr v-show="selectRangeShow">
+                <td colspan ="3">{{selectRange}}</td>
+            </tr>
+            <tr v-for="selects in selectRangeList">
+                <td v-for="select in selects" @click="selectItem(select)">{{select}}</td>
+            </tr>
+        </table>
     </div>
-    <table cellpadding="6" v-show="yearTableShow">
-        <tr v-show="selectRangeShow">
-            <td colspan ="3">{{selectRange}}</td>
-        </tr>
-        <tr v-for="selects in selectRangeList">
-            <td v-for="select in selects" @click="selectItem(select)">{{select}}</td>
-        </tr>
-    </table>
 </template>
 
 <script>
