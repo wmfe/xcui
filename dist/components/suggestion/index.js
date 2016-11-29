@@ -22,7 +22,7 @@
         __webpack_require__.p = "";
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
-        module.exports = __webpack_require__(4);
+        module.exports = __webpack_require__(3);
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -34,54 +34,62 @@
                 return {
                     list: [],
                     localList: [],
-                    currentIndex: -1
+                    currentIndex: -1,
+                    dataText: "",
+                    dataValue: ""
                 };
             },
             props: {
                 id: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 name: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 className: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 disabled: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 placeholder: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 suggestions: {
                     type: Array,
-                    "default": function _default() {
+                    default: function _default() {
                         return [];
                     }
                 },
-                dataText: {
-                    type: String,
-                    "default": ""
-                },
-                dataValue: {
-                    type: [ String, Number ],
-                    "default": ""
-                },
                 check: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 },
                 inputCallback: {
                     type: Function,
-                    "default": function _default() {
+                    default: function _default() {
                         return function() {};
                     }
+                },
+                value: {
+                    type: Object,
+                    default: function _default() {
+                        return {
+                            text: "",
+                            value: ""
+                        };
+                    }
                 }
+            },
+            created: function created() {
+                this.dataText = this.value.text || "";
+                this.dataValue = this.value.value || "";
+                this.emitChange();
             },
             computed: {
                 show: function show() {
@@ -103,6 +111,11 @@
                         me.autoSetItem();
                         me.inputCallback && me.inputCallback();
                     }, 100);
+                },
+                onFocus: function onFocus() {
+                    var me = this;
+                    me.getLocalSug();
+                    me.inputCallback && me.inputCallback();
                 },
                 onBlur: function onBlur() {
                     var me = this;
@@ -148,6 +161,7 @@
                         this.setItem(match[0]);
                     } else {
                         this.dataValue = "";
+                        this.emitChange();
                     }
                 },
                 getLocalSug: function getLocalSug() {
@@ -160,6 +174,7 @@
                 setItem: function setItem(item) {
                     this.dataValue = item.value;
                     this.dataText = item.text;
+                    this.emitChange();
                 },
                 logError: function logError(msg) {
                     throw new Error("[xcui] - " + msg);
@@ -170,33 +185,113 @@
                 clearText: function clearText() {
                     this.dataText = "";
                     this.dataValue = "";
+                    this.emitChange();
+                },
+                emitChange: function emitChange() {
+                    this.$emit("input", {
+                        text: this.dataText,
+                        value: this.dataValue
+                    });
                 }
             },
-            ready: function ready() {
+            mounted: function mounted() {
                 this.arrangeLocalList();
             }
         };
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class="xcui-suggestion {{className}}"> <input type=text class="form-control xcui-suggestion-input" autocomplete=off :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @input=onInput @focus=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter.stop.prevent=onBlur> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'show\':show}"> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}"> <a href=javascript:void(0) @click=setItem(item)> {{item.text}} </a> </li> </ul> </div> ';
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
+    }, function(module, exports) {}, function(module, exports, __webpack_require__) {
+        var __vue_exports__, __vue_options__;
         var __vue_styles__ = {};
         __webpack_require__(2);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(3);
-        module.exports = __vue_script__ || {};
-        if (module.exports.__esModule) module.exports = module.exports.default;
-        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
-        if (__vue_template__) {
-            __vue_options__.template = __vue_template__;
+        __vue_exports__ = __webpack_require__(1);
+        var __vue_template__ = __webpack_require__(4);
+        __vue_options__ = __vue_exports__ = __vue_exports__ || {};
+        if (typeof __vue_exports__.default === "object" || typeof __vue_exports__.default === "function") {
+            __vue_options__ = __vue_exports__ = __vue_exports__.default;
         }
-        if (!__vue_options__.computed) __vue_options__.computed = {};
-        Object.keys(__vue_styles__).forEach(function(key) {
-            var module = __vue_styles__[key];
-            __vue_options__.computed[key] = function() {
-                return module;
-            };
-        });
+        if (typeof __vue_options__ === "function") {
+            __vue_options__ = __vue_options__.options;
+        }
+        __vue_options__.render = __vue_template__.render;
+        __vue_options__.staticRenderFns = __vue_template__.staticRenderFns;
+        module.exports = __vue_exports__;
+    }, function(module, exports) {
+        module.exports = {
+            render: function() {
+                var _vm = this;
+                return _vm._h("div", {
+                    staticClass: "xcui-suggestion",
+                    class: _vm.className
+                }, [ _vm._h("input", {
+                    directives: [ {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.dataText,
+                        expression: "dataText"
+                    } ],
+                    staticClass: "form-control xcui-suggestion-input",
+                    attrs: {
+                        type: "text",
+                        autocomplete: "off",
+                        id: _vm.id,
+                        name: _vm.name,
+                        disabled: _vm.disabled,
+                        placeholder: _vm.placeholder
+                    },
+                    domProps: {
+                        value: _vm._s(_vm.dataText)
+                    },
+                    on: {
+                        input: [ function($event) {
+                            if ($event.target.composing) {
+                                return;
+                            }
+                            _vm.dataText = $event.target.value;
+                        }, _vm.onInput ],
+                        focus: _vm.onFocus,
+                        blur: _vm.onBlur,
+                        keyDown: [ function($event) {
+                            if ($event.keyCode !== 38) {
+                                return;
+                            }
+                            _vm.changeCurrent(-1);
+                        }, function($event) {
+                            if ($event.keyCode !== 40) {
+                                return;
+                            }
+                            _vm.changeCurrent(1);
+                        }, function($event) {
+                            if ($event.keyCode !== 13) {
+                                return;
+                            }
+                            $event.stopPropagation();
+                            $event.preventDefault();
+                            _vm.onBlur($event);
+                        } ]
+                    }
+                }), " ", _vm._h("ul", {
+                    staticClass: "xcui-suggestion-list dropdown-menu",
+                    class: {
+                        show: _vm.show
+                    }
+                }, [ _vm._l(_vm.list, function(item, index) {
+                    return _vm._h("li", {
+                        class: {
+                            current: _vm.currentIndex == index
+                        }
+                    }, [ _vm._h("a", {
+                        attrs: {
+                            href: "javascript:void(0)"
+                        },
+                        on: {
+                            click: function($event) {
+                                _vm.setItem(item);
+                            }
+                        }
+                    }, [ "\n                " + _vm._s(item.text) + "\n            " ]) ]);
+                }) ]) ]);
+            },
+            staticRenderFns: []
+        };
     } ]);
 });
 
