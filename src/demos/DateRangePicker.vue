@@ -18,6 +18,15 @@
     ## DEMO
     
     <demo>
+        <!-- <example title="日期格式">
+            <xcui-daterangepicker
+                :start-date.sync="''"
+                :end-date.sync="''"
+                :min-date="'2016-11-01'"
+                :max-date="'2016-11-20'"
+                :date-limit="date.dateLimit">
+            </xcui-daterangepicker>
+        </example> -->
         <example title="simple">
             <xcui-daterangepicker
                 :start-date.sync="'2016-11-01'"
