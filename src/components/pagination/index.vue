@@ -155,7 +155,6 @@ export default {
     watch: {
         pageSizeInner(val) {
             this.$emit('change-pagesize', this.pageSizeInner);
-            this.$emit('go-to-page', 1, this.currentPageNum);
         }
     },
     methods: {
