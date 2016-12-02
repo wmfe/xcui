@@ -117,27 +117,44 @@
             }
         },
         created() {
+            let startDate = this.startDate ? new Date(this.startDate).getTime() : '';
+            let endDate = this.endDate ? new Date(this.endDate).getTime() : '';
+            let maxDate = new Date(this.maxDate).getTime();
+            let minDate = new Date(this.minDate).getTime();
+            let curDate = new Date().getTime();
             this.newStartDate = this.startDate;
             this.newEndDate = this.endDate;
-            if (this.startDate > this.endDate) {
+            if (!endDate && maxDate && (curDate > maxDate)) {
+                this.newStartDate = this.newEndDate = this.maxDate;
+            }
+            if (!startDate && minDate && (curDate < minDate)) {
+                this.newStartDate = this.newEndDate = this.minDate;
+            }
+            if (startDate > endDate) {
                 this.newEndDate = this.startDate;
             }
-            if (this.endDate < this.startDate) {
+            if (endDate < startDate) {
                 this.newStartDate = this.endDate;
             }
-            this.value = this.newStartDate && this.newEndDate && (this.newStartDate + this.sep + this.newEndDate);
+            this.value = this.startDate && this.endDate && (this.newStartDate + this.sep + this.newEndDate);
         },
         methods: {
             ok(e) {
                 e.preventDefault();
-                if (this.newStartDate && this.newEndDate) {
-                    this.value = this.newStartDate + this.sep + this.newEndDate;
-                    this.startDate = this.newStartDate;
-                    this.endDate = this.newEndDate;
+                let newStartDate = this.newStartDate;
+                let newEndDate = this.newEndDate;
+                if (newStartDate && newEndDate) {
+                    if (newStartDate > newEndDate) {
+                        this.newEndDate = newEndDate = newStartDate;
+                    }
+                    this.value = newStartDate + this.sep + newEndDate;
+                    this.startDate = newStartDate;
+                    this.endDate = newEndDate;
                 }
                 else {
                     this.value = this.startDate = this.endDate = '';
                 }
+
                 this.show = false;
                 this.$emit('on-change', this.startDate, this.endDate);
                 this.initialStartDate = this.startDate;

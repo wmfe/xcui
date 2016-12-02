@@ -123,15 +123,17 @@ export default {
                 let format = me.defaultFormat;
                 let minDate = me.minDate && me.output(me.minDate, format);
                 let maxDate = me.maxDate && me.output(me.maxDate, format);
-                // 第一行
+                // 第一列
                 if (dow === 0) {
+                    console.log(i);
                     temp[line] = [];
                 }
+                // 当月第一天
                 else if (i === 1) {
                     temp[line] = [];
                     let k = me.lastDayOfLastMonth - me.firstDayOfMonth + 1;
                     for (let j = 0; j < me.firstDayOfMonth; j++) {
-                        let nowDay = me.output([me.year, me.month, k], format);
+                        let nowDay = me.output([me.year, me.month - 1, k], format);
                         if (nowDay < minDate || nowDay > maxDate) {
                             temp[line].push({day: k, disabled: true, prev: true, noClick: true});
                         }
@@ -148,14 +150,22 @@ export default {
                 else {
                     me.renderElse(y, m, i, temp, line, currentTime);
                 }
-                // 最后一行
+                // 最后一列
                 if (dow === 6) {
                     line++;
                 }
-                else if (i === me.lastDateOfMonth) {
+                if (i === me.lastDateOfMonth) {
                     let k = 1;
                     for (dow; dow < 6; dow++) {
-                        temp[line].push({day: k, disabled: true, today: false});
+                        let today = me.output([y, m + 1, k], format);
+                        let isMinDate = me.minDate && (today < me.output(me.minDate, format));
+                        let isMaxDate = me.maxDate && (today > me.output(me.maxDate, format));
+                        if (isMinDate || isMaxDate) {
+                            temp[line].push({day: k, disabled: true, range: false, noClick: true});
+                        }
+                        else {
+                            temp[line].push({day: k, disabled: true, today: false});
+                        }
                         k++;
                     }
                 }
