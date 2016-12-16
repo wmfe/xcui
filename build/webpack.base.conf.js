@@ -4,7 +4,7 @@
 
 var path = require('path');
 var projectRoot = path.resolve(__dirname, '../');
-
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     entry: {
         app: './src/main.js'
@@ -42,6 +42,9 @@ module.exports = {
             include: projectRoot,
             exclude: /node_modules/
         }, {
+            test: /\.less$/,
+            loader: ExtractTextPlugin.extract("style-loader","css-loader!less-loader")
+        },{
             test: /\.json$/,
             loader: 'json'
         }, {
@@ -64,5 +67,8 @@ module.exports = {
     },
     eslint: {
         formatter: require('eslint-friendly-formatter')
-    }
+    },
+    plugins: [
+        new ExtractTextPlugin("bootstrap.css")
+    ]
 };

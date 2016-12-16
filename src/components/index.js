@@ -19,6 +19,8 @@ import ScrollTop from './scrolltop';
 
 import xcuiInstall from './install.js';
 
+require('../less/bootstrap.less');
+
 const install = (Vue) => {
     if (install.installed) {
         return;
