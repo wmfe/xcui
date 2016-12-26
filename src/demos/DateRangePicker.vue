@@ -102,7 +102,8 @@
     | color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 否 | 可选 |
     | btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
     | inputClass | Array | 无 | 日历input输入框的样式，class名字 | 否 | 可选 |
-    | onChange | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @onChange | 否 | 可选 |
+    | onChange | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @on-change | 否 | 可选 |
+    | clear-btn | object | 无 | input清空后的回调 @clear-btn | 否 | 可选 |
 </template>
 
 <script>

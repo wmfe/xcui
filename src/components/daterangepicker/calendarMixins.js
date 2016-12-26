@@ -125,7 +125,6 @@ export default {
                 let maxDate = me.maxDate && me.output(me.maxDate, format);
                 // 第一列
                 if (dow === 0) {
-                    console.log(i);
                     temp[line] = [];
                 }
                 // 当月第一天
