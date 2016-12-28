@@ -22,7 +22,7 @@
         __webpack_require__.p = "";
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
-        module.exports = __webpack_require__(78);
+        module.exports = __webpack_require__(77);
     }, function(module, exports) {
         var global = module.exports = typeof window != "undefined" && window.Math == Math ? window : typeof self != "undefined" && self.Math == Math ? self : Function("return this")();
         if (typeof __g == "number") __g = global;
@@ -223,17 +223,17 @@
         var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function(obj) {
             return typeof obj;
         } : function(obj) {
-            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj;
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj;
         };
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function(obj) {
             return typeof obj === "undefined" ? "undefined" : _typeof(obj);
         } : function(obj) {
-            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
         };
     }, function(module, exports) {
         var toString = {}.toString;
@@ -371,7 +371,7 @@
         var _fuzzysearch2 = _interopRequireDefault(_fuzzysearch);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = {
@@ -386,23 +386,23 @@
                 },
                 disabled: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 showSearch: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 clearOnSelect: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 searchEmptyText: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 optgroup: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 customLabel: {
                     type: Function
@@ -412,19 +412,19 @@
                 },
                 multiple: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 multipleMax: {
                     type: Number,
-                    "default": 0
+                    default: 0
                 },
                 label: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 closeAfterSelect: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 }
             },
             data: function data() {
@@ -436,7 +436,7 @@
                 };
             },
             methods: {
-                activate: function activate() {
+                activateSelect: function activateSelect() {
                     if (this.isOpen || this.disabled) {
                         return;
                     }
@@ -446,26 +446,26 @@
                             this.searchValue = "";
                             this.options = [];
                         }
-                        this.$els.search.focus();
+                        this.$refs.search.focus();
                     } else {
                         this.$el.focus();
                     }
                 },
-                deactivate: function deactivate() {
+                deactivateSelect: function deactivateSelect() {
                     if (!this.isOpen) {
                         return;
                     }
                     if (this.showSearch) {
-                        this.$els.search.blur();
+                        this.$refs.search.blur();
                         this.adjustSearch();
                     }
                     this.isOpen = false;
                 },
                 toggle: function toggle(key) {
                     if (!this.isOpen) {
-                        this.activate();
+                        this.activateSelect();
                     } else {
-                        this.deactivate();
+                        this.deactivateSelect();
                     }
                 },
                 getOptionLabel: function getOptionLabel(option) {
@@ -487,7 +487,7 @@
                     this.selectIndex = parentIndex + "-" + index;
                     this.$emit("change", (0, _clone2.default)(this.value), parentIndex, index);
                     this.$emit("select", (0, _clone2.default)(this.value), parentIndex, index);
-                    this.closeAfterSelect && this.deactivate();
+                    this.closeAfterSelect && this.deactivateSelect();
                 },
                 select: function select(option) {
                     var isSelected = this.isSelected(option);
@@ -518,7 +518,7 @@
                     }
                     this.$emit("change", (0, _clone2.default)(this.value));
                     this.$emit("select", (0, _clone2.default)(this.value));
-                    this.closeAfterSelect && this.deactivate();
+                    this.closeAfterSelect && this.deactivateSelect();
                 },
                 isSelected: function isSelected(option, groupIndex, index) {
                     var me = this;
@@ -530,7 +530,21 @@
                     }
                     if (this.multiple) {
                         if ((typeof option === "undefined" ? "undefined" : (0, _typeof3.default)(option)) === "object") {
-                            return this.value.indexOf(option) > -1;
+                            var value = option.label;
+                            if (this.label && option[this.label]) {
+                                value = option[this.label];
+                            }
+                            var isMatched = false;
+                            var valueLen = this.value.length;
+                            for (var i = 0; i < valueLen; i++) {
+                                if (typeof this.value[i] === "string") {
+                                    if (value === this.value[i]) {
+                                        isMatched = true;
+                                        this.value[i] = option;
+                                    }
+                                }
+                            }
+                            return this.value.indexOf(option) > -1 || isMatched;
                         }
                         return this.value.indexOf(option) > -1;
                     }
@@ -554,7 +568,8 @@
                             this.value.splice(this.value.indexOf(option), 1);
                         }
                     }
-                    this.value.$remove(option);
+                    var index = this.value.indexOf(option);
+                    this.value.splice(index, 1);
                     this.$emit("remove", (0, _clone2.default)(option));
                 },
                 indexSet: function indexSet(parentIndex, index) {
@@ -585,22 +600,20 @@
                 },
                 resetSearchScrollTop: function resetSearchScrollTop() {
                     var index = this.selectIndex;
-                    var scrollTop = this.$els.list.scrollTop;
-                    var _getDropDownHeight = this.getDropDownHeight;
-                    var itemHeight = _getDropDownHeight.itemHeight;
-                    var listHeight = _getDropDownHeight.listHeight;
+                    var scrollTop = this.$refs.list.scrollTop;
+                    var _getDropDownHeight = this.getDropDownHeight, itemHeight = _getDropDownHeight.itemHeight, listHeight = _getDropDownHeight.listHeight;
                     var listViewLen = Math.floor(listHeight / itemHeight);
                     var indexPos = index * itemHeight;
                     if (scrollTop <= indexPos - listViewLen * itemHeight) {
-                        this.$els.list.scrollTop = indexPos - (listViewLen - 1) * itemHeight;
+                        this.$refs.list.scrollTop = indexPos - (listViewLen - 1) * itemHeight;
                     }
                     if (scrollTop >= indexPos) {
-                        this.$els.list.scrollTop = indexPos;
+                        this.$refs.list.scrollTop = indexPos;
                     }
                 },
                 resetSelectIndex: function resetSelectIndex() {
                     this.selectIndex = 0;
-                    this.closeAfterSelect && this.deactivate();
+                    this.closeAfterSelect && this.deactivateSelect();
                 },
                 adjustSearch: function adjustSearch() {
                     if (!this.showSearch) {
@@ -663,8 +676,8 @@
                     return this.value.label || "";
                 },
                 getDropDownHeight: function getDropDownHeight() {
-                    var list = this.$els.list;
-                    var item = list.children[0];
+                    var list = this.$refs.list;
+                    var item = list.children[0] || null;
                     var itemHeight = item.currentStyle ? item.currentStyle.height : getComputedStyle(item, false).height;
                     var listHeight = list.currentStyle ? list.currentStyle.height : getComputedStyle(list, false).height;
                     return {
@@ -676,8 +689,11 @@
                     var me = this;
                     var selected = this.selected;
                     var indexs = [];
+                    if (!this.options) {
+                        return indexs;
+                    }
                     this.options.forEach(function(item, index) {
-                        item.options.forEach(function(subItem, subIndex) {
+                        item.options && item.options.forEach(function(subItem, subIndex) {
                             if (typeof subItem === "string" && selected === subItem) {
                                 indexs = [ index, subIndex ];
                                 return;
@@ -737,7 +753,7 @@
         var _typeof3 = _interopRequireDefault(_typeof2);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         var clone = function clone(obj) {
@@ -758,17 +774,17 @@
         module.exports = clone;
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            "default": __webpack_require__(44),
+            default: __webpack_require__(44),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            "default": __webpack_require__(45),
+            default: __webpack_require__(45),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            "default": __webpack_require__(46),
+            default: __webpack_require__(46),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
@@ -1158,7 +1174,7 @@
         for (var symbols = "hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","), i = 0; symbols.length > i; ) wks(symbols[i++]);
         for (var symbols = $keys(wks.store), i = 0; symbols.length > i; ) wksDefine(symbols[i++]);
         $export($export.S + $export.F * !USE_NATIVE, "Symbol", {
-            "for": function(key) {
+            for: function(key) {
                 return has(SymbolRegistry, key += "") ? SymbolRegistry[key] : SymbolRegistry[key] = $Symbol(key);
             },
             keyFor: function keyFor(key) {
@@ -1239,18 +1255,221 @@
             return true;
         }
         module.exports = fuzzysearch;
-    }, function(module, exports) {
-        module.exports = ' <div tabindex=0 :class=getWrapCls @focus=activate() @blur="showSearch ? false : deactivate()" @keydown.enter.stop.prevent.self=enterSearchValue()> <div class=xcui-select-selection> <div class=xcui-select-selection-rendered @mousedown.stop=toggle()> <input type=text name=search v-el:search autocomplete=off class=xcui-select-search-input v-if=showSearch v-model=searchValue @focus.prevent=activate() @blur.prevent=deactivate() @keyup.down=keyNext() @keyup.up=keyPrev() @keydown.enter.stop.prevent.self=enterSearchValue() @change.prevent.stop="" :placeholder=placeholder> <span class=xcui-select-selection-text v-if=!showSearch v-text="currentOptionLabel || placeholder"> </span> <i class="glyphicon xcui-select-arrow" @mousedown.prevent.stop=toggle() :class="{\'glyphicon-triangle-bottom\':(!isOpen),\'glyphicon-triangle-top\':(isOpen)}"></i> </div> </div> <div class=xcui-select-menu-dropdown v-show="(isOpen && filteredOptions.length>0) || (isOpen && multiple)"> <ul v-el:list aria-activedescendant class=xcui-select-menu> <li class=xcui-select-menu-item v-if=multipleMaxShow> 最多可选{{multipleMax}}项! </li> <li class=xcui-select-menu-item v-if="filteredOptions.length<1 && searchEmptyText" v-text=searchEmptyText> </li> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-item v-if=!optgroup tabindex=1 :class="{\'xcui-select-menu-item-selected\': isSelected(item), \'xcui-select-menu-item-key\': $index === selectIndex,\'disabled\': item.disable}" @mouseenter.prevent.stop.self=indexSet($index) @mousedown.prevent=select(item)> <span v-text=getOptionLabel(item)></span> </li> </template> <template v-for="item in filteredOptions"> <li class=xcui-select-menu-group v-if=optgroup> <div class=xcui-select-menu-group-title>{{item.name}}</div> <ul> <template v-for="option in item.options"> <li class=xcui-select-menu-group-item :class="{\'xcui-select-menu-group-item-selected\': isSelected(option,$parent.$index,$index), \'disabled\': option.disable}" @mousedown.prevent.stop.self=optgroupSelect($parent.$index,$index,option)> <span v-text=getOptionLabel(option)></span> </li> </template> </ul> </li> </template> </ul> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
+        var __vue_exports__, __vue_options__;
+        var __vue_styles__ = {};
         __webpack_require__(75);
-        __vue_script__ = __webpack_require__(39);
-        __vue_template__ = __webpack_require__(77);
-        module.exports = __vue_script__ || {};
-        if (module.exports.__esModule) module.exports = module.exports.default;
-        if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+        __vue_exports__ = __webpack_require__(39);
+        var __vue_template__ = __webpack_require__(78);
+        __vue_options__ = __vue_exports__ = __vue_exports__ || {};
+        if (typeof __vue_exports__.default === "object" || typeof __vue_exports__.default === "function") {
+            __vue_options__ = __vue_exports__ = __vue_exports__.default;
         }
+        if (typeof __vue_options__ === "function") {
+            __vue_options__ = __vue_options__.options;
+        }
+        __vue_options__.render = __vue_template__.render;
+        __vue_options__.staticRenderFns = __vue_template__.staticRenderFns;
+        module.exports = __vue_exports__;
+    }, function(module, exports) {
+        module.exports = {
+            render: function() {
+                var _vm = this;
+                return _vm._h("div", {
+                    class: _vm.getWrapCls,
+                    attrs: {
+                        tabindex: "0"
+                    },
+                    on: {
+                        focus: function($event) {
+                            _vm.activateSelect();
+                        },
+                        blur: function($event) {
+                            _vm.showSearch ? false : _vm.deactivateSelect();
+                        },
+                        keydown: function($event) {
+                            if ($event.keyCode !== 13) {
+                                return;
+                            }
+                            $event.stopPropagation();
+                            $event.preventDefault();
+                            if ($event.target !== $event.currentTarget) {
+                                return;
+                            }
+                            _vm.enterSearchValue();
+                        }
+                    }
+                }, [ _vm._h("div", {
+                    staticClass: "xcui-select-selection"
+                }, [ _vm._h("div", {
+                    staticClass: "xcui-select-selection-rendered",
+                    on: {
+                        mousedown: function($event) {
+                            $event.stopPropagation();
+                            _vm.toggle();
+                        }
+                    }
+                }, [ _vm.showSearch ? _vm._h("input", {
+                    directives: [ {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.searchValue,
+                        expression: "searchValue"
+                    } ],
+                    ref: "search",
+                    staticClass: "xcui-select-search-input",
+                    attrs: {
+                        type: "text",
+                        name: "search",
+                        autocomplete: "off",
+                        placeholder: _vm.placeholder
+                    },
+                    domProps: {
+                        value: _vm._s(_vm.searchValue)
+                    },
+                    on: {
+                        focus: function($event) {
+                            $event.preventDefault();
+                            _vm.activateSelect();
+                        },
+                        blur: function($event) {
+                            $event.preventDefault();
+                            _vm.deactivateSelect();
+                        },
+                        keyup: [ function($event) {
+                            if ($event.keyCode !== 40) {
+                                return;
+                            }
+                            _vm.keyNext();
+                        }, function($event) {
+                            if ($event.keyCode !== 38) {
+                                return;
+                            }
+                            _vm.keyPrev();
+                        } ],
+                        keydown: function($event) {
+                            if ($event.keyCode !== 13) {
+                                return;
+                            }
+                            $event.stopPropagation();
+                            $event.preventDefault();
+                            if ($event.target !== $event.currentTarget) {
+                                return;
+                            }
+                            _vm.enterSearchValue();
+                        },
+                        change: function($event) {
+                            $event.preventDefault();
+                            $event.stopPropagation();
+                        },
+                        input: function($event) {
+                            if ($event.target.composing) {
+                                return;
+                            }
+                            _vm.searchValue = $event.target.value;
+                        }
+                    }
+                }) : _vm._e(), " ", !_vm.showSearch ? _vm._h("span", {
+                    staticClass: "xcui-select-selection-text",
+                    domProps: {
+                        textContent: _vm._s(_vm.currentOptionLabel || _vm.placeholder)
+                    }
+                }) : _vm._e(), " ", _vm._h("i", {
+                    staticClass: "glyphicon xcui-select-arrow",
+                    class: {
+                        "glyphicon-triangle-bottom": !_vm.isOpen,
+                        "glyphicon-triangle-top": _vm.isOpen
+                    },
+                    on: {
+                        mousedown: function($event) {
+                            $event.preventDefault();
+                            $event.stopPropagation();
+                            _vm.toggle();
+                        }
+                    }
+                }) ]) ]), " ", _vm._h("div", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.isOpen && _vm.filteredOptions.length > 0 || _vm.isOpen && _vm.multiple,
+                        expression: "(isOpen && filteredOptions.length>0) || (isOpen && multiple)"
+                    } ],
+                    staticClass: "xcui-select-menu-dropdown"
+                }, [ _vm._h("ul", {
+                    ref: "list",
+                    staticClass: "xcui-select-menu",
+                    attrs: {
+                        "aria-activedescendant": ""
+                    }
+                }, [ _vm.multipleMaxShow ? _vm._h("li", {
+                    staticClass: "xcui-select-menu-item"
+                }, [ "\n                最多可选" + _vm._s(_vm.multipleMax) + "项!\n            " ]) : _vm._e(), " ", _vm.filteredOptions.length < 1 && _vm.searchEmptyText ? _vm._h("li", {
+                    staticClass: "xcui-select-menu-item",
+                    domProps: {
+                        textContent: _vm._s(_vm.searchEmptyText)
+                    }
+                }) : _vm._e(), " ", _vm._l(_vm.filteredOptions, function(item, index) {
+                    return [ !_vm.optgroup ? _vm._h("li", {
+                        staticClass: "xcui-select-menu-item",
+                        class: {
+                            "xcui-select-menu-item-selected": _vm.isSelected(item),
+                            "xcui-select-menu-item-key": index === _vm.selectIndex,
+                            disabled: item.disable
+                        },
+                        attrs: {
+                            tabindex: "1"
+                        },
+                        on: {
+                            mouseenter: function($event) {
+                                $event.preventDefault();
+                                $event.stopPropagation();
+                                if ($event.target !== $event.currentTarget) {
+                                    return;
+                                }
+                                _vm.indexSet(index);
+                            },
+                            mousedown: function($event) {
+                                $event.preventDefault();
+                                _vm.select(item);
+                            }
+                        }
+                    }, [ _vm._h("span", {
+                        domProps: {
+                            textContent: _vm._s(_vm.getOptionLabel(item))
+                        }
+                    }) ]) : _vm._e() ];
+                }), " ", _vm._l(_vm.filteredOptions, function(item) {
+                    return [ _vm.optgroup ? _vm._h("li", {
+                        staticClass: "xcui-select-menu-group"
+                    }, [ _vm._h("div", {
+                        staticClass: "xcui-select-menu-group-title"
+                    }, [ _vm._s(item.name) ]), " ", _vm._h("ul", [ _vm._l(item.options, function(option, index) {
+                        return [ _vm._h("li", {
+                            staticClass: "xcui-select-menu-group-item",
+                            class: {
+                                "xcui-select-menu-group-item-selected": _vm.isSelected(option, _vm.$parent.index, index),
+                                disabled: option.disable
+                            },
+                            on: {
+                                mousedown: function($event) {
+                                    $event.preventDefault();
+                                    $event.stopPropagation();
+                                    if ($event.target !== $event.currentTarget) {
+                                        return;
+                                    }
+                                    _vm.optgroupSelect(_vm.$parent.index, index, option);
+                                }
+                            }
+                        }, [ _vm._h("span", {
+                            domProps: {
+                                textContent: _vm._s(_vm.getOptionLabel(option))
+                            }
+                        }) ]) ];
+                    }) ]) ]) : _vm._e() ];
+                }) ]) ]) ]);
+            },
+            staticRenderFns: []
+        };
     } ]);
 });
 

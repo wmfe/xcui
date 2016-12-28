@@ -22,7 +22,7 @@
         __webpack_require__.p = "";
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
-        module.exports = __webpack_require__(6);
+        module.exports = __webpack_require__(5);
     }, function(module, exports, __webpack_require__) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -32,7 +32,7 @@
         var _popoverMixins2 = _interopRequireDefault(_popoverMixins);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = {
@@ -41,23 +41,28 @@
             props: {
                 trigger: {
                     type: String,
-                    "default": "hover"
+                    default: "hover"
                 },
                 effect: {
                     type: String,
-                    "default": "scale"
+                    default: "scale"
                 },
                 tooltipClass: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 titleClass: {
                     type: String,
-                    "default": "scale"
+                    default: "scale"
                 },
                 contentClass: {
                     type: String,
-                    "default": "scale"
+                    default: "scale"
+                }
+            },
+            methods: {
+                afterEnter: function afterEnter() {
+                    this.$refs.popover.style.display = "inline-table";
                 }
             }
         };
@@ -70,18 +75,18 @@
         var _eventlistener2 = _interopRequireDefault(_eventlistener);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = {
             props: {
                 trigger: {
                     type: String,
-                    "default": "click"
+                    default: "click"
                 },
                 effect: {
                     type: String,
-                    "default": "fadein"
+                    default: "fadein"
                 },
                 title: {
                     type: String
@@ -99,7 +104,8 @@
                         top: 0,
                         left: 0
                     },
-                    show: true
+                    show: true,
+                    firstInit: true
                 };
             },
             methods: {
@@ -107,7 +113,7 @@
                     this.show = !this.show;
                 },
                 fixPosition: function fixPosition(triger, popover, placement) {
-                    popover.style.display = "";
+                    popover.style.display = "inline-table";
                     switch (placement) {
                       case "top":
                         this.position.left = triger.offsetLeft - popover.offsetWidth / 2 + triger.offsetWidth / 2;
@@ -132,36 +138,42 @@
                       default:                    }
                     popover.style.top = this.position.top + "px";
                     popover.style.left = this.position.left + "px";
-                    popover.style.display = "none";
+                    if (this.firstInit) {
+                        this.firstInit = false;
+                        popover.style.display = "none";
+                    }
                     this.show = !this.show;
                 }
             },
-            ready: function ready() {
-                var triger = this.$els.trigger.children[0];
-                var me = this;
-                if (this.trigger === "hover") {
-                    this._mouseenterEvent = _eventlistener2.default.listen(triger, "mouseenter", function() {
-                        me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
-                        me.show = true;
-                    });
-                    this._mouseleaveEvent = _eventlistener2.default.listen(triger, "mouseleave", function() {
-                        me.show = false;
-                    });
-                } else if (this.trigger === "focus") {
-                    this._focusEvent = _eventlistener2.default.listen(triger, "focus", function() {
-                        me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
-                        me.show = true;
-                    });
-                    this._blurEvent = _eventlistener2.default.listen(triger, "blur", function() {
-                        me.show = false;
-                    });
-                } else {
-                    this._clickEvent = _eventlistener2.default.listen(triger, "click", function() {
-                        me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
-                        me.toggle;
-                    });
-                }
-                this.fixPosition(this.$els.trigger.children[0], this.$els.popover, this.placement);
+            mounted: function mounted() {
+                var _this = this;
+                this.$nextTick(function() {
+                    var triger = _this.$refs.trigger.children[0];
+                    var me = _this;
+                    if (_this.trigger === "hover") {
+                        _this._mouseenterEvent = _eventlistener2.default.listen(triger, "mouseenter", function() {
+                            me.fixPosition(me.$refs.trigger.children[0], me.$refs.popover, me.placement);
+                            me.show = true;
+                        });
+                        _this._mouseleaveEvent = _eventlistener2.default.listen(triger, "mouseleave", function() {
+                            me.show = false;
+                        });
+                    } else if (_this.trigger === "focus") {
+                        _this._focusEvent = _eventlistener2.default.listen(triger, "focus", function() {
+                            me.fixPosition(me.$refs.trigger.children[0], me.$refs.popover, me.placement);
+                            me.show = true;
+                        });
+                        _this._blurEvent = _eventlistener2.default.listen(triger, "blur", function() {
+                            me.show = false;
+                        });
+                    } else {
+                        _this._clickEvent = _eventlistener2.default.listen(triger, "click", function() {
+                            me.fixPosition(me.$refs.trigger.children[0], me.$refs.popover, me.placement);
+                            me.toggle;
+                        });
+                    }
+                    _this.fixPosition(_this.$refs.trigger.children[0], _this.$refs.popover, _this.placement);
+                });
             },
             beforeDestroy: function beforeDestroy() {
                 if (this._blurEvent) {
@@ -201,18 +213,74 @@
                 }
             }
         };
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div v-el:outer style=\"position:relative; display: inline-block\" class=xcui-tooltip> <span v-el:trigger> <slot> </slot> </span> <div class=tooltip v-bind:class=\"{\n            'top':    placement === 'top',\n            'left':   placement === 'left',\n            'right':  placement === 'right',\n            'bottom': placement === 'bottom'\n        }\" v-el:popover v-show=show :transition=effect role=tooltip> <div class=tooltip-arrow></div> <div class=tooltip-inner :class=tooltipClass> <slot name=content> {{{content}}} </slot> </div> </div> </div> ";
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
+    }, function(module, exports) {}, function(module, exports, __webpack_require__) {
+        var __vue_exports__, __vue_options__;
+        var __vue_styles__ = {};
         __webpack_require__(4);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(5);
-        module.exports = __vue_script__ || {};
-        if (module.exports.__esModule) module.exports = module.exports.default;
-        if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+        __vue_exports__ = __webpack_require__(1);
+        var __vue_template__ = __webpack_require__(6);
+        __vue_options__ = __vue_exports__ = __vue_exports__ || {};
+        if (typeof __vue_exports__.default === "object" || typeof __vue_exports__.default === "function") {
+            __vue_options__ = __vue_exports__ = __vue_exports__.default;
         }
+        if (typeof __vue_options__ === "function") {
+            __vue_options__ = __vue_options__.options;
+        }
+        __vue_options__.render = __vue_template__.render;
+        __vue_options__.staticRenderFns = __vue_template__.staticRenderFns;
+        module.exports = __vue_exports__;
+    }, function(module, exports) {
+        module.exports = {
+            render: function() {
+                var _vm = this;
+                return _vm._h("div", {
+                    ref: "outer",
+                    staticClass: "xcui-tooltip",
+                    staticStyle: {
+                        position: "relative",
+                        display: "inline-block"
+                    }
+                }, [ _vm._h("span", {
+                    ref: "trigger"
+                }, [ _vm._t("default") ]), " ", _vm._h("transition", {
+                    attrs: {
+                        name: _vm.effect
+                    },
+                    on: {
+                        "after-enter": _vm.afterEnter
+                    }
+                }, [ _vm._h("div", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.show,
+                        expression: "show"
+                    } ],
+                    ref: "popover",
+                    staticClass: "tooltip",
+                    class: {
+                        top: _vm.placement === "top",
+                        left: _vm.placement === "left",
+                        right: _vm.placement === "right",
+                        bottom: _vm.placement === "bottom"
+                    },
+                    attrs: {
+                        transition: _vm.effect,
+                        role: "tooltip"
+                    }
+                }, [ _vm._h("div", {
+                    staticClass: "tooltip-arrow"
+                }), " ", _vm._h("div", {
+                    staticClass: "tooltip-inner",
+                    class: _vm.tooltipClass
+                }, [ _vm._t("content", [ _vm._h("div", {
+                    domProps: {
+                        innerHTML: _vm._s(_vm.content)
+                    }
+                }) ]) ]) ]) ]) ]);
+            },
+            staticRenderFns: []
+        };
     } ]);
 });
 

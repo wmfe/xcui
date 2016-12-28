@@ -22,7 +22,7 @@
         __webpack_require__.p = "";
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
-        module.exports = __webpack_require__(73);
+        module.exports = __webpack_require__(72);
     }, function(module, exports) {
         var global = module.exports = typeof window != "undefined" && window.Math == Math ? window : typeof self != "undefined" && self.Math == Math ? self : Function("return this")();
         if (typeof __g == "number") __g = global;
@@ -340,7 +340,7 @@
         var _calendarMixins2 = _interopRequireDefault(_calendarMixins);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = {
@@ -349,15 +349,31 @@
             props: {
                 btnShow: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 }
             },
             data: function data() {
                 return {
                     show: false,
                     currentMonth: Number,
-                    currentTimeBtnShow: true
+                    currentTimeBtnShow: true,
+                    newValue: this,
+                    count: 0,
+                    closeBtnNow: false,
+                    oldValue: null
                 };
+            },
+            watch: {
+                value: function value(val) {
+                    var nowDate = this.output(new Date());
+                    if (this.newValue || this.count !== 0) {
+                        this.newValue = val;
+                    }
+                    if (!this.newValue && val === nowDate) {
+                        this.internalValue = "";
+                    }
+                    this.count += 1;
+                }
             },
             methods: {
                 renderElse: function renderElse(y, m, i, temp, line, currentTime) {
@@ -396,7 +412,7 @@
                     var me = this;
                     var days = this.days;
                     var daySeleted = days[k1][k2];
-                    var oldValue = this.value = me.output(this.value);
+                    this.oldValue = this.internalValue = me.output(this.internalValue);
                     if (this.today.length > 0) {
                         days[this.today[0]][this.today[1]].today = false;
                     }
@@ -407,20 +423,20 @@
                         var om = me.outputMonth(me.month, me.year);
                         me.year = om.y;
                         me.month = om.m;
-                        me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+                        me.internalValue = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
                         me.render(me.year, me.month);
                     } else {
                         me.today = [ k1, k2 ];
-                        me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+                        me.internalValue = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
                     }
                     if (me.type === "date") {
-                        this.$emit("on-change", this.value, oldValue);
+                        this.$emit("input", this.internalValue, this.oldValue);
                         me.showFalse();
                     }
                 },
                 currentTime: function currentTime() {
                     var me = this;
-                    me.value = me.output(new Date());
+                    me.internalValue = me.output(new Date());
                     var params = this.dateParams;
                     me.year = params.year;
                     me.month = params.month;
@@ -438,12 +454,15 @@
                 ok: function ok(e) {
                     e.preventDefault();
                     this.showFalse();
-                    this.$emit("on-change", this.value, this.initialValue);
-                    this.initialValue = this.value;
+                    this.$emit("input", this.internalValue, this.oldValue);
+                    this.internalValue = this.oldValue = this.internalValue || this.oldValue;
+                    this.closeBtnNow = false;
                 },
                 cancel: function cancel(e) {
-                    e.preventDefault();
-                    this.value = this.initialValue;
+                    e && e.preventDefault();
+                    if (this.type !== "date") {
+                        this.internalValue = this.oldValue;
+                    }
                     this.showFalse();
                 },
                 showFalse: function showFalse() {
@@ -451,30 +470,45 @@
                     this.minuteListShow = false;
                     this.secondListShow = false;
                     this.show = false;
+                    document.removeEventListener("click", this.bindHide, false);
                 },
                 showCalendar: function showCalendar(e) {
                     var me = this;
                     e.stopPropagation();
                     me.show = true;
-                    if (me.value !== "") {
-                        me.output(me.value);
+                    if (me.internalValue !== "") {
+                        me.output(me.internalValue);
                         var params = me.dateParams;
                         me.year = params.year;
                         me.month = params.month;
                         me.hour = params.hour;
                         me.minute = params.minute;
                         me.second = params.second;
+                    } else {
+                        me.internalValue = me.initialValue;
+                        this.count = 0;
+                    }
+                    if (me.oldValue === null) {
+                        me.oldValue = me.internalValue;
                     }
                     me.render(me.year, me.month);
-                    var bindHide = function bindHide(e) {
-                        e.stopPropagation();
-                        me.showFalse();
-                        document.removeEventListener("click", bindHide, false);
-                    };
                     setTimeout(function() {
-                        document.addEventListener("click", bindHide, false);
+                        document.addEventListener("click", me.bindHide, false);
                     }, 500);
+                },
+                closeBtn: function closeBtn() {
+                    this.internalValue = "";
+                    this.count = 0;
+                    this.closeBtnNow = true;
+                },
+                bindHide: function bindHide(e) {
+                    e.stopPropagation();
+                    this.cancel();
+                    document.removeEventListener("click", this.bindHide, false);
                 }
+            },
+            destroyed: function destroyed() {
+                document.removeEventListener("click", this.bindHide, false);
             }
         };
     }, function(module, exports, __webpack_require__) {
@@ -486,32 +520,31 @@
         var _typeof3 = _interopRequireDefault(_typeof2);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = {
             props: {
                 value: {
-                    twoWay: true,
-                    "default": ""
+                    default: ""
                 },
                 format: {
                     type: String,
-                    "default": "YYYY-MM-DD"
+                    default: "YYYY-MM-DD"
                 },
                 minDate: {},
                 maxDate: {},
                 hourRange: {
                     type: [ Number, String ],
-                    "default": 1
+                    default: 1
                 },
                 minuteRange: {
                     type: [ Number, String ],
-                    "default": 1
+                    default: 1
                 },
                 secondRange: {
                     type: [ Number, String ],
-                    "default": 1
+                    default: 1
                 },
                 color: String,
                 className: String
@@ -541,23 +574,38 @@
                     selectRange: "",
                     dateParams: null,
                     defaultFormat: "YYYY-MM-DD",
-                    type: "date"
+                    type: "date",
+                    internalValue: "",
+                    initialValue: ""
                 };
             },
             computed: {
                 formatValue: function formatValue() {
-                    return this.output(this.value);
+                    return this.output(this.internalValue);
                 }
             },
             created: function created() {
                 var me = this;
                 me.getType();
                 if (me.value) {
-                    me.value = me.output(me.value);
+                    me.internalValue = me.output(me.value);
                 } else {
-                    me.value = me.output(new Date());
+                    me.internalValue = me.output(new Date());
                 }
-                this.initialValue = this.value;
+                var earlyThanMinDate = false;
+                var lateThanMaxDate = false;
+                if (me.minDate) {
+                    var minDate = me.output(me.minDate);
+                    earlyThanMinDate = me.internalValue < minDate;
+                }
+                if (me.maxDate) {
+                    var maxDate = me.output(me.maxDate);
+                    lateThanMaxDate = me.internalValue > maxDate;
+                }
+                if (earlyThanMinDate || lateThanMaxDate) {
+                    me.internalValue = me.minDate || me.maxDate;
+                }
+                this.initialValue = this.internalValue;
                 var params = me.dateParams;
                 me.year = params.year;
                 me.month = params.month;
@@ -581,7 +629,7 @@
                 if (me.type !== "time") {
                     me.render(me.year, me.month);
                 } else {
-                    this.initialValue = this.value;
+                    this.initialValue = this.internalValue;
                 }
             },
             methods: {
@@ -596,7 +644,7 @@
                     me.firstDayOfMonth = new Date(y, m, 1).getDay();
                     me.lastDateOfMonth = new Date(y, m + 1, 0).getDate();
                     me.lastDayOfLastMonth = new Date(y, m, 0).getDate();
-                    me.output(me.value);
+                    me.output(me.internalValue);
                     var params = me.dateParams;
                     var line = 0;
                     var temp = [];
@@ -618,13 +666,13 @@
                             temp[line] = [];
                             var k = me.lastDayOfLastMonth - me.firstDayOfMonth + 1;
                             for (var j = 0; j < me.firstDayOfMonth; j++) {
-                                var nowDay = me.output([ me.year, me.month, k ], format);
+                                var nowDay = me.output([ me.year, me.month - 1, k ], format);
                                 if (nowDay < minDate || nowDay > maxDate) {
                                     temp[line].push({
                                         day: k,
                                         disabled: true,
                                         prev: true,
-                                        noClick: true
+                                        noclick: true
                                     });
                                 } else {
                                     temp[line].push({
@@ -649,14 +697,25 @@
                         if (dow === 6) {
                             line++;
                         } else if (i === me.lastDateOfMonth) {
-                            var _k = 1;
+                            var count = 1;
                             for (dow; dow < 6; dow++) {
-                                temp[line].push({
-                                    day: _k,
-                                    disabled: true,
-                                    today: false
-                                });
-                                _k++;
+                                var nextMonthDay = me.output([ y, m + 1, count ]);
+                                var isLateThanMaxDate = nextMonthDay > me.output(me.maxDate, format);
+                                if (isLateThanMaxDate) {
+                                    temp[line].push({
+                                        day: count,
+                                        disabled: true,
+                                        today: false,
+                                        noclick: true
+                                    });
+                                } else {
+                                    temp[line].push({
+                                        day: count,
+                                        disabled: true,
+                                        today: false
+                                    });
+                                }
+                                count++;
                             }
                         }
                     }
@@ -754,18 +813,16 @@
                         break;
 
                       default:                    }
-                    me.value = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
+                    me.internalValue = me.output([ me.year, me.month, me.day, me.hour, me.minute, me.second ]);
                 },
                 output: function output(d, format) {
                     var fmt = format || this.format;
                     var me = this;
                     var date = new Date(d);
-                    if (this.value && this.type === "time" && typeof d === "string") {
+                    if (this.internalValue && this.type === "time" && typeof d === "string") {
                         date = new Date("1970-01-01 " + d);
                     } else if ((typeof d === "undefined" ? "undefined" : (0, _typeof3.default)(d)) === "object" && d.length > 0) {
                         date = new Date(d[0], d[1], d[2], d[3] || "00", d[4] || "00", d[5] || "00");
-                    } else if (!this.value) {
-                        date = new Date();
                     }
                     var year = date.getFullYear();
                     var month = date.getMonth();
@@ -848,12 +905,12 @@
         };
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            "default": __webpack_require__(42),
+            default: __webpack_require__(42),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            "default": __webpack_require__(43),
+            default: __webpack_require__(43),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
@@ -866,17 +923,17 @@
         var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function(obj) {
             return typeof obj;
         } : function(obj) {
-            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj;
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj;
         };
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function(obj) {
             return typeof obj === "undefined" ? "undefined" : _typeof(obj);
         } : function(obj) {
-            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
         };
     }, function(module, exports, __webpack_require__) {
         __webpack_require__(67);
@@ -1251,7 +1308,7 @@
         for (var symbols = "hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","), i = 0; symbols.length > i; ) wks(symbols[i++]);
         for (var symbols = $keys(wks.store), i = 0; symbols.length > i; ) wksDefine(symbols[i++]);
         $export($export.S + $export.F * !USE_NATIVE, "Symbol", {
-            "for": function(key) {
+            for: function(key) {
                 return has(SymbolRegistry, key += "") ? SymbolRegistry[key] : SymbolRegistry[key] = $Symbol(key);
             },
             keyFor: function keyFor(key) {
@@ -1309,18 +1366,342 @@
             if (proto && !proto[TO_STRING_TAG]) hide(proto, TO_STRING_TAG, NAME);
             Iterators[NAME] = Iterators.Array;
         }
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class="xcui-datapicker {{className}}"> <div :class="{\'input-group\':btnShow,\'bg-pr\':!btnShow}"> <input class=form-control type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class=calendar v-show=show> <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"><input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年</span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'off\':child.disabled,\'noclick\':child.noClick}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} <div class=lunar v-if=showLunar>{{child.lunar}}</div> </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\'|| type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> <div class=timer-item> <div class=timer-item-current @click=currentTime :style="{\'color\':color}">当前</div> </div> </div> </div> <div class=calendar-button v-show="type==\'datetime\'|| type==\'time\' || range"> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
+    }, function(module, exports) {}, function(module, exports, __webpack_require__) {
+        var __vue_exports__, __vue_options__;
+        var __vue_styles__ = {};
         __webpack_require__(71);
-        __vue_script__ = __webpack_require__(37);
-        __vue_template__ = __webpack_require__(72);
-        module.exports = __vue_script__ || {};
-        if (module.exports.__esModule) module.exports = module.exports.default;
-        if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+        __vue_exports__ = __webpack_require__(37);
+        var __vue_template__ = __webpack_require__(73);
+        __vue_options__ = __vue_exports__ = __vue_exports__ || {};
+        if (typeof __vue_exports__.default === "object" || typeof __vue_exports__.default === "function") {
+            __vue_options__ = __vue_exports__ = __vue_exports__.default;
         }
+        if (typeof __vue_options__ === "function") {
+            __vue_options__ = __vue_options__.options;
+        }
+        __vue_options__.render = __vue_template__.render;
+        __vue_options__.staticRenderFns = __vue_template__.staticRenderFns;
+        module.exports = __vue_exports__;
+    }, function(module, exports) {
+        module.exports = {
+            render: function() {
+                var _vm = this;
+                return _vm._h("div", {
+                    staticClass: "xcui-datapicker",
+                    class: _vm.className
+                }, [ _vm._h("div", {
+                    class: {
+                        "input-group": _vm.btnShow,
+                        "bg-pr": !_vm.btnShow
+                    }
+                }, [ _vm._h("input", {
+                    directives: [ {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.internalValue,
+                        expression: "internalValue"
+                    } ],
+                    staticClass: "form-control",
+                    attrs: {
+                        type: "text",
+                        placeholder: "请输入日期"
+                    },
+                    domProps: {
+                        value: _vm._s(_vm.internalValue)
+                    },
+                    on: {
+                        click: _vm.showCalendar,
+                        input: function($event) {
+                            if ($event.target.composing) {
+                                return;
+                            }
+                            _vm.internalValue = $event.target.value;
+                        }
+                    }
+                }), " ", _vm._h("button", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.show,
+                        expression: "show"
+                    } ],
+                    staticClass: "close close_btn",
+                    style: {
+                        right: _vm.btnShow ? "50px" : "10px"
+                    },
+                    attrs: {
+                        type: "button",
+                        title: "点击关闭"
+                    },
+                    on: {
+                        click: _vm.closeBtn
+                    }
+                }, [ _vm._h("span", {
+                    attrs: {
+                        "aria-hidden": "true"
+                    }
+                }, [ "×" ]) ]), " ", _vm._h("div", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.show,
+                        expression: "show"
+                    } ],
+                    staticClass: "calendar",
+                    on: {
+                        click: function($event) {
+                            $event.stopPropagation();
+                        },
+                        touchstart: function($event) {
+                            $event.stopPropagation();
+                        }
+                    }
+                }, [ _vm.type != "time" ? _vm._h("div", {
+                    staticClass: "calendar-tools"
+                }, [ _vm._h("i", {
+                    staticClass: "glyphicon glyphicon-chevron-left float left",
+                    on: {
+                        click: _vm.prev
+                    }
+                }), " ", _vm._h("i", {
+                    staticClass: "glyphicon glyphicon-chevron-right float right",
+                    on: {
+                        click: _vm.next
+                    }
+                }), " ", _vm._h("div", {
+                    staticClass: "calendar-tit"
+                }, [ _vm._h("span", {
+                    on: {
+                        click: function($event) {
+                            _vm.changeTitSelect(_vm.year, "year");
+                        }
+                    }
+                }, [ _vm._h("input", {
+                    directives: [ {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.year,
+                        expression: "year"
+                    } ],
+                    staticClass: "calendar-tit-year",
+                    attrs: {
+                        type: "text"
+                    },
+                    domProps: {
+                        value: _vm._s(_vm.year)
+                    },
+                    on: {
+                        change: function($event) {
+                            _vm.changeTitSelect(_vm.year, "year");
+                        },
+                        input: function($event) {
+                            if ($event.target.composing) {
+                                return;
+                            }
+                            _vm.year = $event.target.value;
+                        }
+                    }
+                }), "年" ]), " ", _vm._h("span", {
+                    staticClass: "calendar-tit-month",
+                    on: {
+                        click: function($event) {
+                            _vm.changeTitSelect(_vm.month - 1, "month");
+                        }
+                    }
+                }, [ _vm._s(_vm.month + 1) + "月" ]) ]) ]) : _vm._e(), " ", _vm._h("div", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.dataTableShow,
+                        expression: "dataTableShow"
+                    } ]
+                }, [ _vm.type != "time" ? _vm._h("table", {
+                    attrs: {
+                        cellpadding: "5"
+                    }
+                }, [ _vm._h("thead", [ _vm._h("tr", [ _vm._l(_vm.weeks, function(week) {
+                    return _vm._h("td", {
+                        staticClass: "week"
+                    }, [ _vm._s(week) ]);
+                }) ]) ]), " ", _vm._l(_vm.days, function(day, k1) {
+                    return _vm._h("tr", [ _vm._l(day, function(child, k2) {
+                        return _vm._h("td", {
+                            class: {
+                                today: child.today,
+                                off: child.disabled,
+                                noclick: child.noClick
+                            },
+                            style: {
+                                background: _vm.color && child.today ? _vm.color : ""
+                            },
+                            on: {
+                                click: function($event) {
+                                    _vm.select(k1, k2, $event);
+                                }
+                            }
+                        }, [ "\n                        " + _vm._s(child.day) + "\n                        ", _vm.showLunar ? _vm._h("div", {
+                            staticClass: "lunar"
+                        }, [ _vm._s(child.lunar) ]) : _vm._e() ]);
+                    }) ]);
+                }) ]) : _vm._e(), " ", _vm._h("div", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.type == "datetime" || _vm.type == "time",
+                        expression: "type=='datetime'|| type=='time'"
+                    } ],
+                    staticClass: "calendar-time"
+                }, [ _vm._h("div", {
+                    staticClass: "timer clearfix"
+                }, [ _vm._h("div", {
+                    staticClass: "timer-item"
+                }, [ _vm._h("label", {
+                    on: {
+                        click: function($event) {
+                            _vm.dropTimeList("hour");
+                        }
+                    }
+                }, [ _vm._s(_vm.hour) ]), ":\n                            ", _vm._h("ul", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.hourListShow,
+                        expression: "hourListShow"
+                    } ],
+                    staticClass: "drop-down"
+                }, [ _vm._l(_vm.hourList, function(item) {
+                    return _vm._h("li", {
+                        on: {
+                            click: function($event) {
+                                _vm.selectTimeItem($event, "hour");
+                            }
+                        }
+                    }, [ _vm._s(item) ]);
+                }) ]) ]), " ", _vm._h("div", {
+                    staticClass: "timer-item"
+                }, [ _vm._h("label", {
+                    on: {
+                        click: function($event) {
+                            _vm.dropTimeList("minute");
+                        }
+                    }
+                }, [ _vm._s(_vm.minute) ]), ":\n                            ", _vm._h("ul", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.minuteListShow,
+                        expression: "minuteListShow"
+                    } ],
+                    staticClass: "drop-down"
+                }, [ _vm._l(_vm.minuteList, function(item) {
+                    return _vm._h("li", {
+                        on: {
+                            click: function($event) {
+                                _vm.selectTimeItem($event, "minute");
+                            }
+                        }
+                    }, [ _vm._s(item) ]);
+                }) ]) ]), " ", _vm._h("div", {
+                    staticClass: "timer-item"
+                }, [ _vm._h("label", {
+                    on: {
+                        click: function($event) {
+                            _vm.dropTimeList("second");
+                        }
+                    }
+                }, [ _vm._s(_vm.second) ]), " ", _vm._h("ul", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.secondListShow,
+                        expression: "secondListShow"
+                    } ],
+                    staticClass: "drop-down"
+                }, [ _vm._l(_vm.secondList, function(item) {
+                    return _vm._h("li", {
+                        on: {
+                            click: function($event) {
+                                _vm.selectTimeItem($event, "second");
+                            }
+                        }
+                    }, [ _vm._s(item) ]);
+                }) ]) ]), " ", _vm._h("div", {
+                    staticClass: "timer-item"
+                }, [ _vm._h("div", {
+                    staticClass: "timer-item-current",
+                    style: {
+                        color: _vm.color
+                    },
+                    on: {
+                        click: _vm.currentTime
+                    }
+                }, [ "当前" ]) ]) ]) ]), " ", _vm._h("div", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.type == "datetime" || _vm.type == "time" || _vm.range,
+                        expression: "type=='datetime'|| type=='time' || range"
+                    } ],
+                    staticClass: "calendar-button"
+                }, [ _vm._h("button", {
+                    style: {
+                        background: _vm.color
+                    },
+                    on: {
+                        click: _vm.ok
+                    }
+                }, [ "确定" ]), " ", _vm._h("button", {
+                    staticClass: "cancel",
+                    on: {
+                        click: _vm.cancel
+                    }
+                }, [ "取消" ]) ]) ]), " ", _vm._h("table", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.yearTableShow,
+                        expression: "yearTableShow"
+                    } ],
+                    attrs: {
+                        cellpadding: "6"
+                    }
+                }, [ _vm._h("tr", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.selectRangeShow,
+                        expression: "selectRangeShow"
+                    } ]
+                }, [ _vm._h("td", {
+                    attrs: {
+                        colspan: "3"
+                    }
+                }, [ _vm._s(_vm.selectRange) ]) ]), " ", _vm._l(_vm.selectRangeList, function(selects) {
+                    return _vm._h("tr", [ _vm._l(selects, function(select) {
+                        return _vm._h("td", {
+                            on: {
+                                click: function($event) {
+                                    _vm.selectItem(select);
+                                }
+                            }
+                        }, [ _vm._s(select) ]);
+                    }) ]);
+                }) ]) ]), " ", _vm.btnShow ? _vm._h("span", {
+                    staticClass: "input-group-btn",
+                    on: {
+                        click: _vm.showCalendar
+                    }
+                }, [ _vm._m(0) ]) : _vm._e() ]) ]);
+            },
+            staticRenderFns: [ function() {
+                var _vm = this;
+                return _vm._h("button", {
+                    staticClass: "btn btn-default"
+                }, [ _vm._h("span", {
+                    staticClass: "glyphicon glyphicon-calendar"
+                }) ]);
+            } ]
+        };
     } ]);
 });
 

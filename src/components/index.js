@@ -15,6 +15,7 @@ import Select from './select';
 import Suggestion from './suggestion';
 import Tag from './tag';
 import Tooltip from './tooltip';
+import ScrollTop from './scrolltop';
 
 import xcuiInstall from './install.js';
 
@@ -36,6 +37,7 @@ const install = (Vue) => {
     Vue.component(Suggestion.name, Suggestion);
     Vue.component(Tag.name, Tag);
     Vue.component(Tooltip.name, Tooltip);
+    Vue.component(ScrollTop.name, ScrollTop);
 
     Vue.use(xcuiInstall);
 };
@@ -56,6 +58,7 @@ const xcui = {
     Suggestion,
     Tag,
     Tooltip,
+    ScrollTop,
     install,
     xcuiInstall
 };

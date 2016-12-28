@@ -22,7 +22,7 @@
         __webpack_require__.p = "";
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
-        module.exports = __webpack_require__(4);
+        module.exports = __webpack_require__(3);
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -39,23 +39,23 @@
                 },
                 step: {
                     type: Number,
-                    "default": 1
+                    default: 1
                 },
                 isDisable: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 className: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 textTips: {
                     type: String,
-                    "default": "请输入范围内整数"
+                    default: "请输入范围内整数"
                 },
                 size: {
                     type: String,
-                    "default": "large"
+                    default: "normal"
                 },
                 inputValue: {
                     type: Number
@@ -119,21 +119,101 @@
                 preventDefault: function preventDefault(e) {
                     e.preventDefault();
                 }
-            },
-            ready: function ready() {}
+            }
         };
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div v-el:outer class=outer :class=size> <div class=up-down-wrap> <a href="" class="up-wrap glyphicon glyphicon-chevron-up" @mouse.down=preventDefault @click=upValue> </a> <a href="" class="down-wrap glyphicon glyphicon-chevron-down" @mouse.down=preventDefault @click=downValue> </a> </div> <div class=input-wrap> <input type=text v-el=input class=middle v-model=inputValue @keyup=changeValue($event) :placeholder=textTips :disabled=isDisable :class=className /> </div> </div> ';
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
+    }, function(module, exports) {}, function(module, exports, __webpack_require__) {
+        var __vue_exports__, __vue_options__;
+        var __vue_styles__ = {};
         __webpack_require__(2);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(3);
-        module.exports = __vue_script__ || {};
-        if (module.exports.__esModule) module.exports = module.exports.default;
-        if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+        __vue_exports__ = __webpack_require__(1);
+        var __vue_template__ = __webpack_require__(4);
+        __vue_options__ = __vue_exports__ = __vue_exports__ || {};
+        if (typeof __vue_exports__.default === "object" || typeof __vue_exports__.default === "function") {
+            __vue_options__ = __vue_exports__ = __vue_exports__.default;
         }
+        if (typeof __vue_options__ === "function") {
+            __vue_options__ = __vue_options__.options;
+        }
+        __vue_options__.render = __vue_template__.render;
+        __vue_options__.staticRenderFns = __vue_template__.staticRenderFns;
+        module.exports = __vue_exports__;
+    }, function(module, exports) {
+        module.exports = {
+            render: function() {
+                var _vm = this;
+                return _vm._h("div", {
+                    ref: "outer",
+                    staticClass: "outer",
+                    class: _vm.size
+                }, [ _vm._h("div", {
+                    staticClass: "up-down-wrap"
+                }, [ _vm._h("a", {
+                    staticClass: "up-wrap glyphicon glyphicon-chevron-up",
+                    attrs: {
+                        href: ""
+                    },
+                    on: {
+                        mouse: function($event) {
+                            if ($event.keyCode !== 40) {
+                                return;
+                            }
+                            _vm.preventDefault($event);
+                        },
+                        click: _vm.upValue
+                    }
+                }), " ", _vm._h("a", {
+                    staticClass: "down-wrap glyphicon glyphicon-chevron-down",
+                    attrs: {
+                        href: ""
+                    },
+                    on: {
+                        mouse: function($event) {
+                            if ($event.keyCode !== 40) {
+                                return;
+                            }
+                            _vm.preventDefault($event);
+                        },
+                        click: _vm.downValue
+                    }
+                }) ]), " ", _vm._h("div", {
+                    staticClass: "input-wrap"
+                }, [ _vm._h("input", {
+                    directives: [ {
+                        name: "el",
+                        rawName: "v-el",
+                        value: _vm.input,
+                        expression: "input"
+                    }, {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.inputValue,
+                        expression: "inputValue"
+                    } ],
+                    staticClass: "middle form-control",
+                    class: _vm.className,
+                    attrs: {
+                        type: "text",
+                        placeholder: _vm.textTips,
+                        disabled: _vm.isDisable
+                    },
+                    domProps: {
+                        value: _vm._s(_vm.inputValue)
+                    },
+                    on: {
+                        keyup: function($event) {
+                            _vm.changeValue($event);
+                        },
+                        input: function($event) {
+                            if ($event.target.composing) {
+                                return;
+                            }
+                            _vm.inputValue = $event.target.value;
+                        }
+                    }
+                }) ]) ]);
+            },
+            staticRenderFns: []
+        };
     } ]);
 });
 

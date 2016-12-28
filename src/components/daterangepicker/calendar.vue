@@ -1,64 +1,66 @@
 <template>
-    <div class="calendar-tools" v-if="type!='time'">
-        <i class="glyphicon glyphicon-chevron-left float left"
-           @click="prev"></i>
-        <i class="glyphicon glyphicon-chevron-right float right"
-       @click="next"></i>
-        <div class="calendar-tit">
-            <span @click="changeTitSelect(year, 'year')">
-                <input v-model="year" class="calendar-tit-year" type="text" @change="changeTitSelect(year,'year')"/>年
-            </span>
-            <span class="calendar-tit-month" @click="changeTitSelect(month-1, 'month')">{{month+1}}月</span>
+    <div>
+        <div class="calendar-tools" v-if="type!='time'">
+            <i class="glyphicon glyphicon-chevron-left float left"
+               @click="prev"></i>
+            <i class="glyphicon glyphicon-chevron-right float right"
+           @click="next"></i>
+            <div class="calendar-tit">
+                <span @click="changeTitSelect(year, 'year')">
+                    <input v-model="year" class="calendar-tit-year" type="text" @change="changeTitSelect(year,'year')"/>年
+                </span>
+                <span class="calendar-tit-month" @click="changeTitSelect(month-1, 'month')">{{month+1}}月</span>
+            </div>
         </div>
-    </div>
-    <div v-show="dataTableShow">
-        <table cellpadding="5" v-if="type!='time'">
-            <thead>
-                <tr>
-                    <td v-for="week in weeks" class="week">{{week}}</td>
+        <div v-show="dataTableShow">
+            <table cellpadding="5" v-if="type!='time'">
+                <thead>
+                    <tr>
+                        <td v-for="week in weeks" class="week">{{week}}</td>
+                    </tr>
+                </thead>
+                <tr v-for="(day,k1) in days">
+                    <td
+                    v-for="(child,k2) in day"
+                    :class="{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right,'prev':child.prev, 'noclick':child.noclick}"
+                    :style="{'background':color&&child.today?color:''}"
+                    @click="select(k1,k2,$event)">
+                    {{child.day}}
+                    </td>
                 </tr>
-            </thead>
-            <tr v-for="(k1,day) in days">
-                <td
-                v-for="(k2,child) in day"
-                :class="{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right,'prev':child.prev, 'noclick':child.noclick}"
-                :style="{'background':color&&child.today?color:''}"
-                @click="select(k1,k2,$event)">
-                {{child.day}}
-                </td>
-            </tr>
-        </table>
-        <div class="calendar-time" v-show="type=='datetime' || type=='time'">
-            <div class="timer clearfix">
-                <div class="timer-item">
-                    <label @click="dropTimeList('hour')">{{hour}}</label>:
-                    <ul class="drop-down" v-show="hourListShow">
-                        <li v-for="item in hourList" @click="selectTimeItem($event,'hour')">{{item}}</li>
-                    </ul>
-                </div>
-                <div class="timer-item">
-                    <label @click="dropTimeList('minute')">{{minute}}</label>:
-                    <ul class="drop-down" v-show="minuteListShow">
-                        <li v-for="item in minuteList" @click="selectTimeItem($event,'minute')">{{item}}</li>
-                    </ul>
-                </div>
-                <div class="timer-item">
-                    <label @click="dropTimeList('second')">{{second}}</label>
-                    <ul class="drop-down" v-show="secondListShow">
-                        <li v-for="item in secondList" @click="selectTimeItem($event,'second')">{{item}}</li>
-                    </ul>
+            </table>
+            <div class="calendar-time" v-show="type=='datetime' || type=='time'">
+                <div class="timer clearfix">
+                    <div class="timer-item">
+                        <label @click="dropTimeList('hour')">{{hour}}</label>:
+                        <ul class="drop-down" v-show="hourListShow">
+                            <li v-for="item in hourList" @click="selectTime($event,'hour')">{{item}}</li>
+                        </ul>
+                    </div>
+                    <div class="timer-item">
+                        <label @click="dropTimeList('minute')">{{minute}}</label>:
+                        <ul class="drop-down" v-show="minuteListShow">
+                            <li v-for="item in minuteList" @click="selectTime($event,'minute')">{{item}}</li>
+                        </ul>
+                    </div>
+                    <div class="timer-item">
+                        <label @click="dropTimeList('second')">{{second}}</label>
+                        <ul class="drop-down" v-show="secondListShow">
+                            <li v-for="item in secondList" @click="selectTime($event,'second')">{{item}}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+        <table cellpadding="6" v-show="yearTableShow">
+            <tr v-show="selectRangeShow">
+                <td colspan ="3">{{selectRange}}</td>
+            </tr>
+            <tr v-for="selects in selectRangeList">
+                <td v-for="select in selects" @click="selectItem(select)">{{select}}</td>
+            </tr>
+        </table>
     </div>
-    <table cellpadding="6" v-show="yearTableShow">
-        <tr v-show="selectRangeShow">
-            <td colspan ="3">{{selectRange}}</td>
-        </tr>
-        <tr v-for="selects in selectRangeList">
-            <td v-for="select in selects" @click="selectItem(select)">{{select}}</td>
-        </tr>
-    </table>
 </template>
 
 <script>
@@ -78,15 +80,27 @@
             dateLimit: {
                 type: Object,
                 default: null
-            },
-            initialDate: String
+            }
+        },
+        data() {
+            return {
+                internalValue: '',
+                internalOtherValue: '',
+                firstInit: true
+            };
         },
         watch: {
+            value(val) {
+                this.internalValue = val;
+            },
+            otherValue(val) {
+                this.internalOtherValue = val;
+            },
             startRender(val) {
                 if (!val) {
                     return false;
                 }
-                this.value = this.output(this.value);
+                this.internalValue = this.output(this.internalValue);
                 let params = this.dateParams;
                 this.year = params.year;
                 this.month = params.month;
@@ -95,19 +109,32 @@
                 this.minute = params.minute;
                 this.second = params.second;
                 this.render(params.year, params.month);
+                this.emitChange();
             }
         },
         created() {
-            this.initialDate = this.output(this.value);
+            if (this.type === 'time') {
+                if (this.otherValue && this.firstInit) {
+                    this.internalOtherValue = this.output(this.otherValue);
+                    this.firstInit = false;
+                }
+                this.internalOtherValue = this.internalOtherValue
+                    ? this.output(this.internalOtherValue) : this.internalValue;
+            }
+            this.emitChange();
         },
         methods: {
             renderElse(y, m, i, temp, line) {
                 let me = this;
                 let format = me.defaultFormat;
                 let today = me.output([y, m, i], format);
-                let value = me.output(me.value, format);
-                me.otherValue = me.otherValue ? me.output(me.otherValue) : me.value;
-                let otherDate = me.output(me.otherValue, format);
+                let value = me.output(me.internalValue, format);
+                if (me.otherValue && me.firstInit) {
+                    me.internalOtherValue = me.output(me.otherValue);
+                    me.firstInit = false;
+                }
+                me.internalOtherValue = me.internalOtherValue ? me.output(me.internalOtherValue) : me.internalValue;
+                let otherDate = me.output(me.internalOtherValue, format);
                 let isMinDate = me.minDate && (today < me.output(me.minDate, format));
                 let isMaxDate = me.maxDate && (today > me.output(me.maxDate, format));
                 if (isMinDate || isMaxDate) {
@@ -135,47 +162,56 @@
                     return false;
                 }
                 let me = this;
-                let daySeleted = me.days[k1][k2];
+                let daySelected = me.days[k1][k2];
                 // 取消上次选中
-                me.output(me.value);
+                me.output(me.internalValue);
                 let va = me.dateParams;
                 if (me.today.length > 0 && me.month === va.month && me.year === va.year) {
                     me.days[me.today[0]][me.today[1]].today = false;
                 }
                 // 设置当前选中天
-                daySeleted.today = true;
-                daySeleted.range = false;
+                daySelected.today = true;
+                daySelected.range = false;
                 me.day = this.zero(me.days[k1][k2].day);
                 me.today = [k1, k2];
-                if (daySeleted.disabled) {
+                if (daySelected.disabled) {
                     me.month = k1 === 0 ? (me.month - 1) : (me.month + 1);
                     let om = me.outputMonth(me.month, me.year);
                     me.year = om.y;
                     me.month = om.m;
-                    me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+                    me.internalValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
                     me.render(me.year, me.month);
                 }
                 else {
                     me.today = [k1, k2];
-                    me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+                    me.internalValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
                 }
-                me.otherValue = me.bindLimitDate();
+                me.internalOtherValue = me.bindLimitDate();
                 me.changeOtherCalender();
+                this.emitChange();
+            },
+            selectTime(e, type) {
+                this.selectTimeItem(e, type);
+                this.changeOtherCalender();
+                this.internalOtherValue = this.output(this.internalOtherValue);
+                this.emitChange();
             },
             changeOtherCalender() {
                 let me = this;
                 let time = new Date().getTime();
                 if (!me.right) {
-                    if (me.value > me.otherValue) {
-                        me.otherValue = me.value;
+                    if (me.internalValue > me.internalOtherValue) {
+                        me.internalOtherValue = me.internalValue;
                     }
                 }
                 else if (me.right) {
-                    if (me.value < me.otherValue) {
-                        me.otherValue = me.value;
+                    if (me.internalValue < me.internalOtherValue) {
+                        me.internalOtherValue = me.internalValue;
                     }
                 }
-                me.$parent.startRender = time;
+                this.$nextTick(() => {
+                    me.$parent.startRender = time;
+                });
             },
             getYearMonth(date) {
                 this.output(date);
@@ -185,15 +221,15 @@
             bindLimitDate() {
                 let me = this;
                 let format = me.defaultFormat;
-                me.otherValue = me.otherValue ? me.output(me.otherValue) : me.value;
-                let oValue = me.output(me.otherValue, format);
+                me.internalOtherValue = me.internalOtherValue ? me.output(me.internalOtherValue) : me.internalValue;
+                let oValue = me.output(me.internalOtherValue, format);
                 let ovs = me.dateParams;
                 let bg = me.minDate && me.output(me.minDate, format);
                 let ed = me.maxDate && me.output(me.maxDate, format);
                 let y = ovs.year;
                 let m = ovs.month;
                 let d = ovs.day;
-                let meValue = me.output(me.value, format);
+                let meValue = me.output(me.internalValue, format);
                 let meDate = me.dateParams.day;
                 let AddDayCount = 0;
                 let params = null;
@@ -264,7 +300,7 @@
                         d = params.d;
                     }
                 }
-                otherTime = me.output([y, m, d], format);
+                otherTime = me.internalOtherValue || me.output([y, m, d], format);
                 if (bg) {
                     otherTime = otherTime < bg ? bg : (otherTime > ed ? ed : otherTime);
                 }
@@ -283,6 +319,12 @@
                     m: m,
                     d: d
                 };
+            },
+            emitChange() {
+                this.$emit('mutate', {
+                    value: this.internalValue,
+                    otherValue: this.internalOtherValue
+                });
             }
         }
     };
