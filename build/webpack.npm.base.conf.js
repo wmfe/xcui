@@ -3,6 +3,7 @@
  */
 
 var path = require('path');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -37,10 +38,13 @@ module.exports = {
             loader: 'babel!eslint',
             exclude: /node_modules/
         }, {
+            test: /\.less$/,
+            loader: ExtractTextPlugin.extract("style-loader","css-loader!less-loader")
+        },{
             test: /\.json$/,
             loader: 'json'
         }, {
-            test: /\.(png|jpg|gif|svg)$/,
+            test: /\.(png|jpg|gif|svg|woff2?|eot|ttf)(\?.*)?$/,
             loader: 'url',
             query: {
                 limit: 10000,
