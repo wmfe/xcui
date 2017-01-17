@@ -48,3 +48,7 @@ module.exports = {
  // 引入你自己的less,覆盖变量
  @import "./theme/mytheme.less"
 ```
+## xcui-style
+
+##About xcui-styles基于[ Bootstrap v3.3.7] 进行定制开发。
+

@@ -4,7 +4,6 @@
 
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var themeUrl = require('../package.json').theme;
 var theme  = require(path.join(__dirname, '../',themeUrl));
 
