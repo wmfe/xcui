@@ -218,10 +218,12 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm._h("div", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", {
                     staticClass: "xcui-suggestion",
                     class: _vm.className
-                }, [ _vm._h("input", {
+                }, [ _c("input", {
                     directives: [ {
                         name: "model",
                         rawName: "v-model",
@@ -250,17 +252,17 @@
                         focus: _vm.onFocus,
                         blur: _vm.onBlur,
                         keyDown: [ function($event) {
-                            if ($event.keyCode !== 38) {
+                            if (_vm._k($event.keyCode, "up", 38)) {
                                 return;
                             }
                             _vm.changeCurrent(-1);
                         }, function($event) {
-                            if ($event.keyCode !== 40) {
+                            if (_vm._k($event.keyCode, "down", 40)) {
                                 return;
                             }
                             _vm.changeCurrent(1);
                         }, function($event) {
-                            if ($event.keyCode !== 13) {
+                            if (_vm._k($event.keyCode, "enter", 13)) {
                                 return;
                             }
                             $event.stopPropagation();
@@ -268,17 +270,17 @@
                             _vm.onBlur($event);
                         } ]
                     }
-                }), " ", _vm._h("ul", {
+                }), _vm._v(" "), _c("ul", {
                     staticClass: "xcui-suggestion-list dropdown-menu",
                     class: {
                         show: _vm.show
                     }
-                }, [ _vm._l(_vm.list, function(item, index) {
-                    return _vm._h("li", {
+                }, _vm._l(_vm.list, function(item, index) {
+                    return _c("li", {
                         class: {
                             current: _vm.currentIndex == index
                         }
-                    }, [ _vm._h("a", {
+                    }, [ _c("a", {
                         attrs: {
                             href: "javascript:void(0)"
                         },
@@ -287,8 +289,8 @@
                                 _vm.setItem(item);
                             }
                         }
-                    }, [ "\n                " + _vm._s(item.text) + "\n            " ]) ]);
-                }) ]) ]);
+                    }, [ _vm._v("\n                " + _vm._s(item.text) + "\n            ") ]) ]);
+                })) ]);
             },
             staticRenderFns: []
         };

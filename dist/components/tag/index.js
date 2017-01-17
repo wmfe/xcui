@@ -101,16 +101,18 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm.show ? _vm._h("div", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _vm.show ? _c("div", {
                     class: [ "xcui-tag", _vm.disabled ? " xcui-disabled" : "" ],
                     on: {
                         click: _vm.onClick
                     }
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     class: _vm.className
-                }, [ _vm._h("span", {
+                }, [ _c("span", {
                     staticClass: "xcui-tag-text"
-                }, [ _vm._t("default"), _vm._s(_vm.text), _vm._h("span", [ _vm.closeable ? _vm._h("i", {
+                }, [ _vm._t("default"), _vm._v(_vm._s(_vm.text)), _c("span", [ _vm.closeable ? _c("i", {
                     staticClass: "xcui-cross",
                     on: {
                         click: function($event) {
@@ -118,7 +120,7 @@
                             _vm.onCloseClick($event);
                         }
                     }
-                }) : _vm._e() ]) ]) ]) ]) : _vm._e();
+                }) : _vm._e() ]) ], 2) ]) ]) : _vm._e();
             },
             staticRenderFns: []
         };

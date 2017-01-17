@@ -73,21 +73,23 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm._h("div", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", {
                     staticClass: "xcui-progress"
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "xcui-progress-container"
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "xcui-progress-outer"
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "xcui-progress-inner",
                     style: {
                         width: _vm.percent + "%",
                         height: _vm.height + "px"
                     }
-                }) ]) ]), " ", _vm._h("div", {
+                }) ]) ]), _vm._v(" "), _c("div", {
                     class: [ "infoClassName", !_vm.showInfo ? "hidden" : "" ]
-                }, [ "\n        " + _vm._s(_vm.percentInfo) + "\n    " ]), " ", _vm._h("div") ]);
+                }, [ _vm._v("\n        " + _vm._s(_vm.percentInfo) + "\n    ") ]), _vm._v(" "), _c("div") ]);
             },
             staticRenderFns: []
         };

@@ -184,9 +184,11 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm._h("div", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", {
                     staticClass: "xcui-scrolltop"
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     ref: "dropa",
                     staticClass: "xcui-scrolltop-area xcui-scrolltop-corner",
                     class: {
@@ -206,11 +208,11 @@
                             _vm.ondrop($event);
                         }
                     }
-                }, [ _vm._h("transition", {
+                }, [ _c("transition", {
                     attrs: {
                         name: "fadein"
                     }
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -238,7 +240,7 @@
                             _vm.backTop($event);
                         }
                     }
-                }) ]) ]), " ", _vm._h("div", {
+                }) ]) ], 1), _vm._v(" "), _c("div", {
                     ref: "dropb",
                     staticClass: "xcui-scrolltop-area xcui-scrolltop-bottom",
                     class: {
@@ -258,7 +260,7 @@
                             _vm.ondrop($event);
                         }
                     }
-                }), " ", _vm._h("div", {
+                }), _vm._v(" "), _c("div", {
                     ref: "dropc",
                     staticClass: "xcui-scrolltop-area xcui-scrolltop-right",
                     class: {

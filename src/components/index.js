@@ -16,10 +16,11 @@ import Suggestion from './suggestion';
 import Tag from './tag';
 import Tooltip from './tooltip';
 import ScrollTop from './scrolltop';
+import Button from './button';
 
 import xcuiInstall from './install.js';
 
-require('../less/bootstrap.less');
+require('../less/index.less');
 
 const install = (Vue) => {
     if (install.installed) {
@@ -40,6 +41,7 @@ const install = (Vue) => {
     Vue.component(Tag.name, Tag);
     Vue.component(Tooltip.name, Tooltip);
     Vue.component(ScrollTop.name, ScrollTop);
+    Vue.component(Button.name, Button);
 
     Vue.use(xcuiInstall);
 };

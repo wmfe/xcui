@@ -1275,7 +1275,9 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm._h("div", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", {
                     class: _vm.getWrapCls,
                     attrs: {
                         tabindex: "0"
@@ -1288,7 +1290,7 @@
                             _vm.showSearch ? false : _vm.deactivateSelect();
                         },
                         keydown: function($event) {
-                            if ($event.keyCode !== 13) {
+                            if (_vm._k($event.keyCode, "enter", 13)) {
                                 return;
                             }
                             $event.stopPropagation();
@@ -1299,9 +1301,9 @@
                             _vm.enterSearchValue();
                         }
                     }
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "xcui-select-selection"
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "xcui-select-selection-rendered",
                     on: {
                         mousedown: function($event) {
@@ -1309,7 +1311,7 @@
                             _vm.toggle();
                         }
                     }
-                }, [ _vm.showSearch ? _vm._h("input", {
+                }, [ _vm.showSearch ? _c("input", {
                     directives: [ {
                         name: "model",
                         rawName: "v-model",
@@ -1337,18 +1339,18 @@
                             _vm.deactivateSelect();
                         },
                         keyup: [ function($event) {
-                            if ($event.keyCode !== 40) {
+                            if (_vm._k($event.keyCode, "down", 40)) {
                                 return;
                             }
                             _vm.keyNext();
                         }, function($event) {
-                            if ($event.keyCode !== 38) {
+                            if (_vm._k($event.keyCode, "up", 38)) {
                                 return;
                             }
                             _vm.keyPrev();
                         } ],
                         keydown: function($event) {
-                            if ($event.keyCode !== 13) {
+                            if (_vm._k($event.keyCode, "enter", 13)) {
                                 return;
                             }
                             $event.stopPropagation();
@@ -1369,12 +1371,12 @@
                             _vm.searchValue = $event.target.value;
                         }
                     }
-                }) : _vm._e(), " ", !_vm.showSearch ? _vm._h("span", {
+                }) : _vm._e(), _vm._v(" "), !_vm.showSearch ? _c("span", {
                     staticClass: "xcui-select-selection-text",
                     domProps: {
                         textContent: _vm._s(_vm.currentOptionLabel || _vm.placeholder)
                     }
-                }) : _vm._e(), " ", _vm._h("i", {
+                }) : _vm._e(), _vm._v(" "), _c("i", {
                     staticClass: "glyphicon xcui-select-arrow",
                     class: {
                         "glyphicon-triangle-bottom": !_vm.isOpen,
@@ -1387,7 +1389,7 @@
                             _vm.toggle();
                         }
                     }
-                }) ]) ]), " ", _vm._h("div", {
+                }) ]) ]), _vm._v(" "), _c("div", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -1395,21 +1397,21 @@
                         expression: "(isOpen && filteredOptions.length>0) || (isOpen && multiple)"
                     } ],
                     staticClass: "xcui-select-menu-dropdown"
-                }, [ _vm._h("ul", {
+                }, [ _c("ul", {
                     ref: "list",
                     staticClass: "xcui-select-menu",
                     attrs: {
                         "aria-activedescendant": ""
                     }
-                }, [ _vm.multipleMaxShow ? _vm._h("li", {
+                }, [ _vm.multipleMaxShow ? _c("li", {
                     staticClass: "xcui-select-menu-item"
-                }, [ "\n                最多可选" + _vm._s(_vm.multipleMax) + "项!\n            " ]) : _vm._e(), " ", _vm.filteredOptions.length < 1 && _vm.searchEmptyText ? _vm._h("li", {
+                }, [ _vm._v("\n                最多可选" + _vm._s(_vm.multipleMax) + "项!\n            ") ]) : _vm._e(), _vm._v(" "), _vm.filteredOptions.length < 1 && _vm.searchEmptyText ? _c("li", {
                     staticClass: "xcui-select-menu-item",
                     domProps: {
                         textContent: _vm._s(_vm.searchEmptyText)
                     }
-                }) : _vm._e(), " ", _vm._l(_vm.filteredOptions, function(item, index) {
-                    return [ !_vm.optgroup ? _vm._h("li", {
+                }) : _vm._e(), _vm._v(" "), _vm._l(_vm.filteredOptions, function(item, index) {
+                    return [ !_vm.optgroup ? _c("li", {
                         staticClass: "xcui-select-menu-item",
                         class: {
                             "xcui-select-menu-item-selected": _vm.isSelected(item),
@@ -1433,18 +1435,18 @@
                                 _vm.select(item);
                             }
                         }
-                    }, [ _vm._h("span", {
+                    }, [ _c("span", {
                         domProps: {
                             textContent: _vm._s(_vm.getOptionLabel(item))
                         }
                     }) ]) : _vm._e() ];
-                }), " ", _vm._l(_vm.filteredOptions, function(item) {
-                    return [ _vm.optgroup ? _vm._h("li", {
+                }), _vm._v(" "), _vm._l(_vm.filteredOptions, function(item) {
+                    return [ _vm.optgroup ? _c("li", {
                         staticClass: "xcui-select-menu-group"
-                    }, [ _vm._h("div", {
+                    }, [ _c("div", {
                         staticClass: "xcui-select-menu-group-title"
-                    }, [ _vm._s(item.name) ]), " ", _vm._h("ul", [ _vm._l(item.options, function(option, index) {
-                        return [ _vm._h("li", {
+                    }, [ _vm._v(_vm._s(item.name)) ]), _vm._v(" "), _c("ul", [ _vm._l(item.options, function(option, index) {
+                        return [ _c("li", {
                             staticClass: "xcui-select-menu-group-item",
                             class: {
                                 "xcui-select-menu-group-item-selected": _vm.isSelected(option, _vm.$parent.index, index),
@@ -1460,13 +1462,13 @@
                                     _vm.optgroupSelect(_vm.$parent.index, index, option);
                                 }
                             }
-                        }, [ _vm._h("span", {
+                        }, [ _c("span", {
                             domProps: {
                                 textContent: _vm._s(_vm.getOptionLabel(option))
                             }
                         }) ]) ];
-                    }) ]) ]) : _vm._e() ];
-                }) ]) ]) ]);
+                    }) ], 2) ]) : _vm._e() ];
+                }) ], 2) ]) ]);
             },
             staticRenderFns: []
         };

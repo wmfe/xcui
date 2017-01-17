@@ -5,7 +5,8 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var config = require('./webpack.npm.base.conf');
-
+var themeUrl = require('../package.json').theme;
+var theme  = require(path.join(__dirname, '../',themeUrl));
 // naming output files with hashes for better caching.
 // dist/index.html will be auto-generated with correct URLs.
 config.output.filename = '[name].js';
@@ -45,6 +46,9 @@ module.exports = config;
 
 function generateExtractLoaders(loaders) {
     return loaders.map(function (loader) {
+        if (loader === 'less') {
+            return loader + '-less?{"modifyVars":'+ JSON.stringify(theme)+'}'
+        }
         return loader + '-loader' + (SOURCE_MAP ? '?sourceMap' : '');
     }).join('!');
 }

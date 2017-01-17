@@ -158,17 +158,19 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm._h("div", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", {
                     staticClass: "v-pagination-wrap"
-                }, [ _vm.type === "standard" ? [ _vm._h("div", {
+                }, [ _vm.type === "standard" ? [ _c("div", {
                     staticClass: "row"
-                }, [ _vm.withPageSize ? _vm._h("div", {
+                }, [ _vm.withPageSize ? _c("div", {
                     staticClass: "v-pagination-page-size col-md-3 gray"
-                }, [ "\n                共", _vm._h("span", {
+                }, [ _vm._v("\n                共"), _c("span", {
                     domProps: {
                         textContent: _vm._s(_vm.total)
                     }
-                }), "条\n                  \n                每页\n                ", _vm._h("select", {
+                }), _vm._v("条\n                  \n                每页\n                "), _c("select", {
                     directives: [ {
                         name: "model",
                         rawName: "v-model",
@@ -186,19 +188,19 @@
                             })[0];
                         }
                     }
-                }, [ _vm._l(_vm.pageSizeRange, function(opt) {
-                    return _vm._h("option", {
+                }, _vm._l(_vm.pageSizeRange, function(opt) {
+                    return _c("option", {
                         domProps: {
                             value: opt,
                             textContent: _vm._s(opt)
                         }
-                    }, [ "1" ]);
-                }) ]), "\n                条\n            " ]) : _vm._e(), " ", _vm._h("div", {
+                    }, [ _vm._v("1") ]);
+                })), _vm._v("\n                条\n            ") ]) : _vm._e(), _vm._v(" "), _c("div", {
                     staticClass: "v-pagination-standard text-right",
                     class: [ _vm.withPageSize ? "col-md-9" : "col-md-12" ]
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "btn-group"
-                }, [ _vm._h("button", {
+                }, [ _c("button", {
                     staticClass: "btn btn-default",
                     class: {
                         disabled: _vm.currentPageNum == 1
@@ -206,9 +208,9 @@
                     on: {
                         click: _vm.prev
                     }
-                }, [ "上一页" ]), " ", _vm.getRangePage.begin > 1 ? _vm._h("button", {
+                }, [ _vm._v("上一页") ]), _vm._v(" "), _vm.getRangePage.begin > 1 ? _c("button", {
                     staticClass: "btn btn-default page-btn"
-                }, [ _vm._h("a", {
+                }, [ _c("a", {
                     attrs: {
                         href: "javascript:void(0);"
                     },
@@ -217,24 +219,24 @@
                             _vm.turnToPage(1);
                         }
                     }
-                }, [ "1" ]) ]) : _vm._e(), " ", _vm.getRangePage.begin > 1 ? _vm._h("button", {
+                }, [ _vm._v("1") ]) ]) : _vm._e(), _vm._v(" "), _vm.getRangePage.begin > 1 ? _c("button", {
                     staticClass: "btn btn-default page-btn"
-                }, [ _vm._h("a", {
+                }, [ _c("a", {
                     staticClass: "apostrophe"
-                }, [ "..." ]) ]) : _vm._e(), " ", _vm._l(_vm.getRangePage.end - _vm.getRangePage.begin + 1, function(number) {
-                    return _vm._h("button", {
+                }, [ _vm._v("...") ]) ]) : _vm._e(), _vm._v(" "), _vm._l(_vm.getRangePage.end - _vm.getRangePage.begin + 1, function(number) {
+                    return _c("button", {
                         staticClass: "btn btn-default page-btn",
                         class: {
                             active: _vm.isActive(number)
                         }
-                    }, [ _vm.isActive(number) ? _vm._h("a", {
+                    }, [ _vm.isActive(number) ? _c("a", {
                         attrs: {
                             href: "javascript:void(0);"
                         },
                         domProps: {
                             textContent: _vm._s(number + _vm.getRangePage.begin - 1)
                         }
-                    }) : _vm._h("a", {
+                    }) : _c("a", {
                         attrs: {
                             href: "javascript:void(0);"
                         },
@@ -246,14 +248,14 @@
                                 _vm.turnToPage(number + _vm.getRangePage.begin - 1);
                             }
                         }
-                    }), " " ]);
-                }), " ", _vm.getRangePage.end < _vm.totalPageCount ? _vm._h("button", {
+                    }) ]);
+                }), _vm._v(" "), _vm.getRangePage.end < _vm.totalPageCount ? _c("button", {
                     staticClass: "btn btn-default page-btn"
-                }, [ _vm._h("a", {
+                }, [ _c("a", {
                     staticClass: "apostrophe"
-                }, [ "..." ]) ]) : _vm._e(), " ", _vm.getRangePage.end < _vm.totalPageCount ? _vm._h("button", {
+                }, [ _vm._v("...") ]) ]) : _vm._e(), _vm._v(" "), _vm.getRangePage.end < _vm.totalPageCount ? _c("button", {
                     staticClass: "btn btn-default page-btn"
-                }, [ _vm._h("a", {
+                }, [ _c("a", {
                     attrs: {
                         href: "javascript:void(0);"
                     },
@@ -265,7 +267,7 @@
                             _vm.turnToPage(_vm.totalPageCount);
                         }
                     }
-                }) ]) : _vm._e(), " ", _vm._h("button", {
+                }) ]) : _vm._e(), _vm._v(" "), _c("button", {
                     staticClass: "btn btn-default",
                     class: {
                         disabled: _vm.currentPageNum == _vm.totalPageCount
@@ -273,15 +275,15 @@
                     on: {
                         click: _vm.next
                     }
-                }, [ "下一页" ]) ]) ]) ]) ] : _vm._h("div", {
+                }, [ _vm._v("下一页") ]) ], 2) ]) ]) ] : _c("div", {
                     staticClass: "v-pagination-mini"
-                }, [ _vm._h("span", {
+                }, [ _c("span", {
                     staticClass: "gray"
-                }, [ "共", _vm._h("span", {
+                }, [ _vm._v("共"), _c("span", {
                     domProps: {
                         textContent: _vm._s(_vm.total)
                     }
-                }), "条" ]), " ", _vm._h("button", {
+                }), _vm._v("条") ]), _vm._v(" "), _c("button", {
                     staticClass: "btn btn-default prev-trigger",
                     class: {
                         disabled: _vm.currentPageNum < 2
@@ -289,19 +291,19 @@
                     on: {
                         click: _vm.prev
                     }
-                }, [ _vm._h("span", {
+                }, [ _c("span", {
                     staticClass: "caret"
-                }) ]), " ", _vm._h("span", {
+                }) ]), _vm._v(" "), _c("span", {
                     staticClass: "gray"
-                }, [ _vm._h("span", {
+                }, [ _c("span", {
                     domProps: {
                         textContent: _vm._s(_vm.currentPageNum)
                     }
-                }), "/", _vm._h("span", {
+                }), _vm._v("/"), _c("span", {
                     domProps: {
                         textContent: _vm._s(_vm.totalPageCount)
                     }
-                }) ]), " ", _vm._h("button", {
+                }) ]), _vm._v(" "), _c("button", {
                     staticClass: "btn btn-default next-trigger",
                     class: {
                         disabled: _vm.currentPageNum == _vm.totalPageCount
@@ -309,9 +311,9 @@
                     on: {
                         click: _vm.next
                     }
-                }, [ _vm._h("span", {
+                }, [ _c("span", {
                     staticClass: "caret"
-                }) ]) ]), " " ]);
+                }) ]) ]) ], 2);
             },
             staticRenderFns: []
         };
