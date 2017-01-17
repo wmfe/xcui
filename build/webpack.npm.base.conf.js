@@ -4,6 +4,9 @@
 
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var themeUrl = require('../package.json').theme;
+var theme  = require(path.join(__dirname, '../',themeUrl));
 
 module.exports = {
     entry: {
@@ -43,6 +46,11 @@ module.exports = {
         },{
             test: /\.json$/,
             loader: 'json'
+        }, {
+            test: /\.less\.components\.less$/,
+            loader: ExtractTextPlugin.extract(
+                'style-loader!'+
+                'css-loader!less-loader?{"modifyVars":'+ JSON.stringify(theme)+'}')
         }, {
             test: /\.(png|jpg|gif|svg|woff2?|eot|ttf)(\?.*)?$/,
             loader: 'url',

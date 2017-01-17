@@ -1,4 +1,4 @@
-<template lang="md">
+<template>
 # Progress进度条
 
 ## 使用场景

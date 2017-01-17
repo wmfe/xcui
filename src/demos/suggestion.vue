@@ -1,4 +1,4 @@
-<template lang="md">
+<template>
 
   # Suggestion 自动完成/建议
 

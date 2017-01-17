@@ -233,23 +233,25 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm._h("div", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", {
                     ref: "outer",
                     staticClass: "xcui-popover",
                     staticStyle: {
                         position: "relative",
                         display: "inline-block"
                     }
-                }, [ _vm._h("span", {
+                }, [ _c("span", {
                     ref: "trigger"
-                }, [ _vm._t("default") ]), " ", _vm._h("transition", {
+                }, [ _vm._t("default") ], 2), _vm._v(" "), _c("transition", {
                     attrs: {
                         name: _vm.effect
                     },
                     on: {
                         "after-enter": _vm.afterEnter
                     }
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -264,9 +266,9 @@
                         right: _vm.placement === "right",
                         bottom: _vm.placement === "bottom"
                     }
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "arrow"
-                }), " ", _vm._h("div", {
+                }), _vm._v(" "), _c("div", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -275,18 +277,18 @@
                     } ],
                     staticClass: "popover-title",
                     class: _vm.titleClass
-                }, [ _vm._t("title", [ _vm._h("div", {
+                }, [ _vm._t("title", [ _c("div", {
                     domProps: {
                         innerHTML: _vm._s(_vm.title)
                     }
-                }) ]) ]), " ", _vm._h("div", {
+                }) ]) ], 2), _vm._v(" "), _c("div", {
                     staticClass: "popover-content",
                     class: _vm.contentClass
-                }, [ _vm._t("content", [ _vm._h("div", {
+                }, [ _vm._t("content", [ _c("div", {
                     domProps: {
                         innerHTML: _vm._s(_vm.content)
                     }
-                }) ]) ]) ]) ]) ]);
+                }) ]) ], 2) ]) ]) ], 1);
             },
             staticRenderFns: []
         };

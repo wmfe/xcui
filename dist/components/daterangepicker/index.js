@@ -1650,14 +1650,16 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm._h("div", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", {
                     staticClass: "xcui-datarangepicker",
                     class: _vm.className
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     class: {
                         "input-group": _vm.btnShow
                     }
-                }, [ _vm._h("input", {
+                }, [ _c("input", {
                     directives: [ {
                         name: "model",
                         rawName: "v-model",
@@ -1681,7 +1683,7 @@
                             _vm.dateText = $event.target.value;
                         }
                     }
-                }), " ", _vm._h("button", {
+                }), _vm._v(" "), _c("button", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -1699,11 +1701,11 @@
                     on: {
                         click: _vm.closeBtn
                     }
-                }, [ _vm._h("span", {
+                }, [ _c("span", {
                     attrs: {
                         "aria-hidden": "true"
                     }
-                }, [ "×" ]) ]), " ", " ", _vm._h("div", {
+                }, [ _vm._v("×") ]) ]), _vm._v(" "), _c("div", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -1719,11 +1721,11 @@
                             $event.stopPropagation();
                         }
                     }
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "clearfix"
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "double-calendar-left"
-                }, [ _vm._h("calendar", {
+                }, [ _c("calendar", {
                     attrs: {
                         value: _vm.newStartDate,
                         format: _vm.format,
@@ -1740,9 +1742,9 @@
                     on: {
                         mutate: _vm.startChange
                     }
-                }) ]), " ", _vm._h("div", {
+                }) ], 1), _vm._v(" "), _c("div", {
                     staticClass: "double-calendar-right"
-                }, [ _vm._h("calendar", {
+                }, [ _c("calendar", {
                     attrs: {
                         value: _vm.newEndDate,
                         format: _vm.format,
@@ -1760,21 +1762,21 @@
                     on: {
                         mutate: _vm.endChange
                     }
-                }) ]) ]), " ", _vm._h("div", {
+                }) ], 1) ]), _vm._v(" "), _c("div", {
                     staticClass: "calendar-button"
-                }, [ _vm._h("button", {
+                }, [ _c("button", {
                     style: {
                         background: _vm.color
                     },
                     on: {
                         click: _vm.ok
                     }
-                }, [ "确定" ]), " ", _vm._h("button", {
+                }, [ _vm._v("确定") ]), _vm._v(" "), _c("button", {
                     staticClass: "cancel",
                     on: {
                         click: _vm.cancel
                     }
-                }, [ "取消" ]) ]) ]), " ", " ", _vm.btnShow ? _vm._h("span", {
+                }, [ _vm._v("取消") ]) ]) ]), _vm._v(" "), _vm.btnShow ? _c("span", {
                     staticClass: "input-group-btn",
                     on: {
                         click: _vm.showCalendar
@@ -1783,9 +1785,11 @@
             },
             staticRenderFns: [ function() {
                 var _vm = this;
-                return _vm._h("button", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("button", {
                     staticClass: "btn btn-default"
-                }, [ _vm._h("span", {
+                }, [ _c("span", {
                     staticClass: "glyphicon glyphicon-calendar"
                 }) ]);
             } ]
@@ -1794,27 +1798,29 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm._h("div", [ _vm.type != "time" ? _vm._h("div", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", [ _vm.type != "time" ? _c("div", {
                     staticClass: "calendar-tools"
-                }, [ _vm._h("i", {
+                }, [ _c("i", {
                     staticClass: "glyphicon glyphicon-chevron-left float left",
                     on: {
                         click: _vm.prev
                     }
-                }), " ", _vm._h("i", {
+                }), _vm._v(" "), _c("i", {
                     staticClass: "glyphicon glyphicon-chevron-right float right",
                     on: {
                         click: _vm.next
                     }
-                }), " ", _vm._h("div", {
+                }), _vm._v(" "), _c("div", {
                     staticClass: "calendar-tit"
-                }, [ _vm._h("span", {
+                }, [ _c("span", {
                     on: {
                         click: function($event) {
                             _vm.changeTitSelect(_vm.year, "year");
                         }
                     }
-                }, [ _vm._h("input", {
+                }, [ _c("input", {
                     directives: [ {
                         name: "model",
                         rawName: "v-model",
@@ -1839,31 +1845,31 @@
                             _vm.year = $event.target.value;
                         }
                     }
-                }), "年\n            " ]), " ", _vm._h("span", {
+                }), _vm._v("年\n            ") ]), _vm._v(" "), _c("span", {
                     staticClass: "calendar-tit-month",
                     on: {
                         click: function($event) {
                             _vm.changeTitSelect(_vm.month - 1, "month");
                         }
                     }
-                }, [ _vm._s(_vm.month + 1) + "月" ]) ]) ]) : _vm._e(), " ", _vm._h("div", {
+                }, [ _vm._v(_vm._s(_vm.month + 1) + "月") ]) ]) ]) : _vm._e(), _vm._v(" "), _c("div", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
                         value: _vm.dataTableShow,
                         expression: "dataTableShow"
                     } ]
-                }, [ _vm.type != "time" ? _vm._h("table", {
+                }, [ _vm.type != "time" ? _c("table", {
                     attrs: {
                         cellpadding: "5"
                     }
-                }, [ _vm._h("thead", [ _vm._h("tr", [ _vm._l(_vm.weeks, function(week) {
-                    return _vm._h("td", {
+                }, [ _c("thead", [ _c("tr", _vm._l(_vm.weeks, function(week) {
+                    return _c("td", {
                         staticClass: "week"
-                    }, [ _vm._s(week) ]);
-                }) ]) ]), " ", _vm._l(_vm.days, function(day, k1) {
-                    return _vm._h("tr", [ _vm._l(day, function(child, k2) {
-                        return _vm._h("td", {
+                    }, [ _vm._v(_vm._s(week)) ]);
+                })) ]), _vm._v(" "), _vm._l(_vm.days, function(day, k1) {
+                    return _c("tr", _vm._l(day, function(child, k2) {
+                        return _c("td", {
                             class: {
                                 today: child.today,
                                 range: child.range,
@@ -1881,9 +1887,9 @@
                                     _vm.select(k1, k2, $event);
                                 }
                             }
-                        }, [ "\n                " + _vm._s(child.day) + "\n                " ]);
-                    }) ]);
-                }) ]) : _vm._e(), " ", _vm._h("div", {
+                        }, [ _vm._v("\n                " + _vm._s(child.day) + "\n                ") ]);
+                    }));
+                }) ], 2) : _vm._e(), _vm._v(" "), _c("div", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -1891,17 +1897,17 @@
                         expression: "type=='datetime' || type=='time'"
                     } ],
                     staticClass: "calendar-time"
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "timer clearfix"
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "timer-item"
-                }, [ _vm._h("label", {
+                }, [ _c("label", {
                     on: {
                         click: function($event) {
                             _vm.dropTimeList("hour");
                         }
                     }
-                }, [ _vm._s(_vm.hour) ]), ":\n                    ", _vm._h("ul", {
+                }, [ _vm._v(_vm._s(_vm.hour)) ]), _vm._v(":\n                    "), _c("ul", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -1909,23 +1915,23 @@
                         expression: "hourListShow"
                     } ],
                     staticClass: "drop-down"
-                }, [ _vm._l(_vm.hourList, function(item) {
-                    return _vm._h("li", {
+                }, _vm._l(_vm.hourList, function(item) {
+                    return _c("li", {
                         on: {
                             click: function($event) {
                                 _vm.selectTime($event, "hour");
                             }
                         }
-                    }, [ _vm._s(item) ]);
-                }) ]) ]), " ", _vm._h("div", {
+                    }, [ _vm._v(_vm._s(item)) ]);
+                })) ]), _vm._v(" "), _c("div", {
                     staticClass: "timer-item"
-                }, [ _vm._h("label", {
+                }, [ _c("label", {
                     on: {
                         click: function($event) {
                             _vm.dropTimeList("minute");
                         }
                     }
-                }, [ _vm._s(_vm.minute) ]), ":\n                    ", _vm._h("ul", {
+                }, [ _vm._v(_vm._s(_vm.minute)) ]), _vm._v(":\n                    "), _c("ul", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -1933,23 +1939,23 @@
                         expression: "minuteListShow"
                     } ],
                     staticClass: "drop-down"
-                }, [ _vm._l(_vm.minuteList, function(item) {
-                    return _vm._h("li", {
+                }, _vm._l(_vm.minuteList, function(item) {
+                    return _c("li", {
                         on: {
                             click: function($event) {
                                 _vm.selectTime($event, "minute");
                             }
                         }
-                    }, [ _vm._s(item) ]);
-                }) ]) ]), " ", _vm._h("div", {
+                    }, [ _vm._v(_vm._s(item)) ]);
+                })) ]), _vm._v(" "), _c("div", {
                     staticClass: "timer-item"
-                }, [ _vm._h("label", {
+                }, [ _c("label", {
                     on: {
                         click: function($event) {
                             _vm.dropTimeList("second");
                         }
                     }
-                }, [ _vm._s(_vm.second) ]), " ", _vm._h("ul", {
+                }, [ _vm._v(_vm._s(_vm.second)) ]), _vm._v(" "), _c("ul", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -1957,15 +1963,15 @@
                         expression: "secondListShow"
                     } ],
                     staticClass: "drop-down"
-                }, [ _vm._l(_vm.secondList, function(item) {
-                    return _vm._h("li", {
+                }, _vm._l(_vm.secondList, function(item) {
+                    return _c("li", {
                         on: {
                             click: function($event) {
                                 _vm.selectTime($event, "second");
                             }
                         }
-                    }, [ _vm._s(item) ]);
-                }) ]) ]) ]) ]) ]), " ", _vm._h("table", {
+                    }, [ _vm._v(_vm._s(item)) ]);
+                })) ]) ]) ]) ]), _vm._v(" "), _c("table", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -1975,28 +1981,28 @@
                     attrs: {
                         cellpadding: "6"
                     }
-                }, [ _vm._h("tr", {
+                }, [ _c("tr", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
                         value: _vm.selectRangeShow,
                         expression: "selectRangeShow"
                     } ]
-                }, [ _vm._h("td", {
+                }, [ _c("td", {
                     attrs: {
                         colspan: "3"
                     }
-                }, [ _vm._s(_vm.selectRange) ]) ]), " ", _vm._l(_vm.selectRangeList, function(selects) {
-                    return _vm._h("tr", [ _vm._l(selects, function(select) {
-                        return _vm._h("td", {
+                }, [ _vm._v(_vm._s(_vm.selectRange)) ]) ]), _vm._v(" "), _vm._l(_vm.selectRangeList, function(selects) {
+                    return _c("tr", _vm._l(selects, function(select) {
+                        return _c("td", {
                             on: {
                                 click: function($event) {
                                     _vm.selectItem(select);
                                 }
                             }
-                        }, [ _vm._s(select) ]);
-                    }) ]);
-                }) ]) ]);
+                        }, [ _vm._v(_vm._s(select)) ]);
+                    }));
+                }) ], 2) ]);
             },
             staticRenderFns: []
         };

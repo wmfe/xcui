@@ -174,7 +174,9 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm._h("div", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -186,7 +188,7 @@
                     on: {
                         click: _vm.maskClose
                     }
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "xcui-modal",
                     class: _vm.modalClass,
                     style: _vm.style,
@@ -195,17 +197,17 @@
                     },
                     on: {
                         keydown: function($event) {
-                            if ($event.keyCode !== 27) {
+                            if (_vm._k($event.keyCode, "esc", 27)) {
                                 return;
                             }
                             _vm.cancel($event);
                         }
                     }
-                }, [ _vm.showHeader ? _vm._h("div", {
+                }, [ _vm.showHeader ? _c("div", {
                     staticClass: "xcui-modal-header"
-                }, [ _vm._t("header", [ _vm._h("span", {
+                }, [ _vm._t("header", [ _c("span", {
                     staticClass: "xcui-modal-title"
-                }, [ _vm._s(_vm.title) ]) ]), " ", _vm._t("close", [ _vm.showCloseButton ? _vm._h("button", {
+                }, [ _vm._v(_vm._s(_vm.title)) ]) ]), _vm._v(" "), _vm._t("close", [ _vm.showCloseButton ? _c("button", {
                     staticClass: "xcui-modal-header-close",
                     attrs: {
                         type: "button",
@@ -214,18 +216,18 @@
                     on: {
                         click: _vm.cancel
                     }
-                }, [ _vm._h("span", {
+                }, [ _c("span", {
                     attrs: {
                         "aria-hidden": "true"
                     }
-                }, [ "×" ]), _vm._h("span", {
+                }, [ _vm._v("×") ]), _c("span", {
                     staticClass: "sr-only"
-                }, [ "Close" ]) ]) : _vm._e(), " " ]) ]) : _vm._e(), " ", _vm._h("div", {
+                }, [ _vm._v("Close") ]) ]) : _vm._e() ]) ], 2) : _vm._e(), _vm._v(" "), _c("div", {
                     staticClass: "xcui-modal-body",
                     style: _vm.contentStyle
-                }, [ _vm._t("default", [ _vm._s(_vm.content) ]) ]), " ", _vm.showFooter ? _vm._h("div", {
+                }, [ _vm._t("default", [ _vm._v(_vm._s(_vm.content)) ]) ], 2), _vm._v(" "), _vm.showFooter ? _c("div", {
                     staticClass: "xcui-modal-footer"
-                }, [ _vm._t("footer", [ _vm.showOkButton ? _vm._h("button", {
+                }, [ _vm._t("footer", [ _vm.showOkButton ? _c("button", {
                     staticClass: "btn xcui-modal-btn btn-primary",
                     attrs: {
                         type: "button",
@@ -234,7 +236,7 @@
                     on: {
                         click: _vm.ok
                     }
-                }, [ _vm._s(_vm.okText) ]) : _vm._e(), " ", _vm.showCancelButton ? _vm._h("button", {
+                }, [ _vm._v(_vm._s(_vm.okText)) ]) : _vm._e(), _vm._v(" "), _vm.showCancelButton ? _c("button", {
                     staticClass: "btn xcui-modal-cancel-btn btn-default",
                     attrs: {
                         type: "button",
@@ -243,7 +245,7 @@
                     on: {
                         click: _vm.cancel
                     }
-                }, [ _vm._s(_vm.cancelText) ]) : _vm._e() ]) ]) : _vm._e() ]) ]);
+                }, [ _vm._v(_vm._s(_vm.cancelText)) ]) : _vm._e() ]) ], 2) : _vm._e() ]) ]);
             },
             staticRenderFns: []
         };
