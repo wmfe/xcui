@@ -16,6 +16,7 @@
         "frontend"
     ],
     "author": "fe-b <fe-b@iwaimai.baidu.com>",
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/"
