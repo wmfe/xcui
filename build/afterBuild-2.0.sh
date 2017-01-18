@@ -1,3 +1,4 @@
+#!/bin/bash
 
 if [ "$WMFE_ROBOT_TOKEN" = "" ]; then
   echo "You are nothing!"
@@ -13,14 +14,14 @@ if [ -z "$STATUS" ]
 then
     DATE_DIST=`date`
     git commit -m 'Build dist2.0 at $DATE_DIST by circleci[skip ci]' # [skip ci] is neccessary: https://circleci.com/docs/skip-a-build/
-    git push https://$WMFE_ROBOT_TOKEN@github.com/Miantang/xcui.git 2.0
+    git push https://$WMFE_ROBOT_TOKEN@github.com/wmfe/xcui.git 2.0
 else
     echo 'nothing to commit'
 fi
 
 #build vue2.0 site
 GitAddSite2_0 () {
-    git clone -b gh-pages https://$WMFE_ROBOT_TOKEN@github.com/Miantang/xcui.git gh-pages
+    git clone -b gh-pages https://$WMFE_ROBOT_TOKEN@github.com/wmfe/xcui.git gh-pages
     cd gh-pages
     if [ -d "2.0" ]; then
         git rm -rf 2.0
@@ -38,7 +39,7 @@ if [ -z "$STATUS2" ]
 then
     DATE_SITE=`date`
     git commit -m 'Site2.0 Updated at $DATE_SITE [skip ci]'
-    git push https://$WMFE_ROBOT_TOKEN@github.com/Miantang/xcui.git gh-pages
+    git push https://$WMFE_ROBOT_TOKEN@github.com/wmfe/xcui.git gh-pages
 else
     echo 'nothing to commit of site2.0'
 fi
