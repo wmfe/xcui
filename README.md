@@ -1,6 +1,14 @@
-# 关于XCUI
+# Vue组件库 XCUI
 
 ![logo](https://github.com/wmfe/xcui/raw/master/src/assets/logo_nobg_128x128@2x.png)
+
+[![CircleCI](https://img.shields.io/circleci/project/wmfe/xcui/1.0.svg)](https://circleci.com/gh/wmfe/xcui/tree/1.0)
+[![npm version](https://img.shields.io/npm/v/xcui.svg)](https://www.npmjs.com/package/xcui)
+[![GitHub issues](https://img.shields.io/github/issues/wmfe/xcui.svg)](https://github.com/wmfe/xcui/issues)
+[![GitHub forks](https://img.shields.io/github/forks/wmfe/xcui.svg)](https://github.com/wmfe/xcui/network)
+[![GitHub stars](https://img.shields.io/github/stars/wmfe/xcui.svg)](https://github.com/wmfe/xcui/stargazers)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/wmfe/xcui/1.0/LICENSE)
+
 
 XCUI 是基于`Vue`和 `Bootstrap.css` 的**桌面端组件库**。
 
@@ -103,7 +111,7 @@ export default {
 ```javascript
 this.$alert('alert message') // 警告提示
 this.$confirm('是否确认?', content, onOk, onCancel) // 确认提示
-this.$toaster('toaster message') // 信息提示
+this.$Message.show('toaster message') // 信息提示
 this.$Modal.show(options) // 模态框
 ```
 具体请见[modal](https://wmfe.github.io/xcui/#!/component/modal) 中的说明。

@@ -105,7 +105,7 @@ export default {
 ```javascript
 this.$alert('alert message') // 警告提示
 this.$confirm('是否确认?', content, onOk, onCancel) // 确认提示
-this.$toaster('toaster message') // 信息提示
+this.$Message.show('toaster message') // 信息提示
 this.$Modal.show(options) // 模态框
 ```
 具体请见[modal](https://wmfe.github.io/xcui/#!/component/modal) 中的说明。
@@ -157,4 +157,3 @@ export default {
 };
 
 </script>
-

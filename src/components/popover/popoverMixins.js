@@ -2,7 +2,7 @@
  * @file PopoverMixin pass event param for eventlistener
  */
 
-import EventListener from '../../utils/eventlistener';
+import EventListener from '../../utils/eventListener';
 
 export default {
     'props': {
