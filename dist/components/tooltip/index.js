@@ -71,8 +71,8 @@
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
-        var _eventlistener = __webpack_require__(3);
-        var _eventlistener2 = _interopRequireDefault(_eventlistener);
+        var _eventListener = __webpack_require__(3);
+        var _eventListener2 = _interopRequireDefault(_eventListener);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
                 default: obj
@@ -151,23 +151,23 @@
                     var triger = _this.$refs.trigger.children[0];
                     var me = _this;
                     if (_this.trigger === "hover") {
-                        _this._mouseenterEvent = _eventlistener2.default.listen(triger, "mouseenter", function() {
+                        _this._mouseenterEvent = _eventListener2.default.listen(triger, "mouseenter", function() {
                             me.fixPosition(me.$refs.trigger.children[0], me.$refs.popover, me.placement);
                             me.show = true;
                         });
-                        _this._mouseleaveEvent = _eventlistener2.default.listen(triger, "mouseleave", function() {
+                        _this._mouseleaveEvent = _eventListener2.default.listen(triger, "mouseleave", function() {
                             me.show = false;
                         });
                     } else if (_this.trigger === "focus") {
-                        _this._focusEvent = _eventlistener2.default.listen(triger, "focus", function() {
+                        _this._focusEvent = _eventListener2.default.listen(triger, "focus", function() {
                             me.fixPosition(me.$refs.trigger.children[0], me.$refs.popover, me.placement);
                             me.show = true;
                         });
-                        _this._blurEvent = _eventlistener2.default.listen(triger, "blur", function() {
+                        _this._blurEvent = _eventListener2.default.listen(triger, "blur", function() {
                             me.show = false;
                         });
                     } else {
-                        _this._clickEvent = _eventlistener2.default.listen(triger, "click", function() {
+                        _this._clickEvent = _eventListener2.default.listen(triger, "click", function() {
                             me.fixPosition(me.$refs.trigger.children[0], me.$refs.popover, me.placement);
                             me.toggle;
                         });

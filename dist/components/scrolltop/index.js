@@ -28,8 +28,8 @@
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
-        var _eventlistener = __webpack_require__(2);
-        var _eventlistener2 = _interopRequireDefault(_eventlistener);
+        var _eventListener = __webpack_require__(2);
+        var _eventListener2 = _interopRequireDefault(_eventListener);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
                 default: obj
@@ -133,7 +133,7 @@
                             me.show = false;
                         }
                     };
-                    me.scrollListener = _eventlistener2.default.listen(window, "scroll", scrollCall);
+                    me.scrollListener = _eventListener2.default.listen(window, "scroll", scrollCall);
                 });
             },
             destroyed: function destroyed() {
