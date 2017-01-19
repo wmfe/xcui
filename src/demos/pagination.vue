@@ -1,5 +1,5 @@
 <template lang="md">
-# Pagination页码
+# Pagination 页码
 
 ## 使用场景
 

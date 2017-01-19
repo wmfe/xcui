@@ -22,7 +22,7 @@
         __webpack_require__.p = "";
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
-        module.exports = __webpack_require__(4);
+        module.exports = __webpack_require__(3);
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -33,39 +33,47 @@
             props: {
                 text: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 closeable: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 disabled: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 showTag: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 },
-                classname: {
+                className: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
-                key: {
+                keys: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 aftercloseisshow: {
                     type: Boolean,
-                    "default": false,
+                    default: false,
                     twoway: true
                 }
+            },
+            data: function data() {
+                return {
+                    show: true
+                };
+            },
+            created: function created() {
+                this.show = this.showTag;
             },
             methods: {
                 onCloseClick: function onCloseClick() {
                     this.$emit("close");
                     if (this.aftercloseisshow === false) {
-                        this.showTag = false;
+                        this.show = false;
                     }
                 },
                 onClick: function onClick() {
@@ -73,27 +81,47 @@
                 }
             }
         };
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div :class=\"['xcui-tag', disabled ? ' xcui-disabled':'']\" @click=onClick v-if=showTag> <div class=\"{{classname!='' ? classname : ''}}\"> <span class=xcui-tag-text><slot></slot>{{text}}<span> <i class=xcui-cross v-if=closeable @click.stop=onCloseClick></i> </span></span></div> </div> ";
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
+    }, function(module, exports) {}, function(module, exports, __webpack_require__) {
+        var __vue_exports__, __vue_options__;
         var __vue_styles__ = {};
         __webpack_require__(2);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(3);
-        module.exports = __vue_script__ || {};
-        if (module.exports.__esModule) module.exports = module.exports.default;
-        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
-        if (__vue_template__) {
-            __vue_options__.template = __vue_template__;
+        __vue_exports__ = __webpack_require__(1);
+        var __vue_template__ = __webpack_require__(4);
+        __vue_options__ = __vue_exports__ = __vue_exports__ || {};
+        if (typeof __vue_exports__.default === "object" || typeof __vue_exports__.default === "function") {
+            __vue_options__ = __vue_exports__ = __vue_exports__.default;
         }
-        if (!__vue_options__.computed) __vue_options__.computed = {};
-        Object.keys(__vue_styles__).forEach(function(key) {
-            var module = __vue_styles__[key];
-            __vue_options__.computed[key] = function() {
-                return module;
-            };
-        });
+        if (typeof __vue_options__ === "function") {
+            __vue_options__ = __vue_options__.options;
+        }
+        __vue_options__.render = __vue_template__.render;
+        __vue_options__.staticRenderFns = __vue_template__.staticRenderFns;
+        module.exports = __vue_exports__;
+    }, function(module, exports) {
+        module.exports = {
+            render: function() {
+                var _vm = this;
+                return _vm.show ? _vm._h("div", {
+                    class: [ "xcui-tag", _vm.disabled ? " xcui-disabled" : "" ],
+                    on: {
+                        click: _vm.onClick
+                    }
+                }, [ _vm._h("div", {
+                    class: _vm.className
+                }, [ _vm._h("span", {
+                    staticClass: "xcui-tag-text"
+                }, [ _vm._t("default"), _vm._s(_vm.text), _vm._h("span", [ _vm.closeable ? _vm._h("i", {
+                    staticClass: "xcui-cross",
+                    on: {
+                        click: function($event) {
+                            $event.stopPropagation();
+                            _vm.onCloseClick($event);
+                        }
+                    }
+                }) : _vm._e() ]) ]) ]) ]) : _vm._e();
+            },
+            staticRenderFns: []
+        };
     } ]);
 });
 

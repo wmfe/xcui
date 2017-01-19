@@ -133,7 +133,6 @@
                     me.internalOtherValue = me.output(me.otherValue);
                     me.firstInit = false;
                 }
-                debugger;
                 me.internalOtherValue = me.internalOtherValue ? me.output(me.internalOtherValue) : me.internalValue;
                 let otherDate = me.output(me.internalOtherValue, format);
                 let isMinDate = me.minDate && (today < me.output(me.minDate, format));
@@ -193,10 +192,7 @@
             },
             selectTime(e, type) {
                 this.selectTimeItem(e, type);
-                debugger;
-                // if (this.type === 'time') {
                 this.changeOtherCalender();
-                // }
                 this.internalOtherValue = this.output(this.internalOtherValue);
                 this.emitChange();
             },
@@ -205,13 +201,11 @@
                 let time = new Date().getTime();
                 if (!me.right) {
                     if (me.internalValue > me.internalOtherValue) {
-                        debugger;
                         me.internalOtherValue = me.internalValue;
                     }
                 }
                 else if (me.right) {
                     if (me.internalValue < me.internalOtherValue) {
-                        debugger;
                         me.internalOtherValue = me.internalValue;
                     }
                 }

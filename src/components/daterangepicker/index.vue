@@ -134,7 +134,6 @@
         },
         methods: {
             ok(e) {
-                debugger;
                 e.preventDefault();
                 if (this.newStartDate && this.newEndDate) {
                     this.dateText = this.newStartDate + this.sep + this.newEndDate;
@@ -180,14 +179,12 @@
                 });
             },
             startChange(val) {
-                debugger;
                 this.newStartDate = val.value;
                 this.newEndDate = val.otherValue;
                 this.initialStartDate = val.value;
                 this.initialEndDate = val.otherValue;
             },
             endChange(val) {
-                debugger;
                 this.newStartDate = val.otherValue;
                 this.newEndDate = val.value;
                 this.initialStartDate = val.otherValue;

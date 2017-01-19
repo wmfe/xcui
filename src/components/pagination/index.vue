@@ -188,7 +188,7 @@ export default {
         margin: 0;
         .btn{
             a{
-                padding: 5px 12px;
+                color:#666;
                 &:focus{
                     background-color: initial;
                 }
@@ -201,8 +201,6 @@ export default {
         }
         // 枚举的页码按钮
         .page-btn{
-            padding-left: 3px;
-            padding-right: 3px;
             &.active{
                 background-color: #46c3c1;
                 border-color: #46c3c1;
