@@ -16,7 +16,7 @@ import Tooltip from './demos/tooltip';
 import Suggestion from './demos/suggestion';
 import TagDemo from './demos/tag';
 import datepicker from './demos/datepicker';
-import daterangepicker from './demos/dateRangePicker';
+import daterangepicker from './demos/daterangepicker';
 import Select from './demos/select.vue';
 import Message from './demos/message';
 import Modal from './demos/modal';
