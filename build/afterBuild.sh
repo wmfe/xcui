@@ -29,7 +29,7 @@ GitAddSite1_0 () {
     cp ../build/empty_circle.yml ./circle.yml
     sed -i '15i\    <script type="text/javascript" src="./static/app.js"></script>' ./index.html
     mkdir static
-    if [ ! -f "../site/app.js"]; then
+    if [ ! -f "../site/app.js" ]; then
         exit 1
     else
         cp ../site/app.js ./static/app.js
