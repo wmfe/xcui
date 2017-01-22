@@ -22,6 +22,7 @@
   },
   "scripts": {
     "dev": "node build/dev-server.js",
+    "site": "webpack --progress --hide-modules --colors --config build/webpack.base.conf.js",
     "build": "webpack --progress --hide-modules --colors --config build/webpack.npm.conf.js && rimraf dist/components && node build/build-components"
   },
   "main": "dist/xcui.js",

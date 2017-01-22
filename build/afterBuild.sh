@@ -26,6 +26,7 @@ GitAddSite1_0 () {
     git rm -rf ./static
     git rm ./index.html
     cp ../src/index.html ./index.html
+    cp ../site/app.js ./static/app.js
     cp ../build/empty_circle.yml ./circle.yml
     sed -i '15i\    <script type="text/javascript" src="./static/app.js"></script>' ./index.html
     mkdir static
