@@ -13,7 +13,7 @@ STATUS=`git status | grep nothing`
 if [ -z "$STATUS" ]
 then
     DATE_DIST=`date`
-    git commit -m 'Build dist2.0 at $DATE_DIST by circleci[skip ci]' # [skip ci] is neccessary: https://circleci.com/docs/skip-a-build/
+    git commit -m "Build dist2.0 at $DATE_DIST by circleci[skip ci]" # [skip ci] is neccessary: https://circleci.com/docs/skip-a-build/
     git push https://$WMFE_ROBOT_TOKEN@github.com/wmfe/xcui.git 2.0
 else
     echo 'nothing to commit'
@@ -27,6 +27,11 @@ GitAddSite2_0 () {
         git rm -rf 2.0
     fi
     mkdir -p 2.0/static
+    if [ ! -f "../site/app.js" ]; then
+        exit 1
+    else
+        cp ../site/app.js ./2.0/static/app.js
+    fi
     cp ../src/index.html ./2.0/index.html
     sed -i '15i\    <script type="text/javascript" src="./static/app.js"></script>' ./2.0/index.html
     cp -r ../src/assets/* ./2.0/static/
@@ -38,7 +43,7 @@ STATUS2=`git status | grep nothing`
 if [ -z "$STATUS2" ]
 then
     DATE_SITE=`date`
-    git commit -m 'Site2.0 Updated at $DATE_SITE [skip ci]'
+    git commit -m "Site2.0 Updated at $DATE_SITE [skip ci]"
     git push https://$WMFE_ROBOT_TOKEN@github.com/wmfe/xcui.git gh-pages
 else
     echo 'nothing to commit of site2.0'

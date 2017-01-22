@@ -9,6 +9,6 @@ test:
 
 compile:
   override:
-    - npm run build
+    - npm run build && npm run site
   post:
     - bash ./build/afterBuild-2.0.sh
