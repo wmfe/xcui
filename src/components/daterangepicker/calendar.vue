@@ -83,18 +83,7 @@
         },
         watch: {
             startRender(val) {
-                if (!val) {
-                    return false;
-                }
-                this.value = this.output(this.value);
-                let params = this.dateParams;
-                this.year = params.year;
-                this.month = params.month;
-                this.hour = params.hour;
-                this.day = params.day;
-                this.minute = params.minute;
-                this.second = params.second;
-                this.render(params.year, params.month);
+                this.renderValue(val);
             }
         },
         created() {

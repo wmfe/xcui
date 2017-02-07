@@ -127,6 +127,9 @@ export default {
             console.log(val);
             console.log(oldVal);
         }
+    },
+    ready() {
+        this.valueDemo = '2017-02-06';
     }
 };
 </script>

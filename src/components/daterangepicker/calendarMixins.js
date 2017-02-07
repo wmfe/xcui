@@ -53,6 +53,11 @@ export default {
             type: 'date'
         };
     },
+    watch: {
+        value(val) {
+            this.renderValue(val);
+        }
+    },
     computed: {
         formatValue() {
             return this.output(this.value);
@@ -98,6 +103,20 @@ export default {
     methods: {
         zero(n) {
             return n < 10 && String(n).length === 1 ? '0' + n : n;
+        },
+        renderValue(val) {
+            if (!val) {
+                return false;
+            }
+            this.value = this.output(this.value);
+            let params = this.dateParams;
+            this.year = params.year;
+            this.month = params.month;
+            this.hour = params.hour;
+            this.day = params.day;
+            this.minute = params.minute;
+            this.second = params.second;
+            this.render(params.year, params.month);
         },
         render(y, m) {
             let me = this;
@@ -272,6 +291,9 @@ export default {
             }
             else if (!this.value) {
                 date = new Date();
+                let minDate = new Date(me.minDate);
+                let maxDate = new Date(me.maxDate);
+                date = minDate > date ? minDate : maxDate < date ? maxDate : date;
             }
             let year = date.getFullYear();
             let month = date.getMonth();

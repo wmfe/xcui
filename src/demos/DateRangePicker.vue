@@ -136,6 +136,11 @@ export default {
             console.log('startDate' + startDate);
             console.log('endDate' + endDate);
         }
+    },
+    ready() {
+        this.startdate = '2017-09-08 00:02:00';
+        this.enddate = '2017-09-13 00:02:00';
+        // this.valueDemo = '2017-02-03';
     }
 };
 </script>

@@ -111,6 +111,18 @@
                 if (!val) {
                     this.startDate = this.endDate = '';
                 }
+            },
+            startDate(val) {
+                this.newStartDate = this.startDate;
+                if (this.startDate > this.endDate) {
+                    this.newEndDate = this.startDate;
+                }
+            },
+            endDate(val) {
+                this.newEndDate = this.endDate;
+                if (this.endDate < this.startDate) {
+                    this.newStartDate = this.endDate;
+                }
             }
         },
         created() {
