@@ -395,7 +395,7 @@
                             day: i,
                             disabled: true,
                             range: false,
-                            noclick: true
+                            noClick: true
                         });
                     } else if (!me.right && today > value && today <= otherDate) {
                         temp[line].push({
@@ -619,6 +619,10 @@
                 btnShow: {
                     type: Boolean,
                     "default": false
+                },
+                sep: {
+                    type: String,
+                    "default": " 至 "
                 }
             },
             components: {
@@ -630,25 +634,62 @@
                     value: "",
                     startRender: "",
                     initialStartDate: "",
-                    initialEndDate: ""
+                    initialEndDate: "",
+                    newStartDate: "",
+                    newEndDate: ""
                 };
             },
             watch: {
-                startDate: function startDate(val) {
-                    if (val > this.endDate) {
-                        this.endDate = val;
+                value: function value(val) {
+                    if (!val) {
+                        this.startDate = this.endDate = "";
                     }
                 },
-                endDate: function endDate(val) {
-                    if (val < this.startDate) {
-                        this.startDate = val;
-                    }
+                startDate: function startDate(val) {
+                    this.getValue();
                 }
             },
+            created: function created() {
+                this.getValue();
+            },
             methods: {
+                getValue: function getValue() {
+                    var startDate = this.startDate ? new Date(this.startDate).getTime() : "";
+                    var endDate = this.endDate ? new Date(this.endDate).getTime() : "";
+                    var maxDate = new Date(this.maxDate).getTime();
+                    var minDate = new Date(this.minDate).getTime();
+                    var curDate = new Date().getTime();
+                    this.newStartDate = this.startDate;
+                    this.newEndDate = this.endDate;
+                    if (!endDate && maxDate && curDate > maxDate) {
+                        this.newStartDate = this.newEndDate = this.maxDate;
+                    }
+                    if (!startDate && minDate && curDate < minDate) {
+                        this.newStartDate = this.newEndDate = this.minDate;
+                    }
+                    if (startDate > endDate) {
+                        this.newEndDate = this.startDate;
+                    }
+                    if (endDate < startDate) {
+                        this.newStartDate = this.endDate;
+                    }
+                    this.value = this.startDate && this.endDate && this.newStartDate + this.sep + this.newEndDate;
+                    this.ok();
+                },
                 ok: function ok(e) {
-                    e.preventDefault();
-                    this.value = this.startDate + " 至 " + this.endDate;
+                    e && e.preventDefault();
+                    var newStartDate = this.newStartDate;
+                    var newEndDate = this.newEndDate;
+                    if (newStartDate && newEndDate) {
+                        if (newStartDate > newEndDate) {
+                            this.newEndDate = newEndDate = newStartDate;
+                        }
+                        this.value = newStartDate + this.sep + newEndDate;
+                        this.startDate = newStartDate;
+                        this.endDate = newEndDate;
+                    } else {
+                        this.value = this.startDate = this.endDate = "";
+                    }
                     this.show = false;
                     this.$emit("on-change", this.startDate, this.endDate);
                     this.initialStartDate = this.startDate;
@@ -659,8 +700,8 @@
                     e.preventDefault();
                     this.show = false;
                     this.startRender = new Date().getTime();
-                    this.startDate = this.initialStartDate;
-                    this.endDate = this.initialEndDate;
+                    this.newStartDate = this.initialStartDate;
+                    this.newEndDate = this.initialEndDate;
                 },
                 showCalendar: function showCalendar(e) {
                     var me = this;
@@ -674,6 +715,10 @@
                     setTimeout(function() {
                         document.addEventListener("click", bindHide, false);
                     }, 500);
+                },
+                closeBtn: function closeBtn() {
+                    this.value = this.startDate = this.endDate = "";
+                    this.$emit("clear-btn");
                 }
             }
         };
@@ -818,7 +863,7 @@
                             temp[line] = [];
                             var k = me.lastDayOfLastMonth - me.firstDayOfMonth + 1;
                             for (var j = 0; j < me.firstDayOfMonth; j++) {
-                                var nowDay = me.output([ me.year, me.month, k ], format);
+                                var nowDay = me.output([ me.year, me.month - 1, k ], format);
                                 if (nowDay < minDate || nowDay > maxDate) {
                                     temp[line].push({
                                         day: k,
@@ -848,14 +893,27 @@
                         }
                         if (dow === 6) {
                             line++;
-                        } else if (i === me.lastDateOfMonth) {
+                        }
+                        if (i === me.lastDateOfMonth) {
                             var _k = 1;
                             for (dow; dow < 6; dow++) {
-                                temp[line].push({
-                                    day: _k,
-                                    disabled: true,
-                                    today: false
-                                });
+                                var today = me.output([ y, m + 1, _k ], format);
+                                var isMinDate = me.minDate && today < me.output(me.minDate, format);
+                                var isMaxDate = me.maxDate && today > me.output(me.maxDate, format);
+                                if (isMinDate || isMaxDate) {
+                                    temp[line].push({
+                                        day: _k,
+                                        disabled: true,
+                                        range: false,
+                                        noClick: true
+                                    });
+                                } else {
+                                    temp[line].push({
+                                        day: _k,
+                                        disabled: true,
+                                        today: false
+                                    });
+                                }
                                 _k++;
                             }
                         }
@@ -1510,28 +1568,46 @@
             Iterators[NAME] = Iterators.Array;
         }
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"> <input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年 </span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'range\':child.range,\'off\':child.disabled,\'todayleft\':!right,\'todayright\':right,\'prev\':child.prev, \'noclick\':child.noclick}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\' || type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> </div> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> ';
+        module.exports = ' <div class=calendar-tools v-if="type!=\'time\'"> <i class="glyphicon glyphicon-chevron-left float left" @click=prev></i> <i class="glyphicon glyphicon-chevron-right float right" @click=next></i> <div class=calendar-tit> <span @click="changeTitSelect(year, \'year\')"> <input v-model=year class=calendar-tit-year type=text @change="changeTitSelect(year,\'year\')"/>年 </span> <span class=calendar-tit-month @click="changeTitSelect(month-1, \'month\')">{{month+1}}月</span> </div> </div> <div v-show=dataTableShow> <table cellpadding=5 v-if="type!=\'time\'"> <thead> <tr> <td v-for="week in weeks" class=week>{{week}}</td> </tr> </thead> <tr v-for="(k1,day) in days"> <td v-for="(k2,child) in day" :class="{\'today\':child.today,\'range\':child.range,\'off\':child.disabled,\'todayleft\':!right,\'todayright\':right,\'prev\':child.prev, \'noclick\':child.noClick}" :style="{\'background\':color&&child.today?color:\'\'}" @click=select(k1,k2,$event)> {{child.day}} </td> </tr> </table> <div class=calendar-time v-show="type==\'datetime\' || type==\'time\'"> <div class="timer clearfix"> <div class=timer-item> <label @click="dropTimeList(\'hour\')">{{hour}}</label>: <ul class=drop-down v-show=hourListShow> <li v-for="item in hourList" @click="selectTimeItem($event,\'hour\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'minute\')">{{minute}}</label>: <ul class=drop-down v-show=minuteListShow> <li v-for="item in minuteList" @click="selectTimeItem($event,\'minute\')">{{item}}</li> </ul> </div> <div class=timer-item> <label @click="dropTimeList(\'second\')">{{second}}</label> <ul class=drop-down v-show=secondListShow> <li v-for="item in secondList" @click="selectTimeItem($event,\'second\')">{{item}}</li> </ul> </div> </div> </div> </div> <table cellpadding=6 v-show=yearTableShow> <tr v-show=selectRangeShow> <td colspan=3>{{selectRange}}</td> </tr> <tr v-for="selects in selectRangeList"> <td v-for="select in selects" @click=selectItem(select)>{{select}}</td> </tr> </table> ';
     }, function(module, exports) {
-        module.exports = ' <div class=xcui-datarangepicker :class=className> <div :class="{\'input-group\':btnShow}"> <input class="form-control col-md-3" type=text v-model=value placeholder=请输入日期 @click=showCalendar> <div @click.stop="" @touchstart.stop="" class="calendar double-calendar" v-show=show> <div class=clearfix> <div class=double-calendar-left> <calendar :value.sync=startDate :format=format :other-value.sync=endDate :min-date=minDate :max-date=maxDate :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :initial-date.sync=initialStartDate :start-render=startRender></calendar> </div> <div class=double-calendar-right> <calendar :value.sync=endDate :format=format :other-value.sync=startDate :right=true :min-date=minDate :max-date=maxDate :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :initial-date.sync=initialEndDate :start-render=startRender></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
+        module.exports = ' <div class=xcui-datarangepicker :class=className> <div :class="{\'input-group\':btnShow}"> <input class="form-control col-md-3" type=text v-model=value placeholder=请输入日期 @click=showCalendar> <button v-show=btnShow type=button class="close close_btn" :style="{\'right\':btnShow?\'50px\':\'10px\'}" @click=closeBtn title=点击关闭><span aria-hidden=true>×</span></button> <div @click.stop="" @touchstart.stop="" class="calendar double-calendar" v-show=show> <div class=clearfix> <div class=double-calendar-left> <calendar :value.sync=newStartDate :format=format :other-value.sync=newEndDate :min-date=minDate :max-date=maxDate :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :initial-date.sync=initialStartDate :start-render=startRender></calendar> </div> <div class=double-calendar-right> <calendar :value.sync=newEndDate :format=format :other-value.sync=newStartDate :right=true :min-date=minDate :max-date=maxDate :hour-range=hourRange :minute-range=minuteRange :second-range=secondRange :color=color :date-limit=dateLimit :initial-date.sync=initialEndDate :start-render=startRender></calendar> </div> </div> <div class=calendar-button> <button @click=ok :style="{\'background\':color}">确定</button> <button @click=cancel class=cancel>取消</button> </div> </div> <span class=input-group-btn v-if=btnShow @click=showCalendar> <button class="btn btn-default"> <span class="glyphicon glyphicon-calendar"></span> </button> </span> </div> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
         __vue_script__ = __webpack_require__(37);
         __vue_template__ = __webpack_require__(73);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
+        var __vue_styles__ = {};
         __webpack_require__(72);
         __vue_script__ = __webpack_require__(38);
         __vue_template__ = __webpack_require__(74);
         module.exports = __vue_script__ || {};
         if (module.exports.__esModule) module.exports = module.exports.default;
+        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
         if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+            __vue_options__.template = __vue_template__;
         }
+        if (!__vue_options__.computed) __vue_options__.computed = {};
+        Object.keys(__vue_styles__).forEach(function(key) {
+            var module = __vue_styles__[key];
+            __vue_options__.computed[key] = function() {
+                return module;
+            };
+        });
     } ]);
 });
 

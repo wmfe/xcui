@@ -18,14 +18,25 @@
     ## DEMO
     
     <demo>
+        <!-- <example title="日期格式">
+            <xcui-daterangepicker
+                :start-date.sync="''"
+                :end-date.sync="''"
+                :min-date="'2016-11-01'"
+                :max-date="'2016-11-20'"
+                :date-limit="date.dateLimit">
+            </xcui-daterangepicker>
+        </example> -->
         <example title="simple">
             <xcui-daterangepicker
-                :start-date.sync="valueDemo"
-                :end-date.sync="''">
+                :start-date.sync="'2016-11-01'"
+                :end-date.sync="'2016-11-09'"
+                :sep="' － '">
             </xcui-daterangepicker>
         </example>
         <p> 最简单的用法，startDate：日期开始时间，endDate：日期结束时间, 格式</p>
         <p> startDate／endDate：可以传不同日期格式，例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262，也可以不传，默认当天，date.value值为 时间戳1477980088896</p>
+        <p> sep：双日历之间间隔符，例如sep值为“ 至 ” 日期格式为 2016-09-08 00:02:00 至 2016-09-13 00:02:00</p>
         <example title="日期格式">
             <xcui-daterangepicker
                 :start-date.sync="''"
@@ -78,10 +89,11 @@
 
     | 名字 | 类型 | 默认 | 描述 | 是否双向绑定 | 是否必选 |
     |-----|-----|-----|-----|----|----|
-    | startDate | String | 无 | 日期开始时间 | 双向绑定 | 必选 |
-    | endDate | String | 无 | 日期结束时间 | 双向绑定 | 必选 |
-    | minDate | String | 无 | 日期可选最小值 | 否 | 可选|
-    | maxdate | String | 无 | 日期可选最大值 | 否 | 可选|
+    | startDate | String,object,时间戳 | 无 | 日期开始时间 | 双向绑定 | 必选 |
+    | endDate | String,object,时间戳 | 无 | 日期结束时间 | 双向绑定 | 必选 |
+    | minDate | String,object,时间戳 | 无 | 日期可选最小值 | 否 | 可选|
+    | maxdate | String,object,时间戳 | 无 | 日期可选最大值 | 否 | 可选|
+    | sep | String | 至 | 双日历之间间隔符 | 否 | 可选|
     | format | String | YYYY-MM-DD | 展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年-月-日 时：分：秒 YYYY-MM-DD hh:mm:ss， 时/分/秒 hh/mm/ss | 静态属性 | 可选 |
     | dateLimit | object | null | 可选时间范围限制，例如：dateLimit: {months: 1} 一个月 dateLimit: {days: 20} 20天| 否 | 可选 |
     | hourRange | Number | 1 | 小时可选值设置（例如：值为 3 时，小时可选值为0，3，6，9，12 .....） | 否 | 可选 |
@@ -90,7 +102,8 @@
     | color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 否 | 可选 |
     | btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
     | inputClass | Array | 无 | 日历input输入框的样式，class名字 | 否 | 可选 |
-    | onChange | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @onChange | 否 | 可选 |
+    | onChange | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @on-change | 否 | 可选 |
+    | clear-btn | object | 无 | input清空后的回调 @clear-btn | 否 | 可选 |
 </template>
 
 <script>

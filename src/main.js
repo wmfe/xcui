@@ -23,6 +23,7 @@ import Modal from './demos/modal';
 import InputNumber from './demos/inputNumber';
 import Progress from './demos/progress';
 import PageLoading from './demos/pageloading';
+import ScrollTop from './demos/scrolltop';
 
 Vue.use(Router);
 Vue.use(xcui);
@@ -108,6 +109,11 @@ router.map({
             '/component/pageloading': {
                 component(resolve) {
                     resolve(PageLoading);
+                }
+            },
+            '/component/scrolltop': {
+                component(resolve) {
+                    resolve(ScrollTop);
                 }
             }
         }

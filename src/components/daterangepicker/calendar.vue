@@ -21,7 +21,7 @@
             <tr v-for="(k1,day) in days">
                 <td
                 v-for="(k2,child) in day"
-                :class="{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right,'prev':child.prev, 'noclick':child.noclick}"
+                :class="{'today':child.today,'range':child.range,'off':child.disabled,'todayleft':!right,'todayright':right,'prev':child.prev, 'noclick':child.noClick}"
                 :style="{'background':color&&child.today?color:''}"
                 @click="select(k1,k2,$event)">
                 {{child.day}}
@@ -100,7 +100,7 @@
                 let isMinDate = me.minDate && (today < me.output(me.minDate, format));
                 let isMaxDate = me.maxDate && (today > me.output(me.maxDate, format));
                 if (isMinDate || isMaxDate) {
-                    temp[line].push({day: i, disabled: true, range: false, noclick: true});
+                    temp[line].push({day: i, disabled: true, range: false, noClick: true});
                 }
                 else if (!me.right && today > value && today <= otherDate) {
                     temp[line].push({day: i, disabled: false, range: true});

@@ -1,9 +1,8 @@
-
 <template>
 <div class="xcui-datarangepicker" :class="className">
     <div :class="{'input-group':btnShow}">
         <input class="form-control col-md-3" type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
-        <button v-show="show" type="button" class="close close_btn" :style="{'right':btnShow?'50px':'10px'}" @click="closeBtn" title="点击关闭"><span aria-hidden="true">×</span></button>
+        <button v-show="btnShow" type="button" class="close close_btn" :style="{'right':btnShow?'50px':'10px'}" @click="closeBtn" title="点击关闭"><span aria-hidden="true">×</span></button>
         <!-- 双日历 -->
         <div @click.stop=""
              @touchstart.stop=""
@@ -90,6 +89,10 @@
             btnShow: {
                 type: Boolean,
                 default: false
+            },
+            sep: {
+                type: String,
+                default: ' 至 '
             }
         },
         components: {
@@ -117,35 +120,59 @@
                 if (this.startDate > this.endDate) {
                     this.newEndDate = this.startDate;
                 }
+                this.getValue();
             },
             endDate(val) {
                 this.newEndDate = this.endDate;
                 if (this.endDate < this.startDate) {
                     this.newStartDate = this.endDate;
                 }
+                this.getValue();
             }
         },
         created() {
-            this.newStartDate = this.startDate;
-            this.newEndDate = this.endDate;
-            if (this.startDate > this.endDate) {
-                this.newEndDate = this.startDate;
-            }
-            if (this.endDate < this.startDate) {
-                this.newStartDate = this.endDate;
-            }
+            this.getValue();
         },
         methods: {
+            getValue() {
+                let startDate = this.startDate ? new Date(this.startDate).getTime() : '';
+                let endDate = this.endDate ? new Date(this.endDate).getTime() : '';
+                let maxDate = new Date(this.maxDate).getTime();
+                let minDate = new Date(this.minDate).getTime();
+                let curDate = new Date().getTime();
+                this.newStartDate = this.startDate;
+                this.newEndDate = this.endDate;
+                if (!endDate && maxDate && (curDate > maxDate)) {
+                    this.newStartDate = this.newEndDate = this.maxDate;
+                }
+                if (!startDate && minDate && (curDate < minDate)) {
+                    this.newStartDate = this.newEndDate = this.minDate;
+                }
+                if (startDate > endDate) {
+                    this.newEndDate = this.startDate;
+                }
+                if (endDate < startDate) {
+                    this.newStartDate = this.endDate;
+                }
+                this.value = this.startDate && this.endDate && (this.newStartDate + this.sep + this.newEndDate);
+                this.ok();
+            },
             ok(e) {
-                e.preventDefault();
-                if (this.newStartDate && this.newEndDate) {
-                    this.value = this.newStartDate + ' 至 ' + this.newEndDate;
-                    this.startDate = this.newStartDate;
-                    this.endDate = this.newEndDate;
+                e && e.preventDefault();
+                let newStartDate = this.newStartDate;
+                let newEndDate = this.newEndDate;
+                if (newStartDate && newEndDate) {
+                    if (newStartDate > newEndDate) {
+                        this.newEndDate = newEndDate = newStartDate;
+                    }
+                    this.value = newStartDate + this.sep + newEndDate;
+                    this.startDate = newStartDate;
+                    this.endDate = newEndDate;
                 }
                 else {
                     this.value = this.startDate = this.endDate = '';
                 }
+
                 this.show = false;
                 this.$emit('on-change', this.startDate, this.endDate);
                 this.initialStartDate = this.startDate;
@@ -174,6 +201,7 @@
             },
             closeBtn() {
                 this.value = this.startDate = this.endDate = '';
+                this.$emit('clear-btn');
             }
         }
     };
