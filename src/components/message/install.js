@@ -10,7 +10,7 @@ let MessageInstall = (Vue) => {
             <Message :content="content"
                 :type="type"
                 :duration="duration"
-                :show.sync="show">
+                :show="show">
             </Message>
         `;
         document.body.appendChild(div);

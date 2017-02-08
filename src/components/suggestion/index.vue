@@ -1,5 +1,5 @@
 <template>
-    <div class="xcui-suggestion {{className}}">
+    <div class="xcui-suggestion" :class="className">
         <input type="text"
                 class="form-control xcui-suggestion-input"
                 autocomplete="off"
@@ -9,14 +9,14 @@
                 :placeholder="placeholder"
                 v-model="dataText"
                 @input="onInput"
-                @focus="onInput"
+                @focus="onFocus"
                 @blur="onBlur"
                 @keyDown.up="changeCurrent(-1)"
                 @keyDown.down="changeCurrent(1)"
                 @keyDown.enter.stop.prevent="onBlur">
 
         <ul class="xcui-suggestion-list dropdown-menu" :class="{'show':show}">
-            <li v-for="(index,item) in list" :class="{'current' : currentIndex==index}">
+            <li v-for="(item,index) in list" :class="{'current' : currentIndex==index}">
                 <a href="javascript:void(0)" @click="setItem(item)">
                     {{item.text}}
                 </a>
@@ -32,7 +32,9 @@
             return {
                 list: [],
                 localList: [],
-                currentIndex: -1
+                currentIndex: -1,
+                dataText: '',
+                dataValue: ''
             };
         },
         props: {
@@ -62,14 +64,6 @@
                     return [];
                 }
             },
-            'dataText': {
-                type: String,
-                default: ''
-            },
-            'dataValue': {
-                type: [String, Number],
-                default: ''
-            },
             'check': {
                 type: Boolean,
                 default: true
@@ -79,7 +73,22 @@
                 default() {
                     return () => {};
                 }
+            },
+            // v-model使用
+            value: {
+                type: Object,
+                default() {
+                    return {
+                        text: '',
+                        value: ''
+                    };
+                }
             }
+        },
+        created() {
+            this.dataText = this.value.text || '';
+            this.dataValue = this.value.value || '';
+            this.emitChange();
         },
         computed: {
             show() {
@@ -101,6 +110,11 @@
                     me.autoSetItem();
                     me.inputCallback && me.inputCallback();
                 }, 100);
+            },
+            onFocus() {
+                let me = this;
+                me.getLocalSug();
+                me.inputCallback && me.inputCallback();
             },
             onBlur() {
                 let me = this;
@@ -158,11 +172,11 @@
                 }
                 else {
                     this.dataValue = '';
+                    this.emitChange();
                 }
             },
             getLocalSug() {
                 let word = this.dataText;
-
                 this.list = this.localList.filter((item) => {
                     return (word && this.check) ? item.text.indexOf(word) > -1 : true;
                 });
@@ -170,6 +184,7 @@
             setItem(item) {
                 this.dataValue = item.value;
                 this.dataText = item.text;
+                this.emitChange();
             },
             logError(msg) {
                 throw new Error('[xcui] - ' + msg);
@@ -180,9 +195,16 @@
             clearText() {
                 this.dataText = '';
                 this.dataValue = '';
+                this.emitChange();
+            },
+            emitChange() {
+                this.$emit('input', {
+                    text: this.dataText,
+                    value: this.dataValue
+                });
             }
         },
-        ready() {
+        mounted() {
             this.arrangeLocalList();
         }
     };

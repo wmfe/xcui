@@ -22,17 +22,17 @@
         __webpack_require__.p = "";
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
-        module.exports = __webpack_require__(5);
+        module.exports = __webpack_require__(4);
     }, function(module, exports, __webpack_require__) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
-        var _eventlistener = __webpack_require__(2);
-        var _eventlistener2 = _interopRequireDefault(_eventlistener);
+        var _eventListener = __webpack_require__(2);
+        var _eventListener2 = _interopRequireDefault(_eventListener);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         var Quad = {
@@ -54,15 +54,15 @@
             props: {
                 targetElement: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 during: {
                     type: Number,
-                    "default": 50
+                    default: 50
                 },
                 className: {
                     type: String,
-                    "default": ""
+                    default: ""
                 }
             },
             data: function data() {
@@ -88,7 +88,7 @@
                             this.dropin[i] = false;
                         }
                     }
-                    $event.currentTarget.appendChild(this.$els.dragele);
+                    $event.currentTarget.appendChild(this.$refs.dragele);
                     var dropId = $event.currentTarget.id;
                     this.dropin[dropId] = true;
                 },
@@ -118,20 +118,23 @@
                     }
                 }
             },
-            ready: function ready() {
-                var targetElement = document.body;
-                if (this.targetElement) {
-                    targetElement = document.getElementById(this.targetElement);
-                }
-                var me = this;
-                var scrollCall = function scrollCall() {
-                    if (targetElement.getBoundingClientRect().top < 0) {
-                        me.show = true;
-                    } else {
-                        me.show = false;
+            mounted: function mounted() {
+                var _this = this;
+                this.$nextTick(function() {
+                    var targetElement = document.body;
+                    if (_this.targetElement) {
+                        targetElement = document.getElementById(_this.targetElement);
                     }
-                };
-                me.scrollListener = _eventlistener2.default.listen(window, "scroll", scrollCall);
+                    var me = _this;
+                    var scrollCall = function scrollCall() {
+                        if (targetElement.getBoundingClientRect().top < 0) {
+                            me.show = true;
+                        } else {
+                            me.show = false;
+                        }
+                    };
+                    me.scrollListener = _eventListener2.default.listen(window, "scroll", scrollCall);
+                });
             },
             destroyed: function destroyed() {
                 this.scrollListener.remove();
@@ -161,27 +164,126 @@
                 }
             }
         };
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class=xcui-scrolltop> <div v-el:dropa id=corner class="xcui-scrolltop-area xcui-scrolltop-corner" :class="{\'xcui-scrolltop-dropin\':dropin.corner}" @dragover=allowDrop($event) @dragenter=dragenter($event) @drop=ondrop($event)> <div draggable=true v-el:dragele id=dragEle class="glyphicon glyphicon-circle-arrow-up xcui-scrolltop-init" @dragstart=dragStart($event) @dragleave=dragleave($event) @dragend=dragend($event) @click=backTop($event) transition=fadein v-show=show :class=className></div> </div> <div v-el:dropb id=bottom class="xcui-scrolltop-area xcui-scrolltop-bottom" :class="{\'xcui-scrolltop-dropin\':dropin.bottom}" @dragover=allowDrop($event) @dragenter=dragenter($event) @drop=ondrop($event)> </div> <div v-el:dropc id=right class="xcui-scrolltop-area xcui-scrolltop-right" :class="{\'xcui-scrolltop-dropin\':dropin.right}" @dragover=allowDrop($event) @dragenter=dragenter($event) @drop=ondrop($event)></div> </div> ';
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
+    }, function(module, exports) {}, function(module, exports, __webpack_require__) {
+        var __vue_exports__, __vue_options__;
         var __vue_styles__ = {};
         __webpack_require__(3);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(4);
-        module.exports = __vue_script__ || {};
-        if (module.exports.__esModule) module.exports = module.exports.default;
-        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
-        if (__vue_template__) {
-            __vue_options__.template = __vue_template__;
+        __vue_exports__ = __webpack_require__(1);
+        var __vue_template__ = __webpack_require__(5);
+        __vue_options__ = __vue_exports__ = __vue_exports__ || {};
+        if (typeof __vue_exports__.default === "object" || typeof __vue_exports__.default === "function") {
+            __vue_options__ = __vue_exports__ = __vue_exports__.default;
         }
-        if (!__vue_options__.computed) __vue_options__.computed = {};
-        Object.keys(__vue_styles__).forEach(function(key) {
-            var module = __vue_styles__[key];
-            __vue_options__.computed[key] = function() {
-                return module;
-            };
-        });
+        if (typeof __vue_options__ === "function") {
+            __vue_options__ = __vue_options__.options;
+        }
+        __vue_options__.render = __vue_template__.render;
+        __vue_options__.staticRenderFns = __vue_template__.staticRenderFns;
+        module.exports = __vue_exports__;
+    }, function(module, exports) {
+        module.exports = {
+            render: function() {
+                var _vm = this;
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", {
+                    staticClass: "xcui-scrolltop"
+                }, [ _c("div", {
+                    ref: "dropa",
+                    staticClass: "xcui-scrolltop-area xcui-scrolltop-corner",
+                    class: {
+                        "xcui-scrolltop-dropin": _vm.dropin.corner
+                    },
+                    attrs: {
+                        id: "corner"
+                    },
+                    on: {
+                        dragover: function($event) {
+                            _vm.allowDrop($event);
+                        },
+                        dragenter: function($event) {
+                            _vm.dragenter($event);
+                        },
+                        drop: function($event) {
+                            _vm.ondrop($event);
+                        }
+                    }
+                }, [ _c("transition", {
+                    attrs: {
+                        name: "fadein"
+                    }
+                }, [ _c("div", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.show,
+                        expression: "show"
+                    } ],
+                    ref: "dragele",
+                    staticClass: "glyphicon glyphicon-circle-arrow-up xcui-scrolltop-init",
+                    class: _vm.className,
+                    attrs: {
+                        draggable: "true",
+                        id: "dragEle"
+                    },
+                    on: {
+                        dragstart: function($event) {
+                            _vm.dragStart($event);
+                        },
+                        dragleave: function($event) {
+                            _vm.dragleave($event);
+                        },
+                        dragend: function($event) {
+                            _vm.dragend($event);
+                        },
+                        click: function($event) {
+                            _vm.backTop($event);
+                        }
+                    }
+                }) ]) ], 1), _vm._v(" "), _c("div", {
+                    ref: "dropb",
+                    staticClass: "xcui-scrolltop-area xcui-scrolltop-bottom",
+                    class: {
+                        "xcui-scrolltop-dropin": _vm.dropin.bottom
+                    },
+                    attrs: {
+                        id: "bottom"
+                    },
+                    on: {
+                        dragover: function($event) {
+                            _vm.allowDrop($event);
+                        },
+                        dragenter: function($event) {
+                            _vm.dragenter($event);
+                        },
+                        drop: function($event) {
+                            _vm.ondrop($event);
+                        }
+                    }
+                }), _vm._v(" "), _c("div", {
+                    ref: "dropc",
+                    staticClass: "xcui-scrolltop-area xcui-scrolltop-right",
+                    class: {
+                        "xcui-scrolltop-dropin": _vm.dropin.right
+                    },
+                    attrs: {
+                        id: "right"
+                    },
+                    on: {
+                        dragover: function($event) {
+                            _vm.allowDrop($event);
+                        },
+                        dragenter: function($event) {
+                            _vm.dragenter($event);
+                        },
+                        drop: function($event) {
+                            _vm.ondrop($event);
+                        }
+                    }
+                }) ]);
+            },
+            staticRenderFns: []
+        };
     } ]);
 });
 

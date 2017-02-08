@@ -22,7 +22,7 @@
         __webpack_require__.p = "";
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
-        module.exports = __webpack_require__(4);
+        module.exports = __webpack_require__(3);
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -43,19 +43,19 @@
             props: {
                 minimum: {
                     type: Number,
-                    "default": .08
+                    default: .08
                 },
                 speed: {
                     type: Number,
-                    "default": 350
+                    default: 350
                 },
-                trickle: {
+                trickled: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 },
                 trickleSpeed: {
-                    type: Boolean,
-                    "default": 250
+                    type: Number,
+                    default: 250
                 }
             },
             methods: {
@@ -111,7 +111,7 @@
                             work();
                         }, _this.trickleSpeed);
                     };
-                    if (this.trickle) {
+                    if (this.trickled) {
                         work();
                     }
                     return this;
@@ -329,27 +329,46 @@
                 }
             }
         };
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = " <div class=xcui-pageloading> <div class=bar role=bar> <div class=peg></div> </div> </div> ";
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
+    }, function(module, exports) {}, function(module, exports, __webpack_require__) {
+        var __vue_exports__, __vue_options__;
         var __vue_styles__ = {};
         __webpack_require__(2);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(3);
-        module.exports = __vue_script__ || {};
-        if (module.exports.__esModule) module.exports = module.exports.default;
-        var __vue_options__ = typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports;
-        if (__vue_template__) {
-            __vue_options__.template = __vue_template__;
+        __vue_exports__ = __webpack_require__(1);
+        var __vue_template__ = __webpack_require__(4);
+        __vue_options__ = __vue_exports__ = __vue_exports__ || {};
+        if (typeof __vue_exports__.default === "object" || typeof __vue_exports__.default === "function") {
+            __vue_options__ = __vue_exports__ = __vue_exports__.default;
         }
-        if (!__vue_options__.computed) __vue_options__.computed = {};
-        Object.keys(__vue_styles__).forEach(function(key) {
-            var module = __vue_styles__[key];
-            __vue_options__.computed[key] = function() {
-                return module;
-            };
-        });
+        if (typeof __vue_options__ === "function") {
+            __vue_options__ = __vue_options__.options;
+        }
+        __vue_options__.render = __vue_template__.render;
+        __vue_options__.staticRenderFns = __vue_template__.staticRenderFns;
+        module.exports = __vue_exports__;
+    }, function(module, exports) {
+        module.exports = {
+            render: function() {
+                var _vm = this;
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _vm._m(0);
+            },
+            staticRenderFns: [ function() {
+                var _vm = this;
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", {
+                    staticClass: "xcui-pageloading"
+                }, [ _c("div", {
+                    staticClass: "bar",
+                    attrs: {
+                        role: "bar"
+                    }
+                }, [ _c("div", {
+                    staticClass: "peg"
+                }) ]) ]);
+            } ]
+        };
     } ]);
 });
 

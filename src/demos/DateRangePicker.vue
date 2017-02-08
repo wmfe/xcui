@@ -18,31 +18,21 @@
     ## DEMO
     
     <demo>
-        <!-- <example title="日期格式">
-            <xcui-daterangepicker
-                :start-date.sync="''"
-                :end-date.sync="''"
-                :min-date="'2016-11-01'"
-                :max-date="'2016-11-20'"
-                :date-limit="date.dateLimit">
-            </xcui-daterangepicker>
-        </example> -->
         <example title="simple">
             <xcui-daterangepicker
-                :start-date.sync="'2016-11-01'"
-                :end-date.sync="'2016-11-09'"
+                v-model="myDate"
                 :sep="' － '">
             </xcui-daterangepicker>
         </example>
-        <p> 最简单的用法，startDate：日期开始时间，endDate：日期结束时间, 格式</p>
+        <p>myDate:{{myDate}}</p>
+        <p> 最简单的用法，传入v-model值:{startDate: xxx, endDate: xxx} 其中 startDate：日期开始时间，endDate：日期结束时间</p>
         <p> startDate／endDate：可以传不同日期格式，例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262，也可以不传，默认当天，date.value值为 时间戳1477980088896</p>
         <p> sep：双日历之间间隔符，例如sep值为“ 至 ” 日期格式为 2016-09-08 00:02:00 至 2016-09-13 00:02:00</p>
         <example title="日期格式">
             <xcui-daterangepicker
-                :start-date.sync="''"
-                :end-date.sync="''"
-                :min-date="'2015/12/20'"
-                :max-date="'2016/11/20'"
+                v-model="myDate2"
+                :min-date="'2016/11/02'"
+                :max-date="'2016/11/22'"
                 :date-limit="date.dateLimit">
             </xcui-daterangepicker>
         </example>
@@ -51,8 +41,7 @@
         <example title="日期 + 时间选择">
             <xcui-daterangepicker
                   format="YYYY-MM-DD hh:mm:ss"
-                  :start-date.sync="startdate"
-                  :end-date.sync="enddate"
+                  v-model="myDate3"
                   :hour-range="'3'"
                   :minute-range="'10'"
                   :second-range="'20'">
@@ -77,8 +66,7 @@
         <p> btn-show: 按钮是否显示</p>
         <example title="时间选择">
             <xcui-daterangepicker
-                  :start-date.sync="'04:02:03'"
-                  :end-date.sync="'05:02:03'"
+                  v-model="myTime"
                   format="hh:mm:ss">
             </xcui-daterangepicker>
         </example>
@@ -89,8 +77,7 @@
 
     | 名字 | 类型 | 默认 | 描述 | 是否双向绑定 | 是否必选 |
     |-----|-----|-----|-----|----|----|
-    | startDate | String,object,时间戳 | 无 | 日期开始时间 | 双向绑定 | 必选 |
-    | endDate | String,object,时间戳 | 无 | 日期结束时间 | 双向绑定 | 必选 |
+    | v-model | object | {startDate:"",endDate:""   } | 日期开始时间/结束时间 | 双向绑定 | 必选 |
     | minDate | String,object,时间戳 | 无 | 日期可选最小值 | 否 | 可选|
     | maxdate | String,object,时间戳 | 无 | 日期可选最大值 | 否 | 可选|
     | sep | String | 至 | 双日历之间间隔符 | 否 | 可选|
@@ -102,14 +89,20 @@
     | color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 否 | 可选 |
     | btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
     | inputClass | Array | 无 | 日历input输入框的样式，class名字 | 否 | 可选 |
-    | onChange | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @on-change | 否 | 可选 |
-    | clear-btn | object | 无 | input清空后的回调 @clear-btn | 否 | 可选 |
+    | onChange | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @onChange | 否 | 可选 |
 </template>
 
 <script>
 export default {
     data() {
         return {
+            myDate: {
+                startDate: '2016-09-01',
+                endDate: '2016-09-10'
+            },
+            myDate2: {},
+            myDate3: {},
+            myTime: {},
             valueDemo: '',
             startdate: '2016-09-08 00:02:00',
             enddate: '2016-09-13 00:02:00',
@@ -150,10 +143,11 @@ export default {
             console.log('endDate' + endDate);
         }
     },
-    ready() {
-        this.startdate = '2017-09-08 00:02:00';
-        this.enddate = '2017-09-13 00:02:00';
-        // this.valueDemo = '2017-02-03';
+    mounted() {
+        this.myDate = {
+            startDate: '2016-09-01',
+            endDate: '2016-09-11'
+        };
     }
 };
 </script>

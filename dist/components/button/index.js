@@ -22,44 +22,41 @@
         __webpack_require__.p = "";
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
-        module.exports = __webpack_require__(3);
+        module.exports = __webpack_require__(2);
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
         exports.default = {
-            name: "xcui-loading",
+            name: "xcui-button",
             props: {
-                show: {
-                    type: Boolean,
-                    default: false
-                },
                 type: {
-                    type: String,
-                    default: "load2"
-                },
-                classname: {
-                    type: String,
-                    default: ""
-                },
-                color: {
                     type: String,
                     default: ""
                 },
                 size: {
                     type: String,
-                    default: "md"
+                    default: ""
                 }
             },
-            methods: {}
+            computed: {
+                cls: function cls() {
+                    var cls = [ "xcui-btn" ];
+                    this.type && cls.push("xcui-btn-" + this.type);
+                    this.size && cls.push("xcui-btn-" + this.size);
+                    return cls.join(" ");
+                }
+            },
+            data: function data() {
+                return {};
+            }
         };
-    }, function(module, exports) {}, function(module, exports, __webpack_require__) {
+    }, function(module, exports, __webpack_require__) {
         var __vue_exports__, __vue_options__;
         var __vue_styles__ = {};
-        __webpack_require__(2);
         __vue_exports__ = __webpack_require__(1);
-        var __vue_template__ = __webpack_require__(4);
+        var __vue_template__ = __webpack_require__(3);
         __vue_options__ = __vue_exports__ = __vue_exports__ || {};
         if (typeof __vue_exports__.default === "object" || typeof __vue_exports__.default === "function") {
             __vue_options__ = __vue_exports__ = __vue_exports__.default;
@@ -76,21 +73,9 @@
                 var _vm = this;
                 var _h = _vm.$createElement;
                 var _c = _vm._self._c || _h;
-                return _c("div", {
-                    directives: [ {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.show,
-                        expression: "show"
-                    } ],
-                    staticClass: "xcui-loading load-container",
-                    class: [ _vm.type, _vm.size, _vm.classname ]
-                }, [ _c("div", {
-                    staticClass: "loader",
-                    style: {
-                        color: _vm.color
-                    }
-                }) ]);
+                return _c("a", {
+                    class: _vm.cls
+                }, [ _vm._t("default") ], 2);
             },
             staticRenderFns: []
         };

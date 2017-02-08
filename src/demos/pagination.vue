@@ -13,11 +13,12 @@
         <div class="row">
             <div class="col-md-12 text-right">
                 <xcui-pagination
+                    v-show="total > 0"
                     type="mini"
-            @go-to-page="turnToPage"
-                    :current-page-no.sync="currentPageNo"
+                    @go-to-page="goToPage"
+                    :current-page-num="currentPageNum"
                     :total="total"
-                    :page-size.sync="pageSize"
+                    :page-size="pageSize"
                     ></xcui-pagination>
             </div>
         </div>
@@ -34,34 +35,34 @@
             </tr>
         </table>
         <xcui-pagination
-            @go-to-page="turnToPage"
-            :current-page-no.sync="currentPageNo"
+            v-show="total > 0"
+            @go-to-page="goToPage"
+            :current-page-num="currentPageNum"
             :total="total"
-            :page-size.sync="pageSize"
+            :page-size="pageSize"
             ></xcui-pagination>
     </example>
 </demo>
 
 ## Props
 
-
-| 名字          | 类型    | 默认              | 描述                                                              | 可选范围            | 是否必选 |
-|---------------|---------|-------------------|-------------------------------------------------------------------|---------------------|----------|
-| type          | String  | standard          | 控制样式选择                                                      | standard,mini       | 可选     |
-| currentPageNo | Number  | 1                 | 当前页码                                                          | > 0                 | 可选     |
-| total         | Number  | 0                 | 总条数                                                            | >= 0                | 必选     |
-| pageSize      | Number  | 20                | 每页条数                                                          | 取自`pageSizeRange` | 可选     |
-| withPageSize  | Boolean | true              | 是否展示`pageSize`设置挂件                                        |                     | 可选     |
-| pageSizeRange | Array   | [10, 20, 50, 100] | `pageSize`设置挂件的下拉菜单选项范围 `withPageSize`为 true 时生效 |                     | 可选     |
-| rangeLength   | Number  | 10                | 页码按钮的展示个数                                                | > 1                 | 可选     |
+| 名字           | 类型    | 默认              | 描述                                                              | 可选范围            | 是否必选 |
+|----------------|---------|-------------------|-------------------------------------------------------------------|---------------------|----------|
+| type           | String  | standard          | 控制样式选择                                                      | standard,mini       | 可选     |
+| currentPageNum | Number  | 1                 | 当前页码                                                          | > 0                 | 可选     |
+| total          | Number  | 0                 | 总条数                                                            | >= 0                | 必选     |
+| pageSize       | Number  | 20                | 每页条数                                                          | 取自`pageSizeRange` | 可选     |
+| withPageSize   | Boolean | true              | 是否展示`pageSize`设置挂件                                        |                     | 可选     |
+| pageSizeRange  | Array   | [10, 20, 50, 100] | `pageSize`设置挂件的下拉菜单选项范围 `withPageSize`为 true 时生效 |                     | 可选     |
+| rangeLength    | Number  | 10                | 页码按钮的展示个数                                                | > 1                 | 可选     |
 </template>
 
 <script>
-
 export default {
+    name: 'xcui-pagination-demo',
     data() {
         return {
-            currentPageNo: 1,
+            currentPageNum: 1,
             pageSize: 10,
             list: [],
             total: 0
@@ -82,15 +83,15 @@ export default {
                 total: 55
             };
         },
-        turnToPage(pageNo, oldPageNo) {
+        goToPage(pageNo, oldPageNo) {
             const { list, total } = this.fetch(pageNo);
             this.list = list;
             this.total = total;
             this.currentPageNum = pageNo;
         }
     },
-    ready() {
-        this.turnToPage(1);
+    mounted() {
+        this.goToPage(1);
     }
 };
 </script>

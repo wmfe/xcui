@@ -4,53 +4,53 @@
     <div id="sidebar-wrapper" class="col-md-2">
         <ul class="sidebar-nav">
             <li>
-                <a v-link="{ path: '/home' }" href="javascript:;">关于XCUI</a>
+                <router-link to="/home">关于XCUI</router-link>
             </li>
             <li>
-                <a v-link="{ path: '/component/datepicker' }" href="javascript:;">DatePicker</a>
+                <router-link to="/component/datepicker">DatePicker</router-link>
             </li>
             <li>
-                <a v-link="{ path: '/component/daterangepicker' }" href="javascript:;">DateRangePicker</a>
+                <router-link to="/component/daterangepicker">DateRangePicker</router-link>
             </li>
             <li>
-                 <a v-link="{ path: '/component/inputNumber' }" href="javascript:;">InputNumber</a>
+                 <router-link to="/component/inputNumber">InputNumber</router-link>
             </li>
             <li>
-                 <a v-link="{ path: '/component/loading' }" href="javascript:;">Loading</a>
+                 <router-link to="/component/loading">Loading</router-link>
             </li>
 
             <li>
-                 <a v-link="{ path: '/component/modal' }" href="javascript:;">Modal</a>
+                 <router-link to="/component/modal">Modal</router-link>
             </li>
             <li>
-                <a v-link="{ path: '/component/suggestion' }" href="javascript:;">Suggestion</a>
+                <router-link to="/component/suggestion">Suggestion</router-link>
             </li>
             <li>
-                <a v-link="{ path: '/component/pagination' }" href="javascript:;">Pagination</a>
+                <router-link to="/component/pagination">Pagination</router-link>
             </li>
             <li>
-                <a v-link="{ path: '/component/popover' }" href="javascript:;">Popover</a>
+                <router-link to="/component/popover">Popover</router-link>
             </li>
             <li>
-                <a v-link="{ path: '/component/progress' }" href="javascript:;">Progress</a>
+                <router-link to="/component/progress">Progress</router-link>
             </li>
             <li>
-                <a v-link="{ path: '/component/pageloading' }" href="javascript:;">PageLoading</a>
+                <router-link to="/component/pageloading">PageLoading</router-link>
             </li>
             <li>
-                <a v-link="{ path: '/component/tooltip' }" href="javascript:;">Tooltip</a>
+                <router-link to="/component/tooltip">Tooltip</router-link>
             </li>
             <li>
-                <a v-link="{ path: '/component/tag' }" href="javascript:;">Tag</a>
+                <router-link to="/component/tag">Tag</router-link>
             </li>
             <li>
-                 <a v-link="{ path: '/component/message' }" href="javascript:;">Message</a>
+                 <router-link to="/component/message">Message</router-link>
             </li>
             <li>
-                <a v-link="{ path: '/component/select' }" href="javascript:;">Select</a>
+                <router-link to="/component/select">Select</router-link>
             </li>
             <li>
-                <a v-link="{ path: '/component/scrolltop' }" href="javascript:;">ScrollTop</a>
+                <router-link to="/component/scrolltop">ScrollTop</router-link>
             </li>
         </ul>
     </div>
@@ -74,10 +74,10 @@ export default {
             version: version
         };
     },
-    ready() {
+    mounted() {
         if (this.$route.path === '/') {
-            this.$route.router.go({
-                name: 'home'
+            this.$router.push({
+                path: 'home'
             });
         }
     }
