@@ -1,4 +1,4 @@
-<template lang="md">
+<template>
 
   # Suggestion 自动完成/建议
 
@@ -7,7 +7,7 @@
 
   # Demo
 
-<!-- <demo>
+<demo>
 <example title="string数组 sugs:">
   <div>constellation : {{constellation}}</div>
   <div style="width:200px">
@@ -49,7 +49,7 @@
             </xcui-suggestion>
     </div>
 </example>
-</demo> -->
+</demo>
 
 ## 数据格式支持
 

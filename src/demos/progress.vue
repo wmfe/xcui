@@ -1,17 +1,17 @@
-<template lang="md">
+<template>
 # Progress进度条
 
 ## 使用场景
 
 ## DEMO
-<!-- <demo>
+<demo>
     <example title="basic">
         <xcui-progress :percent-info='percentInfo' :percent='percent' :show-info='true'></xcui-progress>
         <div style="width:200px">
         <xcui-progress :info-class-name="'info'" :percent='percent' :percent-info="'50%'" :height='height'></xcui-progress>
         </div>
     </example>
-</demo> -->
+</demo>
 
 ## Props
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |
