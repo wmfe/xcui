@@ -13,7 +13,7 @@ import Tooltip from './demos/tooltip';
 import Suggestion from './demos/suggestion';
 import Tag from './demos/tag';
 import Datepicker from './demos/datepicker';
-import Daterangepicker from './demos/dateRangePicker';
+import Daterangepicker from './demos/DateRangePicker';
 import Select from './demos/select.vue';
 import Message from './demos/message';
 import Modal from './demos/modal';
@@ -21,6 +21,7 @@ import InputNumber from './demos/inputNumber';
 import Progress from './demos/progress';
 import PageLoading from './demos/pageloading';
 import ScrollTop from './demos/scrolltop';
+import Button from './demos/button';
 
 const router = new VueRouter({
     routes: [{
@@ -33,6 +34,9 @@ const router = new VueRouter({
             }, {
                 path: '/component/pagination',
                 component: Pagination
+            }, {
+                path: '/component/button',
+                component: Button
             }, {
                 path: '/component/popover',
                 component: Popover

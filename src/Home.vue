@@ -7,6 +7,9 @@
                 <router-link to="/home">关于XCUI</router-link>
             </li>
             <li>
+                <router-link to="/component/button">Button</router-link>
+            </li>
+            <li>
                 <router-link to="/component/datepicker">DatePicker</router-link>
             </li>
             <li>
@@ -18,7 +21,6 @@
             <li>
                  <router-link to="/component/loading">Loading</router-link>
             </li>
-
             <li>
                  <router-link to="/component/modal">Modal</router-link>
             </li>
