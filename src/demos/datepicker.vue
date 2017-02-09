@@ -85,7 +85,8 @@
 | color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 静态属性 | 可选 |
 | btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
 | class-name | String | 无 | 日历样式，class名字 |  静态属性 | 可选 |
-| onChange | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @onChange | 否 | 可选 |
+| on-change | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @on-change | 否 | 可选 |
+| clear-btn | object | 无 | input清空后的回调 @clear-btn| 否 | 可选 |
 </template>
 <script>
 export default {
@@ -101,7 +102,7 @@ export default {
             },
             datetime: {
                 value2: '2016/09/09',
-                end: '2017-02-01 00:00:00'
+                end: '2027-02-01 00:00:00'
             },
             time: {
                 value: ''
@@ -128,6 +129,9 @@ export default {
             console.log(val);
             console.log(oldVal);
         }
+    },
+    ready() {
+        this.valueDemo = '2017-02-06';
     }
 };
 </script>
