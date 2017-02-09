@@ -369,25 +369,10 @@
             },
             watch: {
                 value: function value(val) {
-                    this.internalValue = val;
+                    this.renderValue(val);
                 },
                 otherValue: function otherValue(val) {
                     this.internalOtherValue = val;
-                },
-                startRender: function startRender(val) {
-                    if (!val) {
-                        return false;
-                    }
-                    this.internalValue = this.output(this.internalValue);
-                    var params = this.dateParams;
-                    this.year = params.year;
-                    this.month = params.month;
-                    this.hour = params.hour;
-                    this.day = params.day;
-                    this.minute = params.minute;
-                    this.second = params.second;
-                    this.render(params.year, params.month);
-                    this.emitChange();
                 }
             },
             created: function created() {
@@ -401,6 +386,17 @@
                 this.emitChange();
             },
             methods: {
+                renderValue: function renderValue(val) {
+                    this.internalValue = this.output(val);
+                    var params = this.dateParams;
+                    this.year = params.year;
+                    this.month = params.month;
+                    this.hour = params.hour;
+                    this.day = params.day;
+                    this.minute = params.minute;
+                    this.second = params.second;
+                    this.render(params.year, params.month);
+                },
                 renderElse: function renderElse(y, m, i, temp, line) {
                     var me = this;
                     var format = me.defaultFormat;
@@ -681,27 +677,23 @@
                 };
             },
             watch: {
-                dateText: function dateText(val) {
-                    if (!val) {
-                        this.startDate = this.endDate = "";
-                    }
+                value: function value(val) {
+                    this.renderValue(val);
                 }
             },
             created: function created() {
-                this.startDate = this.value.startDate || "";
-                this.endDate = this.value.endDate || "";
-                this.newStartDate = this.startDate;
-                this.newEndDate = this.endDate;
-                if (this.startDate > this.endDate) {
-                    this.newEndDate = this.startDate;
-                }
-                if (this.endDate < this.startDate) {
-                    this.newStartDate = this.endDate;
-                }
-                this.dateText = this.newStartDate && this.newEndDate && this.newStartDate + this.sep + this.newEndDate;
-                this.emitChange();
+                this.renderValue(this.value);
             },
             methods: {
+                renderValue: function renderValue(val) {
+                    var startDate = this.startDate = val.startDate || "";
+                    var endDate = this.endDate = val.endDate || "";
+                    this.newStartDate = endDate < startDate ? endDate : startDate;
+                    this.newEndDate = startDate > endDate ? startDate : endDate;
+                    this.dateText = this.newStartDate && this.newEndDate && this.newStartDate + this.sep + this.newEndDate;
+                    this.initialStartDate = startDate;
+                    this.initialEndDate = endDate;
+                },
                 ok: function ok(e) {
                     e.preventDefault();
                     if (this.newStartDate && this.newEndDate) {
@@ -744,19 +736,18 @@
                     this.$emit("input", {
                         startDate: this.newStartDate,
                         endDate: this.newEndDate
+                    }, {
+                        startDate: this.initialStartDate,
+                        endDate: this.initialEndDate
                     });
                 },
                 startChange: function startChange(val) {
                     this.newStartDate = val.value;
                     this.newEndDate = val.otherValue;
-                    this.initialStartDate = val.value;
-                    this.initialEndDate = val.otherValue;
                 },
                 endChange: function endChange(val) {
                     this.newStartDate = val.otherValue;
                     this.newEndDate = val.value;
-                    this.initialStartDate = val.otherValue;
-                    this.initialEndDate = val.value;
                 }
             }
         };
