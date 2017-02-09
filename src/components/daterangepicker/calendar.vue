@@ -91,26 +91,20 @@
         },
         watch: {
             value(val) {
-                this.internalValue = val;
+                this.renderValue(val);
+               // this.emitChange();
             },
             otherValue(val) {
                 this.internalOtherValue = val;
-            },
-            startRender(val) {
-                if (!val) {
-                    return false;
-                }
-                this.internalValue = this.output(this.internalValue);
-                let params = this.dateParams;
-                this.year = params.year;
-                this.month = params.month;
-                this.hour = params.hour;
-                this.day = params.day;
-                this.minute = params.minute;
-                this.second = params.second;
-                this.render(params.year, params.month);
-                this.emitChange();
             }
+            // startRender(val) {
+            //     debugger;
+            //     if (!val) {
+            //         return false;
+            //     }
+            //     this.renderValue(this.internalValue);
+            //     this.emitChange();
+            // }
         },
         created() {
             if (this.type === 'time') {
@@ -124,6 +118,17 @@
             this.emitChange();
         },
         methods: {
+            renderValue(val) {
+                this.internalValue = this.output(val);
+                let params = this.dateParams;
+                this.year = params.year;
+                this.month = params.month;
+                this.hour = params.hour;
+                this.day = params.day;
+                this.minute = params.minute;
+                this.second = params.second;
+                this.render(params.year, params.month);
+            },
             renderElse(y, m, i, temp, line) {
                 let me = this;
                 let format = me.defaultFormat;
