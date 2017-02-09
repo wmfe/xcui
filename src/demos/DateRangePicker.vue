@@ -21,6 +21,7 @@
         <example title="simple">
             <xcui-daterangepicker
                 v-model="myDate"
+                @input="onChange"
                 :sep="' － '">
             </xcui-daterangepicker>
         </example>
@@ -56,13 +57,13 @@
                 color="pink"
                 format="YYYY-MM-DD hh:mm:ss"
                 :btn-show="true"
-                @on-change="onChange"
+                @input="onChange"
                 :hour-range="'3'">
             </xcui-daterangepicker>
         </example>
         <p> class-name：日历样式，class名字</p>
         <p> color：按钮颜色，值为颜色值，例如：#f00,pink</p>
-        <p> on-change：选择日期后的回调，参数 val(当前值) oldval(上次值)，onChange(val, oldVal) {}</p>
+        <p> input：选择日期后的回调，参数 val(当前值) oldval(上次值) input(val, oldVal) {}</p>
         <p> btn-show: 按钮是否显示</p>
         <example title="时间选择">
             <xcui-daterangepicker
@@ -89,7 +90,7 @@
     | color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 否 | 可选 |
     | btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
     | inputClass | Array | 无 | 日历input输入框的样式，class名字 | 否 | 可选 |
-    | onChange | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @onChange | 否 | 可选 |
+    | input | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @input | 否 | 可选 |
 </template>
 
 <script>
@@ -138,10 +139,18 @@ export default {
         }
     },
     methods: {
-        onChange(startDate, endDate) {
-            console.log('startDate' + startDate);
-            console.log('endDate' + endDate);
+        onChange(val, oldval) {
+            console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+            console.log('-----------------------------------------');
+            console.log('当前值：' + val.startDate + ' 至 ' + val.endDate);
+            console.log('上次值：' + oldval.startDate + ' 至 ' + oldval.endDate);
         }
+    },
+    mounted() {
+        this.myDate = {
+            startDate: '2016-09-01',
+            endDate: '2016-09-11'
+        };
     }
 };
 </script>

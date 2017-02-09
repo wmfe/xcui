@@ -103,36 +103,32 @@
             return {
                 show: false,
                 startRender: '',
-                initialStartDate: '',
-                initialEndDate: '',
-                startDate: '',
-                endDate: '',
+                initialStartDate: '', // 上一次的开始值
+                initialEndDate: '', // 上一次的结束值
+                startDate: '', // 开始值
+                endDate: '', // 结束值
                 newStartDate: '',
                 newEndDate: ''
             };
         },
         watch: {
-            dateText(val) {
-                if (!val) {
-                    this.startDate = this.endDate = '';
-                }
+            value(val) {
+                this.renderValue(val);
             }
         },
         created() {
-            this.startDate = this.value.startDate || '';
-            this.endDate = this.value.endDate || '';
-            this.newStartDate = this.startDate;
-            this.newEndDate = this.endDate;
-            if (this.startDate > this.endDate) {
-                this.newEndDate = this.startDate;
-            }
-            if (this.endDate < this.startDate) {
-                this.newStartDate = this.endDate;
-            }
-            this.dateText = this.newStartDate && this.newEndDate && (this.newStartDate + this.sep + this.newEndDate);
-            this.emitChange();
+            this.renderValue(this.value);
         },
         methods: {
+            renderValue(val) {
+                let startDate = this.startDate = val.startDate || '';
+                let endDate = this.endDate = val.endDate || '';
+                this.newStartDate = endDate < startDate ? endDate : startDate;
+                this.newEndDate = startDate > endDate ? startDate : endDate;
+                this.dateText = this.newStartDate && this.newEndDate && (this.newStartDate + this.sep + this.newEndDate);
+                this.initialStartDate = startDate;
+                this.initialEndDate = endDate;
+            },
             ok(e) {
                 e.preventDefault();
                 if (this.newStartDate && this.newEndDate) {
@@ -176,19 +172,18 @@
                 this.$emit('input', {
                     startDate: this.newStartDate,
                     endDate: this.newEndDate
+                }, {
+                    startDate: this.initialStartDate,
+                    endDate: this.initialEndDate
                 });
             },
             startChange(val) {
                 this.newStartDate = val.value;
                 this.newEndDate = val.otherValue;
-                this.initialStartDate = val.value;
-                this.initialEndDate = val.otherValue;
             },
             endChange(val) {
                 this.newStartDate = val.otherValue;
                 this.newEndDate = val.value;
-                this.initialStartDate = val.otherValue;
-                this.initialEndDate = val.value;
             }
         }
     };

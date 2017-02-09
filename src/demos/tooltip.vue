@@ -13,7 +13,7 @@
         <xcui-tooltip effect="fadein" placement="bottom" title="This is Title" :content="htmlContent">
           <button class="btn btn-default ">Hover tooltip on bottom</button>
         </xcui-tooltip>
-        <xcui-tooltip effect="scale" placement="left" title="This is Title" content="Tooltip on left">
+        <xcui-tooltip effect="scale" placement="top" title="This is Title" content="Tooltip on left">
           <button class="btn btn-default ">Hover tooltip on left</button>
         </xcui-tooltip>
         <xcui-tooltip effect="fadein" placement="top" title="This is Title"  trigger="click"  content="Tooltip on top">
