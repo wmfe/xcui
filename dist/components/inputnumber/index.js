@@ -39,23 +39,23 @@
                 },
                 step: {
                     type: Number,
-                    "default": 1
+                    default: 1
                 },
                 isDisable: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 className: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 textTips: {
                     type: String,
-                    "default": "请输入范围内整数"
+                    default: "请输入范围内整数"
                 },
                 size: {
                     type: String,
-                    "default": "normal"
+                    default: "normal"
                 },
                 inputValue: {
                     type: Number

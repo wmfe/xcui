@@ -223,17 +223,17 @@
         var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function(obj) {
             return typeof obj;
         } : function(obj) {
-            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj;
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj;
         };
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function(obj) {
             return typeof obj === "undefined" ? "undefined" : _typeof(obj);
         } : function(obj) {
-            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
+            return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default && obj !== _symbol2.default.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
         };
     }, function(module, exports) {
         var toString = {}.toString;
@@ -371,7 +371,7 @@
         var _fuzzysearch2 = _interopRequireDefault(_fuzzysearch);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = {
@@ -386,23 +386,23 @@
                 },
                 disabled: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 showSearch: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 clearOnSelect: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 searchEmptyText: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 optgroup: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 customLabel: {
                     type: Function
@@ -412,19 +412,19 @@
                 },
                 multiple: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 multipleMax: {
                     type: Number,
-                    "default": 0
+                    default: 0
                 },
                 label: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 closeAfterSelect: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 }
             },
             data: function data() {
@@ -600,9 +600,7 @@
                 resetSearchScrollTop: function resetSearchScrollTop() {
                     var index = this.selectIndex;
                     var scrollTop = this.$els.list.scrollTop;
-                    var _getDropDownHeight = this.getDropDownHeight;
-                    var itemHeight = _getDropDownHeight.itemHeight;
-                    var listHeight = _getDropDownHeight.listHeight;
+                    var _getDropDownHeight = this.getDropDownHeight, itemHeight = _getDropDownHeight.itemHeight, listHeight = _getDropDownHeight.listHeight;
                     var listViewLen = Math.floor(listHeight / itemHeight);
                     var indexPos = index * itemHeight;
                     if (scrollTop <= indexPos - listViewLen * itemHeight) {
@@ -754,7 +752,7 @@
         var _typeof3 = _interopRequireDefault(_typeof2);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         var clone = function clone(obj) {
@@ -775,17 +773,17 @@
         module.exports = clone;
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            "default": __webpack_require__(44),
+            default: __webpack_require__(44),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            "default": __webpack_require__(45),
+            default: __webpack_require__(45),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
         module.exports = {
-            "default": __webpack_require__(46),
+            default: __webpack_require__(46),
             __esModule: true
         };
     }, function(module, exports, __webpack_require__) {
@@ -1175,7 +1173,7 @@
         for (var symbols = "hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","), i = 0; symbols.length > i; ) wks(symbols[i++]);
         for (var symbols = $keys(wks.store), i = 0; symbols.length > i; ) wksDefine(symbols[i++]);
         $export($export.S + $export.F * !USE_NATIVE, "Symbol", {
-            "for": function(key) {
+            for: function(key) {
                 return has(SymbolRegistry, key += "") ? SymbolRegistry[key] : SymbolRegistry[key] = $Symbol(key);
             },
             keyFor: function keyFor(key) {

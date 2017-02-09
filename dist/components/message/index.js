@@ -33,19 +33,19 @@
             props: {
                 show: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 type: {
                     type: String,
-                    "default": "info"
+                    default: "info"
                 },
                 content: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 duration: {
                     type: Number,
-                    "default": 3e3
+                    default: 3e3
                 }
             },
             computed: {

@@ -33,31 +33,31 @@
             props: {
                 text: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 closeable: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 disabled: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 showTag: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 },
                 classname: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 key: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 aftercloseisshow: {
                     type: Boolean,
-                    "default": false,
+                    default: false,
                     twoway: true
                 }
             },

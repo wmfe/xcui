@@ -1,3 +1,13 @@
 machine:
   node:
     version: 5.3.0
+
+test:
+  override:
+    - echo 'test'
+
+compile:
+  override:
+    - npm run build && npm run site
+  post:
+    - bash ./build/afterBuild.sh

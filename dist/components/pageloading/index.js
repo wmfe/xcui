@@ -43,19 +43,19 @@
             props: {
                 minimum: {
                     type: Number,
-                    "default": .08
+                    default: .08
                 },
                 speed: {
                     type: Number,
-                    "default": 350
+                    default: 350
                 },
                 trickle: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 },
                 trickleSpeed: {
                     type: Boolean,
-                    "default": 250
+                    default: 250
                 }
             },
             methods: {

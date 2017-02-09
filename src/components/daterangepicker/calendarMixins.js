@@ -144,6 +144,7 @@ export default {
                 let maxDate = me.maxDate && me.output(me.maxDate, format);
                 // 第一列
                 if (dow === 0) {
+                    console.log(i);
                     temp[line] = [];
                 }
                 // 当月第一天
@@ -299,10 +300,9 @@ export default {
                 date = new Date(d[0], d[1], d[2], d[3] || '00', d[4] || '00', d[5] || '00');
             }
             else if (!this.value) {
-                date = new Date();
-                let minDate = new Date(me.minDate);
-                let maxDate = new Date(me.maxDate);
-                date = minDate > date ? minDate : maxDate < date ? maxDate : date;
+                let minDate = me.minDate ? new Date(me.minDate) : '';
+                let maxDate = me.maxDate ? new Date(me.maxDate) : '';
+                date = minDate > new Date() ? minDate : maxDate && (maxDate < date) ? maxDate : new Date();
             }
             let year = date.getFullYear();
             let month = date.getMonth();

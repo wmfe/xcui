@@ -32,7 +32,7 @@
         var _popoverMixins2 = _interopRequireDefault(_popoverMixins);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = {
@@ -41,23 +41,23 @@
             props: {
                 trigger: {
                     type: String,
-                    "default": "hover"
+                    default: "hover"
                 },
                 effect: {
                     type: String,
-                    "default": "scale"
+                    default: "scale"
                 },
                 tooltipClass: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 titleClass: {
                     type: String,
-                    "default": "scale"
+                    default: "scale"
                 },
                 contentClass: {
                     type: String,
-                    "default": "scale"
+                    default: "scale"
                 }
             }
         };
@@ -66,22 +66,22 @@
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
-        var _eventlistener = __webpack_require__(3);
-        var _eventlistener2 = _interopRequireDefault(_eventlistener);
+        var _eventListener = __webpack_require__(3);
+        var _eventListener2 = _interopRequireDefault(_eventListener);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
-                "default": obj
+                default: obj
             };
         }
         exports.default = {
             props: {
                 trigger: {
                     type: String,
-                    "default": "click"
+                    default: "click"
                 },
                 effect: {
                     type: String,
-                    "default": "fadein"
+                    default: "fadein"
                 },
                 title: {
                     type: String
@@ -140,23 +140,23 @@
                 var triger = this.$els.trigger.children[0];
                 var me = this;
                 if (this.trigger === "hover") {
-                    this._mouseenterEvent = _eventlistener2.default.listen(triger, "mouseenter", function() {
+                    this._mouseenterEvent = _eventListener2.default.listen(triger, "mouseenter", function() {
                         me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
                         me.show = true;
                     });
-                    this._mouseleaveEvent = _eventlistener2.default.listen(triger, "mouseleave", function() {
+                    this._mouseleaveEvent = _eventListener2.default.listen(triger, "mouseleave", function() {
                         me.show = false;
                     });
                 } else if (this.trigger === "focus") {
-                    this._focusEvent = _eventlistener2.default.listen(triger, "focus", function() {
+                    this._focusEvent = _eventListener2.default.listen(triger, "focus", function() {
                         me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
                         me.show = true;
                     });
-                    this._blurEvent = _eventlistener2.default.listen(triger, "blur", function() {
+                    this._blurEvent = _eventListener2.default.listen(triger, "blur", function() {
                         me.show = false;
                     });
                 } else {
-                    this._clickEvent = _eventlistener2.default.listen(triger, "click", function() {
+                    this._clickEvent = _eventListener2.default.listen(triger, "click", function() {
                         me.fixPosition(me.$els.trigger.children[0], me.$els.popover, me.placement);
                         me.toggle;
                     });

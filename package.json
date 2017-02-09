@@ -15,12 +15,14 @@
     "frontend"
   ],
   "author": "fe-b <fe-b@iwaimai.baidu.com>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/"
   },
   "scripts": {
     "dev": "node build/dev-server.js",
+    "site": "webpack --progress --hide-modules --colors --config build/webpack.base.conf.js",
     "build": "webpack --progress --hide-modules --colors --config build/webpack.npm.conf.js && rimraf dist/components && node build/build-components"
   },
   "main": "dist/xcui.js",

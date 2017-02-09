@@ -33,23 +33,23 @@
             props: {
                 show: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 type: {
                     type: String,
-                    "default": "load2"
+                    default: "load2"
                 },
                 classname: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 color: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 size: {
                     type: String,
-                    "default": "md"
+                    default: "md"
                 }
             },
             methods: {}

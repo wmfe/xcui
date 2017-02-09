@@ -33,34 +33,34 @@
             props: {
                 type: {
                     type: String,
-                    "default": "standard"
+                    default: "standard"
                 },
                 currentPageNo: {
                     type: Number,
-                    "default": 1
+                    default: 1
                 },
                 total: {
                     type: Number,
-                    "default": 0
+                    default: 0
                 },
                 pageSize: {
                     type: Number,
-                    "default": 20
+                    default: 20
                 },
-                "class": String,
+                class: String,
                 withPageSize: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 },
                 pageSizeRange: {
                     type: Array,
-                    "default": function _default() {
+                    default: function _default() {
                         return [ 10, 20, 50, 100 ];
                     }
                 },
                 rangeLength: {
                     type: Number,
-                    "default": 10,
+                    default: 10,
                     coerce: function coerce(val) {
                         if (val < 1) {
                             return 1;

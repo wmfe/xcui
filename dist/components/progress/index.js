@@ -33,23 +33,23 @@
             props: {
                 percent: {
                     type: Number,
-                    "default": 0
+                    default: 0
                 },
                 percentInfo: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 infoClassName: {
                     type: String,
-                    "default": "xcui-progress-info"
+                    default: "xcui-progress-info"
                 },
                 showInfo: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 height: {
                     type: Number,
-                    "default": 10
+                    default: 10
                 }
             }
         };

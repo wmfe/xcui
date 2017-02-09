@@ -40,45 +40,45 @@
             props: {
                 id: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 name: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 className: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 disabled: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 placeholder: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 suggestions: {
                     type: Array,
-                    "default": function _default() {
+                    default: function _default() {
                         return [];
                     }
                 },
                 dataText: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 dataValue: {
                     type: [ String, Number ],
-                    "default": ""
+                    default: ""
                 },
                 check: {
                     type: Boolean,
-                    "default": true
+                    default: true
                 },
                 inputCallback: {
                     type: Function,
-                    "default": function _default() {
+                    default: function _default() {
                         return function() {};
                     }
                 }
@@ -103,6 +103,11 @@
                         me.autoSetItem();
                         me.inputCallback && me.inputCallback();
                     }, 100);
+                },
+                onFocus: function onFocus() {
+                    var me = this;
+                    me.getLocalSug();
+                    me.inputCallback && me.inputCallback();
                 },
                 onBlur: function onBlur() {
                     var me = this;
@@ -177,7 +182,7 @@
             }
         };
     }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class="xcui-suggestion {{className}}"> <input type=text class="form-control xcui-suggestion-input" autocomplete=off :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @input=onInput @focus=onInput @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter.stop.prevent=onBlur> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'show\':show}"> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}"> <a href=javascript:void(0) @click=setItem(item)> {{item.text}} </a> </li> </ul> </div> ';
+        module.exports = ' <div class="xcui-suggestion {{className}}"> <input type=text class="form-control xcui-suggestion-input" autocomplete=off :id=id :name=name :disabled=disabled :placeholder=placeholder v-model=dataText @input=onInput @focus=onFocus @blur=onBlur @keydown.up=changeCurrent(-1) @keydown.down=changeCurrent(1) @keydown.enter.stop.prevent=onBlur> <ul class="xcui-suggestion-list dropdown-menu" :class="{\'show\':show}"> <li v-for="(index,item) in list" :class="{\'current\' : currentIndex==index}"> <a href=javascript:void(0) @click=setItem(item)> {{item.text}} </a> </li> </ul> </div> ';
     }, function(module, exports, __webpack_require__) {
         var __vue_script__, __vue_template__;
         var __vue_styles__ = {};
