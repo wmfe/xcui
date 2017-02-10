@@ -22,7 +22,7 @@
         __webpack_require__.p = "";
         return __webpack_require__(0);
     }([ function(module, exports, __webpack_require__) {
-        module.exports = __webpack_require__(4);
+        module.exports = __webpack_require__(3);
     }, function(module, exports) {
         "use strict";
         Object.defineProperty(exports, "__esModule", {
@@ -33,24 +33,24 @@
             props: {
                 show: {
                     type: Boolean,
-                    "default": false
+                    default: false
                 },
                 type: {
                     type: String,
-                    "default": "info"
+                    default: "info"
                 },
                 content: {
                     type: String,
-                    "default": ""
+                    default: ""
                 },
                 duration: {
                     type: Number,
-                    "default": 3e3
+                    default: 3e3
                 }
             },
             computed: {
                 styleClass: function styleClass() {
-                    return "xcui-message-" + this.type;
+                    return this.type ? "xcui-message-" + this.type : "";
                 },
                 iconClass: function iconClass() {
                     switch (this.type) {
@@ -96,18 +96,50 @@
                 }
             }
         };
-    }, function(module, exports) {}, function(module, exports) {
-        module.exports = ' <div class=xcui-message :class=styleClass transition=fade v-show=show> <span class="xcui-message-icon glyphicon" :class=iconClass></span> <p class=xcui-message-desc> {{content}} </p> </div> ';
-    }, function(module, exports, __webpack_require__) {
-        var __vue_script__, __vue_template__;
+    }, function(module, exports) {}, function(module, exports, __webpack_require__) {
+        var __vue_exports__, __vue_options__;
+        var __vue_styles__ = {};
         __webpack_require__(2);
-        __vue_script__ = __webpack_require__(1);
-        __vue_template__ = __webpack_require__(3);
-        module.exports = __vue_script__ || {};
-        if (module.exports.__esModule) module.exports = module.exports.default;
-        if (__vue_template__) {
-            (typeof module.exports === "function" ? module.exports.options || (module.exports.options = {}) : module.exports).template = __vue_template__;
+        __vue_exports__ = __webpack_require__(1);
+        var __vue_template__ = __webpack_require__(4);
+        __vue_options__ = __vue_exports__ = __vue_exports__ || {};
+        if (typeof __vue_exports__.default === "object" || typeof __vue_exports__.default === "function") {
+            __vue_options__ = __vue_exports__ = __vue_exports__.default;
         }
+        if (typeof __vue_options__ === "function") {
+            __vue_options__ = __vue_options__.options;
+        }
+        __vue_options__.render = __vue_template__.render;
+        __vue_options__.staticRenderFns = __vue_template__.staticRenderFns;
+        module.exports = __vue_exports__;
+    }, function(module, exports) {
+        module.exports = {
+            render: function() {
+                var _vm = this;
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("transition", {
+                    attrs: {
+                        name: "fade"
+                    }
+                }, [ _c("div", {
+                    directives: [ {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.show,
+                        expression: "show"
+                    } ],
+                    staticClass: "xcui-message",
+                    class: _vm.styleClass
+                }, [ _c("span", {
+                    staticClass: "xcui-message-icon glyphicon",
+                    class: _vm.iconClass
+                }), _vm._v(" "), _c("p", {
+                    staticClass: "xcui-message-desc"
+                }, [ _vm._v("\n            " + _vm._s(_vm.content) + "\n        ") ]) ]) ]);
+            },
+            staticRenderFns: []
+        };
     } ]);
 });
 

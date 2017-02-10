@@ -1,27 +1,29 @@
 <template>
-    <div v-el:outer style="position:relative; display: inline-block" class="xcui-tooltip">
-         <span v-el:trigger>
+    <div ref="outer" style="position:relative; display: inline-block" class="xcui-tooltip">
+         <span ref="trigger">
             <slot>
             </slot>
         </span>
-        <div class="tooltip"
-            v-bind:class="{
-                'top':    placement === 'top',
-                'left':   placement === 'left',
-                'right':  placement === 'right',
-                'bottom': placement === 'bottom'
-            }"
-            v-el:popover
-            v-show="show"
-            :transition="effect"
-            role="tooltip">
-                <div class="tooltip-arrow"></div>
-                <div class="tooltip-inner" :class="tooltipClass">
-                    <slot name="content">
-                        {{{content}}}
-                    </slot>
-                </div>
-        </div>
+        <transition :name="effect" v-on:after-enter="afterEnter">
+            <div class="tooltip"
+                v-bind:class="{
+                    'top':    placement === 'top',
+                    'left':   placement === 'left',
+                    'right':  placement === 'right',
+                    'bottom': placement === 'bottom'
+                }"
+                ref="popover"
+                v-show="show"
+                :transition="effect"
+                role="tooltip">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner" :class="tooltipClass">
+                        <slot name="content">
+                            <div v-html="content"></div>
+                        </slot>
+                    </div>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -50,6 +52,11 @@
             contentClass: {
                 type: String,
                 default: 'scale'
+            }
+        },
+        methods: {
+            afterEnter() {
+                this.$refs.popover.style.display = 'inline-table';
             }
         }
     };

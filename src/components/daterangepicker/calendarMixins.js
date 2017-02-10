@@ -1,7 +1,6 @@
 export default {
     props: {
         value: {
-            twoWay: true,
             default: ''
         },
         format: {
@@ -50,24 +49,41 @@ export default {
             selectRange: '',
             dateParams: null,
             defaultFormat: 'YYYY-MM-DD',
-            type: 'date'
+            type: 'date',
+            internalValue: '',
+            initialValue: ''
         };
     },
     computed: {
         formatValue() {
-            return this.output(this.value);
+            return this.output(this.internalValue);
         }
     },
     created() {
         let me = this;
         me.getType();
         if (me.value) {
-            me.value = me.output(me.value);
+            me.internalValue = me.output(me.value);
         }
         else {
-            me.value = me.output(new Date());
+            me.internalValue = me.output(new Date());
         }
-        this.initialValue = this.value;
+        // 需要根据限制的最小/最大时间，设定一下初始值。
+        let earlyThanMinDate = false;
+        let lateThanMaxDate = false;
+        if (me.minDate) {
+            let minDate = me.output(me.minDate);
+            earlyThanMinDate = me.internalValue < minDate;
+        }
+        if (me.maxDate) {
+            let maxDate = me.output(me.maxDate);
+            lateThanMaxDate = me.internalValue > maxDate;
+        }
+        if (earlyThanMinDate || lateThanMaxDate) {
+            me.internalValue = me.minDate || me.maxDate;
+        }
+
+        this.initialValue = this.internalValue;
         let params = me.dateParams;
         me.year = params.year;
         me.month = params.month;
@@ -92,7 +108,7 @@ export default {
             me.render(me.year, me.month);
         }
         else {
-            this.initialValue = this.value;
+            this.initialValue = this.internalValue;
         }
     },
     methods: {
@@ -107,7 +123,7 @@ export default {
             me.firstDayOfMonth = new Date(y, m, 1).getDay();// 当月第一天
             me.lastDateOfMonth = new Date(y, m + 1, 0).getDate();// 当月最后一天
             me.lastDayOfLastMonth = new Date(y, m, 0).getDate();// 前一个月的最后一天
-            me.output(me.value);
+            me.output(me.internalValue);
             let params = me.dateParams;
             let line = 0;
             let temp = [];
@@ -131,9 +147,9 @@ export default {
                     temp[line] = [];
                     let k = me.lastDayOfLastMonth - me.firstDayOfMonth + 1;
                     for (let j = 0; j < me.firstDayOfMonth; j++) {
-                        let nowDay = me.output([me.year, me.month, k], format);
+                        let nowDay = me.output([me.year, me.month - 1, k], format);
                         if (nowDay < minDate || nowDay > maxDate) {
-                            temp[line].push({day: k, disabled: true, prev: true, noClick: true});
+                            temp[line].push({day: k, disabled: true, prev: true, noclick: true});
                         }
                         else {
                             temp[line].push({day: k, disabled: true, prev: true});
@@ -153,10 +169,17 @@ export default {
                     line++;
                 }
                 else if (i === me.lastDateOfMonth) {
-                    let k = 1;
+                    let count = 1;
                     for (dow; dow < 6; dow++) {
-                        temp[line].push({day: k, disabled: true, today: false});
-                        k++;
+                        let nextMonthDay = me.output([y, m + 1, count]);
+                        let isLateThanMaxDate = nextMonthDay > me.output(me.maxDate, format);
+                        if (isLateThanMaxDate) {
+                            temp[line].push({day: count, disabled: true, today: false, noclick: true});
+                        }
+                        else {
+                            temp[line].push({day: count, disabled: true, today: false});
+                        }
+                        count++;
                     }
                 }
             }// end for
@@ -256,23 +279,22 @@ export default {
                     break;
                 default:
             };
-            // me.value = me.bindFormat(`me.year-me.month-me.day me.hour:me.minute:me.second`);
-            me.value = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
+            me.internalValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
         },
         // 格式化输出
         output(d, format) {
             let fmt = format || this.format;
             let me = this;
             let date = new Date(d);
-            if (this.value && this.type === 'time' && typeof (d) === 'string') {
+            if (this.internalValue && this.type === 'time' && typeof (d) === 'string') {
                 date = new Date('1970-01-01 ' + d);
             }
             else if (typeof (d) === 'object' && d.length > 0) {
                 date = new Date(d[0], d[1], d[2], d[3] || '00', d[4] || '00', d[5] || '00');
             }
-            else if (!this.value) {
-                date = new Date();
-            }
+            // else if (!this.value && this.firstInit) {
+            //     date = new Date();
+            // }
             let year = date.getFullYear();
             let month = date.getMonth();
             let getDate = date.getDate();

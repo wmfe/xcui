@@ -2,6 +2,13 @@
 
 ![logo](https://github.com/wmfe/xcui/raw/master/src/assets/logo_nobg_128x128@2x.png)
 
+[![CircleCI](https://img.shields.io/circleci/project/wmfe/xcui/2.0.svg)](https://circleci.com/gh/wmfe/xcui/tree/2.0)
+[![npm version](https://img.shields.io/npm/v/xcui.svg)](https://www.npmjs.com/package/xcui)
+[![GitHub issues](https://img.shields.io/github/issues/wmfe/xcui.svg)](https://github.com/wmfe/xcui/issues)
+[![GitHub forks](https://img.shields.io/github/forks/wmfe/xcui.svg)](https://github.com/wmfe/xcui/network)
+[![GitHub stars](https://img.shields.io/github/stars/wmfe/xcui.svg)](https://github.com/wmfe/xcui/stargazers)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/wmfe/xcui/1.0/LICENSE)
+
 XCUI 是基于`Vue`和 `Bootstrap.css` 的**桌面端组件库**。
 
 ## XCUI的目标是：
@@ -13,7 +20,13 @@ XCUI 是基于`Vue`和 `Bootstrap.css` 的**桌面端组件库**。
 
 ## 版本支持
 
-XCUI目前支持`vue 1.x`版本；推荐使用`vue 1.0.26`及以上版本。后续XCUI会增加支持`vue 2.x`的版本，敬请期待。
+XCUI的1.0分支支持 `Vue 1.x` 版本；2.0分支支持 `Vue 2.x` 版本。
+
+在使用`Vue 1.x` 版本时，推荐使用 `Vue 1.0.26` 以上版本；
+
+在使用`Vue 2.x` 版本时，推荐使用 `Vue 2.0.5` 以上版本。
+
+
 > XCUI需要在页面中引入`bootstrap.css`。
 
 ## 如何使用

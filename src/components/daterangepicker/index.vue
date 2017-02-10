@@ -1,7 +1,7 @@
 <template>
 <div class="xcui-datarangepicker" :class="className">
     <div :class="{'input-group':btnShow}">
-        <input class="form-control col-md-3" type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
+        <input class="form-control col-md-3" type="text" v-model="dateText" placeholder="请输入日期" @click="showCalendar">
         <button v-show="show" type="button" class="close close_btn" :style="{'right':btnShow?'50px':'10px'}" @click="closeBtn" title="点击关闭"><span aria-hidden="true">×</span></button>
         <!-- 双日历 -->
         <div @click.stop=""
@@ -11,9 +11,9 @@
              <div class="clearfix">
                  <div class="double-calendar-left">
                     <calendar
-                        :value.sync="newStartDate"
+                        :value="newStartDate"
                         :format="format"
-                        :other-value.sync="newEndDate"
+                        :other-value="newEndDate"
                         :min-date="minDate"
                         :max-date="maxDate"
                         :hour-range="hourRange"
@@ -21,14 +21,14 @@
                         :second-range="secondRange"
                         :color="color"
                         :date-limit="dateLimit"
-                        :initial-date.sync="initialStartDate"
-                        :start-render="startRender"></calendar>
+                        :start-render="startRender"
+                        @mutate="startChange"></calendar>
                  </div>
                  <div class="double-calendar-right">
                     <calendar
-                        :value.sync="newEndDate"
+                        :value="newEndDate"
                         :format="format"
-                        :other-value.sync="newStartDate"
+                        :other-value="newStartDate"
                         :right="true"
                         :min-date="minDate"
                         :max-date="maxDate"
@@ -37,8 +37,8 @@
                         :second-range="secondRange"
                         :color="color"
                         :date-limit="dateLimit"
-                        :initial-date.sync="initialEndDate"
-                        :start-render="startRender"></calendar>
+                        :start-render="startRender"
+                        @mutate="endChange"></calendar>
                  </div>
              </div>
              <div class="calendar-button">
@@ -65,14 +65,6 @@
             hourRange: null,
             minuteRange: null,
             secondRange: null,
-            startDate: {
-                twoWay: true,
-                default: ''
-            },
-            endDate: {
-                twoWay: true,
-                default: ''
-            },
             format: {
                 type: String,
                 default: 'YYYY-MM-DD'
@@ -93,6 +85,15 @@
             sep: {
                 type: String,
                 default: ' 至 '
+            },
+            value: {
+                type: Object,
+                default() {
+                    return {
+                        startDate: '',
+                        endDate: ''
+                    };
+                }
             }
         },
         components: {
@@ -101,45 +102,45 @@
         data() {
             return {
                 show: false,
-                value: '',
                 startRender: '',
-                initialStartDate: '',
-                initialEndDate: '',
+                initialStartDate: '', // 上一次的开始值
+                initialEndDate: '', // 上一次的结束值
+                startDate: '', // 开始值
+                endDate: '', // 结束值
                 newStartDate: '',
                 newEndDate: ''
             };
         },
         watch: {
             value(val) {
-                if (!val) {
-                    this.startDate = this.endDate = '';
-                }
+                this.renderValue(val);
             }
         },
         created() {
-            this.newStartDate = this.startDate;
-            this.newEndDate = this.endDate;
-            if (this.startDate > this.endDate) {
-                this.newEndDate = this.startDate;
-            }
-            if (this.endDate < this.startDate) {
-                this.newStartDate = this.endDate;
-            }
-            this.value = this.newStartDate && this.newEndDate && (this.newStartDate + this.sep + this.newEndDate);
+            this.renderValue(this.value);
         },
         methods: {
+            renderValue(val) {
+                let startDate = this.startDate = val.startDate || '';
+                let endDate = this.endDate = val.endDate || '';
+                this.newStartDate = endDate < startDate ? endDate : startDate;
+                this.newEndDate = startDate > endDate ? startDate : endDate;
+                this.dateText = this.newStartDate && this.newEndDate && (this.newStartDate + this.sep + this.newEndDate);
+                this.initialStartDate = startDate;
+                this.initialEndDate = endDate;
+            },
             ok(e) {
                 e.preventDefault();
                 if (this.newStartDate && this.newEndDate) {
-                    this.value = this.newStartDate + this.sep + this.newEndDate;
+                    this.dateText = this.newStartDate + this.sep + this.newEndDate;
                     this.startDate = this.newStartDate;
                     this.endDate = this.newEndDate;
                 }
                 else {
-                    this.value = this.startDate = this.endDate = '';
+                    this.dateText = this.startDate = this.endDate = '';
                 }
                 this.show = false;
-                this.$emit('on-change', this.startDate, this.endDate);
+                this.emitChange();
                 this.initialStartDate = this.startDate;
                 this.initialEndDate = this.endDate;
                 this.startRender = new Date().getTime();
@@ -165,7 +166,24 @@
                 }, 500);
             },
             closeBtn() {
-                this.value = this.startDate = this.endDate = '';
+                this.dateText = this.startDate = this.endDate = '';
+            },
+            emitChange() {
+                this.$emit('input', {
+                    startDate: this.newStartDate,
+                    endDate: this.newEndDate
+                }, {
+                    startDate: this.initialStartDate,
+                    endDate: this.initialEndDate
+                });
+            },
+            startChange(val) {
+                this.newStartDate = val.value;
+                this.newEndDate = val.otherValue;
+            },
+            endChange(val) {
+                this.newStartDate = val.otherValue;
+                this.newEndDate = val.value;
             }
         }
     };

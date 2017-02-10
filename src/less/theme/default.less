@@ -1,0 +1,109 @@
+@import "../color/colors";
+//
+// Default config
+//
+
+// perfix
+@xcui-prefix: xcui;
+
+// color
+// 应用于组件的默认高亮色值上，或一些传达信息的组件、交互反馈上。
+@brand-primary: @blue-6; //  品牌主色
+@brand-success: @green-6; //  绿色 ： 代表成功、通过、安全
+@brand-info: @blue-6; //  蓝色 ： 代表专业
+@brand-warning: @yellow-6; //  黄色 ： 代表提醒
+@brand-danger: @red-6; //  红色 ： 代表热情、警示
+
+// gray
+// 灰色应用于常见的字体色值设定，组件禁用、置灰色值设定等等
+@gray-base: #000;
+@gray-darker: lighten(@gray-base, 13.5%); // #222
+@gray-dark: lighten(@gray-base, 20%); // #333
+@gray: lighten(@gray-base, 33.5%); // #555
+@gray-light: lighten(@gray-base, 46.7%); // #777
+@gray-lighter: lighten(@gray-base, 93.5%); // #eee
+
+// global base
+// 每当组件默认值没有特定值的时候，遵循这里的全局设定
+@body-bg: #fff; // 全局背景色
+@text-color: @gray-dark; // 全局字体色值
+@text-color-secondary: @gray;// 字体色值第二选择
+@link-color: @brand-primary; // 全局链接色值
+@link-hover-color: darken(@link-color, 15%); // 全局链接悬停色值
+@link-hover-decoration: underline; // 全局链接悬停样式
+@disabled-color: #e6e6e6; // 全局禁用色值
+
+@font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; // 全局字体
+@code-family: Consolas, Menlo, Courier, monospace; // 全局代码字体
+@font-size-base: 14px; // 全局字体base大小
+@font-size-large: ceil((@font-size-base * 1.25)); // 全局字体大尺寸~18px
+@font-size-small: ceil((@font-size-base * 0.85)); // 全局字体小尺寸~12px
+@line-height-base: 1.5; // 字体行高
+
+@border-color-base: #d9d9d9; // 边框默认色值
+
+@border-radius-base: 4px; // 圆角默认值
+@border-radius-large: 6px; // 大尺寸圆角默认值
+@border-radius-small: 2px; // 小尺寸圆角默认值
+
+@padding-base-vertical: 6px; // 组件默认间隔-垂直
+@padding-base-horizontal: 12px; // 组件默认间隔-水平
+
+@padding-large-vertical: 10px; // 组件大尺寸间隔-垂直
+@padding-large-horizontal: 16px; // 组件大尺寸间隔-水平
+
+@padding-small-vertical: 5px; // 组件小尺寸间隔-垂直
+@padding-small-horizontal: 10px; // 组件小尺寸间隔-水平
+
+// global button
+// 全局按钮样式设定，统一按钮样式
+
+@btn-font-weight: 500;
+
+@btn-default-color: #333;
+@btn-default-bg: #fff;
+@btn-default-border: @border-color-base;
+
+@btn-disable-color: @disabled-color;
+@btn-disable-bg: #f7f7f7;
+@btn-disable-border: @border-color-base;
+
+@btn-primary-color: #fff;
+@btn-primary-bg: @brand-primary;
+@btn-primary-border: darken(@btn-primary-bg, 5%);
+
+@btn-success-color: #fff;
+@btn-success-bg: @brand-success;
+@btn-success-border: darken(@btn-success-bg, 5%);
+
+@btn-info-color: #fff;
+@btn-info-bg: @brand-info;
+@btn-info-border: darken(@btn-info-bg, 5%);
+
+@btn-warning-color: #fff;
+@btn-warning-bg: @brand-warning;
+@btn-warning-border: darken(@btn-warning-bg, 5%);
+
+@btn-danger-color: #fff;
+@btn-danger-bg: @brand-danger;
+@btn-danger-border: darken(@btn-danger-bg, 5%);
+
+@btn-link-disabled-color: @gray-light;
+
+@btn-padding-base: 4px 15px;
+@btn-padding-large: 6px 15px;
+@btn-padding-small: 1px 7px;
+
+@btn-border-radius-base: @border-radius-base;
+@btn-border-radius-large: @border-radius-large;
+@btn-border-radius-small: @border-radius-small;
+
+// shadow
+// 阴影设定，统一使用阴影效果
+@shadow-color: rgba(0, 0, 0, .2);
+@box-shadow-base: @shadow-1-down;
+@shadow-1-up: 0 -1px 6px @shadow-color;
+@shadow-1-down: 0 1px 6px @shadow-color;
+@shadow-1-left: -1px 0 6px @shadow-color;
+@shadow-1-right: 1px 0 6px @shadow-color;
+@shadow-2: 0 2px 8px @shadow-color;

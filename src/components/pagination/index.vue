@@ -1,12 +1,12 @@
 <template>
-    <div class="v-pagination-wrap {{ class || '' }}">
+    <div class="v-pagination-wrap">
         <template v-if="type === 'standard' ">
             <div class="row">
-                <div v-if="withPageSize" class="v-pagination-page-size col-md-3">
+                <div v-if="withPageSize" class="v-pagination-page-size col-md-3 gray">
                     共<span v-text="total"></span>条
                     &nbsp;&nbsp;
                     每页
-                    <select v-model="pageSize">
+                    <select v-model="pageSizeInner" class="gray">
                         <option v-for="opt in pageSizeRange" :value="opt" v-text="opt">1</option>
                     </select>
                     条
@@ -16,7 +16,7 @@
                         <button
                             @click="prev"
                             class="btn btn-default"
-                            :class="{'disabled': currentPageNo == 1}">上一页</button>
+                            :class="{'disabled': currentPageNum == 1}">上一页</button>
 
                         <button class="btn btn-default page-btn" v-if="getRangePage.begin > 1">
                             <a href="javascript:void(0);" @click="turnToPage(1)">1</a>
@@ -26,8 +26,8 @@
                         </button>
 
                         <button class="btn btn-default page-btn" v-for="number in (getRangePage.end - getRangePage.begin + 1)" :class="{'active': isActive(number)}">
-                            <a v-if="isActive(number)" href="javascript:void(0);"  v-text="number + getRangePage.begin"></a>
-                            <a v-else href="javascript:void(0);"  v-text="number + getRangePage.begin" @click="turnToPage(number + getRangePage.begin)"></a>
+                            <a v-if="isActive(number)" href="javascript:void(0);"  v-text="number + getRangePage.begin - 1"></a>
+                            <a v-else href="javascript:void(0);"  v-text="number + getRangePage.begin - 1" @click="turnToPage(number + getRangePage.begin - 1)"></a>
                         </button>
 
                         <button class="btn btn-default page-btn" v-if="getRangePage.end < totalPageCount">
@@ -40,18 +40,21 @@
                         <button
                             @click="next"
                             class="btn btn-default"
-                            :class="{'disabled': currentPageNo == totalPageCount}">下一页</button>
+                            :class="{'disabled': currentPageNum == totalPageCount}">下一页</button>
                     </div>
                 </div>
             </div>
         </template>
+
         <div v-else class="v-pagination-mini">
-            <span>共<span v-text="total"></span>条</span>
-            <button class="btn btn-default prev-trigger" :class="{'disabled': currentPageNo < 2}" @click="prev">
+            <span class="gray">共<span v-text="total"></span>条</span>
+            <button class="btn btn-default prev-trigger" :class="{'disabled': currentPageNum < 2}" @click="prev">
                 <span class="caret"></span>
             </button>
-            <span v-text="currentPageNo"></span>/<span v-text="totalPageCount"></span>
-            <button class="btn btn-default next-trigger" :class="{'disabled': currentPageNo == totalPageCount}" @click="next">
+            <span class="gray">
+                <span v-text="currentPageNum"></span>/<span v-text="totalPageCount"></span>
+            </span>
+            <button class="btn btn-default next-trigger" :class="{'disabled': currentPageNum == totalPageCount}" @click="next">
                 <span class="caret"></span>
             </button>
         </div>
@@ -66,7 +69,7 @@ export default {
             type: String,
             default: 'standard' // standard / mini
         },
-        'currentPageNo': {
+        'currentPageNum': {
             type: Number,
             default: 1
         },
@@ -78,7 +81,6 @@ export default {
             type: Number,
             default: 20
         },
-        'class': String,
         'withPageSize': {// only for starndard type
             type: Boolean,
             default: true
@@ -98,12 +100,17 @@ export default {
             }
         }
     },
+    data() {
+        return {
+            pageSizeInner: 20
+        };
+    },
     computed: {
         totalPageCount() {
-            return Math.ceil(this.total / this.pageSize);
+            return Math.ceil(this.total / this.pageSizeInner);
         },
         getRangePage() {
-            let curPage = this.currentPageNo;
+            let curPage = this.currentPageNum;
             let midpoint = curPage;
             // 减1的目的是刨除midpoint占位
             let pageRange = this.rangeLength - 1;
@@ -134,7 +141,7 @@ export default {
                     result.end = totalPage;
                 }
             }
-            else if (result.end > totalPage) {
+            if (result.end > totalPage) {
                 //  调整起始位置，保证展示的页码个数为options.range
                 result.begin += totalPage - result.end;
                 result.end = totalPage;
@@ -146,27 +153,29 @@ export default {
         }
     },
     watch: {
-        pageSize(val) {
-            this.$emit('change-pagesize', this.pageSize);
-            this.$emit('go-to-page', 1, this.currentPageNo);
+        pageSizeInner(val) {
+            this.$emit('change-pagesize', this.pageSizeInner);
+            this.$emit('go-to-page', 1, this.currentPageNum);
         }
     },
     methods: {
         turnToPage(pageNo) {
             if (pageNo > 0 && pageNo <= this.totalPageCount) {
-                this.$emit('go-to-page', pageNo, this.currentPageNo);// new page num / old page num
-                this.currentPageNo = pageNo; // downward compatibility
+                this.$emit('go-to-page', pageNo, this.currentPageNum);// new page num / old page num
             }
         },
         prev() {
-            this.turnToPage(this.currentPageNo - 1);
+            this.turnToPage(this.currentPageNum - 1);
         },
         next() {
-            this.turnToPage(this.currentPageNo + 1);
+            this.turnToPage(this.currentPageNum + 1);
         },
         isActive(number) {
-            return number + this.getRangePage.begin === this.currentPageNo;
+            return number + this.getRangePage.begin - 1 === this.currentPageNum;
         }
+    },
+    mounted() {
+        this.pageSizeInner = this.pageSize;
     }
 };
 </script>
@@ -235,6 +244,16 @@ export default {
                         transform:rotate(-90deg);
             }
         }
+        .prev-trigger,
+        .next-trigger{
+            .caret{
+                position: relative;
+                top: -1px;
+            }
+        }
+    }
+    .gray{
+        color: #777;
     }
 }
 </style>

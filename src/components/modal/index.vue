@@ -1,6 +1,6 @@
 <template lang="html">
-    <div class="xcui-modal-wrapper xcui-modal-mask" @click="maskClose" v-el:modal-mask v-show="show">
-        <div class="xcui-modal" tabindex="-1" @keydown.esc="cancel" :style="style" :class="[sizeClass,className]">
+    <div class="xcui-modal-wrapper xcui-modal-mask" @click="maskClose" ref="modal-mask" v-show="show">
+        <div class="xcui-modal" tabindex="-1" @keydown.esc="cancel" :style="style" :class="modalClass">
             <div class="xcui-modal-header" v-if="showHeader">
                 <slot name="header">
                     <span class="xcui-modal-title">{{title}}</span>
@@ -29,6 +29,10 @@
 export default {
     name: 'xcui-modal',
     props: {
+        value: {
+            type: Boolean,
+            default: false
+        },
         title: {
             type: String,
             default: ''
@@ -36,10 +40,6 @@ export default {
         content: {
             type: String,
             default: ''
-        },
-        show: {
-            type: Boolean,
-            default: false
         },
         style: {
             type: Object
@@ -100,8 +100,14 @@ export default {
             default: () => {}
         }
     },
+    data() {
+        return {
+            show: false
+        };
+    },
     watch: {
-        show(val) {
+        value(val) {
+            this.show = val;
             if (this.scrollable) {
                 return;
             }
@@ -111,11 +117,17 @@ export default {
             else {
                 document.body.style.overflow = 'auto';
             }
+        },
+        show(val) {
+            this.$emit('input', val);
         }
     },
     computed: {
         sizeClass() {
             return `xcui-modal-size-${this.size}`;
+        },
+        modalClass() {
+            return `${this.sizeClass} ${this.className}`;
         }
     },
     methods: {
@@ -123,7 +135,7 @@ export default {
             this.show = false;
         },
         maskClose(e) {
-            if (this.maskClosable && e.target === this.$els.modalMask) {
+            if (this.maskClosable && e.target === this.$refs.modalMask) {
                 this.cancel();
             }
         },

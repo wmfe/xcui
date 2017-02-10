@@ -1,14 +1,15 @@
 <template>
-    <div class="xcui-message"
-    :class="styleClass"
-    transition="fade"
-    v-show="show">
-        <span class="xcui-message-icon glyphicon"
-        :class="iconClass"></span>
-        <p class="xcui-message-desc">
-            {{content}}
-        </p>
-    </div>
+    <transition name="fade">
+        <div class="xcui-message"
+        :class="styleClass"
+        v-show="show">
+            <span class="xcui-message-icon glyphicon"
+            :class="iconClass"></span>
+            <p class="xcui-message-desc">
+                {{content}}
+            </p>
+        </div>
+    </transition>
 </template>
 
 <script>
@@ -34,7 +35,7 @@ export default {
     },
     computed: {
         styleClass() {
-            return `xcui-message-${this.type}`;
+            return this.type ? `xcui-message-${this.type}` : '';
         },
         iconClass() {
             switch (this.type) {
@@ -78,10 +79,10 @@ export default {
 </script>
 
 <style lang="less">
-    .fade-transition {
+    .fade-enter-active, .fade-leave-active {
         transition: all .3s ease;
     }
-    .fade-enter, .fade-leave {
+    .fade-enter, .fade-leave-active {
         opacity: 0;
     }
     .xcui-message{
