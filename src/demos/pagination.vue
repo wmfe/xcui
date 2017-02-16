@@ -96,8 +96,8 @@ export default {
             this.currentPageNum = pageNo;
         },
         onChangeSize(pageSize) {
-            this.pageSize = pageSize;
-            this.goToPage(1);
+            this.pageSize = pageSize;// 同步新页面
+            this.goToPage(1);// 切换到第一页
         }
     },
     mounted() {

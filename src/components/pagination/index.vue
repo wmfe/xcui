@@ -6,7 +6,7 @@
                     共<span v-text="total"></span>条
                     &nbsp;&nbsp;
                     每页
-                    <select v-model="pageSizeInner" class="gray">
+                    <select @change="changePageSize($event)" :value="pageSize" class="gray">
                         <option v-for="opt in pageSizeRange" :value="opt" v-text="opt">1</option>
                     </select>
                     条
@@ -25,10 +25,10 @@
                             <a class="apostrophe">...</a>
                         </button>
 
-                        <button class="btn btn-default page-btn" v-for="number in (getRangePage.end - getRangePage.begin + 1)" :class="{'active': isActive(number)}">
-                            <a v-if="isActive(number)" href="javascript:void(0);"  v-text="number + getRangePage.begin - 1"></a>
-                            <a v-else href="javascript:void(0);"  v-text="number + getRangePage.begin - 1" @click="turnToPage(number + getRangePage.begin - 1)"></a>
-                        </button>
+                    <button class="btn btn-default page-btn" v-for="number in (getRangePage.end - getRangePage.begin + 1)" :class="{'active': isActive(number)}" @click="turnToPage(number + getRangePage.begin - 1)">
+                        <a v-if="isActive(number)" href="javascript:void(0);"  v-text="number + getRangePage.begin - 1"></a>
+                        <a v-else href="javascript:void(0);"  v-text="number + getRangePage.begin - 1" ></a>
+                    </button>
 
                         <button class="btn btn-default page-btn" v-if="getRangePage.end < totalPageCount">
                             <a class="apostrophe">...</a>
@@ -100,14 +100,9 @@ export default {
             }
         }
     },
-    data() {
-        return {
-            pageSizeInner: 20
-        };
-    },
     computed: {
         totalPageCount() {
-            return Math.ceil(this.total / this.pageSizeInner);
+            return Math.ceil(this.total / this.pageSize);
         },
         getRangePage() {
             let curPage = this.currentPageNum;
@@ -152,16 +147,14 @@ export default {
             return result;
         }
     },
-    watch: {
-        pageSizeInner(val) {
-            this.$emit('change-pagesize', this.pageSizeInner);
-        }
-    },
     methods: {
         turnToPage(pageNo) {
             if (pageNo > 0 && pageNo <= this.totalPageCount) {
                 this.$emit('go-to-page', pageNo, this.currentPageNum);// new page num / old page num
             }
+        },
+        changePageSize($event) {
+            this.$emit('change-pagesize', Number($event.target.value));
         },
         prev() {
             this.turnToPage(this.currentPageNum - 1);
@@ -172,9 +165,6 @@ export default {
         isActive(number) {
             return number + this.getRangePage.begin - 1 === this.currentPageNum;
         }
-    },
-    mounted() {
-        this.pageSizeInner = this.pageSize;
     }
 };
 </script>
