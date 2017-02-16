@@ -14,7 +14,7 @@
 
 <demo>
     <example title="simple">
-        <xcui-datepicker v-model="valueDemo">
+        <xcui-datepicker v-model="valueDemo" @input="onChange">
         </xcui-datepicker>
     </example>
     <p> 最简单的用法，value双向绑定，日期</p>
@@ -51,7 +51,7 @@
             color="pink"
             format="YYYY-MM-DD hh:mm:ss"
             :btn-show="true"
-            @on-change="onChange"
+            @input="onChange"
             v-model="datetime.value2"
             :hour-range="'3'">
         </xcui-datepicker>
@@ -86,7 +86,7 @@
 | color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 静态属性 | 可选 |
 | btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
 | class-name | String | 无 | 日历样式，class名字 |  静态属性 | 可选 |
-| onChange | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @onChange | 否 | 可选 |
+| input | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @input | 否 | 可选 |
 </template>
 <script>
 export default {

@@ -116,11 +116,13 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm._h("transition", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("transition", {
                     attrs: {
                         name: "fade"
                     }
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -129,12 +131,12 @@
                     } ],
                     staticClass: "xcui-message",
                     class: _vm.styleClass
-                }, [ _vm._h("span", {
+                }, [ _c("span", {
                     staticClass: "xcui-message-icon glyphicon",
                     class: _vm.iconClass
-                }), " ", _vm._h("p", {
+                }), _vm._v(" "), _c("p", {
                     staticClass: "xcui-message-desc"
-                }, [ "\n            " + _vm._s(_vm.content) + "\n        " ]) ]) ]);
+                }, [ _vm._v("\n            " + _vm._s(_vm.content) + "\n        ") ]) ]) ]);
             },
             staticRenderFns: []
         };

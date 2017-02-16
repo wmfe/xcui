@@ -5,12 +5,14 @@
 var path = require('path');
 var projectRoot = path.resolve(__dirname, '../');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var themeUrl = require('../package.json').theme;
+var theme  = require(path.join(__dirname, '../',themeUrl));
 module.exports = {
     entry: {
         app: './src/main.js'
     },
     output: {
-        path: path.resolve(__dirname, '../site/static'),
+        path: path.resolve(__dirname, '../site'),
         publicPath: '/',
         filename: '[name].js'
     },
@@ -43,7 +45,15 @@ module.exports = {
             exclude: /node_modules/
         }, {
             test: /\.less$/,
-            loader: ExtractTextPlugin.extract("style-loader","css-loader!less-loader")
+            include: [/less/],
+            loader: ExtractTextPlugin.extract(
+                'style-loader',
+                'css-loader!less-loader?{"modifyVars":'+ JSON.stringify(theme)+'}')
+        }, {
+            test: /less\/components\.less$/,
+            loader: ExtractTextPlugin.extract(
+                'style-loader',
+                'css-loader!less-loader?{"modifyVars":'+ JSON.stringify(theme)+'}')
         },{
             test: /\.json$/,
             loader: 'json'

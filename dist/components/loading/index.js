@@ -74,7 +74,9 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm._h("div", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -83,7 +85,7 @@
                     } ],
                     staticClass: "xcui-loading load-container",
                     class: [ _vm.type, _vm.size, _vm.classname ]
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "loader",
                     style: {
                         color: _vm.color

@@ -27,7 +27,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 app.use('/static', express.static('./src/assets'));
 
-app.listen(8888, function (err) {
+app.listen(9999, function (err) {
     if (err) {
         console.log(err);
         return;

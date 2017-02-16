@@ -71,8 +71,8 @@
         Object.defineProperty(exports, "__esModule", {
             value: true
         });
-        var _eventlistener = __webpack_require__(3);
-        var _eventlistener2 = _interopRequireDefault(_eventlistener);
+        var _eventListener = __webpack_require__(3);
+        var _eventListener2 = _interopRequireDefault(_eventListener);
         function _interopRequireDefault(obj) {
             return obj && obj.__esModule ? obj : {
                 default: obj
@@ -151,23 +151,23 @@
                     var triger = _this.$refs.trigger.children[0];
                     var me = _this;
                     if (_this.trigger === "hover") {
-                        _this._mouseenterEvent = _eventlistener2.default.listen(triger, "mouseenter", function() {
+                        _this._mouseenterEvent = _eventListener2.default.listen(triger, "mouseenter", function() {
                             me.fixPosition(me.$refs.trigger.children[0], me.$refs.popover, me.placement);
                             me.show = true;
                         });
-                        _this._mouseleaveEvent = _eventlistener2.default.listen(triger, "mouseleave", function() {
+                        _this._mouseleaveEvent = _eventListener2.default.listen(triger, "mouseleave", function() {
                             me.show = false;
                         });
                     } else if (_this.trigger === "focus") {
-                        _this._focusEvent = _eventlistener2.default.listen(triger, "focus", function() {
+                        _this._focusEvent = _eventListener2.default.listen(triger, "focus", function() {
                             me.fixPosition(me.$refs.trigger.children[0], me.$refs.popover, me.placement);
                             me.show = true;
                         });
-                        _this._blurEvent = _eventlistener2.default.listen(triger, "blur", function() {
+                        _this._blurEvent = _eventListener2.default.listen(triger, "blur", function() {
                             me.show = false;
                         });
                     } else {
-                        _this._clickEvent = _eventlistener2.default.listen(triger, "click", function() {
+                        _this._clickEvent = _eventListener2.default.listen(triger, "click", function() {
                             me.fixPosition(me.$refs.trigger.children[0], me.$refs.popover, me.placement);
                             me.toggle;
                         });
@@ -233,23 +233,25 @@
         module.exports = {
             render: function() {
                 var _vm = this;
-                return _vm._h("div", {
+                var _h = _vm.$createElement;
+                var _c = _vm._self._c || _h;
+                return _c("div", {
                     ref: "outer",
                     staticClass: "xcui-popover",
                     staticStyle: {
                         position: "relative",
                         display: "inline-block"
                     }
-                }, [ _vm._h("span", {
+                }, [ _c("span", {
                     ref: "trigger"
-                }, [ _vm._t("default") ]), " ", _vm._h("transition", {
+                }, [ _vm._t("default") ], 2), _vm._v(" "), _c("transition", {
                     attrs: {
                         name: _vm.effect
                     },
                     on: {
                         "after-enter": _vm.afterEnter
                     }
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -264,9 +266,9 @@
                         right: _vm.placement === "right",
                         bottom: _vm.placement === "bottom"
                     }
-                }, [ _vm._h("div", {
+                }, [ _c("div", {
                     staticClass: "arrow"
-                }), " ", _vm._h("div", {
+                }), _vm._v(" "), _c("div", {
                     directives: [ {
                         name: "show",
                         rawName: "v-show",
@@ -275,18 +277,18 @@
                     } ],
                     staticClass: "popover-title",
                     class: _vm.titleClass
-                }, [ _vm._t("title", [ _vm._h("div", {
+                }, [ _vm._t("title", [ _c("div", {
                     domProps: {
                         innerHTML: _vm._s(_vm.title)
                     }
-                }) ]) ]), " ", _vm._h("div", {
+                }) ]) ], 2), _vm._v(" "), _c("div", {
                     staticClass: "popover-content",
                     class: _vm.contentClass
-                }, [ _vm._t("content", [ _vm._h("div", {
+                }, [ _vm._t("content", [ _c("div", {
                     domProps: {
                         innerHTML: _vm._s(_vm.content)
                     }
-                }) ]) ]) ]) ]) ]);
+                }) ]) ], 2) ]) ]) ], 1);
             },
             staticRenderFns: []
         };

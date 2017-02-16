@@ -1,0 +1,100 @@
+.button-size(@padding;@font-size;@border-radius) {
+  font-size: @font-size;
+  padding: @padding;
+  border-radius: @border-radius;
+}
+
+.button-color(@color;@background;@border) {
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+}
+
+.button-disabled() {
+  &.disabled,
+  &[disabled] {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      .button-color(@btn-disable-color; @btn-disable-bg; @btn-disable-border);
+    }
+  }
+}
+
+.btn-variant-type(@color;@background;@border) {
+  .button-color(@color; @background; @border);
+  &:hover,
+  &:focus {
+    .button-color(@background;@color;@background);
+    //.button-color(fade(@color, 85%); @background; fade(@background, 85%));
+  }
+
+  &:active,
+  &.active {
+    .button-color(fade(@color, 65%); @background; fade(@background, 65%));
+  }
+  .button-disabled;
+}
+
+.btn() {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: @btn-font-weight;
+  text-align: center;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  line-height: @line-height-base;
+  .button-size(@btn-padding-base; @font-size-base; @btn-border-radius-base);
+  user-select: none;
+  transition: all .3s ease;
+  position: relative;
+  .button-disabled();
+  &,
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+
+  &:not([disabled]):hover {
+    text-decoration: none;
+  }
+
+  &:not([disabled]):active {
+    outline: 0;
+    transition: none;
+  }
+
+  &.disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  &-lg {
+    .button-size(@btn-padding-large; @font-size-large; @btn-border-radius-base);
+  }
+
+  &-sm {
+    .button-size(@btn-padding-small; @font-size-small; @btn-border-radius-small);
+  }
+}
+
+.btn-default() {
+  .button-color(@btn-default-color; @btn-default-bg; @btn-default-border);
+  &:hover,
+  &:focus {
+    .button-color(fade(@brand-primary, 85%); @btn-default-bg; fade(@brand-primary, 85%));
+  }
+
+  &:active,
+  &.active {
+    .button-color(fade(@brand-primary, 65%); @btn-default-bg; fade(@brand-primary, 65%));
+  }
+}

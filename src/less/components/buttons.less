@@ -1,0 +1,23 @@
+//
+// Buttons
+// --------------------------------------------------
+
+// Base styles
+// --------------------------------------------------
+
+.@{xcui-prefix}-btn {
+  .btn;
+  .btn-default;
+  &-primary{
+    .btn-variant-type(@btn-primary-color;@brand-primary;@brand-primary);
+  }
+  &-success{
+    .btn-variant-type(@btn-success-color;@brand-success;@brand-success);
+  }
+  &-warning{
+    .btn-variant-type(@btn-warning-color;@brand-warning;@brand-warning);
+  }
+  &-danger{
+    .btn-variant-type(@btn-danger-color;@brand-danger;@brand-danger);
+  }
+}
