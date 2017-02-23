@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <div id="xcui-site-container">
       <div id="header">
-          <router-link to="home" class="logo">
+          <router-link to="/home" class="logo">
             <img :src="logoUrl">
-              XCUI Components
           </router-link>
       </div>
       <router-view></router-view>
+      <div id="footer">
+        
+      </div>
   </div>
 </template>
 
@@ -22,7 +24,3 @@
         }
     };
 </script>
-
-<style lang="less">
-@import 'styles/index.less';
-</style>

@@ -1,0 +1,267 @@
+.input-focus(@color: @input-border-focus) {
+  @color-rgba: rgba(red(@color), green(@color), blue(@color), .6);
+  &:focus {
+    border-color: @color;
+    outline: 0;
+    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px @{color-rgba}");
+  }
+}
+
+.input-focus-error() {
+    border-color: @error-color;
+    outline: 0;
+    box-shadow: 0 0 0 2px fade(@error-color, 20%);
+}
+
+.input-hover(@color: @input-hover-border-color) {
+    border-color: tint(@color, 20%);
+}
+
+.input-hover-error() {
+    border-color: @error-color;
+}
+
+.input-large() {
+    font-size: @font-size-large;
+    padding: @padding-large-vertical @padding-large-horizontal;
+    height: @input-height-large;
+}
+
+.input-small() {
+    font-size: @font-size-small;
+    padding: @padding-small-vertical @padding-small-horizontal;
+    height: @input-height-small;
+}
+
+.input-error() {
+    border: 1px solid @error-color;
+    &:hover {
+        .input-hover-error;
+    }
+    &:focus {
+        .input-focus-error;
+    }
+}
+
+.input-disabled() {
+    background-color: @input-bg-disabled;
+    opacity: 1;
+    cursor: @cursor-disabled;
+    color: rgba(0, 0, 0, 0.25);
+    &:hover {
+        .input-hover(@input-border-color);
+    }
+}
+
+.input() {
+    display: inline-block;
+    width: 100%;
+    height: @input-height-base;
+    padding: @padding-base-vertical @padding-base-horizontal;
+    font-size: @font-size-base;
+    line-height: @line-height-base;
+    color: @input-color;
+    background-color: @input-bg;
+    background-image: none;
+    border: 1px solid @input-border-color;
+    border-radius: @input-border-radius;
+    box-sizing: border-box;
+    .box-shadow(inset 0 1px 1px rgba(0, 0, 0, .075));
+    .transition(~"border-color ease-in-out .3s, box-shadow ease-in-out .3s");
+    &:hover {
+        .input-hover();
+    }
+
+    .input-focus();
+    // Placeholder
+    .placeholder();
+    // Unstyle the caret on `<select>`s in IE10+.
+    &::-ms-expand {
+        border: 0;
+        background-color: transparent;
+    }
+    &[disabled],
+    &[readonly],
+    fieldset[disabled] & {
+        background-color: @input-bg-disabled;
+        opacity: 1; // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
+    }
+    &[disabled],
+    fieldset[disabled] & {
+        .input-disabled();
+    }
+
+    &-large {
+        .input-large();
+    }
+
+    &-small {
+        .input-small();
+    }
+
+    // Reset height for textarea
+    textarea& {
+        max-width: 100%;
+        height: auto;
+        vertical-align: bottom;
+        font-size: @font-size-base;
+    }
+}
+
+.input-group(@inputClass) {
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    position: relative;
+    font-size: @font-size-base;
+    
+    &-large {
+        font-size: @font-size-large;
+    }
+
+    &[class*="col-"] {
+        float: none;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    > [class*="col-"] {
+        padding-right: 8px;
+    }
+
+    &-prepend,
+    &-append,
+    > .@{inputClass} {
+        display: table-cell;
+
+        &:not(:first-child):not(:last-child) {
+            border-radius: 0;
+        }
+    }
+
+    &-prepend .@{xcui-prefix}-btn,
+    &-append .@{xcui-prefix}-btn
+    {
+        border-color: transparent;
+        background-color: transparent;
+        color: inherit;
+        margin: -(@padding-base-vertical + 1) (-@padding-base-horizontal);
+    }
+
+    &-prepend,
+    &-append
+    {
+        width: 1px;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .@{inputClass} {
+        width: 100%;
+        float: left;
+        margin-bottom: 0;
+        position: relative;
+        z-index: 2;
+    }
+
+    &-prepend,
+    &-append
+    {
+        padding: @padding-base-vertical @padding-base-horizontal;
+        font-size: inherit;
+        font-weight: normal;
+        line-height: 1;
+        color: @input-color;
+        text-align: center;
+        background-color: #eee;
+        border: 1px solid @input-border-color;
+        border-radius: @border-radius-base;
+
+        .@{xcui-prefix}-select {
+            margin: -(@padding-base-vertical + 1) (-@padding-base-horizontal);  // lesshint spaceAroundOperator: false
+
+            &-selection {
+                background-color: inherit;
+                margin: -1px;
+                border: 1px solid transparent;
+            }
+
+            &-visible .@{xcui-prefix}-select-selection{
+                box-shadow: none;
+            }
+        }
+    }
+
+    > span > .@{inputClass}:first-child,
+    > .@{inputClass}:first-child,
+    &-prepend
+    {
+        border-bottom-right-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+
+        .@{xcui-prefix}-select .@{xcui-prefix}-select-selection {
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+        }
+    }
+
+    &-prepend {
+        border-right: 0;
+    }
+    &-append {
+        border-left: 0;
+    }
+
+    > .@{inputClass}:last-child,
+    &-append
+    {
+        border-bottom-left-radius: 0 !important;
+        border-top-left-radius: 0 !important;
+
+        .@{xcui-prefix}-select .@{xcui-prefix}-select-selection {
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+        }
+    }
+
+    &-large .@{inputClass},
+    &-large > &-prepend,
+    &-large > &-append
+    {
+        .input-large();
+    }
+
+    &-small .@{inputClass},
+    &-small > &-prepend,
+    &-small > &-append
+    {
+        .input-small();
+    }
+}
+
+.input-group-error{
+    &-prepend,
+    &-append
+    {
+        background-color: #fff;
+        border: 1px solid @error-color;
+        .@{xcui-prefix}-select {
+            &-selection {
+                background-color: inherit;
+                border: 1px solid transparent;
+            }
+        }
+    }
+    &-prepend {
+        border-right: 0;
+    }
+    &-append {
+        border-left: 0;
+    }
+}
+
+
+
+
+
+

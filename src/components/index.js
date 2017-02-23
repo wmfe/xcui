@@ -3,7 +3,11 @@
  */
 import Datepicker from './datepicker';
 import DateRangePicker from './daterangepicker';
+import Input from './input';
 import InputNumber from './inputNumber';
+import Textarea from './textarea';
+import Checkbox from './checkbox';
+import CheckboxGroup from './checkbox-group';
 import Loading from './loading';
 import Message from './message';
 import Modal from './modal';
@@ -16,7 +20,9 @@ import Suggestion from './suggestion';
 import Tag from './tag';
 import Tooltip from './tooltip';
 import ScrollTop from './scrolltop';
-import Button from './button';
+import {Button, ButtonGroup} from './button';
+import {Row, Col} from './layout';
+import Icon from './icon';
 
 import xcuiInstall from './install.js';
 
@@ -42,7 +48,14 @@ const install = (Vue) => {
     Vue.component(Tooltip.name, Tooltip);
     Vue.component(ScrollTop.name, ScrollTop);
     Vue.component(Button.name, Button);
-
+    Vue.component(ButtonGroup.name, ButtonGroup);
+    Vue.component(Icon.name, Icon);
+    Vue.component(Row.name, Row);
+    Vue.component(Col.name, Col);
+    Vue.component(Input.name, Input);
+    Vue.component(Textarea.name, Textarea);
+    Vue.component(Checkbox.name, Checkbox);
+    Vue.component(CheckboxGroup.name, CheckboxGroup);
     Vue.use(xcuiInstall);
 };
 

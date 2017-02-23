@@ -1,0 +1,100 @@
+<template>
+    <div :class="[
+    'xcui-input-wrap',
+    size ? 'xcui-input-wrap-' + size : '',
+    {
+      'is-disabled': disabled,
+      'xcui-input-group': $slots.prepend || $slots.append
+    }
+    ]">
+        <div class="xcui-input-group-prepend" v-if="$slots.prepend">
+            <slot name="prepend"></slot>
+        </div>
+        <i class="xcui-icon xcui-input-icon" :class="[icon ? 'xcui-icon-' + icon : '']" v-if="icon" @click="handleIconClick"></i>
+        <input :class="cls"
+            :type="type"
+            :name="name"
+            :placeholder="placeholder"
+            :disabled="disabled"
+            :readonly="readonly"
+            :maxlength="maxlength"
+            :minlength="minlength"
+            :autofocus="autofocus"
+            :form="form"
+            :value="value"
+            ref="input"
+            @input="handleInput"
+            @focus="handleFocus"
+            @blur="handleBlur"
+            @keyup.enter="handleEnter"
+            @change="handleChange">
+        <div class="xcui-input-group-append" v-if="$slots.append">
+            <slot name="append"></slot>
+        </div>
+    </div>
+</template>
+<script>
+    export default {
+        name: 'xcui-input',
+        props: {
+            value: [String, Number],
+            placeholder: String,
+            size: String,
+            readonly: String,
+            autofocus: Boolean,
+            icon: String,
+            disabled: Boolean,
+            name: String,
+            form: String,
+            maxlength: Number,
+            minlength: Number
+        },
+        data() {
+            return {
+                currentValue: this.value
+            };
+        },
+        computed: {
+            cls() {
+                let cls = ['xcui-input'];
+                this.size && cls.push(`xcui-input-${this.size}`);
+                this.disabled && cls.push('xcui-input-disabled');
+                return cls.join(' ');
+            },
+            validating() {
+                return this.$parent.validating;
+            }
+        },
+        methods: {
+            handleBlur(e) {
+                this.$emit('blur', e);
+                // this.dispatch('form-item', 'xcui.form.blur', [this.currentValue]);
+            },
+            handleChange(e) {
+                this.$emit('change', e);
+            },
+            handleEnter(e) {
+                this.$emit('enter', e);
+            },
+            handleIconClick(e) {
+                !this.disabled && this.$emit('click', e);
+            },
+            handleFocus(e) {
+                this.$emit('focus', e);
+            },
+            handleInput(e) {
+                this.currentValue = e.target.value;
+            }
+        },
+        watch: {
+            value(val, oldVal) {
+                this.currentValue = val;
+            },
+            currentValue(val, oldVal) {
+                this.$emit('input', val);
+                this.$emit('change', val);
+                // this.dispatch('form-item', 'xcui.form.change', [val]);
+            }
+        }
+    };
+</script>

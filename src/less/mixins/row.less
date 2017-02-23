@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+@row-prefix-cls: ~"@{xcui-prefix}-row";
+
+.generate-row(@gutter: @grid-gutter-width) {
+    position: relative;
+    box-sizing: border-box;
+    margin-left: (@gutter / -2);
+    margin-right: (@gutter / -2);
+    height: auto;
+    .clearfix;
+}
+
+

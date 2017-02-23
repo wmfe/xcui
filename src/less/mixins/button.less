@@ -1,7 +1,13 @@
+@charset "UTF-8";
+
 .button-size(@padding;@font-size;@border-radius) {
   font-size: @font-size;
   padding: @padding;
   border-radius: @border-radius;
+}
+
+.button-dashed() {
+  border: 1px dashed;
 }
 
 .button-color(@color;@background;@border) {
@@ -27,8 +33,7 @@
   .button-color(@color; @background; @border);
   &:hover,
   &:focus {
-    .button-color(@background;@color;@background);
-    //.button-color(fade(@color, 85%); @background; fade(@background, 85%));
+    .button-color(@color;fade(@background, 80%); fade(@background, 80%));
   }
 
   &:active,
@@ -71,7 +76,7 @@
 
   &.disabled,
   &[disabled] {
-    cursor: not-allowed;
+    cursor: @cursor-disabled;
     > * {
       pointer-events: none;
     }
@@ -97,4 +102,14 @@
   &.active {
     .button-color(fade(@brand-primary, 65%); @btn-default-bg; fade(@brand-primary, 65%));
   }
+  &.disabled,
+    &[disabled] {
+      &,
+      &:hover,
+      &:focus,
+      &:active,
+      &.active {
+        .button-color(@btn-disable-color; @btn-default-bg; @btn-default-border);
+      }
+    }
 }

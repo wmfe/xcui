@@ -6,6 +6,7 @@
 import VueRouter from 'vue-router';
 import Home from './Home';
 import Homecontent from './demos/homeContent';
+import Layout from './demos/layout';
 import Pagination from './demos/pagination';
 import Loading from './demos/loading';
 import Popover from './demos/popover';
@@ -22,6 +23,10 @@ import Progress from './demos/progress';
 import PageLoading from './demos/pageloading';
 import ScrollTop from './demos/scrolltop';
 import Button from './demos/button';
+import Icon from './demos/icon';
+import Input from './demos/input';
+import Textarea from './demos/textarea';
+import Checkbox from './demos/checkbox';
 
 const router = new VueRouter({
     routes: [{
@@ -32,11 +37,26 @@ const router = new VueRouter({
                 path: '/home',
                 component: Homecontent
             }, {
+                path: '/component/layout',
+                component: Layout
+            }, {
                 path: '/component/pagination',
                 component: Pagination
             }, {
+                path: '/component/icon',
+                component: Icon
+            }, {
                 path: '/component/button',
                 component: Button
+            }, {
+                path: '/component/input',
+                component: Input
+            }, {
+                path: '/component/textarea',
+                component: Textarea
+            }, {
+                path: '/component/checkbox',
+                component: Checkbox
             }, {
                 path: '/component/popover',
                 component: Popover

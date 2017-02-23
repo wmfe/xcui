@@ -79,6 +79,6 @@ module.exports = {
         formatter: require('eslint-friendly-formatter')
     },
     plugins: [
-        new ExtractTextPlugin("bootstrap.css")
+        new ExtractTextPlugin("xcui.css")
     ]
 };

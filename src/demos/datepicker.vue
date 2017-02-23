@@ -136,11 +136,6 @@ export default {
 };
 </script>
 <style lang="less">
-    p{
-        padding-left:30px;
-        font-size: 14px;
-        color: #666;
-    }
     .class-name{
         width:200px;
     }
