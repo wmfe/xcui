@@ -1,112 +1,137 @@
 <template lang="md">
-    # Input 输入框
+# Input 输入框
 
-    通过鼠标或键盘输入内容，是最基础的表单域的包装。
+通过鼠标或键盘输入内容，是最基础的表单域的包装。
 
-    ## 如何使用
-    
-    - 需要用户输入表单域内容。
-    - 提供组合型输入框和大小选择。
+## 如何使用
 
-    <demo>
-        <example title="基础用法">
-            <div style="width:147px">
-                <xcui-input placeholder="请输入内容" v-model="input"></xcui-input>
-            </div>
-            <xcui-info>
-                最基本的用法，使用`<xcui-input>`标签即可创建一个输入框。使用`v-model`赋值。默认的`input`宽度是`100%`。
-            </xcui-info>
-        </example>
-        <example title="三种尺寸">
-            <xcui-row gutter="32">
-                <xcui-col span="4">
-                    <xcui-input placeholder="Large Size" v-model="input1" size="large"></xcui-input>
-                </xcui-col>
-                <xcui-col span="4">
-                    <xcui-input placeholder="Default Size" v-model="input2"></xcui-input>
-                </xcui-col>
-                <xcui-col span="4">
-                    <xcui-input placeholder="Small Size" v-model="input3" size="small"></xcui-input>
-                </xcui-col>
-            </xcui-row>
-            <xcui-info>
-                输入框有三种尺寸：`large`, `small` 和默认大小。分别的高度为`40px`, `34px`, `30px`。
-            </xcui-info>
-        </example>
-        <example title="带icon的输入框">
-            <xcui-row>
-                <xcui-col span="4">
-                    <xcui-input placeholder="请输入进行搜索" icon="search"></xcui-input>
-                </xcui-col>
-            </xcui-row>
-            <xcui-info>
-                通过设置`icon`属性，可以在输入框右边增加相应图标。点击图标会触发`click`事件。
-            </xcui-info>
-        </example>
-        <example title="禁用状态">
-            <xcui-row>
-                <xcui-col span="4">
-                    <xcui-input :disabled="true" placeholder="请输入内容" icon="paper-airplane"></xcui-input>
-                </xcui-col>
-            </xcui-row>
-            <xcui-info>
-                通过设置`disabled`属性可以将输入框置为禁用状态。在禁用状态下点击图标，不会触发`click`事件。
-            </xcui-info>
-        </example>
-        <example title="复合型输入框">
-            <xcui-row>
-                <xcui-col span="8">
-                    <xcui-input placeholder="请输入网址">
-                        <span slot="prepend">http://</span>
-                        <span slot="append">.com</span>
-                    </xcui-input>
-                </xcui-col>
-            </xcui-row>
-            <xcui-row style="margin-top: 15px">
-                <xcui-col span="8">
-                    <xcui-input placeholder="请输入网址">
-                        <span slot="append"><xcui-icon name="share"></xcui-icon></span>
-                    </xcui-input>
-                </xcui-col>
-            </xcui-row>
-            <xcui-info>
-                通过在`input`组件内部添加名为`prepend`和`append`的slot，可用于配置slot于配置一些特定组合的复合型输入框。
-            </xcui-info>
-        </example>
-    </demo>
+- 需要用户输入表单域内容。
+- 提供组合型输入框和大小选择。
 
-    ## Props
-    | 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
-    |-----|-----|-----|-----|----|----|----|
-    |value|String, Number|无|和`v-model`的绑定值|必选||
-    |size|String|无|输入框大小|可选|`large`, `small`|
-    |placeholder|String|无|原生属性，输入框默认文本，用于提示|可选||
-    |disabled|Boolean|false|是否禁用|可选||
-    |icon|String|无|输入框右侧图标名称|可选||
-    |readonly|Boolean|false|原生属性，是否只读|可选||
-    |autofocus|Boolean|false|原生属性，自动获取焦点|可选||
-    |name|String|无|原生属性|可选||
-    |form|String|无|原生属性|可选||
-    |maxlength|Number|无|原生属性|可选||
-    |minlength|Number|无|原生属性|可选||
 
-    ## Events
+## 基础用法
 
-    |事件名|说明|返回值|设置属性|
-    |---|---|---|---|
-    |click|设置`icon`属性后，点击图标时触发|无|`@click`|
-    |enter|按下回车键时触发|无|`@keyup.enter`|
-    |input|输入时触发|无|`@input`|
-    |change|数据改变时触发|event|`@change`|
-    |focus|输入框获得焦点时触发|无|`@focus`|
-    |blur|输入框失去焦点时触发|无|`@blur`|
+::: demo 最基本的用法，使用`<xcui-input>`标签即可创建一个输入框。使用`v-model`赋值。默认的`input`宽度是`100%`。
 
-    ## Slot
-    
-    |名称|说明|
-    |---|---|
-    |prepend|前置内容|
-    |append|后置内容|
+```html
+<tpl>
+    <div style="width:147px">
+        <xcui-input placeholder="请输入内容" v-model="input"></xcui-input>
+    </div>
+</tpl>
+```
+
+:::
+
+## 三种尺寸
+
+::: demo 输入框有三种尺寸：`large`, `small` 和默认大小。分别的高度为`40px`, `34px`, `30px`。
+
+```html
+<tpl>
+    <xcui-row gutter="32">
+        <xcui-col span="4">
+            <xcui-input placeholder="Large Size" v-model="input1" size="large"></xcui-input>
+        </xcui-col>
+        <xcui-col span="4">
+            <xcui-input placeholder="Default Size" v-model="input2"></xcui-input>
+        </xcui-col>
+        <xcui-col span="4">
+            <xcui-input placeholder="Small Size" v-model="input3" size="small"></xcui-input>
+        </xcui-col>
+    </xcui-row>
+</tpl>
+```
+
+:::
+
+
+## 带icon的输入框
+
+::: demo 通过设置`icon`属性，可以在输入框右边增加相应图标。点击图标会触发`click`事件。
+<tpl>
+    <xcui-row>
+        <xcui-col span="4">
+            <xcui-input placeholder="请输入进行搜索" icon="search"></xcui-input>
+        </xcui-col>
+    </xcui-row>
+</tpl>
+:::
+
+## 禁用状态
+
+::: demo 通过设置`disabled`属性可以将输入框置为禁用状态。在禁用状态下点击图标，不会触发`click`事件。
+
+```html
+<tpl>
+    <xcui-row>
+        <xcui-col span="4">
+            <xcui-input :disabled="true" placeholder="请输入内容" icon="paper-airplane"></xcui-input>
+        </xcui-col>
+    </xcui-row>
+</tpl>
+```
+
+:::
+
+## 复合型输入框
+
+::: demo 通过在`input`组件内部添加名为`prepend`和`append`的slot，可用于配置slot于配置一些特定组合的复合型输入框。
+
+```html
+<tpl>
+    <xcui-row>
+        <xcui-col span="8">
+            <xcui-input placeholder="请输入网址">
+                <span slot="prepend">http://</span>
+                <span slot="append">.com</span>
+            </xcui-input>
+        </xcui-col>
+    </xcui-row>
+    <xcui-row style="margin-top: 15px">
+        <xcui-col span="8">
+            <xcui-input placeholder="请输入网址">
+                <span slot="append"><xcui-icon name="share"></xcui-icon></span>
+            </xcui-input>
+        </xcui-col>
+    </xcui-row>
+</tpl>
+```
+
+:::
+
+## Props
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
+|-----|-----|-----|-----|----|----|----|
+|value|String, Number|无|和`v-model`的绑定值|必选||
+|size|String|无|输入框大小|可选|`large`, `small`|
+|placeholder|String|无|原生属性，输入框默认文本，用于提示|可选||
+|disabled|Boolean|false|是否禁用|可选||
+|icon|String|无|输入框右侧图标名称|可选||
+|readonly|Boolean|false|原生属性，是否只读|可选||
+|autofocus|Boolean|false|原生属性，自动获取焦点|可选||
+|name|String|无|原生属性|可选||
+|form|String|无|原生属性|可选||
+|maxlength|Number|无|原生属性|可选||
+|minlength|Number|无|原生属性|可选||
+
+## Events
+
+|事件名|说明|返回值|设置属性|
+|---|---|---|---|
+|click|设置`icon`属性后，点击图标时触发|无|`@click`|
+|enter|按下回车键时触发|无|`@keyup.enter`|
+|input|输入时触发|无|`@input`|
+|change|数据改变时触发|event|`@change`|
+|focus|输入框获得焦点时触发|无|`@focus`|
+|blur|输入框失去焦点时触发|无|`@blur`|
+
+## Slot
+
+|名称|说明|
+|---|---|
+|prepend|前置内容|
+|append|后置内容|
 
 </template>
 
