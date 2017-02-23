@@ -174,7 +174,7 @@
                     me.internalValue = me.output([me.year, me.month, me.day, me.hour, me.minute, me.second]);
                 }
                 if (me.type === 'date') {
-                    this.$emit('mutate', this.internalValue, this.oldValue);
+                    this.$emit('input', this.internalValue, this.oldValue);
                     me.showFalse();
                 }
             },
@@ -198,7 +198,7 @@
             ok(e) {
                 e.preventDefault();
                 this.showFalse();
-                this.$emit('mutate', this.internalValue, this.oldValue);
+                this.$emit('input', this.internalValue, this.oldValue);
                 this.internalValue = this.oldValue = this.internalValue || this.oldValue;
                 this.closeBtnNow = false;
             },

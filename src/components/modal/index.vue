@@ -127,7 +127,7 @@ export default {
             return `xcui-modal-size-${this.size}`;
         },
         modalClass() {
-             return `${this.sizeClass} ${this.className}`;
+            return `${this.sizeClass} ${this.className}`;
         }
     },
     methods: {

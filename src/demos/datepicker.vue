@@ -14,7 +14,7 @@
 
 <demo>
     <example title="simple">
-        <xcui-datepicker :value="valueDemo" v-on:mutate="simpleMutate">
+        <xcui-datepicker v-model="valueDemo" @input="onChange">
         </xcui-datepicker>
     </example>
     <p> 最简单的用法，value双向绑定，日期</p>
@@ -22,7 +22,7 @@
     <p>Value值改变时会触发mutate事件。参数为[val, oldVal]，对应新日期和老日期</p>
     <example title="日期格式">
         <xcui-datepicker
-            :value="dateValue"
+            v-model="dateValue"
             format="YYYY-MM-DD"
             :min-date="'2016-01-01'"
             :max-date="'2017-11-10'">
@@ -33,7 +33,7 @@
     <p> max-date：日期可选最大值，值类型同value</p>
       <example title="日期+时间选择">
         <xcui-datepicker
-            :value="datetimeVal1"
+            v-model="datetimeVal1"
             format="YYYY/MM/DD hh:mm:ss"
             :hour-range="'1'"
             :minute-range="'1'"
@@ -51,8 +51,8 @@
             color="pink"
             format="YYYY-MM-DD hh:mm:ss"
             :btn-show="true"
-            @on-change="onChange"
-            :value="datetime.value2"
+            @input="onChange"
+            v-model="datetime.value2"
             :hour-range="'3'">
         </xcui-datepicker>
       </example>
@@ -62,7 +62,7 @@
       <p> btn-show: 按钮是否显示</p>
       <example title="时间选择">
         <xcui-datepicker
-            :value="timeValue"
+            v-model="timeValue"
             format="hh:mm:ss">
         </xcui-datepicker>
       </example>
@@ -86,13 +86,13 @@
 | color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 静态属性 | 可选 |
 | btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
 | class-name | String | 无 | 日历样式，class名字 |  静态属性 | 可选 |
-| onChange | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @onChange | 否 | 可选 |
+| input | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @input | 否 | 可选 |
 </template>
 <script>
 export default {
     data() {
         return {
-            valueDemo: '',
+            valueDemo: '2018-09-09',
             dateValue: 1477980088896,
             timeValue: '',
             datetimeVal1: new Date(),

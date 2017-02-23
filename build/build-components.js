@@ -128,44 +128,44 @@ function build(name, buildPath, isMulti) {
     });
 }
 
-function buildCommon (name, buildPath, isMulti) {
-  var commonConfig = getConfig()
+function buildCommon(name, buildPath, isMulti) {
+    var commonConfig = getConfig()
 
-  commonConfig.plugins = commonConfig.plugins.concat([new webpack.optimize.UglifyJsPlugin({
-    compress: false,
-    mangle: false,
-    beautify: {
-      beautify: true,
-      'indent-level': 2,
-      'quote_style': 1,
-      semicolons: false
+    commonConfig.plugins = commonConfig.plugins.concat([new webpack.optimize.UglifyJsPlugin({
+        compress: false,
+        mangle: false,
+        beautify: {
+            beautify: true,
+            'indent-level': 2,
+            'quote_style': 1,
+            semicolons: false
+        }
+    }),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new ExtractTextPlugin('index.css')])
+
+    if (buildConfig.ignore.indexOf(name) > -1) {
+        return
     }
-  }),
-  new webpack.optimize.OccurenceOrderPlugin(),
-  new ExtractTextPlugin('index.css')])
 
-  if (buildConfig.ignore.indexOf(name) > -1) {
-    return
-  }
-
-  var _name = name
-  var file = buildPath || `../src/components/${name}/index`
-  var _start = new Date().getTime()
-  commonConfig.entry = {}
-  commonConfig.entry[name] = [path.resolve(__dirname, file)]
-  commonConfig.output.libraryTarget = 'umd'
-  commonConfig.output.filename = 'index.js'
-  commonConfig.output.path = path.resolve(__dirname, '../dist/components/' + name.toLowerCase() + '/')
-  webpack(commonConfig, function (err, stats) {
-    var jsonStats = stats.toJson()
-    var assets = jsonStats.assets[0]
-    var offset = Math.round((new Date().getTime() - _start) / 1000)
-    var index = ++number
-    console.log(`[${index < 10 ? ('0' + index) : index}]  `, addWhiteSpace(`${offset}s`, 10), addWhiteSpace('umd ' + _name, 25), `${(_name, assets.size / 1024).toFixed(2)}k`)
-    if (err) {
-      throw err
-    }
-  })
+    var _name = name
+    var file = buildPath || `../src/components/${name}/index`
+    var _start = new Date().getTime()
+    commonConfig.entry = {}
+    commonConfig.entry[name] = [path.resolve(__dirname, file)]
+    commonConfig.output.libraryTarget = 'umd'
+    commonConfig.output.filename = 'index.js'
+    commonConfig.output.path = path.resolve(__dirname, '../dist/components/' + name.toLowerCase() + '/')
+    webpack(commonConfig, function (err, stats) {
+        var jsonStats = stats.toJson()
+        var assets = jsonStats.assets[0]
+        var offset = Math.round((new Date().getTime() - _start) / 1000)
+        var index = ++number
+        console.log(`[${index < 10 ? ('0' + index) : index}]  `, addWhiteSpace(`${offset}s`, 10), addWhiteSpace('umd ' + _name, 25), `${(_name, assets.size / 1024).toFixed(2)}k`)
+        if (err) {
+            throw err
+        }
+    })
 }
 
 function capitalizeFirstLetter(string) {

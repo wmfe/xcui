@@ -11,7 +11,7 @@
 	</div>
 </template>
 <script>
-import EventListener from '../../utils/eventlistener.js';
+import EventListener from '../../utils/eventListener.js';
 /*
  * 缓动公式Quad
  * t: current time（当前时间）

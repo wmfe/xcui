@@ -2,7 +2,7 @@
  * @file PopoverMixin pass event param for eventlistener
  */
 
-import EventListener from '../../utils/eventlistener';
+import EventListener from '../../utils/eventListener';
 
 export default {
     'props': {
@@ -54,13 +54,11 @@ export default {
                     this.position.top = triger.offsetTop + triger.offsetHeight / 2 - popover.offsetHeight / 2;
                     break;
                 case 'bottom':
-                    debugger;
                     this.position.left = triger.offsetLeft - popover.offsetWidth / 2 + triger.offsetWidth / 2;
                     this.position.top = triger.offsetTop + triger.offsetHeight;
                     break;
                 default:
             }
-            debugger;
             popover.style.top = this.position.top + 'px';
             popover.style.left = this.position.left + 'px';
             if (this.firstInit) {
