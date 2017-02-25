@@ -1,41 +1,21 @@
-.ion-keyframes(@name; @arguments) {
-    @-moz-keyframes @name { @arguments(); }
-    @-webkit-keyframes @name { @arguments(); }
-    @keyframes @name { @arguments(); }
-}
-
-.ion-animation(@arguments) {
-    -webkit-animation: @arguments;
-    -moz-animation: @arguments;
-    animation: @arguments;
-}
-
-.ion-transform(@arguments) {
-    -webkit-transform: @arguments;
-    -ms-transform: @arguments;
-    transform: @arguments;
-}
-
 .@{ionicons-prefix}addon-flip-horizontal {
-    .ion-transform(scale(-1, 1));
+    .scale(-1, 1);
 }
 
 .@{ionicons-prefix}addon-flip-vertical {
-    .ion-transform(scale(1, -1));
+    .scale(1, -1);
 }
 
-// .ion-spin {
-    .ion-keyframes(ion-spin; {
-        0% {transform: rotate(0deg)}
-        100% {transform: rotate(359deg)}
-    });
-// }
+.keyframes(ion-spin; {
+    0% {transform: rotate(0deg)}
+    100% {transform: rotate(359deg)}
+});
 
-.xcui-icon-addon-spin {
-    .ion-animation(ion-spin 1s infinite linear);
+.@{ionicons-prefix}addon-spin {
+    .animation(ion-spin 1s infinite linear);
 }
 
-.xcui-icon-addon-pulse {
-    .ion-animation(ion-spin 1s infinite steps(8));
+.@{ionicons-prefix}addon-pulse {
+    .animation(ion-spin 1s infinite steps(8));
 }
 

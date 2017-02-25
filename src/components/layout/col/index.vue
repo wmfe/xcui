@@ -5,10 +5,10 @@
 </template>
 <script>
 
-    const prefixCls = 'xcui-col';
+    const prefixCls = 'x-col';
 
     export default {
-        name: 'xcui-col',
+        name: 'x-col',
         props: {
             span: [Number, String],
             order: [Number, String],

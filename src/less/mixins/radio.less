@@ -1,0 +1,114 @@
+.radio(@radio-prefix-cls: ~"@{xcui-prefix}-radio") {
+    .keyframes(radio; {
+        20%,
+        80%,
+        100% {
+            -webkit-transform: scale(.6);
+            transform: scale(.6)
+        }
+        40% {
+            -webkit-transform: scale(.4);
+            transform: scale(.4)
+        }
+        75% {
+            -webkit-transform: scale(.55);
+            transform: scale(.55)
+        }
+    });
+
+    .radio-item() {
+        .box-sizing(~"border-box");
+        border-radius: 2px;
+        display: inline-block;
+        width: @radio-size;
+        height: @radio-size;
+        left: 0;
+        position: absolute;
+        top: 0;
+    }
+
+    .radio-cbx() {
+        background-color: @radio-bg;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        .scale(0);
+    }
+
+    .@{radio-prefix-cls} {
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        white-space: nowrap;
+        font-size: @font-size-base;
+        + .@{radio-prefix-cls}{
+            margin-left: 15px;
+        }
+
+        .@{radio-prefix-cls}-item {
+            * {
+                .radio-item;
+            }
+            .@{radio-prefix-cls}-background {
+                background-color: #fff;
+                border: solid 1px @radio-bg;
+                -webkit-border-radius: 50%;
+                border-radius: 50%;
+                .transition(~"all .3s ease-in");
+            }
+            
+            .@{radio-prefix-cls}-cbx {
+                .radio-cbx;
+            }
+            
+            .@{radio-prefix-cls}-input {
+                opacity: 0;
+                outline: none;
+                -ms-touch-action: none;
+                touch-action: none;
+                padding: 0;
+            }
+
+            &.is-checked {
+                .@{radio-prefix-cls}-background{
+                    .box-shadow(~"0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)");
+                }
+                .@{radio-prefix-cls}-cbx {
+                    .animation(~"radio .5s ease-in-out 1ms 1 normal forwards");
+                }
+            }
+
+            &.is-disabled {
+                .@{radio-prefix-cls}-background{
+                    background-color: @radio-bg-disabled;
+                    border: 1px solid @radio-text-disabled;
+                    .box-shadow(~"0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)");
+                }
+                .@{radio-prefix-cls}-cbx {
+                    background-color: @radio-text-disabled;
+                }
+                &.is-checked{
+                    .@{radio-prefix-cls}-cbx {
+                        
+                    }
+                }
+                + .@{radio-prefix-cls}-text {
+                    cursor: @cursor-disabled;
+                    color: @radio-text-disabled;
+                }
+            }
+        }
+
+        .@{radio-prefix-cls}-text {
+            cursor: pointer;
+            display: inline-block;
+            height: @radio-text-size;
+            left: 0;
+            line-height: @radio-text-size;
+            padding-left: 23px;
+            position: relative;
+            text-align: left;
+            top: 0;
+        }
+        
+    }
+}

@@ -3,7 +3,7 @@
 </template>
 <script>
     export default {
-        name: 'xcui-icon',
+        name: 'x-icon',
         props: {
             name: String,
             size: [Number, String],
@@ -22,12 +22,12 @@
         },
         computed: {
             classes() {
-                let cls = `xcui-icon xcui-icon-${this.name}`;
+                let cls = `x-icon x-icon-${this.name}`;
                 if (this.animate) {
-                    cls += ` xcui-icon-addon-${this.animate}`;
+                    cls += ` x-icon-addon-${this.animate}`;
                 }
                 if (this.flip) {
-                    cls += ` xcui-icon-addon-flip-${this.flip}`;
+                    cls += ` x-icon-addon-flip-${this.flip}`;
                 }
                 return cls;
             },

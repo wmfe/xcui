@@ -4,10 +4,10 @@
     </div>
 </template>
 <script>
-    const prefixCls = 'xcui-row';
+    const prefixCls = 'x-row';
 
     export default {
-        name: 'xcui-row',
+        name: 'x-row',
         props: {
             type: {
                 validator(value) {

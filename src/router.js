@@ -27,6 +27,7 @@ import Icon from './demos/icon';
 import Input from './demos/input';
 import Textarea from './demos/textarea';
 import Checkbox from './demos/checkbox';
+import Radio from './demos/radio';
 
 const router = new VueRouter({
     routes: [{
@@ -57,6 +58,9 @@ const router = new VueRouter({
             }, {
                 path: '/component/checkbox',
                 component: Checkbox
+            }, {
+                path: '/component/radio',
+                component: Radio
             }, {
                 path: '/component/popover',
                 component: Popover

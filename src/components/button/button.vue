@@ -1,13 +1,13 @@
 <template>
     <button :class="cls" :disabled="disabled" @click="handleClick">
-        <i class="xcui-icon xcui-icon-load-c xcui-icon-addon-spin" v-if="loading"></i>
-        <i :class="'xcui-icon xcui-icon-' + icon" v-if="icon && !loading"></i>
+        <i class="x-icon x-icon-load-c x-icon-addon-spin" v-if="loading"></i>
+        <i :class="'x-icon x-icon-' + icon" v-if="icon && !loading"></i>
         <span v-if="$slots.default"><slot></slot></span>
     </button>
 </template>
 <script>
     export default{
-        name: 'xcui-button',
+        name: 'x-button',
         props: {
             type: {
                 type: String,
@@ -26,10 +26,10 @@
         },
         computed: {
             cls() {
-                let cls = ['xcui-btn'];
-                this.type && cls.push(`xcui-btn-${this.type}`);
-                this.size && cls.push(`xcui-btn-${this.size}`);
-                this.loading && cls.push('xcui-btn-loading');
+                let cls = ['x-btn'];
+                this.type && cls.push(`x-btn-${this.type}`);
+                this.size && cls.push(`x-btn-${this.size}`);
+                this.loading && cls.push('x-btn-loading');
                 return cls.join(' ');
             }
         },

@@ -16,32 +16,32 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 
 ```html
 <tpl>
-    <xcui-row>
-        <xcui-col span="24"><div class="bg">24: 100%</div></xcui-col>
-    </xcui-row>
-    <xcui-row>
-        <xcui-col span="12"><div class="bg">12: 50%</div></xcui-col>
-        <xcui-col span="12"><div class="bg light">12: 50%</div></xcui-col>
-    </xcui-row>
-    <xcui-row>
-        <xcui-col span="8"><div class="bg">8: 33.33%</div></xcui-col>
-        <xcui-col span="8"><div class="bg light">8: 33.33%</div></xcui-col>
-        <xcui-col span="8"><div class="bg">8: 33.33%</div></xcui-col>
-    </xcui-row>
-    <xcui-row>
-        <xcui-col span="6"><div class="bg">6: 25%</div></xcui-col>
-        <xcui-col span="6"><div class="bg light">6: 25%</div></xcui-col>
-        <xcui-col span="6"><div class="bg">6: 25%</div></xcui-col>
-        <xcui-col span="6"><div class="bg light">6: 25%</div></xcui-col>
-    </xcui-row>
-    <xcui-row>
-        <xcui-col span="4"><div class="bg">4: 16.66%</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">4: 16.66%</div></xcui-col>
-        <xcui-col span="4"><div class="bg">4: 16.66%</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">4: 16.66%</div></xcui-col>
-        <xcui-col span="4"><div class="bg">4: 16.66%</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">4: 16.66%</div></xcui-col>
-    </xcui-row>
+    <x-row>
+        <x-col span="24"><div class="bg">24: 100%</div></x-col>
+    </x-row>
+    <x-row>
+        <x-col span="12"><div class="bg">12: 50%</div></x-col>
+        <x-col span="12"><div class="bg light">12: 50%</div></x-col>
+    </x-row>
+    <x-row>
+        <x-col span="8"><div class="bg">8: 33.33%</div></x-col>
+        <x-col span="8"><div class="bg light">8: 33.33%</div></x-col>
+        <x-col span="8"><div class="bg">8: 33.33%</div></x-col>
+    </x-row>
+    <x-row>
+        <x-col span="6"><div class="bg">6: 25%</div></x-col>
+        <x-col span="6"><div class="bg light">6: 25%</div></x-col>
+        <x-col span="6"><div class="bg">6: 25%</div></x-col>
+        <x-col span="6"><div class="bg light">6: 25%</div></x-col>
+    </x-row>
+    <x-row>
+        <x-col span="4"><div class="bg">4: 16.66%</div></x-col>
+        <x-col span="4"><div class="bg light">4: 16.66%</div></x-col>
+        <x-col span="4"><div class="bg">4: 16.66%</div></x-col>
+        <x-col span="4"><div class="bg light">4: 16.66%</div></x-col>
+        <x-col span="4"><div class="bg">4: 16.66%</div></x-col>
+        <x-col span="4"><div class="bg light">4: 16.66%</div></x-col>
+    </x-row>
 </tpl>
 ```
 :::
@@ -53,12 +53,12 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 
 ```html
 <tpl>
-    <xcui-row gutter="16">
-        <xcui-col span="6"><div class="bg">col-6</div></xcui-col>
-        <xcui-col span="6"><div class="bg light">col-6</div></xcui-col>
-        <xcui-col span="6"><div class="bg">col-6</div></xcui-col>
-        <xcui-col span="6"><div class="bg light">col-6</div></xcui-col>
-    </xcui-row>
+    <x-row gutter="16">
+        <x-col span="6"><div class="bg">col-6</div></x-col>
+        <x-col span="6"><div class="bg light">col-6</div></x-col>
+        <x-col span="6"><div class="bg">col-6</div></x-col>
+        <x-col span="6"><div class="bg light">col-6</div></x-col>
+    </x-row>
 </tpl>
 ```
 :::
@@ -71,10 +71,10 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 
 ```html
 <tpl>
-    <xcui-row>
-        <xcui-col span="8"><div class="bg">col-8</div></xcui-col>
-        <xcui-col span="8" offset="8"><div class="bg">col-8 col-offset-8</div></xcui-col>
-    </xcui-row>
+    <x-row>
+        <x-col span="8"><div class="bg">col-8</div></x-col>
+        <x-col span="8" offset="8"><div class="bg">col-8 col-offset-8</div></x-col>
+    </x-row>
 </tpl>
 ```
 :::
@@ -86,10 +86,10 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 
 ```html
 <tpl>
-    <xcui-row>
-        <xcui-col span="18" push="6"><div class="bg light">col-18 col-push-6</div></xcui-col>
-        <xcui-col span="6" pull="18"><div class="bg">col-6 col-pull-18</div></xcui-col>
-    </xcui-row>
+    <x-row>
+        <x-col span="18" push="6"><div class="bg light">col-18 col-push-6</div></x-col>
+        <x-col span="6" pull="18"><div class="bg">col-6 col-pull-18</div></x-col>
+    </x-row>
 </tpl>
 ```
 :::
@@ -101,40 +101,40 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 ```html
 <tpl>
     <p>向左排列</p>
-    <xcui-row type="flex" justify="start">
-        <xcui-col span="4"><div class="bg">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">col-4</div></xcui-col>
-    </xcui-row>
+    <x-row type="flex" justify="start">
+        <x-col span="4"><div class="bg">col-4</div></x-col>
+        <x-col span="4"><div class="bg light">col-4</div></x-col>
+        <x-col span="4"><div class="bg">col-4</div></x-col>
+        <x-col span="4"><div class="bg light">col-4</div></x-col>
+    </x-row>
     <p>居中排列</p>
-    <xcui-row type="flex" justify="center">
-        <xcui-col span="4"><div class="bg">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">col-4</div></xcui-col>
-    </xcui-row>
+    <x-row type="flex" justify="center">
+        <x-col span="4"><div class="bg">col-4</div></x-col>
+        <x-col span="4"><div class="bg light">col-4</div></x-col>
+        <x-col span="4"><div class="bg">col-4</div></x-col>
+        <x-col span="4"><div class="bg light">col-4</div></x-col>
+    </x-row>
     <p>向右排列</p>
-    <xcui-row type="flex" justify="end">
-        <xcui-col span="4"><div class="bg">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">col-4</div></xcui-col>
-    </xcui-row>
+    <x-row type="flex" justify="end">
+        <x-col span="4"><div class="bg">col-4</div></x-col>
+        <x-col span="4"><div class="bg light">col-4</div></x-col>
+        <x-col span="4"><div class="bg">col-4</div></x-col>
+        <x-col span="4"><div class="bg light">col-4</div></x-col>
+    </x-row>
     <p>等宽排列</p>
-    <xcui-row type="flex" justify="space-between">
-        <xcui-col span="4"><div class="bg">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">col-4</div></xcui-col>
-    </xcui-row>
+    <x-row type="flex" justify="space-between">
+        <x-col span="4"><div class="bg">col-4</div></x-col>
+        <x-col span="4"><div class="bg light">col-4</div></x-col>
+        <x-col span="4"><div class="bg">col-4</div></x-col>
+        <x-col span="4"><div class="bg light">col-4</div></x-col>
+    </x-row>
     <p>分散排列</p>
-    <xcui-row type="flex" justify="space-around">
-        <xcui-col span="4"><div class="bg">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light">col-4</div></xcui-col>
-    </xcui-row>
+    <x-row type="flex" justify="space-around">
+        <x-col span="4"><div class="bg">col-4</div></x-col>
+        <x-col span="4"><div class="bg light">col-4</div></x-col>
+        <x-col span="4"><div class="bg">col-4</div></x-col>
+        <x-col span="4"><div class="bg light">col-4</div></x-col>
+    </x-row>
 </tpl>
 ```
 
@@ -148,26 +148,26 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 ```html
 <tpl>
     <p>顶部对齐</p>
-    <xcui-row type="flex" justify="center" align="top">
-        <xcui-col span="4"><div class="bg" style="height: 80px">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light" style="height: 30px">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg" style="height: 100px">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light" style="height: 60px">col-4</div></xcui-col>
-    </xcui-row>
+    <x-row type="flex" justify="center" align="top">
+        <x-col span="4"><div class="bg" style="height: 80px">col-4</div></x-col>
+        <x-col span="4"><div class="bg light" style="height: 30px">col-4</div></x-col>
+        <x-col span="4"><div class="bg" style="height: 100px">col-4</div></x-col>
+        <x-col span="4"><div class="bg light" style="height: 60px">col-4</div></x-col>
+    </x-row>
     <p>底部对齐</p>
-    <xcui-row type="flex" justify="center" align="bottom">
-        <xcui-col span="4"><div class="bg" style="height: 80px">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light" style="height: 30px">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg" style="height: 100px">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light" style="height: 60px">col-4</div></xcui-col>
-    </xcui-row>
+    <x-row type="flex" justify="center" align="bottom">
+        <x-col span="4"><div class="bg" style="height: 80px">col-4</div></x-col>
+        <x-col span="4"><div class="bg light" style="height: 30px">col-4</div></x-col>
+        <x-col span="4"><div class="bg" style="height: 100px">col-4</div></x-col>
+        <x-col span="4"><div class="bg light" style="height: 60px">col-4</div></x-col>
+    </x-row>
     <p>居中对齐</p>
-    <xcui-row type="flex" justify="center" align="middle">
-        <xcui-col span="4"><div class="bg" style="height: 80px">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light" style="height: 30px">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg" style="height: 100px">col-4</div></xcui-col>
-        <xcui-col span="4"><div class="bg light" style="height: 60px">col-4</div></xcui-col>
-    </xcui-row>
+    <x-row type="flex" justify="center" align="middle">
+        <x-col span="4"><div class="bg" style="height: 80px">col-4</div></x-col>
+        <x-col span="4"><div class="bg light" style="height: 30px">col-4</div></x-col>
+        <x-col span="4"><div class="bg" style="height: 100px">col-4</div></x-col>
+        <x-col span="4"><div class="bg light" style="height: 60px">col-4</div></x-col>
+    </x-row>
 </tpl>
 
 ```
@@ -180,11 +180,11 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 
 ```html
 <tpl>
-    <xcui-row>
-        <xcui-col :xs="2" :sm="4" :md="6" :lg="8"><div class="bg">col</div></xcui-col>
-        <xcui-col :xs="20" :sm="16" :md="12" :lg="8"><div class="bg light">col</div></xcui-col>
-        <xcui-col :xs="2" :sm="4" :md="6" :lg="8"><div class="bg">col</div></xcui-col>
-    </xcui-row>
+    <x-row>
+        <x-col :xs="2" :sm="4" :md="6" :lg="8"><div class="bg">col</div></x-col>
+        <x-col :xs="20" :sm="16" :md="12" :lg="8"><div class="bg light">col</div></x-col>
+        <x-col :xs="2" :sm="4" :md="6" :lg="8"><div class="bg">col</div></x-col>
+    </x-row>
 </tpl>
 ```
 
@@ -196,11 +196,11 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 
 ```html
 <tpl>
-    <xcui-row>
-        <xcui-col :xs="{ span: 5, offset: 1 }" :lg="{ span: 6, offset: 2 }"><div class="bg">col</div></xcui-col>
-        <xcui-col :xs="{ span: 11, offset: 1 }" :lg="{ span: 6, offset: 2 }"><div class="bg">col</div></xcui-col>
-        <xcui-col :xs="{ span: 5, offset: 1 }" :lg="{ span: 6, offset: 2 }"><div class="bg">col</div></xcui-col>
-    </xcui-row>
+    <x-row>
+        <x-col :xs="{ span: 5, offset: 1 }" :lg="{ span: 6, offset: 2 }"><div class="bg">col</div></x-col>
+        <x-col :xs="{ span: 11, offset: 1 }" :lg="{ span: 6, offset: 2 }"><div class="bg">col</div></x-col>
+        <x-col :xs="{ span: 5, offset: 1 }" :lg="{ span: 6, offset: 2 }"><div class="bg">col</div></x-col>
+    </x-row>
 </tpl>
 ```       
 
@@ -241,7 +241,7 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 </script>
 <style lang="less">
     .demo-layout {
-        .xcui-row {
+        .x-row {
             margin-bottom: 10px;
         }
         .bg {

@@ -1,16 +1,16 @@
 <template>
     <div :class="[
-    'xcui-input-wrap',
-    size ? 'xcui-input-wrap-' + size : '',
+    'x-input-wrap',
+    size ? 'x-input-wrap-' + size : '',
     {
       'is-disabled': disabled,
-      'xcui-input-group': $slots.prepend || $slots.append
+      'x-input-group': $slots.prepend || $slots.append
     }
     ]">
-        <div class="xcui-input-group-prepend" v-if="$slots.prepend">
+        <div class="x-input-group-prepend" v-if="$slots.prepend">
             <slot name="prepend"></slot>
         </div>
-        <i class="xcui-icon xcui-input-icon" :class="[icon ? 'xcui-icon-' + icon : '']" v-if="icon" @click="handleIconClick"></i>
+        <i class="x-icon x-input-icon" :class="[icon ? 'x-icon-' + icon : '']" v-if="icon" @click="handleIconClick"></i>
         <input :class="cls"
             :type="type"
             :name="name"
@@ -28,14 +28,14 @@
             @blur="handleBlur"
             @keyup.enter="handleEnter"
             @change="handleChange">
-        <div class="xcui-input-group-append" v-if="$slots.append">
+        <div class="x-input-group-append" v-if="$slots.append">
             <slot name="append"></slot>
         </div>
     </div>
 </template>
 <script>
     export default {
-        name: 'xcui-input',
+        name: 'x-input',
         props: {
             value: [String, Number],
             placeholder: String,
@@ -56,9 +56,9 @@
         },
         computed: {
             cls() {
-                let cls = ['xcui-input'];
-                this.size && cls.push(`xcui-input-${this.size}`);
-                this.disabled && cls.push('xcui-input-disabled');
+                let cls = ['x-input'];
+                this.size && cls.push(`x-input-${this.size}`);
+                this.disabled && cls.push('x-input-disabled');
                 return cls.join(' ');
             },
             validating() {

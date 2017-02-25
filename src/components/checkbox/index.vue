@@ -1,6 +1,6 @@
 <template>
-    <label class="xcui-checkbox">
-        <span class="xcui-checkbox-item"
+    <label class="x-checkbox">
+        <span class="x-checkbox-item"
             :class="{
               'is-disabled': disabled,
               'is-checked': isChecked,
@@ -9,30 +9,30 @@
             <input
             v-if="!isInGroup" 
             type="checkbox"
-            class="xcui-checkbox-input"
+            class="x-checkbox-input"
             :disabled="disabled"
             v-model="model"
             @change="handleChange">
             <input
             v-else 
             type="checkbox"
-            class="xcui-checkbox-input"
+            class="x-checkbox-input"
             :disabled="disabled"
             v-model="model"
             :value="value"
             @change="handleChange"
             >
-            <span class="xcui-checkbox-background"></span>
-            <span class="xcui-checkbox-cbx"></span>
+            <span class="x-checkbox-background"></span>
+            <span class="x-checkbox-cbx"></span>
         </span>
-        <span class="xcui-checkbox-text">
+        <span class="x-checkbox-text">
             <slot></slot>
         </span>
     </label>
 </template>
 <script>
     export default {
-        name: 'xcui-checkbox',
+        name: 'x-checkbox',
         props: {
             value: {
                 type: [String, Number, Boolean]
@@ -42,7 +42,7 @@
         },
         data() {
             return {
-                isInGroup: this.$parent.$options.name === 'xcui-checkbox-group'
+                isInGroup: this.$parent.$options.name === 'x-checkbox-group'
             };
         },
         computed: {

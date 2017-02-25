@@ -1,10 +1,10 @@
 <template>
-    <div class="xcui-btn-group">
+    <div class="x-btn-group">
         <slot></slot>
     </div>
 </template>
 <script>
     export default {
-        name: 'xcui-button-group'
+        name: 'x-button-group'
     };
 </script>

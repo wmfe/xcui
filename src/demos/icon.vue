@@ -3,13 +3,13 @@
 ## 概述
 XCUI的图标使用开源图标库[ionicons](http://ionicons.com/)。
 ## 如何使用
-使用`<xcui-icon></xcui-icon>`组件，指定图标名称`name`属性，示例代码：
+使用`<x-icon></x-icon>`组件，指定图标名称`name`属性，示例代码：
 ```html
-<xcui-icon name="cloud"></xcui-icon>
+<x-icon name="cloud"></x-icon>
 ```
 将会被渲染为：
 ```html
-<i class="xcui-icon xcui-icon-cloud"></i>
+<i class="x-icon x-icon-cloud"></i>
 ```
 
 ## 图标大小和颜色
@@ -19,15 +19,15 @@ XCUI的图标使用开源图标库[ionicons](http://ionicons.com/)。
 ```html
 <tpl>
     <div class="icon-item">
-        <xcui-icon name="camera" size="16"></xcui-icon>
+        <x-icon name="camera" size="16"></x-icon>
         <p>16px大小</p>
     </div>
     <div class="icon-item">
-        <xcui-icon name="camera" size="24"></xcui-icon>
+        <x-icon name="camera" size="24"></x-icon>
         <p>24px大小</p>   
     </div>
     <div class="icon-item">
-        <xcui-icon name="camera" size="32" color="#46C3C1"></xcui-icon>
+        <x-icon name="camera" size="32" color="#46C3C1"></x-icon>
         <p>32px大小,薄荷绿</p>
     </div>
 </tpl>
@@ -42,27 +42,27 @@ XCUI的图标使用开源图标库[ionicons](http://ionicons.com/)。
 ```html
 <tpl>
     <div class="icon-item">
-        <xcui-icon name="settings" size="32"></xcui-icon>
+        <x-icon name="settings" size="32"></x-icon>
         <p>原始图标</p>
     </div>
     <div class="icon-item">
-        <xcui-icon name="settings" size="32" rotate="90"></xcui-icon>
+        <x-icon name="settings" size="32" rotate="90"></x-icon>
         <p>旋转90度</p>
     </div>
     <div class="icon-item">
-        <xcui-icon name="settings" size="32" rotate="180"></xcui-icon>
+        <x-icon name="settings" size="32" rotate="180"></x-icon>
         <p>旋转180度</p>
     </div>
     <div class="icon-item">
-        <xcui-icon name="settings" size="32" rotate="270"></xcui-icon>
+        <x-icon name="settings" size="32" rotate="270"></x-icon>
         <p>旋转270度</p>
     </div>
     <div class="icon-item">
-        <xcui-icon name="settings" size="32" flip="horizontal"></xcui-icon>
+        <x-icon name="settings" size="32" flip="horizontal"></x-icon>
         <p>水平翻转</p>
     </div>
     <div class="icon-item">
-        <xcui-icon name="settings" size="32" flip="vertical"></xcui-icon>
+        <x-icon name="settings" size="32" flip="vertical"></x-icon>
         <p>垂直翻转</p>
     </div>
 </tpl>
@@ -76,11 +76,11 @@ XCUI的图标使用开源图标库[ionicons](http://ionicons.com/)。
 
 ```html
 <tpl>
-    <div class="icon-item"><xcui-icon name="loop" size="32" animate="spin"></xcui-icon></div>
-    <div class="icon-item"><xcui-icon name="load-a" size="32" animate="pulse"></xcui-icon></div>
-    <div class="icon-item"><xcui-icon name="load-b" size="32" animate="spin"></xcui-icon></div>
-    <div class="icon-item"><xcui-icon name="load-c" size="32" animate="spin"></xcui-icon></div>
-    <div class="icon-item"><xcui-icon name="load-d" size="32" animate="spin"></xcui-icon></div>
+    <div class="icon-item"><x-icon name="loop" size="32" animate="spin"></x-icon></div>
+    <div class="icon-item"><x-icon name="load-a" size="32" animate="pulse"></x-icon></div>
+    <div class="icon-item"><x-icon name="load-b" size="32" animate="spin"></x-icon></div>
+    <div class="icon-item"><x-icon name="load-c" size="32" animate="spin"></x-icon></div>
+    <div class="icon-item"><x-icon name="load-d" size="32" animate="spin"></x-icon></div>
 </tpl>
 ```
 
@@ -101,7 +101,7 @@ XCUI的图标使用开源图标库[ionicons](http://ionicons.com/)。
 <div class="demo-icon-list">
     <template v-for="name in list">
         <div class="icon-item">
-            <xcui-icon :name="name" :size="size"></xcui-icon>
+            <x-icon :name="name" :size="size"></x-icon>
             <p>{{name}}</p>
         </div>
     </template>

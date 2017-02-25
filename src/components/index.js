@@ -8,6 +8,9 @@ import InputNumber from './inputNumber';
 import Textarea from './textarea';
 import Checkbox from './checkbox';
 import CheckboxGroup from './checkbox-group';
+import Radio from './radio';
+import RadioButton from './radio-button';
+import RadioGroup from './radio-group';
 import Loading from './loading';
 import Message from './message';
 import Modal from './modal';
@@ -56,6 +59,9 @@ const install = (Vue) => {
     Vue.component(Textarea.name, Textarea);
     Vue.component(Checkbox.name, Checkbox);
     Vue.component(CheckboxGroup.name, CheckboxGroup);
+    Vue.component(Radio.name, Radio);
+    Vue.component(RadioGroup.name, RadioGroup);
+    Vue.component(RadioButton.name, RadioButton);
     Vue.use(xcuiInstall);
 };
 

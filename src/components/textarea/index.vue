@@ -1,6 +1,6 @@
 <template>
     <div :class="[
-    'xcui-input-wrap',
+    'x-input-wrap',
     {
       'is-disabled': disabled
     }
@@ -26,7 +26,7 @@
 <script>
     import calcTextareaHeight from '../../utils/calcTextareaHeight';
     export default {
-        name: 'xcui-textarea',
+        name: 'x-textarea',
         props: {
             value: [String, Number],
             placeholder: String,
@@ -72,8 +72,8 @@
         },
         computed: {
             cls() {
-                let cls = ['xcui-input'];
-                this.disabled && cls.push('xcui-input-disabled');
+                let cls = ['x-input'];
+                this.disabled && cls.push('x-input-disabled');
                 return cls.join(' ');
             }
         },

@@ -11,12 +11,12 @@
 
 ## 基础用法
 
-::: demo 最基本的用法，使用`<xcui-input>`标签即可创建一个输入框。使用`v-model`赋值。默认的`input`宽度是`100%`。
+::: demo 最基本的用法，使用`<x-input>`标签即可创建一个输入框。使用`v-model`赋值。默认的`input`宽度是`100%`。
 
 ```html
 <tpl>
     <div style="width:147px">
-        <xcui-input placeholder="请输入内容" v-model="input"></xcui-input>
+        <x-input placeholder="请输入内容" v-model="input"></x-input>
     </div>
 </tpl>
 ```
@@ -29,17 +29,17 @@
 
 ```html
 <tpl>
-    <xcui-row gutter="32">
-        <xcui-col span="4">
-            <xcui-input placeholder="Large Size" v-model="input1" size="large"></xcui-input>
-        </xcui-col>
-        <xcui-col span="4">
-            <xcui-input placeholder="Default Size" v-model="input2"></xcui-input>
-        </xcui-col>
-        <xcui-col span="4">
-            <xcui-input placeholder="Small Size" v-model="input3" size="small"></xcui-input>
-        </xcui-col>
-    </xcui-row>
+    <x-row gutter="32">
+        <x-col span="4">
+            <x-input placeholder="Large Size" v-model="input1" size="large"></x-input>
+        </x-col>
+        <x-col span="4">
+            <x-input placeholder="Default Size" v-model="input2"></x-input>
+        </x-col>
+        <x-col span="4">
+            <x-input placeholder="Small Size" v-model="input3" size="small"></x-input>
+        </x-col>
+    </x-row>
 </tpl>
 ```
 
@@ -50,11 +50,11 @@
 
 ::: demo 通过设置`icon`属性，可以在输入框右边增加相应图标。点击图标会触发`click`事件。
 <tpl>
-    <xcui-row>
-        <xcui-col span="4">
-            <xcui-input placeholder="请输入进行搜索" icon="search"></xcui-input>
-        </xcui-col>
-    </xcui-row>
+    <x-row>
+        <x-col span="4">
+            <x-input placeholder="请输入进行搜索" icon="search"></x-input>
+        </x-col>
+    </x-row>
 </tpl>
 :::
 
@@ -64,11 +64,11 @@
 
 ```html
 <tpl>
-    <xcui-row>
-        <xcui-col span="4">
-            <xcui-input :disabled="true" placeholder="请输入内容" icon="paper-airplane"></xcui-input>
-        </xcui-col>
-    </xcui-row>
+    <x-row>
+        <x-col span="4">
+            <x-input :disabled="true" placeholder="请输入内容" icon="paper-airplane"></x-input>
+        </x-col>
+    </x-row>
 </tpl>
 ```
 
@@ -80,21 +80,21 @@
 
 ```html
 <tpl>
-    <xcui-row>
-        <xcui-col span="8">
-            <xcui-input placeholder="请输入网址">
+    <x-row>
+        <x-col span="8">
+            <x-input placeholder="请输入网址">
                 <span slot="prepend">http://</span>
                 <span slot="append">.com</span>
-            </xcui-input>
-        </xcui-col>
-    </xcui-row>
-    <xcui-row style="margin-top: 15px">
-        <xcui-col span="8">
-            <xcui-input placeholder="请输入网址">
-                <span slot="append"><xcui-icon name="share"></xcui-icon></span>
-            </xcui-input>
-        </xcui-col>
-    </xcui-row>
+            </x-input>
+        </x-col>
+    </x-row>
+    <x-row style="margin-top: 15px">
+        <x-col span="8">
+            <x-input placeholder="请输入网址">
+                <span slot="append"><x-icon name="share"></x-icon></span>
+            </x-input>
+        </x-col>
+    </x-row>
 </tpl>
 ```
 

@@ -225,3 +225,9 @@
       -ms-user-select: @select; // IE10+
           user-select: @select;
 }
+
+.keyframes(@name; @arguments) {
+    @-moz-keyframes @name { @arguments(); }
+    @-webkit-keyframes @name { @arguments(); }
+    @keyframes @name { @arguments(); }
+}

@@ -7,12 +7,12 @@
 
 ## 基础用法
 
-::: demo 在`xcui-checkbox`中使用`v-model`绑定变量，默认绑定变量的值是`Boolean`, 选中时为`true`。
+::: demo 在`x-checkbox`中使用`v-model`绑定变量，默认绑定变量的值是`Boolean`, 选中时为`true`。
 
 ```html
 
 <tpl>
-    <xcui-checkbox v-model="checked0">备选项</xcui-checkbox>
+    <x-checkbox v-model="checked0">备选项</x-checkbox>
 </tpl>
 
 ```
@@ -26,8 +26,8 @@
 ```html
 
 <tpl>
-    <xcui-checkbox v-model="checked2" :disabled="true">备选项</xcui-checkbox>
-    <xcui-checkbox v-model="checked3" :disabled="true">备选项</xcui-checkbox>
+    <x-checkbox v-model="checked2" :disabled="true">备选项</x-checkbox>
+    <x-checkbox v-model="checked3" :disabled="true">备选项</x-checkbox>
 </tpl>
 
 ```
@@ -36,18 +36,18 @@
 
 ## 多选框组
 
-::: demo 通过将`xcui-checkbox`作为`xcui-checkbox-group`的直接子元素，可以建立组合的多选框。
+::: demo 通过将`x-checkbox`作为`x-checkbox-group`的直接子元素，可以建立组合的多选框。
 
 ```html
 
 <tpl>
-    <xcui-checkbox-group v-model="checklist">
-        <xcui-checkbox value="未开始">未开始</xcui-checkbox>
-        <xcui-checkbox value="进行中">进行中</xcui-checkbox>
-        <xcui-checkbox value="已完成">已完成</xcui-checkbox>
-        <xcui-checkbox value="已分配" :disabled="true">已分配</xcui-checkbox>
-        <xcui-checkbox value="已废弃" :disabled="true">已废弃</xcui-checkbox>
-    </xcui-checkbox-group>
+    <x-checkbox-group v-model="checklist">
+        <x-checkbox value="未开始">未开始</x-checkbox>
+        <x-checkbox value="进行中">进行中</x-checkbox>
+        <x-checkbox value="已完成">已完成</x-checkbox>
+        <x-checkbox value="已分配" :disabled="true">已分配</x-checkbox>
+        <x-checkbox value="已废弃" :disabled="true">已废弃</x-checkbox>
+    </x-checkbox-group>
     <p style="margin-top: 15px;">
         选中的值数组： {{checklist}}
     </p>
@@ -64,13 +64,13 @@
 ```html
 
 <tpl>
-    <xcui-checkbox :indeterminate="indeterminate" v-model="checkAll" @change="handleCheckAll">全选</xcui-checkbox>
-    <xcui-checkbox-group v-model="checkedRoles" @change="handleCheckRole" style="display:inline-block; margin-left: 15px;">
-        <xcui-checkbox value="销售">销售</xcui-checkbox>
-        <xcui-checkbox value="运营">运营</xcui-checkbox>
-        <xcui-checkbox value="研发">研发</xcui-checkbox>
-        <xcui-checkbox value="测试">测试</xcui-checkbox>
-    </xcui-checkbox-group>
+    <x-checkbox :indeterminate="indeterminate" v-model="checkAll" @change="handleCheckAll">全选</x-checkbox>
+    <x-checkbox-group v-model="checkedRoles" @change="handleCheckRole" style="display:inline-block; margin-left: 15px;">
+        <x-checkbox value="销售">销售</x-checkbox>
+        <x-checkbox value="运营">运营</x-checkbox>
+        <x-checkbox value="研发">研发</x-checkbox>
+        <x-checkbox value="测试">测试</x-checkbox>
+    </x-checkbox-group>
 </tpl>
 
 <script>
@@ -118,7 +118,7 @@
 
 |名称|说明|
 |---|---|
-|default|默认内容，放在`<xcui-checkbox></xcui-checkbox>`之间即可|
+|default|默认内容，放在`<x-checkbox></x-checkbox>`之间即可|
 
 ## CheckboxGroup Events
 |事件名|说明|返回值|设置属性|

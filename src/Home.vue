@@ -1,7 +1,7 @@
 <template>
     <div id="wrapper">
-        <xcui-row :gutter="32" id="wrapper-content">
-            <xcui-col :span="4" id="sidebar-wrapper">
+        <x-row :gutter="32" id="wrapper-content">
+            <x-col :xs="8" :sm="8" :md="8" :lg="6" id="sidebar-wrapper">
                 <ul class="sidebar-nav">
                     <li>
                         <router-link to="/home">介绍</router-link>
@@ -36,6 +36,9 @@
                         <router-link to="/component/checkbox">Checkbox 多选框</router-link>
                     </li>
                     <li class="sidebar-item">
+                        <router-link to="/component/radio">Radio 单选框</router-link>
+                    </li>
+                    <li class="sidebar-item">
                          <router-link to="/component/inputNumber">InputNumber 数字输入框</router-link>
                     </li>
                     <li class="sidebar-item">
@@ -48,7 +51,7 @@
                         <router-link to="/component/datepicker">DatePicker 单日期选择器</router-link>
                     </li>
                     <li class="sidebar-item">
-                        <router-link to="/component/daterangepicker">DateRangePicker</router-link>
+                        <router-link to="/component/daterangepicker">DateRangePicker 多日期选择器</router-link>
                     </li>
                     <li class="sidebar-item">
                         <router-link to="/component/pagination">Pagination</router-link>
@@ -86,11 +89,11 @@
                     </li>
 
                 </ul>
-            </xcui-col>
-            <xcui-col :span="20" id="page-content-wrapper" class="xcui-demo">
-                <router-view transition="xcui-fade" transition-mode="out-in"></router-view>
-            </xcui-col>
-        </xcui-row>
+            </x-col>
+            <x-col :xs="16" :sm="16" :md="16" :lg="18" id="page-content-wrapper" class="x-demo">
+                <router-view transition="x-fade" transition-mode="out-in"></router-view>
+            </x-col>
+        </x-row>
   </div>
 </template>
 

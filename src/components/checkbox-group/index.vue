@@ -1,11 +1,11 @@
 <template>
-    <div class="xcui-checkbox-group">
+    <div class="x-checkbox-group">
         <slot></slot>
     </div>
 </template>
 <script>
     export default {
-        name: 'xcui-checkbox-group',
+        name: 'x-checkbox-group',
         props: {
             value: {}
         },
