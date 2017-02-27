@@ -4,7 +4,8 @@
             :class="{
               'is-disabled': disabled,
               'is-checked': isChecked,
-              'is-indeterminate': indeterminate
+              'is-indeterminate': indeterminate,
+              'is-focus': focus
             }">
             <input
             v-if="!isInGroup" 
@@ -12,7 +13,9 @@
             class="x-checkbox-input"
             :disabled="disabled"
             v-model="model"
-            @change="handleChange">
+            @change="handleChange"
+            @focus="focus = true"
+            @blur="focus = false">
             <input
             v-else 
             type="checkbox"
@@ -21,6 +24,8 @@
             v-model="model"
             :value="value"
             @change="handleChange"
+            @focus="focus = true"
+            @blur="focus = false"
             >
             <span class="x-checkbox-background"></span>
             <span class="x-checkbox-cbx"></span>
@@ -42,6 +47,7 @@
         },
         data() {
             return {
+                focus: false,
                 isInGroup: this.$parent.$options.name === 'x-checkbox-group'
             };
         },

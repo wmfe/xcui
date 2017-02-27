@@ -1,59 +1,153 @@
 <template  lang="md">
-# InputNumber数字输入框
+# Input-number 数字输入框
 
-## 使用场景
+通过鼠标或键盘，输入范围内的数值。
 
-- 数字专用输入框
-- 支持限制输入整数数字范围
-- 支持设置增减数字幅度
-- 支持自定义框内提示文案
-- 支持自定义输入框样式
+## 基础用法
 
-## DEMO
-<demo>
-	<example title="InputNumber">
-			<div id="container">
-				<xcui-inputnumber :max-value="100" :min-value="3" :step="2" :is-disable="false" text-tips="请输入整数" size="small"></xcui-inputnumber>
-				<p>支持键盘输入整数，以2为步长，最小值为3，最大值为100</p>
-				</br>
-				<xcui-inputnumber :max-value="100" :min-value="-10" :input-value.sync="-1" :step="2" :is-disable="false" text-tips="请输入整数" size="normal" ></xcui-inputnumber>
-				<p>支持键盘输入负整数，以2为步长，最小值为-10，最大值为100</p>
-				</br>
-				<xcui-inputnumber :max-value="100" :min-value="-25" :input-value.sync="6" :step="5" class-name="input-define-class" :is-disable="true" size="large"></xcui-inputnumber>
-				<p>默认值为6，禁止手动输入，以5为步长，最小值为-25，最大值为100，自定义输入框与字体样式</p>
-			</div>
-	</example>
-</demo>
+::: demo 通过在`x-input-number`元素中设置`v-model`属性绑定变量即可。绑定的变量值即为默认值。通过`@change`事件可以监听值的变化。
+
+```html
+
+<tpl>
+    <x-input-number v-model="num1" :min="1" :max="10" @change="handleChange"></x-input-number>
+</tpl>
+<script>
+    export default {
+        data() {
+            return {
+                num1: 1
+            };
+        },
+        methods: {
+            handleChange(val, oldVal) {
+                console.log(`val: ${val}`);
+                console.log(`oldVal: ${oldVal}`);
+            }
+        }
+    };
+</script>
+
+```
+
+:::
+
+## 禁用状态
+
+::: demo 设置`disabled`属性可以将计数器设置为禁用。
+
+```html
+
+<tpl>
+    <x-input-number v-model="num2" :min="1" :max="10" :disabled="true"></x-input-number>
+</tpl>
+<script>
+    export default {
+        data() {
+            return {
+                num2: 1
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+## 步数
+
+::: demo 通过设置`step`属性可以定义递增/递减的步数。`step`可以设置为整数或小数。
+
+```html
+
+<tpl>
+    <x-input-number v-model="num3" :step="3"></x-input-number>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                num3: 1
+            }
+        }
+    }
+</script>
+```
+
+:::
+
+## 尺寸
+
+::: demo 额外提供了`large`, `small` 两种尺寸的输入框，通过设置`size`属性即可。
+
+```html
+
+<tpl>
+    <x-input-number v-model="num4" size="large"></x-input-number>
+    <x-input-number v-model="num5"></x-input-number>
+    <x-input-number v-model="num6" size="small"></x-input-number>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                num4: 1,
+                num5: 1,
+                num6: 1
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+
 
 ## Props
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
 |-----|-----|-----|-----|----|----|----|
-|max-value|Number|100|最大值|可选||
-|min-value|Number|1|最小值|可选||
-|input-value|Number|空|默认显示数值|可选||
-|step| Number| 1|增减步长|可选||
-|is-disable|Boolean|false|是否禁用键盘输入|可选|true,false|
-|class-name| String|空字符串|自定义样式|可选||
-|size| String|normal|可选尺寸|可选|large,normal,small|
-|text-tips| String|请输入范围内整数|自定义提示文案|可选||
+|value|Number|无|和`v-model`的绑定值|必选，通过设置`v-model`||
+|min|Number|0|计数器最小值|可选||
+|max|Number|Infinity|计数器最大值|可选||
+|step| Number|1|增减步长|可选||
+|disabled|Boolean|false|是否禁用|可选|true,false|
+|size|String|无|可选尺寸|可选|large,small|
+
+## Events
+
+|事件名|说明|返回值|设置属性|
+|---|---|---|---|
+|change|绑定值改变时触发|(变更后的值，变更前的值)|`@change`|
+
+
 </template>
 <script>
-	export default {
-	    data() {
-	        return {
-	        };
-	    },
-	    methods: {
-	    },
-	    ready() {
-	    }
-	};
-
+    export default {
+        data() {
+            return {
+                num1: 1,
+                num2: 1,
+                num3: 1,
+                num4: 1,
+                num5: 1,
+                num6: 1
+            };
+        },
+        methods: {
+            handleChange(val, oldVal) {
+                console.log(`val: ${val}`);
+                console.log(`oldVal: ${oldVal}`);
+            }
+        }
+    };
 </script>
 <style>
-.input-define-class{
-    color: blue;
-    width: 190px;
-    font-size: 20px;
-}
+    .demo-input-number .x-input-number+.x-input-number{
+        margin-left : 15px;
+    }
 </style>

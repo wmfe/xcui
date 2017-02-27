@@ -226,8 +226,20 @@
           user-select: @select;
 }
 
+
+// Keyframes
 .keyframes(@name; @arguments) {
     @-moz-keyframes @name { @arguments(); }
     @-webkit-keyframes @name { @arguments(); }
     @keyframes @name { @arguments(); }
 }
+
+// appearance
+
+.appearance(@arguments) {
+    -webkit-appearance:@arguments; 
+    -moz-appearance: @arguments;
+    appearance: @arguments;
+}
+
+

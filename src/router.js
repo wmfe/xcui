@@ -92,7 +92,7 @@ const router = new VueRouter({
                 path: '/component/select',
                 component: Select
             }, {
-                path: '/component/inputnumber',
+                path: '/component/input-number',
                 component: InputNumber
             }, {
                 path: '/component/progress',

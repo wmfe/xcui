@@ -42,7 +42,7 @@
                 return this.$el.getElementsByClassName('xcui-code-wrap')[0].clientHeight + 30;
             },
             componentDemoClass() {
-                let componentName = this.$route.path.match(/\/component\/([a-zA-Z]+)/)[1];
+                let componentName = this.$route.path.match(/\/component\/([a-zA-Z-]+)/)[1];
                 return `demo-${componentName}`;
             }
         },

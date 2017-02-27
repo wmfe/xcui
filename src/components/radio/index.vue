@@ -3,14 +3,17 @@
         <span class="x-radio-item"
             :class="{
               'is-disabled': disabled,
-              'is-checked': model === label
+              'is-checked': model === label,
+              'is-focus': focus
             }">
             <input
             type="radio"
             :value="label"
             class="x-radio-input"
             :disabled="disabled"
-            v-model="model">
+            v-model="model"
+            @focus="focus = true"
+            @blur="focus = false">
             <span class="x-radio-background"></span>
             <span class="x-radio-cbx"></span>
         </span>
@@ -32,6 +35,11 @@
                 required: true
             },
             disabled: Boolean
+        },
+        data() {
+            return {
+                focus: false
+            };
         },
         computed: {
             model: {

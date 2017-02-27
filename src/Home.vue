@@ -39,7 +39,7 @@
                         <router-link to="/component/radio">Radio 单选框</router-link>
                     </li>
                     <li class="sidebar-item">
-                         <router-link to="/component/inputNumber">InputNumber 数字输入框</router-link>
+                         <router-link to="/component/input-number">InputNumber 计数器</router-link>
                     </li>
                     <li class="sidebar-item">
                         <router-link to="/component/suggestion">Suggestion 输入建议</router-link>
