@@ -68,14 +68,9 @@
                     }
                 }
             },
-            data: function data() {
-                return {
-                    pageSizeInner: 20
-                };
-            },
             computed: {
                 totalPageCount: function totalPageCount() {
-                    return Math.ceil(this.total / this.pageSizeInner);
+                    return Math.ceil(this.total / this.pageSize);
                 },
                 getRangePage: function getRangePage() {
                     var curPage = this.currentPageNum;
@@ -112,17 +107,14 @@
                     return result;
                 }
             },
-            watch: {
-                pageSizeInner: function pageSizeInner(val) {
-                    this.$emit("change-pagesize", this.pageSizeInner);
-                    this.$emit("go-to-page", 1, this.currentPageNum);
-                }
-            },
             methods: {
                 turnToPage: function turnToPage(pageNo) {
                     if (pageNo > 0 && pageNo <= this.totalPageCount) {
                         this.$emit("go-to-page", pageNo, this.currentPageNum);
                     }
+                },
+                changePageSize: function changePageSize($event) {
+                    this.$emit("change-pagesize", Number($event.target.value));
                 },
                 prev: function prev() {
                     this.turnToPage(this.currentPageNum - 1);
@@ -133,9 +125,6 @@
                 isActive: function isActive(number) {
                     return number + this.getRangePage.begin - 1 === this.currentPageNum;
                 }
-            },
-            mounted: function mounted() {
-                this.pageSizeInner = this.pageSize;
             }
         };
     }, function(module, exports) {}, function(module, exports, __webpack_require__) {
@@ -171,21 +160,13 @@
                         textContent: _vm._s(_vm.total)
                     }
                 }), _vm._v("条\n                  \n                每页\n                "), _c("select", {
-                    directives: [ {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.pageSizeInner,
-                        expression: "pageSizeInner"
-                    } ],
                     staticClass: "gray",
+                    domProps: {
+                        value: _vm.pageSize
+                    },
                     on: {
                         change: function($event) {
-                            _vm.pageSizeInner = Array.prototype.filter.call($event.target.options, function(o) {
-                                return o.selected;
-                            }).map(function(o) {
-                                var val = "_value" in o ? o._value : o.value;
-                                return val;
-                            })[0];
+                            _vm.changePageSize($event);
                         }
                     }
                 }, _vm._l(_vm.pageSizeRange, function(opt) {
@@ -228,6 +209,11 @@
                         staticClass: "btn btn-default page-btn",
                         class: {
                             active: _vm.isActive(number)
+                        },
+                        on: {
+                            click: function($event) {
+                                _vm.turnToPage(number + _vm.getRangePage.begin - 1);
+                            }
                         }
                     }, [ _vm.isActive(number) ? _c("a", {
                         attrs: {
@@ -242,11 +228,6 @@
                         },
                         domProps: {
                             textContent: _vm._s(number + _vm.getRangePage.begin - 1)
-                        },
-                        on: {
-                            click: function($event) {
-                                _vm.turnToPage(number + _vm.getRangePage.begin - 1);
-                            }
                         }
                     }) ]);
                 }), _vm._v(" "), _vm.getRangePage.end < _vm.totalPageCount ? _c("button", {
