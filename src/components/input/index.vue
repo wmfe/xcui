@@ -47,7 +47,8 @@
             name: String,
             form: String,
             maxlength: Number,
-            minlength: Number
+            minlength: Number,
+            iconClick: Function
         },
         data() {
             return {
@@ -77,7 +78,12 @@
                 this.$emit('enter', e);
             },
             handleIconClick(e) {
-                !this.disabled && this.$emit('click', e);
+                if (!this.disabled) {
+                    if (this.iconClick) {
+                        this.iconClick(e);
+                    }
+                    this.$emit('click', e);
+                }
             },
             handleFocus(e) {
                 this.$emit('focus', e);

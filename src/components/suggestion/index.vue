@@ -1,52 +1,53 @@
 <template>
-    <div class="xcui-suggestion" :class="className">
-        <input type="text"
-                class="form-control xcui-suggestion-input"
-                autocomplete="off"
-                :id="id"
-                :name="name"
-                :disabled="disabled"
-                :placeholder="placeholder"
-                v-model="dataText"
-                @input="onInput"
-                @focus="onFocus"
-                @blur="onBlur"
-                @keyDown.up="changeCurrent(-1)"
-                @keyDown.down="changeCurrent(1)"
-                @keyDown.enter.stop.prevent="onBlur">
-
-        <ul class="xcui-suggestion-list dropdown-menu" :class="{'show':show}">
-            <li v-for="(item,index) in list" :class="{'current' : currentIndex==index}">
-                <a href="javascript:void(0)" @click="setItem(item)">
-                    {{item.text}}
-                </a>
-            </li>
-        </ul>
+    <div class="x-suggestion">
+        <x-input
+            ref="xInput"
+            :disabled="disabled"
+            :placeholder="placeholder"
+            v-model="dataText"
+            @change="handleChange"
+            @focus="handleFocus"
+            @blur="handleBlur"
+            @keydown.up.native.prevent="changeCurrent(-1)"
+            @keydown.down.native.prevent="changeCurrent(1)"
+            @keyup.enter.stop.native="handleEnter()"
+            :icon="icon"
+            :icon-click="iconClick"></x-input>
+        <transition name="slide-up" @after-leave="doDestroy">
+            <div class="x-suggestion-list-wrap" v-show="sugVisible" ref="wrap" :style="{ width: dropdownWidth }">
+                <ul class="x-suggestion-list" ref="sugList">
+                    <li v-for="(item,index) in list" :class="{'active' : currentIndex==index}" @click="setItem(item)">
+                        {{item.text}}
+                    </li>
+                </ul>
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
+    import xInput from '../input';
+    import Popper from '../../utils/vue-popper';
     export default {
-        name: 'xcui-suggestion',
+        name: 'x-suggestion',
+        mixins: [Popper],
+        components: {
+            xInput
+        },
         data() {
             return {
                 list: [],
                 localList: [],
                 currentIndex: -1,
                 dataText: '',
-                dataValue: ''
+                dataValue: '',
+                isFocus: false,
+                icon: '',
+                iconClick: function () {}
             };
         },
         props: {
             id: {
-                type: String,
-                default: ''
-            },
-            name: {
-                type: String,
-                default: ''
-            },
-            className: {
                 type: String,
                 default: ''
             },
@@ -64,11 +65,7 @@
                     return [];
                 }
             },
-            'check': {
-                type: Boolean,
-                default: true
-            },
-            'inputCallback': {
+            inputCallback: {
                 type: Function,
                 default() {
                     return () => {};
@@ -83,60 +80,92 @@
                         value: ''
                     };
                 }
+            },
+            allowClear: {
+                type: Boolean,
+                default: true
             }
-        },
-        created() {
-            this.dataText = this.value.text || '';
-            this.dataValue = this.value.value || '';
-            this.emitChange();
         },
         computed: {
-            show() {
-                return this.list.length > 0 && this.$el.getElementsByTagName('input')[0] === document.activeElement;
+            sugVisible() {
+                const sug = this.list;
+                const isValid = Array.isArray(sug) && sug.length > 0;
+                return isValid && this.isFocus;
             }
         },
+        
         watch: {
             suggestions() {
                 this.arrangeLocalList();
                 this.getLocalSug();
+            },
+            allowClear(val) {
+                if (val) {
+                    this.handleClearBtn();
+                }
+                else {
+                    this.icon = '';
+                    this.iconClick = () => {};
+                }
             }
         },
         methods: {
-            onInput() {
-                let me = this;
-                setTimeout(function () {
-                    me.currentIndex = -1;
-                    me.getLocalSug();
-                    me.autoSetItem();
-                    me.inputCallback && me.inputCallback();
+            handleClearBtn() {
+                this.icon = 'android-close';
+                this.iconClick = () => {
+                    this.clearText();
+                };
+            },
+            handleChange() {
+                this.emitChange();
+                this.getLocalSug();
+                this.inputCallback && this.inputCallback();
+            },
+            handleFocus() {
+                this.isFocus = true;
+                this.getLocalSug();
+            },
+            handleBlur() {
+                setTimeout(() => {
+                    this.isFocus = false;
                 }, 100);
             },
-            onFocus() {
-                let me = this;
-                me.getLocalSug();
-                me.inputCallback && me.inputCallback();
-            },
-            onBlur() {
-                let me = this;
-
-                setTimeout(() => {
-                    me.currentIndex = -1;
-                    me.list = [];
-                }, 200);
+            clearList() {
+                this.currentIndex = -1;
+                this.list = [];
             },
             changeCurrent(offset) {
-                this.currentIndex += offset;
-
-                if (offset > 0 && this.currentIndex >= this.list.length) {
-                    this.currentIndex = 0;
+                let moveIndex = this.currentIndex + offset;
+                if (offset > 0 && moveIndex >= this.list.length) {
+                    moveIndex -= offset;
                 }
-                else if (offset < 0 && this.currentIndex < 0) {
-                    this.currentIndex = this.list.length - 1;
+                else if (offset < 0 && moveIndex < 0) {
+                    moveIndex = this.currentIndex;
                 }
 
+                this.currentIndex = moveIndex;
+
+                this.$nextTick(() => {
+                    let wrapHeight = this.$refs.wrap.clientHeight;
+                    let activeLi = this.$refs.sugList.querySelector('.active');
+                    let li = this.$refs.sugList.querySelector('li');
+                    if (!activeLi || !li) {
+                        return;
+                    }
+                    let liHeight = li.clientHeight;
+                    if (activeLi && activeLi.offsetTop > wrapHeight) {
+                        this.$refs.wrap.scrollTop += liHeight;
+                    };
+                    if (activeLi && activeLi.offsetTop - liHeight
+                        < this.$refs.wrap.scrollTop) {
+                        this.$refs.wrap.scrollTop -= liHeight;
+                    }
+                });
+            },
+            handleEnter() {
                 let currentItem = this.list[this.currentIndex];
-
                 this.setItem(currentItem);
+                this.triggerOnEnter = true;
             },
             convert2standard(data) {
                 let res = [];
@@ -178,13 +207,15 @@
             getLocalSug() {
                 let word = this.dataText;
                 this.list = this.localList.filter((item) => {
-                    return (word && this.check) ? item.text.indexOf(word) > -1 : true;
+                    return word ? item.text.indexOf(word) > -1 : true;
                 });
             },
             setItem(item) {
                 this.dataValue = item.value;
                 this.dataText = item.text;
-                this.emitChange();
+                this.$nextTick(() => {
+                    this.clearList();
+                });
             },
             logError(msg) {
                 throw new Error('[xcui] - ' + msg);
@@ -204,28 +235,21 @@
                 });
             }
         },
+        created() {
+            this.dataText = this.value.text || '';
+            this.dataValue = this.value.value || '';
+            this.handleClearBtn();
+        },
         mounted() {
+            this.popperElm = this.$refs.wrap;
+            this.referenceElm = this.$refs.xInput.$refs.input;
+            this.dropdownWidth = this.$refs.xInput.$refs.input.getBoundingClientRect().width + 'px';
             this.arrangeLocalList();
+        },
+        updated() {
+            this.$nextTick(_ => {
+                this.updatePopper();
+            });
         }
     };
 </script>
-
-<style lang="less">
-    .xcui-suggestion{
-        position:relative;
-        width:100%;
-        .xcui-show{
-            display:block;
-        }
-        .xcui-suggestion-list{
-            min-width:100%;
-            max-height: 400px;
-            overflow: auto;
-            li{
-                &.current{
-                    background:#ddd;
-                }
-            }
-        }
-    }
-</style>

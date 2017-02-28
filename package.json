@@ -33,7 +33,8 @@
     "array-map": "^0.0.0",
     "array-shuffle": "^1.0.0",
     "countup": "^1.6.1",
-    "fuzzysearch": "^1.0.3"
+    "fuzzysearch": "^1.0.3",
+    "popper.js": "^1.0.7"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",

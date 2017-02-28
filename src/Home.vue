@@ -91,7 +91,7 @@
                 </ul>
             </x-col>
             <x-col :xs="16" :sm="16" :md="16" :lg="18" id="page-content-wrapper" class="x-demo">
-                <router-view transition="x-fade" transition-mode="out-in"></router-view>
+                <router-view></router-view>
             </x-col>
         </x-row>
   </div>

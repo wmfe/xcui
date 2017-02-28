@@ -118,12 +118,13 @@
 |form|String|无|原生属性|可选||
 |maxlength|Number|无|原生属性|可选||
 |minlength|Number|无|原生属性|可选||
+|iconClick|Function|无|设置`icon`属性后，点击图标时触发|可选||
 
 ## Events
 
 |事件名|说明|返回值|设置属性|
 |---|---|---|---|
-|click|设置`icon`属性后，点击图标时触发|无|`@click`|
+|click|设置`icon`属性后，点击图标时触发|无|`iconclick`|
 |enter|按下回车键时触发|无|`@keyup.enter`|
 |input|输入时触发|无|`@input`|
 |change|数据改变时触发|event|`@change`|

@@ -67,7 +67,7 @@
 
             &.is-checked {
                 .@{radio-prefix-cls}-background{
-                    .box-shadow(~"0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)");
+                    box-shadow: @radio-boxshadow;
                 }
                 .@{radio-prefix-cls}-cbx {
                     .scale(0.6);
@@ -84,7 +84,7 @@
                 .@{radio-prefix-cls}-background{
                     background-color: @radio-bg-disabled;
                     border: 1px solid @radio-text-disabled;
-                    .box-shadow(~"0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)");
+                    box-shadow: @radio-boxshadow;
                 }
                 .@{radio-prefix-cls}-cbx {
                     background-color: @radio-text-disabled;

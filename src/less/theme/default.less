@@ -23,6 +23,7 @@
 @gray-light: lighten(@gray-base, 46.7%); // #777
 @gray-lighter: lighten(@gray-base, 93.5%); // #eee
 
+
 // global base
 // 每当组件默认值没有特定值的时候，遵循这里的全局设定
 @body-bg: #fff; // 全局背景色
@@ -96,6 +97,24 @@
 @screen-lg              : 1200px;
 @screen-lg-min          : @screen-lg;
 @screen-lg-max          : (@screen-lg-min - 1);
+
+// Animation
+@animation-duration-slow: .3s; // Modal
+@animation-duration-base: .2s;
+@animation-duration-fast: .1s; // Tooltip
+
+@ease-out            : cubic-bezier(0.215, 0.61, 0.355, 1);
+@ease-in             : cubic-bezier(0.55, 0.055, 0.675, 0.19);
+@ease-in-out         : cubic-bezier(0.645, 0.045, 0.355, 1);
+@ease-out-back       : cubic-bezier(0.12, 0.4, 0.29, 1.46);
+@ease-in-back        : cubic-bezier(0.71, -0.46, 0.88, 0.6);
+@ease-in-out-back    : cubic-bezier(0.71, -0.46, 0.29, 1.46);
+@ease-out-circ       : cubic-bezier(0.08, 0.82, 0.17, 1);
+@ease-in-circ        : cubic-bezier(0.6, 0.04, 0.98, 0.34);
+@ease-in-out-circ    : cubic-bezier(0.78, 0.14, 0.15, 0.86);
+@ease-out-quint      : cubic-bezier(0.23, 1, 0.32, 1);
+@ease-in-quint       : cubic-bezier(0.755, 0.05, 0.855, 0.06);
+@ease-in-out-quint   : cubic-bezier(0.86, 0, 0.07, 1);
 
 // global button
 // 全局按钮样式设定，统一按钮样式
@@ -203,6 +222,8 @@
 
 @checkbox-border-color: lighten(@brand-primary, 20%);
 
+@checkbox-boxshadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
 // radio
 
 @radio-size: 18px;
@@ -216,6 +237,8 @@
 @radio-text-disabled: @disabled-color;
 
 @radio-border-color: lighten(@brand-primary, 20%);
+
+@radio-boxshadow: @checkbox-boxshadow;
 
 // radio-button
 
@@ -243,6 +266,14 @@
 @input-number-btn-color: @gray-light;
 
 @input-number-disabled-color: @disabled-color;
+
+// dropdowns
+
+@drop-down-boxshadow: 0 1px 6px rgba(0,0,0,.2);
+
+@drop-down-hover-bg: @gray-lighter;
+
+@drop-down-text-color: @gray;
 
 
 
