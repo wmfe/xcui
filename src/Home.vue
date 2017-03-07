@@ -53,9 +53,7 @@
                     <li class="sidebar-item">
                         <router-link to="/component/daterangepicker">DateRangePicker 多日期选择器</router-link>
                     </li>
-                    <li class="sidebar-item">
-                        <router-link to="/component/pagination">Pagination</router-link>
-                    </li>
+                    
                     <li class="sidebar-title">Notice 提示</li>
                     <li class="sidebar-item">
                          <router-link to="/component/modal">Modal</router-link>
@@ -76,7 +74,10 @@
                     <li class="sidebar-item">
                          <router-link to="/component/message">Message</router-link>
                     </li>
-                    
+                    <li class="sidebar-title">Navigation 导航</li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/pagination">Pagination 页码</router-link>
+                    </li>
                     <li class="sidebar-title">Others 其他</li>
                     <li class="sidebar-item">
                         <router-link to="/component/scrolltop">ScrollTop</router-link>

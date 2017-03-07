@@ -40,7 +40,7 @@
             value: [String, Number],
             placeholder: String,
             size: String,
-            readonly: String,
+            readonly: Boolean,
             autofocus: Boolean,
             icon: String,
             disabled: Boolean,

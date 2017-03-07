@@ -14,9 +14,9 @@
             :icon="icon"
             :icon-click="iconClick"></x-input>
         <transition name="slide-up" @after-leave="doDestroy">
-            <div class="x-suggestion-list-wrap" v-show="sugVisible" ref="wrap" :style="{ width: dropdownWidth }">
+            <div class="x-suggestion-dropdown" v-show="sugVisible" ref="wrap" :style="{ width: dropdownWidth }">
                 <ul class="x-suggestion-list" ref="sugList">
-                    <li v-for="(item,index) in list" :class="{'active' : currentIndex==index}" @click="setItem(item)">
+                    <li v-for="(item,index) in list" class="x-suggestion-item" :class="{'active' : currentIndex==index}" @click="setItem(item)">
                         {{item.text}}
                     </li>
                 </ul>
@@ -84,7 +84,8 @@
             allowClear: {
                 type: Boolean,
                 default: true
-            }
+            },
+            afterClearCallback: Function
         },
         computed: {
             sugVisible() {
@@ -111,10 +112,13 @@
         },
         methods: {
             handleClearBtn() {
-                this.icon = 'android-close';
-                this.iconClick = () => {
-                    this.clearText();
-                };
+                if (this.allowClear) {
+                    this.icon = 'android-close';
+                    this.iconClick = () => {
+                        this.clearText();
+                        this.afterClearCallback && this.afterClearCallback();
+                    };
+                }
             },
             handleChange() {
                 this.emitChange();
@@ -124,6 +128,7 @@
             handleFocus() {
                 this.isFocus = true;
                 this.getLocalSug();
+                this.inputCallback && this.inputCallback();
             },
             handleBlur() {
                 setTimeout(() => {
@@ -153,10 +158,10 @@
                         return;
                     }
                     let liHeight = li.clientHeight;
-                    if (activeLi && activeLi.offsetTop > wrapHeight) {
+                    if (activeLi && activeLi.offsetTop > wrapHeight - liHeight) {
                         this.$refs.wrap.scrollTop += liHeight;
                     };
-                    if (activeLi && activeLi.offsetTop - liHeight
+                    if (activeLi && activeLi.offsetTop
                         < this.$refs.wrap.scrollTop) {
                         this.$refs.wrap.scrollTop -= liHeight;
                     }
@@ -233,6 +238,10 @@
                     text: this.dataText,
                     value: this.dataValue
                 });
+                this.$emit('change', {
+                    text: this.dataText,
+                    value: this.dataValue
+                });
             }
         },
         created() {
@@ -247,7 +256,7 @@
             this.arrangeLocalList();
         },
         updated() {
-            this.$nextTick(_ => {
+            this.$nextTick(() => {
                 this.updatePopper();
             });
         }

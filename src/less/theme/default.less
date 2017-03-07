@@ -33,6 +33,7 @@
 @link-hover-color: darken(@link-color, 15%); // 全局链接悬停色值
 @link-hover-decoration: underline; // 全局链接悬停样式
 @disabled-color: #e6e6e6; // 全局禁用色值
+@disabled-bg: #f7f7f7;
 @error-color: @brand-danger; // 全局错误色值
 
 @font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, sans-serif; // 全局字体
@@ -271,9 +272,19 @@
 
 @drop-down-boxshadow: 0 1px 6px rgba(0,0,0,.2);
 
-@drop-down-hover-bg: @gray-lighter;
+@drop-down-hover-bg: rgba(70, 195, 193, 0.15);
+
+@drop-down-selected-bg: @gray-lighter;
 
 @drop-down-text-color: @gray;
+
+// select 
+
+@select-group-title-size: @font-size-small;
+
+@select-group-color: #999;
+
+@select-group-height: 30px;
 
 
 

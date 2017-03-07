@@ -3,7 +3,7 @@
 .@{sug-prefix-cls} {
     position: relative;
     display: inline-block;
-    &-list-wrap {
+    &-dropdown {
         margin: 5px 0;
         padding: 5px 0;
         box-shadow: @drop-down-boxshadow;
@@ -13,10 +13,10 @@
         border-radius: 2px;
         box-sizing: border-box;
         background-color: @body-bg;
-        ul.x-suggestion-list {
+        ul.@{sug-prefix-cls}-list {
             margin: 0;
             padding: 0;
-            li {
+            li.@{sug-prefix-cls}-item {
                 font-size: @font-size-base;
                 color: @drop-down-text-color;
                 list-style: none;

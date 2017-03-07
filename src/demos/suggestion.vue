@@ -6,7 +6,7 @@
 
 ## 基本使用：使用文本数组的数据源
 
-::: demo 基本用法，建议列表为文本格式。设置`v-model`和`suggestion`属性即可。可以通过键盘的`上下方向键`和`回车键`来控制选择。
+::: demo 基本用法，建议列表为文本格式。设置`v-model`和`suggestion`属性即可。可以通过键盘的`上下方向键`和`回车键`来控制选择。清除按钮默认展示，可通过`allow-clear`属性将其关闭。
 
 ```html
 
@@ -70,7 +70,7 @@
 ```html
 
 <tpl>
-    <x-suggestion v-model="state3" placeholder="请输入城市" :suggestions="sug3" :input-callback="request"></x-suggestion>
+    <x-suggestion v-model="state3" placeholder="请随意输入" :suggestions="sug3" :input-callback="request"></x-suggestion>
     <p style="margin-top:15px;">选中的值：{{state3}}</p>
 </tpl>
 
@@ -108,7 +108,14 @@
 |disabled|Boolean|false|是否禁用|可选||
 |suggestions|Array|[]|输入建议的数据源|必选||
 |inputCallback|Function|无|输入时的回调函数, 可用于触发远程请求|可选||
+|allowClear|Boolean|true|是否允许出现清除图标|可选|true, false|
+|afterClearCallback|Function|无|点击清除图标后的操作，仅当`allowClear`为`true`时有效|可选||
 
+## Events
+
+|事件名|说明|返回值|设置属性|
+|---|---|---|---|
+|change|选中值改变时触发|当前选中值|`@change`|
 
 </template>
 

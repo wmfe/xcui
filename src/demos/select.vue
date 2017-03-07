@@ -1,480 +1,403 @@
 <template lang="md">
-# Select多功能选择框
+# Select 选择器
 
+替代浏览器原生的选择器。
 
-## 使用场景
+支持单选和多选。
 
-1. 替代原生下拉框，支持多选
-2. 支持Array, Object等格式
-3. 支持进行输入建议，远程搜索等
-4. 支持optionGroup
+如果选项过少（如小于5项）且展示空间充裕，直接使用 `checkbox` 或 `radio` 平铺展示，是更直观、友好的选择。
 
-## DEMO
+## 基础单选
 
-<demo>
-    <example title="single - 基本模式 options(Array)">
-        <xcui-select
-            @change="selectChange2"
-            :options="dataSource2">
-        </xcui-select>
-    </example>
-    <example title="single - 基本模式 options(Object)">
-        <xcui-select
-             @change="selectChange"
-             :options="dataSource"></xcui-select>
-    </example>
-    <example title="自定义label的字段(label='text')">
-        <xcui-select label="text"
-            @change="selectChange"
-            :options="dataSource"></xcui-select>
-    </example>
-    <example title="禁用(:disabled)">
-        <xcui-select :disabled="disable"
-             @change="selectChange"
-             :options="dataSource"></xcui-select>
-    </example>
-    <example title="定制label(:custom-label)">
-        <xcui-select :custom-label="reRenderLabel"
-            @change="selectChange2"
-            :options="dataSource"></xcui-select>
-    </example>
-    <example title="省市联动">
-        <xcui-select placeholder="选择省"
-            @change="provinceChange"
-            :options="provinceData"></xcui-select>
-        <xcui-select placeholder="选择市"
-            @change="cityChange"
-            :options="selectCityData"></xcui-select>
-        <p>
-            {{selectProvinceValue}} - {{selectCityValue}}
-        </p>
-    </example>
-    <example title="input Local Search">
-        <xcui-select class-name="select-demo" placeholder="选择一个城市"
-             show-search search-empty-text="没有搜索结果哎..."
-             @search-change="searchChange"
-             @change="localSearchChange"
-             :options="localSearchSource">
-        </xcui-select>
-        输入值: {{localSearchValue}}
-        选择结果: {{localSearchResult}}
-    </example>
-    <example title="智能输入">
-        <xcui-select class-name="select-demo" placeholder="输入邮箱"
-             show-search
-             @search-change="asyncSearchChange"
-             @change="asyncSearchOnChange"
-             :options="asyncSearchSource">
-        </xcui-select>
-    </example>
-    <example title="远程数据">
-        远程搜索
-        <xcui-select class-name="select-demo" placeholder="搜索"
-             show-search
-             clear-on-select
-             @search-change="serverSearchChange"
-             @change="serverSearchOnChange"
-             :options="serverSearchSource">
-        </xcui-select>
-        {{serverSearchValue}}
-        <br>
-        ajax请求不能耦合select组件, 提供EVENT(@search-change)让使用者进行数据获取 & options赋值
-    </example>
-    <example title="option Group (数据格式一)">
-        <xcui-select class-name="select-demo" placeholder="搜索"
-                     optgroup
-                     @change="optgroupOnChange"
-                     :selected="optgroupDefaultValue"
-                     :options="optgroupSource">
-        </xcui-select>
-    </example>
-    <example title="option Group (数据格式二)">
-        <xcui-select class-name="select-demo" placeholder="搜索"
-                     optgroup
-                     label="name"
-                     @change="optgroupOnChange2"
-                     :options="optgroupSource2">
-        </xcui-select>
-    </example>
-    <example title="multiple select">
-        <xcui-select class-name="select-demo" placeholder="选择多个"
-                     multiple
-                     :selected="multipleDefaultValue"
-                     @change="multipleOnChange"
-                     @remove="multipleOnRemove"
-                     :options="dataSource2">
-        </xcui-select>
-    </example>
-    <example title="multiple select">
-        <xcui-select class-name="select-demo" placeholder="选择多个"
-                     multiple
-                     :multiple-max=2
-                     :selected="multipleDefaultValue2"
-                     :options="dataSource">
-        </xcui-select>
-    </example>
-    <example title="multiple select object">
-        <xcui-select class-name="select-demo"
-                     placeholder="选择多个"
-                     multiple
-                     :selected="multipleDefaultValue"
-                     @change="multipleObjectOnChange"
-                     @remove="multipleObjectOnRemove"
-                     :options="multipleObjOptions">
-        </xcui-select>
-    </example>
-</demo>
+::: demo 基本使用。将`x-option`作为`x-select`的子组件传入。支持通过键盘`方向键`和`回车键`选择选项。
 
-## 组件依赖
-> [fuzzysearch](https://www.npmjs.com/package/fuzzysearch) 模糊搜索模块
+```html
 
-## Props
+<tpl>
+    <div style="width: 180px;">
+        <x-select v-model="model1" placeholder="请选择">
+            <x-option v-for="item in data1" :label="item.label" :value="item.value">
+            </x-option>
+        </x-select>
+    </div>
+    <p style="margin-top: 15px;">选中的值：{{model1}}</p>
+</tpl>
 
-| 名字 | 类型 | 默认 | 描述 | 是否必选 |
-|-----|-----|-----|-----|----|
-| className | String | 无 | 自定义css类名  | 否 |
-| placeholder | String | 无| 选择框默认文字 | 否 |
-| optgroup | Boolean | false | 列表分组模式(结合options使用) | 否 |
-| multiple | Boolean | false | 多选 | 否 |
-| showSearch | Boolean | false | 是否展示搜索框 | 否 |
-| clearOnSelect | Boolean | false | 选择完以后清除搜索内容 | 否 |
-| label | String | 无 | 自定义label展现key(对应数据中key)  | 否 |
-| :multiple-max| Number | 无 | 多选模式下 最多选择数据项，默认0|
-| :customLabel | Function | 无| option内容定制|否
-| :options | Array |无|默认数据,optgroup模式下数据结构有要求(具体查看demo#option Group) | 是|
-| :disabled | Boolean | false | 禁用 | 否 |
-| :selected | String | 无 | 默认已选的值 |否|
-## Events
-
-| 名字 | 类型 | 默认 | 描述 | 是否必选 |
-|-----|-----|-----|-----|----|
-| @change | function(value) / function(value,groupIndex,valueIndex)  | 无 | 值发生变化的时候(2种模式: 普通模式/分组模式) | 否|
-| @select | function(value) / function(value,groupIndex,valueIndex)  | 无 | 发生了选择的时候(2种模式: 普通模式/分组模式)|否|
-| @searchChange | function(searchValue) | 无 | 搜索值发生变化的时候 | 否
-| @remove | function(removeValue) | 无| 多选模式下移除一个选值的时候 | 否
-
-### 模式说明
-
-- 单选模式:
-    ```
-    options数据格式一: [
-        'item1',
-        'item2'
-    ]
-    options数据格式二: [
-        {
-            label: '1',
-            disable: true,
-            name: '1'
-        }
-    ]
-    ```
-- 分组模式:
-    ```
-    optgroup    【必选】
-    showSearch  【不支持】
-    options数据格式一 : [
-        {
-            name: 'opt group 1',
-            options: [
-                'item1',
-                'item2'
-            ]
-        }
-    ]
-    options数据格式二 : [
-        {
-            name: 'opt group 2',
-            options: [
-                {
-                    label: '1',
-                    disable: true
-                }
-            ]
-        }
-    ]
-    ```
-
-- 多选模式:
-    ```
-    multiple 【必选】
-    showSearch  【不支持】
-    selected: Array
-    ```
-### 参考
-
-[select2](https://select2.github.io/)
-[antd-select](http://ant.design/components/select/)
-[vue-multiselect](http://monterail.github.io/vue-multiselect/)
-[Keen-UI - select](https://josephuspaye.github.io/Keen-UI/#/ui-select-docs)
-[http://amazeui.org/javascript/selected](http://amazeui.org/javascript/selected)
-</template>
-<style lang="less">
-    .select-demo,.xcui-select{
-        width:200px !important;
-    }
-</style>
 <script>
-    import jsonp from 'jsonp';
+    export default {
+        data() {
+            return {
+                model1: '',
+                data1: [
+                    {label: '北京烤鸭', value: '1'},
+                    {label: '夫妻肺片', value: '2'},
+                    {label: '西湖醋鱼', value: '3'},
+                    {label: '过桥米线', value: '4'},
+                    {label: '羊肉泡馍', value: '5'}
+                ]
+            }
+        }
+    }
+</script>
+```
+
+:::
+
+## 有禁用选项
+
+::: demo 通过将`x-option`的`disabled`选项置为`true`即可禁用选项。
+
+```html
+
+<tpl>
+    <div style="width: 180px;">
+        <x-select v-model="model2" placeholder="请选择">
+            <x-option v-for="item in data2" :label="item.label" :value="item.value" :disabled="item.disabled">
+            </x-option>
+        </x-select>
+    </div>
+    <p style="margin-top: 15px;">选中的值：{{model2}}</p>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                model2: '',
+                data2: [
+                    {label: '北京烤鸭', value: '1'},
+                    {label: '夫妻肺片', value: '2', disabled: true},
+                    {label: '西湖醋鱼', value: '3'},
+                    {label: '过桥米线', value: '4'},
+                    {label: '羊肉泡馍', value: '5'}
+                ]
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+## 禁用状态
+
+::: demo 通过将`x-select`的`disabled`选项置为`true`即可禁用选择器。
+
+```html
+
+<tpl>
+    <div style="width: 180px;">
+        <x-select v-model="model3" :disabled="disabled" placeholder="请选择">
+            <x-option v-for="item in data3" :label="item.label" :value="item.value" :disabled="item.disabled">
+            </x-option>
+        </x-select>
+    </div>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                disabled: true,
+                model3: '',
+                data3: [
+                    {label: '北京烤鸭', value: '1'},
+                    {label: '夫妻肺片', value: '2'},
+                    {label: '西湖醋鱼', value: '3'},
+                    {label: '过桥米线', value: '4'},
+                    {label: '羊肉泡馍', value: '5'}
+                ]
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+## 允许清空选项
+
+::: demo 通过设置`allowClear`属性可以包含清空按钮，将选择器置为未选择状态。
+
+```html
+
+<tpl>
+    <div style="width: 180px;">
+        <x-select v-model="model4" :allow-clear="true" placeholder="请选择">
+            <x-option v-for="item in data4" :label="item.label" :value="item.value">
+            </x-option>
+        </x-select>
+    </div>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                model4: '',
+                data4: [
+                    {label: '北京烤鸭', value: '1'},
+                    {label: '夫妻肺片', value: '2'},
+                    {label: '西湖醋鱼', value: '3'},
+                    {label: '过桥米线', value: '4'},
+                    {label: '羊肉泡馍', value: '5'}
+                ]
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+## 基础多选
+
+::: demo 通过设置`x-select`的`multiple`选项为`true`, 可以设置为多选状态。 
+
+```html
+
+<tpl>
+    <div style="width: 180px;">
+        <x-select v-model="model5" :multiple="true" placeholder="请选择">
+            <x-option v-for="item in data5" :label="item.label" :value="item.value">
+            </x-option>
+        </x-select>
+    </div>
+    <p style="margin-top: 15px;">选中的值：{{model5}}</p>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                model5: [],
+                data5: [
+                    {label: '北京烤鸭', value: '1'},
+                    {label: '夫妻肺片', value: '2'},
+                    {label: '西湖醋鱼', value: '3'},
+                    {label: '过桥米线', value: '4'},
+                    {label: '羊肉泡馍', value: '5'}
+                ]
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+## 限定多选条数上限
+
+::: demo 通过设置`x-option`的`multipleLimit`属性, 可以限制最多可选的条数。
+
+```html
+
+<tpl>
+    <div style="width: 180px;">
+        <x-select v-model="model6" :multiple-limit="3" :allow-clear="true"  :multiple="true" placeholder="请选择">
+            <x-option v-for="item in data6" :label="item.label" :value="item.value">
+            </x-option>
+        </x-select>
+    </div>
+    <p style="margin-top: 15px;">选中的值：{{model6}}</p>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                model6: [],
+                data6: [
+                    {label: '北京烤鸭', value: '1'},
+                    {label: '夫妻肺片', value: '2'},
+                    {label: '西湖醋鱼', value: '3'},
+                    {label: '过桥米线', value: '4'},
+                    {label: '羊肉泡馍', value: '5'}
+                ]
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+## 分组展示
+
+::: demo 通过引入`x-option-group`组件可以进行分组展示。
+
+```html
+
+<tpl>
+    <div style="width: 180px;">
+        <x-select v-model="model7" placeholder="请选择">
+            <x-option-group v-for="group in data7" :label="group.label">
+                <x-option v-for="item in group.options" :label="item.label" :value="item.value"></x-option>
+            </x-option-group>
+        </x-select>
+    </div>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                model7: '',
+                data7: [{
+                    label: '热卖菜品',
+                    options: [{
+                        value: '1',
+                        label: '北京烤鸭'
+                    }, {
+                        value: '2',
+                        label: '夫妻肺片'
+                    }]
+                }, {
+                    label: '人气菜品',
+                    options: [{
+                        value: '3',
+                        label: '西湖醋鱼'
+                    }, {
+                        value: '4',
+                        label: '过桥米线'
+                    }, {
+                        value: '5',
+                        label: '羊肉泡馍'
+                    }]
+                }]
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+## Select Props
+
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
+|-----|-----|-----|-----|-----|-----|-----|
+|value|String, Array|无|和`v-model`的绑定值|必选||
+|size|String|无|input输入框的大小|可选|large, small|
+|placeholder|String|无|未选择时的默认文字|可选||
+|disabled|Boolean|false|是否禁用选择器|可选|true, false|
+|multiple|Boolean|false|是否开启多选|可选|true, false|
+|multipleLimit|Number|0|开启多选时最多允许选择的项目数，为0即不限制||
+|allowClear|Boolean|false|是否显示清除按钮|可选|true, false|
+
+## Select Events
+
+|事件名|说明|返回值|设置属性|
+|---|---|---|---|
+|change|选中值改变时触发|当前选中值|`@change`|
+
+## Option Props
+
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
+|-----|-----|-----|-----|-----|-----|-----|
+|value|String, Number|无|选项的值|必选||
+|label|String, Number|无|选项的显示文字，不设置的话与`value`相同|可选||
+|disabled|Boolean|false|是否禁用该选项|可选|true, false|
+
+## Option-group Props
+
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
+|-----|-----|-----|-----|-----|-----|-----|
+|label|String|无|该分组的标题|必选||
+|disabled|Boolean|false|是否禁用该分组下所有选项|可选||
+
+
+</template>
+
+<script>
     export default{
         data() {
             return {
-                dataSource: [
-                    {
-                        name: 'jake',
-                        label: 'jake',
-                        text: '测试1',
-                        disable: true
-                    },
-                    {
-                        name: 2,
-                        label: 2,
-                        text: '测试2'
-                    },
-                    {
-                        name: 3,
-                        label: 3,
-                        text: '测试3'
-                    },
-                    {
-                        name: 4,
-                        label: 4,
-                        text: '测试4'
-                    }
+                model1: '',
+                data1: [
+                    {label: '北京烤鸭', value: '1'},
+                    {label: '夫妻肺片', value: '2'},
+                    {label: '西湖醋鱼', value: '3'},
+                    {label: '过桥米线', value: '4'},
+                    {label: '羊肉泡馍', value: '5'},
+                    {label: '宫爆鸡丁', value: '6'},
+                    {label: '三鲜丸子', value: '7'},
+                    {label: '鱼香肉丝', value: '8'},
+                    {label: '麻婆豆腐', value: '9'}
                 ],
-                dataSourceDisable: [
-                    {
-                        name: 'jake',
-                        label: 'jake',
-                        text: '测试1',
-                        disable: true
-                    },
-                    {
-                        name: 2,
-                        label: 2,
-                        text: '测试2'
-                    },
-                    {
-                        name: 3,
-                        label: 3,
-                        text: '测试3'
-                    },
-                    {
-                        name: 4,
-                        label: 4,
-                        text: '测试4'
-                    }
+                model2: '',
+                data2: [
+                    {label: '北京烤鸭', value: '1'},
+                    {label: '夫妻肺片', value: '2', disabled: true},
+                    {label: '西湖醋鱼', value: '3'},
+                    {label: '过桥米线', value: '4'},
+                    {label: '羊肉泡馍', value: '5'}
                 ],
-                dataSource2: [
-                    'js',
-                    'python',
-                    'java',
-                    'ruby',
-                    'markdown',
-                    'php',
-                    'css',
-                    'less'
+                model3: '',
+                data3: [
+                    {label: '北京烤鸭', value: '1'},
+                    {label: '夫妻肺片', value: '2'},
+                    {label: '西湖醋鱼', value: '3'},
+                    {label: '过桥米线', value: '4'},
+                    {label: '羊肉泡馍', value: '5'}
                 ],
-                asyncSearchSource: [],
-                serverSearchSource: [],
-                serverSearchValue: '',
-                localSearchSource: [
-                    '北京',
-                    '南京',
-                    '天津',
-                    '上海',
-                    '静安',
-                    '刘安',
-                    '安徽',
-                    '南充',
-                    '广州',
-                    '西宁',
-                    'angular',
-                    'vue',
-                    'test',
-                    'fis',
-                    'node',
-                    'express',
-                    'koa',
-                    'connect'
+                disabled: true,
+                model4: '',
+                data4: [
+                    {label: '北京烤鸭', value: '1'},
+                    {label: '夫妻肺片', value: '2'},
+                    {label: '西湖醋鱼', value: '3'},
+                    {label: '过桥米线', value: '4'},
+                    {label: '羊肉泡馍', value: '5'}
                 ],
-                localSearchValue: '',
-                localSearchResult: '',
-                optgroupDefaultValue: '1',
-                optgroupSource: [
-                    {
-                        name: 'group 1',
-                        options: [
-                            '1',
-                            '2',
-                            '3'
-                        ]
-                    },
-                    {
-                        name: 'group 2',
-                        options: [
-                            '11',
-                            '12',
-                            '13'
-                        ]
-                    }
+                model5: [],
+                data5: [
+                    {label: '北京烤鸭', value: '1'},
+                    {label: '夫妻肺片', value: '2'},
+                    {label: '西湖醋鱼', value: '3'},
+                    {label: '过桥米线', value: '4'},
+                    {label: '羊肉泡馍', value: '5'}
                 ],
-                optgroupSource2: [
-                    {
-                        name: 'group 1',
-                        options: [
-                            {
-                                name: 'name1',
-                                label: 1,
-                                text: '测试1',
-                                disable: true
-                            },
-                            {
-                                name: 'name2',
-                                label: 2,
-                                text: '测试2'
-                            },
-                            {
-                                name: 'name3',
-                                label: 3,
-                                text: '测试3'
-                            },
-                            {
-                                name: 'name4',
-                                label: 4,
-                                text: '测试4'
-                            }
-                        ]
-                    }
+                model6: [],
+                data6: [
+                    {label: '北京烤鸭', value: '1'},
+                    {label: '夫妻肺片', value: '2'},
+                    {label: '西湖醋鱼', value: '3'},
+                    {label: '过桥米线', value: '4'},
+                    {label: '羊肉泡馍', value: '5'}
                 ],
-                optgroupValue: '',
-                multipleObjOptions: [
-                    {
-                        name: '1',
-                        label: '1',
-                        disable: false
+                model7: '',
+                data7: [{
+                    label: '热卖菜品',
+                    options: [{
+                        value: '1',
+                        label: '北京烤鸭'
                     }, {
-                        name: '2',
-                        label: '2',
-                        disable: false
+                        value: '2',
+                        label: '夫妻肺片'
+                    }]
+                }, {
+                    label: '人气菜品',
+                    options: [{
+                        value: '3',
+                        label: '西湖醋鱼'
                     }, {
-                        name: '3',
-                        label: '3',
-                        disable: false
-                    }
-                ],
-                multipleDefaultValue: [
-                    '3',
-                    '2'
-                ],
-                multipleDefaultValue2: [
-                    2,
-                    4
-                ],
-                value: '',
-                value2: '',
-                disable: true,
-                defaultValue: 'css',
-                closeAfterSelect: true,
-                // 省市联动数据
-                selectProvinceValue: '',
-                selectCityValue: '',
-                provinceData: ['浙江', '江苏'],
-                selectCityData: [],
-                cityData: {
-                    浙江: ['杭州', '宁波', '温州'],
-                    江苏: ['南京', '苏州', '镇江']
-                }
+                        value: '4',
+                        label: '过桥米线'
+                    }, {
+                        value: '5',
+                        label: '羊肉泡馍'
+                    }]
+                }]
             };
         },
-        watch: {
-            'selectProvinceValue'(province) {
-                this.selectCityData = this.cityData[province] || null;
-                this.selectCityValue = '';
-            }
-        },
-        created() {
-            let me = this;
-            setTimeout(function () {
-                me.optgroupDefaultValue = '11';
-            }, 1000);
-        },
         methods: {
-            selectChange(v) {
-                this.value = v;
-            },
-            selectChange2(v) {
-                this.value2 = v;
-            },
-            reRenderLabel(item) {
-                return `${item.text} - ${item.name}`;
-            },
-            reRender(item) {
-                return `${item}`;
-            },
-            onSelect({name}) {
-                // console.log(`选择了${name}`);
-            },
-            onSelect2(value) {
-                // console.log(`选择了${value}`);
-                this.defaultValue = value;
-            },
-            // 省市联动
-            provinceChange(value) {
-                this.selectProvinceValue = value;
-            },
-            cityChange(value) {
-                this.selectCityValue = value;
-            },
-            // searchChange
-            searchChange(v) {
-                this.localSearchValue = v;
-            },
-            localSearchChange(value) {
-                this.localSearchResult = value;
-            },
-            asyncSearchChange(v) {
-                let emails = ['gmail.com', '163.com', 'qq.com'];
-                if (v && v.indexOf('@') < 1) {
-                    this.asyncSearchSource = emails.map(function (item) {
-                        return v + '@' + item;
-                    });
-                }
-                else {
-                    this.asyncSearchSource = [];
-                }
-            },
-            asyncSearchOnChange(v) {
-                console.log('asycn select:' + v);
-            },
-            serverSearchChange(v) {
-                let me = this;
-                window.selectsug = function (res) {
-                    me.serverSearchSource = res.s;
-                };
-                jsonp(`https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=window.selectsug&wd=${v}`);
-            },
-            serverSearchOnChange(v) {
-                this.serverSearchValue = v;
-            },
-            optgroupOnChange(value, groupIndex, valueIndex) {
-                console.log('optgroupOnChange: ', value, 'groupIndex:', groupIndex, 'valueIndex:', valueIndex);
-            },
-            optgroupOnChange2(value, groupIndex, valueIndex) {
-                console.log('optgroupOnChange2: ', value, 'groupIndex:', groupIndex, 'valueIndex:', valueIndex);
-            },
-            multipleOnChange(v) {
-                console.log('multipleOnChange', v);
-            },
-            multipleOnRemove(v) {
-                console.log('multipleOnRemove', v);
-            },
-            multipleObjectOnChange(v) {
-                console.log('multipleObjectOnChange', v);
-            },
-            multipleObjectOnRemove(v) {
-                console.log('multipleObjectOnRemove', v);
-            }
         }
     };
 </script>

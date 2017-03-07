@@ -18,7 +18,7 @@ import PageLoading from './pageloading';
 import Pagination from './pagination';
 import Popover from './popover';
 import Progress from './progress';
-import Select from './select';
+import {Select, Option, OptionGroup} from './select/index';
 import Suggestion from './suggestion';
 import Tag from './tag';
 import Tooltip from './tooltip';
@@ -46,6 +46,8 @@ const install = (Vue) => {
     Vue.component(Popover.name, Popover);
     Vue.component(Progress.name, Progress);
     Vue.component(Select.name, Select);
+    Vue.component(Option.name, Option);
+    Vue.component(OptionGroup.name, OptionGroup);
     Vue.component(Suggestion.name, Suggestion);
     Vue.component(Tag.name, Tag);
     Vue.component(Tooltip.name, Tooltip);
