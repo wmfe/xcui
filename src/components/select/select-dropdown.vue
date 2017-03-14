@@ -36,12 +36,12 @@
             };
         },
         watch: {
-            '$parent.inputWidth'() {
-                this.minWidth = this.$parent.$el.getBoundingClientRect().width + 'px';
+            '$parent.inputWidth'(val) {
+                this.minWidth = val;
             }
         },
         mounted() {
-            this.referenceElm = this.$parent.$refs.reference.$el;
+            this.referenceElm = this.$parent.$refs.reference.$refs.input;
             this.$parent.popperElm = this.popperElm = this.$el;
             this.$on('updatePopper', this.updatePopper);
             this.$on('destroyPopper', this.destroyPopper);

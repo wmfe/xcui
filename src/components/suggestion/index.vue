@@ -13,26 +13,23 @@
             @keyup.enter.stop.native="handleEnter()"
             :icon="icon"
             :icon-click="iconClick"></x-input>
-        <transition name="slide-up" @after-leave="doDestroy">
-            <div class="x-suggestion-dropdown" v-show="sugVisible" ref="wrap" :style="{ width: dropdownWidth }">
-                <ul class="x-suggestion-list" ref="sugList">
-                    <li v-for="(item,index) in list" class="x-suggestion-item" :class="{'active' : currentIndex==index}" @click="setItem(item)">
-                        {{item.text}}
-                    </li>
-                </ul>
-            </div>
-        </transition>
+        <x-suggestion-dropdown :suggestions="list">
+        </x-suggestion-dropdown>
     </div>
 </template>
 
 <script>
     import xInput from '../input';
-    import Popper from '../../utils/vue-popper';
+    import xSuggestionDropdown from './suggestion-dropdown';
+    import Emitter from '../../utils/mixins/emitter';
+
     export default {
-        name: 'x-suggestion',
-        mixins: [Popper],
+        name: 'xSuggestion',
+        componentName: 'xSuggestion',
+        mixins: [Emitter],
         components: {
-            xInput
+            xInput,
+            xSuggestionDropdown
         },
         data() {
             return {
@@ -71,7 +68,6 @@
                     return () => {};
                 }
             },
-            // v-model使用
             value: {
                 type: Object,
                 default() {
@@ -84,8 +80,7 @@
             allowClear: {
                 type: Boolean,
                 default: true
-            },
-            afterClearCallback: Function
+            }
         },
         computed: {
             sugVisible() {
@@ -108,6 +103,10 @@
                     this.icon = '';
                     this.iconClick = () => {};
                 }
+            },
+            sugVisible(val) {
+                this.broadcast('xSuggestionDropdown', 'visible',
+                    [val, this.$refs.xInput.$refs.input.offsetWidth]);
             }
         },
         methods: {
@@ -116,7 +115,6 @@
                     this.icon = 'android-close';
                     this.iconClick = () => {
                         this.clearText();
-                        this.afterClearCallback && this.afterClearCallback();
                     };
                 }
             },
@@ -250,15 +248,10 @@
             this.handleClearBtn();
         },
         mounted() {
-            this.popperElm = this.$refs.wrap;
-            this.referenceElm = this.$refs.xInput.$refs.input;
-            this.dropdownWidth = this.$refs.xInput.$refs.input.getBoundingClientRect().width + 'px';
-            this.arrangeLocalList();
-        },
-        updated() {
-            this.$nextTick(() => {
-                this.updatePopper();
+            this.$on('item-click', item => {
+                this.setItem(item);
             });
+            this.arrangeLocalList();
         }
     };
 </script>

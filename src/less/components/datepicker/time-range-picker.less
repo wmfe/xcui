@@ -1,0 +1,31 @@
+@time-range-picker-prefix-cls: ~"@{xcui-prefix}-time-range-picker";
+
+.@{time-range-picker-prefix-cls} {
+    min-width: 354px;
+    overflow: visible;
+
+    &-content {
+        position: relative;
+        text-align: center;
+        padding: 10px;
+    }
+
+    &-cell {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 4px 7px 7px;
+        width: 49%;
+        display: inline-block;
+    }
+
+    &-header {
+        margin-bottom: 5px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    &-body {
+        border-radius:2px;
+        border: 1px solid @datepicker-border-color;
+    }
+}

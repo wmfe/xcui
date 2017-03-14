@@ -2,9 +2,7 @@
 copied from element-ui/src/utils/
 */
 
-import Vue from 'vue';
-
-const PopperJS = Vue.prototype.$isServer ? function() {} : require('./popper');
+const PopperJS = require('./popper');
 const stop = e => e.stopPropagation();
 let zIndex = 2000;
 
@@ -72,7 +70,6 @@ export default {
 
   methods: {
     createPopper() {
-      if (this.$isServer) return;
       this.currentPlacement = this.currentPlacement || this.placement;
       if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.currentPlacement)) {
         return;

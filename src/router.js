@@ -14,7 +14,8 @@ import Tooltip from './demos/tooltip';
 import Suggestion from './demos/suggestion';
 import Tag from './demos/tag';
 import Datepicker from './demos/datepicker';
-import Daterangepicker from './demos/DateRangePicker';
+import DateTimePicker from './demos/datetimepicker';
+import TimePicker from './demos/timepicker';
 import Select from './demos/select.vue';
 import Message from './demos/message';
 import Modal from './demos/modal';
@@ -77,8 +78,11 @@ const router = new VueRouter({
                 path: '/component/datepicker',
                 component: Datepicker
             }, {
-                path: '/component/daterangepicker',
-                component: Daterangepicker
+                path: '/component/datetimepicker',
+                component: DateTimePicker
+            }, {
+                path: '/component/timepicker',
+                component: TimePicker
             }, {
                 path: '/component/loading',
                 component: Loading

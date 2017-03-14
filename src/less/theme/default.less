@@ -21,8 +21,12 @@
 @gray-dark: lighten(@gray-base, 20%); // #333
 @gray: lighten(@gray-base, 33.5%); // #555
 @gray-light: lighten(@gray-base, 46.7%); // #777
+@gray-ccc: lighten(@gray-base, 80%); // #ccc
+@gray-ddd: lighten(@gray-base, 86.5%); // #ddd;
 @gray-lighter: lighten(@gray-base, 93.5%); // #eee
 
+@white: #fff;
+@white-darker: #fbfdff;
 
 // global base
 // 每当组件默认值没有特定值的时候，遵循这里的全局设定
@@ -285,6 +289,30 @@
 @select-group-color: #999;
 
 @select-group-height: 30px;
+
+// datepicker
+
+@datepicker-color:#48576a;
+
+@datepicker-icon-color: @gray-ccc;
+
+@datepicker-border-color: #d1dbe5;
+
+@datepicker-header-color: @gray-dark;
+
+@datepicker-off-color: #ddd;
+
+@datepicker-text-hover-color: @brand-primary;
+
+@datepicker-active-color: @brand-primary;
+
+@datepicker-cell-hover-color: @drop-down-hover-bg;
+
+@datepicker-inrange-color: darken(@drop-down-hover-bg, 15%);
+
+@datepicker-inrange-hover-color: tint(@brand-primary, 0.64);
+
+@datepicker-inner-border-color: #e4e4e4;
 
 
 

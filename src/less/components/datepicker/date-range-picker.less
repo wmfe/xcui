@@ -1,0 +1,110 @@
+@date-range-picker-prefix-cls: ~"@{xcui-prefix}-date-range-picker";
+@picker-panel-prefix-cls: ~"@{xcui-prefix}-picker-panel";
+
+.@{date-range-picker-prefix-cls} {
+    min-width: 520px;
+     &.has-sidebar.has-time {
+      min-width: 766px;
+    }
+
+    &.has-sidebar {
+      min-width: 620px;
+    }
+
+    &.has-time {
+      min-width: 660px;
+    }
+
+    table {
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    .@{picker-panel-prefix-cls}-body {
+      min-width: 513px;
+    }
+
+    .@{picker-panel-prefix-cls}-content {
+      margin: 0;
+    }
+
+    &-header {
+        position: relative;
+        text-align: center;
+        height: 28px;
+
+        button {
+          float: left;
+        }
+
+        div {
+          font-size: 14px;
+          margin-right: 50px;
+        }
+    }
+
+    &-content {
+        float: left;
+        width: 50%;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 16px;
+
+        &.is-left {
+            border-right: 1px solid @datepicker-inner-border-color;
+        }
+
+        &.is-right {
+            @{date-range-picker-prefix-cls}-header {
+                button {
+                    float: right;
+                }
+
+                div {
+                  margin-left: 50px;
+                  margin-right: 50px;
+                }
+            }
+        }
+    }
+
+    &-editors-wrap {
+        box-sizing: border-box;
+        display: table-cell;
+        &.is-right {
+            text-align: right
+        }
+    }
+
+    &-time-header {
+        position: relative;
+        border-bottom: 1px solid @datepicker-inner-border-color;
+        font-size: 12px;
+        padding: 8px 5px 5px;
+        display: table;
+        width: 100%;
+        box-sizing: border-box;
+
+        >.x-icon-ios-arrow-right {
+            font-size: 20px;
+            vertical-align: middle;
+            display: table-cell;
+            color: var(--datepicker-icon-color);
+        }
+    }
+
+    &-time-picker-wrap {
+      position: relative;
+      display: table-cell;
+      padding: 0 5px;
+
+      .@{picker-panel-prefix-cls} {
+        position: absolute;
+        top: 13px;
+        right: 0;
+        z-index: 1;
+        background: @white;
+      }
+    }
+    
+}

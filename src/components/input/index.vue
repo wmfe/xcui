@@ -10,7 +10,9 @@
         <div class="x-input-group-prepend" v-if="$slots.prepend">
             <slot name="prepend"></slot>
         </div>
-        <i class="x-icon x-input-icon" :class="[icon ? 'x-icon-' + icon : '']" v-if="icon" @click="handleIconClick"></i>
+        <slot name="icon">
+            <i class="x-icon x-input-icon" :class="[icon ? 'x-icon-' + icon : '']" v-if="icon" @click="handleIconClick"></i>
+        </slot>
         <input :class="cls"
             :type="type"
             :name="name"
@@ -35,7 +37,8 @@
 </template>
 <script>
     export default {
-        name: 'x-input',
+        name: 'xInput',
+        componentName: 'xInput',
         props: {
             value: [String, Number],
             placeholder: String,

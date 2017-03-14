@@ -1,8 +1,7 @@
 /**
  * @file index.js
  */
-import Datepicker from './datepicker';
-import DateRangePicker from './daterangepicker';
+import {DatePicker, TimePicker, TimeSelect} from './datepicker/index';
 import Input from './input';
 import InputNumber from './inputNumber';
 import Textarea from './textarea';
@@ -35,8 +34,9 @@ const install = (Vue) => {
     if (install.installed) {
         return;
     }
-    Vue.component(Datepicker.name, Datepicker);
-    Vue.component(DateRangePicker.name, DateRangePicker);
+    Vue.component(DatePicker.name, DatePicker);
+    Vue.component(TimePicker.name, TimePicker);
+    Vue.component(TimeSelect.name, TimeSelect);
     Vue.component(InputNumber.name, InputNumber);
     Vue.component(Loading.name, Loading);
     Vue.component(Message.name, Message);
@@ -69,8 +69,7 @@ const install = (Vue) => {
 
 const xcui = {
     version: '1.0.0-alpha',
-    Datepicker,
-    DateRangePicker,
+    DatePicker,
     InputNumber,
     Loading,
     Message,

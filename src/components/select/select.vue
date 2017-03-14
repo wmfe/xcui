@@ -30,7 +30,6 @@
     </div>
 </template>
 <script>
-    import clone from '../../utils/clone';
     import Emitter from '../../utils/mixins/emitter';
     import Clickoutside from '../../utils/clickoutside';
     import xInput from '../input';
@@ -77,14 +76,12 @@
         },
         data() {
             return {
-                searchValue: '',
                 isOpen: false,
                 inputWidth: 0,
                 selectIndex: 0,
                 isFocus: false,
                 // options 子组件集合
                 options: [],
-                currentValue: this.selected ? clone(this.selected) : this.multiple ? [] : null,
                 currentOptionLabel: '',
                 allOptionsDisabled: false,
                 inputHovering: false,
@@ -117,11 +114,13 @@
                 }
                 else {
                     let optionIndex = -1;
-                    this.value.forEach((item, index) => {
-                        if (item === option.value) {
-                            optionIndex = index;
+                    for (let i = 0, len = this.value.length; i < len; i++) {
+                        if (this.value[i] === option.value) {
+                            optionIndex = i;
+                            break;
                         }
-                    });
+                    }
+
                     if (optionIndex > -1) {
                         this.value.splice(optionIndex, 1);
                     } 
@@ -305,9 +304,9 @@
             if (!this.multiple && Array.isArray(this.value)) {
                 this.$emit('input', '');
             }
-            this.$on('handleOptionClick', this.handleOptionSelect);
         },
         mounted() {
+            this.$on('handleOptionClick', this.handleOptionSelect);
             this.inputWidth = this.$refs.reference.$el.getBoundingClientRect().width + 'px';
             this.setSelected();
         }

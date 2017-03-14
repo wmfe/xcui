@@ -99,6 +99,16 @@
             </x-input>
         </x-col>
     </x-row>
+    <x-row style="margin-top: 15px">
+        <x-col span="8">
+            <x-input placeholder="请输入网址">
+                <x-select v-model="model" slot="prepend" placeholder="请选择" style="width: 100px;">
+                    <x-option v-for="item in options" :value="item.value"></x-option>
+                </x-select>
+                <span slot="append"><x-icon name="share"></x-icon></span>
+            </x-input>
+        </x-col>
+    </x-row>
 </tpl>
 ```
 
@@ -147,7 +157,13 @@
                 input: '',
                 input1: '',
                 input2: '',
-                input3: ''
+                input3: '',
+                model: '',
+                options: [{
+                    value: 'http://'
+                }, {
+                    value: 'https://'
+                }]
             };
         }
     };

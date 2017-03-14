@@ -109,7 +109,6 @@
 |suggestions|Array|[]|输入建议的数据源|必选||
 |inputCallback|Function|无|输入时的回调函数, 可用于触发远程请求|可选||
 |allowClear|Boolean|true|是否允许出现清除图标|可选|true, false|
-|afterClearCallback|Function|无|点击清除图标后的操作，仅当`allowClear`为`true`时有效|可选||
 
 ## Events
 

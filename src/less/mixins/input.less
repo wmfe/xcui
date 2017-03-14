@@ -178,8 +178,13 @@
         border-radius: @border-radius-base;
 
         .@{xcui-prefix}-select {
-            margin: -(@padding-base-vertical + 1) (-@padding-base-horizontal);  // lesshint spaceAroundOperator: false
-
+            margin: -(@padding-base-vertical + 1) (-@padding-base-horizontal);  
+            .@{xcui-prefix}-input {
+                background: transparent !important;
+                border: 0;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
             &-selection {
                 background-color: inherit;
                 margin: -1px;

@@ -162,7 +162,7 @@
 <tpl>
     <div style="width: 180px;">
         <x-select v-model="model5" :multiple="true" placeholder="请选择">
-            <x-option v-for="item in data5" :label="item.label" :value="item.value">
+            <x-option v-for="i in data5" :label="i.label" :value="i.value">
             </x-option>
         </x-select>
     </div>
@@ -279,6 +279,46 @@
 
 :::
 
+## 自定义模板
+
+::: demo 将自定义的HTML模板放入`x-option`的`slot`中即可。
+
+```html
+
+<tpl>
+    <div style="width: 180px;">
+        <x-select v-model="model8" placeholder="请选择">
+            <x-option v-for="item in data8" :label="item.label" :value="item.value">
+                <span style="float: left">{{ item.label }}</span>
+                <span style="float: right; color: #8492a6; font-size: 10px">{{ item.info }}</span>
+            </x-option>
+        </x-select>
+    </div>
+</tpl>
+
+<script>
+    export default {
+        myName: 'hehe',
+        data() {
+            return {
+                model8: '',
+                data8: [
+                    {label: '北京烤鸭', value: '1', info: '$16.00'},
+                    {label: '夫妻肺片', value: '2', info: '$8.00'},
+                    {label: '西湖醋鱼', value: '3', info: '$20.00'},
+                    {label: '过桥米线', value: '4', info: '$4.00'},
+                    {label: '羊肉泡馍', value: '5', info: '$6.00'}
+                ]
+            }
+        }
+    }
+</script>
+```
+
+:::
+
+
+
 ## Select Props
 
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
@@ -394,7 +434,16 @@
                         value: '5',
                         label: '羊肉泡馍'
                     }]
-                }]
+                }],
+                model8: '',
+                data8: [
+                    {label: '北京烤鸭', value: '1', info: '$16.00'},
+                    {label: '夫妻肺片', value: '2', info: '$8.00'},
+                    {label: '西湖醋鱼', value: '3', info: '$20.00'},
+                    {label: '过桥米线', value: '4', info: '$4.00'},
+                    {label: '羊肉泡馍', value: '5', info: '$6.00'}
+                ],
+                data9: 'hehe'
             };
         },
         methods: {

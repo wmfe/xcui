@@ -48,10 +48,13 @@
                         <router-link to="/component/select">Select 选择器</router-link>
                     </li>
                     <li class="sidebar-item">
-                        <router-link to="/component/datepicker">DatePicker 单日期选择器</router-link>
+                        <router-link to="/component/timepicker">TimePicker 时间选择器</router-link>
                     </li>
                     <li class="sidebar-item">
-                        <router-link to="/component/daterangepicker">DateRangePicker 多日期选择器</router-link>
+                        <router-link to="/component/datepicker">DatePicker 日期选择器</router-link>
+                    </li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/datetimepicker">DateTimePicker 时间日期选择器</router-link>
                     </li>
                     
                     <li class="sidebar-title">Notice 提示</li>
