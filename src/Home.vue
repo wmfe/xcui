@@ -59,7 +59,13 @@
                     
                     <li class="sidebar-title">Notice 提示</li>
                     <li class="sidebar-item">
-                         <router-link to="/component/modal">Modal</router-link>
+                         <router-link to="/component/message">Message 信息提示</router-link>
+                    </li>
+                    <li class="sidebar-item">
+                         <router-link to="/component/notice">Notice 通知提示</router-link>
+                    </li>
+                    <li class="sidebar-item">
+                         <router-link to="/component/modal">Modal 对话框</router-link>
                     </li>
                     <li class="sidebar-item">
                         <router-link to="/component/popover">Popover</router-link>
@@ -74,9 +80,7 @@
                     <li class="sidebar-item">
                         <router-link to="/component/tag">Tag</router-link>
                     </li>
-                    <li class="sidebar-item">
-                         <router-link to="/component/message">Message</router-link>
-                    </li>
+                    
                     <li class="sidebar-title">Navigation 导航</li>
                     <li class="sidebar-item">
                         <router-link to="/component/pagination">Pagination 页码</router-link>

@@ -18,6 +18,7 @@ import DateTimePicker from './demos/datetimepicker';
 import TimePicker from './demos/timepicker';
 import Select from './demos/select.vue';
 import Message from './demos/message';
+import Notice from './demos/notice';
 import Modal from './demos/modal';
 import InputNumber from './demos/inputNumber';
 import Progress from './demos/progress';
@@ -89,6 +90,9 @@ const router = new VueRouter({
             }, {
                 path: '/component/message',
                 component: Message
+            }, {
+                path: '/component/notice',
+                component: Notice
             }, {
                 path: '/component/modal',
                 component: Modal

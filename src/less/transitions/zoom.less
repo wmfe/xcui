@@ -1,0 +1,35 @@
+.zoom-motion(@className, @keyframeName) {
+    .@{className}-enter-active {
+        animation: @animation-duration-base ~"@{keyframeName}In" @ease-in-out;
+    }
+    .@{className}-leave-active {
+        animation: @animation-duration-base ~"@{keyframeName}Out" @ease-in-out;
+    }
+}
+
+.zoom-motion(modal-zoom, xModalZoom);
+
+
+// for modal
+
+@keyframes xModalZoomIn {
+    0% {
+      .scale(1.1);
+      opacity: 0;
+    }
+    100% {
+      .scale(1);
+      opacity: 1;
+    }
+  }
+
+@keyframes xModalZoomOut {
+    0% {
+      .scale(1);
+      opacity: 1;
+    }
+    100% {
+      .scale(1.1);
+      opacity: 0;
+    }
+  }

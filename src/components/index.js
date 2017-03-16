@@ -11,7 +11,8 @@ import Radio from './radio';
 import RadioButton from './radio-button';
 import RadioGroup from './radio-group';
 import Loading from './loading';
-import Message from './message';
+import Message from './message/index.js';
+import Notice from './notice/index.js';
 import Modal from './modal';
 import PageLoading from './pageloading';
 import Pagination from './pagination';
@@ -39,7 +40,6 @@ const install = (Vue) => {
     Vue.component(TimeSelect.name, TimeSelect);
     Vue.component(InputNumber.name, InputNumber);
     Vue.component(Loading.name, Loading);
-    Vue.component(Message.name, Message);
     Vue.component(Modal.name, Modal);
     Vue.component(PageLoading.name, PageLoading);
     Vue.component(Pagination.name, Pagination);
@@ -64,6 +64,8 @@ const install = (Vue) => {
     Vue.component(Radio.name, Radio);
     Vue.component(RadioGroup.name, RadioGroup);
     Vue.component(RadioButton.name, RadioButton);
+    Vue.use(Message);
+    Vue.use(Notice);
     Vue.use(xcuiInstall);
 };
 
