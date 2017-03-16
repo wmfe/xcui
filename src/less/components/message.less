@@ -1,0 +1,71 @@
+@message-prefix-cls: ~"@{xcui-prefix}-message";
+@icon-prefix-cls: ~"@{xcui-prefix}-icon";
+
+.@{message-prefix-cls} {
+    font-size: @font-size-base;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    top: 16px;
+    left: 0;
+
+    &-notice {
+        width: auto;
+        vertical-align: middle;
+        position: absolute;
+        left: 50%;
+    }
+
+    &-notice-content {
+        position: relative;
+        right: 50%;
+        border-radius: @border-radius-small;
+        box-shadow: @shadow-1-down;
+        background: #fff;
+        display: block;
+    }
+
+    &-icon-wrap {
+        display: inline-block;
+        padding: 16px;
+    }
+
+    &-text-wrap {
+        display: inline-block;
+        color: @gray;
+        padding: 16px 10px;
+        min-width: 250px;
+    }
+
+    &-success {
+        .@{message-prefix-cls}-icon-wrap {
+            background-color: @brand-success;
+        }
+    }
+
+    &-error {
+        .@{message-prefix-cls}-icon-wrap {
+            background-color: @brand-danger;
+        }
+    }
+
+    &-warning {
+        .@{message-prefix-cls}-icon-wrap {
+            background-color: @brand-warning;
+        }
+    }
+
+    &-info {
+        .@{message-prefix-cls}-icon-wrap {
+            background-color: @brand-info;
+        }
+    }
+
+    .@{icon-prefix-cls} {
+        color: @white;
+        font-size: 20px;
+        width: 20px;
+        position: relative;
+        text-align: center;
+    }
+}

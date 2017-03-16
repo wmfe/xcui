@@ -1,0 +1,129 @@
+@notice-prefix-cls: ~"@{xcui-prefix}-notice";
+@icon-prefix-cls: ~"@{xcui-prefix}-icon";
+
+.@{notice-prefix-cls} {
+    width: @notice-width;
+    margin-right: 24px;
+    position: fixed;
+    z-index: 1500;
+
+    &-notice {
+        margin-bottom: @notice-margin-bottom;
+        padding: @notice-padding;
+        //border: 1px solid @border-color-split;
+        border-radius: @border-radius-small;
+        box-shadow: @shadow-1-down;
+        background: #fff;
+        line-height: 1;
+        position: relative;
+        overflow: hidden;
+
+        &-close {
+            position: absolute;
+            right: 16px;
+            top: 12px;
+            color: #999;
+            outline: none;
+            font-size: 20px;
+            cursor: pointer;
+            &:hover {
+                color: @gray-light;
+            }
+        }
+
+        &-with-desc{
+            .@{notice-prefix-cls}-notice-close{
+                top: 11px;
+            }
+        }
+    }
+
+    &-title {
+        font-size: @font-size-base;
+        color: #464c5b;
+        padding-right: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    &-with-desc &-title{
+        margin-bottom: 8px;
+    }
+    &-with-desc&-with-icon &-title{
+        margin-left: 51px;
+    }
+
+    &-desc {
+        font-size: 12px;
+        color: @gray-light;
+        text-align: justify;
+        line-height: 1.5;
+    }
+    &-with-desc&-with-icon &-desc{
+        margin-left: 51px;
+    }
+
+    &-with-icon &-title{
+        margin-left: 26px;
+    }
+
+    &-icon {
+        position: absolute;
+        left: 20px;
+        margin-top: -1px;
+        font-size: 16px;
+
+        &-success {
+            color: @brand-success;
+        }
+        &-info {
+            color: @brand-info;
+        }
+        &-warning {
+            color: @brand-warning;
+        }
+        &-error {
+            color: @brand-danger;
+        }
+    }
+    &-with-desc &-icon{
+        font-size: 36px;
+    }
+
+    &-custom-content{
+        &:after{
+            content: "";
+            display: block;
+            width: 4px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+    }
+    &-with-normal{
+        &:after{
+            background: @brand-primary;
+        }
+    }
+    &-with-info{
+        &:after{
+            background: @brand-info;
+        }
+    }
+    &-with-success{
+        &:after{
+            background: @brand-success;
+        }
+    }
+    &-with-warning{
+        &:after{
+            background: @brand-warning;
+        }
+    }
+    &-with-error{
+        &:after{
+            background: @brand-danger;
+        }
+    }
+}
