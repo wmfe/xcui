@@ -70,13 +70,15 @@
                     <li class="sidebar-item">
                         <router-link to="/component/popover">Popover</router-link>
                     </li>
+
+                    <li class="sidebar-item">
+                        <router-link to="/component/tooltip">Tooltip</router-link>
+                    </li>
+                    
                     <li class="sidebar-item">
                         <router-link to="/component/progress">Progress</router-link>
                     </li>
                     
-                    <li class="sidebar-item">
-                        <router-link to="/component/tooltip">Tooltip</router-link>
-                    </li>
                     <li class="sidebar-item">
                         <router-link to="/component/tag">Tag</router-link>
                     </li>

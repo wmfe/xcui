@@ -3,13 +3,13 @@
 
 ![logo](https://github.com/wmfe/xcui/raw/master/src/assets/logo_nobg_128x128@2x.png)
 
-XCUI 是基于`Vue`和 `Bootstrap.css` 的**桌面端组件库**。
+XCUI 是基于`Vue`的**桌面端组件库**。
 
 ## XCUI的目标是：
 
 + 满足桌面端页面大部分基础组件需求。
 + 快速开发基于 `vue` 构建的项目。
-+ 保持小体积, 无其他js库依赖(不依赖`jquery`, `Boostrap.js`), 仅使用 `Boostrap.css` 。
++ 保持小体积, 无其他js库依赖(不依赖`jquery`, `Boostrap.js`) 。
 + 简洁优雅。
 
 ## 版本支持

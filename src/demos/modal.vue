@@ -33,31 +33,90 @@
 
 ## 定义元素的显示
 
-::: demo info
+::: demo 通过使用`header`, `footer`插槽，`show-header`、`show-footer`等属性都可控制对话框的展示效果。
 
 ```html
 
 <tpl>
     <x-button @click="modal2 = true">自定义页头和页脚</x-button>
     <x-button @click="modal3 = true">不带标题栏</x-button>
-    <x-button @click="modal4 = true">不带关闭按钮</x-button>
-    <x-button @click="modal5 = true">不带页脚</x-button>
+    <x-button @click="modal4 = true">不带页脚</x-button>
     <x-modal v-model="modal2">
-        <p slot="header" style="text-align:center; font-size: 16px;color: #46c3c1">
+        <div slot="header" style="text-align:center; font-size: 16px;color: #46c3c1">
             <x-icon name="help-circled"></x-icon>
             <span>确认要执行全部操作吗？</span>
-        </p>
+        </div>
         <p>执行后会将任务下发给所有同学！</p>   
-        <p slot="footer" style="text-align:right">
+        <div slot="footer" style="text-align:right">
             <x-button type="primary" @click="exec" size="large" :loading="isLoading">
             {{isLoading ? '执行中...' : '确认执行'}}</x-button>
-        </p>
+        </div>
+    </x-modal>
+
+    <x-modal v-model="modal3" :show-header="false">
+        <div>展示一段信息</div>
+    </x-modal>
+
+    <x-modal v-model="modal4" title="不带页脚" :show-footer="false">
+        <div>展示一段信息</div>
     </x-modal>
 </tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                modal2: true,
+                modal3: true,
+                modal4: true
+            }
+        }
+    }
+</script>
+
+```
+:::
+
+
+
+
+## 自定义位置
+
+
+::: demo 通过设置`styles`属性可以设置更多样式，如对话框的位置等。
+
+```html
+
+<tpl>
+    <x-button type="primary" @click="modal5 = true">垂直居中的对话框</x-button>
+    <x-button type="primary" @click="modal6 = true">距离顶部20px的对话框</x-button>
+    <x-modal v-model="modal5" title="垂直居中的对话框"
+        :styles="{
+            top: '50%',
+            transform: 'translateY(-50%)'}">
+        <div>展示一段信息</div>
+    </x-modal>
+    <x-modal v-model="modal6" title="距离顶部20px的对话框"
+        :styles="{top: '20px'}">
+        <div>展示一段信息</div>
+    </x-modal>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                modal5: true,
+                modal6: true
+            }
+        }
+    }
+</script>
 
 ```
 
 :::
+
 
 
 
@@ -175,7 +234,7 @@ let ModalDemo = {
             this.isLoading = true;
             setTimeout(() => {
                 this.isLoading = false;
-                this.$Message.info('下发完成');
+                this.$Message.success('执行完成！');
                 this.modal2 = false;
             }, 2000);
         }

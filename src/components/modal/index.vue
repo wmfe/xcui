@@ -6,8 +6,8 @@
             </div>
         </transition>
         <transition name="modal-zoom">
-            <div class="x-modal-wrapper" v-show="show" >
-                <div class="x-modal" tabindex="-1" @keydown.esc="cancel" :style="{top: top + 'px'}" :class="modalClass">
+            <div class="x-modal-wrapper" v-show="show" ref="modalWrapper" @click="handleWrapperClick">
+                <div class="x-modal" :style="styles" :class="modalClass">
                         <div class="x-modal-header" v-if="showHeader">
                             <slot name="header">
                                 <span class="x-modal-title">{{title}}</span>
@@ -53,9 +53,8 @@ export default {
             type: String,
             default: ''
         },
-        top: {
-            type: Number,
-            default: 100
+        styles: {
+            type: Object
         },
         contentStyle: {
             type: Object
@@ -151,8 +150,13 @@ export default {
         close(e) {
             this.show = false;
         },
-        maskClose(e) {
-            if (this.maskClosable && e.target === this.$refs.modalMask) {
+        handleWrapperClick(e) {
+            if (e.target === this.$refs.modalWrapper) {
+                this.maskClose();
+            }
+        },
+        maskClose() {
+            if (this.maskClosable) {
                 this.cancel();
             }
         },
