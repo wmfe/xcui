@@ -1,11 +1,8 @@
 /* istanbul ignore next */
 
-import Vue from 'vue';
-
-const isServer = Vue.prototype.$isServer;
 const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
 const MOZ_HACK_REGEXP = /^moz([A-Z])/;
-const ieVersion = isServer ? 0 : Number(document.documentMode);
+const ieVersion =  Number(document.documentMode);
 
 /* istanbul ignore next */
 const trim = function(string) {
@@ -20,7 +17,7 @@ const camelCase = function(name) {
 
 /* istanbul ignore next */
 export const on = (function() {
-  if (!isServer && document.addEventListener) {
+  if (document.addEventListener) {
     return function(element, event, handler) {
       if (element && event && handler) {
         element.addEventListener(event, handler, false);
@@ -37,7 +34,7 @@ export const on = (function() {
 
 /* istanbul ignore next */
 export const off = (function() {
-  if (!isServer && document.removeEventListener) {
+  if (document.removeEventListener) {
     return function(element, event, handler) {
       if (element && event) {
         element.removeEventListener(event, handler, false);
@@ -122,7 +119,6 @@ export function removeClass(el, cls) {
 
 /* istanbul ignore next */
 export const getStyle = ieVersion < 9 ? function(element, styleName) {
-  if (isServer) return;
   if (!element || !styleName) return null;
   styleName = camelCase(styleName);
   if (styleName === 'float') {
@@ -143,7 +139,6 @@ export const getStyle = ieVersion < 9 ? function(element, styleName) {
     return element.style[styleName];
   }
 } : function(element, styleName) {
-  if (isServer) return;
   if (!element || !styleName) return null;
   styleName = camelCase(styleName);
   if (styleName === 'float') {

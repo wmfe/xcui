@@ -1,73 +1,67 @@
 <template>
-    <div ref="outer" style="position:relative; display: inline-block" class="xcui-popover">
-        <span ref="trigger">
-          <slot>
-          </slot>
-        </span>
-        <transition :name="effect" v-on:after-enter="afterEnter">
-          <div class="popover"
-            v-bind:class="{
-            'top':placement === 'top',
-            'left':placement === 'left',
-            'right':placement === 'right',
-            'bottom':placement === 'bottom'
-            }"
-            ref="popover"
-            v-show="show">
-              <div class="arrow"></div>
-              <div class="popover-title" :class="titleClass" v-show="title">
-                  <slot name="title">
-                    <div v-html="title"></div>
-                  </slot>
-              </div>
-              <div class="popover-content" :class="contentClass">
-                <slot name="content">
-                    <div v-html="content"></div>
-                </slot>
-              </div>
-          </div>
-        </transition>
-    </div>
+    <span>
+       <transition :name="transition" @after-leave="doDestroy">
+            <div class="x-popover" :class="popperClass" ref="popper" v-show="showPopper"
+                :style="{width : width + 'px'}">
+                <div class="x-popover-title" :class="{'is-confirm': confirm }" v-if="title">
+                    <i class="x-icon x-icon-help-circled" v-if="confirm"></i>
+                    {{title}}
+                </div>
+                <div class="x-popover-inner">
+                    <slot name="content" v-if="!confirm">
+                            {{ content }}
+                    </slot>
+                    <div class="x-popover-confirm" v-if="confirm">
+                        <x-button size="sm" @click="handleCancel">{{cancelText}}</x-button>
+                        <x-button size="sm" type="primary" @click="handleOk">{{okText}}</x-button>
+                    </div>
+                </div>
+            </div>
+       </transition>
+        <slot></slot>
+    </span>
 </template>
 
 <script>
-import PopoverMixin from './popoverMixins.js';
+import popoverMixin from '../popover/popoverMixin';
+import XInput from '../input';
+
 export default {
-    name: 'xcui-popover',
-    mixins: [PopoverMixin],
+    name: 'XPopover',
+    components: {XInput},
+    mixins: [popoverMixin],
     props: {
+        title: String,
+        confirm: {
+            type: Boolean,
+            default: false
+        },
+        transition: {
+            default: 'tooltip-zoom'
+        },
         trigger: {
-            type: String,
-            default: 'hover'
+            default: 'click'
         },
-        effect: {
+        onOk: Function,
+        onCancel: Function,
+        okText: {
             type: String,
-            default: 'scale'
+            default: '确认'
         },
-        tooltipClass: {
+        cancelText: {
             type: String,
-            default: ''
-        },
-        titleClass: {
-            type: String,
-            default: 'scale'
-        },
-        contentClass: {
-            type: String,
-            default: 'scale'
+            default: '取消'
         }
     },
     methods: {
-        afterEnter() {
-            this.$refs.popover.style.display = 'inline-table';
+        handleOk(e) {
+            this.onOk(e);
+            this.showPopper = false;
+        },
+        handleCancel(e) {
+            this.onCancel(e);
+            this.showPopper = false;
         }
     }
 };
 </script>
-
-<style lang="less">
-.xcui-popover {
-    @import '../../styles/popover.less';
-}
-
-</style>

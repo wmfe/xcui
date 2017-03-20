@@ -1,73 +1,30 @@
 <template>
-    <div ref="outer" style="position:relative; display: inline-block" class="xcui-tooltip">
-         <span ref="trigger">
-            <slot>
-            </slot>
-        </span>
-        <transition :name="effect" v-on:after-enter="afterEnter">
-            <div class="tooltip"
-                v-bind:class="{
-                    'top':    placement === 'top',
-                    'left':   placement === 'left',
-                    'right':  placement === 'right',
-                    'bottom': placement === 'bottom'
-                }"
-                ref="popover"
-                v-show="show"
-                :transition="effect"
-                role="tooltip">
-                    <div class="tooltip-arrow"></div>
-                    <div class="tooltip-inner" :class="tooltipClass">
-                        <slot name="content">
-                            <div v-html="content"></div>
-                        </slot>
+    <span>
+        <transition :name="transition" @after-leave="doDestroy">
+            <div class="x-tooltip" :class="popperClass" ref="popper" v-show="showPopper"
+                :style="{width : width + 'px'}">
+                <slot name="content">
+                    <div class="x-tooltip-inner">
+                        {{ content }}
                     </div>
+                </slot>
             </div>
         </transition>
-    </div>
+        <slot></slot>
+    </span>
 </template>
 
 <script>
-    import PopoverMixin from '../popover/popoverMixins.js';
+    import popoverMixin from '../popover/popoverMixin';
+
     export default {
-        name: 'xcui-tooltip',
-        mixins: [PopoverMixin],
+        name: 'XTooltip',
+        mixins: [popoverMixin],
         props: {
-            trigger: {
+            transition: {
                 type: String,
-                default: 'hover'
-            },
-            effect: {
-                type: String,
-                default: 'scale'
-            },
-            tooltipClass: {
-                type: String,
-                default: ''
-            },
-            titleClass: {
-                type: String,
-                default: 'scale'
-            },
-            contentClass: {
-                type: String,
-                default: 'scale'
-            }
-        },
-        methods: {
-            afterEnter() {
-                this.$refs.popover.style.display = 'inline-table';
+                default: 'tooltip-zoom'
             }
         }
     };
 </script>
-
-<style lang="less">
-.xcui-tooltip{
-    .tooltip {
-        opacity: .9;
-    }
-    @import '../../styles/popover.less';
-}
-
-</style>

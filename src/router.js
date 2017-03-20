@@ -20,6 +20,7 @@ import Select from './demos/select.vue';
 import Message from './demos/message';
 import Notice from './demos/notice';
 import Modal from './demos/modal';
+import Dialog from './demos/dialog';
 import InputNumber from './demos/inputNumber';
 import Progress from './demos/progress';
 import PageLoading from './demos/pageloading';
@@ -96,6 +97,9 @@ const router = new VueRouter({
             }, {
                 path: '/component/modal',
                 component: Modal
+            }, {
+                path: '/component/dialog',
+                component: Dialog
             }, {
                 path: '/component/select',
                 component: Select

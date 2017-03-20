@@ -1,18 +1,26 @@
-.zoom-motion(@className, @keyframeName) {
+.zoom-motion(@className, @keyframeName, @duration) {
     .@{className}-enter-active {
-        animation: @animation-duration-base ~"@{keyframeName}In" @ease-in-out;
+        animation: @duration ~"@{keyframeName}In" @ease-out-circ;
     }
     .@{className}-leave-active {
-        animation: @animation-duration-base ~"@{keyframeName}Out" @ease-in-out;
+        animation: @duration ~"@{keyframeName}Out" @ease-in-out-circ;
     }
 }
 
-.zoom-motion(modal-zoom, xModalZoom);
+// modal
+.zoom-motion(modal-zoom, xZoom, @animation-duration-base);
+
+// tooltip
+.zoom-motion(tooltip-zoom, xZoomFast, @animation-duration-fast);
+
+// popover
+.zoom-motion(popover-zoom, xZoomFast, @animation-duration-base);
+
 
 
 // for modal
 
-@keyframes xModalZoomIn {
+@keyframes xZoomIn {
     0% {
       .scale(1.1);
       opacity: 0;
@@ -23,7 +31,7 @@
     }
   }
 
-@keyframes xModalZoomOut {
+@keyframes xZoomOut {
     0% {
       .scale(1);
       opacity: 1;
@@ -32,4 +40,29 @@
       .scale(1.1);
       opacity: 0;
     }
+}
+
+// tooltip / popover
+
+@keyframes xZoomFastIn {
+  0% {
+    opacity: 0;
+    .scale(.7);
   }
+  100% {
+    opacity: 1;
+    .scale(1);
+  }
+}
+
+@keyframes xZoomFastOut {
+  0% {
+    opacity: 1;
+    .scale(1);
+  }
+  100% {
+    opacity: 0;
+    .scale(.7);
+  }
+}
+

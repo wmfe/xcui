@@ -10,10 +10,11 @@ import CheckboxGroup from './checkbox-group';
 import Radio from './radio';
 import RadioButton from './radio-button';
 import RadioGroup from './radio-group';
-import Loading from './loading';
+import Loading from './loading/index.js';
 import Message from './message/index.js';
 import Notice from './notice/index.js';
 import Modal from './modal';
+import Dialog from './dialog/index.js';
 import PageLoading from './pageloading';
 import Pagination from './pagination';
 import Popover from './popover';
@@ -27,8 +28,6 @@ import {Button, ButtonGroup} from './button';
 import {Row, Col} from './layout';
 import Icon from './icon';
 
-import xcuiInstall from './install.js';
-
 require('../less/index.less');
 
 const install = (Vue) => {
@@ -39,7 +38,6 @@ const install = (Vue) => {
     Vue.component(TimePicker.name, TimePicker);
     Vue.component(TimeSelect.name, TimeSelect);
     Vue.component(InputNumber.name, InputNumber);
-    Vue.component(Loading.name, Loading);
     Vue.component(Modal.name, Modal);
     Vue.component(PageLoading.name, PageLoading);
     Vue.component(Pagination.name, Pagination);
@@ -66,7 +64,8 @@ const install = (Vue) => {
     Vue.component(RadioButton.name, RadioButton);
     Vue.use(Message);
     Vue.use(Notice);
-    Vue.use(xcuiInstall);
+    Vue.use(Dialog);
+    Vue.use(Loading);
 };
 
 const xcui = {
@@ -85,8 +84,7 @@ const xcui = {
     Tag,
     Tooltip,
     ScrollTop,
-    install,
-    xcuiInstall
+    install
 };
 
 module.exports = xcui;

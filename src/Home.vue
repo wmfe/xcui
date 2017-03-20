@@ -68,13 +68,20 @@
                          <router-link to="/component/modal">Modal 对话框</router-link>
                     </li>
                     <li class="sidebar-item">
-                        <router-link to="/component/popover">Popover</router-link>
+                         <router-link to="/component/dialog">Dialog 快捷对话框</router-link>
+                    </li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/popover">Popover 工具提示</router-link>
                     </li>
 
                     <li class="sidebar-item">
-                        <router-link to="/component/tooltip">Tooltip</router-link>
+                        <router-link to="/component/tooltip">Tooltip 文字提示</router-link>
                     </li>
-                    
+
+                    <li class="sidebar-item">
+                         <router-link to="/component/loading">Loading 加载中提示</router-link>
+                    </li>
+                    <li class="sidebar-title">Data 数据展示</li>
                     <li class="sidebar-item">
                         <router-link to="/component/progress">Progress</router-link>
                     </li>
@@ -94,9 +101,7 @@
                     <li class="sidebar-item">
                         <router-link to="/component/pageloading">PageLoading</router-link>
                     </li>
-                    <li class="sidebar-item">
-                         <router-link to="/component/loading">Loading</router-link>
-                    </li>
+                    
 
                 </ul>
             </x-col>

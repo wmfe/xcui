@@ -48,7 +48,7 @@
         </div>
         <p>执行后会将任务下发给所有同学！</p>   
         <div slot="footer" style="text-align:right">
-            <x-button type="primary" @click="exec" size="large" :loading="isLoading">
+            <x-button type="primary" @click="exec" size="lg" :loading="isLoading">
             {{isLoading ? '执行中...' : '确认执行'}}</x-button>
         </div>
     </x-modal>
@@ -128,7 +128,6 @@
 |title|String|-|对话框的标题，如果slot定义了header，则title无效|可选|
 |mask-closable|Boolean|true|是否允许点击遮罩层关闭对话框|可选|
 |scrollable|Boolean|false|打开Modal后，是否允许底页可滚动|可选|
-|top|Number|100|设置浮层位置,单位是px|可选|
 |show-close-button|Boolean|true|是否显示右上角的关闭按钮|可选|
 |show-ok-button|Boolean|true|是否显示确定按钮|可选|
 |show-cancel-button|Boolean|true|是否显示取消按钮|可选|
@@ -138,6 +137,7 @@
 |cancel-text|String|取消|取消按钮的文字|可选|
 |size|String|middle|预设对话框浮层的宽度大小。可选值：small/middle/large/full|可选|
 |class-name|String|-|自定义样式类名|可选|
+|styles|Object|-|设置.modal-wrapper的样式|可选|
 |content-style|object|-|设置对话框内容主体的样式。该属性设置的是.Modal-body的样式|可选|
 
 ## Events
@@ -176,40 +176,7 @@ Vue.use(xcuiInstall)
 ```
 做好以上准备工作后，即可在组件任何位置调用vm.$confirm等来隐式地创建一个对话框了。
 
-1. **this.$Modal.show(options)**
 
-| 参数 | 类型 | 默认 | 描述 | 是否必选 |
-|-----|-----|-----|-----|----|
-|options|Object|-|对话框的参数，属性同props(props.show除外)。注意：使用驼峰式变量名，如**onOk**，而非on-ok|**必选**|
-
-2. **this.$Modal.close()**
-
-`$Modal.close()`提供隐式地关闭对话框全局实例的能力。
-
-3. **this.$confirm(title, content, onOk, onCancel, isRawHTML)** 或 **this.$confirm(options, isRawHTML)**
-
-写法1：
-| 参数 | 类型 | 默认 | 描述 | 是否必选 |
-|-----|-----|-----|-----|----|
-|title|String|-|对话框的标题|可选|
-|content|String|-|对话框的内容，可通过isRawHTML指定是否解析为原生HTML|可选|
-|onOk|Function|-|点击确定按钮的回调函数|可选|
-|onCancel|Function|-|点击取消按钮或关闭按钮的回调函数|可选|
-|options|Object|-|对content(String)是否解析为原生HTML|可选|
-
-写法2：
-| 参数 | 类型 | 默认 | 描述 | 是否必选 |
-|-----|-----|-----|-----|----|
-|options|Object|-|对话框的参数，属性同props(props.show除外)。注意：使用驼峰式变量名，如**onOk**，而非on-ok|**必选**|
-|isRawHTML|Boolean|false|对options.content(String)是否解析为原生HTML|可选|
-
-
-4. **this.$alert(content, onOk)**
-
-| 参数 | 类型 | 默认 | 描述 | 是否必选 |
-|-----|-----|-----|-----|----|
-|content|String|-|对话框的内容|**必选**|
-|onOk|Function|-|点击确定按钮的回调函数|可选|
 
 </template>
 <script>
