@@ -18,23 +18,23 @@
                             class="btn btn-default"
                             :class="{'disabled': currentPageNum == 1}">上一页</button>
 
-                        <button class="btn btn-default page-btn" v-if="getRangePage.begin > 1">
-                            <a href="javascript:void(0);" @click="turnToPage(1)">1</a>
+                        <button @click="turnToPage(1)" class="btn btn-default page-btn" v-if="getRangePage.begin > 1">
+                            <a href="javascript:void(0);">1</a>
                         </button>
                         <button class="btn btn-default page-btn" v-if="getRangePage.begin > 1">
                             <a class="apostrophe">...</a>
                         </button>
 
-                    <button class="btn btn-default page-btn" v-for="number in (getRangePage.end - getRangePage.begin + 1)" :class="{'active': isActive(number)}" @click="turnToPage(number + getRangePage.begin - 1)">
-                        <a v-if="isActive(number)" href="javascript:void(0);"  v-text="number + getRangePage.begin - 1"></a>
-                        <a v-else href="javascript:void(0);"  v-text="number + getRangePage.begin - 1" ></a>
-                    </button>
+                        <button class="btn btn-default page-btn" v-for="number in (getRangePage.end - getRangePage.begin + 1)" :class="{'active': isActive(number)}" @click="turnToPage(number + getRangePage.begin - 1)">
+                            <a v-if="isActive(number)" href="javascript:void(0);"  v-text="number + getRangePage.begin - 1"></a>
+                            <a v-else href="javascript:void(0);"  v-text="number + getRangePage.begin - 1" ></a>
+                        </button>
 
                         <button class="btn btn-default page-btn" v-if="getRangePage.end < totalPageCount">
                             <a class="apostrophe">...</a>
                         </button>
-                        <button class="btn btn-default page-btn" v-if="getRangePage.end < totalPageCount">
-                            <a href="javascript:void(0);" v-text="totalPageCount" @click="turnToPage(totalPageCount)"></a>
+                        <button @click="turnToPage(totalPageCount)" class="btn btn-default page-btn" v-if="getRangePage.end < totalPageCount">
+                            <a href="javascript:void(0);" v-text="totalPageCount"></a>
                         </button>
 
                         <button
