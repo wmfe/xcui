@@ -1,5 +1,6 @@
 <template>
-    <button :class="cls" :disabled="disabled" @click="handleClick">
+    <button :class="cls" :disabled="disabled" @click="handleClick" 
+    @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
         <i class="x-icon x-icon-load-c x-icon-addon-spin" v-if="loading"></i>
         <i :class="'x-icon x-icon-' + icon" v-if="icon && !loading"></i>
         <span v-if="$slots.default"><slot></slot></span>
@@ -40,6 +41,12 @@
         methods: {
             handleClick(e) {
                 this.$emit('click', e);
+            },
+            handleMouseEnter(e) {
+                this.$emit('mouseenter', e);
+            },
+            handleMouseLeave(e) {
+                this.$emit('mouseleave', e);
             }
         }
     };

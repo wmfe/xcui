@@ -1,69 +1,85 @@
 <template>
-    <div class="v-pagination-wrap">
-        <template v-if="type === 'standard' ">
-            <div class="row">
-                <div v-if="withPageSize" class="v-pagination-page-size col-md-3 gray">
+    <div class="x-pagination">
+        <template v-if="type === 'standard'">
+            <div class="x-pagination-standard">
+                <span class="x-pagination-page-total" v-if="showTotal">
                     共<span v-text="total"></span>条
-                    &nbsp;&nbsp;
-                    每页
-                    <select @change="changePageSize($event)" :value="pageSize" class="gray">
-                        <option v-for="opt in pageSizeRange" :value="opt" v-text="opt">1</option>
-                    </select>
-                    条
-                </div>
-                <div class="v-pagination-standard text-right" :class="[ withPageSize ? 'col-md-9' :'col-md-12']">
-                    <div class="btn-group">
-                        <button
+                </span>
+                <span class="x-pagination-standard-btn-group">
+                    <x-button-group>
+                        <x-button
                             @click="prev"
-                            class="btn btn-default"
-                            :class="{'disabled': currentPageNum == 1}">上一页</button>
+                            :disabled="currentPageNum == 1"
+                            icon="chevron-left">
+                            </x-button>
+                        <x-button v-if="getRangePage.begin > 1" @click="turnToPage(1)">
+                            1
+                        </x-button>
+                        <x-button class="number-btn" v-if="showQuickPrevIcon"
+                                @mouseenter="quickPrevIconCls = 'x-icon-chevron-d-left'"
+                                @mouseleave="quickPrevIconCls = 'x-icon-more'"
+                                @click="turnToPage(currentPageNum - rangeLength)">
+                            <span class="x-icon"
+                                :class="[quickPrevIconCls]"
+                                ></span>
+                        </x-button>
+                        <x-button
+                            v-for="number in (getRangePage.end - getRangePage.begin + 1)"
+                            class="number-btn"
+                            :class="{'active': isActive(number)}"
+                            @click="turnToPage(number + getRangePage.begin - 1)">
+                            <span v-if="isActive(number)" v-text="number + getRangePage.begin - 1"></span>
+                            <span v-else v-text="number + getRangePage.begin - 1" ></span>
+                        </x-button>
 
-                        <button class="btn btn-default page-btn" v-if="getRangePage.begin > 1">
-                            <a href="javascript:void(0);" @click="turnToPage(1)">1</a>
-                        </button>
-                        <button class="btn btn-default page-btn" v-if="getRangePage.begin > 1">
-                            <a class="apostrophe">...</a>
-                        </button>
-
-                    <button class="btn btn-default page-btn" v-for="number in (getRangePage.end - getRangePage.begin + 1)" :class="{'active': isActive(number)}" @click="turnToPage(number + getRangePage.begin - 1)">
-                        <a v-if="isActive(number)" href="javascript:void(0);"  v-text="number + getRangePage.begin - 1"></a>
-                        <a v-else href="javascript:void(0);"  v-text="number + getRangePage.begin - 1" ></a>
-                    </button>
-
-                        <button class="btn btn-default page-btn" v-if="getRangePage.end < totalPageCount">
-                            <a class="apostrophe">...</a>
-                        </button>
-                        <button class="btn btn-default page-btn" v-if="getRangePage.end < totalPageCount">
-                            <a href="javascript:void(0);" v-text="totalPageCount" @click="turnToPage(totalPageCount)"></a>
-                        </button>
-
-                        <button
+                        <x-button v-if="showQuickNextIcon" 
+                                class="number-btn"
+                                @mouseenter="quickNextIconCls = 'x-icon-chevron-d-right'"
+                                @mouseleave="quickNextIconCls = 'x-icon-more'"
+                                @click="turnToPage(currentPageNum + rangeLength)">
+                            <span class="x-icon"
+                                :class="[quickNextIconCls]"
+                                ></span>
+                        </x-button>
+                        <x-button class="number-btn" v-if="getRangePage.end < totalPageCount" @click="turnToPage(totalPageCount)">
+                            <span v-text="totalPageCount"></span>
+                        </x-button>
+                        <x-button
                             @click="next"
-                            class="btn btn-default"
-                            :class="{'disabled': currentPageNum == totalPageCount}">下一页</button>
-                    </div>
-                </div>
+                            :disabled="currentPageNum == totalPageCount"
+                            icon="chevron-right">
+                            </x-button>
+                    </x-button-group>
+                </span>
+                <span class="x-pagination-page-size" v-if="showSizer">
+                    <x-select v-model="internalPageSize" @change="changePageSize(internalPageSize)">
+                        <x-option v-for="opt in pageSizeRange" :label="`${opt}条/页`" :value="opt">
+                        </x-option>
+                    </x-select>
+                </span>
             </div>
         </template>
 
-        <div v-else class="v-pagination-mini">
-            <span class="gray">共<span v-text="total"></span>条</span>
-            <button class="btn btn-default prev-trigger" :class="{'disabled': currentPageNum < 2}" @click="prev">
-                <span class="caret"></span>
-            </button>
-            <span class="gray">
+        <div v-else class="x-pagination-mini">
+            <span class="x-pagination-mini-total" v-if="showTotal">共<span v-text="total"></span>条</span>
+            <x-button icon="chevron-left" class="x-pagination-mini-prev-btn" :disabled="currentPageNum < 2" @click="prev">
+            </x-button>
+            <span class="x-pagination-mini-text">
                 <span v-text="currentPageNum"></span>/<span v-text="totalPageCount"></span>
             </span>
-            <button class="btn btn-default next-trigger" :class="{'disabled': currentPageNum == totalPageCount}" @click="next">
-                <span class="caret"></span>
-            </button>
+            <x-button icon="chevron-right" class="x-pagination-mini-next-btn" :disabled="currentPageNum == totalPageCount" @click="next">
+            </x-button>
         </div>
     </div>
 </template>
 
 <script>
+import {Button as XButton, ButtonGroup as XButtonGroup} from '../button';
+import {Select as XSelect, Option as XOption} from '../select';
+
 export default {
-    name: 'xcui-pagination',
+    name: 'XPagination',
+    components: {XButton, XSelect, XOption, XButtonGroup},
     props: {
         'type': {
             type: String,
@@ -81,9 +97,13 @@ export default {
             type: Number,
             default: 20
         },
-        'withPageSize': {// only for starndard type
+        'showTotal': {
             type: Boolean,
-            default: true
+            default: false
+        },
+        'showSizer': {// only for starndard type
+            type: Boolean,
+            default: false
         },
         'pageSizeRange': {
             type: Array,
@@ -91,7 +111,7 @@ export default {
         },
         'rangeLength': {
             type: Number,
-            default: 10,
+            default: 5,
             coerce(val) {
                 if (val < 1) {
                     return 1;
@@ -100,9 +120,22 @@ export default {
             }
         }
     },
+    data() {
+        return {
+            internalPageSize: this.pageSize,
+            quickPrevIconCls: 'x-icon-more',
+            quickNextIconCls: 'x-icon-more'
+        };
+    },
     computed: {
+        showQuickPrevIcon() {
+            return this.getRangePage.begin > 1;
+        },
+        showQuickNextIcon() {
+            return this.getRangePage.end < this.totalPageCount;
+        },
         totalPageCount() {
-            return Math.ceil(this.total / this.pageSize);
+            return Math.ceil(this.total / this.internalPageSize);
         },
         getRangePage() {
             let curPage = this.currentPageNum;
@@ -147,14 +180,26 @@ export default {
             return result;
         }
     },
+    watch: {
+        showQuickPrevIcon(val) {
+            if (!val) {
+                this.quickPrevIconCls = 'x-icon-more';
+            }
+        },
+        showQuickNextIcon(val) {
+            if (!val) {
+                this.quickNextIconCls = 'x-icon-more';
+            }
+        }
+    },
     methods: {
         turnToPage(pageNo) {
             if (pageNo > 0 && pageNo <= this.totalPageCount) {
-                this.$emit('go-to-page', pageNo, this.currentPageNum);// new page num / old page num
+                this.$emit('change-current', pageNo, this.currentPageNum);// new page num / old page num
             }
         },
-        changePageSize($event) {
-            this.$emit('change-pagesize', Number($event.target.value));
+        changePageSize(num) {
+            this.$emit('change-pagesize', num);
         },
         prev() {
             this.turnToPage(this.currentPageNum - 1);
@@ -168,79 +213,3 @@ export default {
     }
 };
 </script>
-
-<style lang="less">
-.v-pagination-wrap{
-    -webkit-user-select: none;
-    // standard
-    .v-pagination-standard{
-        vertical-align: bottom;
-        margin: 0;
-        .btn{
-            a{
-                color:#666;
-                &:focus{
-                    background-color: initial;
-                }
-            }
-            a,
-            a:hover,
-            a:active{
-                text-decoration: none;
-            }
-        }
-        // 枚举的页码按钮
-        .page-btn{
-            &.active{
-                background-color: #46c3c1;
-                border-color: #46c3c1;
-                outline: none;
-                a{
-                    color:#fff;
-                }
-            }
-        }
-
-        .apostrophe{
-            border-color: transparent;
-            border-left-color: #ddd;
-            &:hover{
-                background-color: inherit;
-            }
-        }
-    }
-    // page size
-    .v-pagination-page-size{
-        line-height: 34px;
-    }
-    // mini
-    .v-pagination-mini{
-        .prev-trigger{
-            margin:0 10px;
-            padding:2px 12px;
-            span{
-                -webkit-transform:rotate(90deg);
-                        transform:rotate(90deg);
-            }
-        }
-        .next-trigger{
-            margin:0 0 0 10px;
-            padding:2px 12px;
-            span{
-                -webkit-transform:rotate(-90deg);
-                        transform:rotate(-90deg);
-            }
-        }
-        .prev-trigger,
-        .next-trigger{
-            .caret{
-                position: relative;
-                top: -1px;
-            }
-        }
-    }
-    .gray{
-        color: #777;
-    }
-}
-</style>

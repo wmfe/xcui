@@ -15,13 +15,14 @@ import Message from './message/index.js';
 import Notice from './notice/index.js';
 import Modal from './modal';
 import Dialog from './dialog/index.js';
-import PageLoading from './pageloading';
+import PageLoading from './pageloading/index.js';
 import Pagination from './pagination';
 import Popover from './popover';
 import Progress from './progress';
 import {Select, Option, OptionGroup} from './select/index';
 import Suggestion from './suggestion';
 import Tag from './tag';
+import TagCheckable from './tag-checkable';
 import Tooltip from './tooltip';
 import ScrollTop from './scrolltop';
 import {Button, ButtonGroup} from './button';
@@ -39,7 +40,6 @@ const install = (Vue) => {
     Vue.component(TimeSelect.name, TimeSelect);
     Vue.component(InputNumber.name, InputNumber);
     Vue.component(Modal.name, Modal);
-    Vue.component(PageLoading.name, PageLoading);
     Vue.component(Pagination.name, Pagination);
     Vue.component(Popover.name, Popover);
     Vue.component(Progress.name, Progress);
@@ -48,6 +48,7 @@ const install = (Vue) => {
     Vue.component(OptionGroup.name, OptionGroup);
     Vue.component(Suggestion.name, Suggestion);
     Vue.component(Tag.name, Tag);
+    Vue.component(TagCheckable.name, TagCheckable);
     Vue.component(Tooltip.name, Tooltip);
     Vue.component(ScrollTop.name, ScrollTop);
     Vue.component(Button.name, Button);
@@ -66,6 +67,7 @@ const install = (Vue) => {
     Vue.use(Notice);
     Vue.use(Dialog);
     Vue.use(Loading);
+    Vue.use(PageLoading);
 };
 
 const xcui = {

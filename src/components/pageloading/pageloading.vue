@@ -1,22 +1,20 @@
 <template>
-    <div class="xcui-pageloading">
-        <div class="bar" role="bar">
-            <div class="peg"></div>
-        </div>
-    </div>
+    <span></span>
 </template>
 
 <script>
     export default {
-        name: 'xcui-pageloading',
+        name: 'XPageLoading',
         data() {
             return {
                 easing: 'linear',
                 positionUsing: '',
                 status: null,
-                template: '<div class="bar" role="bar"><div class="peg"></div></div>',
+                template: '<div class="bar" role="bar"><div class="peg" role="peg"></div></div>',
                 parent: 'body',
-                barSelector: '[role="bar"]'
+                barSelector: '[role="bar"]',
+                pegSelector: '[role="peg"]',
+                errorColor: '#f04134'
             };
         },
         props: {
@@ -35,6 +33,10 @@
             trickleSpeed: {
                 type: Number,
                 default: 250
+            },
+            color: {
+                type: String,
+                default: '#46c3c1'
             }
         },
         methods: {
@@ -67,7 +69,7 @@
 
                         setTimeout(() => {
                             me.css(progress, {
-                                transition: 'all ' + speed + 'ms linear',
+                                transition: 'transform ' + speed + 'ms linear',
                                 opacity: 0
                             });
                             setTimeout(() => {
@@ -108,6 +110,22 @@
                 }
                 return this.inc(0.3 + 0.5 * Math.random()).set(1);
             },
+            error(force) {
+                if (!force && !this.status) {
+                    return this;
+                }
+                let started = this.isStarted();
+                let progress = this.render(!started);
+                let bar = progress.querySelector(this.barSelector);
+                let peg = progress.querySelector(this.pegSelector);
+                this.css(bar, {
+                    background: this.errorColor
+                });
+                this.css(peg, {
+                    boxShadow: `0 0 10px ${this.errorColor}, 0 0 5px ${this.errorColor}`
+                });
+                return this.inc(0.3 + 0.5 * Math.random()).set(1);
+            },
             queue: (() => {
                 let pending = [];
 
@@ -127,26 +145,34 @@
             })(),
             render(fromStart) {
                 if (this.isRendered()) {
-                    return document.getElementById('xcui-pageloading');
+                    return document.getElementById('x-pageloading');
                 }
 
-                this.addClass(document.documentElement, 'xcui-pageloading-busy');
+                this.addClass(document.documentElement, 'x-pageloading-busy');
 
                 let progress = document.createElement('div');
-                progress.id = 'xcui-pageloading';
+                progress.id = 'x-pageloading';
                 progress.innerHTML = this.template;
 
                 let bar = progress.querySelector(this.barSelector);
                 let perc = fromStart ? '-100' : this.toBarPerc(this.status || 0);
                 let parent = document.querySelector(this.parent);
 
+                const color = this.color;
+
                 this.css(bar, {
-                    transition: 'all 0 linear',
-                    transform: 'translate3d(' + perc + '%,0,0)'
+                    transition: 'transform 0 linear',
+                    transform: 'translate3d(' + perc + '%,0,0)',
+                    background: color
+                });
+
+                let peg = progress.querySelector(this.pegSelector);
+                this.css(peg, {
+                    boxShadow: `0 0 10px ${color}, 0 0 5px ${color}`
                 });
 
                 if (parent !== document.body) {
-                    this.addClass(parent, 'xcui-pageloading-custom-parent');
+                    this.addClass(parent, 'x-pageloading-custom-parent');
                 }
 
                 parent.appendChild(progress);
@@ -174,7 +200,7 @@
                     barCSS = { 'margin-left': this.toBarPerc(n) + '%' };
                 }
 
-                barCSS.transition = 'all ' + speed + 'ms ' + ease;
+                barCSS.transition = 'transform ' + speed + 'ms ' + ease;
 
                 return barCSS;
             },
@@ -237,9 +263,9 @@
                 };
             })(),
             remove() {
-                this.removeClass(document.documentElement, 'xcui-pageloading-busy');
-                this.removeClass(document.querySelector(this.parent), 'xcui-pageloading-custom-parent');
-                let progress = document.getElementById('xcui-pageloading');
+                this.removeClass(document.documentElement, 'x-pageloading-busy');
+                this.removeClass(document.querySelector(this.parent), 'x-pageloading-custom-parent');
+                let progress = document.getElementById('x-pageloading');
                 progress && this.removeElement(progress);
             },
             removeClass(element) {
@@ -289,7 +315,7 @@
                 return typeof this.status === 'number';
             },
             isRendered() {
-                return !!document.getElementById('xcui-pageloading');
+                return !!document.getElementById('x-pageloading');
             },
             addClass(element, name) {
                 let oldList = this.classList(element);
@@ -353,32 +379,3 @@
         }
     };
 </script>
-
-<style lang="less">
-
-#xcui-pageloading{
-    .bar{
-        background: #29d;
-        position: fixed;
-        z-index: 1031;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-    }
-
-    .peg{
-        display: block;
-        position: absolute;
-        right: 0px;
-        width: 100px;
-        height: 100%;
-        box-shadow: 0 0 10px #29d, 0 0 5px #29d;
-        opacity: 1.0;
-        -webkit-transform: rotate(3deg) translate(0px, -4px);
-        -ms-transform: rotate(3deg) translate(0px, -4px);
-        transform: rotate(3deg) translate(0px, -4px);
-    }
-}
-
-</style>

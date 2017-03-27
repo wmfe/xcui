@@ -83,30 +83,30 @@
                     </li>
                     <li class="sidebar-title">Data 数据展示</li>
                     <li class="sidebar-item">
-                        <router-link to="/component/progress">Progress</router-link>
+                        <router-link to="/component/progress">Progress 进度条</router-link>
                     </li>
                     
                     <li class="sidebar-item">
-                        <router-link to="/component/tag">Tag</router-link>
+                        <router-link to="/component/tag">Tag 标签</router-link>
                     </li>
                     
                     <li class="sidebar-title">Navigation 导航</li>
                     <li class="sidebar-item">
-                        <router-link to="/component/pagination">Pagination 页码</router-link>
+                        <router-link to="/component/pagination">Pagination 分页</router-link>
                     </li>
                     <li class="sidebar-title">Others 其他</li>
                     <li class="sidebar-item">
-                        <router-link to="/component/scrolltop">ScrollTop</router-link>
+                        <router-link to="/component/scrolltop">ScrollTop 返回顶部</router-link>
                     </li>
                     <li class="sidebar-item">
-                        <router-link to="/component/pageloading">PageLoading</router-link>
+                        <router-link to="/component/pageloading">PageLoading 页面加载</router-link>
                     </li>
-                    
-
                 </ul>
             </x-col>
             <x-col :xs="16" :sm="16" :md="16" :lg="18" id="page-content-wrapper" class="x-demo">
-                <router-view></router-view>
+                <div class="x-demo-inner">
+                    <router-view></router-view>
+                </div>
             </x-col>
         </x-row>
   </div>

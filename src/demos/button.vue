@@ -1,8 +1,6 @@
 <template lang="md">
 # Button 按钮
 
-## 概述
-
 按钮用于开始一个即时操作。
 
 

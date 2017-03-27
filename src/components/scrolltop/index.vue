@@ -1,13 +1,13 @@
 <template>
-	<div class="xcui-scrolltop">
-		<div ref="dropa" id="corner" class="xcui-scrolltop-area xcui-scrolltop-corner" :class="{'xcui-scrolltop-dropin':dropin.corner}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
-            <transition name="fadein">
-                <div draggable="true" ref="dragele" id="dragEle" class="glyphicon glyphicon-circle-arrow-up xcui-scrolltop-init" @dragstart="dragStart($event)" @dragleave="dragleave($event)" @dragend="dragend($event)" @click="backTop($event)" v-show="show" :class="className"></div>
+	<div class="x-scrolltop">
+		<div ref="dropa" id="corner" class="x-scrolltop-area x-scrolltop-corner" :class="{'x-scrolltop-dropin':dropin.corner}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
+            <transition name="fade">
+                <div draggable="true" ref="dragele" id="dragEle" class="x-icon x-icon-android-arrow-dropup-circle x-scrolltop-init" @dragstart="dragStart($event)" @dragleave="dragleave($event)" @dragend="dragend($event)" @click="backTop($event)" v-show="show" :class="className"></div>
             </transition>
 		</div>
-		<div ref="dropb" id="bottom" class="xcui-scrolltop-area xcui-scrolltop-bottom" :class="{'xcui-scrolltop-dropin':dropin.bottom}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
+		<div ref="dropb" id="bottom" class="x-scrolltop-area x-scrolltop-bottom" :class="{'x-scrolltop-dropin':dropin.bottom}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
         </div>
-		<div ref="dropc" id="right" class="xcui-scrolltop-area xcui-scrolltop-right" :class="{'xcui-scrolltop-dropin':dropin.right}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" ></div>
+		<div ref="dropc" id="right" class="x-scrolltop-area x-scrolltop-right" :class="{'x-scrolltop-dropin':dropin.right}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" ></div>
 	</div>
 </template>
 <script>
@@ -34,13 +34,13 @@ let Quad = {
     }
 };
 export default {
-    name: 'xcui-scrolltop',
+    name: 'XScrolltop',
     props: {
         targetElement: {
             type: String,
             default: ''
         },
-        during: {
+        duration: {
             type: Number,
             default: 50
         },
@@ -94,18 +94,22 @@ export default {
             if (!obj) {
                 obj = document.body;
             }
+            let me = this;
             let road = obj.getBoundingClientRect().top;
             window.requestAnimationFrame(moveAction);
             let start = 0;
-            let during = this.during;
+            let duration = this.duration;
             let begin = document.body.scrollTop;
             function moveAction(timestamp) {
                 start++;
-                let locTop = Quad.easeOut(start, 0, road, during);
+                let locTop = Quad.easeOut(start, 0, road, duration);
                 let result = begin + locTop;
                 document.body.scrollTop = result;
-                if (start < during) {
+                if (start < duration) {
                     window.requestAnimationFrame(moveAction);
+                }
+                else {
+                    me.$emit('finish');
                 }
             }
         }
@@ -133,66 +137,3 @@ export default {
     }
 };
 </script>
-<style lang="less">
-.xcui-scrolltop{
-	.xcui-scrolltop-init{
-		cursor: pointer;
-        width: auto;
-        display: inline-block;
-	}
-	.xcui-scrolltop-corner{
-		position: fixed;
-		bottom: 10px;
-		right: 10px;
-	}
-	.xcui-scrolltop-bottom{
-		position: fixed;
-		bottom: 10px;
-		left: 50%;
-	}
-	.xcui-scrolltop-right{
-		position: fixed;
-		top: 30%;
-		right: 10px;
-	}
-    .xcui-scrolltop-area{
-        width: 100px;
-        height: 100px;
-        font-size: 50px;
-        color: #428bca;
-        z-index: 1;
-        border: none;
-        &:hover{
-            color: #3071a9;
-        }
-    }
-	.xcui-scrolltop-dropin{
-		border: none !important;
-	}
-}
-.fadein-enter-active, .fadein-leave-active {
-    display: block;
-}
-.fadein-enter {
-    animation:fadein-in 0.3s ease-in;
-}
-.fadein-leave-active {
-    animation:fadein-out 0.3s ease-out;
-}
-@keyframes fadein-in {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-@keyframes fadein-out {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-</style>

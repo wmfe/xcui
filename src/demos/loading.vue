@@ -126,7 +126,8 @@
 |body|Boolean|false|指令修饰符，是否将遮罩层插入body|可选|true,false|
 |fullscreen|Boolean|false|指令修饰符，是否是全屏Loading|可选|true,false|
 |lock|Boolean|false|指令修饰符，全屏时是否锁定滚动条|可选|true,false|
-|x-loading-text|String|无|自定义加载方案|可选||
+|x-loading-type|String|无|自定义加载动画类型|可选|circle(默认), dot, grid|
+|x-loading-text|String|无|自定义加载文案|可选||
 |x-loading-size|String|40|加载图案的大小|可选||
 |x-loading-class|String|无|遮罩层的样式名|可选||
 

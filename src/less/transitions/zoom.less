@@ -7,8 +7,11 @@
     }
 }
 
+// tag 
+.zoom-motion(tag-zoom, xZoom, @animation-duration-base);
+
 // modal
-.zoom-motion(modal-zoom, xZoom, @animation-duration-base);
+.zoom-motion(modal-zoom, xModalZoom, @animation-duration-base);
 
 // tooltip
 .zoom-motion(tooltip-zoom, xZoomFast, @animation-duration-fast);
@@ -17,10 +20,31 @@
 .zoom-motion(popover-zoom, xZoomFast, @animation-duration-base);
 
 
+@keyframes xZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes xZoomOut {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+}
+
 
 // for modal
 
-@keyframes xZoomIn {
+@keyframes xModalZoomIn {
     0% {
       .scale(1.1);
       opacity: 0;
@@ -31,7 +55,7 @@
     }
   }
 
-@keyframes xZoomOut {
+@keyframes xModalZoomOut {
     0% {
       .scale(1);
       opacity: 1;

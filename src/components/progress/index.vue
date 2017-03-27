@@ -1,119 +1,124 @@
 <template>
-    <div class="xcui-progress" >
-        <div class="xcui-progress-container">
-            <div class="xcui-progress-outer">
-                 <div class="xcui-progress-inner" :style="{width:percent+'%',height:height+'px'}"></div>
-            </div>
+  <div
+    class="x-progress"
+    :class="[
+      'x-progress-' + type,
+      status ? 'is-' + status : '',
+      {
+        'x-progress-without-text': !showText,
+        'x-progress-text-inside': textInside,
+      }
+    ]"
+  >
+    <div class="x-progress-bar" v-if="type === 'line'">
+      <div class="x-progress-bar-outer" :style="{height: strokeWidth + 'px'}">
+        <div class="x-progress-bar-inner" :style="barStyle">
+          <div class="x-progress-bar-innerText" v-if="showText && textInside">{{percentage}}%</div>
         </div>
-        <div :class="['infoClassName',!showInfo ? 'hidden':'']" >
-            {{percentInfo}}
-        </div>
-    <div>
+      </div>
+    </div>
+    <div class="x-progress-circle" :style="{height: width + 'px', width: width + 'px'}" v-else>
+      <svg viewBox="0 0 100 100">
+        <path class="x-progress-circle-track" :d="trackPath" stroke="#e5e9f2" :stroke-width="relativeStrokeWidth" fill="none"></path>
+        <path class="x-progress-circle-path" :d="trackPath" stroke-linecap="round" :stroke="stroke" :stroke-width="relativeStrokeWidth" fill="none" :style="circlePathStyle"></path>
+      </svg>
+    </div>
+    <div
+      class="x-progress-text"
+      v-if="showText && !textInside"
+      :style="{fontSize: progressTextSize + 'px'}"
+    >
+      <template v-if="!status">{{percentage}}%</template>
+      <i v-else class="x-icon" :class="iconClass"></i>
+    </div>
+  </div>
 </template>
-
 <script>
-    export default {
-        name: 'xcui-progress',
-        props: {
-            percent: {
-                type: Number,
-                default: 0
-            },
-            percentInfo: {
-                type: String,
-                default: ''
-            },
-            infoClassName: {
-                type: String,
-                default: 'xcui-progress-info'
-            },
-            showInfo: {
-                type: Boolean,
-                default: false
-            },
-            height: {
-                type: Number,
-                default: 10
+export default {
+    name: 'XProgress',
+    props: {
+        type: {
+            type: String,
+            default: 'line',
+            validator: val => ['line', 'circle'].indexOf(val) > -1
+        },
+        percentage: {
+            type: Number,
+            default: 0,
+            required: true,
+            validator: val => val >= 0 && val <= 100
+        },
+        status: {
+            type: String
+        },
+        strokeWidth: {
+            type: Number,
+            default: 6
+        },
+        textInside: {
+            type: Boolean,
+            default: false
+        },
+        width: {
+            type: Number,
+            default: 126
+        },
+        showText: {
+            type: Boolean,
+            default: true
+        }
+    },
+    computed: {
+        barStyle() {
+            let style = {};
+            style.width = this.percentage + '%';
+            return style;
+        },
+        relativeStrokeWidth() {
+            return (this.strokeWidth / this.width * 100).toFixed(1);
+        },
+        trackPath() {
+            let radius = parseInt(50 - parseFloat(this.relativeStrokeWidth) / 2, 10);
+
+            return `M 50 50 m 0 -${radius} a ${radius} ${radius} 0 1 1 0 ${radius * 2}`
+            + ` a ${radius} ${radius} 0 1 1 0 -${radius * 2}`;
+        },
+        perimeter() {
+            let radius = 50 - parseFloat(this.relativeStrokeWidth) / 2;
+            return 2 * Math.PI * radius;
+        },
+        circlePathStyle() {
+            let perimeter = this.perimeter;
+            return {
+                strokeDasharray: `${perimeter}px,${perimeter}px`,
+                strokeDashoffset: (1 - this.percentage / 100) * perimeter + 'px',
+                transition: 'stroke-dashoffset 0.6s ease 0s, stroke 0.6s ease'
+            };
+        },
+        stroke() {
+            let ret;
+            switch (this.status) {
+                case 'success':
+                    ret = '#00a854';
+                    break;
+                case 'exception':
+                    ret = '#f04134';
+                    break;
+                default:
+                    ret = '#2c96ef';
             }
-        }
-    };
-</script>
-
-<style lang="less">
-    .xcui-progress{
-        margin:10px;
-
-        .xcui-progress-container{
-            width: 100%;
-            margin-right:-50px;
-            padding-right:50px;
-            display:inline-block;
-        }
-
-        .xcui-progress-outer{
-            width:100%;
-            background:#ccc;
-            display:inline-block;
-            border-radius:50px;
-           
-        }
-
-        .xcui-progress-inner{
-            background-color:#2db7f5;
-            border-radius:50px;
-            position: relative;
-        }
-
-        .xcui-progress-info{
-            display:inline-block;
-        }
-
-        .shine span {
-          
-        }
-        .xcui-progress-inner:after {
-            content: "";
-            opacity: 0;
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: #fff;
-            -moz-border-radius: 3px;
-            -webkit-border-radius: 3px;
-            border-radius: 3px;
-            -moz-animation: animate-shine 2s ease-out infinite;
-            -webkit-animation: animate-shine 2s ease-out infinite;
-        }
-        
-        @-moz-keyframes animate-shine {
-            0%{
-                opacity: 0;
-                width: 0;
-            }
-            50% {
-                opacity: 0.5;
-            }
-            100%{
-                opacity: 0;
-                width: 95%;
-            }
-        }
-
-        @-webkit-keyframes animate-shine {
-            0%{
-                opacity: 0;
-                width: 0;
-            }
-            50%{
-                opacity: 0.5;
-            }
-
-            100%{
-                opacity: 0;
-                width: 95%;
-            }
+            return ret;
+        },
+        iconClass() {
+            if (this.type === 'line') {
+                return this.status === 'success' ? 'x-icon-checkmark-circled' : 'x-icon-close-circled';
+            } 
+            return this.status === 'success' ? 'x-icon-checkmark-round' : 'x-icon-close-round';
+        },
+        progressTextSize() {
+            return this.type === 'line' ? 12 + this.strokeWidth * 0.4 : this.width * 0.111111 + 2;
         }
     }
-</style>
+};
+
+</script>

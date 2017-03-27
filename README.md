@@ -9,13 +9,13 @@
 [![GitHub stars](https://img.shields.io/github/stars/wmfe/xcui.svg)](https://github.com/wmfe/xcui/stargazers)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/wmfe/xcui/1.0/LICENSE)
 
-XCUI 是基于`Vue`和 `Bootstrap.css` 的**桌面端组件库**。
+XCUI 是基于`Vue`的**桌面端组件库**。
 
 ## XCUI的目标是：
 
 + 满足桌面端页面大部分基础组件需求。
 + 快速开发基于 `vue` 构建的项目。
-+ 保持小体积, 无其他js库依赖(不依赖`jquery`, `Boostrap.js`), 仅使用 `Boostrap.css` 。
++ 保持小体积, 无其他js库依赖 。
 + 简洁优雅。
 
 ## 版本支持
@@ -27,7 +27,6 @@ XCUI的1.0分支支持 `Vue 1.x` 版本；2.0分支支持 `Vue 2.x` 版本。
 在使用`Vue 2.x` 版本时，推荐使用 `Vue 2.0.5` 以上版本。
 
 
-> XCUI需要在页面中引入`bootstrap.css`。
 
 ## 如何使用
 

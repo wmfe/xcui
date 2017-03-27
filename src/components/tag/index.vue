@@ -1,110 +1,72 @@
 <template>
-	<div :class="['xcui-tag', disabled ? ' xcui-disabled':'']" @click="onClick" v-if="show" >
-        <div :class="className" >
-		<span class="xcui-tag-text"><slot></slot>{{text}}<span>
-        <i class="xcui-cross" v-if="closeable" @click.stop="onCloseClick"></i>
-        </div>
-	</div>
+    <transition :name="transition" @after-leave="handleAfterLeave">
+    	<div :class="cls" :style="styles" v-if="visible">
+            <div>
+    		    <span class="x-tag-text"><slot>{{name}}</slot><span>
+                <i class="x-icon x-icon-android-close x-tag-cross" v-if="closeable" @click.stop="handleClose"></i>
+            </div>
+    	</div>
+    </transition>
 </template>
 
 <script>
 export default {
-    name: 'xcui-tag',
+    name: 'XTag',
     props: {
-        text: {
+        transition: {
             type: String,
-            default: ''
+            default: 'tag-zoom'
         },
         closeable: {
             type: Boolean,
             default: false
         },
-        disabled: {
-            type: Boolean,
-            default: false
-        },
-        showTag: {
-            type: Boolean,
-            default: true
-        },
-        className: {
-            type: String,
-            default: ''
-        },
-        keys: {
-            type: String,
-            default: ''
-        },
-        aftercloseisshow: {
-            type: Boolean,
-            default: false,
-            twoway: true
-        }
+        onClose: Function,
+        color: String,
+        name: String
     },
     data() {
         return {
-            show: true
+            visible: true,
+            prefixCls: 'x-tag'
         };
     },
-    created() {
-        this.show = this.showTag;
+    computed: {
+        cls() {
+            let ret = [];
+            ret.push(this.prefixCls);
+            if (this.color && !this.isPresetColor(this.color)) {
+                ret.push('x-tag-has-color');
+            }
+            if (this.isPresetColor(this.color)) {
+                ret.push(`x-tag-${this.color}`);
+            }
+            return ret.join(' ');
+        },
+        styles() {
+            let ret = {};
+            if (!this.isPresetColor(this.color)) {
+                ret.backgroundColor = this.color;
+            }
+            return ret;
+        }
     },
     methods: {
-        onCloseClick() {
-            this.$emit('close');
-            if (this.aftercloseisshow === false) {
-                this.show = false;
-            };
+        handleClose(e) {
+            if (this.onClose) {
+                this.onClose(e);
+            } 
+            if (e.defaultPrevented) {
+                return;
+            }
+            this.visible = false;
         },
-        onClick() {
-            this.$emit('click');
+        handleAfterLeave(e) {
+            this.$emit('afterClose', e);
+        },
+        isPresetColor(color) {
+            return /^(pink|red|yellow|orange|cyan|green|blue|purple)(-inverse)?$/.test(color);
         }
     }
 };
 </script>
-
-<style lang="less">
-	.xcui-tag{
-	    display: inline-block;
-	    line-height: 25px;
-	    height: 27px;
-	    border-radius: 6px;
-	    border: 1px solid #e9e9e9;
-	    background: #fff;
-	    font-size: 12px;
-	    vertical-align: middle;
-	    opacity: 1;
-	    margin: 2px 4px 2px 0;
-	    cursor: pointer;
-
-        .xcui-tag-text{
-            padding:0 8px;
-        }
-	}
-
-    .xcui-disabled{
-        background:#f5f5f5;
-        cursor: default;
-        opacity: .85;
-    }
-
-
-	.xcui-tag:hover{
-		opacity: .85
-	}
-    .xcui-cross{
-        display: inline-block;
-        font-style: normal;
-        font-size: 17px;
-        zoom:1;
-        cursor: pointer;
-        font-weight: 700;
-        margin-left: 3px;
-        color: #666;
-        opacity: .66
-    }
-
-    .xcui-cross:before{
-        content: "×";
-    }
-</style>

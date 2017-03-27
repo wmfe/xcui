@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import logoUrl from './assets/logo_nobg_32x32@2x.png';
+    import logoUrl from './assets/xcui-logo.svg';
     import router from './router';
     export default {
         router: router,

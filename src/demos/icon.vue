@@ -1,8 +1,9 @@
 <template lang="md">
 # Icon 图标
-## 概述
 XCUI的图标使用开源图标库[ionicons](http://ionicons.com/)。
+
 ## 如何使用
+
 使用`<x-icon></x-icon>`组件，指定图标名称`name`属性，示例代码：
 ```html
 <x-icon name="cloud"></x-icon>
