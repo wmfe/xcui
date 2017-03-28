@@ -6,6 +6,8 @@
 import VueRouter from 'vue-router';
 import Home from './Home';
 import Homecontent from './demos/homeContent';
+import Installation from './demos/installation';
+import Quickstart from './demos/quickstart';
 import Layout from './demos/layout';
 import Pagination from './demos/pagination';
 import Loading from './demos/loading';
@@ -31,6 +33,7 @@ import Input from './demos/input';
 import Textarea from './demos/textarea';
 import Checkbox from './demos/checkbox';
 import Radio from './demos/radio';
+import Switch from './demos/switch';
 
 const router = new VueRouter({
     routes: [{
@@ -40,6 +43,12 @@ const router = new VueRouter({
             {
                 path: '/home',
                 component: Homecontent
+            }, {
+                path: '/intro/installation',
+                component: Installation
+            }, {
+                path: '/intro/quickstart',
+                component: Quickstart
             }, {
                 path: '/component/layout',
                 component: Layout
@@ -115,6 +124,9 @@ const router = new VueRouter({
             }, {
                 path: '/component/scrolltop',
                 component: ScrollTop
+            }, {
+                path: '/component/switch',
+                component: Switch
             }
         ]
     }]

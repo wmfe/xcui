@@ -3,16 +3,16 @@
         <x-row :gutter="32" id="wrapper-content">
             <x-col :xs="8" :sm="8" :md="8" :lg="6" id="sidebar-wrapper">
                 <ul class="sidebar-nav">
-                    <li>
+                    <li class="sidebar-item">
                         <router-link to="/home">介绍</router-link>
                     </li>
-                    <li>
-                        <router-link to="/home">安装</router-link>
+                    <li class="sidebar-item">
+                        <router-link to="/intro/installation">安装</router-link>
                     </li>
-                    <li>
-                        <router-link to="/home">快速上手</router-link>
+                    <li class="sidebar-item">
+                        <router-link to="/intro/quickstart">快速上手</router-link>
                     </li>
-                    <li class="sidebar-divider"></li>
+                    <!-- <li class="sidebar-divider"></li> -->
                     <li class="sidebar-part-title">组件</li>
                     <li class="sidebar-title">Basic 基础</li>
                     <li class="sidebar-item">
@@ -46,6 +46,9 @@
                     </li>
                     <li class="sidebar-item">
                         <router-link to="/component/select">Select 选择器</router-link>
+                    </li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/switch">Switch 开关</router-link>
                     </li>
                     <li class="sidebar-item">
                         <router-link to="/component/timepicker">TimePicker 时间选择器</router-link>

@@ -10,15 +10,15 @@ img {
 }
 
 
-#header{
-    height:50px;
+header{
+    height:80px;
     background:#fff;
-    padding-left:50px;
+    // padding-left:50px;
     border-bottom: 1px solid #f1f1f1;
     .logo{
         font-size:22px;
-        line-height:45px;
-        height:50px;
+        line-height:75px;
+        height:80px;
         color:#fff;
         display: block;
         text-align: center;
@@ -28,6 +28,32 @@ img {
         img{
             width:32px;
             height:32px;
+        }
+        &-text {
+            position: absolute;
+            color: #46c3c1;
+            margin-left: 15px;
+        }
+    }
+}
+
+footer {
+    clear: both;
+    font-size: 14px;
+    background: #fff;
+    position: relative;
+    z-index: 1;
+    color: rgba(0,0,0,.65);
+    box-shadow: 0 1000px 0 1000px #fff;
+    height: 120px;
+    .footer-main {
+        text-align: center;
+        padding-top: 50px;
+        .footer-social {
+            margin-top:15px;
+            .x-icon {
+                font-size: 36px;
+            }
         }
     }
 }
@@ -143,15 +169,21 @@ img {
 
 .sidebar-nav {
     margin: 0;
-    padding: 0 15px 0 10px;
+    padding-left: 10px;
     list-style: none;
     overflow-x: hidden!important;
+    border-right: 1px solid #eee;
+    .router-link-active {
+        color: #46c3c1;
+        border-right: 3px solid #46c3c1
+    }
     li {
         text-indent: 20px;
         line-height: 40px;
         &.sidebar-divider {
-          border-bottom:1px solid #eaeefb;
+          border-bottom:1px solid #eee;
           margin-top: 10px;
+          margin-right: 15px;
         }
         &.sidebar-part-title {
           font-size: 16px;
@@ -161,21 +193,20 @@ img {
           color:#b2b2b2;
         }
         &.sidebar-item {
-          a {
-            padding-left: 20px;
-            padding-right: 20px;
-          }
+            &:hover {
+                background: rgba(190, 239, 239, 0.15);
+                cursor: pointer;
+            }
+            a {
+                padding-left: 20px;
+            }
         }
+
         a {
             display: block;
             text-decoration: none;
             color: rgba(0, 0, 0, 0.65);
             border-left:2px solid #fff;
-            &:hover {
-                text-decoration: none;
-                color: #46c3c1;
-                background: rgba(255, 255, 255, 0.2);
-            }
             &.active,
             &.focus {
                 text-decoration: none;

@@ -133,12 +133,16 @@ this.$Notice.error(config);
 
 另外提供了全局配置、全局关闭某个通知和全局销毁的方法：
 
-- this.$Notice.config(options)
-- this.$Notice.close(uuid)
-- this.$Notice.destroy()
-
-
 ```javascript
+// 全局配置
+this.$Notice.config(options)
+
+// 全局关闭
+this.$Notice.close(uuid)
+
+// 全局销毁
+this.$Notice.destroy()
+
 this.$Notice.config({
     top: 50,
     duration: 3

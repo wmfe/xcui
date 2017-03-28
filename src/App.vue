@@ -1,14 +1,17 @@
 <template>
   <div id="xcui-site-container">
-      <div id="header">
+      <header>
           <router-link to="/home" class="logo">
             <img :src="logoUrl">
+            <span class="logo-text">XCUI</span>
           </router-link>
-      </div>
+      </header>
       <router-view></router-view>
-      <div id="footer">
-        
-      </div>
+      <footer>
+          <div class="footer-main">
+              <span>@2016~2017, wmfe</span>
+          </div>
+      </footer>
   </div>
 </template>
 

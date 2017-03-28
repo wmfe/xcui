@@ -28,6 +28,7 @@ import ScrollTop from './scrolltop';
 import {Button, ButtonGroup} from './button';
 import {Row, Col} from './layout';
 import Icon from './icon';
+import Switch from './switch';
 
 require('../less/index.less');
 
@@ -63,6 +64,7 @@ const install = (Vue) => {
     Vue.component(Radio.name, Radio);
     Vue.component(RadioGroup.name, RadioGroup);
     Vue.component(RadioButton.name, RadioButton);
+    Vue.component(Switch.name, Switch);
     Vue.use(Message);
     Vue.use(Notice);
     Vue.use(Dialog);

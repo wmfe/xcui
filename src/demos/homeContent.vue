@@ -1,7 +1,7 @@
 <template lang="md">
 # 关于XCUI
 
-![logo](https://github.com/wmfe/xcui/raw/master/src/assets/logo_nobg_128x128@2x.png)
+<img :src="logoUrl" width="200" style="margin-bottom: 30px">
 
 XCUI 是基于`Vue`的**桌面端组件库**。
 
@@ -150,12 +150,15 @@ $ npm run build
 
 </template>
 <script>
+import logoUrl from '../assets/xcui-logo.svg';
+
 const version = require('../../package.json').version;
 
 export default {
     data() {
         return {
-            version: version
+            version: version,
+            logoUrl: logoUrl
         };
     }
 };
