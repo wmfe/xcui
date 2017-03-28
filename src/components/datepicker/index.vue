@@ -1,7 +1,8 @@
 <template>
 <div class="xcui-datapicker {{className}}">
     <div :class="{'input-group':btnShow,'bg-pr':!btnShow}">
-        <input class="form-control"  type="text" v-model="value" placeholder="请输入日期" @click="showCalendar">
+        <input class="form-control"  type="text" v-model="newValue" placeholder="请输入日期" @click="showCalendar">
+        <button v-show="show" type="button" class="close close_btn" :style="{'right':btnShow?'50px':'10px'}" @click="closeBtn" title="点击关闭"><span aria-hidden="true">×</span></button>
         <div @click.stop=""
              @touchstart.stop=""
              class="calendar"
@@ -98,8 +99,22 @@
             return {
                 show: false,
                 currentMonth: Number,
-                currentTimeBtnShow: true
+                currentTimeBtnShow: true,
+                newValue: this.value,
+                count: 0,
+                closeBtnNow: false
             };
+        },
+        watch: {
+            value(val) {
+                if (this.newValue || this.count !== 0) {
+                    this.newValue = val;
+                }
+                if (!this.newValue) {
+                    this.value = '';
+                }
+                this.count += 1;
+            }
         },
         methods: {
             renderElse(y, m, i, temp, line, currentTime) {
@@ -182,11 +197,12 @@
                 e.preventDefault();
                 this.showFalse();
                 this.$emit('on-change', this.value, this.initialValue);
-                this.initialValue = this.value;
+                this.value = this.initialValue = this.value || this.initialValue;
+                this.closeBtnNow = false;
             },
             cancel(e) {
                 e.preventDefault();
-                this.value = this.initialValue;
+                this.value = this.closeBtnNow ? '' : this.initialValue;
                 this.showFalse();
             },
             showFalse() {
@@ -208,6 +224,10 @@
                     me.minute = params.minute;
                     me.second = params.second;
                 }
+                else {
+                    me.value = me.initialValue;
+                    this.count = 0;
+                }
                 me.render(me.year, me.month);
                 let bindHide = function (e) {
                     e.stopPropagation();
@@ -217,6 +237,11 @@
                 setTimeout(function () {
                     document.addEventListener('click', bindHide, false);
                 }, 500);
+            },
+            closeBtn() {
+                this.value = '';
+                this.count = 0;
+                this.closeBtnNow = true;
             }
         }
     };
@@ -224,6 +249,13 @@
 
 <style lang="less">
 .xcui-datapicker{
+    .close_btn{
+        position:absolute;
+        top:50%;
+        right:10px;
+        margin-top:-11px;
+        z-index:9999;
+    }
     .calendar {
         @base-color:#46c3c1;
         @base-size:14px;
