@@ -17,30 +17,30 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 ```html
 <tpl>
     <x-row>
-        <x-col span="24"><div class="bg">24: 100%</div></x-col>
+        <x-col :span="24"><div class="bg">24: 100%</div></x-col>
     </x-row>
     <x-row>
-        <x-col span="12"><div class="bg">12: 50%</div></x-col>
-        <x-col span="12"><div class="bg light">12: 50%</div></x-col>
+        <x-col :span="12"><div class="bg">12: 50%</div></x-col>
+        <x-col :span="12"><div class="bg light">12: 50%</div></x-col>
     </x-row>
     <x-row>
-        <x-col span="8"><div class="bg">8: 33.33%</div></x-col>
-        <x-col span="8"><div class="bg light">8: 33.33%</div></x-col>
-        <x-col span="8"><div class="bg">8: 33.33%</div></x-col>
+        <x-col :span="8"><div class="bg">8: 33.33%</div></x-col>
+        <x-col :span="8"><div class="bg light">8: 33.33%</div></x-col>
+        <x-col :span="8"><div class="bg">8: 33.33%</div></x-col>
     </x-row>
     <x-row>
-        <x-col span="6"><div class="bg">6: 25%</div></x-col>
-        <x-col span="6"><div class="bg light">6: 25%</div></x-col>
-        <x-col span="6"><div class="bg">6: 25%</div></x-col>
-        <x-col span="6"><div class="bg light">6: 25%</div></x-col>
+        <x-col :span="6"><div class="bg">6: 25%</div></x-col>
+        <x-col :span="6"><div class="bg light">6: 25%</div></x-col>
+        <x-col :span="6"><div class="bg">6: 25%</div></x-col>
+        <x-col :span="6"><div class="bg light">6: 25%</div></x-col>
     </x-row>
     <x-row>
-        <x-col span="4"><div class="bg">4: 16.66%</div></x-col>
-        <x-col span="4"><div class="bg light">4: 16.66%</div></x-col>
-        <x-col span="4"><div class="bg">4: 16.66%</div></x-col>
-        <x-col span="4"><div class="bg light">4: 16.66%</div></x-col>
-        <x-col span="4"><div class="bg">4: 16.66%</div></x-col>
-        <x-col span="4"><div class="bg light">4: 16.66%</div></x-col>
+        <x-col :span="4"><div class="bg">4: 16.66%</div></x-col>
+        <x-col :span="4"><div class="bg light">4: 16.66%</div></x-col>
+        <x-col :span="4"><div class="bg">4: 16.66%</div></x-col>
+        <x-col :span="4"><div class="bg light">4: 16.66%</div></x-col>
+        <x-col :span="4"><div class="bg">4: 16.66%</div></x-col>
+        <x-col :span="4"><div class="bg light">4: 16.66%</div></x-col>
     </x-row>
 </tpl>
 ```
@@ -53,11 +53,11 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 
 ```html
 <tpl>
-    <x-row gutter="16">
-        <x-col span="6"><div class="bg">col-6</div></x-col>
-        <x-col span="6"><div class="bg light">col-6</div></x-col>
-        <x-col span="6"><div class="bg">col-6</div></x-col>
-        <x-col span="6"><div class="bg light">col-6</div></x-col>
+    <x-row :gutter="16">
+        <x-col :span="6"><div class="bg">col-6</div></x-col>
+        <x-col :span="6"><div class="bg light">col-6</div></x-col>
+        <x-col :span="6"><div class="bg">col-6</div></x-col>
+        <x-col :span="6"><div class="bg light">col-6</div></x-col>
     </x-row>
 </tpl>
 ```
@@ -72,8 +72,8 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 ```html
 <tpl>
     <x-row>
-        <x-col span="8"><div class="bg">col-8</div></x-col>
-        <x-col span="8" offset="8"><div class="bg">col-8 col-offset-8</div></x-col>
+        <x-col :span="8"><div class="bg">col-8</div></x-col>
+        <x-col :span="8" offset="8"><div class="bg">col-8 col-offset-8</div></x-col>
     </x-row>
 </tpl>
 ```
@@ -87,8 +87,8 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 ```html
 <tpl>
     <x-row>
-        <x-col span="18" push="6"><div class="bg light">col-18 col-push-6</div></x-col>
-        <x-col span="6" pull="18"><div class="bg">col-6 col-pull-18</div></x-col>
+        <x-col :span="18" push="6"><div class="bg light">col-18 col-push-6</div></x-col>
+        <x-col :span="6" pull="18"><div class="bg">col-6 col-pull-18</div></x-col>
     </x-row>
 </tpl>
 ```
@@ -102,38 +102,38 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 <tpl>
     <p>向左排列</p>
     <x-row type="flex" justify="start">
-        <x-col span="4"><div class="bg">col-4</div></x-col>
-        <x-col span="4"><div class="bg light">col-4</div></x-col>
-        <x-col span="4"><div class="bg">col-4</div></x-col>
-        <x-col span="4"><div class="bg light">col-4</div></x-col>
+        <x-col :span="4"><div class="bg">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light">col-4</div></x-col>
+        <x-col :span="4"><div class="bg">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light">col-4</div></x-col>
     </x-row>
     <p>居中排列</p>
     <x-row type="flex" justify="center">
-        <x-col span="4"><div class="bg">col-4</div></x-col>
-        <x-col span="4"><div class="bg light">col-4</div></x-col>
-        <x-col span="4"><div class="bg">col-4</div></x-col>
-        <x-col span="4"><div class="bg light">col-4</div></x-col>
+        <x-col :span="4"><div class="bg">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light">col-4</div></x-col>
+        <x-col :span="4"><div class="bg">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light">col-4</div></x-col>
     </x-row>
     <p>向右排列</p>
     <x-row type="flex" justify="end">
-        <x-col span="4"><div class="bg">col-4</div></x-col>
-        <x-col span="4"><div class="bg light">col-4</div></x-col>
-        <x-col span="4"><div class="bg">col-4</div></x-col>
-        <x-col span="4"><div class="bg light">col-4</div></x-col>
+        <x-col :span="4"><div class="bg">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light">col-4</div></x-col>
+        <x-col :span="4"><div class="bg">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light">col-4</div></x-col>
     </x-row>
     <p>等宽排列</p>
     <x-row type="flex" justify="space-between">
-        <x-col span="4"><div class="bg">col-4</div></x-col>
-        <x-col span="4"><div class="bg light">col-4</div></x-col>
-        <x-col span="4"><div class="bg">col-4</div></x-col>
-        <x-col span="4"><div class="bg light">col-4</div></x-col>
+        <x-col :span="4"><div class="bg">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light">col-4</div></x-col>
+        <x-col :span="4"><div class="bg">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light">col-4</div></x-col>
     </x-row>
     <p>分散排列</p>
     <x-row type="flex" justify="space-around">
-        <x-col span="4"><div class="bg">col-4</div></x-col>
-        <x-col span="4"><div class="bg light">col-4</div></x-col>
-        <x-col span="4"><div class="bg">col-4</div></x-col>
-        <x-col span="4"><div class="bg light">col-4</div></x-col>
+        <x-col :span="4"><div class="bg">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light">col-4</div></x-col>
+        <x-col :span="4"><div class="bg">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light">col-4</div></x-col>
     </x-row>
 </tpl>
 ```
@@ -149,24 +149,24 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 <tpl>
     <p>顶部对齐</p>
     <x-row type="flex" justify="center" align="top">
-        <x-col span="4"><div class="bg" style="height: 80px">col-4</div></x-col>
-        <x-col span="4"><div class="bg light" style="height: 30px">col-4</div></x-col>
-        <x-col span="4"><div class="bg" style="height: 100px">col-4</div></x-col>
-        <x-col span="4"><div class="bg light" style="height: 60px">col-4</div></x-col>
+        <x-col :span="4"><div class="bg" style="height: 80px">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light" style="height: 30px">col-4</div></x-col>
+        <x-col :span="4"><div class="bg" style="height: 100px">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light" style="height: 60px">col-4</div></x-col>
     </x-row>
     <p>底部对齐</p>
     <x-row type="flex" justify="center" align="bottom">
-        <x-col span="4"><div class="bg" style="height: 80px">col-4</div></x-col>
-        <x-col span="4"><div class="bg light" style="height: 30px">col-4</div></x-col>
-        <x-col span="4"><div class="bg" style="height: 100px">col-4</div></x-col>
-        <x-col span="4"><div class="bg light" style="height: 60px">col-4</div></x-col>
+        <x-col :span="4"><div class="bg" style="height: 80px">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light" style="height: 30px">col-4</div></x-col>
+        <x-col :span="4"><div class="bg" style="height: 100px">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light" style="height: 60px">col-4</div></x-col>
     </x-row>
     <p>居中对齐</p>
     <x-row type="flex" justify="center" align="middle">
-        <x-col span="4"><div class="bg" style="height: 80px">col-4</div></x-col>
-        <x-col span="4"><div class="bg light" style="height: 30px">col-4</div></x-col>
-        <x-col span="4"><div class="bg" style="height: 100px">col-4</div></x-col>
-        <x-col span="4"><div class="bg light" style="height: 60px">col-4</div></x-col>
+        <x-col :span="4"><div class="bg" style="height: 80px">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light" style="height: 30px">col-4</div></x-col>
+        <x-col :span="4"><div class="bg" style="height: 100px">col-4</div></x-col>
+        <x-col :span="4"><div class="bg light" style="height: 60px">col-4</div></x-col>
     </x-row>
 </tpl>
 
@@ -222,15 +222,15 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 ### Col Props
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
 |-----|-----|-----|-----|----|----|----|
-|span|Number, String|无|栅格的占位格数，可选值为0~24的整数，为 0 时，相当于`display:none`|可选||
-|order|Number, String|无|栅格的顺序，在`flex`布局模式下有效|可选||
-|offset|Number, String|无|栅格左侧的间隔格数|可选||
-|push|Number, String|无|栅格向右移动的格数|可选||
-|pull|Number, String|无|栅格向左移动的格数|可选||
+|span|Number|无|栅格的占位格数，可选值为0~24的整数，为 0 时，相当于`display:none`|可选||
+|order|Number|无|栅格的顺序，在`flex`布局模式下有效|可选||
+|offset|Number|无|栅格左侧的间隔格数|可选||
+|push|Number|无|栅格向右移动的格数|可选||
+|pull|Number|无|栅格向左移动的格数|可选||
 |xs|Number, Object|无|`< 768px` 响应式栅格，可为栅格数或一个包含其他属性的对象|可选||
-|xs|Number, Object|无|`>= 768px` 响应式栅格，可为栅格数或一个包含其他属性的对象|可选||
-|xs|Number, Object|无|`>= 992px` 响应式栅格，可为栅格数或一个包含其他属性的对象|可选||
-|xs|Number, Object|无|`>= 1200px` 响应式栅格，可为栅格数或一个包含其他属性的对象|可选||
+|sm|Number, Object|无|`>= 768px` 响应式栅格，可为栅格数或一个包含其他属性的对象|可选||
+|md|Number, Object|无|`>= 992px` 响应式栅格，可为栅格数或一个包含其他属性的对象|可选||
+|lg|Number, Object|无|`>= 1200px` 响应式栅格，可为栅格数或一个包含其他属性的对象|可选||
 
 
 </template>

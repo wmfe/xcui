@@ -48,7 +48,7 @@
         </div>
         <p>执行后会将任务下发给所有同学！</p>   
         <div slot="footer" style="text-align:right">
-            <x-button type="primary" @click="exec" size="lg" :loading="isLoading">
+            <x-button type="primary" @click="exec" size="large" :loading="isLoading">
             {{isLoading ? '执行中...' : '确认执行'}}</x-button>
         </div>
     </x-modal>

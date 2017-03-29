@@ -70,9 +70,9 @@
 ```html
 
 <tpl>
-    <x-button size="sm">小尺寸sm</x-button>
+    <x-button size="small">小尺寸small</x-button>
     <x-button>正常尺寸</x-button>
-    <x-button size="lg">大尺寸lg</x-button>
+    <x-button size="large">大尺寸large</x-button>
 </tpl>
 
 ```
@@ -87,7 +87,7 @@
 ```html
 
 <tpl>
-    <x-button size="sm" type="primary" :loading="true">Loading...</x-button>
+    <x-button size="small" type="primary" :loading="true">Loading...</x-button>
     <x-button type="info" :loading="true">Loading...</x-button>
     <x-button type="primary" :loading="isLoadingA" @click="isLoadingA = true">点击加载</x-button>
     <x-button type="info" icon="heart" :loading="isLoadingB" @click="isLoadingB = true">{{isLoadingB ? '加载中...' : '点击加载'}}</x-button>
@@ -133,6 +133,21 @@
 ```
 
 :::
+
+## Props
+
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
+|-----|-----|-----|-----|----|----|----|
+|size|String|无|尺寸|可选|small, large|
+|type|String|无|类型|可选|primary, info, success, warning, danger, dashed, link|
+|loading|Boolean|false|是否加载中状态|可选|true , false|
+|disabled|Boolean|false|是否禁用|可选|true , false|
+|icon|String|无|图标名，具体见icon组件名|可选||
+
+## Events
+|事件名|说明|返回值|设置属性|
+|---|---|---|---|
+|click|点击时触发|当前事件`event`|`@click`|
 
 </template>
 
