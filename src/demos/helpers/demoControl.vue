@@ -90,6 +90,7 @@
                 padding: 15px 0 25px 0;
                 p {
                     margin: 0;
+                    line-height: 28px;
                 }
             }
         }

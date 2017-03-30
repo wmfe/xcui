@@ -2,7 +2,9 @@
     <transition :name="transition" @after-leave="handleAfterLeave">
     	<div :class="cls" :style="styles" v-if="visible">
             <div>
-    		    <span class="x-tag-text"><slot>{{name}}</slot><span>
+    		    <span class="x-tag-text">
+                    <slot>{{name}}</slot>
+                </span>
                 <i class="x-icon x-icon-android-close x-tag-cross" v-if="closeable" @click.stop="handleClose"></i>
             </div>
     	</div>

@@ -84,6 +84,6 @@
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0",
-    "xcui-demo-loader": "^0.1.4"
+    "xcui-demo-loader": "^0.1.7"
   }
 }

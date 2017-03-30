@@ -25,7 +25,10 @@
             </i>
         </x-input>
         <date-panel v-if="type !== 'daterange' && type !== 'datetimerange'" :popperClass="popperClass" ref="picker"></date-panel>
-        <date-range-panel  v-if="type === 'daterange' || type === 'datetimerange'" :popperClass="popperClass" ref="picker"></date-panel>
+        <date-range-panel 
+            v-if="type === 'daterange' || type === 'datetimerange'"
+            :popperClass="popperClass" ref="picker">
+        </date-range-panel>
     </div>
 </template>
 

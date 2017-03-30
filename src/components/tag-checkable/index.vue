@@ -1,6 +1,8 @@
 <template>
     <div :class="cls"  @click="handleChange">
-        <span class="x-tag-text"><slot>{{name}}</slot><span>
+        <span class="x-tag-text">
+            <slot>{{name}}</slot>
+        </span>
     </div>
 </template>
 

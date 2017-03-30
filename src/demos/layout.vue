@@ -87,8 +87,8 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 ```html
 <tpl>
     <x-row>
-        <x-col :span="18" push="6"><div class="bg light">col-18 col-push-6</div></x-col>
-        <x-col :span="6" pull="18"><div class="bg">col-6 col-pull-18</div></x-col>
+        <x-col :span="18" :push="6"><div class="bg light">col-18 col-push-6</div></x-col>
+        <x-col :span="6" :pull="18"><div class="bg">col-6 col-pull-18</div></x-col>
     </x-row>
 </tpl>
 ```
