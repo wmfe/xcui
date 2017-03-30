@@ -4,7 +4,7 @@
 Message提供一种不打断用户操作的轻量级提示方式，顶部居中显示并自动消失。常用于主动操作后的信息提示。
 
 > XCUI为`Vue.prototype`添加了全局方法`$Message`, 如果您完整引入了XCUI， 可以直接使用如`this.$Message.info('message')`的方式进行信息提示操作。
-> 当然，您也可以使用`import { Message } from 'xcui/components/message'` 的单组件方式调用。
+> 当然，您也可以使用`import Message from 'xcui/components/message'` 的单组件方式调用。
 > Message在XCUI中被注册为一个[Vue 插件](https://vuejs.org/v2/guide/plugins.html), 在**单文件引入**时，请使用`Vue.use(Message)` 挂载，再进行使用。
 
 

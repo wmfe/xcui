@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { Button as XButton } from '../button/index';
+import XButton from '../button/index';
 import getScrollBarSize from '../../utils/getScrollBarSize';
 
 export default {

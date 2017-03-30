@@ -37,7 +37,7 @@
       components: {
           Panel
       },
-      name: 'xTimeSelect',
+      name: 'XTimeSelect',
       beforeCreate() {
           this.type = 'time-select';
       }

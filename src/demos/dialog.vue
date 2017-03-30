@@ -4,7 +4,7 @@
 使用XCUI绑定的快捷方法`$Dialog`, 快速创建一个对话框。
 
 > XCUI为`Vue.prototype`添加了全局方法`$Dialog`, 可以直接使用如`this.$Dialog.alert('message')`的方式进行信息提示操作。
-> 当然，您也可以使用`import { Message } from 'xcui/components/dialog'` 的单组件方式调用。
+> 当然，您也可以使用`import Dialog from 'xcui/components/dialog'` 的单组件方式调用。
 > Dialog在XCUI中被注册为一个[Vue 插件](https://vuejs.org/v2/guide/plugins.html), 在**单文件引入**时，请使用`Vue.use(Dialog)` 挂载，再进行使用。
 
 

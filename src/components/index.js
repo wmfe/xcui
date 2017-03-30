@@ -1,7 +1,9 @@
 /**
  * @file index.js
  */
-import {DatePicker, TimePicker, TimeSelect} from './datepicker/index';
+import DatePicker from './date-picker/index';
+import TimePicker from './time-picker';
+import TimeSelect from './time-select';
 import Input from './input';
 import InputNumber from './inputNumber';
 import Textarea from './textarea';
@@ -19,14 +21,18 @@ import PageLoading from './pageloading/index.js';
 import Pagination from './pagination';
 import Popover from './popover';
 import Progress from './progress';
-import {Select, Option, OptionGroup} from './select/index';
+import Select from './select/index';
+import Option from './option';
+import OptionGroup from './option-group';
 import Suggestion from './suggestion';
 import Tag from './tag';
 import TagCheckable from './tag-checkable';
 import Tooltip from './tooltip';
 import ScrollTop from './scrolltop';
-import {Button, ButtonGroup} from './button';
-import {Row, Col} from './layout';
+import Button from './button';
+import ButtonGroup from './button-group';
+import Row from './row';
+import Col from './col';
 import Icon from './icon';
 import Switch from './switch';
 

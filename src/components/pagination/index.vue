@@ -74,8 +74,10 @@
 </template>
 
 <script>
-import {Button as XButton, ButtonGroup as XButtonGroup} from '../button';
-import {Select as XSelect, Option as XOption} from '../select';
+import XButton from '../button';
+import XButtonGroup from '../button-group';
+import XSelect from '../select';
+import XOption from '../option';
 
 export default {
     name: 'XPagination',

@@ -159,7 +159,7 @@
 XCUI为Modal提供了便捷的调用方式。在Vue.prototype中添加了快捷的方法：$Modal.show,$Modal.close, $confirm和$alert。因此，在Vue实例代码中，可以使用this.$Modal等方法快捷地创建一个对话框。
 但需要在调用这些全局方法之前，先在项目中引入XCUI或xcuiInstall，并调用Vue.use安装。
 
-引入方式一：
+完整引入XCUI：
 
 ```js
 import Vue from 'vue'
@@ -167,13 +167,6 @@ import XCUI from 'xcui' // 全局引入
 Vue.use(XCUI)
 ```
 
-引入方式二：
-
-```js
-import Vue from 'vue'
-import {xcuiInstall} from 'xcui'
-Vue.use(xcuiInstall)
-```
 做好以上准备工作后，即可在组件任何位置调用vm.$confirm等来隐式地创建一个对话框了。
 
 

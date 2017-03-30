@@ -5,7 +5,7 @@
 
 
 > XCUI为`Vue.prototype`添加了全局方法`$PageLoading`, 如果您完整引入了XCUI， 可以直接使用如`this.$PageLoading.start()`的方式进行页面加载操作。
-> 当然，您也可以使用`import { PageLoading } from 'xcui/components/pageloading'` 的单组件方式调用。
+> 当然，您也可以使用`import PageLoading from 'xcui/components/pageloading'` 的单组件方式调用。
 > Pageloading在XCUI中被注册为一个[Vue 插件](https://vuejs.org/v2/guide/plugins.html), 在**单文件引入**时，请使用`Vue.use(PageLoading)` 挂载，再进行使用。
 
 ## DEMO
