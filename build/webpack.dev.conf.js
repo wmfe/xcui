@@ -34,7 +34,7 @@ config.plugins = (config.plugins || []).concat([
         template: 'src/index.html'
     }),
     new FaviconsWebpackPlugin({
-        logo: 'src/assets/favicon.png',
+        logo: './src/assets/favicon.png',
         icons: {
               android: false,
               appleIcon: false,
