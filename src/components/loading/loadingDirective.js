@@ -64,7 +64,6 @@ const XLoading = {
             else {
                 if (el.domVisible) {
                     el.instance.$on('after-leave', _ => {
-                        debugger;
                         el.domVisible = false;
                         if (binding.modifiers.fullscreen && el.originalOverflow !== 'hidden') {
                             document.body.style.overflow = el.originalOverflow;

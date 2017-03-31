@@ -86,6 +86,7 @@
                     this.resizeTextarea();
                 });
                 this.$emit('change', val);
+                this.$emit('input', val);
             }
         },
         mounted() {

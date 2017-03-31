@@ -13,7 +13,7 @@
 ```html
 
 <tpl>
-    <div v-loading="loading" style="width: 400px;height: 60px;padding: 30px; outline: 1px dotted #eee;">
+    <div v-loading.body="loading" style="width: 400px;height: 60px;padding: 30px; outline: 1px dotted #eee;">
         <img :src="imgPara">
     </div>
 </tpl>

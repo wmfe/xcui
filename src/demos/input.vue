@@ -135,7 +135,7 @@
 |事件名|说明|返回值|设置属性|
 |---|---|---|---|
 |click|设置`icon`属性后，点击图标时触发|无|`iconclick`|
-|enter|按下回车键时触发|无|`@keyup.enter`|
+|enter|按下回车键时触发|无|`@enter`|
 |input|输入时触发|无|`@input`|
 |change|数据改变时触发|event|`@change`|
 |focus|输入框获得焦点时触发|无|`@focus`|
