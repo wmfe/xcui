@@ -1,6 +1,9 @@
 {
   "name": "xcui",
   "version": "1.0.1",
+  "engines" : {
+    "node" : ">=5.10.0" 
+  },
   "description": "Desktop web UI based on Vue and Bootstrap",
   "theme": "./custom.js",
   "keywords": [
@@ -23,7 +26,7 @@
   },
   "scripts": {
     "dev": "node build/dev-server.js",
-    "site": "rimraf site && cross-env NODE_ENV=production webpack -p --progress --hide-modules --colors --config build/webpack.site.conf.js",
+    "site": "rimraf site && webpack -p --progress --hide-modules --colors --config build/webpack.site.conf.js",
     "build": "webpack --progress --hide-modules --colors --config build/webpack.npm.conf.js && rimraf dist/components && node build/build-components"
   },
   "main": "dist/xcui.js",

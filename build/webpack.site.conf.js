@@ -1,8 +1,8 @@
 /**
- * @file webpack.base.conf.js
+ * @file webpack.site.conf.js
  */
 
-var config = require('./webpack.base.conf')
+var config = require('./webpack.base.conf');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
@@ -12,7 +12,7 @@ config.plugins = (config.plugins || []).concat([
         template: 'src/index.html'
     }),
     new FaviconsWebpackPlugin({
-        logo: 'src/assets/favicon.png',
+        logo: './src/assets/favicon.png',
         icons: {
               android: false,
               appleIcon: false,
