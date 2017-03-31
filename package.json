@@ -6,9 +6,9 @@
   "keywords": [
     "xcui",
     "vue",
-    "Bootstrap",
     "vue-components",
     "web-components",
+    "ui-components",
     "component",
     "components",
     "desktop ui",
@@ -23,17 +23,11 @@
   },
   "scripts": {
     "dev": "node build/dev-server.js",
-    "site": "webpack --progress --hide-modules --colors --config build/webpack.base.conf.js",
+    "site": "rimraf site && cross-env NODE_ENV=production webpack -p --progress --hide-modules --colors --config build/webpack.site.conf.js",
     "build": "webpack --progress --hide-modules --colors --config build/webpack.npm.conf.js && rimraf dist/components && node build/build-components"
   },
   "main": "dist/xcui.js",
   "dependencies": {
-    "array-filter": "^1.0.0",
-    "array-find": "^1.0.0",
-    "array-map": "^0.0.0",
-    "array-shuffle": "^1.0.0",
-    "countup": "^1.6.1",
-    "fuzzysearch": "^1.0.3",
     "popper.js": "^1.0.7"
   },
   "devDependencies": {
@@ -49,6 +43,7 @@
     "co-request": "^1.0.0",
     "connect-history-api-fallback": "^1.1.0",
     "copy-webpack-plugin": "^1.1.1",
+    "cross-env": "^4.0.0",
     "css-loader": "^0.23.0",
     "eslint": "^2.5.1",
     "eslint-config-standard": "^5.1.0",
@@ -60,9 +55,9 @@
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^1.0.1",
+    "favicons-webpack-plugin": "0.0.7",
     "file-loader": "^0.8.4",
     "function-bind": "^1.0.2",
-    "gh-pages": "^0.10.0",
     "html-webpack-plugin": "^2.14.0",
     "inject-loader": "^2.0.1",
     "json-loader": "^0.5.4",
