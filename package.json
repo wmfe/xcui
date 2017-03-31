@@ -1,6 +1,9 @@
 {
   "name": "xcui",
   "version": "1.0.1",
+  "engines" : {
+    "node" : ">=5.10.0" 
+  },
   "description": "Desktop web UI based on Vue and Bootstrap",
   "theme": "./custom.js",
   "keywords": [
