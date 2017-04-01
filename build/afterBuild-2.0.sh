@@ -30,11 +30,8 @@ GitAddSite2_0 () {
     if [ ! -f "../site/app.js" ]; then
         exit 1
     else
-        cp ../site/app.js ./2.0/static/app.js
+        cp ../site/* ./
     fi
-    cp ../src/index.html ./2.0/index.html
-    sed -i '15i\    <script type="text/javascript" src="./static/app.js"></script>' ./2.0/index.html
-    cp -r ../src/assets/* ./2.0/static/
     git add 2.0
 }
 
