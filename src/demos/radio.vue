@@ -93,7 +93,7 @@
 
 ## 按钮样式
 
-::: demo 按钮样式的单选框组合。通过引入`radio-group`和`radio-button`组件来实现。此时无需再设置单个`radio-button`的`v-model`属性。当相应的`radio`被选中时，`radio-group`的`v-model`值随之改变。
+::: demo 按钮样式的单选框组合。通过引入`radio-group`和`radio-button`组件来实现。此时无需再设置单个`radio-button`的`v-model`属性。当相应的`radio`被选中时，`radio-group`的`v-model`值随之改变。通过`size`来可以控制大小。除默认大小外，提供`large`和`small`两种大小。
 
 ```html
 

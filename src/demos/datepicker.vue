@@ -45,7 +45,7 @@
 
 <tpl>
     <div style="width:180px">
-        <x-date-picker v-model="model2" align="right" placeholder="请选择日期" :picker-options="pickerOption2">
+        <x-date-picker v-model="model2" align="left" placeholder="请选择日期" :picker-options="pickerOption2">
         </x-date-picker>
     </div>
 </tpl>
@@ -213,7 +213,7 @@
 |placeholder|String|无|文本框默认显示文字|可选||
 |type|String|date|显示类型|可选|year/month/date/week/datetime/daterange/datetimerange|
 |format|String|yyyy-MM-dd|时间日期格式化|可选|年yyyy, 月MM, 日dd, 小时HH, 分mm, 秒ss|
-|align|String|left|对齐方式|可选|left, center, right|
+|align|String|left|对齐方式|可选|left, right|
 |popper-class|String|无|下拉框类名|可选||
 |picker-options|Object|无|特殊选项，参考下表|可选||
 |range-separator|String|-|选择范围时的分隔符|可选||

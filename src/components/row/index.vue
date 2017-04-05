@@ -4,8 +4,6 @@
     </div>
 </template>
 <script>
-    const prefixCls = 'x-row';
-
     export default {
         name: 'x-row',
         props: {
@@ -32,15 +30,12 @@
         },
         computed: {
             classes() {
-                return [
-                    `${prefixCls}`,
-                    {
-                        [`${prefixCls}-${this.type}`]: !!this.type,
-                        [`${prefixCls}-${this.type}-${this.align}`]: !!this.align,
-                        [`${prefixCls}-${this.type}-${this.justify}`]: !!this.justify,
-                        [`${this.className}`]: !!this.className
-                    }
-                ];
+                let cls = ['x-row'];
+                !!this.type && cls.push(`x-row-${this.type}`);
+                !!this.align && cls.push(`x-row-${this.type}-${this.align}`);
+                !!this.justify && cls.push(`x-row-${this.type}-${this.justify}`);
+                !!this.className && cls.push(`${this.className}`);
+                return cls;
             },
             styles() {
                 let style = {};
@@ -50,7 +45,6 @@
                         marginRight: this.gutter / -2 + 'px'
                     };
                 }
-
                 return style;
             }
         },

@@ -229,14 +229,14 @@
 
 ## 分组展示
 
-::: demo 通过引入`x-option-group`组件可以进行分组展示。
+::: demo 通过引入`x-option-group`组件可以进行分组展示。在`x-option-group`上设置`disabled`可以将整个分组禁用。
 
 ```html
 
 <tpl>
     <div style="width: 180px;">
         <x-select v-model="model7" placeholder="请选择">
-            <x-option-group v-for="group in data7" :label="group.label">
+            <x-option-group v-for="group in data7" :label="group.label" :disabled="group.disabled">
                 <x-option v-for="item in group.options" :label="item.label" :value="item.value"></x-option>
             </x-option-group>
         </x-select>
@@ -265,9 +265,16 @@
                     }, {
                         value: '4',
                         label: '过桥米线'
+                    }]
+                }, {
+                    label: '已下架',
+                    disabled: true,
+                    options: [{
+                        value: '6',
+                        label: '鱼香肉丝'
                     }, {
-                        value: '5',
-                        label: '羊肉泡馍'
+                        value: '7',
+                        label: '宫爆鸡丁'
                     }]
                 }]
             }
@@ -430,9 +437,16 @@
                     }, {
                         value: '4',
                         label: '过桥米线'
+                    }]
+                }, {
+                    label: '已下架',
+                    disabled: true,
+                    options: [{
+                        value: '6',
+                        label: '鱼香肉丝'
                     }, {
-                        value: '5',
-                        label: '羊肉泡馍'
+                        value: '7',
+                        label: '宫爆鸡丁'
                     }]
                 }],
                 model8: '',

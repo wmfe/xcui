@@ -103,8 +103,13 @@
                     this.deleteSelected(e);
                 }
                 else {
-                    this.isFocus = true;
-                    this.toggleSelect();
+                    let $input = this.$refs.reference.$el.querySelector('.x-input');
+                    if (!this.isOpen) {
+                        $input.focus();
+                    }
+                    else {
+                        this.closeSelect();
+                    }
                 }
             },
             handleOptionSelect(option) {

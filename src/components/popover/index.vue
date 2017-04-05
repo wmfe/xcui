@@ -13,7 +13,7 @@
                     </slot>
                     <div class="x-popover-confirm" v-if="confirm">
                         <x-button size="sm" @click="handleCancel">{{cancelText}}</x-button>
-                        <x-button size="sm" type="primary" @click="handleOk">{{okText}}</x-button>
+                        <x-button size="sm" :loading="confirmLoading" type="primary" @click="handleOk">{{okText}}</x-button>
                     </div>
                 </div>
             </div>
@@ -53,13 +53,24 @@ export default {
             default: '取消'
         }
     },
+    data() {
+        return {
+            confirmLoading: false
+        };
+    },
     methods: {
         handleOk(e) {
-            this.onOk(e);
+            this.onOk(e, this);
+            if (e.defaultPrevented) {
+                return;
+            }
             this.showPopper = false;
         },
         handleCancel(e) {
             this.onCancel(e);
+            if (e.defaultPrevented) {
+                return;
+            }
             this.showPopper = false;
         }
     }

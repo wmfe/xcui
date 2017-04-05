@@ -13,7 +13,7 @@
             @keyup.enter.stop.native="handleEnter()"
             :icon="icon"
             :icon-click="iconClick"></x-input>
-        <x-suggestion-dropdown :suggestions="list">
+        <x-suggestion-dropdown :suggestions="list" ref="popper">
         </x-suggestion-dropdown>
     </div>
 </template>
@@ -140,28 +140,40 @@
             changeCurrent(offset) {
                 let moveIndex = this.currentIndex + offset;
                 if (offset > 0 && moveIndex >= this.list.length) {
-                    moveIndex -= offset;
+                    moveIndex = 0;
                 }
                 else if (offset < 0 && moveIndex < 0) {
-                    moveIndex = this.currentIndex;
+                    moveIndex = this.list.length - 1;
                 }
 
                 this.currentIndex = moveIndex;
 
                 this.$nextTick(() => {
-                    let wrapHeight = this.$refs.wrap.clientHeight;
-                    let activeLi = this.$refs.sugList.querySelector('.active');
-                    let li = this.$refs.sugList.querySelector('li');
-                    if (!activeLi || !li) {
+                    const popper = this.$refs.popper.$el;
+                    let popperHeight = popper.clientHeight;
+                    let activeItem = popper.querySelector('.active');
+                    let item = popper.querySelector('li');
+                    if (!activeItem || !item) {
                         return;
                     }
-                    let liHeight = li.clientHeight;
-                    if (activeLi && activeLi.offsetTop > wrapHeight - liHeight) {
-                        this.$refs.wrap.scrollTop += liHeight;
+                    let itemHeight = item.clientHeight;
+
+                    if (this.currentIndex === 0) {
+                        popper.scrollTop = 0;
+                        return;
+                    }
+
+                    if (this.currentIndex === this.list.length - 1) {
+                        popper.scrollTop = popperHeight;
+                        return;
+                    }
+
+                    if (activeItem && activeItem.offsetTop > popperHeight - itemHeight) {
+                        popper.scrollTop += itemHeight;
                     };
-                    if (activeLi && activeLi.offsetTop
-                        < this.$refs.wrap.scrollTop) {
-                        this.$refs.wrap.scrollTop -= liHeight;
+                    if (activeItem && activeItem.offsetTop
+                        < popper.scrollTop) {
+                        popper.scrollTop -= itemHeight;
                     }
                 });
             },

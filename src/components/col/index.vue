@@ -28,26 +28,22 @@
         },
         computed: {
             classes() {
-                let classList = [
-                    `${prefixCls}`,
-                    {
-                        [`${prefixCls}-span-${this.span}`]: this.span,
-                        [`${prefixCls}-order-${this.order}`]: this.order,
-                        [`${prefixCls}-offset-${this.offset}`]: this.offset,
-                        [`${prefixCls}-push-${this.push}`]: this.push,
-                        [`${prefixCls}-pull-${this.pull}`]: this.pull,
-                        [`${this.className}`]: !!this.className
-                    }
-                ];
-
+                const cls = ['x-col'];
+                this.span && cls.push(`x-col-span-${this.span}`);
+                this.order && cls.push(`x-col-order-${this.order}`);
+                this.offset && cls.push(`x-col-offset-${this.offset}`);
+                this.push && cls.push(`x-col-push-${this.push}`);
+                this.pull && cls.push(`x-col-pull-${this.pull}`);
+                !!this.className && cls.push(`${this.className}`);
+                
                 ['xs', 'sm', 'md', 'lg'].forEach(size => {
                     if (typeof this[size] === 'number') {
-                        classList.push(`${prefixCls}-span-${size}-${this[size]}`);
+                        cls.push(`${prefixCls}-span-${size}-${this[size]}`);
                     }
                     else if (typeof this[size] === 'object') {
                         let props = this[size];
                         Object.keys(props).forEach(prop => {
-                            classList.push(
+                            cls.push(
                                 prop !== 'span'
                                     ? `${prefixCls}-${size}-${prop}-${props[prop]}`
                                     : `${prefixCls}-span-${size}-${props[prop]}`
@@ -56,7 +52,7 @@
                     }
                 });
 
-                return classList;
+                return cls;
             },
             styles() {
                 let style = {};

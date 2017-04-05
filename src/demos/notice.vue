@@ -98,6 +98,21 @@
     <x-button type="info" @click="notice6">不自动关闭</x-button>
 </tpl>
 
+<script>
+    export default {
+        methods: {
+            notice6() {
+                this.$Notice.info({
+                    title: '这是通知标题',
+                    desc: '这条通知不会自动关闭，需要点击关闭按钮才能关闭',
+                    duration: 0
+                });
+            }
+
+        }
+    };
+</script>
+
 ```
 
 :::
@@ -199,7 +214,8 @@ this.$Notice.config({
             notice6() {
                 this.$Notice.info({
                     title: '这是通知标题',
-                    desc: '这条通知不会自动关闭，需要点击关闭按钮才能关闭'
+                    desc: '这条通知不会自动关闭，需要点击关闭按钮才能关闭',
+                    duration: 0
                 });
             }
 

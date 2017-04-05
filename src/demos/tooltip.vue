@@ -164,9 +164,10 @@
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
 |-----|-----|-----|-----|-----|-----|-----|
 |content|String|无|显示的内容|可选||
+|trigger|String|click|触发方式|可选|hover,focus,click|
 |placement|String|bottom|出现的位置|可选|top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end|
 |offset|Number|0|默认的偏移量|可选||
-|transition|String|tooltip-zoom|过渡效果名|可选||
+|transition|String|popover-zoom|过渡效果名（如修改，需要自行增加相关css，具体见[Vue过渡系统](https://vuejs.org/v2/guide/transitions.html#CSS-Transitions)）|可选||
 |visible-arrow|Boolean|true|是否显示Tooltip箭头|可选|true, false|
 |open-delay|Number|200|延迟出现，单位是毫秒|可选||
 |popper-class|String|无|tooltip弹窗的类名|可选||

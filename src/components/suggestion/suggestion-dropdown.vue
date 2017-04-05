@@ -4,7 +4,7 @@
             v-show="showPopper"
             :style="{width: dropdownWidth}">
             <ul class="x-suggestion-list" ref="sugList">
-                <li v-for="(item,index) in suggestions" class="x-suggestion-item" :class="{'active' : currentIndex==index}" @click="setItem(item)">
+                <li v-for="(item,index) in suggestions" class="x-suggestion-item" :class="{'active' : $parent.currentIndex==index}" @click="setItem(item)">
                     {{item.text}}
                 </li>
             </ul>

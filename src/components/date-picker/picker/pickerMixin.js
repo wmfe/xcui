@@ -176,7 +176,10 @@ export default {
         },
         align: {
             type: String,
-            default: 'left'
+            default: 'left',
+            validator(value) {
+                return ['right', 'left'].indexOf(value) >= 0;
+            }
         },
         value: {},
         rangeSeparator: {

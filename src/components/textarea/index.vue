@@ -21,6 +21,9 @@
             @focus="handleFocus"
             @blur="handleBlur"
             @change="handleChange"></textarea>
+        <span class="max-text" :class="{'max-reached': currentValue.length >= maxlength}"
+            v-if="maxlength && maxlength > 0 && showMax">{{currentValue.length}} / {{maxlength}}
+        </span>
     </div>
 </template>
 <script>
@@ -42,7 +45,8 @@
                 default: 2
             },
             maxlength: Number,
-            minlength: Number
+            minlength: Number,
+            showMax: Boolean
         },
         data() {
             return {

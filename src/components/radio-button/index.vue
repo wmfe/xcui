@@ -2,7 +2,7 @@
   <label
     class="x-radio-button"
     :class="[
-      size ? 'el-radio-button--' + size : '',
+      size ? 'x-radio-button-' + size : '',
       { 'is-active': value === label }
     ]"
   >

@@ -117,7 +117,7 @@
 ## Props
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
 |-----|-----|-----|-----|----|----|----|
-|value|String, Number|无|和`v-model`的绑定值|必选||
+|v-model|String, Number|无|和`v-model`的绑定值|必选||
 |size|String|无|输入框大小|可选|`large`, `small`|
 |placeholder|String|无|原生属性，输入框默认文本，用于提示|可选||
 |disabled|Boolean|false|是否禁用|可选||

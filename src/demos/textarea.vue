@@ -83,6 +83,24 @@
 
 :::
 
+## 显示当前输入长度及允许输入的范围
+
+::: demo 通过设置属性`maxlength`为一定数值，并设置属性`show-max`为`true`可以显示当前输入文字长度。
+
+```html
+
+<tpl>
+    <x-row>
+        <x-col :span="8">
+            <x-textarea placeholder="请输入内容" v-model="input5" :maxlength="15" show-max></x-textarea>
+        </x-col>
+    </x-row>
+</tpl>
+
+```
+
+:::
+
 
 
 ## Props
@@ -116,7 +134,8 @@
                 input1: '',
                 input2: '',
                 input3: '',
-                input4: ''
+                input4: '',
+                input5: ''
             };
         }
     };   

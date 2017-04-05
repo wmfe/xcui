@@ -216,7 +216,7 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 |gutter|Number|0|栅格的间距|可选||
 |type|String|无|布局的模式|可选|`flex`|
 |align|String|无|`flex`布局下的垂直对齐方式|可选|`top`, `middle`, `bottom`|
-|justify|String|无|`flex`布局下的垂直对齐方式|可选|`start`, `end`, `center`, `space-around`, `space-between`|
+|justify|String|无|`flex`布局下的水平对齐方式|可选|`start`, `end`, `center`, `space-around`, `space-between`|
 |class|String|无|自定义class名称|可选||
 
 ### Col Props

@@ -139,7 +139,7 @@
 
 ## Popconfirm 确认提示框
 
-::: demo 确认提示框是一种比`modal`更轻量的操作，常用于二次确认。使用`confirm`属性开启此模式。在确认模式下`content`内容无效。
+::: demo 确认提示框是一种比`modal`更轻量的操作，常用于二次确认。使用`confirm`属性开启此模式。在确认模式下`content`内容无效。确认的操作支持异步，在回调参数中可以设置`confirmLoading`来开启确认按钮的loading效果。具体请看demo代码。
 
 ```html
 
@@ -149,17 +149,23 @@
         title="确定要删除这些数据吗？"
         :on-ok="ok"
         :on-cancel="cancel">
-        <x-button>点击确认</x-button>
+        <x-button :loading="loading">点击确认</x-button>
     </x-popover>
 </tpl>
 
 <script>
     export default {
         methods: {
-            ok() {
-                this.$Message.success('已经成功删除');
+            ok(e, popover) {
+                e.preventDefault();
+                popover.confirmLoading = true;
+                setTimeout(() => {
+                    this.$Message.success('已经成功删除');
+                    popover.showPopper = false;
+                    popover.confirmLoading = false;
+                }, 2000);
             },
-            cancel() {
+            cancel(e) {
                 this.$Message.info('已取消');
             }
         }
@@ -230,16 +236,18 @@
 
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
 |-----|-----|-----|-----|-----|-----|-----|
+|title|String|无|标题|可选||
 |content|String|无|显示的内容|可选||
+|trigger|String|click|触发方式|可选|hover,focus,click|
 |placement|String|bottom|出现的位置|可选|top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end|
 |offset|Number|0|默认的偏移量|可选||
-|transition|String|popover-zoom|过渡效果名|可选||
+|transition|String|popover-zoom|过渡效果名（如修改，需要自行增加相关css，具体见[Vue过渡系统](https://vuejs.org/v2/guide/transitions.html#CSS-Transitions)）|可选||
 |visible-arrow|Boolean|true|是否显示Tooltip箭头|可选|true, false|
 |open-delay|Number|200|延迟出现，单位是毫秒|可选||
 |popper-class|String|无|tooltip弹窗的类名|可选||
 |confirm|Boolean|false|是否开启确认提示框模式|可选||
-|on-ok|Function|无|确认时的操作，仅在`confirm`模式下有效|可选||
-|on-cancel|Function|无|取消时的操作，仅在`confirm`模式下有效|可选||
+|on-ok|Function|无|确认时的操作，仅在`confirm`模式下有效,返回值为(event, VueComponent)，即当前事件和组件实例|可选||
+|on-cancel|Function|无|取消时的操作，仅在`confirm`模式下有效,返回值为当前event|可选||
 |ok-text|String|无|确认按钮显示文字，仅在`confirm`模式下有效|可选||
 |cancel-text|String|无|取消按钮显示文字，仅在`confirm`模式下有效|可选||
 
@@ -256,14 +264,21 @@
 export default {
     data() {
         return {
-            content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. '
+            content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. ',
+            loading: false
         };
     },
     methods: {
-        ok() {
-            this.$Message.success('已经成功删除');
+        ok(e, popover) {
+            e.preventDefault();
+            popover.confirmLoading = true;
+            setTimeout(() => {
+                this.$Message.success('已经成功删除');
+                popover.showPopper = false;
+                popover.confirmLoading = false;
+            }, 2000);
         },
-        cancel() {
+        cancel(e) {
             this.$Message.info('已取消');
         }
     }

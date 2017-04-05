@@ -21,13 +21,19 @@ const XPageLoading = {
                 },
                 methods: {
                     start() {
-                        this.$refs.pageloading.start();
+                        this.$nextTick(() => {
+                            this.$refs.pageloading.start();
+                        });
                     },
                     done() {
-                        this.$refs.pageloading.done();
+                        this.$nextTick(() => {
+                            this.$refs.pageloading.done();
+                        });
                     },
                     error() {
-                        this.$refs.pageloading.error();
+                        this.$nextTick(() => {
+                            this.$refs.pageloading.error();
+                        });
                     },
                     config(options) {
                         this.speed = options.speed || this.speed;
