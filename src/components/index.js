@@ -38,6 +38,8 @@ import Switch from './switch';
 
 require('../less/index.less');
 
+const version = require('../../package.json').version;
+
 const install = (Vue) => {
     if (install.installed) {
         return;
@@ -79,7 +81,7 @@ const install = (Vue) => {
 };
 
 const xcui = {
-    version: '2.0.0-rc.1',
+    version: version,
     DatePicker,
     TimePicker,
     TimeSelect,

@@ -83,7 +83,7 @@ module.exports = {
         formatter: require('eslint-friendly-formatter')
     },
     plugins: [
-        new ExtractTextPlugin("xcui.css"),
+        new ExtractTextPlugin("app.css"),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'src/index.html'

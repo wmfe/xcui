@@ -1,6 +1,7 @@
 {
   "name": "xcui",
-  "version": "1.0.1",
+  "version": "2.0.0-rc-1",
+  "main": "dist/xcui.js",
   "engines" : {
     "node" : ">=5.10.0" 
   },
@@ -27,7 +28,7 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "site": "rimraf site && webpack -p --progress --hide-modules --colors --config build/webpack.site.conf.js",
-    "build": "webpack --progress --hide-modules --colors --config build/webpack.npm.conf.js && rimraf dist/components && node build/build-components"
+    "build": "rimraf dist/* && webpack --progress --hide-modules --colors --config build/webpack.npm.conf.js && node build/build-components"
   },
   "main": "dist/xcui.js",
   "dependencies": {
