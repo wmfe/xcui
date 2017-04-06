@@ -142,27 +142,18 @@
 |clearable|Boolean|true|是否显示清除按钮|可选|true, false|
 |size|String|无|文本框尺寸|可选|large, small|
 |placeholder|String|无|文本框默认显示文字|可选||
-|type|String|date|显示类型|可选|year/month/date/week/datetime/daterange/datetimerange|
-|format|String|yyyy-MM-dd|时间日期格式化|可选|年yyyy, 月MM, 日dd, 小时HH, 分mm, 秒ss|
 |align|String|left|对齐方式|可选|left, center, right|
 |popper-class|String|无|下拉框类名|可选||
 |picker-options|Object|无|特殊选项，参考下表|可选||
 |range-separator|String|-|选择范围时的分隔符|可选||
 
-## Picker Options
+## TimePicker Options
 
 | 参数 | 类型 | 说明 | 默认 | 可选值 |
 |---|---|---|---|---|
-|shortcuts|object[]|设置快捷选项，用法参考demo或下表|无||
-|disabledDate|Function|设置禁用日期，参数为当前日期，要求返回Boolean|||
-|firstDayOfWeek|Number|周起始日|7|1到7|
+|selectableRange|String/Array|可选时间段，例如`'18:30:00 - 20:30:00'`或者传入数组`['09:30:00 - 12:00:00', '14:30:00 - 18:30:00']`|无||
+|format|String|时间格式化(TimePicker)||小时：HH，分：mm，秒：ss|
 
-## Shortcuts
-
-| 参数 | 类型 | 说明 | 默认 | 可选值 |
-|---|---|---|---|---|
-|text|String|标题文本|无||
-|onClick|Function|选中后的回调参数，参数是vm, 可通过触发`pick`事件设置选择器的值。例如`vm.$emit('pick', new Date())`|无||
 
 ## Timepicker Events
 |事件名|说明|返回值|设置属性|

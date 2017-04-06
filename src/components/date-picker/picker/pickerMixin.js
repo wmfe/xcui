@@ -15,7 +15,6 @@ const NewPopper = {
     beforeDestroy: Popper.beforeDestroy
 };
 
-let RANGE_SEPARATOR = ' - ';
 const DEFAULT_FORMATS = {
     date: 'yyyy-MM-dd',
     month: 'yyyy-MM',
@@ -44,112 +43,7 @@ const DATE_FORMATTER = function (value, format) {
 const DATE_PARSER = function (text, format) {
     return parseDate(text, format);
 };
-const RANGE_FORMATTER = function (value, format) {
-    if (Array.isArray(value) && value.length === 2) {
-        const start = value[0];
-        const end = value[1];
 
-        if (start && end) {
-            return formatDate(start, format) + RANGE_SEPARATOR + formatDate(end, format);
-        }
-    }
-    return '';
-};
-const RANGE_PARSER = function (text, format) {
-    const array = text.split(RANGE_SEPARATOR);
-    if (array.length === 2) {
-        const range1 = array[0];
-        const range2 = array[1];
-
-        return [parseDate(range1, format), parseDate(range2, format)];
-    }
-    return [];
-};
-const TYPE_VALUE_RESOLVER_MAP = {
-    default: {
-        formatter(value) {
-            if (!value) {
-                return '';
-            }
-            return '' + value;
-        },
-        parser(text) {
-            if (text === undefined || text === '') {
-                return null;
-            }
-            return text;
-        }
-    },
-    week: {
-        formatter(value) {
-            if (value instanceof Date) {
-                const weekNumber = getWeekNumber(value);
-                return value.getFullYear() + 'w' + (weekNumber > 9 ? weekNumber : '0' + weekNumber);
-            }
-            return value;
-        },
-        parser(text) {
-            const array = (text || '').split('w');
-            if (array.length === 2) {
-                const year = Number(array[0]);
-                const month = Number(array[1]);
-
-                if (!isNaN(year) && !isNaN(month) && month < 54) {
-                    return text;
-                }
-            }
-            return null;
-        }
-    },
-    date: {
-        formatter: DATE_FORMATTER,
-        parser: DATE_PARSER
-    },
-    datetime: {
-        formatter: DATE_FORMATTER,
-        parser: DATE_PARSER
-    },
-    daterange: {
-        formatter: RANGE_FORMATTER,
-        parser: RANGE_PARSER
-    },
-    datetimerange: {
-        formatter: RANGE_FORMATTER,
-        parser: RANGE_PARSER
-    },
-    timerange: {
-        formatter: RANGE_FORMATTER,
-        parser: RANGE_PARSER
-    },
-    time: {
-        formatter: DATE_FORMATTER,
-        parser: DATE_PARSER
-    },
-    month: {
-        formatter: DATE_FORMATTER,
-        parser: DATE_PARSER
-    },
-    year: {
-        formatter: DATE_FORMATTER,
-        parser: DATE_PARSER
-    },
-    number: {
-        formatter(value) {
-            if (!value) {
-                return '';
-            }
-            return '' + value;
-        },
-        parser(text) {
-            let result = Number(text);
-
-            if (!isNaN(text)) {
-                return result;
-            }
-            return null;
-        }
-    }
-};
 const PLACEMENT_MAP = {
     left: 'bottom-start',
     center: 'bottom-center',
@@ -198,7 +92,92 @@ export default {
             showClose: false,
             currentValue: '',
             pickerDateForTime: '',
-            pickerValueForTimeRange: ''
+            pickerValueForTimeRange: '',
+            TYPE_VALUE_RESOLVER_MAP: {
+                default: {
+                    formatter(value) {
+                        if (!value) {
+                            return '';
+                        }
+                        return '' + value;
+                    },
+                    parser(text) {
+                        if (text === undefined || text === '') {
+                            return null;
+                        }
+                        return text;
+                    }
+                },
+                week: {
+                    formatter(value) {
+                        if (value instanceof Date) {
+                            const weekNumber = getWeekNumber(value);
+                            return value.getFullYear() + 'w' + (weekNumber > 9 ? weekNumber : '0' + weekNumber);
+                        }
+                        return value;
+                    },
+                    parser(text) {
+                        const array = (text || '').split('w');
+                        if (array.length === 2) {
+                            const year = Number(array[0]);
+                            const month = Number(array[1]);
+
+                            if (!isNaN(year) && !isNaN(month) && month < 54) {
+                                return text;
+                            }
+                        }
+                        return null;
+                    }
+                },
+                date: {
+                    formatter: DATE_FORMATTER,
+                    parser: DATE_PARSER
+                },
+                datetime: {
+                    formatter: DATE_FORMATTER,
+                    parser: DATE_PARSER
+                },
+                daterange: {
+                    formatter: this.RANGE_FORMATTER,
+                    parser: this.RANGE_PARSER
+                },
+                datetimerange: {
+                    formatter: this.RANGE_FORMATTER,
+                    parser: this.RANGE_PARSER
+                },
+                timerange: {
+                    formatter: this.RANGE_FORMATTER,
+                    parser: this.RANGE_PARSER
+                },
+                time: {
+                    formatter: DATE_FORMATTER,
+                    parser: DATE_PARSER
+                },
+                month: {
+                    formatter: DATE_FORMATTER,
+                    parser: DATE_PARSER
+                },
+                year: {
+                    formatter: DATE_FORMATTER,
+                    parser: DATE_PARSER
+                },
+                number: {
+                    formatter(value) {
+                        if (!value) {
+                            return '';
+                        }
+                        return '' + value;
+                    },
+                    parser(text) {
+                        let result = Number(text);
+
+                        if (!isNaN(text)) {
+                            return result;
+                        }
+                        return null;
+                    }
+                }
+            }
         };
     },
 
@@ -296,8 +275,8 @@ export default {
                     return;
                 }
                 const formatter = (
-                    TYPE_VALUE_RESOLVER_MAP[this.type]
-                    || TYPE_VALUE_RESOLVER_MAP.default
+                    this.TYPE_VALUE_RESOLVER_MAP[this.type]
+                    || this.TYPE_VALUE_RESOLVER_MAP.default
                 ).formatter;
                 const format = DEFAULT_FORMATS[this.type];
 
@@ -308,8 +287,8 @@ export default {
                 if (value) {
                     const type = this.type;
                     const parser = (
-                        TYPE_VALUE_RESOLVER_MAP.type
-                        || TYPE_VALUE_RESOLVER_MAP.default
+                        this.TYPE_VALUE_RESOLVER_MAP.type
+                        || this.TYPE_VALUE_RESOLVER_MAP.default
                     ).parser;
                     const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
 
@@ -326,8 +305,6 @@ export default {
     },
 
     created() {
-        RANGE_SEPARATOR = this.rangeSeparator;
-        // vue-popper
         this.popperOptions = {
             boundariesPadding: 0,
             gpuAcceleration: false
@@ -434,7 +411,7 @@ export default {
 
                     if (options && options.selectableRange) {
                         let ranges = options.selectableRange;
-                        const parser = TYPE_VALUE_RESOLVER_MAP.datetimerange.parser;
+                        const parser = this.TYPE_VALUE_RESOLVER_MAP.datetimerange.parser;
                         const format = DEFAULT_FORMATS.timerange;
 
                         ranges = Array.isArray(ranges) ? ranges : [ranges];
@@ -508,6 +485,28 @@ export default {
             else {
                 this.pickerVisible = this.picker.visible = visible;
             }
+        },
+
+        RANGE_FORMATTER: function (value, format) {
+            if (Array.isArray(value) && value.length === 2) {
+                const start = value[0];
+                const end = value[1];
+
+                if (start && end) {
+                    return formatDate(start, format) + this.rangeSeparator + formatDate(end, format);
+                }
+            }
+            return '';
+        },
+        RANGE_PARSER: function (text, format) {
+            const array = text.split(this.rangeSeparator);
+            if (array.length === 2) {
+                const range1 = array[0];
+                const range2 = array[1];
+
+                return [parseDate(range1, format), parseDate(range2, format)];
+            }
+            return [];
         }
     }
 };

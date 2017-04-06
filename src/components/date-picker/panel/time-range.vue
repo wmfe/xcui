@@ -46,7 +46,7 @@
         <button
           type="button"
           class="x-time-panel-btn cancel"
-          @click="handleCancel()">{{ t('x.datepicker.cancel') }}</button>
+          @click="handleCancel()">{{ t('x.datepicker.clear') }}</button>
         <button
           type="button"
           class="x-time-panel-btn confirm"

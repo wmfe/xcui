@@ -87,7 +87,7 @@
 
 <tpl>
     <div style="width: 350px">
-        <x-date-picker type="datetimerange" v-model="model3" placeholder="选择日期时间范围">
+        <x-date-picker type="datetimerange" range-separator=" 至 " v-model="model3" placeholder="选择日期时间范围">
         </x-date-picker>
     </div>
 </tpl>
@@ -166,7 +166,7 @@
 
 | 名字 | 类型 | 默认 | 描述  | 是否必选 | 可选值 |
 |-----|-----|-----|-----|----|----|
-|v-model|String|无|绑定值|是||
+|v-model|String, Array[Date, Date](选择范围时)|无|绑定值|是||
 |readonly|Boolean|false|是否完全只读|可选||
 |disabled|Boolean|false|是否禁用|可选|true, false|
 |editable|Boolean|false|文本框可输入|可选|true, false|
