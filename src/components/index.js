@@ -1,7 +1,7 @@
 /**
  * @file index.js
  */
-import DatePicker from './date-picker/index';
+import DatePicker from './date-picker';
 import TimePicker from './time-picker';
 import TimeSelect from './time-select';
 import Input from './input';
@@ -12,12 +12,12 @@ import CheckboxGroup from './checkbox-group';
 import Radio from './radio';
 import RadioButton from './radio-button';
 import RadioGroup from './radio-group';
-import Loading from './loading/index.js';
-import Message from './message/index.js';
-import Notice from './notice/index.js';
+import Loading from './loading';
+import Message from './message';
+import Notice from './notice';
 import Modal from './modal';
-import Dialog from './dialog/index.js';
-import PageLoading from './pageloading/index.js';
+import Dialog from './dialog';
+import PageLoading from './pageloading';
 import Pagination from './pagination';
 import Popover from './popover';
 import Progress from './progress';
@@ -119,4 +119,4 @@ const xcui = {
     install
 };
 
-module.exports = xcui;
+export default xcui;

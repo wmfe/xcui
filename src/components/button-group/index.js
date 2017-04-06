@@ -1,3 +1,3 @@
-import ButtonGroup from '../button/button-group';
+import ButtonGroup from '../button/src/button-group';
 
 export default ButtonGroup;

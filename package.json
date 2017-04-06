@@ -28,7 +28,7 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "site": "rimraf site && webpack -p --progress --hide-modules --colors --config build/webpack.site.conf.js",
-    "build": "rimraf dist/* && webpack --progress --hide-modules --colors --config build/webpack.npm.conf.js && node build/build-components"
+    "build": "rimraf dist/* && cross-env NODE_ENV=production webpack --progress --hide-modules --colors --config build/webpack.npm.conf.js && node build/build-components"
   },
   "main": "dist/xcui.js",
   "dependencies": {

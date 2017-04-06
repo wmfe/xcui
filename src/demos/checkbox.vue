@@ -15,6 +15,16 @@
     <x-checkbox v-model="checked0">备选项</x-checkbox>
 </tpl>
 
+<script>
+    export default {
+        data() {
+            return {
+                checked0: false,
+            };
+        }
+    };
+</script>
+
 ```
 
 :::
@@ -29,6 +39,17 @@
     <x-checkbox v-model="checked2" :disabled="true">备选项</x-checkbox>
     <x-checkbox v-model="checked3" :disabled="true">备选项</x-checkbox>
 </tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                checked2: true,
+                checked3: false
+            };
+        }
+    };
+</script>
 
 ```
 
@@ -52,6 +73,16 @@
         选中的值数组： {{checklist}}
     </p>
 </tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                checklist: ['已完成', '已分配']
+            };
+        }
+    };
+</script>
 
 ```
 
@@ -104,6 +135,7 @@
 ## Checkbox Props
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
 |-----|-----|-----|-----|----|----|----|
+|v-model|Boolean||绑定值|单选框时必选|true,false|
 |value|String, Number, Boolean|无||仅在使用多选框组合时起作用，此场景下必填，指定当前选项的`value`值，会自动判断是否选中||
 |disabled|Boolean|false|禁用状态|可选|`true`, `false`|
 |interminate|Boolean|false|不确定状态|可选||
@@ -119,6 +151,11 @@
 |名称|说明|
 |---|---|
 |default|默认内容，放在`<x-checkbox></x-checkbox>`之间即可|
+
+## CheckboxGroup Props
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
+|-----|-----|-----|-----|----|----|----|
+|v-model|Array||绑定值|必选||
 
 ## CheckboxGroup Events
 |事件名|说明|返回值|设置属性|

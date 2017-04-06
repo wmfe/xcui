@@ -1,4 +1,4 @@
-import Pageloading from './pageloading.vue';
+import Pageloading from './src/pageloading.vue';
 
 const XPageLoading = {
     install(Vue) {
