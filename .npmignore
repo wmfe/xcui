@@ -2,8 +2,8 @@ build/
 node_modules/
 examples/
 src/
+site/
 test/
-buildSite.sh
 yarn.lock
 favicon.ico
 logo.png

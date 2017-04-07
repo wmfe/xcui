@@ -1,0 +1,147 @@
+@tag-prefix-cls: ~"@{xcui-prefix}-tag";
+
+.@{tag-prefix-cls} {
+    display: inline-block;
+    line-height: 27px;
+    height: 27px;
+    border-radius: 4px;
+    border: 1px solid #e9e9e9;
+    background: #f7f7f7;
+    font-size: @font-size-small;
+    vertical-align: middle;
+    opacity: 1;
+    margin: 2px 4px 2px 0;
+    cursor: pointer;
+    color: rgba(0, 0, 0, .65);
+
+    &:hover {
+        opacity: .85
+    }
+
+    .@{tag-prefix-cls}-text {
+        padding:0 8px;
+    }
+
+    &-cross {
+        position: relative;
+        top: 1px;
+        margin-left: 5px;
+        padding-right: 10px;
+    }
+
+    &-checkable {
+        transition: all 0.2s ease;
+        &.@{tag-prefix-cls}-checked {
+            background: @brand-primary;
+            color: @white;
+            border: 1px solid @brand-primary;
+        }
+    }
+    
+    &-has-color {
+        color: @white;
+        border: transparent;
+        &.@{tag-prefix-cls}-cross {
+            color: @white;
+        }
+    }
+    
+    &-pink {
+        color: #f5317f;
+        background: #fdd8e7;
+        border-color: #fdd8e7
+    }
+
+    &-pink-inverse {
+        background: #f5317f;
+        border-color: #f5317f;
+        color: @white
+    }
+
+    &-red {
+        color: #f04134;
+        background: #fcdbd9;
+        border-color: #fcdbd9
+    }
+
+    &-red-inverse {
+        background: #f04134;
+        border-color: #f04134;
+        color: #fff
+    }
+
+    &-orange {
+        color: #f56a00;
+        background: #fde3cf;
+        border-color: #fde3cf
+    }
+
+    &-orange-inverse {
+        background: #f56a00;
+        border-color: #f56a00;
+        color: #fff
+    }
+
+    &-yellow {
+        color: #ffbf00;
+        background: #fff3cf;
+        border-color: #fff3cf
+    }
+
+    &-yellow-inverse {
+        background: #ffbf00;
+        border-color: #ffbf00;
+        color: #fff
+    }
+
+    &-cyan {
+        color: #00a2ae;
+        background: #cfedf0;
+        border-color: #cfedf0
+    }
+
+    &-cyan-inverse {
+        background: #00a2ae;
+        border-color: #00a2ae;
+        color: #fff
+    }
+
+    &-green {
+        color: #00a854;
+        background: #cfefdf;
+        border-color: #cfefdf
+    }
+
+    &-green-inverse {
+        background: #00a854;
+        border-color: #00a854;
+        color: #fff
+    }
+
+    &-blue {
+        color: #108ee9;
+        background: #d2eafb;
+        border-color: #d2eafb
+    }
+
+    &-blue-inverse {
+        background: #108ee9;
+        border-color: #108ee9;
+        color: #fff
+    }
+
+    &-purple {
+        color: #7265e6;
+        background: #e4e2fa;
+        border-color: #e4e2fa
+    }
+
+    &-purple-inverse {
+        background: #7265e6;
+        border-color: #7265e6;
+        color: #fff
+    }
+}
+
+
+    

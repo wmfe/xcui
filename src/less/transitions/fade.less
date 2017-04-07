@@ -1,0 +1,29 @@
+.fade-motion(@className, @keyframeName) {
+    .@{className}-enter-active {
+        animation: @animation-duration-base ~"@{keyframeName}In" @ease-in-out;
+    }
+    .@{className}-leave-active {
+        animation: @animation-duration-base ~"@{keyframeName}Out" @ease-in-out;
+    }
+}
+
+.fade-motion(fade, xFade);
+
+@keyframes xFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes xFadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+

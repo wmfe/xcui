@@ -7,6 +7,10 @@ var projectRoot = path.resolve(__dirname, '../');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var themeUrl = require('../package.json').theme;
 var theme  = require(path.join(__dirname, '../',themeUrl));
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+
+
 module.exports = {
     entry: {
         app: './src/main.js'
@@ -79,6 +83,10 @@ module.exports = {
         formatter: require('eslint-friendly-formatter')
     },
     plugins: [
-        new ExtractTextPlugin("bootstrap.css")
+        new ExtractTextPlugin("app.css"),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'src/index.html'
+        })
     ]
 };

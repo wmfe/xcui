@@ -1,0 +1,137 @@
+@select-prefix-cls: ~"@{xcui-prefix}-select";
+
+.@{select-prefix-cls} {
+    & .@{xcui-prefix}-input{
+        &[readonly] {
+            background-color: @body-bg;
+        }
+        &[disabled] {
+            background-color: @input-bg-disabled;
+        }
+    }
+    
+    &.is-focus {
+        & .@{xcui-prefix}-input{
+            border-color: @brand-primary;
+            outline: 0;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(70, 195, 193, 0.6);
+        }
+    }
+
+    & .@{xcui-prefix}-input-icon {
+        transition: transform .3s;
+        &.is-reversed {
+            transform: rotateZ(180deg);
+        }
+        &:hover {
+            +.@{xcui-prefix}-input {
+                border-color: @brand-primary;
+                outline: 0;
+            }
+        }
+    }
+
+    &-dropdown {
+        margin: 5px 0;
+        padding: 5px 0;
+        box-shadow: @drop-down-boxshadow;
+        max-height: 280px;
+        overflow: auto;
+        border: 1px solid @border-color-base;
+        border-radius: 2px;
+        box-sizing: border-box;
+        background-color: @body-bg;
+        &.is-multiple {
+            .@{select-prefix-cls}-item {
+                &.hover{
+                    background: @drop-down-hover-bg;
+                }
+                &:hover {
+                    &:after {
+                        font-family: Ionicons;
+                        content: "\f122";
+                        position: absolute;
+                        right: 10px;
+                        font-size: 11px;
+                        color: darken(@drop-down-hover-bg, 10%);
+                    }
+                }
+                &.@{select-prefix-cls}-item-selected {
+                    font-size: @font-size-base;
+                    font-weight: 500;
+                    color: @drop-down-text-color;
+                    background-color: @drop-down-selected-bg;
+                    
+                    &:after {
+                        font-family: Ionicons;
+                        content: "\f122";
+                        position: absolute;
+                        right: 10px;
+                        font-size: 11px;
+                        color: @brand-primary;
+                    }
+                }
+            }
+        }
+        
+    }
+
+    &-item {
+        font-size: @font-size-base;
+        color: @drop-down-text-color;
+        list-style: none;
+        cursor: pointer;
+        line-height: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+        padding: 10px 15px;
+        &:hover, &.hover{
+            background: @drop-down-hover-bg;
+            // .transition(~"all .3s ease");
+        }
+        &.@{select-prefix-cls}-item-selected {
+            background: @brand-primary;
+            color: #fff;
+            // transition: background .3s cubic-bezier(.645,.045,.355,1);
+            &.is-limit-reached {
+                cursor: pointer;
+            }
+        }
+        &.is-disabled {
+            cursor: @cursor-disabled;
+            color: @disabled-color;
+            background-color: @body-bg;
+            &:hover {
+                background: @body-bg;
+            }
+        }
+    }
+
+    &-list {
+        margin: 0;
+        padding: 0;
+    }
+
+    &-group {
+        margin: 0;
+        padding: 0;
+        &-wrap {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        &-title{
+            padding-left: 10px;
+            font-size: @select-group-title-size;
+            color: @select-group-color;
+            height: @select-group-height;
+            line-height: @select-group-height;
+        }
+        & .@{select-prefix-cls}-item {
+            padding-left: 20px;
+        }
+    }
+
+}

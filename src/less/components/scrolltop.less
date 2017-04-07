@@ -1,0 +1,42 @@
+@scrolltop-prefix-cls: ~"@{xcui-prefix}-scrolltop";
+
+.@{scrolltop-prefix-cls} {
+    .@{scrolltop-prefix-cls} {
+        &-init{
+            z-index: @scrolltop-zindex;
+            cursor: pointer;
+            width: auto;
+            display: inline-block;
+        }
+        &-corner{
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
+        &-bottom{
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+        }
+        &-right{
+            position: fixed;
+            top: 30%;
+            right: 10px;
+        }
+        &-area{
+            width: 100px;
+            height: 100px;
+            font-size: 50px;
+            color: @brand-primary;
+            opacity: .85;
+            z-index: 1;
+            border: none;
+            &:hover{
+                opacity: 1;
+            }
+        }
+        &-dropin{
+            border: none !important;
+        }
+    }
+}

@@ -23,19 +23,12 @@ fi
 GitAddSite2_0 () {
     git clone -b gh-pages https://$WMFE_ROBOT_TOKEN@github.com/wmfe/xcui.git gh-pages
     cd gh-pages
-    if [ -d "2.0" ]; then
-        git rm -rf 2.0
-    fi
-    mkdir -p 2.0/static
     if [ ! -f "../site/app.js" ]; then
         exit 1
     else
-        cp ../site/app.js ./2.0/static/app.js
+        cp -r ../site/* ./
     fi
-    cp ../src/index.html ./2.0/index.html
-    sed -i '15i\    <script type="text/javascript" src="./static/app.js"></script>' ./2.0/index.html
-    cp -r ../src/assets/* ./2.0/static/
-    git add 2.0
+    git add --all
 }
 
 GitAddSite2_0

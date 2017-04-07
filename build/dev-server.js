@@ -5,7 +5,6 @@
 var express = require('express');
 var webpack = require('webpack');
 var config = require('./webpack.dev.conf');
-var http = require('http');
 var app = express();
 var compiler = webpack(config);
 

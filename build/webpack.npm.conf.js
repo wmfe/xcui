@@ -9,6 +9,7 @@ var themeUrl = require('../package.json').theme;
 var theme  = require(path.join(__dirname, '../',themeUrl));
 // naming output files with hashes for better caching.
 // dist/index.html will be auto-generated with correct URLs.
+config.entry['xcui'] = './src/components/index.js';
 config.output.filename = '[name].js';
 config.output.chunkFilename = '[id].[chunkhash].js';
 
@@ -33,11 +34,11 @@ config.plugins = (config.plugins || []).concat([
             NODE_ENV: '"production"'
         }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-        compress: {
-            warnings: false
-        }
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //     compress: {
+    //         warnings: false
+    //     }
+    // }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new ExtractTextPlugin('xcui.css')
 ]);

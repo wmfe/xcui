@@ -1,66 +1,132 @@
 <template lang="md">
-# Pagination 页码
+# Pagination 分页
 
-## 使用场景
+当数据较多时，使用页码分解数据为多页，通过翻页来展示数据。
 
-- 表格或其他需要分页的页面元素。
-- 支持两种类型的页码： `Mini` 迷你页码，一般用于元素顶部， `Standard` 标准页码, 一般用于元素底部；
+## 标准尺寸
 
-# Demo
+::: demo 基本使用，通过处理`change-current`事件来处理页码改变后的当前页码数。`change-current`, `total`, `current-page-num`均为必选参数。
 
-<demo>
-    <example title="两种翻页展示">
-        <div class="row">
-            <div class="col-md-12 text-right">
-                <xcui-pagination
-                    v-show="total > 0"
-                    type="mini"
-                    @go-to-page="goToPage"
-                    :current-page-num="currentPageNum"
-                    :total="total"
-                    :page-size="pageSize"
-                    ></xcui-pagination>
-            </div>
-        </div>
-        <table class="table table-hover table-condensed">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                </tr>
-            </thead>
-            <tr v-for="item in list">
-                <td v-text="item.id"></td>
-                <td v-text="item.name"></td>
-            </tr>
-        </table>
-        <xcui-pagination
-            v-show="total > 0"
-            @go-to-page="goToPage"
-            @change-pagesize="onChangeSize"
-            :current-page-num="currentPageNum"
-            :total="total"
-            :page-size="pageSize"
-            ></xcui-pagination>
-    </example>
-</demo>
+```html
+
+<tpl>
+    <x-pagination
+        @change-current="goToPage"
+        :current-page-num="num1"
+        :total="total"
+        :page-size="pageSize">
+    </x-pagination>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                num1: 1,
+                pageSize: 10,
+                total: 100
+            };
+        },
+        methods: {
+            goToPage(pageNo, oldPageNo) {
+                this.num1 = pageNo;
+            }
+        }
+    };
+</script>
+
+```
+:::
+
+## 标准尺寸下的其他挂件
+
+
+
+::: demo 通过设置`show-sizer`, `show-total`来控制是否显示分页挂件和总页数挂件。`sizer`可用时需要通过`change-pagesize`事件来处理`page-size`。
+
+```html
+
+<tpl>
+    <x-pagination
+        show-sizer
+        show-total
+        @change-current="goToPage2"
+        @change-pagesize="onChangeSize"
+        :current-page-num="num2"
+        :total="total"
+        :page-size="pageSize">
+    </x-pagination>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                num2: 1,
+                pageSize: 10,
+                total: 100
+            };
+        },
+        methods: {
+            goToPage2(pageNo, oldPageNo) {
+                this.num2 = pageNo;
+            },
+            onChangeSize(pageSize) {
+                this.pageSize = pageSize;
+                this.goToPage2(1);// 切换到第一页
+            }
+        }
+    };
+</script>
+
+```
+
+:::
+
+
+## 迷你尺寸
+
+::: demo 迷你尺寸可以放在元素顶部，或者在页面空间受到限制时使用。设置`type="mini"`即可。
+
+```html
+
+<tpl>
+    <x-pagination
+        show-total
+        type="mini"
+        @change-current="goToPage"
+        :current-page-num="num1"
+        :total="total"
+        :page-size="pageSize">
+    </x-pagination>
+</tpl>
+
+```
+
+:::
+
+        
 
 ## Props
-| 名字           | 类型    | 是否必选 | 默认              | 可选范围            | 描述                                                              |
-|----------------|---------|----------|-------------------|---------------------|-------------------------------------------------------------------|
-| type           | String  | 否       | standard          | standard,mini       | 控制样式选择                                                      |
-| currentPageNum | Number  | 否       | 1                 | > 0                 | 当前页码                                                          |
-| total          | Number  | 是       | 0                 | >= 0                | 总条数                                                            |
-| pageSize       | Number  | 否       | 20                | 取自`pageSizeRange` | 每页条数                                                          |
-| withPageSize   | Boolean | 否       | true              |                     | 是否展示`pageSize`设置挂件                                        |
-| pageSizeRange  | Array   | 否       | [10, 20, 50, 100] |                     | `pageSize`设置挂件的下拉菜单选项范围 `withPageSize`为 true 时生效 |
-| rangeLength    | Number  | 否       | 10                | > 1                 | 页码按钮的展示个数                                                |
 
-## Events
-| 名称           | 类型                      | 是否必选 | 描述                  |
-|----------------|---------------------------|----------|-----------------------|
-| goToPage       | function(pageNum){ ... }  | 是       | pageNum:跳转的页码    |
-| changePagesize | function(pageSize){ ... } | 否       | pageSize:每页展示条数 |
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
+|-----|-----|-----|-----|-----|-----|-----|
+|type| String| standard | 页码类型为标准或迷你| 可选 | standard,mini |
+|current-page-num| Number| 1 | 当前页码 | 必选 | |
+|total|Number|0|数据总条数|必选||
+|page-size|Number|20|每页条数|可选||
+|show-sizer|Boolean|false|是否显示每页条数挂件，标准模式下有效|可选|true, false|
+|show-total|Boolean|false|是否显示总条数挂件|可选|true, false|
+|page-size-range| Array | [10, 20, 50, 100] | 设置`sizer`的可选范围， `show-sizer`为`true`时生效 |可选||
+|range-length| Number | 5 | 页码按钮的展示个数  | 可选 | |
+
+
+##  Events
+|事件名|说明|返回值|设置属性|
+|---|---|---|---|
+|change-current|当前页码改变时触发|(pageNum, oldPageNum) pageNum:跳转的页码; oldPageNum: 上一个页码; |`@change-current`|
+|change-pagesize|每页展示条数改变时触发|(pageSize) pageSize:每页展示条数; |`@change-pagesize`|
+
 </template>
 
 <script>
@@ -68,40 +134,27 @@ export default {
     name: 'xcui-pagination-demo',
     data() {
         return {
-            currentPageNum: 1,
+            num1: 1,
+            num2: 1,
             pageSize: 10,
             list: [],
-            total: 0
+            total: 100
         };
     },
     methods: {
-        genId() {
-            return Math.floor(Math.random() * 100);
-        },
-        fetch(pageNo) {
-            return {
-                list: (new Array(this.pageSize).fill(undefined)).map((item) => {
-                    return {
-                        name: 'example',
-                        id: this.genId()
-                    };
-                }),
-                total: 55
-            };
-        },
         goToPage(pageNo, oldPageNo) {
-            const { list, total } = this.fetch(pageNo);
-            this.list = list;
-            this.total = total;
-            this.currentPageNum = pageNo;
+            this.num1 = pageNo;
+        },
+        goToPage2(pageNo, oldPageNo) {
+            this.num2 = pageNo;
         },
         onChangeSize(pageSize) {
             this.pageSize = pageSize;// 同步新页面
-            this.goToPage(1);// 切换到第一页
+            this.goToPage2(1);// 切换到第一页
         }
     },
     mounted() {
-        this.goToPage(1);
+        // this.goToPage(1);
     }
 };
 </script>

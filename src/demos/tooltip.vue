@@ -1,72 +1,218 @@
 <template lang="md">
-# Tooltip 工具提示
+# Tooltip 文字提示
 
-## 使用场景
+鼠标移入则显示提示，移出消失，气泡浮层不承载过于复杂的文本和操作。
 
-- 需要hover或click时悬浮提示更多详情
-- 支持自定义提示框样式
-- 支持两种悬浮框过渡样式:  `scale` 和 `fadein`
+可用来代替系统默认的 `title` 提示，提供一个按钮/文字/操作的文案解释。
 
-## DEMO
-<demo>
-    <example title="Popover">
-        <xcui-tooltip effect="fadein" placement="bottom" title="This is Title" :content="htmlContent">
-          <button class="btn btn-default ">Hover tooltip on bottom</button>
-        </xcui-tooltip>
-        <xcui-tooltip effect="scale" placement="top" title="This is Title" content="Tooltip on left">
-          <button class="btn btn-default ">Hover tooltip on left</button>
-        </xcui-tooltip>
-        <xcui-tooltip effect="fadein" placement="top" title="This is Title"  trigger="click"  content="Tooltip on top">
-          <button class="btn btn-default "> Click tooltip on top</button>
-        </xcui-tooltip>
-        <xcui-tooltip effect="scale" placement="right" title="This is Title" trigger="click"  :title-class="'title-class'" :content-class="'content-class'" content="Tooltip on right">
-          <button class="btn btn-default ">Click tooltip on right</button>
-        </xcui-tooltip>
-    </example>
-</demo>
+## 触发工具提示的方式
+
+::: demo 通过设置`trigger`属性来设置触发工具提示的方式，默认为`hover`。
+
+```html
+
+<tpl>
+    <x-tooltip content="Sample Text" title="Title">
+          <x-button class="btn">hover触发</x-button>
+    </x-tooltip>
+    <x-tooltip content="Sample Text" title="Title" trigger="click">
+          <x-button class="btn">click触发</x-button>
+    </x-tooltip>
+    <x-tooltip content="Sample Text" title="Title" trigger="focus">
+          <x-button class="btn">focus触发</x-button>
+    </x-tooltip>
+    <div style="margin-left: 15px; width: 180px; display:inline-block;">
+        <x-tooltip content="Sample Text" title="Title" trigger="focus">
+              <x-input placeholder="focus触发">focus触发</x-input>
+        </x-tooltip>
+    </div>
+</tpl>
+```
+
+:::
+
+
+## 文字提示的对齐方式
+
+::: demo Tooltip提供了四种展示方向`top`, `bottom` `left`, `right`和三种对齐位置`start`, `end`, 默认空。通过设置属性如`placement="top-start"`来控制文字提示的位置和对齐方式。
+
+```html
+
+<tpl>
+    <div class="box">
+        <div class="top">
+            <x-tooltip content="Sample Text" placement="top">
+                <x-button class="btn">上中</x-button>
+            </x-tooltip>
+            <x-tooltip content="Sample Text" placement="top-start">
+                <x-button class="btn">上左</x-button>
+            </x-tooltip>
+            <x-tooltip content="Sample Text" placement="top-end">
+                <x-button class="btn">上右</x-button>
+            </x-tooltip>
+        </div>
+        <div class="left">
+            <x-tooltip content="Sample Text" placement="left-start">
+                <x-button class="btn">左上</x-button>
+            </x-tooltip>
+            <x-tooltip content="Sample Text" placement="left">
+                <x-button class="btn">左中</x-button>
+            </x-tooltip>
+            <x-tooltip content="Sample Text" placement="left-end">
+                <x-button class="btn">左下</x-button>
+            </x-tooltip>
+        </div>
+        <div class="right">
+            <x-tooltip content="Sample Text" placement="right-start">
+                <x-button class="btn">右上</x-button>
+            </x-tooltip>
+            <x-tooltip content="Sample Text" placement="right">
+                <x-button class="btn">右中</x-button>
+            </x-tooltip>
+            <x-tooltip content="Sample Text" placement="right-end">
+                <x-button class="btn">右下</x-button>
+            </x-tooltip>
+        </div>
+        <div class="bottom">
+            <x-tooltip content="Sample Text" placement="bottom-start">
+                <x-button class="btn">下左</x-button>
+            </x-tooltip>
+            <x-tooltip content="Sample Text" placement="bottom">
+                <x-button class="btn">下中</x-button>
+            </x-tooltip>
+            <x-tooltip content="Sample Text" placement="bottom-end">
+                <x-button class="btn">下右</x-button>
+            </x-tooltip>
+        </div>
+    </div>
+</tpl>
+
+<style>
+    .box {
+        width: 400px;
+    }
+    .top {
+        text-align: center;
+    }
+    .left {
+        float: left;
+        width: 60px;
+    }
+    .right {
+        float: right;
+        width: 60px;
+    }
+    .bottom {
+        text-align: center;
+        clear: both;
+    }
+    .btn {
+        margin: 6px;
+    }
+</style>
+
+```
+
+:::
+
+
+## 展示更多内容
+
+::: demo 通过使用名为`content`的具名slot来往文字提示中填充更多信息。在使用此slot后`content`属性无效。
+
+```html
+
+<tpl>
+    <x-tooltip placement="top">
+        <div slot="content">这是第一行信息<br>这是第二行信息</div>
+        <x-button>展示多行信息</x-button>
+    </x-tooltip>
+</tpl>
+
+```
+
+:::
+
+## 自定义过渡效果
+
+::: demo 可通过设置`transition`属性来改变默认的过渡效果。
+
+```html
+
+<tpl>
+    <x-tooltip placement="top" transition="my-fade" content="Sample Text">
+        <x-button>自定义过渡效果</x-button>
+    </x-tooltip>
+</tpl>
+
+<style>
+    .my-fade-enter-active, .my-fade-leave-active {
+        transition: opacity .5s
+    }
+    .my-fade-enter, .my-fade-leave-to {
+        opacity: 0
+    }
+</style>
+
+```
+
+:::
+
 
 ## Props
-| 名字 | 类型 | 默认 | 描述 | 是否必选 |
-|-----|-----|-----|-----|----|
-|type|String|popover|提示类型|可选|
-|trigger|String|hover|悬浮触发方式|可选|
-|effect|String|scale|悬浮过渡样式|可选, scale/fadein|
-|placement | String| 空字符串|悬浮相对位置|必选|
-|title|String|空字符串|popover提示标题|可选|
-|content| String|空字符串|提示内容|可选|
-|classname|String|空字符串|自定义样式|可选|
-|tooltip-class|String|Object|tootip提示框样式|可选|
-|title-class|Object|Object|popover标题样式|可选|
-|content-class|Object|Object|popover内容样式|可选|
+
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
+|-----|-----|-----|-----|-----|-----|-----|
+|content|String|无|显示的内容|可选||
+|trigger|String|click|触发方式|可选|hover,focus,click|
+|placement|String|bottom|出现的位置|可选|top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end|
+|offset|Number|0|默认的偏移量|可选||
+|transition|String|popover-zoom|过渡效果名（如修改，需要自行增加相关css，具体见[Vue过渡系统](https://vuejs.org/v2/guide/transitions.html#CSS-Transitions)）|可选||
+|visible-arrow|Boolean|true|是否显示Tooltip箭头|可选|true, false|
+|open-delay|Number|200|延迟出现，单位是毫秒|可选||
+|popper-class|String|无|tooltip弹窗的类名|可选||
+
+
+## Slot
+
+|名称|说明|
+|---|---|
+|default|默认内容，放在`<x-tooltip></x-tooltip>`之间即可|
+|content|工具提示的内容|
+
+
 
 </template>
 
-</template>
-<script>
-export default {
-    data() {
-        return {
-            htmlContent: '<h3>This is h3</h3><h4>This is h4</h4>'
-        };
+<style lang="less">
+    .demo-tooltip {
+        .box {
+            width: 400px;
+        }
+        .top {
+            text-align: center;
+
+        }
+        .left {
+            float: left;
+            width: 60px;
+        }
+        .right {
+            float: right;
+            width: 60px;
+        }
+        .bottom {
+            text-align: center;
+            clear: both;
+        }
+        .btn {
+            margin: 6px;
+        }
     }
-};
-
-</script>
-<style>
-.container{
-    margin-top:100px;
-}
-.define-class{
-    background:#ffab47;
-    color:#fff;
-    width: 100px;
-}
-.title-class{
-    background:#46c3c1;
-    color:#fff;
-    width: 150px;
-}
-.content-class{
-    width: 150px;
-}
+    .my-fade-enter-active, .my-fade-leave-active {
+        transition: opacity .5s
+    }
+    .my-fade-enter, .my-fade-leave-to {
+        opacity: 0
+    }
 </style>

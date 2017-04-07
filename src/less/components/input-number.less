@@ -1,0 +1,77 @@
+@input-number-prefix-cls: ~"@{xcui-prefix}-input-number";
+
+.@{input-number-prefix-cls} {
+    display: inline-block;
+    overflow: hidden;
+    width: @input-number-width;
+    position: relative;
+    font-size: @font-size-base;
+    .@{xcui-prefix}-input{
+        display: block;
+        .appearance(none);
+    }
+    &.is-disabled{
+        .@{input-number-prefix-cls}-minus, .@{input-number-prefix-cls}-plus {
+            border-color: @input-number-disabled-color;
+            color: @input-number-disabled-color;
+            &:hover {
+                color: @input-number-disabled-color;
+                cursor: @cursor-disabled;
+            }
+        }
+    }
+    &-large {
+        width: @input-number-large-width;
+        .@{input-number-prefix-cls}-minus, .@{input-number-prefix-cls}-plus {
+            line-height: @input-height-large;
+            width: @input-height-large;
+            font-size: @font-size-large;
+        }
+        .@{input-number-prefix-cls}-minus {
+            right: (@input-height-large + 1);
+        }
+    }
+    &-small {
+        width: @input-number-small-width;
+        .@{input-number-prefix-cls}-minus, .@{input-number-prefix-cls}-plus {
+            line-height: @input-height-small;
+            width: @input-height-small;
+            font-size: @font-size-small;
+        }
+        .@{input-number-prefix-cls}-minus {
+            right: (@input-height-small + 1);
+        }
+    }
+}
+
+.@{input-number-prefix-cls}-minus, .@{input-number-prefix-cls}-plus {
+    height: auto;
+    border-left: 1px solid @input-border-color;
+    width: @input-height-base;
+    line-height: (@input-height-base - 2);
+    top: 1px;
+    text-align: center;
+    color: @input-number-btn-color;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    &:hover {
+        color: @input-number-btn-hover-color;
+        &:not(.is-disabled)~.@{xcui-prefix}-input-wrap .@{xcui-prefix}-input {
+            border-color: @input-number-btn-hover-color;
+        }
+    }
+    &.is-disabled{
+        color: @input-number-disabled-color;
+        cursor: @cursor-disabled;
+    }
+}
+
+.@{input-number-prefix-cls}-minus {
+    right: (@input-height-base + 1);
+}
+
+.@{input-number-prefix-cls}-plus {
+    right: 0;
+}
+

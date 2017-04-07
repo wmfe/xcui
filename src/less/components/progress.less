@@ -1,0 +1,125 @@
+@progress-prefix-cls: ~"@{xcui-prefix}-progress";
+
+.@{progress-prefix-cls} {
+    position: relative;
+    line-height: 1;
+
+    &-text {
+        font-size:@font-size-base;
+        color:rgba(0, 0, 0, .65);
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px;
+        line-height: 1;
+
+        i {
+          vertical-align: middle;
+          display: block;
+          font-size: 20px;
+        }
+    }
+
+    &.is-exception {
+        .@{progress-prefix-cls}-bar-inner {
+            background-color: @brand-danger;
+        }
+        .@{progress-prefix-cls}-text {
+            color: @brand-danger;
+        }
+    }
+    
+    &.is-success {
+        .@{progress-prefix-cls}-bar-inner {
+            background-color: @brand-success;
+        }
+        .@{progress-prefix-cls}-text {
+            color: @brand-success;
+        }
+    }
+
+    &-circle {
+        display: inline-block;
+        .@{progress-prefix-cls}-text {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            transform: translateY(-50%);
+            i {
+                vertical-align: middle;
+                display: inline-block;
+                font-size: 26px;
+            }
+        }
+    }
+
+    &-without-text {
+        .@{progress-prefix-cls}-text {
+            display: none;
+        }
+        .@{progress-prefix-cls}-bar {
+            padding-right: 0;
+            margin-right: 0;
+            display: block;
+        }
+    }
+
+    &-text-inside {
+        .@{progress-prefix-cls}-bar {
+            padding-right: 0;
+            margin-right: 0;
+        }
+    }
+
+    &-bar {
+        padding-right: 50px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 100%;
+        margin-right: -55px;
+        box-sizing: border-box;
+
+        &-outer {
+            height: 6px;
+            border-radius: 100px;
+            background-color: @gray-lighter;
+            overflow: hidden;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        &-inner {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            border-radius: 2px 0 0 2px;
+            background-color: @brand-info;
+            text-align: right;
+            border-radius: 100px;
+            line-height: 1;
+        }
+
+        &-innerText {
+            display: inline-block;
+            vertical-align: middle;
+            color: @white;
+            font-size: @font-size-small;
+            margin: 3px 5px;
+        }
+    }
+
+}
+
+
+@keyframes progress {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 32px 0;
+  }
+}
+

@@ -1,90 +1,120 @@
-<template>
+<template lang="md">
+# Suggestion 输入建议
 
-  # Suggestion 自动完成/建议
+用户在输入框中输入文字时，展示相关输入建议。
 
-  ## 使用场景
-  用户输入相关词语时进行输入建议(suggestions), 自动完成
 
-  # Demo
+## 基本使用：使用文本数组的数据源
 
-<demo>
-<example title="string数组 sugs:">
-  <div>constellation : {{constellation}}</div>
-  <div style="width:200px">
-    <xcui-suggestion
-      v-model="constellation"
-      id="constellation"
-      name="constellation"
-      placeholder="请输入星座"
-      :suggestions="constellationSuggestions">
-    </xcui-suggestion>
-  </div>
-</example>
-<example title="object数组 sugs:">
-    <div>city: {{city}}</div>
-    <div style="width:200px">
-        <xcui-suggestion v-model="city" id="city" name="city" placeholder="请输入城市" :suggestions="citySuggestions">
-        </xcui-suggestion>
-    </div>
-</example>
-<example title="远程sug，string数组 sugs:">
-  <div>requestWord: {{requestWord}}</div>
-  <div style="width:200px">
-      <xcui-suggestion placeholder=""
-                  :check=false
-                  v-model="requestWord"
-                  :suggestions="remoteSug"
-                  :input-callback="request">>
-      </xcui-suggestion>
-  </div>
-</example>
-<example title="远程sug，object数组 sugs:">
-    <div>requestWord2: {{requestWord2}}</div>
-    <div style="width:200px">
-            <xcui-suggestion placeholder=""
-                :check=false
-                v-model="requestWord2"
-                :suggestions="remoteSug2"
-                :input-callback="request2">
-            </xcui-suggestion>
-    </div>
-</example>
-</demo>
+::: demo 基本用法，建议列表为文本格式。设置`v-model`和`suggestion`属性即可。可以通过键盘的`上下方向键`和`回车键`来控制选择。清除按钮默认展示，可通过`allow-clear`属性将其关闭。
 
-## 数据格式支持
+```html
 
-组件支持两种`数据格式`：
-- Object:
+<tpl>
+    <x-suggestion v-model="state1" placeholder="请输入星座" :suggestions="sug1"></x-suggestion>
+    <p style="margin-top:15px;">选中的值：{{state1}}</p>
+</tpl>
 
-```
-[{
-    text:"北京",
-    value:"103"
-},{
-    text:"上海",
-    value:"131"
-},
-    ……
-]
-```
-- Array:
-
-```
-["北京","上海",……]
+<script>
+  export default {
+      data() {
+          return {
+              state1: {},
+              sug1: ['水瓶','双鱼','白羊','金牛','双子','巨蟹','狮子','处女','天秤','天蝎','射手','魔羯']
+          }
+      }
+  }
+</script>
 ```
 
-## 参数说明
-|参数|类型|双向|说明|
-| ------------- | ------------- | ----- | ----- |
-|id|String|   |input的id|
-|name|String|   |input的name属性|
-|className|String| |类名|
-|disabled|Boolean| |input的disabled属性|
-|placeholder|String| |input提示|
-|v-model|Object|是 | 双向绑定，输出如下格式：{text:[String], value:[String]}|
-|suggestions|Array| |sug list|
-|check|Boolean@default:false| |是否要做sug匹配，如果想用本组件实现远程sug，设为false|
-|inputCallback|Function| |input事件回调，可以本时机触发远程sug异步请求|
+:::
+
+## 使用Object数组格式的数据源
+
+::: demo 支持格式为`[{text:'text', value:'value'}, ...]` 的数据源。
+
+```html
+
+<tpl>
+    <x-suggestion v-model="state2" placeholder="请输入城市" :suggestions="sug2"></x-suggestion>
+    <p style="margin-top:15px;">选中的值：{{state2}}</p>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                state2: {},
+                sug2: [
+                    {text: '北京', value: '131'},
+                    {text: '上海', value: '289'},
+                    {text: '海口', value: '125'},
+                    {text: '三亚', value: '121'},
+                    {text: '杭州', value: '179'},
+                    {text: '成都', value: '75'},
+                    {text: '贵阳', value: '146'}
+                ]
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+## 使用远程（请求）数据的数据源
+
+::: demo 通过使用`input-callback`属性定义相关方法, 和`v-model` 绑定变量的`text`值，可以使用远程数据（例如，用`text`作为请求参数）。本例模拟远程数据。
+
+```html
+
+<tpl>
+    <x-suggestion v-model="state3" placeholder="请随意输入" :suggestions="sug3" :input-callback="request"></x-suggestion>
+    <p style="margin-top:15px;">选中的值：{{state3}}</p>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                state3: {},
+                sug3: []
+            }
+        },
+        methods: {
+            request() {
+                const v = this.state3.text;
+                this.sug3 = !v ? [] : [
+                    {text: v, value: 1},
+                    {text: v + v, value: 2},
+                    {text: v + v + v, value: 3},
+                    {text: v + v + v + v, value: 4}
+                ];
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+## Props
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
+|-----|-----|-----|-----|-----|-----|-----|
+|value|Object|无|和`v-model`的绑定值|必选||
+|placeholder|String|无|原生属性，输入框默认文本，用于提示|可选||
+|disabled|Boolean|false|是否禁用|可选||
+|suggestions|Array|[]|输入建议的数据源|必选||
+|inputCallback|Function|无|输入时的回调函数, 可用于触发远程请求|可选||
+|allowClear|Boolean|true|是否允许出现清除图标|可选|true, false|
+
+## Events
+
+|事件名|说明|返回值|设置属性|
+|---|---|---|---|
+|change|选中值改变时触发|当前选中值|`@change`|
 
 </template>
 
@@ -92,8 +122,24 @@
   export default {
       data() {
           return {
-              city: {},
-              citySuggestions: [
+              showHello: true,
+              state1: {},
+              sug1: [
+                  '水瓶',
+                  '双鱼',
+                  '白羊',
+                  '金牛',
+                  '双子',
+                  '巨蟹',
+                  '狮子',
+                  '处女',
+                  '天秤',
+                  '天蝎',
+                  '射手',
+                  '魔羯'
+              ],
+              state2: {},
+              sug2: [
                   {
                       text: '北京',
                       value: '131'
@@ -123,62 +169,21 @@
                       value: '146'
                   }
               ],
-              constellation: {},
-              constellationValue: '',
-              constellationSuggestions: [
-                  '水瓶',
-                  '双鱼',
-                  '白羊',
-                  '金牛',
-                  '双子',
-                  '巨蟹',
-                  '狮子',
-                  '处女',
-                  '天秤',
-                  '天蝎',
-                  '射手',
-                  '魔羯'
-              ],
-              requestWord: {},
-              remoteSug: [],
-              remoteUrl: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=window.bdsug.sug&wd=',
-              requestWord2: {},
-              requestValue2: '',
-              remoteSug2: [],
-              remoteUrl2: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=window.bdsug.sug2&wd='
+              state3: {},
+              sug3: []
           };
       },
       watch: {
       },
       methods: {
-          setSug(s) {
-              this.remoteSug = s;
-          },
-          setSug2(s) {
-              this.remoteSug2 = s.map((item, index) => {
-                  return {
-                      text: item,
-                      value: index
-                  };
-              });
-          },
           request() {
-              let url = this.remoteUrl + this.requestWord.text;
-              let script = document.createElement('script');
-              script.src = url;
-              document.body.appendChild(script);
-              script.onload = function (res) {
-                  document.body.removeChild(script);
-              };
-          },
-          request2() {
-              let url = this.remoteUrl2 + this.requestWord2.text;
-              let script = document.createElement('script');
-              script.src = url;
-              document.body.appendChild(script);
-              script.onload = function (res) {
-                  document.body.removeChild(script);
-              };
+              const v = this.state3.text;
+              this.sug3 = !v ? [] : [
+                  {text: v, value: 1},
+                  {text: v + v, value: 2},
+                  {text: v + v + v, value: 3},
+                  {text: v + v + v + v, value: 4}
+              ];  
           }
       },
       mounted() {
@@ -195,9 +200,3 @@
   };
 </script>
 
-<style lang="less" scoped>
-    .block-item {
-        margin:0 30px 50px;
-        float:left;
-    }
-</style>
