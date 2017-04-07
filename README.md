@@ -1,6 +1,6 @@
 # 关于XCUI
 
-[logo](https://raw.githubusercontent.com/wmfe/xcui/2.0/src/assets/xcui-logo.png)
+![logo](https://raw.githubusercontent.com/wmfe/xcui/2.0/src/assets/xcui-logo.png)
 
 [![CircleCI](https://img.shields.io/circleci/project/wmfe/xcui/2.0.svg)](https://circleci.com/gh/wmfe/xcui/tree/2.0)
 [![npm version](https://img.shields.io/npm/v/xcui.svg)](https://www.npmjs.com/package/xcui)
