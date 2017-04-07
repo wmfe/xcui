@@ -36,7 +36,6 @@ import Radio from './demos/radio';
 import Switch from './demos/switch';
 
 const router = new VueRouter({
-    mode: 'history',
     routes: [{
         path: '/',
         component: Home,
@@ -130,10 +129,11 @@ const router = new VueRouter({
                 component: Switch
             }
         ]
-    }],
-    scrollBehavior(to, from, savedPosition) {
-        return { x: 0, y: 0 };
-    }
+    }]
+});
+
+router.afterEach(route => {
+    window.scrollTo(0, 0);
 });
 
 export default router;
