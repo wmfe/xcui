@@ -9,12 +9,12 @@ var theme  = require(path.join(__dirname, '../',themeUrl));
 
 module.exports = {
     entry: {
-        'xcui': './src/components/index.js'
     },
     output: {
         path: path.resolve(__dirname, '../dist'),
         publicPath: './',
-        filename: 'xcui.js',
+        filename: '[name].js',
+        // library: 'xcui',
         libraryTarget: 'umd'
     },
     resolve: {

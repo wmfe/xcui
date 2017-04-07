@@ -13,6 +13,9 @@ config.plugins = (config.plugins || []).concat([
     }),
     new FaviconsWebpackPlugin({
         logo: './src/assets/favicon.png',
+        prefix: 'icons/',
+        emitStats: false,
+        persistentCache: false,
         icons: {
               android: false,
               appleIcon: false,
