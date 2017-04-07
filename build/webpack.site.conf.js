@@ -6,6 +6,8 @@ var config = require('./webpack.base.conf');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
+config.output.publicPath = process.env.NODE_ENV !== 'production' ? '/' : '/xcui/';
+
 config.plugins = (config.plugins || []).concat([
     new HtmlWebpackPlugin({
         filename: 'index.html',
