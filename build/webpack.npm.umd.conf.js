@@ -12,7 +12,6 @@ var theme  = require(path.join(__dirname, '../',themeUrl));
 config.entry['xcui.umd'] = './src/components/index.umd.js';
 config.output.filename = '[name].js';
 config.output.chunkFilename = '[id].[chunkhash].js';
-config.output.library = 'xcui';
 
 
 var SOURCE_MAP = false;
