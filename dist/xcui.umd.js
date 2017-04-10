@@ -3,10 +3,10 @@
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
-	else if(typeof exports === 'object')
-		exports["xcui"] = factory();
-	else
-		root["xcui"] = factory();
+	else {
+		var a = factory();
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -10804,7 +10804,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 		"name": "xcui",
-		"version": "2.0.0-rc-1",
+		"version": "2.0.0-rc-2",
 		"main": "dist/xcui.js",
 		"engines": {
 			"node": ">=5.10.0"
