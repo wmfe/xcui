@@ -10816,7 +10816,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 		"name": "xcui",
-		"version": "2.0.0-rc-1",
+		"version": "2.0.0-rc-2",
 		"main": "dist/xcui.js",
 		"engines": {
 			"node": ">=5.10.0"
@@ -10843,7 +10843,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 		"scripts": {
 			"dev": "node build/dev-server.js",
-			"site": "rimraf site && webpack -p --progress --hide-modules --colors --config build/webpack.site.conf.js",
+			"site": "rimraf site && cross-env NODE_ENV=production webpack -p --progress --hide-modules --colors --config build/webpack.site.conf.js",
+			"site:local": "rimraf site && webpack -p --progress --hide-modules --colors --config build/webpack.site.conf.js",
 			"build": "rimraf dist/* && npm run build:umd && npm run build:esmodule",
 			"build:esmodule": "cross-env NODE_ENV=production webpack --progress --hide-modules --colors --config build/webpack.npm.conf.js",
 			"build:umd": "cross-env NODE_ENV=production webpack --progress --hide-modules --colors --config build/webpack.npm.umd.conf.js",
