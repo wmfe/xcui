@@ -22,5 +22,13 @@
             background-color: @datepicker-active-color !important;
             color: @white;
         }
+
+        &.disabled {
+            .cell {
+                background-color: @disabled-bg;
+                cursor: not-allowed;
+                color: #ccc;
+            }
+        }
     }
 }
