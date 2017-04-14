@@ -106,8 +106,19 @@
     export default {
         data() {
             return {
+                isLoading: false,
                 modal5: true,
                 modal6: true
+            }
+        },
+        methods: {
+            exec() {
+                this.isLoading = true;
+                setTimeout(() => {
+                    this.isLoading = false;
+                    this.$Message.success('执行完成！');
+                    this.modal2 = false;
+                }, 2000);
             }
         }
     }
@@ -173,7 +184,7 @@ Vue.use(XCUI)
 
 </template>
 <script>
-let ModalDemo = {
+export default {
     data() {
         return {
             modal1: false,
@@ -201,5 +212,4 @@ let ModalDemo = {
     }
 };
 
-export default ModalDemo;
 </script>
