@@ -6080,8 +6080,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                var target = new Date(type === 'min' ? this.minDate : this.maxDate);
 	                if (target) {
 	                    target.setFullYear(parsedValue.getFullYear());
-	                    target.setMonth(parsedValue.getMonth());
-	                    target.setDate(parsedValue.getDate());
+	                    target.setMonth(parsedValue.getMonth(), parsedValue.getDate());
 	                }
 	            }
 	        },
@@ -6097,8 +6096,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                var target = new Date(type === 'min' ? this.minDate : this.maxDate);
 	                if (target) {
 	                    target.setFullYear(parsedValue.getFullYear());
-	                    target.setMonth(parsedValue.getMonth());
-	                    target.setDate(parsedValue.getDate());
+	                    target.setMonth(parsedValue.getMonth(), parsedValue.getDate());
 	                }
 	                if (type === 'min') {
 	                    if (target < this.maxDate) {
@@ -6409,8 +6407,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    this.$emit('pick', new Date(value.getTime()));
 	                }
 	                this.date.setFullYear(value.getFullYear());
-	                this.date.setMonth(value.getMonth());
-	                this.date.setDate(value.getDate());
+	                this.date.setMonth(value.getMonth(), value.getDate());
 	            } else if (this.selectionMode === 'week') {
 	                var date = (0, _util.formatDate)(value.date, this.format || 'yyyywWW');
 	                var week = this.week = value.week;
@@ -6678,8 +6675,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                return;
 	            }
 	            MIN_TIME.setFullYear(this.minTime.getFullYear());
-	            MIN_TIME.setMonth(this.minTime.getMonth());
-	            MIN_TIME.setDate(this.minTime.getDate());
+	            MIN_TIME.setMonth(this.minTime.getMonth(), this.minTime.getDate());
+	            MAX_TIME.setFullYear(this.maxTime.getFullYear());
+	            MAX_TIME.setMonth(this.maxTime.getMonth(), this.maxTime.getDate());
 	            this.$refs.minSpinner.selectableRange = [[MIN_TIME, this.maxTime]];
 	            this.$refs.maxSpinner.selectableRange = [[this.minTime, MAX_TIME]];
 	            this.handleConfirm(true);
