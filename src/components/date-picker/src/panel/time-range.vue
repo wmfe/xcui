@@ -113,7 +113,6 @@ export default {
             format: 'HH:mm:ss',
             visible: false,
             width: 0
-            // defaultValue: null
         };
     },
 
@@ -122,21 +121,6 @@ export default {
             this.panelCreated();
             this.$nextTick(_ => this.ajustScrollTop());
         }
-        // defaultValue(val) {
-        //     if (val) {
-        //         const time = clacTime(this.defaultValue);
-        //         this.minTime = time.minTime;
-        //         this.maxTime = time.maxTime;
-        //         this.btnDisabled = isDisabled(time.minTime, time.maxTime);
-        //         this.maxHours = time.maxTime.getHours();
-        //         this.maxMinutes = time.maxTime.getMinutes();
-        //         this.maxSeconds = time.maxTime.getSeconds();
-        //         this.minHours = time.minTime.getHours();
-        //         this.minMinutes = time.minTime.getMinutes();
-        //         this.minSeconds = time.minTime.getSeconds();
-        //         // this.$emit('pick', [this.minTime, this.maxTime], true, true);
-        //     }
-        // }
     },
 
     methods: {
@@ -171,8 +155,9 @@ export default {
                 return;
             }
             MIN_TIME.setFullYear(this.minTime.getFullYear());
-            MIN_TIME.setMonth(this.minTime.getMonth());
-            MIN_TIME.setDate(this.minTime.getDate());
+            MIN_TIME.setMonth(this.minTime.getMonth(), this.minTime.getDate());
+            MAX_TIME.setFullYear(this.maxTime.getFullYear());
+            MAX_TIME.setMonth(this.maxTime.getMonth(), this.maxTime.getDate());
             this.$refs.minSpinner.selectableRange = [
                 [MIN_TIME, this.maxTime]
             ];
