@@ -40,6 +40,11 @@
   background-color: #46c3c1 !important;
   color: #fff;
 }
+.base-table td.disabled .cell {
+  background-color: #f7f7f7;
+  cursor: not-allowed;
+  color: #ccc;
+}
 /*
 Ionicons, v2.0.0
 Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -6759,6 +6764,11 @@ textarea.x-input {
   background-color: #46c3c1 !important;
   color: #fff;
 }
+.x-month-table td.disabled .cell {
+  background-color: #f7f7f7;
+  cursor: not-allowed;
+  color: #ccc;
+}
 .x-year-table {
   font-size: 12px;
   margin: -1px;
@@ -6786,6 +6796,11 @@ textarea.x-input {
 .x-year-table td.current:not(.disabled) .cell {
   background-color: #46c3c1 !important;
   color: #fff;
+}
+.x-year-table td.disabled .cell {
+  background-color: #f7f7f7;
+  cursor: not-allowed;
+  color: #ccc;
 }
 .x-picker-panel {
   color: #48576a;
