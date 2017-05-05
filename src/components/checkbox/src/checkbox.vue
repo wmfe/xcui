@@ -36,8 +36,10 @@
     </label>
 </template>
 <script>
+    import emitter from '../../../utils/mixins/emitter'; 
     export default {
-        name: 'x-checkbox',
+        name: 'XCheckbox',
+        componentName: 'XCheckbox',
         props: {
             value: {
                 type: [String, Number, Boolean]
@@ -45,6 +47,7 @@
             indeterminate: Boolean,
             disabled: Boolean
         },
+        mixins: [emitter],
         data() {
             return {
                 focus: false,
@@ -82,6 +85,9 @@
         methods: {
             handleChange(e) {
                 this.$emit('change', e);
+                if (this.isInGroup) {
+                    this.dispatch('XCheckboxGroup', 'change', [this.$parent.value]);
+                }
             },
             checkStatus() {
                 

@@ -1,0 +1,114 @@
+@form-prefix-cls: ~"@{xcui-prefix}-form";
+@form-item-prefix-cls: ~"@{xcui-prefix}-form-item";
+
+
+.@{form-prefix-cls} {
+    &-label{
+        &-left {
+            .@{form-item-prefix-cls}-label {
+                text-align: left
+            }
+        }
+        &-top {
+            float: none;
+            display: inline-block;
+            text-align: left;
+            padding: 0 0 10px;
+        }
+
+    }
+    &-inline {
+        .@{form-item-prefix-cls} {
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: top;
+            &-label {
+                float: none;
+                display: inline-block;
+            }
+            &-content {
+                display: inline-block;
+                vertical-align: top;
+            }
+        }
+        &.@{form-prefix-cls}-label-top {
+            .@{form-item-prefix-cls}-content {
+                display: block;
+            }
+        }
+    }
+}
+
+.@{form-item-prefix-cls} {
+    margin-bottom: 22px;
+
+    .@{form-item-prefix-cls} {
+        margin-bottom: 0;
+        .@{form-item-prefix-cls}-content {
+            margin-left: 0 !important;
+        }
+    }
+
+    &.is-error {
+        .x-input {
+            border-color: transparent;
+            border-color: #ff4949;
+        }
+        .x-input-group-append, .x-input-group-prepend {
+            .x-input {
+                border-color: transparent;
+            }
+        }
+    }
+
+    &.is-required {
+        .@{form-item-prefix-cls}-label:before {
+            content: '*';
+            color: #ff4949;
+            margin-right: 4px;
+        };
+    }
+
+    &-label {
+        text-align: right;
+        vertical-align: middle;
+        float: left;
+        font-size: 14px;
+        color: #48576a;
+        line-height: 1;
+        padding: 11px 12px 11px 0;
+        box-sizing: border-box
+    }
+
+    &-content {
+        line-height: 36px;
+        position: relative;
+        font-size: 14px;
+        &:after, &:before {
+            display: table;
+            content: "";
+        }
+        &:after {
+            clear: both;
+        }
+    }
+
+    &-error {
+        color: #ff4949;
+        font-size: 12px;
+        line-height: 1;
+        padding-top: 4px;
+        position: absolute;
+        top: 100%;
+        left: 0
+    }
+
+    &:after, &:before {
+        display: table;
+        content: "";
+    }
+
+    &:after {
+        clear: both;
+    }
+}

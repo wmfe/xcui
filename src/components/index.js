@@ -35,6 +35,8 @@ import Row from './row';
 import Col from './col';
 import Icon from './icon';
 import Switch from './switch';
+import Form from './form';
+import FormItem from './form-item';
 
 require('../less/index.less');
 
@@ -73,6 +75,8 @@ const install = (Vue) => {
     Vue.component(RadioGroup.name, RadioGroup);
     Vue.component(RadioButton.name, RadioButton);
     Vue.component(Switch.name, Switch);
+    Vue.component(Form.name, Form);
+    Vue.component(FormItem.name, FormItem);
     Vue.use(Message);
     Vue.use(Notice);
     Vue.use(Dialog);
@@ -116,6 +120,8 @@ const xcui = {
     Col,
     Icon,
     Switch,
+    Form,
+    FormItem,
     install
 };
 

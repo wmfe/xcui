@@ -43,13 +43,10 @@ import Picker from './pickerMixin';
 import TimePanel from '../panel/time';
 import TimeRangePanel from '../panel/time-range';
 
-import XInput from '../../../input';
-
 export default {
     name: 'XTimePicker',
     mixins: [Picker],
     components: {
-        XInput,
         TimePanel,
         TimeRangePanel
     },
@@ -61,9 +58,6 @@ export default {
                 return this.isRange ? 'timerange' : 'time';
             }
         }
-    },
-    created() {
-        // this.type = this.isRange ? 'timerange' : 'time';
     }
 };
 </script>

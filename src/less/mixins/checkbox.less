@@ -48,11 +48,14 @@
         cursor: pointer;
         white-space: nowrap;
         font-size: @font-size-base;
+        float: left;
+
         + .@{checkbox-prefix-cls}{
             margin-left: 15px;
         }
 
         &-item {
+            position: relative;
             * {
                 .checkbox-item;
             }
@@ -139,6 +142,27 @@
                     border-left: none;
                 }
             }
+
+        }
+
+        &-group {
+            &:before, &:after {
+                content: " ";
+                display: table;
+            }
+        
+            &:after {
+                clear: both;
+                visibility: hidden;
+                font-size: 0;
+                height: 0;
+            }
+
+            // .@{checkbox-prefix-cls} {
+            //     .@{checkbox-prefix-cls}-item {
+            //         position: relative;
+            //     }
+            // }
         }
 
         &-text {
