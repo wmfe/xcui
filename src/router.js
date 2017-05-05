@@ -34,6 +34,7 @@ import Textarea from './demos/textarea';
 import Checkbox from './demos/checkbox';
 import Radio from './demos/radio';
 import Switch from './demos/switch';
+import Form from './demos/form';
 
 const router = new VueRouter({
     routes: [{
@@ -127,6 +128,9 @@ const router = new VueRouter({
             }, {
                 path: '/component/switch',
                 component: Switch
+            }, {
+                path: '/component/form',
+                component: Form
             }
         ]
     }]

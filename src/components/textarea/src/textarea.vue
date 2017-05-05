@@ -27,9 +27,11 @@
     </div>
 </template>
 <script>
+    import emitter from '../../../utils/mixins/emitter';  
     import calcTextareaHeight from '../../../utils/calcTextareaHeight';
     export default {
         name: 'x-textarea',
+        mixins: [emitter],
         props: {
             value: [String, Number],
             placeholder: String,
@@ -60,6 +62,7 @@
             },
             handleBlur(e) {
                 this.$emit('blur', e);
+                this.dispatch('XFormItem', 'x.form.blur', [this.currentValue]);
             },
             handleChange(e) {
                 this.$emit('change', e);

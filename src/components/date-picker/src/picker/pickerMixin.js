@@ -2,7 +2,7 @@ import Clickoutside from '../../../../utils/clickoutside';
 import { formatDate, parseDate, getWeekNumber, equalDate, isDate } from '../util';
 import Popper from '../../../../utils/vue-popper';
 import Emitter from '../../../../utils/mixins/emitter';
-import ElInput from '../../../input';
+import XInput from '../../../input';
 
 const NewPopper = {
     props: {
@@ -82,7 +82,7 @@ export default {
         pickerOptions: {}
     },
 
-    components: { ElInput },
+    components: { XInput },
 
     directives: { Clickoutside },
 
@@ -184,7 +184,7 @@ export default {
     watch: {
         pickerVisible(val) {
             if (!val) {
-                this.dispatch('ElFormItem', 'el.form.blur');
+                this.dispatch('XFormItem', 'x.form.blur');
             }
             if (this.readonly || this.disabled) {
                 return;
@@ -210,7 +210,7 @@ export default {
         },
         displayValue(val) {
             this.$emit('change', val);
-            this.dispatch('ElFormItem', 'el.form.change');
+            this.dispatch('XFormItem', 'x.form.change');
         }
     },
 

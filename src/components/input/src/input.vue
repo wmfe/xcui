@@ -36,9 +36,12 @@
     </div>
 </template>
 <script>
+    import emitter from '../../../utils/mixins/emitter';
+
     export default {
         name: 'xInput',
         componentName: 'xInput',
+        mixins: [emitter],
         props: {
             value: [String, Number],
             placeholder: String,
@@ -72,7 +75,7 @@
         methods: {
             handleBlur(e) {
                 this.$emit('blur', e);
-                // this.dispatch('form-item', 'xcui.form.blur', [this.currentValue]);
+                this.dispatch('XFormItem', 'x.form.blur', [this.currentValue]);
             },
             handleChange(e) {
                 this.$emit('change', e);
@@ -102,7 +105,7 @@
             currentValue(val, oldVal) {
                 this.$emit('input', val);
                 this.$emit('change', val);
-                // this.dispatch('form-item', 'xcui.form.change', [val]);
+                this.dispatch('XFormItem', 'x.form.change', [val]);
             }
         }
     };

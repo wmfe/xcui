@@ -70,6 +70,16 @@
                 modal3: true,
                 modal4: true
             }
+        },
+        methods: {
+            exec() {
+                this.isLoading = true;
+                setTimeout(() => {
+                    this.isLoading = false;
+                    this.$Message.success('执行完成！');
+                    this.modal2 = false;
+                }, 2000);
+            }
         }
     }
 </script>
@@ -109,16 +119,6 @@
                 isLoading: false,
                 modal5: true,
                 modal6: true
-            }
-        },
-        methods: {
-            exec() {
-                this.isLoading = true;
-                setTimeout(() => {
-                    this.isLoading = false;
-                    this.$Message.success('执行完成！');
-                    this.modal2 = false;
-                }, 2000);
             }
         }
     }

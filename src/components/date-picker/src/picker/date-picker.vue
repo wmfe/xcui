@@ -36,13 +36,11 @@
 import Picker from './pickerMixin';
 import DateRangePanel from '../panel/date-range';
 import DatePanel from '../panel/date';
-import XInput from '../../../input';
 
 export default {
     name: 'XDatePicker',
     mixins: [Picker],
     components: {
-        XInput,
         DatePanel,
         DateRangePanel
     },
