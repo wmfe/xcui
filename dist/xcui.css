@@ -6171,9 +6171,13 @@ textarea.x-input {
   cursor: pointer;
   white-space: nowrap;
   font-size: 14px;
+  float: left;
 }
 .x-checkbox + .x-checkbox {
   margin-left: 15px;
+}
+.x-checkbox-item {
+  position: relative;
 }
 .x-checkbox-item * {
   -webkit-box-sizing: border-box;
@@ -6276,6 +6280,17 @@ textarea.x-input {
   width: 10px;
   border-width: 2px;
   border-left: none;
+}
+.x-checkbox-group:before,
+.x-checkbox-group:after {
+  content: " ";
+  display: table;
+}
+.x-checkbox-group:after {
+  clear: both;
+  visibility: hidden;
+  font-size: 0;
+  height: 0;
 }
 .x-checkbox-text {
   cursor: pointer;
@@ -8173,4 +8188,91 @@ textarea.x-input {
   min-width: 36px;
   cursor: pointer;
   padding: 5px;
+}
+.x-form-label-left .x-form-item-label {
+  text-align: left;
+}
+.x-form-label-top {
+  float: none;
+  display: inline-block;
+  text-align: left;
+  padding: 0 0 10px;
+}
+.x-form-inline .x-form-item {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: top;
+}
+.x-form-inline .x-form-item-label {
+  float: none;
+  display: inline-block;
+}
+.x-form-inline .x-form-item-content {
+  display: inline-block;
+  vertical-align: top;
+}
+.x-form-inline.x-form-label-top .x-form-item-content {
+  display: block;
+}
+.x-form-item {
+  margin-bottom: 22px;
+}
+.x-form-item .x-form-item {
+  margin-bottom: 0;
+}
+.x-form-item .x-form-item .x-form-item-content {
+  margin-left: 0 !important;
+}
+.x-form-item.is-error .x-input {
+  border-color: transparent;
+  border-color: #ff4949;
+}
+.x-form-item.is-error .x-input-group-append .x-input,
+.x-form-item.is-error .x-input-group-prepend .x-input {
+  border-color: transparent;
+}
+.x-form-item.is-required .x-form-item-label:before {
+  content: '*';
+  color: #ff4949;
+  margin-right: 4px;
+}
+.x-form-item-label {
+  text-align: right;
+  vertical-align: middle;
+  float: left;
+  font-size: 14px;
+  color: #48576a;
+  line-height: 1;
+  padding: 11px 12px 11px 0;
+  box-sizing: border-box;
+}
+.x-form-item-content {
+  line-height: 36px;
+  position: relative;
+  font-size: 14px;
+}
+.x-form-item-content:after,
+.x-form-item-content:before {
+  display: table;
+  content: "";
+}
+.x-form-item-content:after {
+  clear: both;
+}
+.x-form-item-error {
+  color: #ff4949;
+  font-size: 12px;
+  line-height: 1;
+  padding-top: 4px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+.x-form-item:after,
+.x-form-item:before {
+  display: table;
+  content: "";
+}
+.x-form-item:after {
+  clear: both;
 }
