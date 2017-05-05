@@ -59,6 +59,9 @@
                     <li class="sidebar-item">
                         <router-link to="/component/datetimepicker">DateTimePicker 时间日期选择器</router-link>
                     </li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/form">Form 表单</router-link>
+                    </li>
                     
                     <li class="sidebar-title">Notice 提示</li>
                     <li class="sidebar-item">

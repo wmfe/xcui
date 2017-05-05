@@ -2,8 +2,8 @@
   "name": "xcui",
   "version": "2.0.0-rc-2",
   "main": "dist/xcui.js",
-  "engines" : {
-    "node" : ">=5.10.0" 
+  "engines": {
+    "node": ">=5.10.0"
   },
   "description": "Desktop web UI based on Vue and Bootstrap",
   "theme": "./custom.js",
@@ -34,8 +34,8 @@
     "build:umd": "cross-env NODE_ENV=production webpack --progress --hide-modules --colors --config build/webpack.npm.umd.conf.js",
     "build:components": "node build/build-components"
   },
-  "main": "dist/xcui.js",
   "dependencies": {
+    "async-validator": "^1.6.9",
     "popper.js": "^1.0.7"
   },
   "devDependencies": {

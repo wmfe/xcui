@@ -288,6 +288,7 @@
                 }
                 this.setSelected();
                 this.$emit('change', val);
+                this.dispatch('XFormItem', 'x.form.change', val);
             },
             options(val) {
                 this.allOptionsDisabled = val.length === val.filter(item => item.disabled === true).length;

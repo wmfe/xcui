@@ -230,6 +230,7 @@
                 this.dataText = item.text;
                 this.$nextTick(() => {
                     this.clearList();
+                    this.emitChange();
                 });
             },
             logError(msg) {
