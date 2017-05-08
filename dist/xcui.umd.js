@@ -4775,8 +4775,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../less/index.less\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
 	var version = __webpack_require__(212).version;
 
 	var install = function install(Vue) {
