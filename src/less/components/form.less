@@ -52,7 +52,7 @@
     &.is-error {
         .x-input {
             border-color: transparent;
-            border-color: #ff4949;
+            border-color: @brand-danger;
         }
         .x-input-group-append, .x-input-group-prepend {
             .x-input {
@@ -64,7 +64,7 @@
     &.is-required {
         .@{form-item-prefix-cls}-label:before {
             content: '*';
-            color: #ff4949;
+            color: @brand-danger;
             margin-right: 4px;
         };
     }
@@ -73,8 +73,8 @@
         text-align: right;
         vertical-align: middle;
         float: left;
-        font-size: 14px;
-        color: #48576a;
+        font-size: @font-size-base;
+        color: @text-color;
         line-height: 1;
         padding: 11px 12px 11px 0;
         box-sizing: border-box
@@ -83,7 +83,7 @@
     &-content {
         line-height: 36px;
         position: relative;
-        font-size: 14px;
+        font-size: @font-size-base;
         &:after, &:before {
             display: table;
             content: "";
@@ -94,7 +94,7 @@
     }
 
     &-error {
-        color: #ff4949;
+        color: @brand-danger;
         font-size: 12px;
         line-height: 1;
         padding-top: 4px;
