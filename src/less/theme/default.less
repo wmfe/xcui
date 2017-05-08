@@ -31,8 +31,8 @@
 // global base
 // 每当组件默认值没有特定值的时候，遵循这里的全局设定
 @body-bg: #fff; // 全局背景色
-@text-color: @gray-dark; // 全局字体色值
-@text-color-secondary: @gray;// 字体色值第二选择
+@text-color: @gray; // 全局字体色值
+@text-color-secondary: @gray-dark;// 字体色值第二选择
 @link-color: @brand-primary; // 全局链接色值
 @link-hover-color: darken(@link-color, 15%); // 全局链接悬停色值
 @link-hover-decoration: underline; // 全局链接悬停样式
@@ -302,7 +302,7 @@
 
 // datepicker
 
-@datepicker-color:#48576a;
+@datepicker-color:@text-color;
 
 @datepicker-icon-color: @gray-ccc;
 
@@ -342,7 +342,7 @@
 @popover-bg: #fff;
 @popover-title-size: @font-size-base;
 @popover-font-size: @font-size-small;
-@popover-font-color: rgba(0,0,0,.65);
+@popover-font-color: @text-color;
 @popover-arrow-size: 6px;
 @popover-arrow-color: rgba(217, 217, 217, 0.7);
 @popover-shadow: @shadow-1-down;
