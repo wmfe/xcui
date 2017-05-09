@@ -4,32 +4,33 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var config = require('./webpack.npm.base.conf');
+var baseConfig = require('./webpack.npm.base.conf');
 var themeUrl = require('../package.json').theme;
 var theme  = require(path.join(__dirname, '../',themeUrl));
+var merge = require('webpack-merge');
 
-
-config.entry['xcui.umd'] = './src/components/index.umd.js';
-config.output.filename = '[name].js';
-config.output.chunkFilename = '[id].[chunkhash].js';
-
-
-var SOURCE_MAP = false;
-
-config.devtool = SOURCE_MAP ? 'source-map' : false;
-
-config.vue.loaders = {
-    js: 'babel'
-};
-
-config.plugins = (config.plugins || []).concat([
-    new webpack.DefinePlugin({
-        'process.env': {
-            NODE_ENV: '"production"'
+module.exports = merge(baseConfig, {
+    entry: {
+        'xcui.umd': './src/components/index.umd.js'
+    },
+    output: {
+        filename: '[name].js',
+        library: 'xcui',
+        chunkFilename : '[id].[chunkhash].js'
+    },
+    devtool: false,
+    vue: {
+        loaders: {
+            js: 'babel'
         }
-    }),
-    new webpack.optimize.OccurenceOrderPlugin()
-]);
-
-module.exports = config;
+    },
+    plugins: (baseConfig.plugins || []).concat([
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
+        new webpack.optimize.OccurenceOrderPlugin()
+    ])
+});
 

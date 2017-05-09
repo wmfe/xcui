@@ -36,7 +36,8 @@
   },
   "dependencies": {
     "async-validator": "^1.6.9",
-    "popper.js": "^1.0.7"
+    "popper.js": "^1.0.7",
+    "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",

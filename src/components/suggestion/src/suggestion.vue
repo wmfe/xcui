@@ -107,6 +107,12 @@
             sugVisible(val) {
                 this.broadcast('xSuggestionDropdown', 'visible',
                     [val, this.$refs.xInput.$refs.input.offsetWidth]);
+            },
+            dataText(val) {
+                if (val === '') {
+                    this.dataValue = '';
+                    this.emitChange();
+                }
             }
         },
         methods: {
@@ -240,9 +246,8 @@
                 return Object.prototype.toString.call(arr) === '[object Array]';
             },
             clearText() {
+                // watch for clear
                 this.dataText = '';
-                this.dataValue = '';
-                this.emitChange();
             },
             emitChange() {
                 this.$emit('input', {
