@@ -456,7 +456,7 @@
 
 <tpl>
     <x-form ref="form7" :model="form7" label-width="80px" style="width:440px">
-        <x-form-item prop=""
+        <x-form-item 
             v-for="(name, index) in form7.names"
             :label="'乘客' + (index + 1)"
             :key="name.key"
