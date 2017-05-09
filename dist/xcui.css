@@ -30,7 +30,7 @@
   height: 32px;
   display: block;
   line-height: 32px;
-  color: #48576a;
+  color: #555555;
   text-decoration: none;
 }
 .base-table td .cell:hover {
@@ -6769,7 +6769,7 @@ textarea.x-input {
   height: 32px;
   display: block;
   line-height: 32px;
-  color: #48576a;
+  color: #555555;
   text-decoration: none;
 }
 .x-month-table td .cell:hover {
@@ -6802,7 +6802,7 @@ textarea.x-input {
   height: 32px;
   display: block;
   line-height: 32px;
-  color: #48576a;
+  color: #555555;
   text-decoration: none;
 }
 .x-year-table td .cell:hover {
@@ -6818,7 +6818,7 @@ textarea.x-input {
   color: #ccc;
 }
 .x-picker-panel {
-  color: #48576a;
+  color: #555555;
   border: 1px solid #d1dbe5;
   box-shadow: 0 2px 6px #ccc;
   background-color: #fff;
@@ -6850,7 +6850,7 @@ textarea.x-input {
   background-color: transparent;
   line-height: 28px;
   font-size: 14px;
-  color: #48576a;
+  color: #555555;
   padding-left: 12px;
   text-align: left;
   outline: none;
@@ -6993,7 +6993,7 @@ textarea.x-input {
   width: 180px;
   left: 0;
   z-index: 1000;
-  color: #48576a;
+  color: #555555;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -7583,7 +7583,7 @@ textarea.x-input {
   font-size: 12px;
   line-height: 1.2;
   background: #fff;
-  color: rgba(0, 0, 0, 0.65);
+  color: #555555;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
 }
 .x-popover-title {
@@ -7733,7 +7733,7 @@ textarea.x-input {
   opacity: 1;
   margin: 2px 4px 2px 0;
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.65);
+  color: #555555;
 }
 .x-tag:hover {
   opacity: 0.85;
@@ -7933,7 +7933,7 @@ textarea.x-input {
 }
 .x-progress-text {
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.65);
+  color: #555555;
   display: inline-block;
   vertical-align: middle;
   margin-left: 10px;
@@ -8225,7 +8225,7 @@ textarea.x-input {
 }
 .x-form-item.is-error .x-input {
   border-color: transparent;
-  border-color: #ff4949;
+  border-color: #F04134;
 }
 .x-form-item.is-error .x-input-group-append .x-input,
 .x-form-item.is-error .x-input-group-prepend .x-input {
@@ -8233,7 +8233,7 @@ textarea.x-input {
 }
 .x-form-item.is-required .x-form-item-label:before {
   content: '*';
-  color: #ff4949;
+  color: #F04134;
   margin-right: 4px;
 }
 .x-form-item-label {
@@ -8241,7 +8241,7 @@ textarea.x-input {
   vertical-align: middle;
   float: left;
   font-size: 14px;
-  color: #48576a;
+  color: #555555;
   line-height: 1;
   padding: 11px 12px 11px 0;
   box-sizing: border-box;
@@ -8260,7 +8260,7 @@ textarea.x-input {
   clear: both;
 }
 .x-form-item-error {
-  color: #ff4949;
+  color: #F04134;
   font-size: 12px;
   line-height: 1;
   padding-top: 4px;
