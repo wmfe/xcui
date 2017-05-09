@@ -3,10 +3,10 @@
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
-	else {
-		var a = factory();
-		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-	}
+	else if(typeof exports === 'object')
+		exports["xcui"] = factory();
+	else
+		root["xcui"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -11508,6 +11508,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },
 	        sugVisible: function sugVisible(val) {
 	            this.broadcast('xSuggestionDropdown', 'visible', [val, this.$refs.xInput.$refs.input.offsetWidth]);
+	        },
+	        dataText: function dataText(val) {
+	            if (val === '') {
+	                this.dataValue = '';
+	                this.emitChange();
+	            }
 	        }
 	    },
 	    methods: {
@@ -11646,8 +11652,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },
 	        clearText: function clearText() {
 	            this.dataText = '';
-	            this.dataValue = '';
-	            this.emitChange();
 	        },
 	        emitChange: function emitChange() {
 	            this.$emit('input', {
@@ -12815,7 +12819,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 		"dependencies": {
 			"async-validator": "^1.6.9",
-			"popper.js": "^1.0.7"
+			"popper.js": "^1.0.7",
+			"webpack-merge": "^4.1.0"
 		},
 		"devDependencies": {
 			"babel-core": "^6.9.1",
