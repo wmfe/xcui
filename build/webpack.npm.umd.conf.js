@@ -8,6 +8,8 @@ var baseConfig = require('./webpack.npm.base.conf');
 var themeUrl = require('../package.json').theme;
 var theme  = require(path.join(__dirname, '../',themeUrl));
 var merge = require('webpack-merge');
+var banner = require('./banner');
+
 
 module.exports = merge(baseConfig, {
     entry: {
@@ -30,6 +32,7 @@ module.exports = merge(baseConfig, {
                 NODE_ENV: '"production"'
             }
         }),
+        new webpack.BannerPlugin(banner),
         new webpack.optimize.OccurenceOrderPlugin()
     ])
 });

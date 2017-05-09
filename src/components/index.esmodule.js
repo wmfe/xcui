@@ -38,8 +38,6 @@ import Switch from './switch';
 import Form from './form';
 import FormItem from './form-item';
 
-const version = require('../../package.json').version;
-
 const install = (Vue) => {
     if (install.installed) {
         return;
@@ -83,7 +81,6 @@ const install = (Vue) => {
 };
 
 const xcui = {
-    version: version,
     DatePicker,
     TimePicker,
     TimeSelect,
