@@ -20,7 +20,7 @@
             @mouseenter.native="inputHovering = true"
             @mouseleave.native="inputHovering = false">
         </x-input>
-        <transition name="slide-up" @after-leave="doDestroy">
+        <transition name="x-slide-up" @after-leave="doDestroy">
             <x-select-dropdown ref="popper" v-show="isOpen">
                 <ul ref="list" class="x-select-list">
                     <slot></slot>
