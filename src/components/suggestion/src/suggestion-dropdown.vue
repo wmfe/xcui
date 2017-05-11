@@ -1,5 +1,5 @@
 <template>
-    <transition name="slide-up" @after-leave="doDestroy">
+    <transition name="x-slide-up" @after-leave="doDestroy">
         <div class="x-suggestion-dropdown"
             v-show="showPopper"
             :style="{width: dropdownWidth}">

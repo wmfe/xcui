@@ -8,7 +8,7 @@
         <label :for="prop" class="x-form-item-label" :style="labelStyle" v-if="label">{{label}}</label> 
         <div class="x-form-item-content" v-bind:style="contentStyle">
             <slot></slot>
-            <transition name="slide-up">
+            <transition name="x-slide-up">
                 <div class="x-form-item-error" v-if="validateState === 'error' && showMessage && form.showMessage">
                     {{validateMessage}}
                 </div>

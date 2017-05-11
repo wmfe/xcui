@@ -1,11 +1,11 @@
 <template lang="html">
     <div>
-        <transition name="fade">
+        <transition name="x-fade">
             <div class="x-modal-mask"
                 @click="maskClose" ref="modal-mask" v-show="show">
             </div>
         </transition>
-        <transition name="modal-zoom">
+        <transition name="x-modal-zoom">
             <div class="x-modal-wrapper" v-show="show" ref="modalWrapper" @click="handleWrapperClick">
                 <div class="x-modal" :style="styles" :class="modalClass">
                         <div class="x-modal-header" v-if="showHeader">
