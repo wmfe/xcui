@@ -1,7 +1,7 @@
 <template>
     <div class="x-scrolltop">
         <div ref="dropa" id="corner" class="x-scrolltop-area x-scrolltop-corner" :class="{'x-scrolltop-dropin':dropin.corner}" @dragover="allowDrop($event)" @dragenter="dragenter($event)" @drop="ondrop($event)" >
-            <transition name="fade">
+            <transition name="x-fade">
                 <div draggable="true" ref="dragele" id="dragEle" class="x-icon x-icon-android-arrow-dropup-circle x-scrolltop-init" @dragstart="dragStart($event)" @dragleave="dragleave($event)" @dragend="dragend($event)" @click="backTop($event)" v-show="show" :class="className"></div>
             </transition>
         </div>

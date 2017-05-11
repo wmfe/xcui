@@ -1,5 +1,5 @@
 <template>
-  <transition name="slide-up" @after-leave="$emit('dodestroy')">
+  <transition name="x-slide-up" @after-leave="$emit('dodestroy')">
     <div
       v-show="visible"
       :style="{ width: width + 'px' }"

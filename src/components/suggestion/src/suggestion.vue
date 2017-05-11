@@ -113,6 +113,15 @@
                     this.dataValue = '';
                     this.emitChange();
                 }
+            },
+            value(val) {
+                if (!val) {
+                    this.dataText = '';
+                    this.dataValue = '';
+                    return;
+                }
+                this.dataText = val.text || '';
+                this.dataValue = val.value || '';
             }
         },
         methods: {
