@@ -11523,6 +11523,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.dataValue = '';
 	                this.emitChange();
 	            }
+	        },
+	        value: function value(val) {
+	            if (!val) {
+	                this.dataText = '';
+	                this.dataValue = '';
+	                return;
+	            }
+	            this.dataText = val.text || '';
+	            this.dataValue = val.value || '';
 	        }
 	    },
 	    methods: {
@@ -14151,7 +14160,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    },
 	    on: {
 	      "after-leave": function($event) {
@@ -14421,7 +14430,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    },
 	    on: {
 	      "after-leave": function($event) {
@@ -14515,7 +14524,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    },
 	    on: {
 	      "after-leave": function($event) {
@@ -14602,7 +14611,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    },
 	    on: {
 	      "after-leave": function($event) {
@@ -15070,7 +15079,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }), _vm._v(" "), _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    },
 	    on: {
 	      "after-leave": _vm.doDestroy
@@ -15345,7 +15354,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    },
 	    on: {
 	      "after-leave": _vm.doDestroy
@@ -15565,7 +15574,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', [_c('transition', {
 	    attrs: {
-	      "name": "fade"
+	      "name": "x-fade"
 	    }
 	  }, [_c('div', {
 	    directives: [{
@@ -15581,7 +15590,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  })]), _vm._v(" "), _c('transition', {
 	    attrs: {
-	      "name": "modal-zoom"
+	      "name": "x-modal-zoom"
 	    }
 	  }, [_c('div', {
 	    directives: [{
@@ -16271,7 +16280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    style: (_vm.contentStyle)
 	  }, [_vm._t("default"), _vm._v(" "), _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    }
 	  }, [(_vm.validateState === 'error' && _vm.showMessage && _vm.form.showMessage) ? _c('div', {
 	    staticClass: "x-form-item-error"
@@ -16322,7 +16331,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, [_c('transition', {
 	    attrs: {
-	      "name": "fade"
+	      "name": "x-fade"
 	    }
 	  }, [_c('div', {
 	    directives: [{
