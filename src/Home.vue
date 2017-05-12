@@ -24,7 +24,7 @@
                     <li class="sidebar-item">
                         <router-link to="/component/button">Button 按钮</router-link>
                     </li class="sidebar-item">
-                    
+
                     <li class="sidebar-title">Form 表单</li>
                     <li class="sidebar-item">
                         <router-link to="/component/input">Input 单行输入框</router-link>
@@ -62,7 +62,7 @@
                     <li class="sidebar-item">
                         <router-link to="/component/form">Form 表单</router-link>
                     </li>
-                    
+
                     <li class="sidebar-title">Notice 提示</li>
                     <li class="sidebar-item">
                          <router-link to="/component/message">Message 信息提示</router-link>
@@ -89,13 +89,16 @@
                     </li>
                     <li class="sidebar-title">Data 数据展示</li>
                     <li class="sidebar-item">
+                        <router-link to="/component/table">Table 表格</router-link>
+                    </li>
+                    <li class="sidebar-item">
                         <router-link to="/component/progress">Progress 进度条</router-link>
                     </li>
-                    
+
                     <li class="sidebar-item">
                         <router-link to="/component/tag">Tag 标签</router-link>
                     </li>
-                    
+
                     <li class="sidebar-title">Navigation 导航</li>
                     <li class="sidebar-item">
                         <router-link to="/component/pagination">Pagination 分页</router-link>
