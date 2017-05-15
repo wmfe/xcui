@@ -292,6 +292,7 @@
             },
             options(val) {
                 this.allOptionsDisabled = val.length === val.filter(item => item.disabled === true).length;
+                this.setSelected();
             },
             isOpen(val) {
                 if (val) {
