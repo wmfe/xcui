@@ -71,7 +71,7 @@ const xNotice = {
                 name: noticeUuid.toString(),
                 duration: duration,
                 styles: {},
-                transitionName: 'move-notice',
+                transitionName: 'x-move-notice',
                 content: content,
                 onClose: onClose,
                 closable: true
