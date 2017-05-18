@@ -2754,10 +2754,10 @@ code,
 pre {
   font-family: Consolas, Menlo, Monaco, Courier, monospace;
 }
-.fade-enter-active {
+.x-fade-enter-active {
   animation: 0.2s xFadeIn cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.fade-leave-active {
+.x-fade-leave-active {
   animation: 0.2s xFadeOut cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 @keyframes xFadeIn {
@@ -2776,28 +2776,28 @@ pre {
     opacity: 0;
   }
 }
-.slide-up-enter-active {
+.x-slide-up-enter-active {
   animation: 0.2s xSlideUpIn cubic-bezier(0.755, 0.05, 0.855, 0.06);
 }
-.slide-up-leave-active {
+.x-slide-up-leave-active {
   animation: 0.2s xSlideUpOut cubic-bezier(0.755, 0.05, 0.855, 0.06);
 }
-.slide-down-enter-active {
+.x-slide-down-enter-active {
   animation: 0.2s xSlideDownIn cubic-bezier(0.755, 0.05, 0.855, 0.06);
 }
-.slide-down-leave-active {
+.x-slide-down-leave-active {
   animation: 0.2s xSlideDownOut cubic-bezier(0.755, 0.05, 0.855, 0.06);
 }
-.slide-left-enter-active {
+.x-slide-left-enter-active {
   animation: 0.2s xSlideLeftIn cubic-bezier(0.755, 0.05, 0.855, 0.06);
 }
-.slide-left-leave-active {
+.x-slide-left-leave-active {
   animation: 0.2s xSlideLeftOut cubic-bezier(0.755, 0.05, 0.855, 0.06);
 }
-.slide-right-enter-active {
+.x-slide-right-enter-active {
   animation: 0.2s xSlideRightIn cubic-bezier(0.755, 0.05, 0.855, 0.06);
 }
-.slide-right-leave-active {
+.x-slide-right-leave-active {
   animation: 0.2s xSlideRightOut cubic-bezier(0.755, 0.05, 0.855, 0.06);
 }
 @keyframes xSlideUpIn {
@@ -2896,36 +2896,36 @@ pre {
     transform: scaleX(0.8);
   }
 }
-.move-up-enter-active,
-.move-up-appear {
+.x-move-up-enter-active,
+.x-move-up-appear {
   opacity: 0;
   animation: 0.2s xMoveUpIn cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.move-up-leave-active {
+.x-move-up-leave-active {
   animation: 0.2s xMoveUpOut cubic-bezier(0.23, 1, 0.32, 1);
 }
-.move-down-enter-active,
-.move-down-appear {
+.x-move-down-enter-active,
+.x-move-down-appear {
   opacity: 0;
   animation: 0.2s xMoveDownIn cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.move-down-leave-active {
+.x-move-down-leave-active {
   animation: 0.2s xMoveDownOut cubic-bezier(0.23, 1, 0.32, 1);
 }
-.move-left-enter-active,
-.move-left-appear {
+.x-move-left-enter-active,
+.x-move-left-appear {
   opacity: 0;
   animation: 0.2s xMoveLeftIn cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.move-left-leave-active {
+.x-move-left-leave-active {
   animation: 0.2s xMoveLeftOut cubic-bezier(0.23, 1, 0.32, 1);
 }
-.move-right-enter-active,
-.move-right-appear {
+.x-move-right-enter-active,
+.x-move-right-appear {
   opacity: 0;
   animation: 0.2s xMoveRightIn cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.move-right-leave-active {
+.x-move-right-leave-active {
   animation: 0.2s xMoveRightOut cubic-bezier(0.23, 1, 0.32, 1);
 }
 @keyframes xMoveDownIn {
@@ -3024,12 +3024,12 @@ pre {
     opacity: 0;
   }
 }
-.move-notice-enter-active,
-.move-notice-appear {
+.x-move-notice-enter-active,
+.x-move-notice-appear {
   opacity: 0;
   animation: 0.2s xMoveNoticeIn cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.move-notice-leave-active {
+.x-move-notice-leave-active {
   animation: 0.2s xMoveNoticeOut cubic-bezier(0.23, 1, 0.32, 1);
 }
 @keyframes xMoveNoticeIn {
@@ -3067,28 +3067,28 @@ pre {
     opacity: 0;
   }
 }
-.tag-zoom-enter-active {
+.x-tag-zoom-enter-active {
   animation: 0.2s xZoomIn cubic-bezier(0.08, 0.82, 0.17, 1);
 }
-.tag-zoom-leave-active {
+.x-tag-zoom-leave-active {
   animation: 0.2s xZoomOut cubic-bezier(0.78, 0.14, 0.15, 0.86);
 }
-.modal-zoom-enter-active {
+.x-modal-zoom-enter-active {
   animation: 0.2s xModalZoomIn cubic-bezier(0.08, 0.82, 0.17, 1);
 }
-.modal-zoom-leave-active {
+.x-modal-zoom-leave-active {
   animation: 0.2s xModalZoomOut cubic-bezier(0.78, 0.14, 0.15, 0.86);
 }
-.tooltip-zoom-enter-active {
+.x-tooltip-zoom-enter-active {
   animation: 0.1s xZoomFastIn cubic-bezier(0.08, 0.82, 0.17, 1);
 }
-.tooltip-zoom-leave-active {
+.x-tooltip-zoom-leave-active {
   animation: 0.1s xZoomFastOut cubic-bezier(0.78, 0.14, 0.15, 0.86);
 }
-.popover-zoom-enter-active {
+.x-popover-zoom-enter-active {
   animation: 0.2s xZoomFastIn cubic-bezier(0.08, 0.82, 0.17, 1);
 }
-.popover-zoom-leave-active {
+.x-popover-zoom-leave-active {
   animation: 0.2s xZoomFastOut cubic-bezier(0.78, 0.14, 0.15, 0.86);
 }
 @keyframes xZoomIn {
@@ -7888,8 +7888,9 @@ textarea.x-input {
   -webkit-user-select: none;
 }
 .x-pagination-standard .number-btn {
-  width: 34px;
-  padding: 4px 0;
+  width: auto;
+  min-width: 30px;
+  padding: 4px 6px;
 }
 .x-pagination-standard .number-btn.active {
   color: #fff;

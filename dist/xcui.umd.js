@@ -5093,7 +5093,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                uuid: '' + prefixUuid + uuid,
 	                duration: duration,
 	                styles: {},
-	                transitionName: 'move-up',
+	                transitionName: 'x-move-up',
 	                content: '\n                    <div class="' + prefixCls + '-custom-content ' + prefixCls + '-' + type + '">\n                        <div class="' + prefixCls + '-icon-wrap">\n                            <i class="' + iconPrefixCls + ' ' + iconPrefixCls + '-' + iconType + '"></i>\n                        </div>\n                        <div class="' + prefixCls + '-text-wrap">\n                            <span>' + content + '</span>\n                        </div>\n                    </div>\n                ',
 	                visible: true,
 	                onClose: onClose
@@ -5206,7 +5206,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                name: noticeUuid.toString(),
 	                duration: duration,
 	                styles: {},
-	                transitionName: 'move-notice',
+	                transitionName: 'x-move-notice',
 	                content: content,
 	                onClose: onClose,
 	                closable: true
@@ -11306,6 +11306,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.allOptionsDisabled = val.length === val.filter(function (item) {
 	                return item.disabled === true;
 	            }).length;
+	            this.setSelected();
 	        },
 	        isOpen: function isOpen(val) {
 	            if (val) {
@@ -11517,6 +11518,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.dataValue = '';
 	                this.emitChange();
 	            }
+	        },
+	        value: function value(val) {
+	            if (!val) {
+	                this.dataText = '';
+	                this.dataValue = '';
+	                return;
+	            }
+	            this.dataText = val.text || '';
+	            this.dataValue = val.value || '';
 	        }
 	    },
 	    methods: {
@@ -14139,7 +14149,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    },
 	    on: {
 	      "after-leave": function($event) {
@@ -14409,7 +14419,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    },
 	    on: {
 	      "after-leave": function($event) {
@@ -14503,7 +14513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    },
 	    on: {
 	      "after-leave": function($event) {
@@ -14590,7 +14600,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    },
 	    on: {
 	      "after-leave": function($event) {
@@ -15058,7 +15068,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }), _vm._v(" "), _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    },
 	    on: {
 	      "after-leave": _vm.doDestroy
@@ -15333,7 +15343,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    },
 	    on: {
 	      "after-leave": _vm.doDestroy
@@ -15553,7 +15563,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', [_c('transition', {
 	    attrs: {
-	      "name": "fade"
+	      "name": "x-fade"
 	    }
 	  }, [_c('div', {
 	    directives: [{
@@ -15569,7 +15579,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  })]), _vm._v(" "), _c('transition', {
 	    attrs: {
-	      "name": "modal-zoom"
+	      "name": "x-modal-zoom"
 	    }
 	  }, [_c('div', {
 	    directives: [{
@@ -16259,7 +16269,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    style: (_vm.contentStyle)
 	  }, [_vm._t("default"), _vm._v(" "), _c('transition', {
 	    attrs: {
-	      "name": "slide-up"
+	      "name": "x-slide-up"
 	    }
 	  }, [(_vm.validateState === 'error' && _vm.showMessage && _vm.form.showMessage) ? _c('div', {
 	    staticClass: "x-form-item-error"
@@ -16310,7 +16320,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, [_c('transition', {
 	    attrs: {
-	      "name": "fade"
+	      "name": "x-fade"
 	    }
 	  }, [_c('div', {
 	    directives: [{
