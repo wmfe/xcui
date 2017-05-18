@@ -42,7 +42,7 @@ const xMessage = {
                 uuid: `${prefixUuid}${uuid}`,
                 duration: duration,
                 styles: {},
-                transitionName: 'move-up',
+                transitionName: 'x-move-up',
                 content: `
                     <div class="${prefixCls}-custom-content ${prefixCls}-${type}">
                         <div class="${prefixCls}-icon-wrap">
