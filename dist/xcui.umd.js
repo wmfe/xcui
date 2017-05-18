@@ -5093,7 +5093,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                uuid: '' + prefixUuid + uuid,
 	                duration: duration,
 	                styles: {},
-	                transitionName: 'move-up',
+	                transitionName: 'x-move-up',
 	                content: '\n                    <div class="' + prefixCls + '-custom-content ' + prefixCls + '-' + type + '">\n                        <div class="' + prefixCls + '-icon-wrap">\n                            <i class="' + iconPrefixCls + ' ' + iconPrefixCls + '-' + iconType + '"></i>\n                        </div>\n                        <div class="' + prefixCls + '-text-wrap">\n                            <span>' + content + '</span>\n                        </div>\n                    </div>\n                ',
 	                visible: true,
 	                onClose: onClose
@@ -5206,7 +5206,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                name: noticeUuid.toString(),
 	                duration: duration,
 	                styles: {},
-	                transitionName: 'move-notice',
+	                transitionName: 'x-move-notice',
 	                content: content,
 	                onClose: onClose,
 	                closable: true
@@ -11306,6 +11306,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            this.allOptionsDisabled = val.length === val.filter(function (item) {
 	                return item.disabled === true;
 	            }).length;
+	            this.setSelected();
 	        },
 	        isOpen: function isOpen(val) {
 	            if (val) {
