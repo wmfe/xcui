@@ -8,14 +8,26 @@ export default {
         title: {
             type: String
         },
-        dataKeyName: {
+        prop: {
+            type: String
+        },
+        type: {
             type: String
         },
         width: {
             type: String
         },
         className: {
-            type: [String, Function]
+            type: String,
+            default() {
+                return '';
+            }
+        },
+        singleLine: {
+            type: Boolean,
+            default() {
+                return false;
+            }
         }
     },
 
@@ -29,18 +41,30 @@ export default {
 
         const slots = this.$scopedSlots;
 
+        if (this.type) {
+            this.table.rowKey = this.prop;
+        }
+
+        const SINGLE_LINE_CLASS_NAME = 'x-table-td-single-line';
+        let tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
+
         // 将数据配置存到 table 上
         this.table.columns.push({
             title: this.title,
-            dataKeyName: this.dataKeyName,
+            type: this.type || 'normal',
+            prop: this.prop,
             width: this.width,
-            className: this.className,
+            className: tdClassName,
+            singleLine: this.singleLine,
+            // tbody 中每个 td 内的 render 方法
             render: slots.default
+                // 如果 <x-table-column> 内有 template，按照 template 内的来渲染
                 ? args => {
                     return slots.default(args);
                 }
                 : ({dataItem, columnItem}) => {
-                    return dataItem[columnItem.dataKeyName];
+                    // 直接返回内容
+                    return dataItem[columnItem.prop];
                 }
         });
     }

@@ -10,61 +10,20 @@ export default {
         rowClassName: {
             type: [String, Function]
         },
-        selectable: {
-            type: Boolean
-        },
-        selectedItemList: {
+        selectedValueList: {
             type: Array
         },
-        uniqleKeyName: {
-            type: String
+        selectedValue: {
+            type: [String, Number]
         }
     },
 
-    render() {
-        return (
-            <tbody>
-                {
-                    this.data.map((dataItem, dataIndex) => (
-                        <tr class={ [this.getRowClass(dataItem, dataIndex)] }>
-                            {
-                                this.selectable
-                                    ? (
-                                        <td>
-                                            <x-checkbox
-                                                value={this.selectedItemList.indexOf(dataItem[this.uniqleKeyName]) > -1}
-                                                onChange={this.onChange.bind(this, dataItem)}
-                                            />
-                                        </td>
-                                    )
-                                    : ''
-                            }
-                            {
-                                this.columns.map(columnItem => (
-                                    <td class={columnItem.className}>
-                                        {
-                                            columnItem.render.call(
-                                                this,
-                                                {
-                                                    dataItem,
-                                                    columnItem,
-                                                    dataIndex
-                                                }
-                                            )
-                                        }
-                                    </td>
-                                ))
-                            }
-                        </tr>
-                    ))
-                }
-            </tbody>
-        );
-    },
-
     methods: {
-        onChange(dataItem, e) {
-            this.$emit('changeCheckbox', e.target.checked, dataItem);
+        onChangeCheckbox(value, e) {
+            this.$emit('changeCheckbox', e.target.checked, value);
+        },
+        onChangeRadio(value, e) {
+            this.$emit('changeRadio', e.target.checked, value);
         },
         getRowClass(row, index) {
             let classes = [];
@@ -78,6 +37,78 @@ export default {
             }
 
             return classes.join(' ');
+        },
+        onMouseenterTD(content, dataItem, columnItem, e) {
+            let tdElem = e.target;
+            if (columnItem.singleLine && tdElem.scrollWidth > tdElem.offsetWidth) {
+                tdElem.setAttribute('title', content);
+            }
+            else {
+                tdElem.removeAttribute('title');
+            }
         }
+    },
+
+    render() {
+        return (
+            <tbody>
+                {
+                    this.data.map((dataItem, dataIndex) => (
+                        <tr class={ [this.getRowClass(dataItem, dataIndex)] }>
+                            {
+                                this.columns.map(columnItem => {
+                                    let currentUniqueValue = dataItem[columnItem.prop];
+                                    switch (columnItem.type) {
+                                        case 'selection':
+                                            return (
+                                                <td class={columnItem.className}>
+                                                    <x-checkbox
+                                                        value={this.selectedValueList.indexOf(currentUniqueValue) > -1}
+                                                        onChange={this.onChangeCheckbox.bind(this, currentUniqueValue)}
+                                                    />
+                                                </td>
+                                            );
+                                        case 'radio':
+                                            return (
+                                                <td class={columnItem.className}>
+                                                    <x-checkbox
+                                                    value={this.selectedValue === currentUniqueValue}
+                                                    onChange={this.onChangeRadio.bind(this, currentUniqueValue)}
+                                                />
+                                                </td>
+                                            );
+                                        case 'normal':
+                                        default:
+                                            let content = columnItem.render.call(
+                                                this,
+                                                {
+                                                    dataItem,
+                                                    columnItem,
+                                                    dataIndex
+                                                }
+                                            );
+                                            return (
+                                                <td
+                                                    class={columnItem.className}
+                                                    onMouseenter={this.onMouseenterTD.bind(
+                                                            this,
+                                                            content,
+                                                            dataItem,
+                                                            columnItem
+                                                        )}
+                                                >
+                                                    {
+                                                        content
+                                                    }
+                                                </td>
+                                            );
+                                    }
+                                })
+                            }
+                        </tr>
+                    ))
+                }
+            </tbody>
+        );
     }
 };

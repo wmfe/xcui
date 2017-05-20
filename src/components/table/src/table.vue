@@ -1,31 +1,35 @@
 <template>
-    <table class="x-table" :class="{
-        'x-table-border': border,
-        'x-table-stripe': stripe
-        }">
-        <colgroup>
-            <col
-                v-for="item in columns"
-                :width="item.width"
-            >
-        </colgroup>
-        <x-thead
-            :columns="columns"
-            :selectable="selectable"
-            :selectedStatus="selectedStatus"
-            @changeCheckboxAll="onChangeCheckboxAll"
-        />
-        <x-tbody
-            :data="data"
-            :columns="columns"
-            :rowClassName="rowClassName"
-            :selectable="selectable"
-            :selectedItemList="selectedItemList"
-            :uniqleKeyName="uniqleKeyName"
-            @changeCheckbox="onChangeCheckbox"
-        />
-        <slot></slot>
-    </table>
+    <div class="x-table-wrapper">
+        <table class="x-table" :class="{
+            'x-table-bordered': bordered,
+            'x-table-striped': striped
+            }">
+            <colgroup>
+                <col
+                    v-for="item in columns"
+                    :width="item.width"
+                >
+            </colgroup>
+            <x-thead
+                :columns="columns"
+                :selected-status="selectedStatus"
+                @changeCheckboxAll="onChangeCheckboxAll"
+            />
+            <x-tbody
+                :data="data"
+                :columns="columns"
+                :row-class-name="rowClassName"
+                :selected-value-list="selectedValueList"
+                :selected-value="selectedValue"
+                @changeCheckbox="onChangeCheckbox"
+                @changeRadio="onChangeRadio"
+            />
+            <slot></slot>
+        </table>
+        <div class="x-table-empty-tip" v-if="data.length === 0">
+            {{emptyTip}}
+        </div>
+    </div>
 </template>
 
 <script>
@@ -41,30 +45,35 @@
                     return [];
                 }
             },
-            border: {
+            bordered: {
                 type: Boolean,
                 default: false
             },
-            stripe: {
+            striped: {
                 type: Boolean,
                 default: false
+            },
+            emptyTip: {
+                type: String,
+                default: '暂无数据'
             },
             rowClassName: {
                 type: [String, Function]
             },
-            uniqleKeyName: {
-                type: String,
-                default: ''
-            },
-            selectable: {
-                type: Boolean,
-                default: false
-            },
-            initialSelectedItemList: {
+            initialSelectedValueList: {
                 type: Array,
                 default() {
                     return [];
                 }
+            },
+            initialSelectedValue: {
+                type: [String, Number]
+            },
+            selectionChange: {
+                type: Function
+            },
+            radioChange: {
+                type: Function
             }
         },
 
@@ -76,54 +85,84 @@
         data() {
             return {
                 columns: [],
-                selectedItemList: this.initialSelectedItemList
+                rowKey: '',
+                tableWidth: null,
+                selectedValueList: this.initialSelectedValueList,
+                selectedValue: this.initialSelectedValue
             };
         },
         computed: {
             // none partial all
             selectedStatus() {
                 /* eslint-disable no-else-return */
-                if (this.selectedItemList.length === 0) {
+                if (this.selectedValueList.length === 0) {
                     return 'none';
                 }
                 else {
-                    if (this.selectedItemList.length === this.data.length) {
+                    if (this.selectedValueList.length === this.data.length) {
                         return 'all';
                     }
                     return 'partial';
                 }
                 /* eslint-enable no-else-return */
+            },
+            dataMap() {
+                let dataMap = {};
+                this.data.forEach(item => {
+                    let value = item[this.rowKey];
+                    dataMap[value] = item;
+                });
+                return dataMap;
             }
         },
 
         methods: {
+            getDataList(valueList) {
+                return valueList.map(value => {
+                    return this.dataMap[value];
+                });
+            },
             onChangeCheckboxAll(status) {
                 if (status) {
-                    this.selectedItemList = this.data.map(item => {
-                        return item[this.uniqleKeyName];
+                    this.selectedValueList = this.data.map(item => {
+                        return item[this.rowKey];
                     });
                 }
                 else {
-                    this.selectedItemList = [];
+                    this.selectedValueList = [];
                 }
-                this.$emit('update:selectedItemList', this.selectedItemList);
+                this.$emit(
+                    'selection-change',
+                    this.selectedValueList,
+                    this.getDataList(this.selectedValueList)
+                );
             },
-            onChangeCheckbox(status, dataItem) {
-                let uniqueValue = dataItem[this.uniqleKeyName];
-
-                let index = this.selectedItemList.indexOf(uniqueValue);
+            onChangeCheckbox(status, rowKey) {
+                let index = this.selectedValueList.indexOf(rowKey);
 
                 if (status) {
                     if (index === -1) {
-                        this.selectedItemList = this.selectedItemList.concat(uniqueValue);
+                        this.selectedValueList = this.selectedValueList.concat(rowKey);
                     }
                 }
                 else {
                     if (index > -1) {
-                        this.selectedItemList.splice(index, 1);
+                        this.selectedValueList.splice(index, 1);
                     }
                 }
-                this.$emit('update:selectedItemList', this.selectedItemList);
+                this.$emit(
+                    'selection-change',
+                    this.selectedValueList,
+                    this.getDataList(this.selectedValueList)
+                );
+            },
+            onChangeRadio(status, value) {
+                this.selectedValue = this.selectedValue === value ? '' : value;
+                this.$emit(
+                    'radio-change',
+                    this.selectedValue,
+                    this.dataMap[this.selectedValue]
+                );
             }
         }
     };

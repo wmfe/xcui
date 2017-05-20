@@ -6,9 +6,6 @@ export default {
         columns: {
             type: Array
         },
-        selectable: {
-            type: Boolean
-        },
         selectedStatus: {
             type: String
         }
@@ -29,24 +26,31 @@ export default {
             <thead>
                 <tr>
                     {
-                        this.selectable
-                            ? (
-                                <th class="x-table-checkbox">
-                                    <x-checkbox
-                                        indeterminate={this.selectedStatus === 'partial'}
-                                        value={this.selectedStatus === 'all'}
-                                        onChange={this.onChange}
-                                    />
-                                </th>
-                            )
-                            : ''
-                    }
-                    {
-                        this.columns.map(columnItem => (
-                            <th>
-                                {columnItem.title}
-                            </th>
-                        ))
+                        this.columns.map(columnItem => {
+                            switch (columnItem.type) {
+                                case 'selection':
+                                    return (
+                                        <th>
+                                            <x-checkbox
+                                                indeterminate={this.selectedStatus === 'partial'}
+                                                value={this.selectedStatus === 'all'}
+                                                onChange={this.onChange}
+                                            />
+                                        </th>
+                                    );
+                                case 'radio':
+                                    return (
+                                        <th></th>
+                                    );
+                                case 'normal':
+                                default:
+                                    return (
+                                        <th>
+                                            {columnItem.title}
+                                        </th>
+                                    );
+                            }
+                        })
                     }
                 </tr>
             </thead>

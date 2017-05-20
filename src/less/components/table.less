@@ -5,11 +5,9 @@
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
-    border: 1px solid @gray-ddd;
-    border-bottom: none;
 
     thead {
-        background-color: @gray-lighter;
+        background-color: @disabled-bg;
         text-align: left;
     }
     th {
@@ -19,14 +17,15 @@
         overflow: hidden;
         text-align: left;
     }
-    &-stripe {
+    &-striped {
         tr:nth-child(even) {
             background-color: @disabled-bg;
         }
     }
     tr:hover {
-        background-color: @gray-lighter;
+        background-color: @disabled-bg;
         color: @text-color;
+        transition: all .3s ease;
     }
     td {
         border-bottom: 1px solid @gray-ddd;
@@ -35,16 +34,25 @@
     }
     td, th {
         height: 40px;
-        text-overflow: ellipsis;
         vertical-align: middle;
     }
-    &-border {
+    &-bordered {
+        border: 1px solid @gray-ddd;
+        border-bottom: none;
         border-right: none;
         td, th {
           border-right: 1px solid @gray-ddd;
         }
     }
-    &-checkbox {
-        width: 20px;
+    &-td-single-line {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    &-empty-tip {
+        height: 300px;
+        line-height: 300px;
+        font-size: 20px;
+        text-align: center;
     }
 }
