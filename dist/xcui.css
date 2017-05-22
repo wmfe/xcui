@@ -8283,3 +8283,59 @@ textarea.x-input {
 .x-form-item:after {
   clear: both;
 }
+.x-table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 14px;
+}
+.x-table thead {
+  background-color: #f7f7f7;
+  text-align: left;
+}
+.x-table th {
+  padding: 0 15px;
+  border-bottom: 1px solid #dddddd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+}
+.x-table-striped tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+.x-table tr:hover {
+  background-color: #f7f7f7;
+  color: #555555;
+  transition: all .3s ease;
+}
+.x-table td {
+  border-bottom: 1px solid #dddddd;
+  padding: 0 15px;
+  word-break: break-all;
+}
+.x-table td,
+.x-table th {
+  height: 40px;
+  vertical-align: middle;
+}
+.x-table-bordered {
+  border: 1px solid #dddddd;
+  border-bottom: none;
+  border-right: none;
+}
+.x-table-bordered td,
+.x-table-bordered th {
+  border-right: 1px solid #dddddd;
+}
+.x-table-td-single-line {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.x-table-empty-tip {
+  height: 300px;
+  line-height: 300px;
+  font-size: 20px;
+  text-align: center;
+}

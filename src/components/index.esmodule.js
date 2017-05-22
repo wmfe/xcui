@@ -37,6 +37,8 @@ import Icon from './icon';
 import Switch from './switch';
 import Form from './form';
 import FormItem from './form-item';
+import Table from './table';
+import TableColumn from './table-column';
 
 const install = (Vue) => {
     if (install.installed) {
@@ -73,6 +75,8 @@ const install = (Vue) => {
     Vue.component(Switch.name, Switch);
     Vue.component(Form.name, Form);
     Vue.component(FormItem.name, FormItem);
+    Vue.component(Table.name, Table);
+    Vue.component(TableColumn.name, TableColumn);
     Vue.use(Message);
     Vue.use(Notice);
     Vue.use(Dialog);
@@ -117,6 +121,8 @@ const xcui = {
     Switch,
     Form,
     FormItem,
+    Table,
+    TableColumn,
     install
 };
 
