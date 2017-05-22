@@ -35,6 +35,7 @@ import Checkbox from './demos/checkbox';
 import Radio from './demos/radio';
 import Switch from './demos/switch';
 import Form from './demos/form';
+import Table from './demos/table';
 
 const router = new VueRouter({
     routes: [{
@@ -131,6 +132,9 @@ const router = new VueRouter({
             }, {
                 path: '/component/form',
                 component: Form
+            }, {
+                path: '/component/table',
+                component: Table
             }
         ]
     }]

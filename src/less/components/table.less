@@ -1,0 +1,50 @@
+@table-prefix-cls: ~"@{xcui-prefix}-table";
+
+.@{table-prefix-cls} {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid @gray-ddd;
+    border-bottom: none;
+
+    thead {
+        background-color: @gray-lighter;
+        text-align: left;
+    }
+    th {
+        padding: 0 15px;
+        border-bottom: 1px solid @gray-ddd;
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: left;
+    }
+    &-stripe {
+        tr:nth-child(even) {
+            background-color: @disabled-bg;
+        }
+    }
+    tr:hover {
+        background-color: @gray-lighter;
+        color: @text-color;
+    }
+    td {
+        border-bottom: 1px solid @gray-ddd;
+        padding: 0 15px;
+        word-break: break-all;
+    }
+    td, th {
+        height: 40px;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+    }
+    &-border {
+        border-right: none;
+        td, th {
+          border-right: 1px solid @gray-ddd;
+        }
+    }
+    &-checkbox {
+        width: 20px;
+    }
+}
