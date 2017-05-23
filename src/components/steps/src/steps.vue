@@ -34,7 +34,7 @@
                     this.$nextTick(() => {
                         this.calcQueued = false;
                         this.wrapStyle = {
-                            minWidth: `${this.$children.length * 180 - 100}px`
+                            minWidth: `${this.$children.length * 150 - 100}px`
                         };
                         this.$children.forEach((child, index) => {
                             if (!child[stepsItemComponentSymbol]) {

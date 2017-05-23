@@ -28,21 +28,21 @@
 
 ## 执行状态
 
-::: demo 每个步骤可以有success、failure、running三种状态，running状态可通过设置progress显示执行进度
+::: demo 通过设置status属性，每个步骤可以有 success、failure、running、pending、default 五种状态，running状态可通过设置progress显示执行进度
 
 ```html
 <tpl>
     <x-steps>
-        <x-steps-item title="第一步" success>
+        <x-steps-item title="第一步" status="success">
             执行成功
         </x-steps-item>
-        <x-steps-item title="第二步" failure>
+        <x-steps-item title="第二步" status="failure">
             执行失败
         </x-steps-item>
-        <x-steps-item title="第四步" running :progress="0.4">
+        <x-steps-item title="第四步" status="running" :progress="0.4">
             正在执行
         </x-steps-item>
-        <x-steps-item title="第五步" pending>
+        <x-steps-item title="第五步" status="pending">
             尚未执行
         </x-steps-item>
     </x-steps>
@@ -88,10 +88,10 @@
 ```html
 <tpl>
     <x-steps v-model="currentStep">
-        <x-steps-item title="执行成功" success></x-steps-item>
-        <x-steps-item title="执行失败" failure></x-steps-item>
-        <x-steps-item title="正在执行" running></x-steps-item>
-        <x-steps-item title="尚未执行" pending></x-steps-item>
+        <x-steps-item title="执行成功" status="success"></x-steps-item>
+        <x-steps-item title="执行失败" status="failure"></x-steps-item>
+        <x-steps-item title="正在执行" status="running"></x-steps-item>
+        <x-steps-item title="尚未执行" status="pending"></x-steps-item>
     </x-steps>
 </tpl>
 <script>
