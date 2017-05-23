@@ -10,10 +10,15 @@
     flex-grow: 1;
     flex-shrink: 1;
     padding: 5px;
+    cursor: pointer;
+    &:hover {
+      background: transparent;
+    }
     &-title {
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
+      transition: opacity 0.3s;
       &-mark {
         position: relative;
         flex-grow: 0;
@@ -75,12 +80,37 @@
         background: @blue-6;
         position: relative;
       }
-      &-trigger {
-        position: absolute;
-        left: 0;
-        right: 0;
-        font-size: 10px;
+      &-progress {
+        flex-grow: 1;
+        height: 3px;
+        background: @gray-lighter;
+        &-value {
+          background: @brand-warning;
+          height: 3px;
+          width: 0;
+          position: relative;
+          &::after {
+            content: "";
+            position: absolute;
+            right: -1px;
+            top: -1px;
+            height: 5px;
+            width: 5px;
+            border-radius: 3px;
+            box-shadow: 0 0 5px @brand-warning;
+            background: @brand-warning;
+            animation: steps-progress-shine 1s infinite;
+            @keyframes steps-progress-shine {
+              0% { opacity: 0; }
+              50% { opacity: 1; }
+              100% { opacity: 0; }
+            }
+          }
+        }
       }
+    }
+    &:last-child {
+      flex-grow: 0;
     }
     &:last-child &-title-line {
       display: none;
@@ -93,6 +123,9 @@
     }
     .status (@status, @color) {
       &-@{status} &-title {
+        &-text {
+          color: @color;
+        }
         &-mark {
           &-text {
             color: @color;
@@ -105,7 +138,11 @@
           background-color: @color;
         }
       }
+      &-@{status}.activatable &-title {
+        opacity: 0.6;
+      }
       &-@{status}.active &-title {
+        opacity: 1;
         &-mark {
           &-text {
             color: @white;
@@ -114,12 +151,14 @@
             background-color: @color;
           }
         }
+        &-text {
+          color: @color;
+        }
       }
     }
-    .status(success, @brand-success);
-    .status(failure, @brand-danger);
+    .status(success, #5A5);
+    .status(failure, #F00);
     .status(running, @brand-warning);
-    .status(running-progress, @brand-warning);
     .status(pending, @gray-light);
     .status(default, @brand-info);
 
@@ -144,7 +183,7 @@
     &-running.active &-title {
       &-mark {
         &-text {
-          color: @gray;
+          color: @brand-warning * 0.5;
         }
         &-circle {
           &::after {

@@ -39,9 +39,6 @@
         <x-steps-item title="第二步" failure>
             执行失败
         </x-steps-item>
-        <x-steps-item title="第三步" running>
-            正在执行
-        </x-steps-item>
         <x-steps-item title="第四步" running :progress="0.4">
             正在执行
         </x-steps-item>
@@ -57,20 +54,16 @@
 
 ## 用户选择与高亮
 
-::: demo 通过 value 属性克设置当前哪个步骤高亮选中，监听 @input 事件可得知用户点击了某个步骤。可通过 v-model 进行双向绑定。
+::: demo 通过 value 属性克设置当前哪个步骤高亮选中，监听 @input 事件可得知用户点击了某个步骤。可通过 v-model 进行双向绑定。还可以设置value-cancelable允许用户取通过再次点击消选择，value会被置为-1。
 
 ```html
 <tpl>
     <div>
-        <x-steps v-model="currentStep">
-            <x-steps-item title="第一步">
-            </x-steps-item>
-            <x-steps-item title="第二步">
-            </x-steps-item>
-            <x-steps-item title="第三步">
-            </x-steps-item>
-            <x-steps-item title="第四步">
-            </x-steps-item>
+        <x-steps v-model="currentStep" value-cancelable>
+            <x-steps-item title="第一步"></x-steps-item>
+            <x-steps-item title="第二步"></x-steps-item>
+            <x-steps-item title="第三步"></x-steps-item>
+            <x-steps-item title="第四步"></x-steps-item>
         </x-steps>
         当前步骤：第 {{currentStep + 1}} 步
     </div>
@@ -95,18 +88,10 @@
 ```html
 <tpl>
     <x-steps v-model="currentStep">
-        <x-steps-item title="第一步" success>
-            执行成功
-        </x-steps-item>
-        <x-steps-item title="第二步" failure>
-            执行失败
-        </x-steps-item>
-        <x-steps-item title="第三步" running>
-            正在执行
-        </x-steps-item>
-        <x-steps-item title="第五步" pending>
-            尚未执行
-        </x-steps-item>
+        <x-steps-item title="执行成功" success></x-steps-item>
+        <x-steps-item title="执行失败" failure></x-steps-item>
+        <x-steps-item title="正在执行" running></x-steps-item>
+        <x-steps-item title="尚未执行" pending></x-steps-item>
     </x-steps>
 </tpl>
 <script>

@@ -15,6 +15,10 @@
             value: {
                 type: Number,
                 defaultValue: -1
+            },
+            valueCancelable: {
+                type: Boolean,
+                defaultValue: false
             }
         },
         data() {

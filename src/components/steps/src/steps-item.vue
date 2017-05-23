@@ -4,10 +4,14 @@
             <div class="x-steps-item-title-mark">
                 <span class="x-steps-item-title-mark-text">{{itemIndex + 1}}</span>
                 <span class="x-steps-item-title-mark-circle"></span>
-            </div><!--
-            --><div class="x-steps-item-title-text">{{title}}</div><!--
-            --><div class="x-steps-item-title-line">
             </div>
+            <div class="x-steps-item-title-text">{{title}}</div>
+            <div class="x-steps-item-title-progress" v-if="progress >= 0">
+                <x-tooltip :content="percent" placement="top">
+                    <div class="x-steps-item-title-progress-value" :style="{ width: percent }"></div>
+                </x-tooltip>
+            </div>
+            <div class="x-steps-item-title-line" v-else></div>
         </div>
         <div class="x-steps-item-content"><slot></slot></div>
     </div>
@@ -58,9 +62,6 @@
                 else if (this.failure) {
                     status = 'failure';
                 }
-                else if (this.running && this.progress >= 0) {
-                    status = 'running-progress';
-                }
                 else if (this.running) {
                     status = 'running';
                 }
@@ -77,11 +78,19 @@
             },
             activatable() {
                 return this.$parent.value >= 0;
+            },
+            percent() {
+                return `${Math.round(this.progress * 100)}%`;
             }
         },
         methods: {
             onClick() {
-                this.$parent.$emit('input', this.itemIndex);
+                if (this.$parent.valueCancelable && this.itemIndex === this.$parent.value) {
+                    this.$parent.$emit('input', -1);
+                }
+                else {
+                    this.$parent.$emit('input', this.itemIndex);
+                }
             }
         },
         created() {
