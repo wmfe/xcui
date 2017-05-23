@@ -1,5 +1,158 @@
 @select-prefix-cls: ~"@{xcui-prefix}-steps";
 
 .@{select-prefix-cls} {
-  border: none;
+  overflow: hidden;
+  &-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  &-item {
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 5px;
+    &-title {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      &-mark {
+        position: relative;
+        flex-grow: 0;
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        font-family: arial;
+        text-align: center;
+        margin-right: 10px;
+        &-text {
+          position: relative;
+          z-index: 2;
+          transition: color 0.2s;
+          color: @blue-6;
+          .active & {
+            color: @white;
+            font-weight: bold;
+          }
+        }
+        &-circle {
+          position: absolute;
+          display: block;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          &::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            border: 1px solid @blue-6;
+            border-radius: 20px;
+            transition: background-color 0.2s, border 0.2s;
+            .active & {
+              background: @blue-6;
+            }
+          }
+        }
+      }
+      &-text {
+        flex-grow: 0;
+        margin-right: 10px;
+        font-weight: bold;
+        color: @gray-dark;
+        .activatable & {
+          color: @gray-light;
+        }
+        transition: color 0.2s;
+        .active & {
+          color: @gray-dark;
+        }
+      }
+      &-line {
+        flex-grow: 1;
+        height: 1px;
+        background: @blue-6;
+        position: relative;
+      }
+      &-trigger {
+        position: absolute;
+        left: 0;
+        right: 0;
+        font-size: 10px;
+      }
+    }
+    &:last-child &-title-line {
+      display: none;
+    }
+    &-content {
+      margin-left: 38px;
+      margin-top: 5px;
+      font-size: 0.8em;
+      color: @gray-light;
+    }
+    .status (@status, @color) {
+      &-@{status} &-title {
+        &-mark {
+          &-text {
+            color: @color;
+          }
+          &-circle::after {
+            border-color: @color;
+          }
+        }
+        &-line {
+          background-color: @color;
+        }
+      }
+      &-@{status}.active &-title {
+        &-mark {
+          &-text {
+            color: @white;
+          }
+          &-circle::after {
+            background-color: @color;
+          }
+        }
+      }
+    }
+    .status(success, @brand-success);
+    .status(failure, @brand-danger);
+    .status(running, @brand-warning);
+    .status(running-progress, @brand-warning);
+    .status(pending, @gray-light);
+    .status(default, @brand-info);
+
+    &-running &-title {
+      &-mark {
+        &-circle {
+          width: 50%;
+          overflow: hidden;
+          transform-origin: 100% 50%;
+          animation: steps-running-rotate 0.8s linear infinite;
+          @keyframes steps-running-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+          &::after {
+            width: 200%;
+            border-width: 3px;
+          }
+        }
+      }
+    }
+    &-running.active &-title {
+      &-mark {
+        &-text {
+          color: @gray;
+        }
+        &-circle {
+          &::after {
+            background-color: transparent;
+            border-width: 5px;
+          }
+        }
+      }
+    }
+  }
 }

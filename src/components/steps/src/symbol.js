@@ -8,3 +8,4 @@ function S(mark) {
 }
 
 export const stepsComponentSymbol = S('StepsComponent');
+export const stepsItemComponentSymbol = S('StepsItemComponent');
