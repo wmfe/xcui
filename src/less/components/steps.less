@@ -82,13 +82,14 @@
       }
       &-progress {
         flex-grow: 1;
-        height: 3px;
+        height: 1px;
         background: @gray-lighter;
         &-value {
-          background: @brand-warning;
-          height: 3px;
-          width: 0;
           position: relative;
+          top: -1px;
+          width: 0;
+          height: 3px;
+          background: @brand-warning;
           &::after {
             content: "";
             position: absolute;
