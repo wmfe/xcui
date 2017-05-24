@@ -28,21 +28,21 @@
 
 ## 执行状态
 
-::: demo 每个步骤可以有success、failure、running三种状态，running状态可通过设置progress显示执行进度
+::: demo 通过设置status属性，每个步骤可以有 success、failure、running、pending、default 五种状态，running状态可通过设置progress显示执行进度
 
 ```html
 <tpl>
     <x-steps>
-        <x-steps-item title="第一步" success>
+        <x-steps-item title="第一步" status="success">
             执行成功
         </x-steps-item>
-        <x-steps-item title="第二步" failure>
+        <x-steps-item title="第二步" status="failure">
             执行失败
         </x-steps-item>
-        <x-steps-item title="第四步" running :progress="0.4">
+        <x-steps-item title="第四步" status="running" :progress="0.4">
             正在执行
         </x-steps-item>
-        <x-steps-item title="第五步" pending>
+        <x-steps-item title="第五步" status="pending">
             尚未执行
         </x-steps-item>
     </x-steps>
@@ -88,10 +88,10 @@
 ```html
 <tpl>
     <x-steps v-model="currentStep">
-        <x-steps-item title="执行成功" success></x-steps-item>
-        <x-steps-item title="执行失败" failure></x-steps-item>
-        <x-steps-item title="正在执行" running></x-steps-item>
-        <x-steps-item title="尚未执行" pending></x-steps-item>
+        <x-steps-item title="执行成功" status="success"></x-steps-item>
+        <x-steps-item title="执行失败" status="failure"></x-steps-item>
+        <x-steps-item title="正在执行" status="running"></x-steps-item>
+        <x-steps-item title="尚未执行" status="pending"></x-steps-item>
     </x-steps>
 </tpl>
 <script>
@@ -106,6 +106,61 @@
 ```
 
 :::
+
+
+
+## 最小宽度与超长滚动
+
+::: demo 通过给添加min-width属性可给该步骤设置最小宽度，当步骤长度超过容器宽度时会自动进入可滚动状态。
+
+```html
+<tpl>
+    <x-steps v-model="currentStep">
+        <x-steps-item title="执行成功" status="success" :min-width="200"></x-steps-item>
+        <x-steps-item title="执行失败" status="failure" :min-width="300"></x-steps-item>
+        <x-steps-item title="正在执行" status="running"></x-steps-item>
+        <x-steps-item title="尚未执行" status="pending"></x-steps-item>
+        <x-steps-item title="执行成功" status="success"></x-steps-item>
+        <x-steps-item title="执行失败" status="failure"></x-steps-item>
+        <x-steps-item title="正在执行" status="running"></x-steps-item>
+        <x-steps-item title="尚未执行" status="pending"></x-steps-item>
+    </x-steps>
+</tpl>
+<script>
+    export default {
+        data() {
+            return {
+                currentStep: 0
+            };
+        },
+    };
+</script>
+```
+
+:::
+
+
+## Steps Props
+
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
+|-----|-----|-----|-----|-----|-----|-----|
+|value|Number|-1|被选中的步骤|可选||
+|value-cancelable|Boolean|false|用户是否可通过点击被选中步骤取消选中状态|可选||
+
+## Steps Events
+
+|事件名|说明|返回值|设置属性|
+|---|---|---|---|
+|input|用户选中某个步骤|当前选中步骤值（从0开始）|`@input`|
+
+## Steps-Item Props
+
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
+|-----|-----|-----|-----|-----|-----|-----|
+|title|String|无|步骤标题|必选||
+|status|String|default|步骤状态|可选|default, success, failure, running, pending|
+|progress|Number|-1|当状态是running时，显示进度条|可选|-1或0到1|
+|min-width|Number|100|该步骤最小展示宽度|可选|大于等于1|
 
 </template>
 

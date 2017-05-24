@@ -1,5 +1,5 @@
 <template>
-    <div :class="['x-steps-item', statusClass, { active, activatable }]" :style="{ minWidth: `${minWidth || 100}px` }" @click="onClick">
+    <div :class="['x-steps-item', `x-steps-item-${status}`, { active, activatable }]" :style="{ minWidth: `${minWidth || 100}px` }" @click="onClick">
         <div class="x-steps-item-title">
             <div class="x-steps-item-title-mark">
                 <span class="x-steps-item-title-mark-text">{{itemIndex + 1}}</span>
@@ -27,21 +27,9 @@
                 type: String,
                 defaultValue: ''
             },
-            success: {
-                type: Boolean,
-                defaultValue: false
-            },
-            failure: {
-                type: Boolean,
-                defaultValue: false
-            },
-            running: {
-                type: Boolean,
-                defaultValue: false
-            },
-            pending: {
-                type: Boolean,
-                defaultValue: false
+            status: {
+                type: String,
+                defaultValue: 'default'
             },
             progress: {
                 type: Number,
@@ -58,25 +46,6 @@
             };
         },
         computed: {
-            statusClass() {
-                let status = '';
-                if (this.success) {
-                    status = 'success';
-                }
-                else if (this.failure) {
-                    status = 'failure';
-                }
-                else if (this.running) {
-                    status = 'running';
-                }
-                else if (this.pending) {
-                    status = 'pending';
-                }
-                else {
-                    status = 'default';
-                }
-                return `x-steps-item-${status}`;
-            },
             active() {
                 return this.$parent.value === this.itemIndex;
             },
