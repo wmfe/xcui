@@ -115,7 +115,7 @@
 
 ```html
 <tpl>
-    <x-steps v-model="currentStep">
+    <x-steps>
         <x-steps-item title="执行成功" status="success" :min-width="200"></x-steps-item>
         <x-steps-item title="执行失败" status="failure" :min-width="300"></x-steps-item>
         <x-steps-item title="正在执行" status="running"></x-steps-item>
