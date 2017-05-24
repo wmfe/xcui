@@ -126,15 +126,6 @@
         <x-steps-item title="尚未执行" status="pending"></x-steps-item>
     </x-steps>
 </tpl>
-<script>
-    export default {
-        data() {
-            return {
-                currentStep: 0
-            };
-        },
-    };
-</script>
 ```
 
 :::
