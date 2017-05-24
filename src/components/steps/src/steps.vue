@@ -33,15 +33,20 @@
                     this.calcQueued = true;
                     this.$nextTick(() => {
                         this.calcQueued = false;
-                        this.wrapStyle = {
-                            minWidth: `${this.$children.length * 180 - 100}px`
-                        };
+                        let minWidth = 0;
                         this.$children.forEach((child, index) => {
                             if (!child[stepsItemComponentSymbol]) {
                                 throw new Error('<steps> may only contain <steps-item> children');
                             }
                             child.itemIndex = index;
+                            minWidth += child.minWidth || 100;
+                            if (index < this.$children.length - 1) {
+                                minWidth += 50;
+                            }
                         });
+                        this.wrapStyle = {
+                            minWidth: `${minWidth}px`
+                        };
                     });
                 }
             },

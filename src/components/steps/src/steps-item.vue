@@ -1,5 +1,5 @@
 <template>
-    <div :class="['x-steps-item', statusClass, { active, activatable }]" @click="onClick">
+    <div :class="['x-steps-item', statusClass, { active, activatable }]" :style="{ minWidth: `${minWidth || 100}px` }" @click="onClick">
         <div class="x-steps-item-title">
             <div class="x-steps-item-title-mark">
                 <span class="x-steps-item-title-mark-text">{{itemIndex + 1}}</span>
@@ -46,6 +46,10 @@
             progress: {
                 type: Number,
                 defaultValue: -1
+            },
+            minWidth: {
+                type: Number,
+                defaultValue: 100
             }
         },
         data() {
