@@ -39,6 +39,7 @@ import Form from './form';
 import FormItem from './form-item';
 import Table from './table';
 import TableColumn from './table-column';
+import Steps, { StepsItem } from './steps';
 
 const install = (Vue) => {
     if (install.installed) {
@@ -77,6 +78,8 @@ const install = (Vue) => {
     Vue.component(FormItem.name, FormItem);
     Vue.component(Table.name, Table);
     Vue.component(TableColumn.name, TableColumn);
+    Vue.component(Steps.name, Steps);
+    Vue.component(StepsItem.name, StepsItem);
     Vue.use(Message);
     Vue.use(Notice);
     Vue.use(Dialog);
