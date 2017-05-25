@@ -2,7 +2,11 @@
     <div :class="['x-steps-item', `x-steps-item-${status}`, { active, activatable }]" :style="{ minWidth: `${minWidth || 100}px` }" @click="onClick">
         <div class="x-steps-item-title">
             <div class="x-steps-item-title-mark">
-                <span class="x-steps-item-title-mark-text">{{itemIndex + 1}}</span>
+                <span class="x-steps-item-title-mark-text">
+                    <span v-if="icon >= 0">{{icon}}</span>
+                    <x-icon v-else-if="typeof icon === 'string'" :name="icon"></x-icon>
+                    <span v-else>{{itemIndex + 1}}</span>
+                </span>
                 <span class="x-steps-item-title-mark-circle"></span>
             </div>
             <div class="x-steps-item-title-text">{{title}}</div>
@@ -13,7 +17,7 @@
             </div>
             <div class="x-steps-item-title-line" v-else></div>
         </div>
-        <div class="x-steps-item-content"><slot></slot></div>
+        <div class="x-steps-item-content"><slot>{{description}}</slot></div>
     </div>
 </template>
 <script>
@@ -24,6 +28,10 @@
         componentName: 'xStepsItem',
         props: {
             title: {
+                type: String,
+                defaultValue: ''
+            },
+            description: {
                 type: String,
                 defaultValue: ''
             },
@@ -38,6 +46,9 @@
             minWidth: {
                 type: Number,
                 defaultValue: 100
+            },
+            icon: {
+                defaultValue: -1
             }
         },
         data() {

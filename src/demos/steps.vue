@@ -18,7 +18,25 @@
                 丰富的<b>第二步</b>说明
             </div>
         </x-steps-item>
-        <x-steps-item title="第三步">
+        <x-steps-item title="第三步" description="第三步描述">
+        </x-steps-item>
+    </x-steps>
+</tpl>
+```
+
+:::
+## 图标
+
+::: demo 设置icon属性可显示图标或数字
+
+```html
+<tpl>
+    <x-steps>
+        <x-steps-item title="第一步" icon="checkmark">
+        </x-steps-item>
+        <x-steps-item title="第二步" icon="0">
+        </x-steps-item>
+        <x-steps-item title="第三步" icon="close">
         </x-steps-item>
     </x-steps>
 </tpl>
@@ -54,7 +72,7 @@
 
 ## 用户选择与高亮
 
-::: demo 通过 value 属性克设置当前哪个步骤高亮选中，监听 @input 事件可得知用户点击了某个步骤。可通过 v-model 进行双向绑定。还可以设置value-cancelable允许用户取通过再次点击消选择，value会被置为-1。
+::: demo 通过 value 属性可设置当前哪个步骤高亮选中，监听 @input 事件可得知用户点击了某个步骤。可通过 v-model 进行双向绑定。还可以设置value-cancelable允许用户取通过再次点击消选择，value会被置为-1。
 
 ```html
 <tpl>
@@ -111,7 +129,7 @@
 
 ## 最小宽度与超长滚动
 
-::: demo 通过给添加min-width属性可给该步骤设置最小宽度，当步骤长度超过容器宽度时会自动进入可滚动状态。
+::: demo 通过添加min-width属性可给该步骤设置最小宽度，当步骤长度超过容器宽度时会进入可滚动状态（鼠标在两侧悬停进行滚动）。
 
 ```html
 <tpl>
@@ -149,6 +167,8 @@
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
 |-----|-----|-----|-----|-----|-----|-----|
 |title|String|无|步骤标题|必选||
+|icon|String或Number|无|步骤图标|必选|大于等于0的数字或者参考Icon组件|
+|description|String|无|步骤描述|可选||
 |status|String|default|步骤状态|可选|default, success, failure, running, pending|
 |progress|Number|-1|当状态是running时，显示进度条|可选|-1或0到1|
 |min-width|Number|100|该步骤最小展示宽度|可选|大于等于1|
