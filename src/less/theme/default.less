@@ -4,11 +4,11 @@
 //
 
 // perfix
-@xcui-prefix: xcui;
+@xcui-prefix: x;
 
 // color
 // 应用于组件的默认高亮色值上，或一些传达信息的组件、交互反馈上。
-@brand-primary: @blue-6; //  品牌主色
+@brand-primary: @lightseagreen-6; //  品牌主色
 @brand-success: @green-6; //  绿色 ： 代表成功、通过、安全
 @brand-info: @blue-6; //  蓝色 ： 代表专业
 @brand-warning: @yellow-6; //  黄色 ： 代表提醒
@@ -21,44 +21,120 @@
 @gray-dark: lighten(@gray-base, 20%); // #333
 @gray: lighten(@gray-base, 33.5%); // #555
 @gray-light: lighten(@gray-base, 46.7%); // #777
+@gray-ccc: lighten(@gray-base, 80%); // #ccc
+@gray-ddd: lighten(@gray-base, 86.5%); // #ddd;
 @gray-lighter: lighten(@gray-base, 93.5%); // #eee
+
+@white: #fff;
+@white-darker: #fbfdff;
 
 // global base
 // 每当组件默认值没有特定值的时候，遵循这里的全局设定
 @body-bg: #fff; // 全局背景色
-@text-color: @gray-dark; // 全局字体色值
-@text-color-secondary: @gray;// 字体色值第二选择
+@text-color: @gray; // 全局字体色值
+@text-color-secondary: @gray-dark;// 字体色值第二选择
 @link-color: @brand-primary; // 全局链接色值
 @link-hover-color: darken(@link-color, 15%); // 全局链接悬停色值
 @link-hover-decoration: underline; // 全局链接悬停样式
 @disabled-color: #e6e6e6; // 全局禁用色值
+@disabled-bg: #f7f7f7;
+@error-color: @brand-danger; // 全局错误色值
 
-@font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; // 全局字体
-@code-family: Consolas, Menlo, Courier, monospace; // 全局代码字体
+@font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, sans-serif; // 全局字体
+@code-family: Consolas, Menlo, Monaco, Courier, monospace; // 全局代码字体
 @font-size-base: 14px; // 全局字体base大小
-@font-size-large: ceil((@font-size-base * 1.25)); // 全局字体大尺寸~18px
+@font-size-large: ceil((@font-size-base * 1.10)); // 全局字体大尺寸~16px
 @font-size-small: ceil((@font-size-base * 0.85)); // 全局字体小尺寸~12px
 @line-height-base: 1.5; // 字体行高
 
 @border-color-base: #d9d9d9; // 边框默认色值
+@border-light-color: @gray-lighter;
 
 @border-radius-base: 4px; // 圆角默认值
 @border-radius-large: 6px; // 大尺寸圆角默认值
-@border-radius-small: 2px; // 小尺寸圆角默认值
+@border-radius-small: 3px; // 小尺寸圆角默认值
 
 @padding-base-vertical: 6px; // 组件默认间隔-垂直
 @padding-base-horizontal: 12px; // 组件默认间隔-水平
 
-@padding-large-vertical: 10px; // 组件大尺寸间隔-垂直
-@padding-large-horizontal: 16px; // 组件大尺寸间隔-水平
+@padding-large-vertical: 8px; // 组件大尺寸间隔-垂直
+@padding-large-horizontal: 14px; // 组件大尺寸间隔-水平
 
 @padding-small-vertical: 5px; // 组件小尺寸间隔-垂直
 @padding-small-horizontal: 10px; // 组件小尺寸间隔-水平
 
+//** Unit-less `line-height` for use in components like buttons.
+@line-height-base:        1.428571429; // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+@line-height-computed:    floor((@font-size-base * @line-height-base)); // ~20px
+
+@line-height-large:         1.3333333; // extra decimals for Win 8.1 Chrome
+@line-height-small:         1.5;
+
+//** Width of the `border` for generating carets that indicate dropdowns.
+@caret-width-base:          4px;
+//** Carets increase slightly in size for larger components.
+@caret-width-large:         5px;
+
+//** Disabled cursor for form controls and buttons.
+@cursor-disabled: not-allowed;
+
+// global Layout
+@grid-gutter-width: 0;
+@grid-columns: 24;
+
+
+// z-index
+
+@tooltip-zindex: 1000;
+@popover-zindex: 1000;
+@modal-zindex: 1000;
+@loading-zindex: 10000;
+@scrolltop-zindex: 9000;
+
+// Media queries breakpoints
+// Extra small screen / phone
+@screen-xs              : 480px;
+@screen-xs-min          : @screen-xs;
+@screen-xs-max          : (@screen-xs-min - 1);
+
+// Small screen / tablet
+@screen-sm              : 768px;
+@screen-sm-min          : @screen-sm;
+@screen-sm-max          : (@screen-sm-min - 1);
+
+// Medium screen / desktop
+@screen-md              : 992px;
+@screen-md-min          : @screen-md;
+@screen-md-max          : (@screen-md-min - 1);
+
+// Large screen / wide desktop
+@screen-lg              : 1200px;
+@screen-lg-min          : @screen-lg;
+@screen-lg-max          : (@screen-lg-min - 1);
+
+// Animation
+@animation-duration-slow: .3s; // Modal
+@animation-duration-base: .2s;
+@animation-duration-fast: .1s; // Tooltip
+
+@ease-out            : cubic-bezier(0.215, 0.61, 0.355, 1);
+@ease-in             : cubic-bezier(0.55, 0.055, 0.675, 0.19);
+@ease-in-out         : cubic-bezier(0.645, 0.045, 0.355, 1);
+@ease-out-back       : cubic-bezier(0.12, 0.4, 0.29, 1.46);
+@ease-in-back        : cubic-bezier(0.71, -0.46, 0.88, 0.6);
+@ease-in-out-back    : cubic-bezier(0.71, -0.46, 0.29, 1.46);
+@ease-out-circ       : cubic-bezier(0.08, 0.82, 0.17, 1);
+@ease-in-circ        : cubic-bezier(0.6, 0.04, 0.98, 0.34);
+@ease-in-out-circ    : cubic-bezier(0.78, 0.14, 0.15, 0.86);
+@ease-out-quint      : cubic-bezier(0.23, 1, 0.32, 1);
+@ease-in-quint       : cubic-bezier(0.755, 0.05, 0.855, 0.06);
+@ease-in-out-quint   : cubic-bezier(0.86, 0, 0.07, 1);
+
 // global button
 // 全局按钮样式设定，统一按钮样式
 
-@btn-font-weight: 500;
+@btn-font-weight: 400;
 
 @btn-default-color: #333;
 @btn-default-bg: #fff;
@@ -70,24 +146,31 @@
 
 @btn-primary-color: #fff;
 @btn-primary-bg: @brand-primary;
-@btn-primary-border: darken(@btn-primary-bg, 5%);
+@btn-primary-border: @brand-primary;
 
 @btn-success-color: #fff;
 @btn-success-bg: @brand-success;
-@btn-success-border: darken(@btn-success-bg, 5%);
+@btn-success-border: @brand-success;
 
 @btn-info-color: #fff;
 @btn-info-bg: @brand-info;
-@btn-info-border: darken(@btn-info-bg, 5%);
+@btn-info-border: @brand-info;
 
 @btn-warning-color: #fff;
 @btn-warning-bg: @brand-warning;
-@btn-warning-border: darken(@btn-warning-bg, 5%);
+@btn-warning-border: @brand-warning;
 
 @btn-danger-color: #fff;
 @btn-danger-bg: @brand-danger;
-@btn-danger-border: darken(@btn-danger-bg, 5%);
+@btn-danger-border: @brand-danger;
 
+@btn-dashed-color: @gray-dark;
+@btn-dashed-bg: #fff;
+@btn-dashed-border: @gray-dark;
+
+@btn-link-color: @brand-primary;
+@btn-link-bg: #fff;
+@btn-link-border: transparent;
 @btn-link-disabled-color: @gray-light;
 
 @btn-padding-base: 4px 15px;
@@ -107,3 +190,170 @@
 @shadow-1-left: -1px 0 6px @shadow-color;
 @shadow-1-right: 1px 0 6px @shadow-color;
 @shadow-2: 0 2px 8px @shadow-color;
+
+//** `<input>` background color
+@input-bg:                       #fff;
+//** `<input disabled>` background color
+@input-bg-disabled:              #f7f7f7;
+
+//** Text color for `<input>`s
+@input-color:                    @gray;
+//** `<input>` border color
+@input-border-color:                   #ccc;
+
+@input-border-radius:            @border-radius-base;
+//** Large input border radius
+@input-border-radius-large:      @border-radius-large;
+//** Small input border radius
+@input-border-radius-small:      @border-radius-small;
+
+//** Border color for inputs on focus
+@input-border-focus:             @brand-primary;
+
+//** Placeholder text color
+@input-color-placeholder:        #ccc;
+
+//** Default input height
+@input-height-base:              (@line-height-computed + (@padding-base-vertical * 2) + 2);
+//** Large input height
+@input-height-large:             (ceil(@font-size-large * @line-height-large) + (@padding-large-vertical * 2) + 2);
+//** Small input height
+@input-height-small:             (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) + 2);
+
+// input hover color
+@input-hover-border-color: @brand-primary;
+
+// checkboxes
+
+@checkbox-size: 18px;
+
+@checkbox-bg: @brand-primary;
+
+@checkbox-bg-disabled: @input-bg-disabled;
+
+@checkbox-text-size: 18px;
+
+@checkbox-text-disabled: @disabled-color;
+
+@checkbox-border-color: lighten(@brand-primary, 20%);
+
+@checkbox-boxshadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+// radio
+
+@radio-size: 18px;
+
+@radio-bg: @brand-primary;
+
+@radio-bg-disabled: @input-bg-disabled;
+
+@radio-text-size: 18px;
+
+@radio-text-disabled: @disabled-color;
+
+@radio-border-color: lighten(@brand-primary, 20%);
+
+@radio-boxshadow: @checkbox-boxshadow;
+
+// radio-button
+
+
+@radio-button-checked-bg: @btn-primary-bg;
+
+@radio-button-checked-color: @btn-primary-color;
+
+@radio-button-bg: @btn-default-bg;
+
+@radio-button-border: @btn-default-border;
+
+// input-number
+
+@input-number-width: 180px;
+
+@input-number-large-width: 200px;
+
+@input-number-small-width: 130px;
+
+@input-number-btn-border: @input-border-color;
+
+@input-number-btn-hover-color: @brand-primary;
+
+@input-number-btn-color: @gray-light;
+
+@input-number-disabled-color: @disabled-color;
+
+// dropdowns
+
+@drop-down-boxshadow: 0 1px 6px rgba(0,0,0,.2);
+
+@drop-down-hover-bg: rgba(70, 195, 193, 0.15);
+
+@drop-down-selected-bg: @gray-lighter;
+
+@drop-down-text-color: @gray;
+
+// select 
+
+@select-group-title-size: @font-size-small;
+
+@select-group-color: #999;
+
+@select-group-height: 30px;
+
+// datepicker
+
+@datepicker-color:@text-color;
+
+@datepicker-icon-color: @gray-ccc;
+
+@datepicker-border-color: #d1dbe5;
+
+@datepicker-header-color: @gray-dark;
+
+@datepicker-off-color: #ddd;
+
+@datepicker-text-hover-color: @brand-primary;
+
+@datepicker-active-color: @brand-primary;
+
+@datepicker-cell-hover-color: @drop-down-hover-bg;
+
+@datepicker-inrange-color: darken(@drop-down-hover-bg, 15%);
+
+@datepicker-inrange-hover-color: tint(@brand-primary, 0.64);
+
+@datepicker-inner-border-color: #e4e4e4;
+
+// notice 
+
+@notice-width: 335px;
+@notice-padding: 16px;
+@notice-margin-bottom: 10px;
+
+// tooltip
+
+@tooltip-bg: #2c3e50;
+@tooltip-font-size: @font-size-small;
+@tooltip-font-color: @white;
+@tooltip-arrow-size: 6px;
+
+// popover
+
+@popover-bg: #fff;
+@popover-title-size: @font-size-base;
+@popover-font-size: @font-size-small;
+@popover-font-color: @text-color;
+@popover-arrow-size: 6px;
+@popover-arrow-color: rgba(217, 217, 217, 0.7);
+@popover-shadow: @shadow-1-down;
+@popover-title-border: @border-light-color;
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+@pagination-prefix-cls: ~"@{xcui-prefix}-pagination";
+
+.@{pagination-prefix-cls} {
+    -webkit-user-select: none;
+    &-standard {
+        .number-btn {
+            width: auto;
+            min-width: 30px;
+            padding: 4px 6px;
+            &.active{
+                color: @white;
+                background-color: @brand-primary;
+            }
+        }
+    }
+    
+    &-size-select {
+        display: block;
+        width: 30px;
+    }
+
+    &-standard-btn-group{
+        margin: 0 15px;
+        vertical-align: bottom;
+        display: inline-block;
+        .x-icon-chevron-d-left,.x-icon-chevron-d-right {
+            font-size: 10px;
+            width: 10.5px;
+        }
+    }
+
+    &-page-size{
+        display: inline-block;
+        .x-icon {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+        }
+        .x-input {
+            width: 110px;
+            padding-right: 25px;
+            height: 30px;
+        }
+    }
+
+    &-mini {
+        &-total {
+            margin-right: 10px;
+        }
+        &-text {
+            padding: 0 10px;
+        }
+        &-prev-btn , &-next-btn {
+            padding: 4px 0;
+            width: 34px;
+        }
+    }
+}

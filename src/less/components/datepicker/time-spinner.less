@@ -1,0 +1,58 @@
+@time-spinner-prefix-cls: ~"@{xcui-prefix}-time-spinner";
+
+.@{time-spinner-prefix-cls} {
+    &.has-seconds {
+        .@{time-spinner-prefix-cls}-wrapper {
+            width: 33%;
+            &:hover {
+                overflow-y: scroll;
+            }
+        }
+        &:nth-child(2) {
+            margin-left: 1%;
+        }
+    }
+
+    &-wrapper {
+        max-height: 190px;
+        overflow: hidden;
+        display: inline-block;
+        width: 50%;
+        vertical-align: top;
+        position: relative;
+        overflow: hidden;
+    }
+
+    &-list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        text-align: center;
+        
+        &:after, &:before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 80px;
+        }
+    }
+
+    &-item {
+        height: 32px;
+        line-height: 32px;
+        font-size: @font-size-small;
+
+        &:hover:not(.disabled):not(.active) {
+            background-color: @datepicker-cell-hover-color;
+        }
+
+        &.active:not(.disabled) {
+            color: @white
+        }
+        
+        &.disabled {
+            color: @datepicker-border-color;
+            cursor: not-allowed;
+        }
+    }
+}

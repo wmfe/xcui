@@ -1,0 +1,12 @@
+.button-group-btn-border() {
+    &:first-child {
+        border-right-color: rgba(255, 255, 255, 0.5);
+    }
+    &:last-child {
+        border-left-color: hsla(0,0%,100%,.5)
+    }
+    &:not(:first-child):not(:last-child) {
+        border-left-color: hsla(0,0%,100%,.5);
+        border-right-color: hsla(0,0%,100%,.5);
+    }
+}

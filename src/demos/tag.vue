@@ -1,5 +1,5 @@
 <template lang="md">
-# Tag标签
+# Tag 标签
 
 ## 使用场景
 
@@ -8,76 +8,297 @@
 - 支持禁用标签
 - 支持自定义标签样式
 
-## DEMO
-<demo>
-	<example title="基本使用">
-        <xcui-tag :text="'标签'"></xcui-tag>
-        <xcui-tag :disabled="true" :text="'禁用标签'"></xcui-tag>
-        <xcui-tag :closeable="true" :text="'关闭'" @close="closeclick"></xcui-tag>
-        <xcui-tag :closeable="true" @close="closeclick" :keys.sync="key" :text="'点击不关闭'" :aftercloseisshow.sync="afterCloseIsShowTag" @click="click"></xcui-tag>
-        <xcui-tag :class="'define-class'" :text="'自定义样式'" @click="click"></xcui-tag>
-    </example>
-    <example title="添加标签">
-        <span v-for="item in tags">
-            <xcui-tag :closeable="true" :text="item.text"></xcui-tag>
-        </span>
-        <input type="button" class="btn btn-primary" value="添加" @click="addTag"/>
-    </example>
-</demo>
+
+## 基本使用
+
+::: demo 基本使用, 可通过添加`closeable`来关闭标签。在`on-close`事件中可使用`event.preventDefault()`来阻止标签隐藏。
+
+```html
+
+<tpl>
+    <x-tag>标签一</x-tag>
+    <x-tag closeable :on-close="close1">可关闭标签一</x-tag>
+    <x-tag closeable :on-close="close2">可关闭标签二</x-tag>
+</tpl>
+
+<script>
+    export default {
+        methods: {
+            close1() {
+                this.$Message.info('标签被关闭了');
+            },
+            close2(e) {
+                e.preventDefault();
+                this.$Message.info('标签不会被关闭');
+            }
+        }
+    };
+</script>
+```
+
+:::
+
+## 多彩标签
+
+::: demo XCUI添加了多种预设色彩，用于不同场景。如果预设值不能满足需求，可设置为具体的色值。
+
+```html
+
+<tpl>
+    <div>
+        <x-tag closeable color="pink">pink</x-tag>
+        <x-tag closeable color="red">red</x-tag>
+        <x-tag closeable color="orange">orange</x-tag>
+        <x-tag closeable color="green">green</x-tag>
+        <x-tag closeable color="cyan">cyan</x-tag>
+        <x-tag closeable color="blue">blue</x-tag>
+        <x-tag closeable color="purple">purple</x-tag>
+    </div>
+    <div style="margin-top: 15px;">
+        <x-tag closeable color="pink-inverse">pink-inverse</x-tag>
+        <x-tag closeable color="red-inverse">red-inverse</x-tag>
+        <x-tag closeable color="orange-inverse">orange-inverse</x-tag>
+        <x-tag closeable color="green-inverse">green-inverse</x-tag>
+        <x-tag closeable color="cyan-inverse">cyan-inverse</x-tag>
+        <x-tag closeable color="blue-inverse">blue-inverse</x-tag>
+        <x-tag closeable color="purple-inverse">purple-inverse</x-tag>
+    </div>
+    <div style="margin-top: 15px;">
+        <x-tag color="#f50">#f50</x-tag>
+        <x-tag color="#2db7f5">#2db7f5</x-tag>
+        <x-tag color="#87d068">#87d068</x-tag>
+        <x-tag color="#108ee9">#108ee9</x-tag>
+    </div>
+
+</tpl>
 
 
-## Props
-| 名字 | 类型 | 默认 | 描述 | 是否必选 |
-|-----|-----|-----|-----|----|
-|text|String|空字符串|内容|必选|
-|disabled | Boolean| false|是否禁用|可选|
-|closeable|Boolean|false|是否可关闭|可选|
-|close|function|无|关闭时回调|可选|
-|click|function|无|点击标签事件|可选|
-|showTag| Boolean|true|是否展示tag|可选|
-|aftercloseisshow| Boolean|false|关闭回调后是否展示Tag|可选|
-|key|String|空字符串|存储数据|可选|
-|class|String|空字符串|自定义样式|可选|
-</template>
+```
+
+:::
+
+## 添加标签
+
+::: demo 添加标签
+
+```html
+
+<tpl>
+    <x-tag v-for="tag in tags" closeable>{{tag.name}}</x-tag>
+    <x-button type="sm" @click="addTag">添加</x-button>
+</tpl>
 
 <script>
 export default {
     data() {
         return {
-            tags: [{text: '新标签', key: 'test'}],
-            showTag: false,
-            index: 1,
-            key: 'data',
-            afterCloseIsShowTag: true
+            index: 1
         };
     },
     methods: {
-        closeclick() {
-            alert('testValidateSuccess');
-        },
         addTag() {
             if (this.tags === null) {
                 this.tags = [];
             }
-            this.tags.push({text: `新标签${this.index++}`, key: this.index});
-        },
-        click() {
-            alert('clicksuccess');
+            this.tags.push({name: `新标签${this.index++}`});
         }
     }
 };
 
 </script>
 
-<style>
-.define-class{
-    background:#ffab47;
-    color:#fff;
-    border-radius: 6px;
-}
+```
 
-.define-class:hover{
-    background:red;
-}
-</style>
+:::
+
+## 可选择的标签（类checkbox)
+
+::: demo 可选择的标签, 使用`x-tag-checkable`组件来实现。`@change`事件返回的参数中携带当前tag的Vue实例和`checked`状态。
+
+```html
+
+<tpl>
+    <x-tag-checkable v-for="tag in tags2"
+        :color="tag.color"
+        :tag-key="tag.key"
+        :name="tag.name"
+        @change="change1">{{tag.name}}</x-tag-checkable>
+    <p style="margin-top: 15px;">选中的标签：{{selectedTagNames.length > 0 ? selectedTagNames : ''}}</p>
+    <p style="margin-top: 15px;">选中的标签值：{{selectedTagKeys.length > 0 ? selectedTagKeys : ''}}</p>
+</tpl>
+
+<script>
+export default {
+    data() {
+        return {
+            tags:[{
+                name: '电影', color: ''
+            }]
+            selectedTags: [],
+            selectedTagNames: [],
+            selectedTagKeys: [],
+            tags2: [{
+                name: '电影', color: '', key: '0'
+            }, {
+                name: '动漫', color: 'pink', key: '1'
+            }, {
+                name: '音乐', color: 'green', key: '2'
+            }, {
+                name: '八卦', color: 'blue', key: '3'
+            }, {
+                name: '科技', color: 'purple', key: '4'
+            }]
+        };
+    },
+    methods: {
+        change1(tag, checked) {
+            if (checked) {
+                let hit;
+                this.selectedTags.forEach((v) => {
+                    if (v.tagkey === tag.tagkey) {
+                        hit = true;
+                    }
+                });
+                if (!hit) {
+                    this.selectedTags.push({
+                        name: tag.name,
+                        color: tag.color,
+                        tagkey: tag.tagKey
+                    });
+                } 
+            }
+            else {
+                let i = -1;
+                this.selectedTags.forEach((v, index) => {
+                    if (v.tagkey === tag.tagKey) {
+                        i = index;
+                    }
+                });
+                if (i >= 0) {
+                    this.selectedTags.splice(i, 1);  
+                }
+            }
+            this.selectedTagNames = this.selectedTags.map((v) => {
+                return v.name;
+            });
+            this.selectedTagKeys = this.selectedTags.map((v) => {
+                return v.tagkey;
+            });
+        }
+    }
+};
+
+</script>
+
+```
+
+:::
+
+
+
+## Tag Props
+| 名字 | 类型 | 默认 | 描述 | 是否必选 | 可选值|
+|-----|-----|-----|-----|----|----|
+|color|String|无|颜色，可设为预设值或色值|可选|pink/red/orange/green/cyan/blue/purple, 加上`-inverse`设为反色|
+|closeable|Boolean|false|是否可关闭|可选|true, false|
+|on-close|function|无|关闭时回调，参数为鼠标事件event|可选||
+|transition|String|fade|关闭时的过渡效果名称|可选||
+
+## TagCheckable Props
+| 名字 | 类型 | 默认 | 描述 | 是否必选 | 可选值|
+|-----|-----|-----|-----|----|----|
+|color|String|无|颜色，可设为预设值或色值|可选|pink/red/orange/green/cyan/blue/purple, 加上`-inverse`设为反色|
+|name|String|false|是否可关闭|可选|true, false|
+|tag-key|function|无|tag的标识|可选||
+|checked|Boolean|false|是否默认选中|否|true,false|
+
+
+## TagCheckable Events
+|事件名|说明|返回值|设置属性|
+|---|---|---|---|
+|change|点击事件后触发|(TagVueComponent, checked)|`@change`|
+
+
+
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            tags: [{name: '新标签', key: 'test'}],
+            showTag: false,
+            index: 1,
+            key: 'data',
+            selectedTags: [],
+            selectedTagNames: [],
+            selectedTagKeys: [],
+            tags2: [{
+                name: '电影', color: '', key: '0'
+            }, {
+                name: '动漫', color: 'pink', key: '1'
+            }, {
+                name: '音乐', color: 'green', key: '2'
+            }, {
+                name: '八卦', color: 'blue', key: '3'
+            }, {
+                name: '科技', color: 'purple', key: '4'
+            }]
+        };
+    },
+    methods: {
+        close1() {
+            this.$Message.info('标签被关闭了');
+        },
+        close2(e) {
+            e.preventDefault();
+            this.$Message.info('标签不会被关闭');
+        },
+        closeclick(e) {
+            e.preventDefault();
+        },
+        addTag() {
+            if (this.tags === null) {
+                this.tags = [];
+            }
+            this.tags.push({name: `新标签${this.index++}`, key: this.index});
+        },
+        change1(tag, checked) {
+            if (checked) {
+                let hit;
+                this.selectedTags.forEach((v) => {
+                    if (v.tagkey === tag.tagkey) {
+                        hit = true;
+                    }
+                });
+                if (!hit) {
+                    this.selectedTags.push({
+                        name: tag.name,
+                        color: tag.color,
+                        tagkey: tag.tagKey
+                    });
+                } 
+            }
+            else {
+                let i = -1;
+                this.selectedTags.forEach((v, index) => {
+                    if (v.tagkey === tag.tagKey) {
+                        i = index;
+                    }
+                });
+                if (i >= 0) {
+                    this.selectedTags.splice(i, 1);  
+                }
+            }
+            this.selectedTagNames = this.selectedTags.map((v) => {
+                return v.name;
+            });
+            this.selectedTagKeys = this.selectedTags.map((v) => {
+                return v.tagkey;
+            });
+        }
+    }
+};
+
+</script>
 

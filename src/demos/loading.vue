@@ -1,124 +1,157 @@
 <template lang="md">
-# Loading 加载组件
+# Loading 加载中提示
 
-## 使用场景
+用于页面和区块的加载中状态, 一般在页面局部处于等待异步数据或正在渲染过程时使用。
 
-在ajax加载或其他长耗时操作时，在一个页面元素上加入加载中图标，当耗时操作完成后隐藏。
+> `Loading`在XCUI中以指令方式调用。如果完整引入了XCUI，可以直接使用`v-loading`指令。
+>  在**单文件引入**时，由于`Loading`在XCUI中被注册为一个[Vue 插件](https://vuejs.org/v2/guide/plugins.html),请使用`Vue.use(Loading)` 挂载，再进行使用。
 
-## 组件能力
+## 基本使用
 
-- 提供3种css加载样式。
-- loading需要放在一个拥有定位属性的容器，组件蒙层大小为父元素大小。
-- css动画颜色可定制。
-- 提供三种可选尺寸。
-- 可通过自定义类名增加特殊定制。
+::: demo 基本使用，在需要加载中提示的区块元素上设置`v-loading`指令，并绑定`Boolean`即可。默认状况下，Loading 遮罩会插入到绑定元素的子节点，通过添加`body`修饰符，可以使遮罩插入至 `DOM` 中的 `body` 上。
 
-<demo>
-    <example title="加载组件">
-      <div class="loadWrap">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <xcui-loading :show="show"
-                   :type="type"
-                   :color="color"
-                   :size="size"
-                   :classname="classname"></xcui-loading>
-      </div>
-        <div class="btnGroup clearfix">
-            <label class="control-label col-md-4">show：</label>
-            <div class="col-md-6">
-                <button class="btn btn-primary" @click="toogleShow">{{showBtn}}</button>
-            </div>
-        </div>
-        <div class="btnGroup clearfix">
-            <label  class="control-label col-md-4">type：</label>
-            <div class="col-md-6">
-                <select class="form-control" v-model="type">
-                    <option>load1</option>
-                    <option>load2</option>
-                    <option>load3</option>
-                </select>
-            </div>
-        </div>
-        <div class="btnGroup clearfix">
-            <label  class="control-label col-md-4">size：</label>
-            <div class="col-md-6">
-                <select class="form-control" v-model="size">
-                    <option>sm</option>
-                    <option>md</option>
-                    <option>lg</option>
-                </select>
-            </div>
-        </div>
-        <div class="btnGroup clearfix">
-            <label class="control-label col-md-4">color：</label>
-            <div class="col-md-6">
-                <input class="form-control" type="text" v-model="color" placeholder="支持css颜色格式">
-            </div>
-        </div>
-    </example>
-</demo>
+```html
 
+<tpl>
+    <div v-loading.body="loading" style="width: 400px;height: 60px;padding: 30px; outline: 1px dotted #eee;">
+        <img :src="imgPara">
+    </div>
+</tpl>
 
-## Props
-| 名字 | 类型 | 默认 | 描述 | 可选范围 | 是否必选 |
-|-----|-----|-----|-----|----|----|
-| show | Boolean | false | 控制显示隐藏 | true/false | 必选 |
-| type | String | load2 | 控制样式选择 | load1-load3 | 可选 |
-| size | String | md | 控制大小 | sm/md/lg | 可选 |
-| color | String | 无 | 控制颜色 | css色值 | 可选 |
-| classname | String | 无 | 自定义类名 |  | 可选 |
+<script>
+    export default {
+        data() {
+            return {
+                loading: true
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+## 其他加载效果
+
+::: demo 除了默认效果外，还可以通过在需要Loading的区块元素上设置`x-loading-type`属性来使用其他两种效果：`grid`和`dot`。
+
+```html
+
+<tpl>
+    <div v-loading="loading" x-loading-type="grid" style="width: 30%;display:inline-block;margin-top: 15px;padding: 30px; outline: 1px dotted #eee;">
+        <img :src="imgPara">
+    </div>
+
+    <div v-loading="loading" x-loading-type="dot" style="width: 30%;display:inline-block;margin-top: 15px;padding: 30px; outline: 1px dotted #eee;">
+        <img :src="imgPara">
+    </div>
+</tpl>
+
+```
+
+:::
+
+## 整页加载
+
+::: demo 当需要全屏遮罩时，可使用`fullscreen`修饰符（此时遮罩会插入至 body 上）。此时若需要锁定屏幕的滚动，可以使用`lock`修饰符。
+
+```html
+
+<tpl>
+    <x-button type="primary" @click="openFullScreen" v-loading.fullscreen.lock="fullscreenLoading">
+        显示整页加载，3 秒后消失
+    </x-button>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                fullscreenLoading: false
+            };
+        },
+        methods: {
+            openFullScreen() {
+                this.fullscreenLoading = true;
+                setTimeout(() => {
+                    this.fullscreenLoading = false;
+                }, 3000);
+            }
+        }
+    };
+</script>
+
+```
+
+:::
+
+## 自定义加载文案
+
+::: demo 通过在需要Loading的区块元素上设置`x-loading-text`，可进行自定义加载文案。
+
+```html
+
+<tpl>
+    <div v-loading="loading" x-loading-text="拼命加载中" style="width: 30%;height: 60px;padding: 30px; outline: 1px dotted #eee;">
+        <img :src="imgPara">
+    </div>
+</tpl>
+
+```
+
+:::
+
+## 自定义加载图案的大小
+
+::: demo 通过在需要Loading的区块元素上设置`x-loading-size`，可进行自定义加载图案的大小。默认为40。
+
+```html
+
+<tpl>
+    <div v-loading="loading" x-loading-size="20" style="width: 30%;height: 60px;padding: 30px; outline: 1px dotted #eee;">
+        <img :src="imgPara">
+    </div>
+</tpl>
+
+```
+
+:::
+
+## Directive Props
+
+| 名字 | 类型 | 默认 | 描述 | 是否必选 |可选值|
+|-----|-----|-----|-----|-----|-----|-----|
+|v-loading|Boolean|-|与指令的绑定值|必选|true, false|
+|body|Boolean|false|指令修饰符，是否将遮罩层插入body|可选|true,false|
+|fullscreen|Boolean|false|指令修饰符，是否是全屏Loading|可选|true,false|
+|lock|Boolean|false|指令修饰符，全屏时是否锁定滚动条|可选|true,false|
+|x-loading-type|String|无|自定义加载动画类型|可选|circle(默认), dot, grid|
+|x-loading-text|String|无|自定义加载文案|可选||
+|x-loading-size|String|40|加载图案的大小|可选||
+|x-loading-class|String|无|遮罩层的样式名|可选||
 
 
 </template>
 
 <script>
+import imgPara from '../assets/short-paragraph.png';
+
 export default {
     data() {
         return {
-            show: true,
-            type: 'load2',
-            showBtn: 'hide',
-            classname: 'myclass', // 自定义类名
-            color: '',
-            size: 'md'
+            loading: true,
+            imgPara: imgPara,
+            fullscreenLoading: false
         };
     },
-    ready() {
-        window.Z = this;
-    },
     methods: {
-        toogleShow() {
-            this.show = !this.show;
-            this.showBtn = this.show ? 'hide' : 'show';
+        openFullScreen() {
+            this.fullscreenLoading = true;
+            setTimeout(() => {
+                this.fullscreenLoading = false;
+            }, 3000);
         }
     }
 };
 </script>
-
-<style lang="less" scoped>
-	.loadWrap
-	{
-        padding: 30px;
-		position: relative;
-	}
-
-    p{
-        text-align: left;
-        text-indent: 2em;
-    }
-
-    .btnGroup{
-        margin-top: 15px;
-        label{
-            width: 10%;
-            position: relative;
-            top: 5px;
-            text-align: right;
-        }
-    }
-
-    select,option,button{
-        outline: none;
-    }
-
-</style>

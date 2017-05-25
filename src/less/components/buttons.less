@@ -1,23 +1,72 @@
-//
-// Buttons
-// --------------------------------------------------
-
-// Base styles
-// --------------------------------------------------
+@charset "UTF-8";
 
 .@{xcui-prefix}-btn {
   .btn;
   .btn-default;
   &-primary{
-    .btn-variant-type(@btn-primary-color;@brand-primary;@brand-primary);
+    .btn-variant-type(@btn-primary-color;@btn-primary-bg;@btn-primary-border);
+  }
+  &-info{
+    .btn-variant-type(@btn-info-color;@btn-info-bg;@btn-info-border);
+
   }
   &-success{
-    .btn-variant-type(@btn-success-color;@brand-success;@brand-success);
+    .btn-variant-type(@btn-success-color;@btn-success-bg;@btn-success-border);
   }
   &-warning{
-    .btn-variant-type(@btn-warning-color;@brand-warning;@brand-warning);
+    .btn-variant-type(@btn-warning-color;@btn-warning-bg;@btn-warning-border);
   }
   &-danger{
-    .btn-variant-type(@btn-danger-color;@brand-danger;@brand-danger);
+    .btn-variant-type(@btn-danger-color;@btn-danger-bg;@btn-danger-border);
+  }
+  &-dashed{
+    .button-dashed();
+    .btn-variant-type(@btn-dashed-color;@btn-dashed-bg;@btn-dashed-border);
+    &:hover,
+    &:focus {
+      .button-color(fade(@btn-primary-bg, 80%);@btn-dashed-bg;@btn-primary-border);
+    }
+    &:active,
+    &.active {
+      .button-color(@btn-primary-bg; @btn-dashed-bg; @btn-primary-border);
+    }
+    &.disabled,
+    &[disabled] {
+      &,
+      &:hover,
+      &:focus,
+      &:active,
+      &.active {
+        .button-color(@btn-disable-color; @btn-dashed-bg; @btn-disable-border);
+      }
+    }
+  }
+  &-link{
+    .btn-variant-type(@btn-link-color;@btn-link-bg;@btn-link-border);
+    &:hover,
+    &:focus {
+      .button-color(fade(@btn-link-color, 80%);@btn-link-bg;@btn-link-border);
+    }
+    &:active,
+    &.active {
+      .button-color(@btn-link-color; @btn-link-bg; @btn-link-border);
+    }
+    &.disabled,
+    &[disabled] {
+      &,
+      &:hover,
+      &:focus,
+      &:active,
+      &.active {
+        .button-color(@btn-disable-color; @btn-link-bg; @btn-link-border);
+      }
+    }
+  }
+  [class*=xcui-icon-]+span {
+    margin-left: 5px;
+  }
+  &-loading {
+    pointer-events: none;
+    opacity: .85;
   }
 }

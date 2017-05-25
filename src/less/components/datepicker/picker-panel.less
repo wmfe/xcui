@@ -1,0 +1,113 @@
+@picker-panel-prefix-cls: ~"@{xcui-prefix}-picker-panel";
+
+.@{picker-panel-prefix-cls} {
+    color: @datepicker-color;
+    border: 1px solid @datepicker-border-color;
+    box-shadow: 0 2px 6px #ccc;
+    background-color: @white;
+    border-radius: 2px;
+    line-height: 20px;
+    margin: 5px 0;
+
+    &-body, &-body-wrapper {
+        &:after {
+            content: " ";
+            display: table;
+            clear: both;
+        }
+    }
+
+    &-content {
+        position: relative;
+        margin: 15px;
+    }
+
+    &-footer {
+        border-top: 1px solid @datepicker-inner-border-color;
+        padding: 4px;
+        text-align: right;
+        background-color: @white;
+        position: relative;
+    }
+
+    &-shortcut {
+        display: block;
+        width: 100%;
+        border: 0;
+        background-color: transparent;
+        line-height: 28px;
+        font-size: @font-size-base;
+        color: @datepicker-color;
+        padding-left: 12px;
+        text-align: left;
+        outline: none;
+        cursor: pointer;
+
+        &:hover {
+            background-color: @datepicker-cell-hover-color;
+        }
+
+        &.active {
+            background-color: #e6f1fe;
+            color: @datepicker-active-color;
+        }
+    }
+
+    &-btn {
+        border: 1px solid #dcdcdc;
+        color: #333;
+        line-height: 24px;
+        border-radius: 2px;
+        padding: 0 20px;
+        cursor: pointer;
+        background-color: transparent;
+        outline: none;
+        font-size: @font-size-small;
+
+        &[disabled] {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+    }
+
+    &-icon-btn {
+        font-size: 12px;
+        color: @datepicker-icon-color;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        outline: none;
+        margin-top: 3px;
+
+        &:hover {
+          color: @datepicker-text-hover-color;
+        }
+    }
+
+    &-link-btn {
+        cursor: pointer;
+        color: @brand-primary;
+        text-decoration: none;
+        padding: 15px;
+        font-size: @font-size-small;
+        &:hover, &:active {
+            text-decoration: none;
+        }
+    }
+
+    [slot=sidebar], &-sidebar {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 110px;
+        border-right: 1px solid @datepicker-inner-border-color;
+        box-sizing: border-box;
+        padding-top: 6px;
+        background-color: @white-darker;
+    }
+    
+    [slot=sidebar]+.@{picker-panel-prefix-cls}-body,
+    .@{picker-panel-prefix-cls}-sidebar+.@{picker-panel-prefix-cls}-body {
+        margin-left: 110px;
+    } 
+}

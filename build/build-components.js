@@ -173,7 +173,7 @@ function capitalizeFirstLetter(string) {
 }
 
 function converName(name) {
-    return ('xcui-' + name).split('-').map(function (one, index) {
+    return ('x-' + name).split('-').map(function (one, index) {
         return index === 0 ? one : capitalizeFirstLetter(one);
     }).join('');
 }

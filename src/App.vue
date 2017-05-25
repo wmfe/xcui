@@ -1,17 +1,24 @@
 <template>
-  <div>
-      <div id="header">
-          <router-link to="home" class="logo">
+  <div id="xcui-site-container">
+      <header>
+          <router-link to="/home" class="logo">
             <img :src="logoUrl">
-              XCUI Components
+            <span class="logo-text">XCUI</span>
           </router-link>
-      </div>
-      <router-view></router-view>
+      </header>
+      <transition name="slide-left">
+          <router-view></router-view>
+      </transition>
+      <footer>
+          <div class="footer-main">
+              <span>@2016~2017, wmfe</span>
+          </div>
+      </footer>
   </div>
 </template>
 
 <script>
-    import logoUrl from './assets/logo_nobg_32x32@2x.png';
+    import logoUrl from './assets/xcui-logo.svg';
     import router from './router';
     export default {
         router: router,
@@ -22,7 +29,3 @@
         }
     };
 </script>
-
-<style lang="less">
-@import 'styles/index.less';
-</style>

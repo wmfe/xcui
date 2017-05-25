@@ -1,0 +1,22 @@
+.@{ionicons-prefix}ios-arrow-right:before,
+.@{ionicons-prefix}addon-flip-horizontal {
+    .scale(-1, 1);
+}
+
+.@{ionicons-prefix}addon-flip-vertical {
+    .scale(1, -1);
+}
+
+.keyframes(ion-spin; {
+    0% {transform: rotate(0deg)}
+    100% {transform: rotate(359deg)}
+});
+
+.@{ionicons-prefix}addon-spin {
+    .animation(ion-spin 1s infinite linear);
+}
+
+.@{ionicons-prefix}addon-pulse {
+    .animation(ion-spin 1s infinite steps(8));
+}
+

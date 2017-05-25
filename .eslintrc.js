@@ -50,7 +50,7 @@ module.exports = {
         'no-new-wrappers': 2,
         'no-octal': 1,
         'no-octal-escape': 1,
-        'no-proto': 2,
+        'no-proto': 1,
         'no-redeclare': 1,
         'no-self-compare': 2,
         'no-unneeded-ternary': 2,

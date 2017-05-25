@@ -1,0 +1,33 @@
+@date-editor-prefix-cls: ~"@{xcui-prefix}-date-editor";
+@picker-panel-prefix-cls: ~"@{xcui-prefix}-picker-panel";
+
+.@{date-editor-prefix-cls} {
+    position: relative;
+    display: inline-block;
+
+    &.@{xcui-prefix}-input {
+        width: 193px;
+    }
+
+    &-daterange {
+        &.@{xcui-prefix}-input {
+            width: 220px;
+        }
+    }
+
+    &-datetimerange {
+        &.@{xcui-prefix}-input {
+            width: 350px;
+        }
+    }
+
+    @{picker-panel-prefix-cls} {
+        position: absolute;
+        min-width: 180px;
+        box-sizing: border-box;
+        box-shadow: 0 2px 6px #ccc;
+        background: @white;
+        z-index: 10;
+        top: 41px
+    }
+}

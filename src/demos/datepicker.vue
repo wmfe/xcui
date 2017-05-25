@@ -1,147 +1,313 @@
 <template lang="md">
-# datepicker 日期选择框
+# DatePicker 日期选择框
 
-## 使用场景
+用于输入或选择日期或日期范围。
 
-- 支持日历筛选，日历＋时间，时间筛选
-- 可以配置日期的筛选范围，日期格式
-- 对于时间的筛选，可以倍数形式定制筛选时间的值，例如分钟可以订制筛选值为15，30，45，60
-- 可以直接获取当前的时间
-- 年筛选可以直接输入，可以筛选
-- 支持定制皮肤颜色
 
-# DEMO
+## 基本使用：选择单日期
 
-<demo>
-    <example title="simple">
-        <xcui-datepicker v-model="valueDemo" @input="onChange">
-        </xcui-datepicker>
-    </example>
-    <p> 最简单的用法，value双向绑定，日期</p>
-    <p> value：可以传不同日期格式，例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262，也可以不传，默认当天，dateValue值为 时间戳1477980088896</p>
-    <p>Value值改变时会触发mutate事件。参数为[val, oldVal]，对应新日期和老日期</p>
-    <example title="日期格式">
-        <xcui-datepicker
-            v-model="dateValue"
-            format="YYYY-MM-DD"
-            :min-date="'2016-01-01'"
-            :max-date="'2017-11-10'">
-        </xcui-datepicker>
-    </example>
-    <p> format：展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年/月/日 时：分：秒 YYYY/MM/DD hh:mm:ss， 时:分:秒 hh:mm:ss</p>
-    <p> min-date：日期可选最小值，值类型同value</p>
-    <p> max-date：日期可选最大值，值类型同value</p>
-      <example title="日期+时间选择">
-        <xcui-datepicker
-            v-model="datetimeVal1"
-            format="YYYY/MM/DD hh:mm:ss"
-            :hour-range="'1'"
-            :minute-range="'1'"
-            :second-range="'1'"
-            :min-date="datetime.begin"
-            :max-date="datetime.end">
-        </xcui-datepicker>
-      </example>
-      <p> hour-range：小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12</p>
-      <p> minute-range：分钟可选值设置，同上</p>
-      <p> second-range：分钟可选值设置，同上</p>
-      <example title="样式以及回调配置">
-        <xcui-datepicker
-            class-name="class-name"
-            color="pink"
-            format="YYYY-MM-DD hh:mm:ss"
-            :btn-show="true"
-            @input="onChange"
-            v-model="datetime.value2"
-            :hour-range="'3'">
-        </xcui-datepicker>
-      </example>
-      <p> class-name：日历样式，class名字</p>
-      <p> color：按钮颜色，值为颜色值，例如：#f00,pink</p>
-      <p> on-change：选择日期后的回调，参数 val(当前值) oldval(上次值)，onChange(val, oldVal) {}</p>
-      <p> btn-show: 按钮是否显示</p>
-      <example title="时间选择">
-        <xcui-datepicker
-            v-model="timeValue"
-            format="hh:mm:ss">
-        </xcui-datepicker>
-      </example>
-      <p> 最简单的时间用法</p>
-</demo>
+> 注： `v-model`绑定值的时间格式为`ISO string`，如：`2016-12-13T00:45:00.000Z`。
 
-## 组件依赖
-> 无
+::: demo 基本使用, 可通过设置`pickerOptions`的`disabledDate`属性对日期进行限制，本例展示了禁用今天以前的日期。
 
-## Props
+```html
 
-| 名字 | 类型 | 默认 | 描述 | 是否双向绑定 | 是否必选 |
+<tpl>
+    <div style="width:180px">
+        <x-date-picker v-model="model1" placeholder="请选择日期" :picker-options="pickerOption1"></x-date-picker>
+    </div>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                model1: '',
+                pickerOption1: {
+                    disabledDate(time) {
+                        return time.getTime() < Date.now() - 24 * 60 * 60 * 1000;
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+## 日期：带快捷选项
+
+::: demo 带快捷选项，通过设置`pickerOptions`的`shortcuts`属性来实现。
+
+```html
+
+<tpl>
+    <div style="width:180px">
+        <x-date-picker v-model="model2" align="left" placeholder="请选择日期" :picker-options="pickerOption2">
+        </x-date-picker>
+    </div>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                model2: '',
+                pickerOption2: {
+                    shortcuts: [{
+                        text: '今天',
+                        onClick(picker) {
+                            picker.$emit('pick', new Date());
+                        }
+                    }, {
+                        text: '昨天',
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 60 * 60 * 1000 * 24);
+                            picker.$emit('pick', date);
+                        }
+                    }, {
+                        text: '一周前',
+                        onClick(picker) {
+                            const date = new Date();
+                            date.setTime(date.getTime() - 60 * 60 * 1000 * 24 * 7);
+                            picker.$emit('pick', date);
+                        }
+                    }]
+                }
+            }
+        }
+    }
+</script>
+```
+
+:::
+
+## 选择周 / 月 / 年
+
+::: demo 通过设置`type`属性为`week/month/year`可以进行周/月/年模式的切换。
+
+```html
+
+<tpl>
+    <x-row>
+        <x-col span="6">
+            <p>选择周</p>
+            <x-date-picker v-model="model3" placeholder="请选择周" type="week" format="yyyy 第 WW 周">
+            </x-date-picker>
+        </x-col>
+        <x-col span="6" offset="3">
+            <p>选择月</p>   
+            <x-date-picker v-model="model4" placeholder="请选择月" type="month">
+            </x-date-picker>
+        </x-col>
+        <x-col span="6" offset="3">
+            <p>选择年</p>
+            <x-date-picker v-model="model5" placeholder="请选择年" type="year">
+            </x-date-picker>
+        </x-col>
+    </x-row>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                model3: '',
+                model4: '',
+                model5: ''
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+## 基本使用：选择日期范围
+
+::: demo 通过使用`type="daterange"`来选择日期范围。返回的时间格式为`ISO string`的数组[Date1, Date2]。
+
+```html
+
+<tpl>
+    <div style="width: 240px">
+        <x-date-picker type="daterange" v-model="model6" placeholder="选择日期范围">
+        </x-date-picker>
+    </div>
+</tpl>
+
+```
+
+:::
+
+## 日期范围： 带快捷选项
+
+::: demo 与单日期一样，可以使用`pickerOptions`的`shortcuts`属性增加快捷选项。
+
+```html
+
+<tpl>
+    <div style="width: 240px">
+        <x-date-picker type="daterange" v-model="model7" placeholder="选择日期范围" :picker-options="pickerOptions3">
+        </x-date-picker>
+    </div>
+</tpl>
+
+<script>
+    export default {
+        data() {
+            return {
+                model7: '',
+                pickerOptions3: {
+                    shortcuts: [{
+                        text: '最近一周',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近一个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近三个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }]
+                }
+            }
+        }
+    }
+</script>
+
+```
+
+:::
+
+
+
+## DatePicker Props
+
+| 名字 | 类型 | 默认 | 描述  | 是否必选 | 可选值 |
 |-----|-----|-----|-----|----|----|
-| value | String/object/Number | 无 | 日期 例如：date对象 new Date()，日期字符串 2018-09-09，时间搓 1477980169262 | 双向绑定 | 可选 |
-| format | String | YYYY-MM-DD | 展示的日期格式，配置例如，分隔符可自选：年-月-日 YYYY-MM-DD，年/月/日 时：分：秒 YYYY/MM/DD hh:mm:ss， 时:分:秒 hh:mm:ss | 静态属性 | 可选 |
-| minDate | String | 无 | 日期可选最小值 | 否 | 可选|
-| maxDate | String | 无 | 日期可选最大值 | 否 | 可选|
-| hourRange | Number | 1 | 小时可选值设置（例如：值为 3 时，小时可选值为0, 3，6，9，12 ..） | 否 | 可选 |
-| minuteRange | Number | 1 | 分可选值设置（例如：值为 20 时，分可选值为0, 20，40，60） | 否 | 可选 |
-| secondRange | Number | 1 | 秒可选值设置（例如：值为 20 时，分可选值为0, 20，40，60） | 否 | 可选 |
-| color | String | 无 | 订制按钮颜色，值为颜色值，例如：#f00,pink | 静态属性 | 可选 |
-| btnShow | boolean | 无 | 是否显示日历后面的按钮 | 否 | 可选 |
-| class-name | String | 无 | 日历样式，class名字 |  静态属性 | 可选 |
-| input | object | 无 | 选择日期后的回调，参数 val(当前值) oldval(上次值) @input | 否 | 可选 |
+|v-model|String|无|绑定值|是||
+|readonly|Boolean|false|是否完全只读|可选||
+|disabled|Boolean|false|是否禁用|可选|true, false|
+|editable|Boolean|false|文本框可输入|可选|true, false|
+|clearable|Boolean|true|是否显示清除按钮|可选|true, false|
+|size|String|无|文本框尺寸|可选|large, small|
+|placeholder|String|无|文本框默认显示文字|可选||
+|type|String|date|显示类型|可选|year/month/date/week/datetime/daterange/datetimerange|
+|format|String|yyyy-MM-dd|时间日期格式化|可选|年yyyy, 月MM, 日dd, 小时HH, 分mm, 秒ss|
+|align|String|left|对齐方式|可选|left, right|
+|popper-class|String|无|下拉框类名|可选||
+|picker-options|Object|无|特殊选项，参考下表|可选||
+|range-separator|String|-|选择范围时的分隔符|可选||
+
+## Picker Options
+
+| 参数 | 类型 | 说明 | 默认 | 可选值 |
+|---|---|---|---|---|
+|shortcuts|object[]|设置快捷选项，用法参考demo或下表|无||
+|disabledDate|Function|设置禁用日期，参数为当前日期，要求返回Boolean|||
+|firstDayOfWeek|Number|周起始日|7|1到7|
+
+## Shortcuts
+
+| 参数 | 类型 | 说明 | 默认 | 可选值 |
+|---|---|---|---|---|
+|text|String|标题文本|无||
+|onClick|Function|选中后的回调参数，参数是vm, 可通过触发`pick`事件设置选择器的值。例如`vm.$emit('pick', new Date())`|无||
+
+## DatePicker Events
+|事件名|说明|返回值|设置属性|
+|---|---|---|---|
+|change|文本框值改变时触发|格式化后的值|`@change`|
+
+
+
 </template>
 <script>
 export default {
     data() {
         return {
-            valueDemo: '2018-09-09',
-            dateValue: 1477980088896,
-            timeValue: '',
-            datetimeVal1: new Date(),
-            date: {
-                begin: '2015-12-20',
-                end: '2016-09-09'
+            model1: '',
+            pickerOption1: {
+                disabledDate(time) {
+                    return time.getTime() < Date.now() - 24 * 60 * 60 * 1000;
+                }
             },
-            datetime: {
-                value2: '2016/09/09',
-                end: '2017-02-01 00:00:00'
+            model2: '2016-12-13T00:45:00.000Z',
+            pickerOption2: {
+                shortcuts: [{
+                    text: '今天',
+                    onClick(picker) {
+                        picker.$emit('pick', new Date());
+                    }
+                }, {
+                    text: '昨天',
+                    onClick(picker) {
+                        const date = new Date();
+                        date.setTime(date.getTime() - 60 * 60 * 1000 * 24);
+                        picker.$emit('pick', date);
+                    }
+                }, {
+                    text: '一周前',
+                    onClick(picker) {
+                        const date = new Date();
+                        date.setTime(date.getTime() - 60 * 60 * 1000 * 24 * 7);
+                        picker.$emit('pick', date);
+                    }
+                }]
             },
-            time: {
-                value: ''
-            },
-            demo: ''
+            model3: '',
+            model4: '',
+            model5: '',
+            model6: '',
+            model7: '',
+            pickerOptions3: {
+                shortcuts: [{
+                    text: '最近一周',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '最近一个月',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }, {
+                    text: '最近三个月',
+                    onClick(picker) {
+                        const end = new Date();
+                        const start = new Date();
+                        start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                        picker.$emit('pick', [start, end]);
+                    }
+                }]
+            }
         };
-    },
-    watch: {
-        valueDemo(val) {
-            console.log('simple: ' + val);
-        },
-        dateValue(val) {
-            console.log('日期格式: ' + val);
-        },
-        timeValue(val) {
-            console.log('时间选择: ' + val);
-        },
-        datetimeVal1(val) {
-            console.log('日期+时间选择: ' + val);
-        }
-    },
-    methods: {
-        onChange(val, oldVal) {
-            console.log(val);
-            console.log(oldVal);
-        },
-        simpleMutate(val, oldVal) {
-            alert(`val: ${val}, oldval: ${oldVal}`);
-        }
     }
 };
+
 </script>
-<style lang="less">
-    p{
-        padding-left:30px;
-        font-size: 14px;
-        color: #666;
-    }
-    .class-name{
-        width:200px;
-    }
-</style>

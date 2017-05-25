@@ -1,74 +1,70 @@
 <template lang="md">
-# PageLoading页面加载进度条
+# PageLoading 页面加载进度条
 
-## 使用场景
+路由页面切换、页面加载资源时提供顶部加载进度条。
 
-- 路由页面切换时提供顶部加载进度条。
+
+> XCUI为`Vue.prototype`添加了全局方法`$PageLoading`, 如果您完整引入了XCUI， 可以直接使用如`this.$PageLoading.start()`的方式进行页面加载操作。
+> 当然，您也可以使用`import PageLoading from 'xcui/components/pageloading'` 的单组件方式调用。
+> Pageloading在XCUI中被注册为一个[Vue 插件](https://vuejs.org/v2/guide/plugins.html), 在**单文件引入**时，请使用`Vue.use(PageLoading)` 挂载，再进行使用。
 
 ## DEMO
-<demo>
-    <example title="顶部加载条">
-        <xcui-pageloading ref="pageLoading"></xcui-pageloading>
-        <div class="form-group">
-            <button class="btn btn-primary" @click="start">start</button>
-            <button class="btn btn-primary" @click="done">done</button>
-            <button class="btn btn-primary" @click="inc">inc</button>
-            <button class="btn btn-primary" @click="setPercent">set</button>
-        </div>
-        <div class="input-group">
-            <input type="text" class="form-control" v-model="toppercent" placeholder="设置进度条速度"/>
-        </div>
-    </example>
-</demo>
+        
 
-## Props
+::: demo 基本使用，通过调用`.start()`、`.done()`、`.error()` 方法，实现开始，完成，错误三种操作。
+
+```html
+
+<tpl>
+        <x-button type="primary" @click="start">start</x-button>
+        <x-button type="info" @click="done">done</x-button>
+        <x-button type="danger" @click="error">error</x-button>
+</tpl>
+
+```
+
+:::
+
+## API
+
+```javascript
+// 开始进度加载
+this.$PageLoading.start();
+
+// 结束进度加载
+this.$PageLoading.done();
+
+// 改变进度条颜色为错误色，并结束进度加载
+this.$PageLoading.error();
+
+// 设置进度条的增加速度和进度条颜色，具体描述见下
+this.$PageLoading.config({
+   speed: 500,
+   color: '#2c96ef' 
+});
+```
+
+## Config Options
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|
 |speed|Number|350|速度|可选|
-
-## Methods
-| 名字 | 类型 | 默认 | 描述 | 是否必选 |
-|-----|-----|-----|-----|----|
-|start|function|-|开始|可选|
-|done|function|-|结束|可选|
-|set|function|0.08|设置进度条进度，取值范围（0.08 ~ 1）|可选|
-|inc|function|-|增加一小段进度|可选|
-
-### 方法调用
->- this.$refs.pageLoading.start();
->- this.$refs.pageLoading.done();
->- this.$refs.pageLoading.set(0.5);
->- this.$refs.pageLoading.inc();
-
-备注：先执行set(0.X)，再执行inc()，即可看到inc的执行效果
+|color|String|xcui主色|进度条颜色|可选|
 
 
 </template>
 
 
 <script>
-    import vPageloading from '../components/pageloading';
     export default {
-        components: {
-            vPageloading
-        },
-        data() {
-            return {
-                toppercent: ''
-            };
-        },
         methods: {
             start() {
-                this.$refs.pageLoading.start();
+                this.$PageLoading.start();
             },
             done() {
-                this.$refs.pageLoading.done();
+                this.$PageLoading.done();
             },
-            setPercent() {
-                this.$refs.pageLoading.set(parseFloat(this.toppercent, 10));
-            },
-            inc() {
-                this.$refs.pageLoading.inc();
+            error() {
+                this.$PageLoading.error();
             }
         }
     };

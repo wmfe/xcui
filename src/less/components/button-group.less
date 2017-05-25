@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+//
+// Button groups
+// --------------------------------------------------
+
+// Make the div behave like a button
+.@{xcui-prefix}-btn-group,
+.@{xcui-prefix}-btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle; // match .btn alignment given font-size hack above
+  > .@{xcui-prefix}-btn {
+    position: relative;
+    float: left;
+    // Bring the "active" button to the front
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      z-index: 2;
+    }
+  }
+}
+
+// Prevent double borders when buttons are next to each other
+.@{xcui-prefix}-btn-group {
+  .@{xcui-prefix}-btn + .@{xcui-prefix}-btn,
+  .@{xcui-prefix}-btn + .@{xcui-prefix}-btn-group,
+  .@{xcui-prefix}-btn-group + .@{xcui-prefix}-btn,
+  .@{xcui-prefix}-btn-group + .@{xcui-prefix}-btn-group {
+    margin-left: -1px;
+  }
+}
+
+.@{xcui-prefix}-btn-group > .@{xcui-prefix}-btn:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+// Set corners individual because sometimes a single button can be in a .btn-group and we need :first-child and :last-child to both match
+.@{xcui-prefix}-btn-group > .@{xcui-prefix}-btn:first-child {
+  margin-left: 0;
+  &:not(:last-child){
+    .border-right-radius(0);
+  }
+}
+// Need .dropdown-toggle since :last-child doesn't apply, given that a .dropdown-menu is used immediately after it
+.@{xcui-prefix}-btn-group > .@{xcui-prefix}-btn:last-child:not(:first-child) {
+  .border-left-radius(0);
+}
+
+.@{xcui-prefix}-btn-group {
+    .@{xcui-prefix}-btn-primary, .@{xcui-prefix}-btn-success, .@{xcui-prefix}-btn-warning, .@{xcui-prefix}-btn-danger, .@{xcui-prefix}-btn-info {
+        .button-group-btn-border();
+    }
+}
+
+
+// Custom edits for including btn-groups within btn-groups (useful for including dropdown buttons within a btn-group)
+.@{xcui-prefix}-btn-group > .@{xcui-prefix}-btn-group {
+  float: left;
+}
+.@{xcui-prefix}-btn-group > .@{xcui-prefix}-btn-group:not(:first-child):not(:last-child) > .@{xcui-prefix}-btn {
+  border-radius: 0;
+}
+.@{xcui-prefix}-btn-group > .@{xcui-prefix}-btn-group:first-child:not(:last-child) {
+  > .@{xcui-prefix}-btn:last-child,
+  > .@{xcui-prefix}-dropdown-toggle {
+    .border-right-radius(0);
+  }
+}
+.@{xcui-prefix}-btn-group > .@{xcui-prefix}-btn-group:last-child:not(:first-child) > .btn:first-child {
+  .border-left-radius(0);
+}
+
+
+// Sizing
+//
+// Remix the default button sizing classes into new ones for easier manipulation.
+
+.@{xcui-prefix}-btn-group-xs > .@{xcui-prefix}-btn { &:extend(.@{xcui-prefix}-btn-xs); }
+.@{xcui-prefix}-btn-group-sm > .@{xcui-prefix}-btn { &:extend(.@{xcui-prefix}-btn-sm); }
+.@{xcui-prefix}-btn-group-lg > .@{xcui-prefix}-btn { &:extend(.@{xcui-prefix}-btn-lg); }
+
+
+
+// Reposition the caret
+.@{xcui-prefix}-btn .caret {
+  margin-left: 0;
+}
+// Carets in other button sizes
+.@{xcui-prefix}-btn-lg .caret {
+  border-width: @caret-width-large @caret-width-large 0;
+  border-bottom-width: 0;
+}
+// Upside down carets for .dropup
+.@{xcui-prefix}-dropup .@{xcui-prefix}-btn-lg .caret {
+  border-width: 0 @caret-width-large @caret-width-large;
+}
+
+
+// Vertical button groups
+// ----------------------
+
+.@{xcui-prefix}-btn-group-vertical {
+  > .@{xcui-prefix}-btn,
+  > .@{xcui-prefix}-btn-group,
+  > .@{xcui-prefix}-btn-group > .@{xcui-prefix}-btn {
+    display: block;
+    float: none;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  // Clear floats so dropdown menus can be properly placed
+  > .@{xcui-prefix}-btn-group {
+    &:extend(.clearfix all);
+    > .@{xcui-prefix}-btn {
+      float: none;
+    }
+  }
+
+  > .@{xcui-prefix}-btn + .@{xcui-prefix}-btn,
+  > .@{xcui-prefix}-btn + .@{xcui-prefix}-btn-group,
+  > .@{xcui-prefix}-btn-group + .@{xcui-prefix}-btn,
+  > .@{xcui-prefix}-btn-group + .@{xcui-prefix}-btn-group {
+    margin-top: -1px;
+    margin-left: 0;
+  }
+}
+
+.@{xcui-prefix}-btn-group-vertical > .@{xcui-prefix}-btn {
+  &:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+  &:first-child:not(:last-child) {
+    .border-top-radius(@btn-border-radius-base);
+    .border-bottom-radius(0);
+  }
+  &:last-child:not(:first-child) {
+    .border-top-radius(0);
+    .border-bottom-radius(@btn-border-radius-base);
+  }
+}
+.@{xcui-prefix}-btn-group-vertical > .@{xcui-prefix}-btn-group:not(:first-child):not(:last-child) > .@{xcui-prefix}-btn {
+  border-radius: 0;
+}
+.@{xcui-prefix}-btn-group-vertical > .@{xcui-prefix}-btn-group:first-child:not(:last-child) {
+  > .@{xcui-prefix}-btn:last-child {
+    .border-bottom-radius(0);
+  }
+}
+.@{xcui-prefix}-btn-group-vertical > .@{xcui-prefix}-btn-group:last-child:not(:first-child) > .@{xcui-prefix}-btn:first-child {
+  .border-top-radius(0);
+}
+
+
+

@@ -1,0 +1,117 @@
+.slide-motion(@className, @keyframeName) {
+    .@{className}-enter-active {
+        animation: @animation-duration-base ~"@{keyframeName}In" @ease-in-quint;
+    }
+    .@{className}-leave-active {
+        animation: @animation-duration-base ~"@{keyframeName}Out" @ease-in-quint;
+    }
+}
+
+.slide-motion(x-slide-up, xSlideUp);
+.slide-motion(x-slide-down, xSlideDown);
+.slide-motion(x-slide-left, xSlideLeft);
+.slide-motion(x-slide-right, xSlideRight);
+
+@keyframes xSlideUpIn {
+    0% {
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: scaleY(.8);
+    }
+    100% {
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: scaleY(1);
+    }
+}
+
+@keyframes xSlideUpOut {
+    0% {
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: scaleY(.8);
+    }
+}
+
+@keyframes xSlideDownIn {
+    0% {
+        opacity: 0;
+        transform-origin: 100% 100%;
+        transform: scaleY(.8);
+    }
+    100% {
+        opacity: 1;
+        transform-origin: 100% 100%;
+        transform: scaleY(1);
+    }
+}
+
+@keyframes xSlideDownOut {
+    0% {
+        opacity: 1;
+        transform-origin: 100% 100%;
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform-origin: 100% 100%;
+        transform: scaleY(.8);
+    }
+}
+
+@keyframes xSlideLeftIn {
+    0% {
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: scaleX(.8);
+    }
+    100% {
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes xSlideLeftOut {
+    0% {
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: scaleX(1);
+    }
+    100% {
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: scaleX(.8);
+    }
+}
+
+@keyframes xSlideRightIn {
+    0% {
+        opacity: 0;
+        transform-origin: 100% 0%;
+        transform: scaleX(.8);
+    }
+    100% {
+        opacity: 1;
+        transform-origin: 100% 0%;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes xSlideRightOut {
+    0% {
+        opacity: 1;
+        transform-origin: 100% 0%;
+        transform: scaleX(1);
+    }
+    100% {
+        opacity: 0;
+        transform-origin: 100% 0%;
+        transform: scaleX(.8);
+    }
+}

@@ -1,0 +1,159 @@
+.move-motion(@className, @keyframeName) {
+  .@{className}-enter-active,  .@{className}-appear{
+    opacity: 0;
+    animation: @animation-duration-base ~"@{keyframeName}In" @ease-in-out;
+  }
+  .@{className}-leave-active {
+    animation: @animation-duration-base ~"@{keyframeName}Out" @ease-out-quint;
+  }
+}
+
+.move-motion(x-move-up, xMoveUp);
+.move-motion(x-move-down, xMoveDown);
+.move-motion(x-move-left, xMoveLeft);
+.move-motion(x-move-right, xMoveRight);
+
+@keyframes xMoveDownIn {
+  0% {
+    transform-origin: 0 0;
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes xMoveDownOut {
+  0% {
+    transform-origin: 0 0;
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes xMoveLeftIn {
+  0% {
+    transform-origin: 0 0;
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes xMoveLeftOut {
+  0% {
+    transform-origin: 0 0;
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes xMoveRightIn {
+  0% {
+    opacity: 0;
+    transform-origin: 0 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform-origin: 0 0;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes xMoveRightOut {
+  0% {
+    transform-origin: 0 0;
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes xMoveUpIn {
+  0% {
+    transform-origin: 0 0;
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes xMoveUpOut {
+  0% {
+    transform-origin: 0 0;
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+// specific transition for Notice
+
+.move-motion(x-move-notice, xMoveNotice);
+
+@keyframes xMoveNoticeIn {
+    0% {
+        opacity: 0;
+        transform-origin: 0 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform-origin: 0 0;
+        transform: translateX(0%);
+    }
+}
+
+@keyframes xMoveNoticeOut {
+    0% {
+        transform-origin: 0 0;
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    70% {
+        transform-origin: 0 0;
+        transform: translateX(100%);
+        height: auto;
+        padding: @notice-padding;
+        margin-bottom: @notice-margin-bottom;
+        opacity: 0;
+    }
+    100% {
+        transform-origin: 0 0;
+        transform: translateX(100%);
+        height: 0;
+        padding: 0;
+        margin-bottom: 0;
+        opacity: 0;
+    }
+}

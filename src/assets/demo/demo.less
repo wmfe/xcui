@@ -1,0 +1,238 @@
+@import "./prism.less";
+@import "./markdown.less";
+
+body {
+  font-weight: 400;
+}
+
+img {
+    vertical-align: middle;
+}
+
+
+header{
+    height:80px;
+    background:#fff;
+    // padding-left:50px;
+    border-bottom: 1px solid #f1f1f1;
+    .logo{
+        font-size:22px;
+        line-height:75px;
+        height:80px;
+        color:#fff;
+        display: block;
+        text-align: center;
+        &:hover{
+            text-decoration: none;
+        }
+        img{
+            width:32px;
+            height:32px;
+        }
+        &-text {
+            position: absolute;
+            color: #46c3c1;
+            margin-left: 15px;
+        }
+    }
+}
+
+footer {
+    clear: both;
+    font-size: 14px;
+    background: #fff;
+    position: relative;
+    z-index: 1;
+    color: rgba(0,0,0,.65);
+    box-shadow: 0 1000px 0 1000px #fff;
+    height: 120px;
+    .footer-main {
+        text-align: center;
+        padding-top: 50px;
+        .footer-social {
+            margin-top:15px;
+            .x-icon {
+                font-size: 36px;
+            }
+        }
+    }
+}
+
+#xcui-site-container {
+    background: #eee;
+}
+
+#wrapper {
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+    margin: 30px auto 20px;
+    width: 90%;
+}
+
+#wrapper-content {
+    background: #fff;
+    border-radius: 4px;
+    padding-bottom: 30px;
+}
+
+#sidebar-wrapper {
+    padding-top: 30px;
+    z-index: 1000;
+    //position: fixed;
+    //left: 250px;
+    display: inline-block;
+    height: 100%;
+    //margin-left: -250px;
+    // overflow-y: auto;
+    overflow-x:hidden;
+    background: #fff;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+    // padding:0;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    background:#fff;
+}
+
+.x-demo {
+    color: rgba(0, 0, 0, .65);
+  .x-demo-inner {
+    padding-right: 40px;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+  }
+  h1 {
+    font-size: 26px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  h4 {
+    font-size: 14px;
+  }
+  h5,h6 {
+    font-size: 12px;
+  }
+  code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f7f7f7;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin: 0 5px
+  }
+  .markdown-table {
+    font-family: 'Roboto Mono', Monaco, Courier,monospace;
+    font-size: 13px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid #e9e9e9;
+    width: 100%;
+    margin-bottom: 24px;
+    color: rgba(0, 0, 0, 0.65);
+        th {
+            background: #f7f7f7;
+            white-space: nowrap;
+            color: #5c6b77;
+            font-weight: 600
+        }
+        td,th{
+            border: 1px solid #e9e9e9;
+            padding: 8px 16px;
+            text-align: left
+        }
+    }
+    ul {
+        li{
+            margin-bottom: 1em;
+        }
+    }
+
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    margin: 0;
+    padding-left: 10px;
+    list-style: none;
+    overflow-x: hidden!important;
+    border-right: 1px solid #eee;
+    .router-link-active {
+        color: #46c3c1;
+        border-right: 3px solid #46c3c1
+    }
+    li {
+        text-indent: 20px;
+        line-height: 40px;
+        &.sidebar-divider {
+          border-bottom:1px solid #eee;
+          margin-top: 10px;
+          margin-right: 15px;
+        }
+        &.sidebar-part-title {
+          font-size: 16px;
+          margin-top: 10px;
+        }
+        &.sidebar-title {
+          color:#b2b2b2;
+        }
+        &.sidebar-item {
+            &:hover {
+                background: rgba(190, 239, 239, 0.15);
+                cursor: pointer;
+            }
+            a {
+                padding-left: 20px;
+            }
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            color: rgba(0, 0, 0, 0.65);
+            border-left:2px solid #fff;
+            &.active,
+            &.focus {
+                text-decoration: none;
+            }
+            &.v-link-active {
+                border-left:2px solid #46c3c1;
+                background: #fff;
+                color:#46c3c1;
+            }
+        }
+    }
+    .sidebar-brand {
+        height: 65px;
+        font-size: 18px;
+        line-height: 60px;
+        a {
+            color: #46c3c1;
+            background:#fff;
+            :hover {
+                color: #fff;
+                background: #46c3c1;
+            }
+        }
+
+    }
+
+}
+
+

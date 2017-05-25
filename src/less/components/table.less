@@ -1,0 +1,59 @@
+@table-prefix-cls: ~"@{xcui-prefix}-table";
+
+.@{table-prefix-cls} {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: @font-size-base;
+
+    thead {
+        background-color: @disabled-bg;
+        text-align: left;
+    }
+    th {
+        padding: 0 15px;
+        border-bottom: 1px solid @gray-ddd;
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: left;
+    }
+    &-striped {
+        tr:nth-child(even) {
+            background-color: @disabled-bg;
+        }
+    }
+    tr:hover {
+        background-color: @disabled-bg;
+        color: @text-color;
+        transition: all .3s ease;
+    }
+    td {
+        border-bottom: 1px solid @gray-ddd;
+        padding: 0 15px;
+        word-break: break-all;
+    }
+    td, th {
+        height: 40px;
+        vertical-align: middle;
+    }
+    &-bordered {
+        border: 1px solid @gray-ddd;
+        border-bottom: none;
+        border-right: none;
+        td, th {
+          border-right: 1px solid @gray-ddd;
+        }
+    }
+    &-td-single-line {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    &-empty-tip {
+        height: 300px;
+        line-height: 300px;
+        font-size: 20px;
+        text-align: center;
+    }
+}
