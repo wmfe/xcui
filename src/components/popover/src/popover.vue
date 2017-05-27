@@ -37,7 +37,7 @@ export default {
             default: false
         },
         transition: {
-            default: 'tooltip-zoom'
+            default: 'x-popover-zoom'
         },
         trigger: {
             default: 'click'

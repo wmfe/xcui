@@ -23,7 +23,7 @@
         props: {
             transition: {
                 type: String,
-                default: 'tooltip-zoom'
+                default: 'x-tooltip-zoom'
             }
         }
     };
