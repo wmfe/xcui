@@ -10736,7 +10736,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            default: false
 	        },
 	        transition: {
-	            default: 'tooltip-zoom'
+	            default: 'x-popover-zoom'
 	        },
 	        trigger: {
 	            default: 'click'
@@ -12783,7 +12783,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    props: {
 	        transition: {
 	            type: String,
-	            default: 'tooltip-zoom'
+	            default: 'x-tooltip-zoom'
 	        }
 	    }
 	};
