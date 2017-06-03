@@ -9,7 +9,7 @@
     export default {
         name: 'x-collapse',
         componentName: 'x-collapse',
-        porps: {
+        props: {
             openOnlyOne: {
                 type: Boolean,
                 default: false

@@ -5,7 +5,7 @@
             <x-icon :name="isOpen ? iconUpName : iconDownName" size="14"></x-icon>
             <slot name="titleRight">{{title}}</slot>
         </div>
-        <transition name="x-slide-up">
+        <transition name="x-slide-down">
             <div class="x-collapse-item-wrap" v-show="isOpen">
                 <div class="x-collapse-item-content">
                     <slot></slot>
@@ -32,6 +32,11 @@
                 type: String,
                 default: 'chevron-down'
             }
+        },
+        data() {
+            return {
+                transitionName: this.isOpen ? 'x-slide-up' : 'x-slide-down'
+            };
         },
         mixins: [Emitter],
         computed: {
