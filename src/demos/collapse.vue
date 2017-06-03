@@ -38,7 +38,7 @@
             <div>i am the content3</div>
             <div>i am the content3</div>
             <div>i am the content3</div>
-            
+
             <span slot="titleRight">i am right</span>
         </x-collapse-item>
     </x-collapse>
@@ -50,7 +50,8 @@
     export default {
         data() {
             return {
-                opens: ['1']
+                opens: ['1']，
+                openOnlyOne: true
             };
         }
     };
