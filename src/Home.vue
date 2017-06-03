@@ -113,6 +113,9 @@
                     <li class="sidebar-item">
                         <router-link to="/component/pageloading">PageLoading 页面加载</router-link>
                     </li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/collapse">Collapse 折叠面板</router-link>
+                    </li>
                 </ul>
             </x-col>
             <x-col :xs="16" :sm="16" :md="16" :lg="18" id="page-content-wrapper" class="x-demo">
