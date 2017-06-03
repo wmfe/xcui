@@ -1,69 +1,51 @@
 <template>
-  <div class="el-collapse-item" :class="{'is-active': isActive}">
-    <div class="el-collapse-item__header" @click="handleHeaderClick">
-      <i class="el-collapse-item__header__arrow el-icon-arrow-right"></i>
-      <slot name="title">{{title}}</slot>
-    </div>
-    <el-collapse-transition>
-      <div class="el-collapse-item__wrap" v-show="isActive">
-        <div class="el-collapse-item__content">
-          <slot></slot>
+    <div class="x-collapse-item" :class="{'is-active': isOpen}">
+        <div class="x-collapse-item-header" @click="clickHeader">
+            <slot name="titleLeft">{{title}}</slot>
+            <x-icon :name="isOpen ? iconUpName : iconDownName" size="14"></x-icon>
+            <slot name="titleRight">{{title}}</slot>
         </div>
-      </div>
-    </el-collapse-transition>
-  </div>
+        <div class="x-collapse-item-wrap" :style="{height: contentHeight}" ref="content">
+            <div class="x-collapse-item-content">
+                <slot></slot>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
-  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
-  import Emitter from 'element-ui/src/mixins/emitter';
-
-  export default {
-    name: 'ElCollapseItem',
-
-    componentName: 'ElCollapseItem',
-
-    mixins: [Emitter],
-
-    components: { ElCollapseTransition },
-
-    data() {
-      return {
-        contentWrapStyle: {
-          height: 'auto',
-          display: 'block'
+    import Emitter from '../../../utils/mixins/emitter';
+    export default {
+        name: 'x-collapse-item',
+        componentName: 'x-collapse-item',
+        props: {
+            id: {
+                type: [String, Number],
+                required: true
+            },
+            iconUpName: {
+                type: String,
+                default: 'chevron-up'
+            },
+            iconDownName: {
+                type: String,
+                default: 'chevron-down'
+            }
         },
-        contentHeight: 0
-      };
-    },
-
-    props: {
-      title: String,
-      name: {
-        type: [String, Number],
-        default() {
-          return this._uid;
+        data() {
+            return {
+                transitionName: this.isOpen ? 'x-slide-up' : 'x-slide-down'
+            };
+        },
+        mixins: [Emitter],
+        computed: {
+            isOpen() {
+                return this.$parent.openItems.indexOf(this.id) > -1;
+            }
+        },
+        methods: {
+            clickHeader: function () {
+                this.dispatch('x-collapse', 'itemClick', this.id);
+            }
         }
-      }
-    },
-
-    computed: {
-      isActive() {
-        return this.$parent.activeNames.indexOf(this.name) > -1;
-      }
-    },
-
-    watch: {
-      'isActive'(value) {
-      }
-    },
-
-    methods: {
-      handleHeaderClick() {
-        this.dispatch('ElCollapse', 'item-click', this);
-      }
-    },
-
-    mounted() {
-    }
-  };
+    };
 </script>

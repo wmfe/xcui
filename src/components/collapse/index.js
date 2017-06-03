@@ -1,3 +1,2 @@
-import Button from './src/button';
-
-export default Button;
+import Collapse from './src/collapse';
+export default Collapse;
