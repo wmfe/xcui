@@ -39,6 +39,8 @@ import Form from './form';
 import FormItem from './form-item';
 import Table from './table';
 import TableColumn from './table-column';
+import Collapse from './collapse';
+import CollapseItem from './collapse-item';
 
 const install = (Vue) => {
     if (install.installed) {
@@ -77,6 +79,8 @@ const install = (Vue) => {
     Vue.component(FormItem.name, FormItem);
     Vue.component(Table.name, Table);
     Vue.component(TableColumn.name, TableColumn);
+    Vue.component(Collapse.name, Collapse);
+    Vue.component(CollapseItem.name, CollapseItem);
     Vue.use(Message);
     Vue.use(Notice);
     Vue.use(Dialog);
@@ -123,7 +127,9 @@ const xcui = {
     FormItem,
     Table,
     TableColumn,
-    install
+    install,
+    Collapse,
+    CollapseItem
 };
 
 export default xcui;

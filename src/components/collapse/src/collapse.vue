@@ -1,67 +1,54 @@
 <template>
-  <div class="el-collapse">
-    <slot></slot>
-  </div>
+    <div class="x-collapse">
+        <slot></slot>
+    </div>
 </template>
 <script>
-  export default {
-    name: 'ElCollapse',
+    import Emitter from '../../../utils/mixins/emitter';
 
-    componentName: 'ElCollapse',
-
-    props: {
-      accordion: Boolean,
-      value: {
-        type: [Array, String, Number],
-        default() {
-          return [];
+    export default {
+        name: 'x-collapse',
+        componentName: 'x-collapse',
+        porps: {
+            openOnlyOne: {
+                type: Boolean,
+                default: false
+            },
+            value: {
+                type: [Array, String, Number],
+                default: []
+            }
+        },
+        mixins: [Emitter],
+        data: function () {
+            return {
+                openItems: (this.value ? [].concat(this.value) : [])
+            };
+        },
+        methods: {
+            onItemClick: function (id) {
+                let index = this.openItems.indexOf(id);
+                if (index > -1) {
+                    this.openItems.splice(index, 1);
+                }
+                else {
+                    if (this.openOnlyOne) {
+                        this.openItems = [];
+                    }
+                    this.openItems.push(id);
+                }
+                this.$emit('change', this.openItems);
+            }
+        },
+        mounted() {
+            this.$nextTick(() => {
+                if (this.openOnlyOne && this.openItems.length > 1) {
+                    let tempItem = this.openItems[0];
+                    this.openItems = [];
+                    this.openItems.push(tempItem);
+                }
+                this.$on('itemClick', this.onItemClick);
+            });
         }
-      }
-    },
-
-    data() {
-      return {
-        activeNames: [].concat(this.value)
-      };
-    },
-
-    watch: {
-      value(value) {
-        this.activeNames = [].concat(value);
-      }
-    },
-
-    methods: {
-      setActiveNames(activeNames) {
-        activeNames = [].concat(activeNames);
-        let value = this.accordion ? activeNames[0] : activeNames;
-        this.activeNames = activeNames;
-        this.$emit('input', value);
-        this.$emit('change', value);
-      },
-      handleItemClick(item) {
-        if (this.accordion) {
-          this.setActiveNames(
-            (this.activeNames[0] || this.activeNames[0] === 0) &&
-            this.activeNames[0] === item.name
-            ? '' : item.name
-          );
-        } else {
-          let activeNames = this.activeNames.slice(0);
-          let index = activeNames.indexOf(item.name);
-
-          if (index > -1) {
-            activeNames.splice(index, 1);
-          } else {
-            activeNames.push(item.name);
-          }
-          this.setActiveNames(activeNames);
-        }
-      }
-    },
-
-    created() {
-      this.$on('item-click', this.handleItemClick);
-    }
-  };
+    };
 </script>
