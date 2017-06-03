@@ -1,9 +1,9 @@
 <template>
     <div class="x-collapse-item" :class="{'is-active': isOpen}">
         <div class="x-collapse-item-header" @click="clickHeader">
-            <slot name="titleLeft">{{title}}</slot>
+            <slot name="titleLeft"></slot>
             <x-icon :name="isOpen ? iconUpName : iconDownName" size="14"></x-icon>
-            <slot name="titleRight">{{title}}</slot>
+            <slot name="titleRight"></slot>
         </div>
         <div class="x-collapse-item-wrap" :style="{height: contentHeight}" ref="content">
             <div class="x-collapse-item-content">
@@ -31,21 +31,33 @@
                 default: 'chevron-down'
             }
         },
+        mixins: [Emitter],
         data() {
             return {
-                transitionName: this.isOpen ? 'x-slide-up' : 'x-slide-down'
+                orginHeight: 'auto',
+                isReady: false
             };
         },
-        mixins: [Emitter],
         computed: {
             isOpen() {
                 return this.$parent.openItems.indexOf(this.id) > -1;
+            },
+            contentHeight() {
+                if (this.isReady) {
+                    return this.isOpen ? this.orginHeight : 0;
+                }
             }
         },
         methods: {
             clickHeader: function () {
                 this.dispatch('x-collapse', 'itemClick', this.id);
             }
+        },
+        mounted() {
+            this.$nextTick(() => {
+                this.isReady = true;
+                this.orginHeight = window.getComputedStyle(this.$refs.content, null).height;
+            });
         }
     };
 </script>
