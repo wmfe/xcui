@@ -5,8 +5,8 @@
             <x-icon :name="isOpen ? iconUpName : iconDownName" size="14"></x-icon>
             <slot name="titleRight">{{title}}</slot>
         </div>
-        <div class="x-collapse-item-wrap">
-            <div class="x-collapse-item-content" :style="{height: contentHeight, display: isOpen ? '' : 'none'}" ref="content">
+        <div class="x-collapse-item-wrap" :style="{height: contentHeight}" ref="content">
+            <div class="x-collapse-item-content">
                 <slot></slot>
             </div>
         </transition>
