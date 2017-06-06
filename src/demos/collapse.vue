@@ -1,16 +1,18 @@
 <template lang="md">
 # Collapse 折叠面板
 
+## 概述
 
+点击面板，实现内容区域的展示和隐藏  
 
-## 折叠面板组 
+## 基础模式
 
 ::: demo 以面板组的方式出现，常用于多项类似操作。
 
 ```html
 
 <tpl>
-    <x-collapse v-model="opens" :open-only-one="openOnlyOne">
+    <x-collapse v-model="opens1">
         <x-collapse-item id="1">
             <span slot="titleLeft">i am left</span>
             <div>i am the content1</div>
@@ -50,7 +52,66 @@
     export default {
         data() {
             return {
-                opens: ['1']，
+                opens1: ['1', '2']，
+            };
+        }
+    };
+</script>
+
+</tpl>
+
+```
+
+:::
+
+## 手风琴模式（每次只能打开一个面板）
+
+::: demo 以面板组的方式出现，常用于多项类似操作。
+
+```html
+
+<tpl>
+    <x-collapse v-model="opens" :open-only-one="openOnlyOne">
+        <x-collapse-item id="1">
+            <span slot="titleLeft">i am left</span>
+            <div>i am the content1</div>
+            <div>i am the content1</div>
+            <div>i am the content1</div>
+            <div>i am the content1</div>
+            <div>i am the content1</div>
+
+            <span slot="titleRight">i am right</span>
+        </x-collapse-item>
+        <x-collapse-item id="2">
+            <span slot="titleLeft">i am left</span>
+            <div>i am the content2</div>
+            <div>i am the content2</div>
+            <div>i am the content2</div>
+            <div>i am the content2</div>
+            <div>i am the content2</div>
+
+        </x-collapse-item>
+        <x-collapse-item id="3">
+            <div>i am the content3</div>
+            <div>i am the content3</div>
+            <div>i am the content3</div>
+            <div>i am the content3</div>
+            <div>i am the content3</div>
+            <div>i am the content3</div>
+            <div>i am the content3</div>
+
+            <span slot="titleRight">i am right</span>
+        </x-collapse-item>
+    </x-collapse>
+    <p style="margin-top: 15px;">
+        打开的值数组： {{opens1}}
+    </p>
+   
+<script>
+    export default {
+        data() {
+            return {
+                opens: ['1'],
                 openOnlyOne: true
             };
         }
@@ -99,6 +160,7 @@
     export default {
         data() {
             return {
+                opens1: ['1', '2'],
                 opens: ['1'],
                 openOnlyOne: true
             };
