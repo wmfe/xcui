@@ -7,9 +7,15 @@
     &-item-header {
         padding: 15px;
         border-bottom: 1px solid @border-color-base;
+        background: @gray-lighter;
     }
     &-item-wrap {
         border-bottom: 1px solid @border-color-base;
+    }
+    &-item-content{
+        transition: height .3s @ease-in;
+        overflow: hidden;
+        padding: 15px;
     }
     &-item:last-child &-item-header {
         border-bottom: none;

@@ -5,11 +5,9 @@
             <x-icon :name="isOpen ? iconUpName : iconDownName" size="14"></x-icon>
             <slot name="titleRight">{{title}}</slot>
         </div>
-        <transition name="x-slide-down">
-            <div class="x-collapse-item-wrap" v-show="isOpen">
-                <div class="x-collapse-item-content">
-                    <slot></slot>
-                </div>
+        <div class="x-collapse-item-wrap">
+            <div class="x-collapse-item-content" :style="{height: contentHeight, display: isOpen ? '' : 'none'}" ref="content">
+                <slot></slot>
             </div>
         </transition>
     </div>
