@@ -1,0 +1,21 @@
+@collapse-prefix-cls: ~"@{xcui-prefix}-collapse";
+@icon-prefix-cls: ~"@{xcui-prefix}-icon";
+
+.@{collapse-prefix-cls} {
+    border: 1px solid @border-color-base;
+    border-radius: 2px;
+    &-item-header {
+        padding: 15px;
+        border-bottom: 1px solid @border-color-base;
+    }
+    &-item-wrap {
+        border-bottom: 1px solid @border-color-base;
+    }
+    &-item:last-child &-item-header {
+        border-bottom: none;
+    }
+    &-item:last-child &-item-wrap {
+        border-bottom: none;
+        border-top: 1px solid @border-color-base;
+    }
+}
