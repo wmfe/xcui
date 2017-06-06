@@ -7,32 +7,30 @@
 
 ## 基础模式
 
-::: demo 以面板组的方式出现，常用于多项类似操作。
+::: demo 以面板组的方式出现，常用于多项类似操作。通过v-model绑定数组，可以设置默认展开的项。
 
 ```html
 
 <tpl>
     <x-collapse v-model="opens1">
         <x-collapse-item id="1">
-            <span slot="titleLeft">i am left</span>
+            <span slot="titleRight">This is panel header 1</span>
             <div>i am the content1</div>
             <div>i am the content1</div>
             <div>i am the content1</div>
             <div>i am the content1</div>
             <div>i am the content1</div>
-
-            <span slot="titleRight">i am right</span>
         </x-collapse-item>
         <x-collapse-item id="2">
-            <span slot="titleLeft">i am left</span>
+            <span slot="titleRight">This is panel header 2</span>
             <div>i am the content2</div>
             <div>i am the content2</div>
             <div>i am the content2</div>
             <div>i am the content2</div>
             <div>i am the content2</div>
-
         </x-collapse-item>
         <x-collapse-item id="3">
+            <span slot="titleRight">This is panel header 3</span>
             <div>i am the content3</div>
             <div>i am the content3</div>
             <div>i am the content3</div>
@@ -40,12 +38,10 @@
             <div>i am the content3</div>
             <div>i am the content3</div>
             <div>i am the content3</div>
-
-            <span slot="titleRight">i am right</span>
         </x-collapse-item>
     </x-collapse>
     <p style="margin-top: 15px;">
-        打开的值数组： {{opens}}
+        默认展开的面板值数组： {{opens1}}
     </p>
    
 <script>
@@ -66,32 +62,30 @@
 
 ## 手风琴模式（每次只能打开一个面板）
 
-::: demo 以面板组的方式出现，常用于多项类似操作。
+::: demo 通过设置open-only-one，实现每次最多只能打开一个面板，其他展开面板自动折叠。
 
 ```html
 
 <tpl>
     <x-collapse v-model="opens" :open-only-one="openOnlyOne">
         <x-collapse-item id="1">
-            <span slot="titleLeft">i am left</span>
+            <span slot="titleRight">This is panel header 1</span>
             <div>i am the content1</div>
             <div>i am the content1</div>
             <div>i am the content1</div>
             <div>i am the content1</div>
             <div>i am the content1</div>
-
-            <span slot="titleRight">i am right</span>
         </x-collapse-item>
         <x-collapse-item id="2">
-            <span slot="titleLeft">i am left</span>
+            <span slot="titleRight">This is panel header 2</span>
             <div>i am the content2</div>
             <div>i am the content2</div>
             <div>i am the content2</div>
             <div>i am the content2</div>
             <div>i am the content2</div>
-
         </x-collapse-item>
         <x-collapse-item id="3">
+            <span slot="titleRight">This is panel header 3</span>
             <div>i am the content3</div>
             <div>i am the content3</div>
             <div>i am the content3</div>
@@ -99,13 +93,8 @@
             <div>i am the content3</div>
             <div>i am the content3</div>
             <div>i am the content3</div>
-
-            <span slot="titleRight">i am right</span>
         </x-collapse-item>
     </x-collapse>
-    <p style="margin-top: 15px;">
-        打开的值数组： {{opens1}}
-    </p>
    
 <script>
     export default {
@@ -117,6 +106,76 @@
         }
     };
 </script>
+
+</tpl>
+
+```
+
+:::
+
+## 自定义面板头
+
+::: demo 通过添加titleRight和titleLeft两个solt可以灵活设置箭头图标左右两侧的内容
+
+```html
+
+<tpl>
+    <x-collapse v-model="opens" :open-only-one="openOnlyOne">
+        <x-collapse-item id="1">
+            <span slot="titleLeft" class="title-left">This is panel header 1</span>
+            <span slot="titleRight" class="title-right">
+                <x-icon name="trash-a" size="16"></x-icon>
+            </span>
+            <div>i am the content1</div>
+            <div>i am the content1</div>
+            <div>i am the content1</div>
+            <div>i am the content1</div>
+            <div>i am the content1</div>
+        </x-collapse-item>
+        <x-collapse-item id="2">
+            <span slot="titleLeft" class="title-left">This is panel header 1</span>
+            <span slot="titleRight" class="title-right">
+                <x-icon name="trash-a" size="16"></x-icon>
+            </span>
+            <div>i am the content2</div>
+            <div>i am the content2</div>
+            <div>i am the content2</div>
+            <div>i am the content2</div>
+            <div>i am the content2</div>
+        </x-collapse-item>
+        <x-collapse-item id="3">
+            <span slot="titleLeft" class="title-left">This is panel header 1</span>
+            <span slot="titleRight" class="title-right">
+                <x-icon name="trash-a" size="16"></x-icon>
+            </span>
+            <div>i am the content3</div>
+            <div>i am the content3</div>
+            <div>i am the content3</div>
+            <div>i am the content3</div>
+            <div>i am the content3</div>
+            <div>i am the content3</div>
+            <div>i am the content3</div>
+        </x-collapse-item>
+    </x-collapse>
+   
+<script>
+    export default {
+        data() {
+            return {
+                opens: ['1'],
+                openOnlyOne: true
+            };
+        }
+    };
+</script>
+<style>
+    .title-right{
+        float: right;      
+    }
+    .title-left{
+        padding-right: 300px;        
+    }
+</style>
 
 </tpl>
 
@@ -170,4 +229,12 @@
     };
 
 </script>
+<style>
+    .title-right{
+        float: right;      
+    }
+    .title-left{
+        padding-right: 300px;        
+    }
+</style>
 

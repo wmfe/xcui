@@ -7,20 +7,20 @@
     &-item-header {
         padding: 15px;
         border-bottom: 1px solid @border-color-base;
-        background: @gray-lighter;
+        background: @white-lighter;
     }
     &-item-wrap {
-        border-bottom: 1px solid @border-color-base;
-        transition: height .3s @ease-in;
+        transition: height .3s ease-in-out;
         overflow: hidden;
     }
     &-item-content{
+        border-bottom: 1px solid @border-color-base;
         padding: 15px;
     }
     &-item:last-child &-item-header {
         border-bottom: none;
     }
-    &-item:last-child &-item-wrap {
+    &-item:last-child &-item-content {
         border-bottom: none;
         border-top: 1px solid @border-color-base;
     }
