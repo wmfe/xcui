@@ -15,29 +15,21 @@
     <x-collapse v-model="opens1">
         <x-collapse-item id="1">
             <span slot="titleRight">This is panel header 1</span>
-            <div>i am the content1</div>
-            <div>i am the content1</div>
-            <div>i am the content1</div>
-            <div>i am the content1</div>
-            <div>i am the content1</div>
+            <div class="eg-class">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
         </x-collapse-item>
         <x-collapse-item id="2">
             <span slot="titleRight">This is panel header 2</span>
-            <div>i am the content2</div>
-            <div>i am the content2</div>
-            <div>i am the content2</div>
-            <div>i am the content2</div>
-            <div>i am the content2</div>
+            <div class="eg-class">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
         </x-collapse-item>
         <x-collapse-item id="3">
             <span slot="titleRight">This is panel header 3</span>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
+            <div class="eg-class">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
         </x-collapse-item>
     </x-collapse>
     <p style="margin-top: 15px;">
@@ -53,6 +45,12 @@
         }
     };
 </script>
+
+<style>
+    .eg-class{
+        width: 80%;
+    }
+</style>
 
 </tpl>
 
@@ -70,29 +68,21 @@
     <x-collapse v-model="opens" :open-only-one="openOnlyOne">
         <x-collapse-item id="1">
             <span slot="titleRight">This is panel header 1</span>
-            <div>i am the content1</div>
-            <div>i am the content1</div>
-            <div>i am the content1</div>
-            <div>i am the content1</div>
-            <div>i am the content1</div>
+            <div class="eg-class">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
         </x-collapse-item>
         <x-collapse-item id="2">
             <span slot="titleRight">This is panel header 2</span>
-            <div>i am the content2</div>
-            <div>i am the content2</div>
-            <div>i am the content2</div>
-            <div>i am the content2</div>
-            <div>i am the content2</div>
+            <div class="eg-class">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.  culpa qui officia deserunt mollit anim id est laborum.
+            </div>
         </x-collapse-item>
         <x-collapse-item id="3">
             <span slot="titleRight">This is panel header 3</span>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
+            <div class="eg-class">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
         </x-collapse-item>
     </x-collapse>
    
@@ -106,6 +96,12 @@
         }
     };
 </script>
+
+<style>
+    .eg-class{
+        width: 80%;
+    }
+</style>
 
 </tpl>
 
@@ -126,35 +122,27 @@
             <span slot="titleRight" class="title-right">
                 <x-icon name="trash-a" size="16"></x-icon>
             </span>
-            <div>i am the content1</div>
-            <div>i am the content1</div>
-            <div>i am the content1</div>
-            <div>i am the content1</div>
-            <div>i am the content1</div>
+            <div class="eg-class">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
         </x-collapse-item>
         <x-collapse-item id="2">
             <span slot="titleLeft" class="title-left">This is panel header 1</span>
             <span slot="titleRight" class="title-right">
                 <x-icon name="trash-a" size="16"></x-icon>
             </span>
-            <div>i am the content2</div>
-            <div>i am the content2</div>
-            <div>i am the content2</div>
-            <div>i am the content2</div>
-            <div>i am the content2</div>
+            <div class="eg-class">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
         </x-collapse-item>
         <x-collapse-item id="3">
             <span slot="titleLeft" class="title-left">This is panel header 1</span>
             <span slot="titleRight" class="title-right">
                 <x-icon name="trash-a" size="16"></x-icon>
             </span>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
-            <div>i am the content3</div>
+            <div class="eg-class">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
         </x-collapse-item>
     </x-collapse>
    
@@ -174,6 +162,9 @@
     }
     .title-left{
         padding-right: 300px;        
+    }
+    .eg-class{
+        width: 80%;
     }
 </style>
 
@@ -235,6 +226,9 @@
     }
     .title-left{
         padding-right: 300px;        
+    }
+    .eg-class{
+        width: 80%;
     }
 </style>
 
