@@ -8665,3 +8665,27 @@ textarea.x-input {
   left: 0;
   transform: rotate(180deg);
 }
+.x-collapse {
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+}
+.x-collapse-item-header {
+  padding: 15px;
+  border-bottom: 1px solid #d9d9d9;
+  background: #f9f9f9;
+}
+.x-collapse-item-wrap {
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
+}
+.x-collapse-item-content {
+  border-bottom: 1px solid #d9d9d9;
+  padding: 15px;
+}
+.x-collapse-item:last-child .x-collapse-item-header {
+  border-bottom: none;
+}
+.x-collapse-item:last-child .x-collapse-item-content {
+  border-bottom: none;
+  border-top: 1px solid #d9d9d9;
+}
