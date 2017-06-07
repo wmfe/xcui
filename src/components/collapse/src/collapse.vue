@@ -25,6 +25,11 @@
                 openItems: (this.value ? [].concat(this.value) : [])
             };
         },
+        watch: {
+            openItems(val) {
+                this.$emit('input', val);
+            }
+        },
         methods: {
             onItemClick: function (id) {
                 let index = this.openItems.indexOf(id);
