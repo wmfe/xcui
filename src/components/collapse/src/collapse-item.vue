@@ -9,7 +9,7 @@
             <div class="x-collapse-item-content">
                 <slot></slot>
             </div>
-        </transition>
+        </div>
     </div>
 </template>
 <script>
