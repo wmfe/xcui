@@ -1,0 +1,27 @@
+@collapse-prefix-cls: ~"@{xcui-prefix}-collapse";
+@icon-prefix-cls: ~"@{xcui-prefix}-icon";
+
+.@{collapse-prefix-cls} {
+    border: 1px solid @border-color-base;
+    border-radius: 2px;
+    &-item-header {
+        padding: 15px;
+        border-bottom: 1px solid @border-color-base;
+        background: @white-lighter;
+    }
+    &-item-wrap {
+        transition: height .3s ease-in-out;
+        overflow: hidden;
+    }
+    &-item-content{
+        border-bottom: 1px solid @border-color-base;
+        padding: 15px;
+    }
+    &-item:last-child &-item-header {
+        border-bottom: none;
+    }
+    &-item:last-child &-item-content {
+        border-bottom: none;
+        border-top: 1px solid @border-color-base;
+    }
+}
