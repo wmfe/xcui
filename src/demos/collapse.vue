@@ -120,7 +120,7 @@
         <x-collapse-item id="1">
             <span slot="titleLeft" class="title-left">This is panel header 1</span>
             <span slot="titleRight" class="title-right">
-                <x-icon name="trash-a" size="16"></x-icon>
+                <x-icon name="outlet" size="16"></x-icon>
             </span>
             <div class="eg-class">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -129,7 +129,7 @@
         <x-collapse-item id="2">
             <span slot="titleLeft" class="title-left">This is panel header 1</span>
             <span slot="titleRight" class="title-right">
-                <x-icon name="trash-a" size="16"></x-icon>
+                <x-icon name="outlet" size="16"></x-icon>
             </span>
             <div class="eg-class">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -138,7 +138,7 @@
         <x-collapse-item id="3">
             <span slot="titleLeft" class="title-left">This is panel header 1</span>
             <span slot="titleRight" class="title-right">
-                <x-icon name="trash-a" size="16"></x-icon>
+                <x-icon name="outlet" size="16"></x-icon>
             </span>
             <div class="eg-class">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
