@@ -8673,10 +8673,12 @@ textarea.x-input {
   padding: 15px;
   border-bottom: 1px solid #d9d9d9;
   background: #f9f9f9;
+  cursor: pointer;
 }
 .x-collapse-item-wrap {
   transition: height 0.3s ease-in-out;
   overflow: hidden;
+  cursor: default;
 }
 .x-collapse-item-content {
   border-bottom: 1px solid #d9d9d9;
