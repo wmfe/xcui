@@ -1,6 +1,3 @@
-# XCUI
-
-
 <p align="center">
     <a href="https://wmfe.github.io/xcui" target="_blank"><img width="100"src="https://raw.githubusercontent.com/wmfe/xcui/2.0/src/assets/xcui-logo.png"></a>
 </p>
@@ -12,7 +9,7 @@
     <a href="https://www.npmjs.com/package/xcui"><img src="https://img.shields.io/npm/l/xcui.svg" alt="Licence"></a>
 </p>
 
-
+## About
 
 XCUI 是基于`Vue2.0`的**桌面端组件库**。
 
