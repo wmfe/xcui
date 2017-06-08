@@ -5,7 +5,7 @@
   "engines": {
     "node": ">=5.10.0"
   },
-  "description": "Desktop web UI based on Vue and Bootstrap",
+  "description": "Desktop web UI based on Vue2.0",
   "theme": "./custom.js",
   "keywords": [
     "xcui",

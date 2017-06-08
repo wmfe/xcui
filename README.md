@@ -13,11 +13,11 @@
 
 XCUI 是基于`Vue2.0`的**桌面端组件库**。
 
-## XCUI的目标是：
+XCUI的目标是：
 
 + 满足桌面端页面大部分基础组件需求。
 + 快速开发基于 `Vue2.0` 构建的项目。
-+ 保持小体积, 无其他js库依赖。
++ 保持小体积, 无其他js库依赖(No jquery, No Bootstrap, etc)
 + 简洁优雅。
 
 ## 组件展示
@@ -66,7 +66,7 @@ Vue.use(xcui);
 
 ## 开发
 
-### Clone the doc repo
+### Clone the repo
 ```
 $ git clone git@github.com:wmfe/xcui.git
 ```
