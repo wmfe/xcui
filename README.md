@@ -1,13 +1,18 @@
-# 关于XCUI
+# XCUI
 
-![logo](https://raw.githubusercontent.com/wmfe/xcui/2.0/src/assets/xcui-logo.png)
 
-[![CircleCI](https://img.shields.io/circleci/project/wmfe/xcui/2.0.svg)](https://circleci.com/gh/wmfe/xcui/tree/2.0)
-[![npm version](https://img.shields.io/npm/v/xcui.svg)](https://www.npmjs.com/package/xcui)
-[![GitHub issues](https://img.shields.io/github/issues/wmfe/xcui.svg)](https://github.com/wmfe/xcui/issues)
-[![GitHub forks](https://img.shields.io/github/forks/wmfe/xcui.svg)](https://github.com/wmfe/xcui/network)
-[![GitHub stars](https://img.shields.io/github/stars/wmfe/xcui.svg)](https://github.com/wmfe/xcui/stargazers)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/wmfe/xcui/1.0/LICENSE)
+<p align="center">
+    <a href="https://wmfe.github.io/xcui" target="_blank"><img width="100"src="https://raw.githubusercontent.com/wmfe/xcui/2.0/src/assets/xcui-logo.png"></a>
+</p>
+
+<p align="center">
+    <a href="https://circleci.com/gh/wmfe/xcui/tree/2.0"><img src="https://img.shields.io/circleci/project/wmfe/xcui/2.0.svg"></a>
+    <a href="https://www.npmjs.com/package/xcui"><img src="https://img.shields.io/npm/dm/xcui.svg" alt="Downloads"></a>
+    <a href="https://www.npmjs.com/package/xcui"><img src="https://img.shields.io/npm/v/xcui.svg" alt="Version"></a>
+    <a href="https://www.npmjs.com/package/xcui"><img src="https://img.shields.io/npm/l/xcui.svg" alt="Licence"></a>
+</p>
+
+
 
 XCUI 是基于`Vue2.0`的**桌面端组件库**。
 
