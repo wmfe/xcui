@@ -23,7 +23,8 @@ export default {
         },
         onClose: Function,
         color: String,
-        name: String
+        name: String,
+        tagKey: String
     },
     data() {
         return {
@@ -54,7 +55,7 @@ export default {
     methods: {
         handleClose(e) {
             if (this.onClose) {
-                this.onClose(e);
+                this.onClose(e, this);
             } 
             if (e.defaultPrevented) {
                 return;
