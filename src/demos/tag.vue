@@ -17,15 +17,15 @@
 
 <tpl>
     <x-tag>标签一</x-tag>
-    <x-tag closeable :on-close="close1">可关闭标签一</x-tag>
+    <x-tag closeable tag-key="1" :on-close="close1">可关闭标签一</x-tag>
     <x-tag closeable :on-close="close2">可关闭标签二</x-tag>
 </tpl>
 
 <script>
     export default {
         methods: {
-            close1() {
-                this.$Message.info('标签被关闭了');
+            close1(e/*{preventDefault}*/, tagInst/*tag instance*/) {
+                this.$Message.info(`tagKey为${tagInst.tagKey}的标签被关闭了`);
             },
             close2(e) {
                 e.preventDefault();
@@ -122,6 +122,7 @@ export default {
         :color="tag.color"
         :tag-key="tag.key"
         :name="tag.name"
+        :checked="tag.checked"
         @change="change1">{{tag.name}}</x-tag-checkable>
     <p style="margin-top: 15px;">选中的标签：{{selectedTagNames.length > 0 ? selectedTagNames : ''}}</p>
     <p style="margin-top: 15px;">选中的标签值：{{selectedTagKeys.length > 0 ? selectedTagKeys : ''}}</p>
@@ -138,11 +139,11 @@ export default {
             selectedTagNames: [],
             selectedTagKeys: [],
             tags2: [{
-                name: '电影', color: '', key: '0'
+                name: '电影', color: '', key: '0', checked: true
             }, {
                 name: '动漫', color: 'pink', key: '1'
             }, {
-                name: '音乐', color: 'green', key: '2'
+                name: '音乐', color: 'green', key: '2', checked: true
             }, {
                 name: '八卦', color: 'blue', key: '3'
             }, {
@@ -200,8 +201,9 @@ export default {
 | 名字 | 类型 | 默认 | 描述 | 是否必选 | 可选值|
 |-----|-----|-----|-----|----|----|
 |color|String|无|颜色，可设为预设值或色值|可选|pink/red/orange/green/cyan/blue/purple, 加上`-inverse`设为反色|
+|tag-key|String, Number|无|tag的标识|可选||
 |closeable|Boolean|false|是否可关闭|可选|true, false|
-|on-close|function|无|关闭时回调，参数为鼠标事件event|可选||
+|on-close|function|无|关闭时回调，参数为鼠标事件event和tag实例|可选||
 |transition|String|fade|关闭时的过渡效果名称|可选||
 
 ## TagCheckable Props
@@ -209,7 +211,7 @@ export default {
 |-----|-----|-----|-----|----|----|
 |color|String|无|颜色，可设为预设值或色值|可选|pink/red/orange/green/cyan/blue/purple, 加上`-inverse`设为反色|
 |name|String|false|是否可关闭|可选|true, false|
-|tag-key|function|无|tag的标识|可选||
+|tag-key|String, Number|无|tag的标识|可选||
 |checked|Boolean|false|是否默认选中|否|true,false|
 
 
@@ -234,7 +236,7 @@ export default {
             selectedTagNames: [],
             selectedTagKeys: [],
             tags2: [{
-                name: '电影', color: '', key: '0'
+                name: '电影', color: '', key: '0', checked: true
             }, {
                 name: '动漫', color: 'pink', key: '1'
             }, {
@@ -247,8 +249,8 @@ export default {
         };
     },
     methods: {
-        close1() {
-            this.$Message.info('标签被关闭了');
+        close1(e, tagInst) {
+            this.$Message.info(`tagKey为${tagInst.tagKey}的标签被关闭了`);
         },
         close2(e) {
             e.preventDefault();
@@ -262,6 +264,9 @@ export default {
                 this.tags = [];
             }
             this.tags.push({name: `新标签${this.index++}`, key: this.index});
+        },
+        onCloseTag(e, tagInst) {
+            console.log(tagInst.tagKey);
         },
         change1(tag, checked) {
             if (checked) {

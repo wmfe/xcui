@@ -22,6 +22,11 @@
                 internalChecked: this.checked
             };
         },
+        watch: {
+            checked(val) {
+                this.internalChecked = val;
+            }
+        },
         computed: {
             cls() {
                 let ret = [];
