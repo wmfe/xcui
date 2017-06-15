@@ -12374,6 +12374,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	        },
 	        handleEnter: function handleEnter() {
+	            if (this.currentIndex === -1) {
+	                return;
+	            }
 	            var currentItem = this.list[this.currentIndex];
 	            this.setItem(currentItem);
 	            this.triggerOnEnter = true;
