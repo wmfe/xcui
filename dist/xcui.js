@@ -12755,6 +12755,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	    },
 
+	    watch: {
+	        checked: function checked(val) {
+	            this.internalChecked = val;
+	        }
+	    },
 	    computed: {
 	        cls: function cls() {
 	            var ret = [];
@@ -12805,7 +12810,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },
 	        onClose: Function,
 	        color: String,
-	        name: String
+	        name: String,
+	        tagKey: String
 	    },
 	    data: function data() {
 	        return {
@@ -12837,7 +12843,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    methods: {
 	        handleClose: function handleClose(e) {
 	            if (this.onClose) {
-	                this.onClose(e);
+	                this.onClose(e, this);
 	            }
 	            if (e.defaultPrevented) {
 	                return;
