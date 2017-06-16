@@ -193,6 +193,9 @@
                 });
             },
             handleEnter() {
+                if (this.currentIndex === -1) {
+                    return;
+                }
                 let currentItem = this.list[this.currentIndex];
                 this.setItem(currentItem);
                 this.triggerOnEnter = true;

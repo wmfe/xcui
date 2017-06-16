@@ -103,12 +103,18 @@
                     <li class="sidebar-item">
                         <router-link to="/component/pagination">Pagination 分页</router-link>
                     </li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/steps">Steps 步骤条</router-link>
+                    </li>
                     <li class="sidebar-title">Others 其他</li>
                     <li class="sidebar-item">
                         <router-link to="/component/scrolltop">ScrollTop 返回顶部</router-link>
                     </li>
                     <li class="sidebar-item">
                         <router-link to="/component/pageloading">PageLoading 页面加载</router-link>
+                    </li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/collapse">Collapse 折叠面板</router-link>
                     </li>
                 </ul>
             </x-col>

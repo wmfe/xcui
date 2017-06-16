@@ -36,6 +36,8 @@ import Radio from './demos/radio';
 import Switch from './demos/switch';
 import Form from './demos/form';
 import Table from './demos/table';
+import Steps from './demos/steps';
+import Collapse from './demos/collapse';
 
 const router = new VueRouter({
     routes: [{
@@ -135,6 +137,12 @@ const router = new VueRouter({
             }, {
                 path: '/component/table',
                 component: Table
+            }, {
+                path: '/component/steps',
+                component: Steps
+            }, {
+                path: '/component/collapse',
+                component: Collapse
             }
         ]
     }]
