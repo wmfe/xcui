@@ -244,11 +244,6 @@
                 order: 0
             };
         },
-        watch: {
-            singleMap(val) {
-                // alert('singleMap');
-            }
-        },
         methods: {
             tableRowClassName(row, index) {
                 if (index === 0) {
@@ -267,11 +262,10 @@
             addColumn() {
                 this.sourceData = [];
                 this.order++;
-                // this.$nextTick(() => {
                 this.singleMap = this.columsMap[this.order];
-                // });
                 if (!this.singleMap) {
                     this.order = 0;
+                    this.singleMap = this.columsMap[this.order];
                 }
                 this.sourceData = [
                     {
