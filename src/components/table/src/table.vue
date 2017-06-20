@@ -115,7 +115,11 @@
                 return dataMap;
             }
         },
-
+        watch: {
+            data(val, oldVal) {
+                console.log(val);
+            }
+        },
         methods: {
             getDataList(valueList) {
                 return valueList.map(value => {
