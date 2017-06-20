@@ -81,22 +81,22 @@ export default {
     },
     watch: {
         title(val) {
-            this.updateColumn();
+            this.updateColumn('title');
         },
         prop(val) {
-            this.updateColumn();
+            this.updateColumn('prop');
         },
         type(val) {
-            this.updateColumn();
+            this.updateColumn('type');
         },
         width(val) {
-            this.updateColumn();
+            this.updateColumn('width');
         },
         className(val) {
             this.updateColumn();
         },
         singleLine(val) {
-            this.updateColumn();
+            this.updateColumn('singleLine');
         }
     },
     methods: {
@@ -117,29 +117,34 @@ export default {
                 this.columnOrder = array.push(column) - 1;
             }
         },
-        updateColumn() {
-            const slots = this.$scopedSlots;
-            let tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
-            let column = {
-                title: this.title,
-                type: this.type || 'normal',
-                prop: this.prop,
-                width: this.width,
-                className: tdClassName,
-                singleLine: this.singleLine,
-                children: [],
-                // tbody 中每个 td 内的 render 方法
-                render: slots.default
-                    // 如果 <x-table-column> 内有 template，按照 template 内的来渲染
-                    ? args => {
-                        return slots.default(args);
-                    }
-                    : ({dataItem, columnItem}) => {
-                        // 直接返回内容
-                        return dataItem[columnItem.prop];
-                    }
-            };
-            this.table.columns.splice(this.columnOrder, 1, column);
+        updateColumn(name) {
+            // const slots = this.$scopedSlots;
+            // let tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
+            // let column = {
+            //     title: this.title,
+            //     type: this.type || 'normal',
+            //     prop: this.prop,
+            //     width: this.width,
+            //     className: tdClassName,
+            //     singleLine: this.singleLine,
+            //     children: [],
+            //     // tbody 中每个 td 内的 render 方法
+            //     render: slots.default
+            //         // 如果 <x-table-column> 内有 template，按照 template 内的来渲染
+            //         ? args => {
+            //             return slots.default(args);
+            //         }
+            //         : ({dataItem, columnItem}) => {
+            //             // 直接返回内容
+            //             return dataItem[columnItem.prop];
+            //         }
+            // };
+            let value = this[name];
+            if (value) {
+                this.$set(this.table.columns[this.columnOrder], name, value);
+            }
+
+            // this.table.columns.splice(this.columnOrder, 1, column);
         },
         removeColumn() {
             this.table.columns.splice(this.columnOrder, 1);
