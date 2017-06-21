@@ -646,14 +646,14 @@
 ```
 :::
 
-## 支持动态表格赋值
+## 支持表头动态赋值
 
 ::: demo 支持经过异步操作对表头列数据重新赋值
 ```html
 <tpl>
     <div>
-        <x-button type="success" @click="addColumn">async</x-button>
-        <x-table :data="sourceDataAsync">
+        <x-button type="success" @click="changeColumn">async</x-button>
+        <x-table :data="sourceData">
                 <x-table-column
                     title="固定姓名列"
                     prop="name"
@@ -662,7 +662,7 @@
                <x-table-column
                    :title="columnitem.title"
                    :prop="columnitem.prop"
-                   v-for="(columnitem, name) in singleMap"
+                   v-for="(columnitem, name) in columsMap[order]"
                >
                </x-table-column>
                 <x-table-column
@@ -677,7 +677,7 @@
     export default {
         data() {
             return {
-                sourceDataAsync: [
+                sourceData: [
                     {
                         name: '李雷',
                         address: '北京市海淀区新建宫门路17号',
@@ -691,8 +691,50 @@
                         address: '北京市海淀区新建宫门路17号',
                         job: 'UI设计师'
                     }
-                ]
+                ],
+                columsMap: [
+                    {
+                        nameCol: {
+                            title: '姓名2',
+                            prop: 'name'
+                        },
+                        jobCol: {
+                            title: '职业2',
+                            prop: 'job'
+                        },
+                        addressCol: {
+                            title: '地址2',
+                            prop: 'address'
+                        },
+                        jobCo2: {
+                            title: '职业2',
+                            prop: 'job'
+                        }
+                    },
+                    {
+                        nameCol: {
+                            title: '姓名3',
+                            prop: 'name'
+                        },
+                        jobCol: {
+                            title: '职业3',
+                            prop: 'job'
+                        },
+                        addressCol3: {
+                            title: '地址3',
+                            prop: 'address'
+                        }
+                    }
+                ],
+                order: 0
             };
+        },
+        methods: {
+            //改变表头元素绑定的数据
+            changeColumn() {
+                let order = this.order + 1;
+                this.columsMap[order] ? this.order++ : this.order = 0;
+            }
         }
     };
 </script>
@@ -770,60 +812,7 @@
                         job: 'UI设计师'
                     }
                 ],
-                sourceDataAsync: [
-                    {
-                        name: '李雷',
-                        address: '北京市海淀区新建宫门路17号',
-                        job: '前端开发工程师',
-                        birth: '1994-03-11',
-                        gender: '男'
-                    }, {
-                        name: '韩梅梅',
-                        address: '北京市海淀区新建宫门路17号',
-                        job: '架构师',
-                        birth: '1996-09-27',
-                        gender: '女'
-                    }, {
-                        name: '小明',
-                        address: '北京市海淀区新建宫门路17号',
-                        job: 'UI设计师',
-                        birth: '1992-05-20',
-                        gender: '男'
-                    }
-                ],
                 columsMap: [
-                    {
-                        nameCol: {
-                            title: '姓名',
-                            prop: 'name'
-                        },
-                        jobCol: {
-                            title: '职业',
-                            prop: 'job'
-                        },
-                        addressCol: {
-                            title: '地址',
-                            prop: 'address'
-                        }
-                    },
-                    {
-                        nameCol: {
-                            title: '姓名1',
-                            prop: 'name'
-                        },
-                        jobCol: {
-                            title: '职业1',
-                            prop: 'job'
-                        },
-                        addressCol: {
-                            title: '地址1',
-                            prop: 'address'
-                        },
-                        jobCo2: {
-                            title: '职业1',
-                            prop: 'job'
-                        }
-                    },
                     {
                         nameCol: {
                             title: '姓名2',
@@ -837,9 +826,9 @@
                             title: '地址2',
                             prop: 'address'
                         },
-                        addressCol3: {
-                            title: '地址2',
-                            prop: 'address'
+                        jobCo2: {
+                            title: '职业2',
+                            prop: 'job'
                         }
                     },
                     {
@@ -852,61 +841,11 @@
                             prop: 'job'
                         },
                         addressCol3: {
-                            title: '地址23',
-                            prop: 'address'
-                        }
-                    },
-                    {
-                        nameCol: {
-                            title: '姓名4',
-                            prop: 'name'
-                        },
-                        jobCol: {
-                            title: '职业4',
-                            prop: 'job'
-                        },
-                        addressCol3: {
-                            title: '地址4',
-                            prop: 'address'
-                        },
-                        addressCol4: {
-                            title: '地址4',
-                            prop: 'address'
-                        }
-                    },
-                    {
-                        addressCol3: {
-                            title: '地址5',
-                            prop: 'address'
-                        },
-                        nameCol: {
-                            title: '姓名5',
-                            prop: 'name'
-                        },
-                        jobCol: {
-                            title: '职业5',
-                            prop: 'job'
-                        },
-                        addressCol4: {
-                            title: '地址5',
+                            title: '地址3',
                             prop: 'address'
                         }
                     }
                 ],
-                singleMap: {
-                    nameCol: {
-                        title: '姓名2',
-                        prop: 'name'
-                    },
-                    jobCol: {
-                        title: '职业2',
-                        prop: 'job'
-                    },
-                    addressCol: {
-                        title: '地址2',
-                        prop: 'address'
-                    }
-                },
                 selectedValueList: ['小明'],
                 selectedValue: '小明',
                 order: 0
@@ -927,35 +866,9 @@
                 this.selectedValue = value;
                 console.log(data);
             },
-            addColumn() {
-                this.sourceDataAsync = [];
-                this.order++;
-                this.singleMap = this.columsMap[this.order];
-                if (!this.singleMap) {
-                    this.order = 0;
-                    this.singleMap = this.columsMap[this.order];
-                }
-                this.sourceDataAsync = [
-                    {
-                        name: '李雷' + this.order,
-                        address: '北京市海淀区新建宫门路17号',
-                        job: '前端开发工程师',
-                        birth: '1994-03-11',
-                        gender: '男'
-                    }, {
-                        name: '韩梅梅' + this.order,
-                        address: '北京市海淀区新建宫门路17号',
-                        job: '架构师',
-                        birth: '1996-09-27',
-                        gender: '女'
-                    }, {
-                        name: '小明' + this.order,
-                        address: '北京市海淀区新建宫门路17号',
-                        job: 'UI设计师',
-                        birth: '1992-05-20',
-                        gender: '男'
-                    }
-                ];
+            changeColumn() {
+                let order = this.order + 1;
+                this.columsMap[order] ? this.order++ : this.order = 0;
             }
         }
     };
