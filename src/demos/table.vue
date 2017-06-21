@@ -652,7 +652,7 @@
 ```html
 <tpl>
     <div>
-        <x-button type="success" @click="changeColumn">async</x-button>
+        <x-button type="primary" @click="changeColumn">async</x-button>
         <x-table :data="sourceData">
                 <x-table-column
                     title="固定姓名列"
