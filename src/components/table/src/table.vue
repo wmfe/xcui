@@ -4,6 +4,7 @@
             'x-table-bordered': bordered,
             'x-table-striped': striped
             }">
+            <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
             <colgroup>
                 <col
                     v-for="item in columns"
@@ -24,7 +25,7 @@
                 @changeCheckbox="onChangeCheckbox"
                 @changeRadio="onChangeRadio"
             />
-            <slot></slot>
+            <!-- <slot></slot> -->
         </table>
         <div class="x-table-empty-tip" v-if="data.length === 0">
             {{emptyTip}}

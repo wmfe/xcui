@@ -37,7 +37,7 @@ export default {
         };
     },
     mounted() {
-        this.$options.render = h => h('div', this.$slots.default);
+        // this.$options.render = h => h('div', this.$slots.default);
         let parent = this.$parent;
         let origin = this.$parent;
         while (origin && origin.$options.name !== 'XTable') {
@@ -74,9 +74,14 @@ export default {
         };
         this.columnConfig = column;
         let columnIndex;
-        if (isSubColumn) {
+
+        if (!isSubColumn) {
+            columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
+        }
+        else {
             columnIndex = [].indexOf.call(parent.$el.children, this.$el);
         }
+
         this.insertColumn(this.table, column, columnIndex, isSubColumn ? parent.columnConfig : null);
     },
     watch: {
@@ -93,7 +98,8 @@ export default {
             this.updateColumn('width');
         },
         className(val) {
-            this.updateColumn();
+            let tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
+            this.updateColumn('className', tdClassName);
         },
         singleLine(val) {
             this.updateColumn('singleLine');
@@ -108,7 +114,6 @@ export default {
                     array = parent.children = [];
                 }
             }
-            // array.push(column);
             if (typeof index !== 'undefined') {
                 array.splice(index, 0, column);
                 this.columnOrder = index;
@@ -117,8 +122,8 @@ export default {
                 this.columnOrder = array.push(column) - 1;
             }
         },
-        updateColumn(name) {
-            let value = this[name];
+        updateColumn(name, customVal) {
+            let value = customVal || this[name];
             if (value) {
                 this.$set(this.table.columns[this.columnOrder], name, value);
             }
