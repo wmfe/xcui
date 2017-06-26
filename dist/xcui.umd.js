@@ -9694,7 +9694,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        form: String,
 	        maxlength: Number,
 	        minlength: Number,
-	        iconClick: Function
+	        iconClick: Function,
+	        type: {
+	            default: 'text',
+	            type: String,
+	            validator: function validator(val) {
+	                return ['text', 'password'].indexOf(val) >= 0;
+	            }
+	        }
 	    },
 	    data: function data() {
 	        return {
