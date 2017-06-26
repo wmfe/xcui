@@ -576,6 +576,7 @@
 </script>
 ```
 :::
+
 ## 多选
 
 ::: demo 使用`checkbox`进行多选，通过设置`x-table-column`的`type`为`selection`进行多选
