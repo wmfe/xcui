@@ -21,7 +21,7 @@
     export default {
         data() {
             return {
-                modal1: true
+                modal1: false
             }
         }
     }
@@ -66,9 +66,9 @@
     export default {
         data() {
             return {
-                modal2: true,
-                modal3: true,
-                modal4: true
+                modal2: false,
+                modal3: false,
+                modal4: false
             }
         },
         methods: {
@@ -117,8 +117,8 @@
         data() {
             return {
                 isLoading: false,
-                modal5: true,
-                modal6: true
+                modal5: false,
+                modal6: false
             }
         }
     }
