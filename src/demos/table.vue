@@ -646,101 +646,6 @@
 ```
 :::
 
-## 支持表头动态赋值
-
-::: demo 支持经过异步操作对表头列数据重新赋值
-```html
-<tpl>
-    <div>
-        <x-button type="primary" @click="changeColumn">async</x-button>
-        <x-table :data="sourceData">
-                <x-table-column
-                    title="固定姓名列"
-                    prop="name"
-                >
-                </x-table-column>
-               <x-table-column
-                   :title="columnitem.title"
-                   :prop="columnitem.prop"
-                   v-for="(columnitem, name) in columsMap[order]"
-               >
-               </x-table-column>
-                <x-table-column
-                    title="固定工作列"
-                    prop="job"
-                >
-                </x-table-column>
-        </x-table>
-    </div>
-</tpl>
-<script>
-    export default {
-        data() {
-            return {
-                sourceData: [
-                    {
-                        name: '李雷',
-                        address: '北京市海淀区新建宫门路17号',
-                        job: '前端开发工程师'
-                    }, {
-                        name: '韩梅梅',
-                        address: '北京市海淀区新建宫门路17号',
-                        job: '架构师'
-                    }, {
-                        name: '小明',
-                        address: '北京市海淀区新建宫门路17号',
-                        job: 'UI设计师'
-                    }
-                ],
-                columsMap: [
-                    {
-                        nameCol: {
-                            title: '姓名2',
-                            prop: 'name'
-                        },
-                        jobCol: {
-                            title: '职业2',
-                            prop: 'job'
-                        },
-                        addressCol: {
-                            title: '地址2',
-                            prop: 'address'
-                        },
-                        jobCo2: {
-                            title: '职业2',
-                            prop: 'job'
-                        }
-                    },
-                    {
-                        nameCol: {
-                            title: '姓名3',
-                            prop: 'name'
-                        },
-                        jobCol: {
-                            title: '职业3',
-                            prop: 'job'
-                        },
-                        addressCol3: {
-                            title: '地址3',
-                            prop: 'address'
-                        }
-                    }
-                ],
-                order: 0
-            };
-        },
-        methods: {
-            //改变表头元素绑定的数据
-            changeColumn() {
-                let order = this.order + 1;
-                this.columsMap[order] ? this.order++ : this.order = 0;
-            }
-        }
-    };
-</script>
-```
-:::
-
 
 
 ## Table Props
@@ -812,43 +717,8 @@
                         job: 'UI设计师'
                     }
                 ],
-                columsMap: [
-                    {
-                        nameCol: {
-                            title: '姓名2',
-                            prop: 'name'
-                        },
-                        jobCol: {
-                            title: '职业2',
-                            prop: 'job'
-                        },
-                        addressCol: {
-                            title: '地址2',
-                            prop: 'address'
-                        },
-                        jobCo2: {
-                            title: '职业2',
-                            prop: 'job'
-                        }
-                    },
-                    {
-                        nameCol: {
-                            title: '姓名3',
-                            prop: 'name'
-                        },
-                        jobCol: {
-                            title: '职业3',
-                            prop: 'job'
-                        },
-                        addressCol3: {
-                            title: '地址3',
-                            prop: 'address'
-                        }
-                    }
-                ],
                 selectedValueList: ['小明'],
-                selectedValue: '小明',
-                order: 0
+                selectedValue: '小明'
             };
         },
         methods: {
@@ -865,10 +735,6 @@
             onUpdateSelectedValue(value, data) {
                 this.selectedValue = value;
                 console.log(data);
-            },
-            changeColumn() {
-                let order = this.order + 1;
-                this.columsMap[order] ? this.order++ : this.order = 0;
             }
         }
     };
