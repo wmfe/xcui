@@ -12526,6 +12526,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+
+	var SINGLE_LINE_CLASS_NAME = 'x-table-td-single-line';
 	exports.default = {
 	    name: 'XTableColumn',
 
@@ -12555,31 +12558,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    },
-
+	    data: function data() {
+	        return {
+	            columnOrder: 0
+	        };
+	    },
 	    mounted: function mounted() {
 	        var parent = this.$parent;
-	        while (parent && parent.$options.name !== 'XTable') {
-	            parent = parent.$parent;
+	        var origin = this.$parent;
+	        while (origin && origin.$options.name !== 'XTable') {
+	            origin = origin.$parent;
 	        }
-
-	        this.table = parent;
-
+	        this.table = origin;
+	        var isSubColumn = parent !== origin;
 	        var slots = this.$scopedSlots;
 
 	        if (this.type) {
 	            this.table.rowKey = this.prop;
 	        }
 
-	        var SINGLE_LINE_CLASS_NAME = 'x-table-td-single-line';
 	        var tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
 
-	        this.table.columns.push({
+	        var column = {
 	            title: this.title,
 	            type: this.type || 'normal',
 	            prop: this.prop,
 	            width: this.width,
 	            className: tdClassName,
 	            singleLine: this.singleLine,
+	            children: [],
 
 	            render: slots.default ? function (args) {
 	                return slots.default(args);
@@ -12589,7 +12596,68 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                return dataItem[columnItem.prop];
 	            }
-	        });
+	        };
+	        this.columnConfig = column;
+	        var columnIndex = void 0;
+
+	        if (!isSubColumn) {
+	            columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
+	        } else {
+	            columnIndex = [].indexOf.call(parent.$el.children, this.$el);
+	        }
+
+	        this.insertColumn(this.table, column, columnIndex, isSubColumn ? parent.columnConfig : null);
+	    },
+
+	    watch: {
+	        title: function title(val) {
+	            this.updateColumn('title');
+	        },
+	        prop: function prop(val) {
+	            this.updateColumn('prop');
+	        },
+	        type: function type(val) {
+	            this.updateColumn('type');
+	        },
+	        width: function width(val) {
+	            this.updateColumn('width');
+	        },
+	        className: function className(val) {
+	            var tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
+	            this.updateColumn('className', tdClassName);
+	        },
+	        singleLine: function singleLine(val) {
+	            this.updateColumn('singleLine');
+	        }
+	    },
+	    methods: {
+	        insertColumn: function insertColumn(table, column, index, parent) {
+	            var array = table.columns;
+	            if (parent) {
+	                array = parent.children;
+	                if (!array) {
+	                    array = parent.children = [];
+	                }
+	            }
+	            if (typeof index !== 'undefined') {
+	                array.splice(index, 0, column);
+	                this.columnOrder = index;
+	            } else {
+	                this.columnOrder = array.push(column) - 1;
+	            }
+	        },
+	        updateColumn: function updateColumn(name, customVal) {
+	            var value = customVal || this[name];
+	            if (value) {
+	                this.$set(this.table.columns[this.columnOrder], name, value);
+	            }
+	        },
+	        removeColumn: function removeColumn() {
+	            this.table.columns.splice(this.columnOrder, 1);
+	        }
+	    },
+	    destroyed: function destroyed() {
+	        this.removeColumn();
 	    }
 	};
 
@@ -16651,7 +16719,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      'x-table-bordered': _vm.bordered,
 	      'x-table-striped': _vm.striped
 	    }
-	  }, [_c('colgroup', _vm._l((_vm.columns), function(item) {
+	  }, [_c('div', {
+	    ref: "hiddenColumns",
+	    staticClass: "hidden-columns"
+	  }, [_vm._t("default")], 2), _vm._v(" "), _c('colgroup', _vm._l((_vm.columns), function(item) {
 	    return _c('col', {
 	      attrs: {
 	        "width": item.width
@@ -16677,7 +16748,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      "changeCheckbox": _vm.onChangeCheckbox,
 	      "changeRadio": _vm.onChangeRadio
 	    }
-	  }), _vm._v(" "), _vm._t("default")], 2), _vm._v(" "), (_vm.data.length === 0) ? _c('div', {
+	  })], 1), _vm._v(" "), (_vm.data.length === 0) ? _c('div', {
 	    staticClass: "x-table-empty-tip"
 	  }, [_vm._v("\n        " + _vm._s(_vm.emptyTip) + "\n    ")]) : _vm._e()])
 	},staticRenderFns: []}
