@@ -42,7 +42,7 @@
 
 ## 不同类型的通知消息
 
-::: demo 通过使用 `.info()`, `.success()`, `.warning()`, `.danger()` 展示不同类型的通知消息
+::: demo 通过使用 `.info()`, `.success()`, `.warning()`, `.error()` 展示不同类型的通知消息
 
 ```html
 
@@ -50,7 +50,7 @@
     <x-button type="info" @click="notice2">info</x-button>
     <x-button type="success" @click="notice3">success</x-button>
     <x-button type="warning" @click="notice4">warning</x-button>
-    <x-button type="danger" @click="notice5">danger</x-button>
+    <x-button type="danger" @click="notice5">error</x-button>
 </tpl>
 
 <script>
