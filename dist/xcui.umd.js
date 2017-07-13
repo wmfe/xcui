@@ -10862,6 +10862,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    },
 	    watch: {
+	        pageSize: function pageSize(val) {
+	            this.internalPageSize = val;
+	        },
 	        showQuickPrevIcon: function showQuickPrevIcon(val) {
 	            if (!val) {
 	                this.quickPrevIconCls = 'x-icon-more';
@@ -17281,6 +17284,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    class: [_vm.quickPrevIconCls]
 	  })]) : _vm._e(), _vm._v(" "), _vm._l(((_vm.getRangePage.end - _vm.getRangePage.begin + 1)), function(number) {
 	    return _c('x-button', {
+	      key: number,
 	      staticClass: "number-btn",
 	      class: {
 	        'active': _vm.isActive(number)
@@ -17351,6 +17355,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, _vm._l((_vm.pageSizeRange), function(opt) {
 	    return _c('x-option', {
+	      key: opt,
 	      attrs: {
 	        "label": (opt + "条/页"),
 	        "value": opt
