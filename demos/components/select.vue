@@ -16,7 +16,7 @@
 <tpl>
     <div style="width: 180px;">
         <x-select v-model="model1" placeholder="请选择">
-            <x-option v-for="item in data1" :label="item.label" :value="item.value">
+            <x-option v-for="item in data1" :key="item.value" :label="item.label" :value="item.value">
             </x-option>
         </x-select>
     </div>
@@ -52,7 +52,7 @@
 <tpl>
     <div style="width: 180px;">
         <x-select v-model="model2" placeholder="请选择">
-            <x-option v-for="item in data2" :label="item.label" :value="item.value" :disabled="item.disabled">
+            <x-option v-for="item in data2" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled">
             </x-option>
         </x-select>
     </div>
@@ -89,7 +89,7 @@
 <tpl>
     <div style="width: 180px;">
         <x-select v-model="model3" :disabled="disabled" placeholder="请选择">
-            <x-option v-for="item in data3" :label="item.label" :value="item.value" :disabled="item.disabled">
+            <x-option v-for="item in data3" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled">
             </x-option>
         </x-select>
     </div>
@@ -126,7 +126,7 @@
 <tpl>
     <div style="width: 180px;">
         <x-select v-model="model4" :allow-clear="true" placeholder="请选择">
-            <x-option v-for="item in data4" :label="item.label" :value="item.value">
+            <x-option v-for="item in data4" :key="item.value" :label="item.label" :value="item.value">
             </x-option>
         </x-select>
     </div>
@@ -155,14 +155,14 @@
 
 ## 基础多选
 
-::: demo 通过设置`x-select`的`multiple`选项为`true`, 可以设置为多选状态。 
+::: demo 通过设置`x-select`的`multiple`选项为`true`, 可以设置为多选状态。
 
 ```html
 
 <tpl>
     <div style="width: 180px;">
         <x-select v-model="model5" :multiple="true" placeholder="请选择">
-            <x-option v-for="i in data5" :label="i.label" :value="i.value">
+            <x-option v-for="item in data5" :key="item.value" :label="i.label" :value="i.value">
             </x-option>
         </x-select>
     </div>
@@ -199,7 +199,7 @@
 <tpl>
     <div style="width: 180px;">
         <x-select v-model="model6" :multiple-limit="3" :allow-clear="true"  :multiple="true" placeholder="请选择">
-            <x-option v-for="item in data6" :label="item.label" :value="item.value">
+            <x-option v-for="item in data6" :key="item.value" :label="item.label" :value="item.value">
             </x-option>
         </x-select>
     </div>
@@ -236,8 +236,8 @@
 <tpl>
     <div style="width: 180px;">
         <x-select v-model="model7" placeholder="请选择">
-            <x-option-group v-for="group in data7" :label="group.label" :disabled="group.disabled">
-                <x-option v-for="item in group.options" :label="item.label" :value="item.value"></x-option>
+            <x-option-group v-for="group in data7" :key="group.label" :label="group.label" :disabled="group.disabled">
+                <x-option v-for="item in group.options" :key="item.value" :label="item.label" :value="item.value"></x-option>
             </x-option-group>
         </x-select>
     </div>
@@ -295,7 +295,7 @@
 <tpl>
     <div style="width: 180px;">
         <x-select v-model="model8" placeholder="请选择">
-            <x-option v-for="item in data8" :label="item.label" :value="item.value">
+            <x-option v-for="item in data8" :key="item.value" :label="item.label" :value="item.value">
                 <span style="float: left">{{ item.label }}</span>
                 <span style="float: right; color: #8492a6; font-size: 10px">{{ item.info }}</span>
             </x-option>

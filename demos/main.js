@@ -4,8 +4,8 @@
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Helpers from './demos/helpers/install';
-import XCUI from './components/index';
+import Helpers from './helpers/install';
+import XCUI from '../src/components/index';
 import App from './App';
 
 Vue.use(XCUI);
