@@ -33,8 +33,8 @@
     import Emitter from '../../../utils/mixins/emitter';
     import Clickoutside from '../../../utils/clickoutside';
     import xInput from '../../input';
-    import xSelectDropdown from './select-dropdown';
-    import xOption from './option';
+    import xSelectDropdown from './select-dropdown.vue';
+    import xOption from './option.vue';
 
     export default {
         name: 'xSelect',
@@ -128,7 +128,7 @@
 
                     if (optionIndex > -1) {
                         this.value.splice(optionIndex, 1);
-                    } 
+                    }
                     else if (this.multipleLimit <= 0 || this.value.length < this.multipleLimit) {
                         this.value.push(option.value);
                     }

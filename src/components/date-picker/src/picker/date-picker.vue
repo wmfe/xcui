@@ -25,7 +25,7 @@
             </i>
         </x-input>
         <date-panel v-if="type !== 'daterange' && type !== 'datetimerange'" :popperClass="popperClass" ref="picker"></date-panel>
-        <date-range-panel 
+        <date-range-panel
             v-if="type === 'daterange' || type === 'datetimerange'"
             :popperClass="popperClass" ref="picker">
         </date-range-panel>
@@ -34,8 +34,8 @@
 
 <script>
 import Picker from './pickerMixin';
-import DateRangePanel from '../panel/date-range';
-import DatePanel from '../panel/date';
+import DateRangePanel from '../panel/date-range.vue';
+import DatePanel from '../panel/date.vue';
 
 export default {
     name: 'XDatePicker',

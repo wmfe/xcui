@@ -59,7 +59,7 @@
 
 <script>
 import { parseDate, limitRange } from '../util/index';
-import TimeSpinner from '../basic/time-spinner';
+import TimeSpinner from '../basic/time-spinner.vue';
 import Config from '../config';
 
 const MIN_TIME = parseDate('00:00:00', 'HH:mm:ss');
