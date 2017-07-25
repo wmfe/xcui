@@ -30,8 +30,8 @@
     </div>
 </template>
 <script>
-    import Emitter from '../../../utils/mixins/emitter';
-    import Clickoutside from '../../../utils/clickoutside';
+    import Emitter from 'xcui/src/utils/mixins/emitter';
+    import Clickoutside from 'xcui/src/utils/clickoutside';
     import xInput from '../../input';
     import xSelectDropdown from './select-dropdown.vue';
     import xOption from './option.vue';

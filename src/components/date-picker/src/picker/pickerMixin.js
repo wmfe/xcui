@@ -1,7 +1,7 @@
-import Clickoutside from '../../../../utils/clickoutside';
+import Clickoutside from 'xcui/src/utils/clickoutside';
 import { formatDate, parseDate, getWeekNumber, equalDate, isDate } from '../util';
-import Popper from '../../../../utils/vue-popper';
-import Emitter from '../../../../utils/mixins/emitter';
+import Popper from 'xcui/src/utils/vue-popper';
+import Emitter from 'xcui/src/utils/mixins/emitter';
 import XInput from '../../../input';
 
 const NewPopper = {
@@ -37,10 +37,10 @@ const HAVE_TRIGGER_TYPES = [
     'timerange',
     'datetimerange'
 ];
-const DATE_FORMATTER = function (value, format) {
+const DATE_FORMATTER = function(value, format) {
     return formatDate(value, format);
 };
-const DATE_PARSER = function (text, format) {
+const DATE_PARSER = function(text, format) {
     return parseDate(text, format);
 };
 
@@ -197,8 +197,7 @@ export default {
             }
             if (this.picker && typeof this.picker.handleClear === 'function') {
                 this.picker.handleClear();
-            }
-            else {
+            } else {
                 this.$emit('input');
             }
         },
@@ -234,8 +233,7 @@ export default {
                         return false;
                     }
                 }
-            }
-            else {
+            } else {
                 if (val) {
                     return false;
                 }
@@ -250,11 +248,9 @@ export default {
         selectionMode() {
             if (this.type === 'week') {
                 return 'week';
-            }
-            else if (this.type === 'month') {
+            } else if (this.type === 'month') {
                 return 'month';
-            }
-            else if (this.type === 'year') {
+            } else if (this.type === 'year') {
                 return 'year';
             }
 
@@ -275,8 +271,8 @@ export default {
                     return;
                 }
                 const formatter = (
-                    this.TYPE_VALUE_RESOLVER_MAP[this.type]
-                    || this.TYPE_VALUE_RESOLVER_MAP.default
+                    this.TYPE_VALUE_RESOLVER_MAP[this.type] ||
+                    this.TYPE_VALUE_RESOLVER_MAP.default
                 ).formatter;
                 const format = DEFAULT_FORMATS[this.type];
 
@@ -287,16 +283,15 @@ export default {
                 if (value) {
                     const type = this.type;
                     const parser = (
-                        this.TYPE_VALUE_RESOLVER_MAP.type
-                        || this.TYPE_VALUE_RESOLVER_MAP.default
+                        this.TYPE_VALUE_RESOLVER_MAP.type ||
+                        this.TYPE_VALUE_RESOLVER_MAP.default
                     ).parser;
                     const parsedValue = parser(value, this.format || DEFAULT_FORMATS[type]);
 
                     if (parsedValue && this.picker) {
                         this.picker.value = parsedValue;
                     }
-                }
-                else {
+                } else {
                     this.picker.value = value;
                 }
                 this.$forceUpdate();
@@ -329,8 +324,7 @@ export default {
             if (this.showClose) {
                 this.currentValue = '';
                 this.showClose = false;
-            }
-            else {
+            } else {
                 this.pickerVisible = !this.pickerVisible;
             }
         },
@@ -339,15 +333,14 @@ export default {
             if (Array.isArray(dateA)) {
                 let len = dateA.length;
                 if (!dateB) {
-                    return true; 
+                    return true;
                 }
                 while (len--) {
                     if (!equalDate(dateA[len], dateB[len])) {
                         return true;
                     }
                 }
-            }
-            else {
+            } else {
                 if (!equalDate(dateA, dateB)) {
                     return true;
                 }
@@ -419,8 +412,8 @@ export default {
                     }
 
                     for (const option in options) {
-                        if (options.hasOwnProperty(option)
-                            && option !== 'selectableRange') {
+                        if (options.hasOwnProperty(option) &&
+                            option !== 'selectableRange') {
                             this.picker[option] = options[option];
                         }
                     }
@@ -431,7 +424,7 @@ export default {
                 // this.$el.appendChild(this.picker.$el);
                 // this.pickerVisible = this.picker.visible = true;
                 this.handleVisible(true);
-                
+
                 this.picker.resetView && this.picker.resetView();
 
                 this.picker.$on('dodestroy', this.doDestroy);
@@ -446,8 +439,7 @@ export default {
                     this.refInput.setSelectionRange(start, end);
                     this.refInput.focus();
                 });
-            }
-            else {
+            } else {
                 this.handleVisible(true);
                 // this.pickerVisible = this.picker.visible = true;
             }
@@ -458,16 +450,13 @@ export default {
                 // 增加对time, timerange的处理
                 if (this.type === 'time') {
                     this.pickerDateForTime = new Date(this.currentValue.getTime());
-                }
-                else {
+                } else {
                     this.picker.date = new Date(this.currentValue.getTime());
                 }
-            }
-            else {
+            } else {
                 if (this.type === 'timerange') {
                     this.pickerValueForTimeRange = this.currentValue;
-                }
-                else {
+                } else {
                     this.picker.value = this.currentValue;
                 }
             }
@@ -481,13 +470,12 @@ export default {
         handleVisible(visible) {
             if (this.type === 'time') {
                 this.pickerVisible = visible;
-            }
-            else {
+            } else {
                 this.pickerVisible = this.picker.visible = visible;
             }
         },
 
-        RANGE_FORMATTER: function (value, format) {
+        RANGE_FORMATTER: function(value, format) {
             if (Array.isArray(value) && value.length === 2) {
                 const start = value[0];
                 const end = value[1];
@@ -498,7 +486,7 @@ export default {
             }
             return '';
         },
-        RANGE_PARSER: function (text, format) {
+        RANGE_PARSER: function(text, format) {
             const array = text.split(this.rangeSeparator);
             if (array.length === 2) {
                 const range1 = array[0];

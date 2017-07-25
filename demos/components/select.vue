@@ -162,7 +162,7 @@
 <tpl>
     <div style="width: 180px;">
         <x-select v-model="model5" :multiple="true" placeholder="请选择">
-            <x-option v-for="item in data5" :key="item.value" :label="i.label" :value="i.value">
+            <x-option v-for="item in data5" :key="item.value" :label="item.label" :value="item.value">
             </x-option>
         </x-select>
     </div>

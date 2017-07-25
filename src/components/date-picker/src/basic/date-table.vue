@@ -30,7 +30,7 @@ import { getFirstDayOfMonth,
           getWeekNumber,
           getStartDateOfMonth,
           DAY_DURATION } from '../util/index';
-import { hasClass } from '../../../../utils/dom';
+import { hasClass } from 'xcui/src/utils/dom';
 import Config from '../config';
 
 const WEEKS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];

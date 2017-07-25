@@ -1,5 +1,5 @@
 import Modal from '../modal';
-import merge from '../../utils/merge';
+import merge from 'xcui/src/utils/merge';
 
 const camelcaseToHyphen = str => str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 const isEmptyObject = obj => !Object.keys(obj).length;
@@ -112,8 +112,7 @@ let Dialog = {
                 if (typeof title === 'object') {
                     options = title;
                     type = content;
-                }
-                else {
+                } else {
                     options.title = title;
                     options.content = content;
                     options.onOk = onOk;
