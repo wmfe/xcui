@@ -29,12 +29,11 @@
     "scripts": {
         "dev": "node build/dev-server.js",
         "site": "rimraf site && node build/build.js",
-        "rollup": "rollup --config build/rollup.config.js",
         "site:local": "rimraf site && webpack -p --progress --hide-modules --colors --config build/webpack.site.conf.js",
         "build": "rimraf dist/* && npm run build:umd && npm run build:esmodule",
-        "build:esmodule": "cross-env NODE_ENV=production webpack --progress --hide-modules --colors --config build/webpack.npm.conf.js",
+        "build:esmodule": "webpack --progress --hide-modules --colors --config build/webpack.npm.conf.js",
         "build:umd": "cross-env NODE_ENV=production webpack --progress --hide-modules --colors --config build/webpack.npm.umd.conf.js",
-        "build:components": "node build/build-components"
+        "build:components": "node build/build-components.js"
     },
     "dependencies": {
         "async-validator": "^1.6.9"
@@ -44,7 +43,7 @@
         "babel-helper-vue-jsx-merge-props": "^2.0.2",
         "babel-loader": "^7.1.1",
         "babel-plugin-syntax-jsx": "^6.18.0",
-        "babel-plugin-transform-runtime": "^6.9.0",
+        "babel-plugin-transform-runtime": "^6.23.0",
         "babel-plugin-transform-vue-jsx": "^3.4.3",
         "babel-preset-es2015": "^6.24.1",
         "babel-preset-stage-2": "^6.0.0",
@@ -91,6 +90,7 @@
         "webpack-dev-middleware": "^1.11.0",
         "webpack-hot-middleware": "^2.18.2",
         "webpack-merge": "^4.1.0",
+        "webpack-node-externals": "^1.6.0",
         "xcui-demo-loader": "^0.1.8"
     }
 }

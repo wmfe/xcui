@@ -1,5 +1,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
-var path = require('path')
+var path = require('path');
+var externals = require('./externals');
 
 module.exports = {
     build: {
@@ -8,8 +9,11 @@ module.exports = {
         assetsRoot: path.resolve(__dirname, '../site'),
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
+        distRoot: path.resolve(__dirname, '../dist'),
+        distLibRoot: path.resolve(__dirname, '../dist/lib'),
         productionSourceMap: false,
         productionGzipExtensions: ['js', 'css'],
+        externals: externals,
         // Run the build command with an extra argument to
         // View the bundle analyzer report after build finishes:
         // `npm run build --report`
