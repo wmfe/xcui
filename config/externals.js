@@ -1,8 +1,9 @@
 var nodeExternals = require('webpack-node-externals');
 
 var utilExternals = function(context, request, callback) {
-    if (/utils\//.test(request)) {
-        return callback(null, 'commonjs ' + request);
+    if (/src\/utils\//.test(request)) {
+        var libRequest = request.replace(/src/, 'lib');
+        return callback(null, 'commonjs ' + libRequest);
     }
     callback();
 }
