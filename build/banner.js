@@ -1,6 +1,6 @@
-const version = require('../package.json').version;
-const author = require('../package.json').author;
-const url = require('../package.json').repository.url;
+var version = require('../package.json').version;
+var author = require('../package.json').author;
+var url = require('../package.json').repository.url;
 
 var banner =
     ' xcui v' + version + '\n' +

@@ -8,11 +8,9 @@ function resolve(dir) {
 }
 
 module.exports = {
-    entry: {
-        xcui: './src/components/index.js'
-    },
+    entry: {},
     output: {
-        path: config.build.distLibRoot,
+        path: config.build.libRoot,
         filename: '[name].js'
     },
     resolve: {

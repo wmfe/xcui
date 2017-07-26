@@ -14,7 +14,7 @@ console.log(chalk.cyan.bold('Building components...'));
 var componentsConfig = merge(baseWebpackConfig, {
     entry: {},
     output: {
-        path: config.build.distLibRoot
+        path: config.build.libRoot
     },
     externals: config.build.externals,
     plugins: [

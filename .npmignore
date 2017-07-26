@@ -1,7 +1,6 @@
 build/
 node_modules/
 examples/
-src/
 site/
 test/
 yarn.lock

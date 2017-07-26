@@ -1,7 +1,7 @@
 {
     "name": "xcui",
     "version": "2.1.0",
-    "main": "dist/xcui.js",
+    "main": "lib/xcui.common.js",
     "engines": {
         "node": ">=5.10.0",
         "npm": ">=5.0.0"
@@ -28,14 +28,12 @@
     },
     "scripts": {
         "dev": "node build/dev-server.js",
-        "site": "rimraf site && node build/build.js",
-        "site:local": "rimraf site && webpack -p --progress --hide-modules --colors --config build/webpack.site.conf.js",
-        "build": "rimraf dist/* && npm run build:umd && npm run build:esmodule",
-        "build:esmodule": "webpack --progress --hide-modules --colors --config build/webpack.npm.conf.js",
-        "build:umd": "cross-env NODE_ENV=production webpack --progress --hide-modules --colors --config build/webpack.npm.umd.conf.js",
+        "site": "rimraf site && node build/build-site.js",
+        "build": "npm run build:lib && npm run site",
+        "build:lib": "rimraf lib && npm run build:bundle && npm run build:components && npm run build:utils",
         "build:components": "node build/build-components.js",
         "build:utils": "node build/build-utils.js",
-        "build:src": "node build/build-src.js"
+        "build:bundle": "node build/build-bundle.js"
     },
     "dependencies": {
         "async-validator": "^1.6.9"
@@ -69,8 +67,6 @@
         "file-loader": "^0.11.2",
         "file-save": "^0.2.0",
         "friendly-errors-webpack-plugin": "^1.6.1",
-        "fs-extra": "^4.0.0",
-        "glob": "^7.1.2",
         "html-webpack-plugin": "^2.29.0",
         "http-proxy-middleware": "^0.17.4",
         "json-loader": "^0.5.4",
