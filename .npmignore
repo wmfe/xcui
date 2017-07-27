@@ -1,4 +1,6 @@
 build/
+config/
+demos/
 node_modules/
 examples/
 site/
