@@ -48,7 +48,7 @@ npm install xcui
 ```javascript
 import Vue from 'vue'
 import xcui from 'xcui'
-import 'xcui/dist/xcui.css'
+import 'xcui/lib/xcui.css'
 Vue.use(xcui);
 ```
 

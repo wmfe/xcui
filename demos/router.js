@@ -6,38 +6,39 @@
 import VueRouter from 'vue-router';
 import Home from './Home';
 import Homecontent from './components/homeContent';
-import Installation from './components/installation';
-import Quickstart from './components/quickstart';
-import Layout from './components/layout';
-import Pagination from './components/pagination';
-import Loading from './components/loading';
-import Popover from './components/popover';
-import Tooltip from './components/tooltip';
-import Suggestion from './components/suggestion';
-import Tag from './components/tag';
-import Datepicker from './components/datepicker';
-import DateTimePicker from './components/datetimepicker';
-import TimePicker from './components/timepicker';
-import Select from './components/select.vue';
-import Message from './components/message';
-import Notice from './components/notice';
-import Modal from './components/modal';
-import Dialog from './components/dialog';
-import InputNumber from './components/inputNumber';
-import Progress from './components/progress';
-import PageLoading from './components/pageloading';
-import ScrollTop from './components/scrolltop';
-import Button from './components/button';
-import Icon from './components/icon';
-import Input from './components/input';
-import Textarea from './components/textarea';
-import Checkbox from './components/checkbox';
-import Radio from './components/radio';
-import Switch from './components/switch';
-import Form from './components/form';
-import Table from './components/table';
-import Steps from './components/steps';
-import Collapse from './components/collapse';
+
+const Installation = () => import('./components/installation');
+const Quickstart = () => import('./components/quickstart');
+const Layout = () => import('./components/layout');
+const Pagination = () => import('./components/pagination');
+const Loading = () => import('./components/loading');
+const Popover = () => import('./components/popover');
+const Tooltip = () => import('./components/tooltip');
+const Suggestion = () => import('./components/suggestion');
+const Tag = () => import('./components/tag');
+const Datepicker = () => import('./components/datepicker');
+const DateTimePicker = () => import('./components/datetimepicker');
+const TimePicker = () => import('./components/timepicker');
+const Select = () => import('./components/select.vue');
+const Message = () => import('./components/message');
+const Notice = () => import('./components/notice');
+const Modal = () => import('./components/modal');
+const Dialog = () => import('./components/dialog');
+const InputNumber = () => import('./components/inputNumber');
+const Progress = () => import('./components/progress');
+const PageLoading = () => import('./components/pageloading');
+const ScrollTop = () => import('./components/scrolltop');
+const Button = () => import('./components/button');
+const Icon = () => import('./components/icon');
+const Input = () => import('./components/input');
+const Textarea = () => import('./components/textarea');
+const Checkbox = () => import('./components/checkbox');
+const Radio = () => import('./components/radio');
+const Switch = () => import('./components/switch');
+const Form = () => import('./components/form');
+const Table = () => import('./components/table');
+const Steps = () => import('./components/steps');
+const Collapse = () => import('./components/collapse');
 
 const router = new VueRouter({
     routes: [{
@@ -146,10 +147,6 @@ const router = new VueRouter({
             }
         ]
     }]
-});
-
-router.afterEach(route => {
-    window.scrollTo(0, 0);
 });
 
 export default router;
