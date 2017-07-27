@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://wmfe.github.io/xcui" target="_blank"><img width="100"src="https://raw.githubusercontent.com/wmfe/xcui/2.0/src/assets/xcui-logo.png"></a>
+    <a href="https://wmfe.github.io/xcui" target="_blank"><img width="100"src="https://raw.githubusercontent.com/wmfe/xcui/2.0/demos/assets/xcui-logo.png"></a>
 </p>
 
 <p align="center">
