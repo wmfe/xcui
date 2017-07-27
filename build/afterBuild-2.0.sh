@@ -11,7 +11,8 @@ git config --global user.email "wmferobot@163.com"
 GitAddSite2_0 () {
     git clone -b gh-pages https://$WMFE_ROBOT_TOKEN@github.com/wmfe/xcui.git gh-pages
     cd gh-pages
-    if [ ! -f "../site/app.js" ]; then
+    rm -rf *
+    if [ ! -f "../site/index.html" ]; then
         exit 1
     else
         cp -r ../site/* ./
