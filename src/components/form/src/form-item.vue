@@ -5,7 +5,7 @@
             'is-validating': validateState === 'validating',
             'is-required': isRequired || required
             }">
-        <label :for="prop" class="x-form-item-label" :style="labelStyle" v-if="label">{{label}}</label> 
+        <label :for="prop" class="x-form-item-label" :style="labelStyle" v-if="label">{{label}}</label>
         <div class="x-form-item-content" v-bind:style="contentStyle">
             <slot></slot>
             <transition name="x-slide-up">
@@ -13,13 +13,13 @@
                     {{validateMessage}}
                 </div>
             </transition>
-       </div>    
+       </div>
     </div>
 </template>
 
 <script>
 import AsyncValidator from 'async-validator';
-import emitter from '../../../utils/mixins/emitter';
+import emitter from 'xcui/src/utils/mixins/emitter';
 
 function noop() {}
 

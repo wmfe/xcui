@@ -26,6 +26,17 @@
             return {
                 logoUrl: logoUrl
             };
+        },
+        mounted() {
+            router.beforeEach((to, from, next) => {
+                this.$PageLoading.start();
+                next();
+            });
+
+            router.afterEach((to, from, next) => {
+                this.$PageLoading.done();
+                window.scrollTo(0, 0);
+            });
         }
     };
 </script>

@@ -1,3 +1,3 @@
-import XForm from './src/form';
+import XForm from './src/form.vue';
 
 export default XForm;

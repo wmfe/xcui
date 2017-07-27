@@ -1,2 +1,5 @@
 src/assets/*/*.js
 src/utils/*.js
+build/*.js
+config/*.js
+lib/

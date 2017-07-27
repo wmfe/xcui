@@ -103,7 +103,7 @@
         <x-col span="8">
             <x-input placeholder="请输入网址">
                 <x-select v-model="model" slot="prepend" placeholder="请选择" style="width: 100px;">
-                    <x-option v-for="item in options" :value="item.value"></x-option>
+                    <x-option v-for="item in options" :key="item.key" :value="item.value"></x-option>
                 </x-select>
                 <span slot="append"><x-icon name="share"></x-icon></span>
             </x-input>

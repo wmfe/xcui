@@ -40,8 +40,8 @@
 
 <script>
 import Picker from './pickerMixin';
-import TimePanel from '../panel/time';
-import TimeRangePanel from '../panel/time-range';
+import TimePanel from '../panel/time.vue';
+import TimeRangePanel from '../panel/time-range.vue';
 
 export default {
     name: 'XTimePicker',

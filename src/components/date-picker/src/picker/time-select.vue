@@ -30,7 +30,7 @@
 
 <script>
   import Picker from './pickerMixin';
-  import Panel from '../panel/time-select';
+  import Panel from '../panel/time-select.vue';
 
   export default {
       mixins: [Picker],
