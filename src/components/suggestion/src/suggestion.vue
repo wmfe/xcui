@@ -20,8 +20,8 @@
 
 <script>
     import xInput from '../../input';
-    import xSuggestionDropdown from './suggestion-dropdown';
-    import Emitter from '../../../utils/mixins/emitter';
+    import xSuggestionDropdown from './suggestion-dropdown.vue';
+    import Emitter from 'xcui/src/utils/mixins/emitter';
 
     export default {
         name: 'xSuggestion',
@@ -89,7 +89,7 @@
                 return isValid && this.isFocus;
             }
         },
-        
+
         watch: {
             suggestions() {
                 this.arrangeLocalList();

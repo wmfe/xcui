@@ -16,7 +16,7 @@
 </template>
 <script>
     import Msg from './msg.vue';
-    import merge from '../../../utils/merge';
+    import merge from 'xcui/src/utils/merge';
 
     const prefixCls = 'x-messages';
     let seed = 0;

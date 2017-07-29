@@ -148,8 +148,8 @@
 
 <script>
 import { nextMonth, prevMonth, toDate, formatDate, parseDate } from '../util';
-import TimePicker from './time';
-import DateTable from '../basic/date-table';
+import TimePicker from './time.vue';
+import DateTable from '../basic/date-table.vue';
 import XInput from '../../../input';
 import Config from '../config';
 

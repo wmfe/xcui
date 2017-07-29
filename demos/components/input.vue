@@ -103,7 +103,7 @@
         <x-col span="8">
             <x-input placeholder="请输入网址">
                 <x-select v-model="model" slot="prepend" placeholder="请选择" style="width: 100px;">
-                    <x-option v-for="item in options" :value="item.value"></x-option>
+                    <x-option v-for="item in options" :key="item.key" :value="item.value"></x-option>
                 </x-select>
                 <span slot="append"><x-icon name="share"></x-icon></span>
             </x-input>
@@ -120,6 +120,7 @@
 |v-model|String, Number|无|和`v-model`的绑定值|必选||
 |size|String|无|输入框大小|可选|`large`, `small`|
 |placeholder|String|无|原生属性，输入框默认文本，用于提示|可选||
+|type|String|无|原生属性，输入框类型|可选|`text`, `password`|
 |disabled|Boolean|false|是否禁用|可选||
 |icon|String|无|输入框右侧图标名称|可选||
 |readonly|Boolean|false|原生属性，是否只读|可选||

@@ -25,6 +25,7 @@
                         </x-button>
                         <x-button
                             v-for="number in (getRangePage.end - getRangePage.begin + 1)"
+                            v-bind:key="number"
                             class="number-btn"
                             :class="{'active': isActive(number)}"
                             @click="turnToPage(number + getRangePage.begin - 1)">
@@ -32,7 +33,7 @@
                             <span v-else v-text="number + getRangePage.begin - 1" ></span>
                         </x-button>
 
-                        <x-button v-if="showQuickNextIcon" 
+                        <x-button v-if="showQuickNextIcon"
                                 class="number-btn"
                                 @mouseenter="quickNextIconCls = 'x-icon-chevron-d-right'"
                                 @mouseleave="quickNextIconCls = 'x-icon-more'"
@@ -53,7 +54,7 @@
                 </span>
                 <span class="x-pagination-page-size" v-if="showSizer">
                     <x-select v-model="internalPageSize" @change="changePageSize(internalPageSize)">
-                        <x-option v-for="opt in pageSizeRange" :label="`${opt}条/页`" :value="opt">
+                        <x-option v-for="opt in pageSizeRange" v-bind:key="opt" :label="`${opt}条/页`" :value="opt">
                         </x-option>
                     </x-select>
                 </span>
@@ -183,6 +184,9 @@ export default {
         }
     },
     watch: {
+        pageSize(val) {
+            this.internalPageSize = val;
+        },
         showQuickPrevIcon(val) {
             if (!val) {
                 this.quickPrevIconCls = 'x-icon-more';

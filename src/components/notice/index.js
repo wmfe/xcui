@@ -34,7 +34,7 @@ const xNotice = {
             const title = options.title || '';
             const desc = options.desc || '';
             const noticeUuid = options.uuid || `${prefixUuid}${uuid}`;
-            const onClose = options.onClose || function () {};
+            const onClose = options.onClose || function() {};
             const duration = options.duration === 0 ? 0 : options.duration || defaultDuration;
 
             uuid++;
@@ -52,11 +52,10 @@ const xNotice = {
                         <div class="${prefixCls}-desc">${desc}</div>
                     </div>
                 `;
-            }
-            else {
+            } else {
                 const iconType = iconTypes[type];
                 content = `
-                    <div class="${prefixCls}-custom-content ${prefixCls}-with-icon 
+                    <div class="${prefixCls}-custom-content ${prefixCls}-with-icon
                         ${prefixCls}-with-${type}${withDesc}">
                         <span class="${prefixCls}-icon ${prefixCls}-icon-${type}">
                             <i class="${iconPrefixCls} ${iconPrefixCls}-${iconType}"></i>
@@ -93,8 +92,7 @@ const xNotice = {
                     if (noticeInstance) {
                         noticeInstance.remove(name);
                     }
-                }
-                else {
+                } else {
                     return false;
                 }
             },

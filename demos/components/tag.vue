@@ -84,7 +84,7 @@
 ```html
 
 <tpl>
-    <x-tag v-for="tag in tags" closeable>{{tag.name}}</x-tag>
+    <x-tag v-for="tag in tags" :key="tag.name" closeable>{{tag.name}}</x-tag>
     <x-button type="sm" @click="addTag">添加</x-button>
 </tpl>
 
@@ -120,6 +120,7 @@ export default {
 <tpl>
     <x-tag-checkable v-for="tag in tags2"
         :color="tag.color"
+        :key="tag.key"
         :tag-key="tag.key"
         :name="tag.name"
         :checked="tag.checked"
@@ -166,7 +167,7 @@ export default {
                         color: tag.color,
                         tagkey: tag.tagKey
                     });
-                } 
+                }
             }
             else {
                 let i = -1;
@@ -176,7 +177,7 @@ export default {
                     }
                 });
                 if (i >= 0) {
-                    this.selectedTags.splice(i, 1);  
+                    this.selectedTags.splice(i, 1);
                 }
             }
             this.selectedTagNames = this.selectedTags.map((v) => {
@@ -282,7 +283,7 @@ export default {
                         color: tag.color,
                         tagkey: tag.tagKey
                     });
-                } 
+                }
             }
             else {
                 let i = -1;
@@ -292,7 +293,7 @@ export default {
                     }
                 });
                 if (i >= 0) {
-                    this.selectedTags.splice(i, 1);  
+                    this.selectedTags.splice(i, 1);
                 }
             }
             this.selectedTagNames = this.selectedTags.map((v) => {

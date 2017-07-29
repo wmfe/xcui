@@ -10,15 +10,15 @@
 <html>
 <head>
     <title>Hello World</title>
-    <link rel="stylesheet" href="https://unpkg.com/xcui/dist/xcui.css">
+    <link rel="stylesheet" href="https://unpkg.com/xcui/lib/xcui.css">
     <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/xcui/dist/xcui.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/xcui/lib/xcui.umd.js"></script>
 </head>
 <body>
     <div id="app">
         <x-button type="primary" @click="visible = true">click</x-button>
         <x-modal v-model="visible" title="欢迎使用XCUI">
-          <p>Hello World</p> 
+          <p>Hello World</p>
         </x-modal>
     </div>
     <script type="text/javascript">

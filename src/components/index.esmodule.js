@@ -18,7 +18,7 @@ import Notice from './notice';
 import Modal from './modal';
 import Dialog from './dialog';
 import PageLoading from './pageloading';
-import Pagination from './pagination';
+import Pagination from './pagination/index.vue';
 import Popover from './popover';
 import Progress from './progress';
 import Select from './select/index';

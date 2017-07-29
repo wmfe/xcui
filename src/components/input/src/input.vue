@@ -36,7 +36,7 @@
     </div>
 </template>
 <script>
-    import emitter from '../../../utils/mixins/emitter';
+    import emitter from 'xcui/src/utils/mixins/emitter';
 
     export default {
         name: 'xInput',
@@ -54,7 +54,12 @@
             form: String,
             maxlength: Number,
             minlength: Number,
-            iconClick: Function
+            iconClick: Function,
+            type: {
+                default: 'text',
+                type: String,
+                validator: val => ['text', 'password'].indexOf(val) >= 0
+            }
         },
         data() {
             return {

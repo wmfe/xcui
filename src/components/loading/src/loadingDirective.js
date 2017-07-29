@@ -1,4 +1,4 @@
-import { addClass, removeClass } from '../../../utils/dom';
+import { addClass, removeClass } from 'xcui/src/utils/dom';
 
 const XLoading = {
     install(Vue) {
@@ -35,8 +35,7 @@ const XLoading = {
 
                         addClass(el.mask, 'is-fullscreen');
                         insertDom(document.body, el, binding);
-                    }
-                    else {
+                    } else {
                         removeClass(el.mask, 'is-fullscreen');
 
                         if (binding.modifiers.body) {
@@ -44,24 +43,22 @@ const XLoading = {
 
                             ['top', 'left'].forEach(property => {
                                 let scroll = property === 'top' ? 'scrollTop' : 'scrollLeft';
-                                el.maskStyle[property] = el.getBoundingClientRect()[property]
-                                    + document.body[scroll]
-                                    + document.documentElement[scroll] + 'px';
+                                el.maskStyle[property] = el.getBoundingClientRect()[property] +
+                                    document.body[scroll] +
+                                    document.documentElement[scroll] + 'px';
                             });
                             ['height', 'width'].forEach(property => {
                                 el.maskStyle[property] = el.getBoundingClientRect()[property] + 'px';
                             });
 
                             insertDom(document.body, el, binding);
-                        }
-                        else {
+                        } else {
                             el.originalPosition = el.style.position;
                             insertDom(el, el, binding);
                         }
                     }
                 });
-            }
-            else {
+            } else {
                 if (el.domVisible) {
                     el.instance.$on('after-leave', _ => {
                         el.domVisible = false;
@@ -70,8 +67,7 @@ const XLoading = {
                         }
                         if (binding.modifiers.fullscreen || binding.modifiers.body) {
                             document.body.style.position = el.originalPosition;
-                        }
-                        else {
+                        } else {
                             el.style.position = el.originalPosition;
                         }
                     });
@@ -81,7 +77,7 @@ const XLoading = {
         };
 
         Vue.directive('loading', {
-            bind: function (el, binding) {
+            bind: function(el, binding) {
                 let mask = new Mask({
                     el: document.createElement('div'),
                     data: {
@@ -99,18 +95,17 @@ const XLoading = {
                 toggleLoading(el, binding);
             },
 
-            update: function (el, binding) {
+            update: function(el, binding) {
                 if (binding.oldValue !== binding.value) {
                     toggleLoading(el, binding);
                 }
             },
 
-            unbind: function (el, binding) {
+            unbind: function(el, binding) {
                 if (el.domInserted) {
                     if (binding.modifiers.fullscreen || binding.modifiers.body) {
                         document.body.removeChild(el.mask);
-                    }
-                    else {
+                    } else {
                         el.mask && el.mask.parentNode && el.mask.parentNode.removeChild(el.mask);
                     }
                 }
@@ -120,4 +115,3 @@ const XLoading = {
 };
 
 export default XLoading;
-
