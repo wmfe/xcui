@@ -449,7 +449,7 @@
 
 ## 列模板自定义
 
-::: demo 可以自己配置列内容。
+::: demo 可以自己配置列内容以及表头内容，未命名模版为列内容，设置名称为“column-header-slot”则为表头自定义模版，无该模版则默认显示title文案。
 
 ```html
 <tpl>
@@ -469,6 +469,13 @@
                 title="地址"
                 prop="address"
             >
+            <template scope="props" slot="column-header-slot">
+                {{props.columnItem.title}}
+                <x-tooltip content="Sample Text" title="Title">
+                        <x-icon name="help-circled" size="16"></x-icon>
+                </x-tooltip>
+            </template>
+
             </x-table-column>
             <x-table-column
                 title="职业"
