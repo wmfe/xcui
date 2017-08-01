@@ -3036,7 +3036,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "title": "地址",
       "prop": "address"
-    }
+    },
+    scopedSlots: _vm._u([
+      ["column-header-slot", function(props) {
+        return [_vm._v("\n                " + _vm._s(props.columnItem.title) + "\n                "), _c('x-tooltip', {
+          attrs: {
+            "content": "Sample Text",
+            "title": "Title"
+          }
+        }, [_c('x-icon', {
+          attrs: {
+            "name": "help-circled",
+            "size": "16"
+          }
+        })], 1)]
+      }]
+    ])
   }), _vm._v(" "), _c('x-table-column', {
     attrs: {
       "title": "职业",
@@ -3051,7 +3066,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info-title"
   }, [_vm._v("说明")]), _vm._v(" "), _c('div', {
     slot: "info"
-  }, [_c('p', [_vm._v("可以自己配置列内容。")])]), _vm._v(" "), _c('div', {
+  }, [_c('p', [_vm._v("可以自己配置列内容以及表头内容，未命名模版为列内容，设置名称为“column-header-slot”则为表头自定义模版，无该模版则默认显示title文案。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
   }, [_c('pre', [_c('span', {
     staticClass: "token tag"
@@ -3212,6 +3227,122 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
     staticClass: "token punctuation"
   }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("template")]), _vm._v(" "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("scope")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("props"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v(" "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("slot")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("column-header-slot"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")]), _vm._v("props.columnItem.title"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-tooltip")]), _vm._v(" "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("content")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("Sample Text"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v(" "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("Title"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n                        "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-icon")]), _vm._v(" "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("name")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("help-circled"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v(" "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("size")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("16"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-icon")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-tooltip")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("template")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n\n            "), _c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"

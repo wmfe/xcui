@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "static/js/chunk." + chunkId + "." + {"0":"d09b075530e84d7c35f3","1":"4c4bcda0dd84839a048a","2":"1a5d230240dd6497335d","3":"15593661d99c158dc561","4":"8fd43e1939712c8512c2","5":"f37f07c5639308ef3130","6":"21f8814b6dfe91543d89","7":"c039be51e159d8ba236a","8":"842bfddd6c6fbc76d82d","9":"fc3fa3fb055e2a544b39","10":"25f14b5664296bf0de91","11":"ac8e9b4b5fe17f7c8cee","12":"a100a57f30852976fe1e","13":"d0b06043f83ace11e7d9","14":"9de90f75b58433fa86e9","15":"9e3b4211693eea4734ca","16":"a0c9d00d7fbcf6af07c4","17":"f1bb9462202be6a4fe0d","18":"b6d766cbd9bf32b0c21a","19":"6b567f47a5a5174ea893","20":"93fb4705507f0e0b986e","21":"adb77c45862cebce5b2e","22":"6a8ddd377c58d1e2f90c","23":"05c5ffbd0d19db5e96e5","24":"c88e08266dfab61bb5f9","25":"376df1f67f1cd6f69c5b","26":"c036229f5d70a831c87f","27":"8cb510348d71e460851a","28":"24d0df46a3dcef6b5071","29":"72b59f9ecec5e6e30cb1","30":"8528fea8e0d869231cc6","31":"0fc85f188f195679aa3b"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "static/js/chunk." + chunkId + "." + {"0":"d09b075530e84d7c35f3","1":"296cdd1a9b819959bf98","2":"1a5d230240dd6497335d","3":"15593661d99c158dc561","4":"8fd43e1939712c8512c2","5":"f37f07c5639308ef3130","6":"21f8814b6dfe91543d89","7":"c039be51e159d8ba236a","8":"842bfddd6c6fbc76d82d","9":"fc3fa3fb055e2a544b39","10":"25f14b5664296bf0de91","11":"ac8e9b4b5fe17f7c8cee","12":"a100a57f30852976fe1e","13":"d0b06043f83ace11e7d9","14":"9de90f75b58433fa86e9","15":"9e3b4211693eea4734ca","16":"a0c9d00d7fbcf6af07c4","17":"f1bb9462202be6a4fe0d","18":"b6d766cbd9bf32b0c21a","19":"6b567f47a5a5174ea893","20":"93fb4705507f0e0b986e","21":"adb77c45862cebce5b2e","22":"6a8ddd377c58d1e2f90c","23":"05c5ffbd0d19db5e96e5","24":"c88e08266dfab61bb5f9","25":"376df1f67f1cd6f69c5b","26":"c036229f5d70a831c87f","27":"8cb510348d71e460851a","28":"24d0df46a3dcef6b5071","29":"72b59f9ecec5e6e30cb1","30":"8528fea8e0d869231cc6","31":"0fc85f188f195679aa3b"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -29246,10 +29246,13 @@ exports.default = {
                             );
                         case 'normal':
                         default:
+                            var content = columnItem.headerRender.call(_this, {
+                                columnItem: columnItem
+                            });
                             return h(
                                 'th',
                                 null,
-                                [columnItem.title]
+                                [content]
                             );
                     }
                 })]
@@ -29405,7 +29408,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     ref: "hiddenColumns",
-    staticClass: "hidden-columns"
+    staticClass: "x-table-hidden"
   }, [_vm._t("default")], 2), _vm._v(" "), _c('colgroup', _vm._l((_vm.columns), function(item) {
     return _c('col', {
       attrs: {
@@ -29524,6 +29527,8 @@ exports.default = {
         };
     },
     mounted: function mounted() {
+        var _this = this;
+
         var parent = this.$parent;
         var origin = this.$parent;
         while (origin && origin.$options.name !== 'XTable') {
@@ -29555,6 +29560,11 @@ exports.default = {
                     columnItem = _ref.columnItem;
 
                 return dataItem[columnItem.prop];
+            },
+            headerRender: slots['column-header-slot'] ? function (args) {
+                return slots['column-header-slot'](args);
+            } : function () {
+                return _this.title;
             }
         };
         this.columnConfig = column;
