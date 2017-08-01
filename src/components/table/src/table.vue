@@ -4,7 +4,7 @@
             'x-table-bordered': bordered,
             'x-table-striped': striped
             }">
-            <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
+            <div class="x-table-hidden" ref="hiddenColumns"><slot></slot></div>
             <colgroup>
                 <col
                     v-for="item in columns"

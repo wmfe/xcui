@@ -44,9 +44,15 @@ export default {
                                     );
                                 case 'normal':
                                 default:
+                                    let content = columnItem.headerRender.call(
+                                        this,
+                                        {
+                                            columnItem
+                                        }
+                                    );
                                     return (
                                         <th>
-                                            {columnItem.title}
+                                            {content}
                                         </th>
                                     );
                             }

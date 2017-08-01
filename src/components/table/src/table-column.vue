@@ -70,6 +70,13 @@ export default {
                 : ({dataItem, columnItem}) => {
                     // 直接返回内容
                     return dataItem[columnItem.prop];
+                },
+            headerRender: slots['column-header-slot']
+                ? args => {
+                    return slots['column-header-slot'](args);
+                }
+                : () => {
+                    return this.title;
                 }
         };
         this.columnConfig = column;
