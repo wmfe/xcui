@@ -7,8 +7,8 @@
 </template>
 
 <script>
-    import Popper from '../../../utils/vue-popper';
-    import Emitter from '../../../utils/mixins/emitter';
+    import Popper from 'xcui/src/utils/vue-popper';
+    import Emitter from 'xcui/src/utils/mixins/emitter';
 
     export default {
         name: 'xSelectDropdown',

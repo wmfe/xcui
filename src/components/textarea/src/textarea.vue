@@ -27,8 +27,8 @@
     </div>
 </template>
 <script>
-    import emitter from '../../../utils/mixins/emitter';  
-    import calcTextareaHeight from '../../../utils/calcTextareaHeight';
+    import emitter from 'xcui/src/utils/mixins/emitter';
+    import calcTextareaHeight from 'xcui/src/utils/calcTextareaHeight';
     export default {
         name: 'x-textarea',
         mixins: [emitter],
@@ -48,7 +48,8 @@
             },
             maxlength: Number,
             minlength: Number,
-            showMax: Boolean
+            showMax: Boolean,
+            autofocus: Boolean
         },
         data() {
             return {

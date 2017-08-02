@@ -1,3 +1,3 @@
-import Scrolltop from './src/scrolltop';
+import Scrolltop from './src/scrolltop.vue';
 
 export default Scrolltop;

@@ -5,6 +5,7 @@
             }">
         <div class="x-table-header-wrapper" ref="headerWrapper">
             <table>
+                <div class="x-table-hidden" ref="hiddenColumns"><slot></slot></div>
                 <colgroup>
                     <col
                         v-for="item in columns"
@@ -115,7 +116,7 @@
                 </table>
             </div>
         </div>
-        <slot></slot>
+        <!-- <slot></slot> -->
         <div class="x-table-empty-tip" v-if="data.length === 0" ref="emptyTip">
             {{emptyTip}}
         </div>

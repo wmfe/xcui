@@ -1,21 +1,23 @@
-# 关于XCUI
+<p align="center">
+    <a href="https://wmfe.github.io/xcui" target="_blank"><img width="100"src="https://raw.githubusercontent.com/wmfe/xcui/2.0/demos/assets/xcui-logo.png"></a>
+</p>
 
-![logo](https://raw.githubusercontent.com/wmfe/xcui/2.0/src/assets/xcui-logo.png)
+<p align="center">
+    <a href="https://circleci.com/gh/wmfe/xcui/tree/2.0"><img src="https://img.shields.io/circleci/project/wmfe/xcui/2.0.svg"></a>
+    <a href="https://www.npmjs.com/package/xcui"><img src="https://img.shields.io/npm/dm/xcui.svg" alt="Downloads"></a>
+    <a href="https://www.npmjs.com/package/xcui"><img src="https://img.shields.io/npm/v/xcui.svg" alt="Version"></a>
+    <a href="https://www.npmjs.com/package/xcui"><img src="https://img.shields.io/npm/l/xcui.svg" alt="Licence"></a>
+</p>
 
-[![CircleCI](https://img.shields.io/circleci/project/wmfe/xcui/2.0.svg)](https://circleci.com/gh/wmfe/xcui/tree/2.0)
-[![npm version](https://img.shields.io/npm/v/xcui.svg)](https://www.npmjs.com/package/xcui)
-[![GitHub issues](https://img.shields.io/github/issues/wmfe/xcui.svg)](https://github.com/wmfe/xcui/issues)
-[![GitHub forks](https://img.shields.io/github/forks/wmfe/xcui.svg)](https://github.com/wmfe/xcui/network)
-[![GitHub stars](https://img.shields.io/github/stars/wmfe/xcui.svg)](https://github.com/wmfe/xcui/stargazers)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/wmfe/xcui/1.0/LICENSE)
+## About
 
 XCUI 是基于`Vue2.0`的**桌面端组件库**。
 
-## XCUI的目标是：
+XCUI的目标是：
 
 + 满足桌面端页面大部分基础组件需求。
 + 快速开发基于 `Vue2.0` 构建的项目。
-+ 保持小体积, 无其他js库依赖。
++ 保持小体积, 无其他js库依赖(No jquery, No Bootstrap, etc)
 + 简洁优雅。
 
 ## 组件展示
@@ -46,7 +48,7 @@ npm install xcui
 ```javascript
 import Vue from 'vue'
 import xcui from 'xcui'
-import 'xcui/dist/xcui.css'
+import 'xcui/lib/xcui.css'
 Vue.use(xcui);
 ```
 
@@ -64,7 +66,7 @@ Vue.use(xcui);
 
 ## 开发
 
-### Clone the doc repo
+### Clone the repo
 ```
 $ git clone git@github.com:wmfe/xcui.git
 ```

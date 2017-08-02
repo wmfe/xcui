@@ -1,5 +1,5 @@
-import Popper from '../../../utils/vue-popper';
-import {on, off} from '../../../utils/dom';
+import Popper from 'xcui/src/utils/vue-popper';
+import { on, off } from 'xcui/src/utils/dom';
 
 export default {
     name: 'XTooltip',
@@ -28,7 +28,7 @@ export default {
         },
         popperOptions: {
             type: Object,
-            default() {
+            default () {
                 return {
                     boundariesPadding: 10,
                     gpuAcceleration: false
@@ -69,8 +69,8 @@ export default {
         handleDocumentClick(e) {
             const popper = this.$refs.popper;
 
-            if (!this.$el || !this.ref || this.$el.contains(e.target)
-                || this.ref.contains(e.target) || !popper || popper.contains(e.target)) {
+            if (!this.$el || !this.ref || this.$el.contains(e.target) ||
+                this.ref.contains(e.target) || !popper || popper.contains(e.target)) {
                 return;
             }
             this.showPopper = false;
@@ -97,8 +97,8 @@ export default {
                     const children = this.ref.childNodes;
                     const len = children.length;
                     for (let i = 0; i < len; i++) {
-                        if (children[i].nodeName === 'INPUT'
-                           || children[i].nodeName === 'TEXTAREA') {
+                        if (children[i].nodeName === 'INPUT' ||
+                            children[i].nodeName === 'TEXTAREA') {
                             on(children[i], 'focus', () => {
                                 this.showPopper = true;
                             });
@@ -113,16 +113,15 @@ export default {
                 if (found) {
                     return;
                 }
-                if (this.ref.nodeName === 'INPUT'
-                    || this.ref.nodeName === 'TEXTAREA') {
+                if (this.ref.nodeName === 'INPUT' ||
+                    this.ref.nodeName === 'TEXTAREA') {
                     on(this.ref, 'focus', () => {
                         this.showPopper = true;
                     });
                     on(this.ref, 'blur', () => {
                         this.showPopper = false;
                     });
-                }
-                else {
+                } else {
                     on(this.ref, 'mousedown', () => {
                         this.showPopper = true;
                     });

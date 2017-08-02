@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-    import emitter from '../../../utils/mixins/emitter'; 
+    import emitter from 'xcui/src/utils/mixins/emitter';
     export default {
         name: 'x-checkbox-group',
         mixins: [emitter],

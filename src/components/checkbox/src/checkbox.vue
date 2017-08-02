@@ -8,7 +8,7 @@
               'is-focus': focus
             }">
             <input
-            v-if="!isInGroup" 
+            v-if="!isInGroup"
             type="checkbox"
             class="x-checkbox-input"
             :disabled="disabled"
@@ -17,7 +17,7 @@
             @focus="focus = true"
             @blur="focus = false">
             <input
-            v-else 
+            v-else
             type="checkbox"
             class="x-checkbox-input"
             :disabled="disabled"
@@ -36,7 +36,7 @@
     </label>
 </template>
 <script>
-    import emitter from '../../../utils/mixins/emitter'; 
+    import emitter from 'xcui/src/utils/mixins/emitter';
     export default {
         name: 'XCheckbox',
         componentName: 'XCheckbox',
@@ -90,7 +90,7 @@
                 }
             },
             checkStatus() {
-                
+
             }
         }
     };

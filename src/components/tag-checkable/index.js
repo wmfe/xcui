@@ -1,3 +1,3 @@
-import TagCheckable from './src/tag-checkable';
+import TagCheckable from './src/tag-checkable.vue';
 
 export default TagCheckable;

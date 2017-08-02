@@ -1,9 +1,9 @@
 <template></template>
 
 <script>
+const SINGLE_LINE_CLASS_NAME = 'x-table-td-single-line';
 export default {
     name: 'XTableColumn',
-
     props: {
         title: {
             type: String
@@ -36,77 +36,34 @@ export default {
             }
         }
     },
-
     data() {
         return {
-            columnConfig: {}
+            columnOrder: 0
         };
     },
-
-    watch: {
-        title(newVal) {
-            if (this.columnConfig) {
-                this.columnConfig.title = newVal;
-            }
-        },
-        prop(newVal) {
-            if (this.columnConfig) {
-                this.columnConfig.prop = newVal;
-            }
-        },
-        type(newVal) {
-            if (this.columnConfig) {
-                this.columnConfig.type = newVal;
-            }
-        },
-        width(newVal) {
-            if (this.columnConfig) {
-                this.columnConfig.width = newVal;
-            }
-        },
-        fixed(newVal) {
-            if (this.columnConfig) {
-                this.columnConfig.fixed = newVal;
-            }
-        },
-        className(newVal) {
-            if (this.columnConfig) {
-                this.columnConfig.className = newVal;
-            }
-        },
-        singleLine(newVal) {
-            if (this.columnConfig) {
-                this.columnConfig.singleLine = newVal;
-            }
-        }
-
-    },
-
     mounted() {
+        // this.$options.render = h => h('div', this.$slots.default);
         let parent = this.$parent;
-        while (parent && parent.$options.name !== 'XTable') {
-            parent = parent.$parent;
+        let origin = this.$parent;
+        while (origin && origin.$options.name !== 'XTable') {
+            origin = origin.$parent;
         }
-
-        this.table = parent;
-
+        this.table = origin;
+        let isSubColumn = parent !== origin;
         const slots = this.$scopedSlots;
-
         if (this.type) {
             this.table.rowKey = this.prop;
         }
-
-        const SINGLE_LINE_CLASS_NAME = 'x-table-td-single-line';
         let tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
-
-        this.columnConfig = {
+        let column = {
             title: this.title,
             type: this.type || 'normal',
+            fixed: this.fixed || '',
             prop: this.prop,
             width: this.width,
             className: tdClassName,
-            fixed: this.fixed || '',
             singleLine: this.singleLine,
+            children: [],
             // tbody 中每个 td 内的 render 方法
             render: slots.default
                 // 如果 <x-table-column> 内有 template，按照 template 内的来渲染
@@ -116,11 +73,78 @@ export default {
                 : ({dataItem, columnItem}) => {
                     // 直接返回内容
                     return dataItem[columnItem.prop];
+                },
+            headerRender: slots['column-header-slot']
+                ? args => {
+                    return slots['column-header-slot'](args);
+                }
+                : () => {
+                    return this.title;
                 }
         };
-
-        // 将数据配置存到 table 上
-        this.table.columns.push(this.columnConfig);
+        this.columnConfig = column;
+        let columnIndex;
+        if (!isSubColumn) {
+            columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
+        }
+        else {
+            columnIndex = [].indexOf.call(parent.$el.children, this.$el);
+        }
+        this.insertColumn(this.table, column, columnIndex, isSubColumn ? parent.columnConfig : null);
+    },
+    watch: {
+        title(val) {
+            this.updateColumn('title');
+        },
+        prop(val) {
+            this.updateColumn('prop');
+        },
+        type(val) {
+            this.updateColumn('type');
+        },
+        width(val) {
+            this.updateColumn('width');
+        },
+        fixed(val) {
+            this.updateColumn('fixed');
+        },
+        className(val) {
+            let tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
+            this.updateColumn('className', tdClassName);
+        },
+        singleLine(val) {
+            this.updateColumn('singleLine');
+        }
+    },
+    methods: {
+        insertColumn(table, column, index, parent) {
+            let array = table.columns;
+            if (parent) {
+                array = parent.children;
+                if (!array) {
+                    array = parent.children = [];
+                }
+            }
+            if (typeof index !== 'undefined') {
+                array.splice(index, 0, column);
+                this.columnOrder = index;
+            }
+            else {
+                this.columnOrder = array.push(column) - 1;
+            }
+        },
+        updateColumn(name, customVal) {
+            let value = customVal || this[name];
+            if (value) {
+                this.$set(this.table.columns[this.columnOrder], name, value);
+            }
+        },
+        removeColumn() {
+            this.table.columns.splice(this.columnOrder, 1);
+        }
+    },
+    destroyed() {
+        this.removeColumn();
     }
 };
 </script>
