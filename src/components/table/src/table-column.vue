@@ -17,6 +17,12 @@ export default {
         width: {
             type: String
         },
+        fixed: {
+            type: String,
+            default() {
+                return '';
+            }
+        },
         className: {
             type: String,
             default() {
@@ -29,6 +35,51 @@ export default {
                 return false;
             }
         }
+    },
+
+    data() {
+        return {
+            columnConfig: {}
+        };
+    },
+
+    watch: {
+        title(newVal) {
+            if (this.columnConfig) {
+                this.columnConfig.title = newVal;
+            }
+        },
+        prop(newVal) {
+            if (this.columnConfig) {
+                this.columnConfig.prop = newVal;
+            }
+        },
+        type(newVal) {
+            if (this.columnConfig) {
+                this.columnConfig.type = newVal;
+            }
+        },
+        width(newVal) {
+            if (this.columnConfig) {
+                this.columnConfig.width = newVal;
+            }
+        },
+        fixed(newVal) {
+            if (this.columnConfig) {
+                this.columnConfig.fixed = newVal;
+            }
+        },
+        className(newVal) {
+            if (this.columnConfig) {
+                this.columnConfig.className = newVal;
+            }
+        },
+        singleLine(newVal) {
+            if (this.columnConfig) {
+                this.columnConfig.singleLine = newVal;
+            }
+        }
+
     },
 
     mounted() {
@@ -48,13 +99,13 @@ export default {
         const SINGLE_LINE_CLASS_NAME = 'x-table-td-single-line';
         let tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
 
-        // 将数据配置存到 table 上
-        this.table.columns.push({
+        this.columnConfig = {
             title: this.title,
             type: this.type || 'normal',
             prop: this.prop,
             width: this.width,
             className: tdClassName,
+            fixed: this.fixed || '',
             singleLine: this.singleLine,
             // tbody 中每个 td 内的 render 方法
             render: slots.default
@@ -66,7 +117,10 @@ export default {
                     // 直接返回内容
                     return dataItem[columnItem.prop];
                 }
-        });
+        };
+
+        // 将数据配置存到 table 上
+        this.table.columns.push(this.columnConfig);
     }
 };
 </script>

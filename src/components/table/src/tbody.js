@@ -46,6 +46,12 @@ export default {
             else {
                 tdElem.removeAttribute('title');
             }
+        },
+        onMouseenterTR(index) {
+            this.$emit('setHoverRow', index);
+        },
+        onMouseleaveTR(index) {
+            this.$emit('removeHoverRow', index);
         }
     },
 
@@ -54,7 +60,11 @@ export default {
             <tbody>
                 {
                     this.data.map((dataItem, dataIndex) => (
-                        <tr class={ [this.getRowClass(dataItem, dataIndex)] }>
+                        <tr
+                            class={ [this.getRowClass(dataItem, dataIndex)] }
+                            onMouseenter={this.onMouseenterTR.bind(this, dataIndex)}
+                            onMouseleave={this.onMouseleaveTR.bind(this, dataIndex)}
+                        >
                             {
                                 this.columns.map(columnItem => {
                                     let currentUniqueValue = dataItem[columnItem.prop];

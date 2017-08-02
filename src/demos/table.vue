@@ -645,12 +645,176 @@
 ```
 :::
 
+## 表头固定
 
+::: demo 只要在`x-table`元素中定义了`height`，当纵向内容过多时，表格自动固定表头。
+```html
+<tpl>
+    <div>
+        <x-table
+            :data="sourceData2"
+            height="250"
+        >
+            <x-table-column
+                title="姓名"
+                prop="name"
+            >
+            </x-table-column>
+            <x-table-column
+                title="职业"
+                prop="job"
+            >
+            </x-table-column>
+            <x-table-column
+                title="地址"
+                prop="address"
+            >
+            </x-table-column>
+        </x-table>
+    </div>
+</tpl>
+<script>
+    export default {
+        data() {
+            return {
+                sourceData2: [
+                    {
+                        name: '李雷',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: '前端开发工程师'
+                    }, {
+                        name: '韩梅梅',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: '架构师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师'
+                    }
+                ]
+            };
+        }
+    };
+</script>
+```
+:::
+
+## 列固定
+
+::: demo 当表格横向数据很多时，可以选择固定列。
+```html
+<tpl>
+    <div>
+        <x-table
+            :data="sourceData2"
+            height="250"
+        >
+            <x-table-column
+                title="姓名"
+                prop="name"
+                width="150px"
+                fixed="left"
+            >
+            </x-table-column>
+            <x-table-column
+                title="地址"
+                prop="address"
+                width="250px"
+            >
+            </x-table-column>
+            <x-table-column
+                title="性别"
+                prop="gender"
+                width="100px"
+            >
+            </x-table-column>
+            <x-table-column
+                title="生日"
+                prop="birth"
+                width="200px"
+            >
+            </x-table-column>
+            <x-table-column
+                title="职业"
+                prop="job"
+                width="180px"
+                fixed="right"
+            >
+            </x-table-column>
+        </x-table>
+    </div>
+</tpl>
+<script>
+    export default {
+        data() {
+            return {
+                sourceData2: [
+                    {
+                        name: '李雷',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: '前端开发工程师'
+                    }, {
+                        name: '韩梅梅',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: '架构师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师'
+                    }
+                ]
+            };
+        }
+    };
+</script>
+```
+:::
 
 ## Table Props
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|
 |data|Array|[]|表格数据|必选|
+|height|Number|-|表格的高度|可选|
 |bordered|Boolean|false|是否带边框|可选|
 |striped|Boolean|false|是否带斑马纹|可选|
 |empty-tip|String|暂无数据|没有表格数据的提示文案|可选|
@@ -667,6 +831,7 @@
 |width|String|-|列宽|可选|
 |class-name|String|-|自定义列 className|可选|
 |single-line|Boolean|-|当文字过多时，是否单行显示 tooltips|可选|
+|fixed|String|-|可选值left、right|列是否固定在左侧或者右侧，必须设置列宽|
 
 ## Table Events
 | 名字 | 描述 | 是否必选 |
@@ -714,6 +879,45 @@
                         name: '小明',
                         address: '北京市海淀区新建宫门路17号',
                         job: 'UI设计师'
+                    }
+                ],
+                sourceData2: [
+                    {
+                        name: '李雷',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: '前端开发工程师',
+                        birth: '1994-03-11',
+                        gender: '男'
+                    }, {
+                        name: '韩梅梅',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: '架构师',
+                        birth: '1996-09-27',
+                        gender: '女'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师',
+                        birth: '1992-05-20',
+                        gender: '男'
+                    }, {
+                        name: '李雷',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: '前端开发工程师',
+                        birth: '1994-03-11',
+                        gender: '男'
+                    }, {
+                        name: '韩梅梅',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: '架构师',
+                        birth: '1996-09-27',
+                        gender: '女'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师',
+                        birth: '1992-05-20',
+                        gender: '男'
                     }
                 ],
                 selectedValueList: ['小明'],
