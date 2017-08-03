@@ -3,9 +3,9 @@
             'x-table-bordered': bordered,
             'x-table-striped': striped
             }">
+        <div class="x-table-hidden" ref="hiddenColumns"><slot></slot></div>
         <div class="x-table-header-wrapper" ref="headerWrapper">
             <table>
-                <div class="x-table-hidden" ref="hiddenColumns"><slot></slot></div>
                 <colgroup>
                     <col
                         v-for="item in columns"
@@ -56,7 +56,7 @@
                     />
                 </table>
             </div>
-            <div class="x-table-fixed-body-wrapper" ref="fixedBodyWrapper" :style="bodyStyle">
+            <div class="x-table-fixed-body-wrapper" ref="fixedBodyWrapper" :style="fixedBodyStyle">
                 <table>
                     <colgroup>
                         <col
@@ -94,7 +94,7 @@
                     />
                 </table>
             </div>
-            <div class="x-table-fixed-right-body-wrapper" ref="rightFixedBodyWrapper" :style="bodyStyle">
+            <div class="x-table-fixed-right-body-wrapper" ref="rightFixedBodyWrapper" :style="fixedBodyStyle">
                 <table>
                     <colgroup>
                         <col
@@ -183,6 +183,7 @@
                 rowKey: '',
                 tableWidth: null,
                 headerHeight: '',
+                scrollbarHeight: '',
                 selectedValueList: this.initialSelectedValueList,
                 selectedValue: this.initialSelectedValue
             };
@@ -220,6 +221,16 @@
                 }
                 return '';
             },
+            fixedBodyStyle() {
+                    let style = {}
+                    if (this.height) {
+                        style = {
+                            'max-height': (+this.height - this.headerHeight - this.scrollbarHeight) + 'px'
+                        };
+                        return style;
+                    }
+                    return '';
+            },
             fixedLeftWidth() {
                 if (this.columns.length > 0 && this.columns[0].width) {
                     return this.columns[0].width;
@@ -255,17 +266,34 @@
             },
             fixedLeftTableStyle() {
                 let style = {};
+                if (this.height) {
+                    style = {
+                        'width': this.fixedLeftWidth,
+                        'height': +this.height - this.scrollbarHeight + 'px'
+                    };
+                    return style;
+                }
                 style = {
-                    'width': this.fixedLeftWidth
+                    'width': this.fixedLeftWidth,
+                    'height': this.bodyHeight + this.headerHeight - this.scrollbarHeight + 'px'
                 };
-                return Object.assign(style, this.tableStyle);
+                return style;
             },
             fixedRightTableStyle() {
                 let style = {};
+                if (this.height) {
+                    style = {
+                        'width': this.fixedRightWidth,
+                        'height': +this.height - this.scrollbarHeight + 'px',
+                        'right': this.scrollbarHeight + 'px'
+                    };
+                    return style;
+                }
                 style = {
-                    'width': this.fixedRightWidth
+                    'width': this.fixedRightWidth,
+                    'height': this.bodyHeight + this.headerHeight - this.scrollbarHeight + 'px'
                 };
-                return Object.assign(style, this.tableStyle);
+                return style;
             },
             fixedNum() {
                 return this.columns.filter((column) => column.fixed === 'left');
@@ -278,6 +306,7 @@
             this.$nextTick(() => {
                 this.headerHeight = this.$refs.headerWrapper.offsetHeight;
                 this.bodyHeight = this.$refs.bodyWrapper.offsetHeight;
+                this.scrollbarHeight = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
                 this.$refs.bodyWrapper.style.top = +this.headerHeight + 'px';
                 if (this.$refs.fixedBodyWrapper) {
                     this.$refs.fixedBodyWrapper.style.top = +this.headerHeight + 'px';
