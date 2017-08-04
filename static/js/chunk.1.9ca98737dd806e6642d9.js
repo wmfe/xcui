@@ -97,6 +97,80 @@ exports.default = {
                 address: '北京市海淀区新建宫门路17号',
                 job: 'UI设计师'
             }],
+            sourceData2: [{
+                name: '李雷',
+                address: '北京市海淀区新建宫门路17号',
+                job: '前端开发工程师',
+                birth: '1994-03-11',
+                gender: '男'
+            }, {
+                name: '韩梅梅',
+                address: '北京市海淀区新建宫门路17号',
+                job: '架构师',
+                birth: '1996-09-27',
+                gender: '女'
+            }, {
+                name: '小明',
+                address: '北京市海淀区新建宫门路17号',
+                job: 'UI设计师',
+                birth: '1992-05-20',
+                gender: '男'
+            }, {
+                name: '李雷',
+                address: '北京市海淀区新建宫门路17号',
+                job: '前端开发工程师',
+                birth: '1994-03-11',
+                gender: '男'
+            }, {
+                name: '韩梅梅',
+                address: '北京市海淀区新建宫门路17号',
+                job: '架构师',
+                birth: '1996-09-27',
+                gender: '女'
+            }, {
+                name: '小明',
+                address: '北京市海淀区新建宫门路17号',
+                job: 'UI设计师',
+                birth: '1992-05-20',
+                gender: '男'
+            }, {
+                name: '李雷',
+                address: '北京市海淀区新建宫门路17号',
+                job: '前端开发工程师',
+                birth: '1994-03-11',
+                gender: '男'
+            }, {
+                name: '韩梅梅',
+                address: '北京市海淀区新建宫门路17号',
+                job: '架构师',
+                birth: '1996-09-27',
+                gender: '女'
+            }, {
+                name: '小明',
+                address: '北京市海淀区新建宫门路17号',
+                job: 'UI设计师',
+                birth: '1992-05-20',
+                gender: '男'
+            }],
+            sourceData3: [{
+                name: '李雷',
+                address: '北京市海淀区新建宫门路17号',
+                job: '前端开发工程师',
+                birth: '1994-03-11',
+                gender: '男'
+            }, {
+                name: '韩梅梅',
+                address: '北京市海淀区新建宫门路17号',
+                job: '架构师',
+                birth: '1996-09-27',
+                gender: '女'
+            }, {
+                name: '小明',
+                address: '北京市海淀区新建宫门路17号',
+                job: 'UI设计师',
+                birth: '1992-05-20',
+                gender: '男'
+            }],
             selectedValueList: ['小明'],
             selectedValue: '小明'
         };
@@ -4576,15 +4650,1918 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("</")]), _vm._v("script")]), _c('span', {
     staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n")])])]), _vm._v(" "), _c('h2', [_vm._v("表头固定")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+    slot: "source"
+  }, [_c('div', [_c('x-table', {
+    attrs: {
+      "data": _vm.sourceData2,
+      "height": "250"
+    }
+  }, [_c('x-table-column', {
+    attrs: {
+      "title": "姓名",
+      "prop": "name"
+    }
+  }), _vm._v(" "), _c('x-table-column', {
+    attrs: {
+      "title": "职业",
+      "prop": "job"
+    }
+  }), _vm._v(" "), _c('x-table-column', {
+    attrs: {
+      "title": "地址",
+      "prop": "address"
+    }
+  })], 1)], 1)]), _vm._v(" "), _c('span', {
+    slot: "info-title"
+  }, [_vm._v("说明")]), _vm._v(" "), _c('div', {
+    slot: "info"
+  }, [_c('p', [_vm._v("只要在"), _c('code', [_vm._v("x-table")]), _vm._v("元素中定义了"), _c('code', [_vm._v("height")]), _vm._v("，当纵向内容过多时，表格自动固定表头。")])]), _vm._v(" "), _c('div', {
+    slot: "highlight"
+  }, [_c('pre', [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("template")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n    "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("div")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n        "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table")]), _vm._v("\n            "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v(":data")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("sourceData2"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("height")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("250"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n        "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("姓名"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("职业"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("地址"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n        "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n    "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("div")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n"), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("template")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n"), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("script")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _c('span', {
+    staticClass: "token script language-javascript"
+  }, [_vm._v("\n    "), _c('span', {
+    staticClass: "token keyword"
+  }, [_vm._v("export")]), _vm._v(" "), _c('span', {
+    staticClass: "token keyword"
+  }, [_vm._v("default")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n        "), _c('span', {
+    staticClass: "token function"
+  }, [_vm._v("data")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("(")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(")")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token keyword"
+  }, [_vm._v("return")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                sourceData2"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("[")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'李雷'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'前端开发工程师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1994-03-11'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'韩梅梅'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'架构师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1996-09-27'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'女'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'小明'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'UI设计师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1992-05-20'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'李雷'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'前端开发工程师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1994-03-11'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'韩梅梅'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'架构师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1996-09-27'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'女'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'小明'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'UI设计师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1992-05-20'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'李雷'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'前端开发工程师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1994-03-11'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'韩梅梅'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'架构师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1996-09-27'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'女'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'小明'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'UI设计师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1992-05-20'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("]")]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(";")]), _vm._v("\n        "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _vm._v("\n    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(";")]), _vm._v("\n")]), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("script")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n")])])]), _vm._v(" "), _c('h2', [_vm._v("列固定")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+    slot: "source"
+  }, [_c('div', [_c('x-table', {
+    attrs: {
+      "data": _vm.sourceData3
+    }
+  }, [_c('x-table-column', {
+    attrs: {
+      "title": "姓名",
+      "prop": "name",
+      "width": "150px",
+      "fixed": "left"
+    }
+  }), _vm._v(" "), _c('x-table-column', {
+    attrs: {
+      "title": "地址",
+      "prop": "address",
+      "width": "250px"
+    }
+  }), _vm._v(" "), _c('x-table-column', {
+    attrs: {
+      "title": "性别",
+      "prop": "gender",
+      "width": "100px"
+    }
+  }), _vm._v(" "), _c('x-table-column', {
+    attrs: {
+      "title": "生日",
+      "prop": "birth",
+      "width": "200px"
+    }
+  }), _vm._v(" "), _c('x-table-column', {
+    attrs: {
+      "title": "职业",
+      "prop": "job",
+      "width": "180px",
+      "fixed": "right"
+    }
+  })], 1)], 1)]), _vm._v(" "), _c('span', {
+    slot: "info-title"
+  }, [_vm._v("说明")]), _vm._v(" "), _c('div', {
+    slot: "info"
+  }, [_c('p', [_vm._v("当表格横向数据很多时，可以选择固定列。只支持第一列左固定，最后一列右固定。")])]), _vm._v(" "), _c('div', {
+    slot: "highlight"
+  }, [_c('pre', [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("template")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n    "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("div")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n        "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table")]), _vm._v("\n            "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v(":data")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("sourceData3"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n        "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("姓名"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("width")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("150px"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("fixed")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("left"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("地址"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("width")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("250px"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("性别"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("width")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("100px"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("生日"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("width")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("200px"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("职业"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("width")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("180px"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("fixed")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("right"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n        "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n    "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("div")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n"), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("template")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n"), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("script")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _c('span', {
+    staticClass: "token script language-javascript"
+  }, [_vm._v("\n    "), _c('span', {
+    staticClass: "token keyword"
+  }, [_vm._v("export")]), _vm._v(" "), _c('span', {
+    staticClass: "token keyword"
+  }, [_vm._v("default")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n        "), _c('span', {
+    staticClass: "token function"
+  }, [_vm._v("data")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("(")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(")")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token keyword"
+  }, [_vm._v("return")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                sourceData3"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("[")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'李雷'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'前端开发工程师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1994-03-11'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'韩梅梅'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'架构师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1996-09-27'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'女'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'小明'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'UI设计师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1992-05-20'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("]")]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(";")]), _vm._v("\n        "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _vm._v("\n    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(";")]), _vm._v("\n")]), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("script")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n")])])]), _vm._v(" "), _c('h2', [_vm._v("固定表头和列")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+    slot: "source"
+  }, [_c('div', [_c('x-table', {
+    attrs: {
+      "data": _vm.sourceData2,
+      "height": "250"
+    }
+  }, [_c('x-table-column', {
+    attrs: {
+      "title": "姓名",
+      "prop": "name",
+      "width": "150px",
+      "fixed": "left"
+    }
+  }), _vm._v(" "), _c('x-table-column', {
+    attrs: {
+      "title": "地址",
+      "prop": "address",
+      "width": "250px"
+    }
+  }), _vm._v(" "), _c('x-table-column', {
+    attrs: {
+      "title": "性别",
+      "prop": "gender",
+      "width": "100px"
+    }
+  }), _vm._v(" "), _c('x-table-column', {
+    attrs: {
+      "title": "生日",
+      "prop": "birth",
+      "width": "200px"
+    }
+  }), _vm._v(" "), _c('x-table-column', {
+    attrs: {
+      "title": "职业",
+      "prop": "job",
+      "width": "180px",
+      "fixed": "right"
+    }
+  })], 1)], 1)]), _vm._v(" "), _c('span', {
+    slot: "info-title"
+  }, [_vm._v("说明")]), _vm._v(" "), _c('div', {
+    slot: "info"
+  }, [_c('p', [_vm._v("表格内容很多时，支持同时设置固定表头，固定列。")])]), _vm._v(" "), _c('div', {
+    slot: "highlight"
+  }, [_c('pre', [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("template")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n    "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("div")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n        "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table")]), _vm._v("\n            "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v(":data")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("sourceData2"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("height")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("250"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n        "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("姓名"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("width")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("150px"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("fixed")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("left"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("地址"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("width")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("250px"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("性别"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("width")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("100px"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("生日"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("width")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("200px"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-table-column")]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("title")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("职业"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("prop")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("width")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("180px"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("fixed")]), _c('span', {
+    staticClass: "token attr-value"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("=")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")]), _vm._v("right"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("\"")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table-column")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n        "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-table")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n    "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("div")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n"), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("template")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n"), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("script")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _c('span', {
+    staticClass: "token script language-javascript"
+  }, [_vm._v("\n    "), _c('span', {
+    staticClass: "token keyword"
+  }, [_vm._v("export")]), _vm._v(" "), _c('span', {
+    staticClass: "token keyword"
+  }, [_vm._v("default")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n        "), _c('span', {
+    staticClass: "token function"
+  }, [_vm._v("data")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("(")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(")")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n            "), _c('span', {
+    staticClass: "token keyword"
+  }, [_vm._v("return")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                sourceData2"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("[")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'李雷'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'前端开发工程师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1994-03-11'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'韩梅梅'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'架构师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1996-09-27'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'女'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'小明'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'UI设计师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1992-05-20'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'李雷'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'前端开发工程师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1994-03-11'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'韩梅梅'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'架构师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1996-09-27'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'女'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'小明'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'UI设计师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1992-05-20'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'李雷'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'前端开发工程师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1994-03-11'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'韩梅梅'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'架构师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1996-09-27'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'女'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v(" "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("{")])]), _vm._v("\n                        name"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'小明'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        address"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'北京市海淀区新建宫门路17号'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        job"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'UI设计师'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        birth"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'1992-05-20'")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(",")]), _vm._v("\n                        gender"), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(":")]), _vm._v(" "), _c('span', {
+    staticClass: "token string"
+  }, [_vm._v("'男'")]), _vm._v("\n                    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _vm._v("\n                "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("]")]), _vm._v("\n            "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(";")]), _vm._v("\n        "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _vm._v("\n    "), _c('span', {
+    staticClass: "token punctuation"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("}")])]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(";")]), _vm._v("\n")]), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("script")]), _c('span', {
+    staticClass: "token punctuation"
   }, [_vm._v(">")])]), _vm._v("\n")])])]), _vm._v(" "), _c('h2', [_vm._v("Table Props")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('h2', [_vm._v("Table-column Props")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('h2', [_vm._v("Table Events")]), _vm._v(" "), _vm._m(2)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('table', {
     staticClass: "markdown-table"
-  }, [_c('thead', [_c('tr', [_c('th', [_vm._v("名字")]), _vm._v(" "), _c('th', [_vm._v("类型")]), _vm._v(" "), _c('th', [_vm._v("默认")]), _vm._v(" "), _c('th', [_vm._v("描述")]), _vm._v(" "), _c('th', [_vm._v("是否必选")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("data")]), _vm._v(" "), _c('td', [_vm._v("Array")]), _vm._v(" "), _c('td', [_vm._v("[]")]), _vm._v(" "), _c('td', [_vm._v("表格数据")]), _vm._v(" "), _c('td', [_vm._v("必选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("bordered")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("false")]), _vm._v(" "), _c('td', [_vm._v("是否带边框")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("striped")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("false")]), _vm._v(" "), _c('td', [_vm._v("是否带斑马纹")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("empty-tip")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("暂无数据")]), _vm._v(" "), _c('td', [_vm._v("没有表格数据的提示文案")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("row-class-name")]), _vm._v(" "), _c('td', [_vm._v("String or Function")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("自定义行 className")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("initial-selected-value-list")]), _vm._v(" "), _c('td', [_vm._v("Array")]), _vm._v(" "), _c('td', [_vm._v("[]")]), _vm._v(" "), _c('td', [_vm._v("多选中默认选中项的集合，每一项对应type为selection列的prop的值")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("initial-selected-value")]), _vm._v(" "), _c('td', [_vm._v("String or Number")]), _vm._v(" "), _c('td', [_vm._v("[]")]), _vm._v(" "), _c('td', [_vm._v("单选中默认选中项，对应type为radio列的prop的值")]), _vm._v(" "), _c('td', [_vm._v("可选")])])])])
+  }, [_c('thead', [_c('tr', [_c('th', [_vm._v("名字")]), _vm._v(" "), _c('th', [_vm._v("类型")]), _vm._v(" "), _c('th', [_vm._v("默认")]), _vm._v(" "), _c('th', [_vm._v("描述")]), _vm._v(" "), _c('th', [_vm._v("是否必选")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("data")]), _vm._v(" "), _c('td', [_vm._v("Array")]), _vm._v(" "), _c('td', [_vm._v("[]")]), _vm._v(" "), _c('td', [_vm._v("表格数据")]), _vm._v(" "), _c('td', [_vm._v("必选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("height")]), _vm._v(" "), _c('td', [_vm._v("Number")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("表格的高度")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("bordered")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("false")]), _vm._v(" "), _c('td', [_vm._v("是否带边框")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("striped")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("false")]), _vm._v(" "), _c('td', [_vm._v("是否带斑马纹")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("empty-tip")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("暂无数据")]), _vm._v(" "), _c('td', [_vm._v("没有表格数据的提示文案")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("row-class-name")]), _vm._v(" "), _c('td', [_vm._v("String or Function")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("自定义行 className")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("initial-selected-value-list")]), _vm._v(" "), _c('td', [_vm._v("Array")]), _vm._v(" "), _c('td', [_vm._v("[]")]), _vm._v(" "), _c('td', [_vm._v("多选中默认选中项的集合，每一项对应type为selection列的prop的值")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("initial-selected-value")]), _vm._v(" "), _c('td', [_vm._v("String or Number")]), _vm._v(" "), _c('td', [_vm._v("[]")]), _vm._v(" "), _c('td', [_vm._v("单选中默认选中项，对应type为radio列的prop的值")]), _vm._v(" "), _c('td', [_vm._v("可选")])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('table', {
     staticClass: "markdown-table"
-  }, [_c('thead', [_c('tr', [_c('th', [_vm._v("名字")]), _vm._v(" "), _c('th', [_vm._v("类型")]), _vm._v(" "), _c('th', [_vm._v("默认")]), _vm._v(" "), _c('th', [_vm._v("描述")]), _vm._v(" "), _c('th', [_vm._v("是否必选")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("title")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("显示的标题")]), _vm._v(" "), _c('td', [_vm._v("必选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("type")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("column的类型 可选值selection、radio")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("prop")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("对应列内容的字段名")]), _vm._v(" "), _c('td', [_vm._v("必选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("width")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("列宽")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("class-name")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("自定义列 className")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("single-line")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("当文字过多时，是否单行显示 tooltips")]), _vm._v(" "), _c('td', [_vm._v("可选")])])])])
+  }, [_c('thead', [_c('tr', [_c('th', [_vm._v("名字")]), _vm._v(" "), _c('th', [_vm._v("类型")]), _vm._v(" "), _c('th', [_vm._v("默认")]), _vm._v(" "), _c('th', [_vm._v("描述")]), _vm._v(" "), _c('th', [_vm._v("是否必选")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("title")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("显示的标题")]), _vm._v(" "), _c('td', [_vm._v("必选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("type")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("column的类型 可选值selection、radio")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("prop")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("对应列内容的字段名")]), _vm._v(" "), _c('td', [_vm._v("必选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("width")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("列宽")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("class-name")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("自定义列 className")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("single-line")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("当文字过多时，是否单行显示 tooltips")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("fixed")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("可选值left、right")]), _vm._v(" "), _c('td', [_vm._v("列是否固定在左侧或者右侧，必须设置列宽")])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('table', {
     staticClass: "markdown-table"

@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "static/js/chunk." + chunkId + "." + {"0":"d09b075530e84d7c35f3","1":"296cdd1a9b819959bf98","2":"1a5d230240dd6497335d","3":"15593661d99c158dc561","4":"8fd43e1939712c8512c2","5":"f37f07c5639308ef3130","6":"21f8814b6dfe91543d89","7":"c039be51e159d8ba236a","8":"842bfddd6c6fbc76d82d","9":"fc3fa3fb055e2a544b39","10":"25f14b5664296bf0de91","11":"ac8e9b4b5fe17f7c8cee","12":"a100a57f30852976fe1e","13":"d0b06043f83ace11e7d9","14":"9de90f75b58433fa86e9","15":"9e3b4211693eea4734ca","16":"a0c9d00d7fbcf6af07c4","17":"f1bb9462202be6a4fe0d","18":"b6d766cbd9bf32b0c21a","19":"6b567f47a5a5174ea893","20":"93fb4705507f0e0b986e","21":"adb77c45862cebce5b2e","22":"6a8ddd377c58d1e2f90c","23":"05c5ffbd0d19db5e96e5","24":"c88e08266dfab61bb5f9","25":"376df1f67f1cd6f69c5b","26":"c036229f5d70a831c87f","27":"8cb510348d71e460851a","28":"24d0df46a3dcef6b5071","29":"72b59f9ecec5e6e30cb1","30":"8528fea8e0d869231cc6","31":"0fc85f188f195679aa3b"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "static/js/chunk." + chunkId + "." + {"0":"d09b075530e84d7c35f3","1":"9ca98737dd806e6642d9","2":"1a5d230240dd6497335d","3":"15593661d99c158dc561","4":"8fd43e1939712c8512c2","5":"f37f07c5639308ef3130","6":"21f8814b6dfe91543d89","7":"c039be51e159d8ba236a","8":"842bfddd6c6fbc76d82d","9":"fc3fa3fb055e2a544b39","10":"25f14b5664296bf0de91","11":"ac8e9b4b5fe17f7c8cee","12":"a100a57f30852976fe1e","13":"d0b06043f83ace11e7d9","14":"9de90f75b58433fa86e9","15":"9e3b4211693eea4734ca","16":"a0c9d00d7fbcf6af07c4","17":"f1bb9462202be6a4fe0d","18":"b6d766cbd9bf32b0c21a","19":"6b567f47a5a5174ea893","20":"93fb4705507f0e0b986e","21":"adb77c45862cebce5b2e","22":"6a8ddd377c58d1e2f90c","23":"05c5ffbd0d19db5e96e5","24":"c88e08266dfab61bb5f9","25":"376df1f67f1cd6f69c5b","26":"c036229f5d70a831c87f","27":"8cb510348d71e460851a","28":"24d0df46a3dcef6b5071","29":"72b59f9ecec5e6e30cb1","30":"8528fea8e0d869231cc6","31":"0fc85f188f195679aa3b"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -29067,6 +29067,10 @@ exports.default = {
             type: Boolean,
             default: false
         },
+        height: {
+            type: String,
+            default: ''
+        },
         emptyTip: {
             type: String,
             default: '暂无数据'
@@ -29101,6 +29105,8 @@ exports.default = {
             columns: [],
             rowKey: '',
             tableWidth: null,
+            headerHeight: '',
+            scrollbarHeight: '',
             selectedValueList: this.initialSelectedValueList,
             selectedValue: this.initialSelectedValue
         };
@@ -29126,23 +29132,151 @@ exports.default = {
                 dataMap[value] = item;
             });
             return dataMap;
+        },
+        bodyStyle: function bodyStyle() {
+            var style = {};
+            if (this.height) {
+                style = {
+                    'max-height': +this.height - this.headerHeight + 'px'
+                };
+                return style;
+            }
+            return '';
+        },
+        fixedBodyStyle: function fixedBodyStyle() {
+            var style = {};
+            if (this.height) {
+                style = {
+                    'max-height': +this.height - this.headerHeight - this.scrollbarHeight + 'px'
+                };
+                return style;
+            }
+            return '';
+        },
+        fixedLeftWidth: function fixedLeftWidth() {
+            if (this.columns.length > 0 && this.columns[0].width) {
+                return this.columns[0].width;
+            }
+            return '';
+        },
+        fixedRightWidth: function fixedRightWidth() {
+            var columnsLen = this.columns.length;
+            if (columnsLen > 0 && this.columns[columnsLen - 1].width) {
+                return this.columns[columnsLen - 1].width;
+            }
+            return '';
+        },
+        tableStyle: function tableStyle() {
+            var style = {};
+
+            if (this.data.length === 0) {
+                style = {
+                    'height': 300 + this.headerHeight + 'px'
+                };
+                return style;
+            }
+            if (this.height) {
+                style = {
+                    'height': +this.height + 'px'
+                };
+                return style;
+            }
+            style = {
+                'height': this.bodyHeight + this.headerHeight + 'px'
+            };
+            return style;
+        },
+        fixedLeftTableStyle: function fixedLeftTableStyle() {
+            var style = {};
+            if (this.height) {
+                style = {
+                    'width': this.fixedLeftWidth,
+                    'height': +this.height - this.scrollbarHeight + 'px'
+                };
+                return style;
+            }
+            style = {
+                'width': this.fixedLeftWidth,
+                'height': this.bodyHeight + this.headerHeight - this.scrollbarHeight + 'px'
+            };
+            return style;
+        },
+        fixedRightTableStyle: function fixedRightTableStyle() {
+            var style = {};
+            if (this.height) {
+                style = {
+                    'width': this.fixedRightWidth,
+                    'height': +this.height - this.scrollbarHeight + 'px',
+                    'right': this.scrollbarHeight + 'px'
+                };
+                return style;
+            }
+            style = {
+                'width': this.fixedRightWidth,
+                'height': this.bodyHeight + this.headerHeight - this.scrollbarHeight + 'px'
+            };
+            return style;
+        },
+        fixedNum: function fixedNum() {
+            return this.columns.filter(function (column) {
+                return column.fixed === 'left';
+            });
+        },
+        rightFixedColumns: function rightFixedColumns() {
+            return this.columns.filter(function (column) {
+                return column.fixed === 'right';
+            });
         }
     },
+    mounted: function mounted() {
+        var _this2 = this;
+
+        this.$nextTick(function () {
+            _this2.headerHeight = _this2.$refs.headerWrapper.offsetHeight;
+            _this2.bodyHeight = _this2.$refs.bodyWrapper.offsetHeight;
+            _this2.scrollbarHeight = _this2.$refs.bodyWrapper.offsetHeight - _this2.$refs.bodyWrapper.clientHeight;
+            _this2.$refs.bodyWrapper.style.top = +_this2.headerHeight + 'px';
+            if (_this2.$refs.fixedBodyWrapper) {
+                _this2.$refs.fixedBodyWrapper.style.top = +_this2.headerHeight + 'px';
+            }
+            if (_this2.$refs.rightFixedBodyWrapper) {
+                _this2.$refs.rightFixedBodyWrapper.style.top = +_this2.headerHeight + 'px';
+            }
+        });
+        this.bindEvents();
+    },
+
 
     methods: {
+        bindEvents: function bindEvents() {
+            var headerWrapper = this.$refs.headerWrapper;
+
+            var refs = this.$refs;
+            this.$refs.bodyWrapper.addEventListener('scroll', function () {
+                if (headerWrapper) {
+                    headerWrapper.scrollLeft = refs.bodyWrapper.scrollLeft;
+                }
+                if (refs.fixedBodyWrapper) {
+                    refs.fixedBodyWrapper.scrollTop = refs.bodyWrapper.scrollTop;
+                };
+                if (refs.rightFixedBodyWrapper) {
+                    refs.rightFixedBodyWrapper.scrollTop = refs.bodyWrapper.scrollTop;
+                };
+            });
+        },
         getDataList: function getDataList(valueList) {
-            var _this2 = this;
+            var _this3 = this;
 
             return valueList.map(function (value) {
-                return _this2.dataMap[value];
+                return _this3.dataMap[value];
             });
         },
         onChangeCheckboxAll: function onChangeCheckboxAll(status) {
-            var _this3 = this;
+            var _this4 = this;
 
             if (status) {
                 this.selectedValueList = this.data.map(function (item) {
-                    return item[_this3.rowKey];
+                    return item[_this4.rowKey];
                 });
             } else {
                 this.selectedValueList = [];
@@ -29166,6 +29300,16 @@ exports.default = {
         onChangeRadio: function onChangeRadio(status, value) {
             this.selectedValue = this.selectedValue === value ? '' : value;
             this.$emit('radio-change', this.selectedValue, this.dataMap[this.selectedValue]);
+        },
+        setHoverRow: function setHoverRow(index) {
+            this.$el.querySelectorAll('tbody').forEach(function (trItem, trIndex) {
+                trItem.children[index].classList.add('hover-row');
+            });
+        },
+        removeHoverRow: function removeHoverRow(index) {
+            this.$el.querySelectorAll('tbody').forEach(function (trItem, trIndex) {
+                trItem.children[index].classList.remove('hover-row');
+            });
         }
     }
 };
@@ -29316,6 +29460,12 @@ exports.default = {
             } else {
                 tdElem.removeAttribute('title');
             }
+        },
+        onMouseenterTR: function onMouseenterTR(index) {
+            this.$emit('setHoverRow', index);
+        },
+        onMouseleaveTR: function onMouseleaveTR(index) {
+            this.$emit('removeHoverRow', index);
         }
     },
 
@@ -29330,7 +29480,13 @@ exports.default = {
             [this.data.map(function (dataItem, dataIndex) {
                 return h(
                     'tr',
-                    { 'class': [_this.getRowClass(dataItem, dataIndex)] },
+                    {
+                        'class': [_this.getRowClass(dataItem, dataIndex)],
+                        on: {
+                            'mouseenter': _this.onMouseenterTR.bind(_this, dataIndex),
+                            'mouseleave': _this.onMouseleaveTR.bind(_this, dataIndex)
+                        }
+                    },
                     [_this.columns.map(function (columnItem) {
                         var currentUniqueValue = dataItem[columnItem.prop];
                         switch (columnItem.type) {
@@ -29399,17 +29555,19 @@ exports.default = {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "x-table-wrapper"
-  }, [_c('table', {
     staticClass: "x-table",
     class: {
       'x-table-bordered': _vm.bordered,
       'x-table-striped': _vm.striped
-    }
+    },
+    style: (_vm.tableStyle)
   }, [_c('div', {
     ref: "hiddenColumns",
     staticClass: "x-table-hidden"
-  }, [_vm._t("default")], 2), _vm._v(" "), _c('colgroup', _vm._l((_vm.columns), function(item) {
+  }, [_vm._t("default")], 2), _vm._v(" "), _c('div', {
+    ref: "headerWrapper",
+    staticClass: "x-table-header-wrapper"
+  }, [_c('table', [_c('colgroup', _vm._l((_vm.columns), function(item) {
     return _c('col', {
       attrs: {
         "width": item.width
@@ -29423,7 +29581,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "changeCheckboxAll": _vm.onChangeCheckboxAll
     }
-  }), _vm._v(" "), _c('x-tbody', {
+  })], 1)]), _vm._v(" "), _c('div', {
+    ref: "bodyWrapper",
+    staticClass: "x-table-body-wrapper",
+    style: (_vm.bodyStyle)
+  }, [_c('table', [_c('colgroup', _vm._l((_vm.columns), function(item) {
+    return _c('col', {
+      attrs: {
+        "width": item.width
+      }
+    })
+  })), _vm._v(" "), _c('x-tbody', {
     attrs: {
       "data": _vm.data,
       "columns": _vm.columns,
@@ -29433,9 +29601,112 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "changeCheckbox": _vm.onChangeCheckbox,
-      "changeRadio": _vm.onChangeRadio
+      "changeRadio": _vm.onChangeRadio,
+      "setHoverRow": _vm.setHoverRow,
+      "removeHoverRow": _vm.removeHoverRow
     }
-  })], 1), _vm._v(" "), (_vm.data.length === 0) ? _c('div', {
+  })], 1)]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.fixedNum.length > 0),
+      expression: "fixedNum.length > 0"
+    }],
+    staticClass: "x-table-fixed",
+    style: (_vm.fixedLeftTableStyle)
+  }, [_c('div', {
+    ref: "fixedHeaderWrapper",
+    staticClass: "x-table-fixed-header-wrapper"
+  }, [_c('table', [_c('colgroup', _vm._l((_vm.columns), function(item) {
+    return _c('col', {
+      attrs: {
+        "width": item.width
+      }
+    })
+  })), _vm._v(" "), _c('x-thead', {
+    attrs: {
+      "columns": _vm.columns,
+      "selected-status": _vm.selectedStatus
+    },
+    on: {
+      "changeCheckboxAll": _vm.onChangeCheckboxAll
+    }
+  })], 1)]), _vm._v(" "), _c('div', {
+    ref: "fixedBodyWrapper",
+    staticClass: "x-table-fixed-body-wrapper",
+    style: (_vm.fixedBodyStyle)
+  }, [_c('table', [_c('colgroup', _vm._l((_vm.columns), function(item) {
+    return _c('col', {
+      attrs: {
+        "width": item.width
+      }
+    })
+  })), _vm._v(" "), _c('x-tbody', {
+    attrs: {
+      "data": _vm.data,
+      "columns": _vm.columns,
+      "row-class-name": _vm.rowClassName,
+      "selected-value-list": _vm.selectedValueList,
+      "selected-value": _vm.selectedValue
+    },
+    on: {
+      "changeCheckbox": _vm.onChangeCheckbox,
+      "changeRadio": _vm.onChangeRadio,
+      "setHoverRow": _vm.setHoverRow,
+      "removeHoverRow": _vm.removeHoverRow
+    }
+  })], 1)])]), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.rightFixedColumns.length > 0),
+      expression: "rightFixedColumns.length > 0"
+    }],
+    staticClass: "x-table-fixed-right",
+    style: (_vm.fixedRightTableStyle)
+  }, [_c('div', {
+    ref: "rightFixedHeaderWrapper",
+    staticClass: "x-table-fixed-right-header-wrapper"
+  }, [_c('table', [_c('colgroup', _vm._l((_vm.columns), function(item) {
+    return _c('col', {
+      attrs: {
+        "width": item.width
+      }
+    })
+  })), _vm._v(" "), _c('x-thead', {
+    attrs: {
+      "columns": _vm.columns,
+      "selected-status": _vm.selectedStatus
+    },
+    on: {
+      "changeCheckboxAll": _vm.onChangeCheckboxAll
+    }
+  })], 1)]), _vm._v(" "), _c('div', {
+    ref: "rightFixedBodyWrapper",
+    staticClass: "x-table-fixed-right-body-wrapper",
+    style: (_vm.fixedBodyStyle)
+  }, [_c('table', [_c('colgroup', _vm._l((_vm.columns), function(item) {
+    return _c('col', {
+      attrs: {
+        "width": item.width
+      }
+    })
+  })), _vm._v(" "), _c('x-tbody', {
+    attrs: {
+      "data": _vm.data,
+      "columns": _vm.columns,
+      "row-class-name": _vm.rowClassName,
+      "selected-value-list": _vm.selectedValueList,
+      "selected-value": _vm.selectedValue
+    },
+    on: {
+      "changeCheckbox": _vm.onChangeCheckbox,
+      "changeRadio": _vm.onChangeRadio,
+      "setHoverRow": _vm.setHoverRow,
+      "removeHoverRow": _vm.removeHoverRow
+    }
+  })], 1)])]), _vm._v(" "), (_vm.data.length === 0) ? _c('div', {
+    ref: "emptyTip",
     staticClass: "x-table-empty-tip"
   }, [_vm._v("\n        " + _vm._s(_vm.emptyTip) + "\n    ")]) : _vm._e()])
 },staticRenderFns: []}
@@ -29494,7 +29765,6 @@ Object.defineProperty(exports, "__esModule", {
 var SINGLE_LINE_CLASS_NAME = 'x-table-td-single-line';
 exports.default = {
     name: 'XTableColumn',
-
     props: {
         title: {
             type: String
@@ -29507,6 +29777,12 @@ exports.default = {
         },
         width: {
             type: String
+        },
+        fixed: {
+            type: String,
+            default: function _default() {
+                return '';
+            }
         },
         className: {
             type: String,
@@ -29537,16 +29813,14 @@ exports.default = {
         this.table = origin;
         var isSubColumn = parent !== origin;
         var slots = this.$scopedSlots;
-
         if (this.type) {
             this.table.rowKey = this.prop;
         }
-
         var tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
-
         var column = {
             title: this.title,
             type: this.type || 'normal',
+            fixed: this.fixed || '',
             prop: this.prop,
             width: this.width,
             className: tdClassName,
@@ -29569,13 +29843,11 @@ exports.default = {
         };
         this.columnConfig = column;
         var columnIndex = void 0;
-
         if (!isSubColumn) {
             columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
         } else {
             columnIndex = [].indexOf.call(parent.$el.children, this.$el);
         }
-
         this.insertColumn(this.table, column, columnIndex, isSubColumn ? parent.columnConfig : null);
     },
 
@@ -29591,6 +29863,9 @@ exports.default = {
         },
         width: function width(val) {
             this.updateColumn('width');
+        },
+        fixed: function fixed(val) {
+            this.updateColumn('fixed');
         },
         className: function className(val) {
             var tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
