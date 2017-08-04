@@ -429,8 +429,57 @@ export default {
 
                 this.picker.$on('dodestroy', this.doDestroy);
                 this.picker.$on('pick', (date, visible = false) => {
+
+                    if (this.type === 'daterange' || this.type === 'datetimerange') {
+                        const options = this.pickerOptions;
+                        if (options.dateLimit) {
+                            // handle endDate with dateLimit
+                            const startDate = date[0];
+                            if (Object.prototype.toString.call(startDate) === '[object Date]') {
+                                let limitEndDate = new Date(startDate.getTime());
+                                Object.keys(options.dateLimit).forEach(v => {
+                                    const num = options.dateLimit[v];
+                                    if (!Number.isInteger(parseInt(num, 10)) || parseInt(num, 10) < 0) {
+                                        console.warn(`xcui warn: dateLimit (${v}) must be a Positive Int Number`);
+                                        return false;
+                                    }
+                                    switch (v) {
+                                        case 'year':
+                                            limitEndDate = limitEndDate.setFullYear(limitEndDate.getFullYear() + num);
+                                            break;
+                                        case 'month':
+                                            limitEndDate = limitEndDate.setMonth(limitEndDate.getMonth() + num);
+                                            break;
+                                        case 'day':
+                                            limitEndDate = limitEndDate.setDate(limitEndDate.getDate() + num);
+                                            break;
+                                        case 'hour':
+                                            limitEndDate = limitEndDate.setHours(limitEndDate.getHours() + num);
+                                            break;
+                                        case 'minute':
+                                            limitEndDate = limitEndDate.setMinutes(limitEndDate.getMinutes() + num);
+                                            break;
+                                        case 'second':
+                                            limitEndDate = limitEndDate.setSeconds(limitEndDate.getSeconds() + num);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    limitEndDate = new Date(limitEndDate);
+                                });
+                                console.log('limitEndDate', limitEndDate);
+                                const endDate = date[1];
+                                if (endDate > limitEndDate) {
+                                    date[1] = limitEndDate;
+                                    this.$emit('over-limit', startDate, endDate, limitEndDate);
+                                }
+                            }
+                        }
+                    }
+
                     this.$emit('input', date);
                     this.handleVisible(visible);
+
                     // this.pickerVisible = this.picker.visible = visible;
                     this.picker.resetView && this.picker.resetView();
                 });
