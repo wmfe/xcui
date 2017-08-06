@@ -1,5 +1,5 @@
 <template  lang="md">
-# Input-number 数字输入框
+# InputNumber 数字输入框
 
 通过鼠标或键盘，输入范围内的数值。
 

@@ -5,7 +5,7 @@ import DatePicker from './date-picker';
 import TimePicker from './time-picker';
 import TimeSelect from './time-select';
 import Input from './input';
-import InputNumber from './inputNumber';
+import InputNumber from './input-number';
 import Textarea from './textarea';
 import Checkbox from './checkbox';
 import CheckboxGroup from './checkbox-group';
