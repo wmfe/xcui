@@ -88,7 +88,7 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("Input-number 数字输入框")]), _vm._v(" "), _c('p', [_vm._v("通过鼠标或键盘，输入范围内的数值。")]), _vm._v(" "), _c('h2', [_vm._v("基础用法")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+  return _c('div', [_c('h1', [_vm._v("InputNumber 数字输入框")]), _vm._v(" "), _c('p', [_vm._v("通过鼠标或键盘，输入范围内的数值。")]), _vm._v(" "), _c('h2', [_vm._v("基础用法")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
     slot: "source"
   }, [_c('x-input-number', {
     attrs: {
