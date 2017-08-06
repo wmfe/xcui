@@ -71,11 +71,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnEAAABCBAMAAADK
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("Loading 加载中提示")]), _vm._v(" "), _c('p', [_vm._v("用于页面和区块的加载中状态, 一般在页面局部处于等待异步数据或正在渲染过程时使用。")]), _vm._v(" "), _c('blockquote', [_c('p', [_c('code', [_vm._v("Loading")]), _vm._v("在XCUI中以指令方式调用。如果完整引入了XCUI，可以直接使用"), _c('code', [_vm._v("v-loading")]), _vm._v("指令。"), _c('br'), _vm._v("\n在"), _c('strong', [_vm._v("单文件引入")]), _vm._v("时，由于"), _c('code', [_vm._v("Loading")]), _vm._v("在XCUI中被注册为一个"), _c('a', {
-    attrs: {
-      "href": "https://vuejs.org/v2/guide/plugins.html"
-    }
-  }, [_vm._v("Vue 插件")]), _vm._v(",请使用"), _c('code', [_vm._v("Vue.use(Loading)")]), _vm._v(" 挂载，再进行使用。")])]), _vm._v(" "), _c('h2', [_vm._v("基本使用")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+  return _c('div', [_c('h1', [_vm._v("Loading 加载中提示")]), _vm._v(" "), _c('p', [_vm._v("用于页面和区块的加载中状态, 一般在页面局部处于等待异步数据或正在渲染过程时使用。")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('h2', [_vm._v("基本使用")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
     slot: "source"
   }, [_c('div', {
     directives: [{
@@ -103,7 +99,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("基本使用，在需要加载中提示的区块元素上设置"), _c('code', [_vm._v("v-loading")]), _vm._v("指令，并绑定"), _c('code', [_vm._v("Boolean")]), _vm._v("即可。默认状况下，Loading 遮罩会插入到绑定元素的子节点，通过添加"), _c('code', [_vm._v("body")]), _vm._v("修饰符，可以使遮罩插入至 "), _c('code', [_vm._v("DOM")]), _vm._v(" 中的 "), _c('code', [_vm._v("body")]), _vm._v(" 上。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -307,7 +303,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("除了默认效果外，还可以通过在需要Loading的区块元素上设置"), _c('code', [_vm._v("x-loading-type")]), _vm._v("属性来使用其他两种效果："), _c('code', [_vm._v("grid")]), _vm._v("和"), _c('code', [_vm._v("dot")]), _vm._v("。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -540,7 +536,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("当需要全屏遮罩时，可使用"), _c('code', [_vm._v("fullscreen")]), _vm._v("修饰符（此时遮罩会插入至 body 上）。此时若需要锁定屏幕的滚动，可以使用"), _c('code', [_vm._v("lock")]), _vm._v("修饰符。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -766,7 +762,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过在需要Loading的区块元素上设置"), _c('code', [_vm._v("x-loading-text")]), _vm._v("，可进行自定义加载文案。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -900,7 +896,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过在需要Loading的区块元素上设置"), _c('code', [_vm._v("x-loading-size")]), _vm._v("，可进行自定义加载图案的大小。默认为40。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -1006,8 +1002,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("</")]), _vm._v("template")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("Directive Props")]), _vm._v(" "), _vm._m(0)], 1)
+  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("Directive Props")]), _vm._v(" "), _vm._m(1)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('blockquote', [_c('p', [_c('code', [_vm._v("Loading")]), _vm._v("在XCUI中以指令方式调用。如果完整引入了XCUI，可以直接使用"), _c('code', [_vm._v("v-loading")]), _vm._v("指令。"), _c('br'), _vm._v("\n在"), _c('strong', [_vm._v("单文件引入")]), _vm._v("时，由于"), _c('code', [_vm._v("Loading")]), _vm._v("在XCUI中被注册为一个"), _c('a', {
+    attrs: {
+      "href": "https://vuejs.org/v2/guide/plugins.html"
+    }
+  }, [_vm._v("Vue 插件")]), _vm._v(",请使用"), _c('code', [_vm._v("Vue.use(Loading)")]), _vm._v(" 挂载，再进行使用。")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('table', {
     staticClass: "markdown-table"
   }, [_c('thead', [_c('tr', [_c('th', [_vm._v("名字")]), _vm._v(" "), _c('th', [_vm._v("类型")]), _vm._v(" "), _c('th', [_vm._v("默认")]), _vm._v(" "), _c('th', [_vm._v("描述")]), _vm._v(" "), _c('th', [_vm._v("是否必选")]), _vm._v(" "), _c('th', [_vm._v("可选值")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("v-loading")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("-")]), _vm._v(" "), _c('td', [_vm._v("与指令的绑定值")]), _vm._v(" "), _c('td', [_vm._v("必选")]), _vm._v(" "), _c('td', [_vm._v("true, false")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("body")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("false")]), _vm._v(" "), _c('td', [_vm._v("指令修饰符，是否将遮罩层插入body")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td', [_vm._v("true,false")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("fullscreen")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("false")]), _vm._v(" "), _c('td', [_vm._v("指令修饰符，是否是全屏Loading")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td', [_vm._v("true,false")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("lock")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("false")]), _vm._v(" "), _c('td', [_vm._v("指令修饰符，全屏时是否锁定滚动条")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td', [_vm._v("true,false")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("x-loading-type")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("无")]), _vm._v(" "), _c('td', [_vm._v("自定义加载动画类型")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td', [_vm._v("circle(默认), dot, grid")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("x-loading-text")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("无")]), _vm._v(" "), _c('td', [_vm._v("自定义加载文案")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td')]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("x-loading-size")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("40")]), _vm._v(" "), _c('td', [_vm._v("加载图案的大小")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td')]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("x-loading-class")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("无")]), _vm._v(" "), _c('td', [_vm._v("遮罩层的样式名")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td')])])])

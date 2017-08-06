@@ -72,7 +72,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("最基本的用法，使用"), _c('code', [_vm._v("<x-textarea>")]), _vm._v("标签即可创建一个输入框。使用"), _c('code', [_vm._v("v-model")]), _vm._v("赋值。默认的"), _c('code', [_vm._v("textarea")]), _vm._v("宽度是"), _c('code', [_vm._v("100%")]), _vm._v(", 默认的行数是"), _c('code', [_vm._v("2")]), _vm._v("。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -190,7 +190,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过使用"), _c('code', [_vm._v("disabled")]), _vm._v("属性可以设置禁用状态。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -318,7 +318,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过使用"), _c('code', [_vm._v("rows")]), _vm._v("属性可以控制"), _c('code', [_vm._v("textarea")]), _vm._v("的行数。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -469,7 +469,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过使用"), _c('code', [_vm._v("autosize")]), _vm._v("属性可以控制"), _c('code', [_vm._v("textarea")]), _vm._v("组件进行高度自适应。可以设置为"), _c('code', [_vm._v("Boolean(true, false)")]), _vm._v("或者一个指定了"), _c('code', [_vm._v("minRows(最小行数)")]), _vm._v(", "), _c('code', [_vm._v("maxRows（最大行数）")]), _vm._v("的"), _c('code', [_vm._v("Object")]), _vm._v("。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -716,7 +716,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过设置属性"), _c('code', [_vm._v("maxlength")]), _vm._v("为一定数值，并设置属性"), _c('code', [_vm._v("show-max")]), _vm._v("为"), _c('code', [_vm._v("true")]), _vm._v("可以显示当前输入文字长度。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"

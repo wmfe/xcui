@@ -114,7 +114,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("基本用法，建议列表为文本格式。设置"), _c('code', [_vm._v("v-model")]), _vm._v("和"), _c('code', [_vm._v("suggestion")]), _vm._v("属性即可。可以通过键盘的"), _c('code', [_vm._v("上下方向键")]), _vm._v("和"), _c('code', [_vm._v("回车键")]), _vm._v("来控制选择。清除按钮默认展示，可通过"), _c('code', [_vm._v("allow-clear")]), _vm._v("属性将其关闭。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -360,7 +360,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("支持格式为"), _c('code', [_vm._v("[{text:'text', value:'value'}, ...]")]), _vm._v(" 的数据源。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -699,7 +699,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过使用"), _c('code', [_vm._v("input-callback")]), _vm._v("属性定义相关方法, 和"), _c('code', [_vm._v("v-model")]), _vm._v(" 绑定变量的"), _c('code', [_vm._v("text")]), _vm._v("值，可以使用远程数据（例如，用"), _c('code', [_vm._v("text")]), _vm._v("作为请求参数）。本例模拟远程数据。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"

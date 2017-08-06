@@ -135,7 +135,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("基本使用, 可通过添加"), _c('code', [_vm._v("closeable")]), _vm._v("来关闭标签。在"), _c('code', [_vm._v("on-close")]), _vm._v("事件中可使用"), _c('code', [_vm._v("event.preventDefault()")]), _vm._v("来阻止标签隐藏。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -481,7 +481,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("XCUI添加了多种预设色彩，用于不同场景。如果预设值不能满足需求，可设置为具体的色值。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -1099,7 +1099,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("添加标签")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -1394,7 +1394,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("可选择的标签, 使用"), _c('code', [_vm._v("x-tag-checkable")]), _vm._v("组件来实现。"), _c('code', [_vm._v("@change")]), _vm._v("事件返回的参数中携带当前tag的Vue实例和"), _c('code', [_vm._v("checked")]), _vm._v("状态。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"

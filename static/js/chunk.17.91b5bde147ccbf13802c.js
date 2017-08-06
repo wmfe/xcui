@@ -48,7 +48,7 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("ScrollTop 返回顶部")]), _vm._v(" "), _c('h2', [_vm._v("使用场景")]), _vm._v(" "), _c('p', [_vm._v("如页面超过一屏，提供快捷返回顶部按钮。")]), _vm._v(" "), _c('blockquote', [_c('p', [_c('code', [_vm._v("scrollTop")]), _vm._v(" 组件支持拖拽到"), _c('code', [_vm._v("页面底部正中")]), _vm._v("和"), _c('code', [_vm._v("页面右边正中")]), _vm._v("位置，当右下角位置遮挡到其他元素时，可以进行拖拽。")])]), _vm._v(" "), _c('h2', [_vm._v("基本使用")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+  return _c('div', [_c('h1', [_vm._v("ScrollTop 返回顶部")]), _vm._v(" "), _c('h2', [_vm._v("使用场景")]), _vm._v(" "), _c('p', [_vm._v("如页面超过一屏，提供快捷返回顶部按钮。")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('h2', [_vm._v("基本使用")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
     slot: "source"
   }, [_c('x-scrolltop', {
     on: {
@@ -60,7 +60,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("请滚动页面来查看右下角的返回顶部按钮。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -174,8 +174,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("</")]), _vm._v("script")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("Props")]), _vm._v(" "), _vm._m(0)], 1)
+  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("Props")]), _vm._v(" "), _vm._m(1)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('blockquote', [_c('p', [_c('code', [_vm._v("scrollTop")]), _vm._v(" 组件支持拖拽到"), _c('code', [_vm._v("页面底部正中")]), _vm._v("和"), _c('code', [_vm._v("页面右边正中")]), _vm._v("位置，当右下角位置遮挡到其他元素时，可以进行拖拽。")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('table', {
     staticClass: "markdown-table"
   }, [_c('thead', [_c('tr', [_c('th', [_vm._v("名字")]), _vm._v(" "), _c('th', [_vm._v("类型")]), _vm._v(" "), _c('th', [_vm._v("默认")]), _vm._v(" "), _c('th', [_vm._v("描述")]), _vm._v(" "), _c('th', [_vm._v("是否必选")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("duration")]), _vm._v(" "), _c('td', [_vm._v("Number")]), _vm._v(" "), _c('td', [_vm._v("50")]), _vm._v(" "), _c('td', [_vm._v("滚动持续间隔，单位为毫秒，值越小完成滚动越快")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("target-element")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("空字符串")]), _vm._v(" "), _c('td', [_vm._v("定位元素ID名称，返回指定元素顶部")]), _vm._v(" "), _c('td', [_vm._v("可选，此属性未赋值时，返回页面顶部")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("finish")]), _vm._v(" "), _c('td', [_vm._v("Function")]), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v("返回顶部完成，事件回调")]), _vm._v(" "), _c('td', [_vm._v("可选")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("class-name")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("空字符串")]), _vm._v(" "), _c('td', [_vm._v("自定义样式")]), _vm._v(" "), _c('td', [_vm._v("可选")])])])])

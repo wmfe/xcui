@@ -81,7 +81,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("最简单的用法。通过设置"), _c('code', [_vm._v("v-model")]), _vm._v("值和"), _c('code', [_vm._v("label")]), _vm._v("属性为相应的变量。选中时"), _c('code', [_vm._v("v-model")]), _vm._v("的值变为该"), _c('code', [_vm._v("radio")]), _vm._v("组件的"), _c('code', [_vm._v("label")]), _vm._v("值。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -301,7 +301,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过使用"), _c('code', [_vm._v("disabled")]), _vm._v("属性可以设置单选框的禁用状态。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -499,7 +499,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("一组互斥的单选框配合使用。这种情况下无需再设置单个"), _c('code', [_vm._v("radio")]), _vm._v("的"), _c('code', [_vm._v("v-model")]), _vm._v("属性。当相应的"), _c('code', [_vm._v("radio")]), _vm._v("被选中时，"), _c('code', [_vm._v("radio-group")]), _vm._v("的"), _c('code', [_vm._v("v-model")]), _vm._v("值随之改变。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -751,7 +751,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("按钮样式的单选框组合。通过引入"), _c('code', [_vm._v("radio-group")]), _vm._v("和"), _c('code', [_vm._v("radio-button")]), _vm._v("组件来实现。此时无需再设置单个"), _c('code', [_vm._v("radio-button")]), _vm._v("的"), _c('code', [_vm._v("v-model")]), _vm._v("属性。当相应的"), _c('code', [_vm._v("radio")]), _vm._v("被选中时，"), _c('code', [_vm._v("radio-group")]), _vm._v("的"), _c('code', [_vm._v("v-model")]), _vm._v("值随之改变。通过"), _c('code', [_vm._v("size")]), _vm._v("来可以控制大小。除默认大小外，提供"), _c('code', [_vm._v("large")]), _vm._v("和"), _c('code', [_vm._v("small")]), _vm._v("两种大小。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"

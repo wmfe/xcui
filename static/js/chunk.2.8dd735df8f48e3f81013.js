@@ -141,7 +141,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过设置"), _c('code', [_vm._v("trigger")]), _vm._v("属性来设置触发气泡提示的方式，默认为"), _c('code', [_vm._v("click")]), _vm._v("。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -653,7 +653,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("Popover提供了四种展示方向"), _c('code', [_vm._v("top")]), _vm._v(", "), _c('code', [_vm._v("bottom")]), _vm._v(" "), _c('code', [_vm._v("left")]), _vm._v(", "), _c('code', [_vm._v("right")]), _vm._v("和三种对齐位置"), _c('code', [_vm._v("start")]), _vm._v(", "), _c('code', [_vm._v("end")]), _vm._v(", 默认空。通过设置属性如"), _c('code', [_vm._v("placement=\"top-start\"")]), _vm._v("来控制文字提示的位置和对齐方式。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -1873,7 +1873,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("确认提示框是一种比"), _c('code', [_vm._v("modal")]), _vm._v("更轻量的操作，常用于二次确认。使用"), _c('code', [_vm._v("confirm")]), _vm._v("属性开启此模式。在确认模式下"), _c('code', [_vm._v("content")]), _vm._v("内容无效。确认的操作支持异步，在回调参数中可以设置"), _c('code', [_vm._v("confirmLoading")]), _vm._v("来开启确认按钮的loading效果。具体请看demo代码。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -2156,7 +2156,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过使用名为"), _c('code', [_vm._v("content")]), _vm._v("的具名slot来往文字提示中填充更多信息。在使用此slot后"), _c('code', [_vm._v("content")]), _vm._v("属性无效。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -2273,7 +2273,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("可通过设置"), _c('code', [_vm._v("transition")]), _vm._v("属性来改变默认的过渡效果。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"

@@ -150,7 +150,7 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("Form 表单")]), _vm._v(" "), _c('p', [_vm._v("具有数据收集、校验和提交功能的表单，包含复选框、单选框、输入框、下拉选择框等元素。")]), _vm._v(" "), _c('p', [_vm._v("表单可以进行水平、垂直和行内排列。")]), _vm._v(" "), _c('h2', [_vm._v("表单域")]), _vm._v(" "), _c('p', [_vm._v("表单里面的每一项被称为表单域，包括复选框、单选框等元素。")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('blockquote', [_c('p', [_vm._v("注：在form组件中，一律使用标准大小的控件。")])]), _vm._v(" "), _c('h2', [_vm._v("水平登录栏")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+  return _c('div', [_c('h1', [_vm._v("Form 表单")]), _vm._v(" "), _c('p', [_vm._v("具有数据收集、校验和提交功能的表单，包含复选框、单选框、输入框、下拉选择框等元素。")]), _vm._v(" "), _c('p', [_vm._v("表单可以进行水平、垂直和行内排列。")]), _vm._v(" "), _c('h2', [_vm._v("表单域")]), _vm._v(" "), _c('p', [_vm._v("表单里面的每一项被称为表单域，包括复选框、单选框等元素。")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('h2', [_vm._v("水平登录栏")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
     slot: "source"
   }, [_c('x-form', {
     ref: "form1",
@@ -200,7 +200,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("水平登录栏，常用于顶部导航")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -612,7 +612,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("普通的登录框，垂直方向排列")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -1539,7 +1539,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("用于数据表格的高级搜索。设置"), _c('code', [_vm._v("inline")]), _vm._v("可变为行内表单域。可以嵌套"), _c('code', [_vm._v("Row")]), _vm._v("和"), _c('code', [_vm._v("Col")]), _vm._v("组件进行栅格化。布局相关请见layout组件。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -2914,7 +2914,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过设置"), _c('code', [_vm._v("label-position")]), _vm._v("属性来决定label的位置。默认为右对齐。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -3577,7 +3577,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("用于在用户填写的信息提交服务器前，做必要的校验。在"), _c('code', [_vm._v("x-form")]), _vm._v("上配置"), _c('code', [_vm._v("rules")]), _vm._v("校验逻辑，在"), _c('code', [_vm._v("x-form-item")]), _vm._v("上的"), _c('code', [_vm._v("prop")]), _vm._v("声明该表单域对应的字段，在提交时使用"), _c('code', [_vm._v("validate")]), _vm._v("方法来获取验证结果进行处理。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -5117,11 +5117,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("</")]), _vm._v("script")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v(">")])]), _vm._v("\n")])])]), _vm._v(" "), _c('blockquote', [_c('p', [_vm._v("表单校验的规则（即"), _c('code', [_vm._v("rules")]), _vm._v("属性中各表单域的校验规则）见"), _c('a', {
-    attrs: {
-      "href": "https://github.com/yiminghe/async-validator"
-    }
-  }, [_vm._v("async-validator")]), _vm._v("。")])]), _vm._v(" "), _c('h2', [_vm._v("自定义校验规则")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+  }, [_vm._v(">")])]), _vm._v("\n")])])]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('h2', [_vm._v("自定义校验规则")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
     slot: "source"
   }, [_c('x-form', {
     ref: "form6",
@@ -5155,7 +5151,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过自定义"), _c('code', [_vm._v("rules")]), _vm._v("属性的"), _c('code', [_vm._v("validator")]), _vm._v("函数可以进行自定义规则校验。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -5662,7 +5658,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("可以动态增减表单项。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -6196,7 +6192,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("</")]), _vm._v("script")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("Form Props")]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('h2', [_vm._v("Form Methods")]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('h2', [_vm._v("Form-Item Props")]), _vm._v(" "), _vm._m(4), _vm._v(" "), _c('h2', [_vm._v("Form-Item Slot")]), _vm._v(" "), _vm._m(5)], 1)
+  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("Form Props")]), _vm._v(" "), _vm._m(4), _vm._v(" "), _c('h2', [_vm._v("Form Methods")]), _vm._v(" "), _vm._m(5), _vm._v(" "), _c('h2', [_vm._v("Form-Item Props")]), _vm._v(" "), _vm._m(6), _vm._v(" "), _c('h2', [_vm._v("Form-Item Slot")]), _vm._v(" "), _vm._m(7)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', [_vm._v("在XCUI中，表单域即是使用"), _c('code', [_vm._v("form")]), _vm._v("组件包裹"), _c('code', [_vm._v("form-item")]), _vm._v("组件，如下：")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -6238,6 +6234,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("</")]), _vm._v("x-form")]), _c('span', {
     staticClass: "token punctuation"
   }, [_vm._v(">")])]), _vm._v("\n")])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('blockquote', [_c('p', [_vm._v("注：在form组件中，一律使用标准大小的控件。")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('blockquote', [_c('p', [_vm._v("表单校验的规则（即"), _c('code', [_vm._v("rules")]), _vm._v("属性中各表单域的校验规则）见"), _c('a', {
+    attrs: {
+      "href": "https://github.com/yiminghe/async-validator"
+    }
+  }, [_vm._v("async-validator")]), _vm._v("。")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('table', {
     staticClass: "markdown-table"

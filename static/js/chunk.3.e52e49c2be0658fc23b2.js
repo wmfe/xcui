@@ -112,7 +112,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("基本使用，通过处理"), _c('code', [_vm._v("change-current")]), _vm._v("事件来处理页码改变后的当前页码数。"), _c('code', [_vm._v("change-current")]), _vm._v(", "), _c('code', [_vm._v("total")]), _vm._v(", "), _c('code', [_vm._v("current-page-num")]), _vm._v("均为必选参数。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -314,7 +314,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过设置"), _c('code', [_vm._v("show-sizer")]), _vm._v(", "), _c('code', [_vm._v("show-total")]), _vm._v("来控制是否显示分页挂件和总页数挂件。"), _c('code', [_vm._v("sizer")]), _vm._v("可用时需要通过"), _c('code', [_vm._v("change-pagesize")]), _vm._v("事件来处理"), _c('code', [_vm._v("page-size")]), _vm._v("。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -572,7 +572,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("迷你尺寸可以放在元素顶部，或者在页面空间受到限制时使用。设置"), _c('code', [_vm._v("type=\"mini\"")]), _vm._v("即可。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"

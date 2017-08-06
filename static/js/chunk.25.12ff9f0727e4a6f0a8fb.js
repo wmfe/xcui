@@ -72,11 +72,7 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("Dialog 快捷对话框")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('blockquote', [_c('p', [_vm._v("XCUI为"), _c('code', [_vm._v("Vue.prototype")]), _vm._v("添加了全局方法"), _c('code', [_vm._v("$Dialog")]), _vm._v(", 可以直接使用如"), _c('code', [_vm._v("this.$Dialog.alert('message')")]), _vm._v("的方式进行信息提示操作。"), _c('br'), _vm._v("\n当然，您也可以使用"), _c('code', [_vm._v("import Dialog from 'xcui/lib/dialog'")]), _vm._v(" 的单组件方式调用。"), _c('br'), _vm._v("\nDialog在XCUI中被注册为一个"), _c('a', {
-    attrs: {
-      "href": "https://vuejs.org/v2/guide/plugins.html"
-    }
-  }, [_vm._v("Vue 插件")]), _vm._v(", 在"), _c('strong', [_vm._v("单文件引入")]), _vm._v("时，请使用"), _c('code', [_vm._v("Vue.use(Dialog)")]), _vm._v(" 挂载，再进行使用。")])]), _vm._v(" "), _c('h2', [_vm._v("消息提示对话框（模拟原生alert）")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+  return _c('div', [_c('h1', [_vm._v("Dialog 快捷对话框")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('h2', [_vm._v("消息提示对话框（模拟原生alert）")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
     slot: "source"
   }, [_c('x-button', {
     attrs: {
@@ -91,7 +87,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("使用"), _c('code', [_vm._v("this.$Dialog.alert(options)")]), _vm._v("来使用警告对话框，具体配置请看API。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -262,7 +258,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("使用"), _c('code', [_vm._v("this.$Dialog.confirm(options)")]), _vm._v("来使用警告对话框，具体配置请看API。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -469,7 +465,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("使用"), _c('code', [_vm._v("this.$Dialog.show(options)")]), _vm._v("来使用更多自定义功能的对话框，具体配置请看API。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -715,9 +711,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("</")]), _vm._v("script")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("API")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5), _vm._v(" "), _vm._m(6), _vm._v(" "), _vm._m(7), _vm._v(" "), _vm._m(8)], 1)
+  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("API")]), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5), _vm._v(" "), _vm._m(6), _vm._v(" "), _vm._m(7), _vm._v(" "), _vm._m(8), _vm._v(" "), _vm._m(9)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', [_vm._v("使用XCUI绑定的快捷方法"), _c('code', [_vm._v("$Dialog")]), _vm._v(", 快速创建一个对话框。")])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('blockquote', [_c('p', [_vm._v("XCUI为"), _c('code', [_vm._v("Vue.prototype")]), _vm._v("添加了全局方法"), _c('code', [_vm._v("$Dialog")]), _vm._v(", 可以直接使用如"), _c('code', [_vm._v("this.$Dialog.alert('message')")]), _vm._v("的方式进行信息提示操作。"), _c('br'), _vm._v("\n当然，您也可以使用"), _c('code', [_vm._v("import Dialog from 'xcui/lib/dialog'")]), _vm._v(" 的单组件方式调用。"), _c('br'), _vm._v("\nDialog在XCUI中被注册为一个"), _c('a', {
+    attrs: {
+      "href": "https://vuejs.org/v2/guide/plugins.html"
+    }
+  }, [_vm._v("Vue 插件")]), _vm._v(", 在"), _c('strong', [_vm._v("单文件引入")]), _vm._v("时，请使用"), _c('code', [_vm._v("Vue.use(Dialog)")]), _vm._v(" 挂载，再进行使用。")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('h3', [_c('strong', [_vm._v("this.$Dialog.$alert(content, onOk)")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;

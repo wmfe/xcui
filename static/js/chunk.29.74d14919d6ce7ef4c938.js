@@ -83,7 +83,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("按钮有以下类型： "), _c('code', [_vm._v("default")]), _vm._v(", "), _c('code', [_vm._v("primary")]), _vm._v(", "), _c('code', [_vm._v("info")]), _vm._v(", "), _c('code', [_vm._v("success")]), _vm._v(", "), _c('code', [_vm._v("warning")]), _vm._v(", "), _c('code', [_vm._v("danger")]), _vm._v("，"), _c('code', [_vm._v("dashed")]), _vm._v("，"), _c('code', [_vm._v("link")]), _vm._v("。默认值为"), _c('code', [_vm._v("default")]), _vm._v("。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -339,7 +339,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("当需要在"), _c('code', [_vm._v("Button")]), _vm._v(" 内嵌入 "), _c('code', [_vm._v("Icon")]), _vm._v(" 时，可以设置 "), _c('code', [_vm._v("icon")]), _vm._v(" 属性，或者直接在 "), _c('code', [_vm._v("Button")]), _vm._v(" 内使用 "), _c('code', [_vm._v("Icon")]), _vm._v(" 组件。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -624,7 +624,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过设置"), _c('code', [_vm._v("disabled")]), _vm._v("属性可以将按钮置为禁用状态。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -790,7 +790,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过设置"), _c('code', [_vm._v("size")]), _vm._v("属性可以设定按钮的大小。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -914,7 +914,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过设置"), _c('code', [_vm._v("loading")]), _vm._v("属性可以设定按钮进入加载中状态。最后两个按钮演示点击后进入加载状态。当进入加载状态时，"), _c('code', [_vm._v("button")]), _vm._v(" 的任何鼠标事件均"), _c('strong', [_vm._v("不会触发")]), _vm._v("。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -1225,7 +1225,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("以按钮组的方式出现，常用于多项类似操作。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"

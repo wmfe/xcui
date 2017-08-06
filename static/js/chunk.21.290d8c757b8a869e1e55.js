@@ -95,7 +95,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("基本使用，使用"), _c('code', [_vm._v("x-modal")]), _vm._v("组件包裹需要展示的内容，"), _c('code', [_vm._v("v-model")]), _vm._v("的绑定值用于控制显示隐藏。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -341,7 +341,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过使用"), _c('code', [_vm._v("header")]), _vm._v(", "), _c('code', [_vm._v("footer")]), _vm._v("插槽，"), _c('code', [_vm._v("show-header")]), _vm._v("、"), _c('code', [_vm._v("show-footer")]), _vm._v("等属性都可控制对话框的展示效果。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -1024,7 +1024,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过设置"), _c('code', [_vm._v("styles")]), _vm._v("属性可以设置更多样式，如对话框的位置等。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"

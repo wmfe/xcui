@@ -561,7 +561,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("默认情况下，Table 组件是没有边框的，可以通过"), _c('code', [_vm._v("bordered")]), _vm._v("属性，它接受一个"), _c('code', [_vm._v("Boolean")]), _vm._v("，设置为"), _c('code', [_vm._v("true")]), _vm._v("即可启用。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -897,7 +897,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("默认情况下，Table 没有斑马纹，可以通过"), _c('code', [_vm._v("striped")]), _vm._v("属性，它接受一个"), _c('code', [_vm._v("Boolean")]), _vm._v("，设置为"), _c('code', [_vm._v("true")]), _vm._v("即可启用。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -1246,7 +1246,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("默认情况下，Table 组件撑满父元素，可通过设置"), _c('code', [_vm._v("x-table-column")]), _vm._v("的"), _c('code', [_vm._v("width")]), _vm._v("控制列宽。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -3097,22 +3097,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "title": "姓名",
       "prop": "name"
     },
-    scopedSlots: _vm._u([
-      ["default", function(props) {
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function(props) {
         return [_c('a', {
           attrs: {
             "href": "javascript:void(0)"
           }
         }, [_vm._v("\n                    " + _vm._s(props.dataItem.name) + "\n                    ")])]
-      }]
-    ])
+      }
+    }])
   }), _vm._v(" "), _c('x-table-column', {
     attrs: {
       "title": "地址",
       "prop": "address"
     },
-    scopedSlots: _vm._u([
-      ["column-header-slot", function(props) {
+    scopedSlots: _vm._u([{
+      key: "column-header-slot",
+      fn: function(props) {
         return [_vm._v("\n                " + _vm._s(props.columnItem.title) + "\n                "), _c('x-tooltip', {
           attrs: {
             "content": "Sample Text",
@@ -3124,18 +3126,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
             "size": "16"
           }
         })], 1)]
-      }]
-    ])
+      }
+    }])
   }), _vm._v(" "), _c('x-table-column', {
     attrs: {
       "title": "职业",
       "prop": "job"
     },
-    scopedSlots: _vm._u([
-      ["default", function(props) {
+    scopedSlots: _vm._u([{
+      key: "default",
+      fn: function(props) {
         return [_c('x-tag', [_vm._v(_vm._s(props.dataItem.job))])]
-      }]
-    ])
+      }
+    }])
   })], 1)], 1)]), _vm._v(" "), _c('span', {
     slot: "info-title"
   }, [_vm._v("说明")]), _vm._v(" "), _c('div', {

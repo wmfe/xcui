@@ -79,7 +79,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("在"), _c('code', [_vm._v("x-checkbox")]), _vm._v("中使用"), _c('code', [_vm._v("v-model")]), _vm._v("绑定变量，默认绑定变量的值是"), _c('code', [_vm._v("Boolean")]), _vm._v(", 选中时为"), _c('code', [_vm._v("true")]), _vm._v("。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -215,7 +215,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过使用"), _c('code', [_vm._v("disabled")]), _vm._v("属性可以设置多选框的禁用状态。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -413,7 +413,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过将"), _c('code', [_vm._v("x-checkbox")]), _vm._v("作为"), _c('code', [_vm._v("x-checkbox-group")]), _vm._v("的直接子元素，可以建立组合的多选框。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -770,7 +770,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_c('code', [_vm._v("indeterminate")]), _vm._v("属性表示多选框的不确定状态，常用于实现部分选中功能。本例实现了全选和部分选中功能。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"

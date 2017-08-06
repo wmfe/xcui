@@ -126,7 +126,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("基本使用。将"), _c('code', [_vm._v("x-option")]), _vm._v("作为"), _c('code', [_vm._v("x-select")]), _vm._v("的子组件传入。支持通过键盘"), _c('code', [_vm._v("方向键")]), _vm._v("和"), _c('code', [_vm._v("回车键")]), _vm._v("选择选项。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -510,7 +510,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过将"), _c('code', [_vm._v("x-option")]), _vm._v("的"), _c('code', [_vm._v("disabled")]), _vm._v("选项置为"), _c('code', [_vm._v("true")]), _vm._v("即可禁用选项。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -907,7 +907,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过将"), _c('code', [_vm._v("x-select")]), _vm._v("的"), _c('code', [_vm._v("disabled")]), _vm._v("选项置为"), _c('code', [_vm._v("true")]), _vm._v("即可禁用选择器。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -1271,7 +1271,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过设置"), _c('code', [_vm._v("allowClear")]), _vm._v("属性可以包含清空按钮，将选择器置为未选择状态。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -1623,7 +1623,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过设置"), _c('code', [_vm._v("x-select")]), _vm._v("的"), _c('code', [_vm._v("multiple")]), _vm._v("选项为"), _c('code', [_vm._v("true")]), _vm._v(", 可以设置为多选状态。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -2021,7 +2021,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过设置"), _c('code', [_vm._v("x-option")]), _vm._v("的"), _c('code', [_vm._v("multipleLimit")]), _vm._v("属性, 可以限制最多可选的条数。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -2440,7 +2440,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过引入"), _c('code', [_vm._v("x-option-group")]), _vm._v("组件可以进行分组展示。在"), _c('code', [_vm._v("x-option-group")]), _vm._v("上设置"), _c('code', [_vm._v("disabled")]), _vm._v("可以将整个分组禁用。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -2929,7 +2929,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("将自定义的HTML模板放入"), _c('code', [_vm._v("x-option")]), _vm._v("的"), _c('code', [_vm._v("slot")]), _vm._v("中即可。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"

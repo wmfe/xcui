@@ -73,11 +73,7 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("Message信息提示")]), _vm._v(" "), _c('p', [_vm._v("Message提供一种不打断用户操作的轻量级提示方式，顶部居中显示并自动消失。常用于主动操作后的信息提示。")]), _vm._v(" "), _c('blockquote', [_c('p', [_vm._v("XCUI为"), _c('code', [_vm._v("Vue.prototype")]), _vm._v("添加了全局方法"), _c('code', [_vm._v("$Message")]), _vm._v(", 如果您完整引入了XCUI， 可以直接使用如"), _c('code', [_vm._v("this.$Message.info('message')")]), _vm._v("的方式进行信息提示操作。"), _c('br'), _vm._v("\n当然，您也可以使用"), _c('code', [_vm._v("import Message from 'xcui/lib/message'")]), _vm._v(" 的单组件方式调用。"), _c('br'), _vm._v("\nMessage在XCUI中被注册为一个"), _c('a', {
-    attrs: {
-      "href": "https://vuejs.org/v2/guide/plugins.html"
-    }
-  }, [_vm._v("Vue 插件")]), _vm._v(", 在"), _c('strong', [_vm._v("单文件引入")]), _vm._v("时，请使用"), _c('code', [_vm._v("Vue.use(Message)")]), _vm._v(" 挂载，再进行使用。")])]), _vm._v(" "), _c('h2', [_vm._v("基本使用")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+  return _c('div', [_c('h1', [_vm._v("Message信息提示")]), _vm._v(" "), _c('p', [_vm._v("Message提供一种不打断用户操作的轻量级提示方式，顶部居中显示并自动消失。常用于主动操作后的信息提示。")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('h2', [_vm._v("基本使用")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
     slot: "source"
   }, [_c('x-button', {
     attrs: {
@@ -92,7 +88,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("基本提示，展示信息3s后消失。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -245,7 +241,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("支持四种方法："), _c('code', [_vm._v("info(信息提示)")]), _vm._v("， "), _c('code', [_vm._v("success(成功提示)")]), _vm._v("， "), _c('code', [_vm._v("warning(警告提示)")]), _vm._v("，"), _c('code', [_vm._v("error（错误提示）")]), _vm._v("。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -518,7 +514,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("显示一个10秒的提示。也可以在"), _c('code', [_vm._v("Message.config()")]), _vm._v("中全局配置，详见API。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -659,7 +655,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("使用关闭时的回调函数。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -819,8 +815,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("</")]), _vm._v("script")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("使用提示")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('h2', [_vm._v("API")]), _vm._v(" "), _c('p', [_vm._v("通过以下方法来使用：")]), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('h2', [_vm._v("全局配置")]), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5), _vm._v(" "), _vm._m(6), _vm._v(" "), _vm._m(7)], 1)
+  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("使用提示")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('h2', [_vm._v("API")]), _vm._v(" "), _c('p', [_vm._v("通过以下方法来使用：")]), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _c('h2', [_vm._v("全局配置")]), _vm._v(" "), _vm._m(5), _vm._v(" "), _vm._m(6), _vm._v(" "), _vm._m(7), _vm._v(" "), _vm._m(8)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('blockquote', [_c('p', [_vm._v("XCUI为"), _c('code', [_vm._v("Vue.prototype")]), _vm._v("添加了全局方法"), _c('code', [_vm._v("$Message")]), _vm._v(", 如果您完整引入了XCUI， 可以直接使用如"), _c('code', [_vm._v("this.$Message.info('message')")]), _vm._v("的方式进行信息提示操作。"), _c('br'), _vm._v("\n当然，您也可以使用"), _c('code', [_vm._v("import Message from 'xcui/lib/message'")]), _vm._v(" 的单组件方式调用。"), _c('br'), _vm._v("\nMessage在XCUI中被注册为一个"), _c('a', {
+    attrs: {
+      "href": "https://vuejs.org/v2/guide/plugins.html"
+    }
+  }, [_vm._v("Vue 插件")]), _vm._v(", 在"), _c('strong', [_vm._v("单文件引入")]), _vm._v("时，请使用"), _c('code', [_vm._v("Vue.use(Message)")]), _vm._v(" 挂载，再进行使用。")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('h3', [_vm._v("单组件使用时，请遵循以下的方式注册"), _c('code', [_vm._v("Message")]), _vm._v("插件。如果已经全局使用"), _c('code', [_vm._v("Vue.use(xcui)")]), _vm._v(", 则无需再次注册。")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('pre', [_c('span', {

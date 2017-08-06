@@ -84,11 +84,7 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("Notice 通知提醒")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('blockquote', [_c('p', [_vm._v("XCUI为"), _c('code', [_vm._v("Vue.prototype")]), _vm._v("添加了全局方法"), _c('code', [_vm._v("$Notice")]), _vm._v(", 如果您完整引入了XCUI， 可以直接使用如"), _c('code', [_vm._v("this.$Notice.info('some message')")]), _vm._v("的方式进行通知提示操作。"), _c('br'), _vm._v("\n当然，您也可以使用"), _c('code', [_vm._v("import Notice from 'xcui/lib/notice'")]), _vm._v(" 的单组件方式调用。"), _c('br'), _vm._v("\nNotice在XCUI中被注册为一个"), _c('a', {
-    attrs: {
-      "href": "https://vuejs.org/v2/guide/plugins.html"
-    }
-  }, [_vm._v("Vue 插件")]), _vm._v(", 在"), _c('strong', [_vm._v("单文件引入")]), _vm._v("时，请使用"), _c('code', [_vm._v("Vue.use(Notice)")]), _vm._v(" 挂载，再进行使用。")])]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+  return _c('div', [_c('h1', [_vm._v("Notice 通知提醒")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('xcui-demo', [_c('div', {
     slot: "source"
   }, [_c('x-button', {
     on: {
@@ -107,7 +103,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("基本使用，默认在4.5s后关闭。如果"), _c('code', [_vm._v("desc")]), _vm._v("选项未填，则仅展示标题。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -357,7 +353,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过使用 "), _c('code', [_vm._v(".info()")]), _vm._v(", "), _c('code', [_vm._v(".success()")]), _vm._v(", "), _c('code', [_vm._v(".warning()")]), _vm._v(", "), _c('code', [_vm._v(".error()")]), _vm._v(" 展示不同类型的通知消息")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -764,7 +760,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("设置"), _c('code', [_vm._v("duration")]), _vm._v("选项为0时，不会自动关闭。"), _c('code', [_vm._v("duration")]), _vm._v("的单位为毫秒。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -910,9 +906,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("</")]), _vm._v("script")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("API")]), _vm._v(" "), _c('p', [_vm._v("通过以下方法来使用：")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('h3', [_vm._v("Config options")]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('p', [_vm._v("另外提供了全局配置、全局关闭某个通知和全局销毁的方法：")]), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4)], 1)
+  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("API")]), _vm._v(" "), _c('p', [_vm._v("通过以下方法来使用：")]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('h3', [_vm._v("Config options")]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('p', [_vm._v("另外提供了全局配置、全局关闭某个通知和全局销毁的方法：")]), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', [_vm._v("相对于"), _c('code', [_vm._v("Message")]), _vm._v(", "), _c('code', [_vm._v("Notice")]), _vm._v("通知提醒的方式更加醒目，常用于系统推送、主动通知等。")])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('blockquote', [_c('p', [_vm._v("XCUI为"), _c('code', [_vm._v("Vue.prototype")]), _vm._v("添加了全局方法"), _c('code', [_vm._v("$Notice")]), _vm._v(", 如果您完整引入了XCUI， 可以直接使用如"), _c('code', [_vm._v("this.$Notice.info('some message')")]), _vm._v("的方式进行通知提示操作。"), _c('br'), _vm._v("\n当然，您也可以使用"), _c('code', [_vm._v("import Notice from 'xcui/lib/notice'")]), _vm._v(" 的单组件方式调用。"), _c('br'), _vm._v("\nNotice在XCUI中被注册为一个"), _c('a', {
+    attrs: {
+      "href": "https://vuejs.org/v2/guide/plugins.html"
+    }
+  }, [_vm._v("Vue 插件")]), _vm._v(", 在"), _c('strong', [_vm._v("单文件引入")]), _vm._v("时，请使用"), _c('code', [_vm._v("Vue.use(Notice)")]), _vm._v(" 挂载，再进行使用。")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('pre', [_c('span', {
     staticClass: "token comment",

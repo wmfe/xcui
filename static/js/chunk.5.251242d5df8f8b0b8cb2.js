@@ -111,7 +111,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过在"), _c('code', [_vm._v("x-input-number")]), _vm._v("元素中设置"), _c('code', [_vm._v("v-model")]), _vm._v("属性绑定变量即可。绑定的变量值即为默认值。通过"), _c('code', [_vm._v("@change")]), _vm._v("事件可以监听值的变化。通过键盘的"), _c('code', [_vm._v("上下箭头键")]), _vm._v("也可改变输入框的值。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -346,7 +346,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("设置"), _c('code', [_vm._v("disabled")]), _vm._v("属性可以将计数器设置为禁用。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -495,7 +495,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("通过设置"), _c('code', [_vm._v("step")]), _vm._v("属性可以定义递增/递减的步数。"), _c('code', [_vm._v("step")]), _vm._v("可以设置为整数或小数。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -643,7 +643,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("额外提供了"), _c('code', [_vm._v("large")]), _vm._v(", "), _c('code', [_vm._v("small")]), _vm._v(" 两种尺寸的输入框，通过设置"), _c('code', [_vm._v("size")]), _vm._v("属性即可。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"

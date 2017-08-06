@@ -50,11 +50,7 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("PageLoading 页面加载进度条")]), _vm._v(" "), _c('p', [_vm._v("路由页面切换、页面加载资源时提供顶部加载进度条。")]), _vm._v(" "), _c('blockquote', [_c('p', [_vm._v("XCUI为"), _c('code', [_vm._v("Vue.prototype")]), _vm._v("添加了全局方法"), _c('code', [_vm._v("$PageLoading")]), _vm._v(", 如果您完整引入了XCUI， 可以直接使用如"), _c('code', [_vm._v("this.$PageLoading.start()")]), _vm._v("的方式进行页面加载操作。"), _c('br'), _vm._v("\n当然，您也可以使用"), _c('code', [_vm._v("import PageLoading from 'xcui/lib/pageloading'")]), _vm._v(" 的单组件方式调用。"), _c('br'), _vm._v("\nPageloading在XCUI中被注册为一个"), _c('a', {
-    attrs: {
-      "href": "https://vuejs.org/v2/guide/plugins.html"
-    }
-  }, [_vm._v("Vue 插件")]), _vm._v(", 在"), _c('strong', [_vm._v("单文件引入")]), _vm._v("时，请使用"), _c('code', [_vm._v("Vue.use(PageLoading)")]), _vm._v(" 挂载，再进行使用。")])]), _vm._v(" "), _c('h2', [_vm._v("DEMO")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+  return _c('div', [_c('h1', [_vm._v("PageLoading 页面加载进度条")]), _vm._v(" "), _c('p', [_vm._v("路由页面切换、页面加载资源时提供顶部加载进度条。")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('h2', [_vm._v("DEMO")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
     slot: "source"
   }, [_c('x-button', {
     attrs: {
@@ -83,7 +79,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "info"
   }, [_c('p', [_vm._v("基本使用，通过调用"), _c('code', [_vm._v(".start()")]), _vm._v("、"), _c('code', [_vm._v(".done()")]), _vm._v("、"), _c('code', [_vm._v(".error()")]), _vm._v(" 方法，实现开始，完成，错误三种操作。")])]), _vm._v(" "), _c('div', {
     slot: "highlight"
-  }, [_c('pre', [_vm._v("\n"), _c('span', {
+  }, [_c('pre', [_c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -207,8 +203,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("</")]), _vm._v("template")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("API")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('h2', [_vm._v("Config Options")]), _vm._v(" "), _vm._m(1)], 1)
+  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("API")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('h2', [_vm._v("Config Options")]), _vm._v(" "), _vm._m(2)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('blockquote', [_c('p', [_vm._v("XCUI为"), _c('code', [_vm._v("Vue.prototype")]), _vm._v("添加了全局方法"), _c('code', [_vm._v("$PageLoading")]), _vm._v(", 如果您完整引入了XCUI， 可以直接使用如"), _c('code', [_vm._v("this.$PageLoading.start()")]), _vm._v("的方式进行页面加载操作。"), _c('br'), _vm._v("\n当然，您也可以使用"), _c('code', [_vm._v("import PageLoading from 'xcui/lib/pageloading'")]), _vm._v(" 的单组件方式调用。"), _c('br'), _vm._v("\nPageloading在XCUI中被注册为一个"), _c('a', {
+    attrs: {
+      "href": "https://vuejs.org/v2/guide/plugins.html"
+    }
+  }, [_vm._v("Vue 插件")]), _vm._v(", 在"), _c('strong', [_vm._v("单文件引入")]), _vm._v("时，请使用"), _c('code', [_vm._v("Vue.use(PageLoading)")]), _vm._v(" 挂载，再进行使用。")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('pre', [_c('span', {
     staticClass: "token comment",
     attrs: {
