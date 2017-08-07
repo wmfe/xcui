@@ -42,7 +42,7 @@ import TableColumn from './table-column';
 import Steps, { StepsItem } from './steps';
 import Collapse from './collapse';
 import CollapseItem from './collapse-item';
-import Upload from './Upload';
+import Upload from './upload';
 
 const install = (Vue) => {
     if (install.installed) {
