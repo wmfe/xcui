@@ -33,15 +33,15 @@ module.exports = merge(baseWebpackConfig, {
             inject: true
         }),
         new FriendlyErrorsPlugin(),
-        // open for better debug
-        function() {
-            this.plugin("done", function(stats) {
-                if (stats.compilation.errors && stats.compilation.errors.length) {
-                    console.log(stats.compilation.errors);
-                    process.exit(1);
-                }
-                // ...
-            });
-        }
+        // // open for better debug
+        // function() {
+        //     this.plugin("done", function(stats) {
+        //         if (stats.compilation.errors && stats.compilation.errors.length) {
+        //             console.log(stats.compilation.errors);
+        //             process.exit(1);
+        //         }
+        //         // ...
+        //     });
+        // }
     ]
 })

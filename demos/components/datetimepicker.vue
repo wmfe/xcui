@@ -162,6 +162,44 @@
 :::
 
 
+## 日期范围：限定最多可选的日期范围（如最多只能选一个月）
+
+
+::: demo 通过设置`pickerOptions`的`dateLimit`选项来控制范围。`dateLimit`为`object`格式，可支持的选项有`year`, `month`, `day`, `hour`, `minute`, `second`。如同时设置2种以上选项时，日期范围会被累加，如1年2个月。当用户的选择超过限定范围时，会自动选择最大范围（以开始时间计算）。配合日期限制有一个对应的钩子事件`@over-limit`, 可用于错误提示。
+
+```html
+<tpl>
+    <div style="width: 350px">
+        <x-date-picker type="datetimerange" v-model="model5" placeholder="选择日期范围" :pickerOptions="pickerOptions3" @over-limit="handleOverLimit">
+        </x-date-picker>
+    </div>
+</tpl>
+
+<script>
+    export default {
+       data() {
+           return {
+               model5: '',
+               pickerOptions3: {
+                  dateLimit: {
+                      month: 1
+                  }
+               }
+           }
+       },
+       methods: {
+           handleOverLimit(startDate, endDate, limitEndDate) {
+                this.$Message.warning('选择时间超过限定最大时间（最大可选1个月）');
+           }
+       }
+    }
+</script>
+
+```
+
+:::
+
+
 ## DateTimePicker Props
 
 | 名字 | 类型 | 默认 | 描述  | 是否必选 | 可选值 |
@@ -187,6 +225,7 @@
 |shortcuts|object[]|设置快捷选项，用法参考demo或下表|无||
 |disabledDate|Function|设置禁用日期，参数为当前日期，要求返回Boolean|||
 |firstDayOfWeek|Number|周起始日|7|1到7|
+|dateLimit|object|最大可选范围|无|{year:number, month: number, day: number, hour:number, minute:number, second: number}|
 
 ## Shortcuts
 
@@ -199,6 +238,7 @@
 |事件名|说明|返回值|设置属性|
 |---|---|---|---|
 |change|文本框值改变时触发|格式化后的值|`@change`|
+|over-limit|设置了`pickeroption`的`dateLimit`选项后，选择范围超过限定范围时触发|startDate/\* 用户选择的开始时间 \*/, endDate/\* 用户选择的结束时间 \*/, limitEndDate /\* 计算出的最大结束时间 \*/|`@over-limit`|
 
 </template>
 
@@ -232,6 +272,7 @@
                 },
                 model3: [new Date(2016, 11, 12, 10, 10), new Date(2016, 11, 13, 0, 45)],
                 model4: '',
+                model5: '',
                 pickerOptions2: {
                     shortcuts: [{
                         text: '最近一周',
@@ -258,8 +299,18 @@
                             picker.$emit('pick', [start, end]);
                         }
                     }]
+                },
+                pickerOptions3: {
+                   dateLimit: {
+                       month: 1
+                   }
                 }
             };
+        },
+        methods: {
+            handleOverLimit(startDate, endDate, limitEndDate) {
+                 this.$Message.warning('选择时间超过限定最大时间（最大可选1个月）');
+            }
         }
     };
 </script>
