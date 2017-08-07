@@ -7,7 +7,7 @@
 
 ## 上传列表
 
-::: demo  基础上传列表，提供trigger（选择文件按钮）/tip(提示文案) 具名 slot，不指定trigger则为默认传入的slot。
+::: demo  基础上传列表，通过具名slot传入提示文案。
 
 ```html
 
@@ -15,9 +15,9 @@
     <x-upload
         class="upload-demo-list"
         action="https://jsonplaceholder.typicode.com/posts/"
-        :fileList="list1">
+        :file-list="list1">
         <x-button type="primary">点击上传</x-button>
-        <p slot="tip" class="x-upload-tip">请上传压缩文件，支持rar/zip格式，单个文件不超过1M。</p>
+        <p slot="tip" class="x-upload-tip">请上传文件。</p>
     </x-upload>
 </tpl>
 
@@ -27,10 +27,10 @@
             return {
                 list1: [{
                     name: 'xcui-logo.png',
-                    url: 'http://img.waimai.baidu.com/pb/b6d6751cd442333e728785b6e7a2375938'
+                    url: 'https://img.waimai.baidu.com/pb/b6d6751cd442333e728785b6e7a2375938'
                 }, {
                     name: '497236c9d6616b4182ae6c4ef06c8710f0.png',
-                    url: 'http://img.waimai.baidu.com/pb/497236c9d6616b4182ae6c4ef06c8710f0'
+                    url: 'https://img.waimai.baidu.com/pb/497236c9d6616b4182ae6c4ef06c8710f0'
                 }]
             };
         }
@@ -48,7 +48,7 @@
 
 ## 图片列表
 
-::: demo 通过listType设置list样式，通过onPreview（点击已上传的文件链接时的钩子），可以自定义预览交互。
+::: demo 通过listType设置list样式，通过on-preview（点击已上传的文件链接时的钩子），可以自定义预览交互。
 
 ```html
 
@@ -56,9 +56,9 @@
     <x-upload
         class="upload-demo"
         action="https://jsonplaceholder.typicode.com/posts/"
-        :fileList="list2"
-        listType="picture"
-        :onPreview="handlePreview"
+        :file-list="list2"
+        :list-type="'picture'"
+        :on-preview="handlePreview"
     >
         <i class="x-icon x-icon-plus-round"></i>
     </x-upload>
@@ -79,7 +79,7 @@
             return {
                 list2: [{
                     name: 'xcui-logo.png',
-                    url: 'http://img.waimai.baidu.com/pb/b6d6751cd442333e728785b6e7a2375938'
+                    url: 'https://img.waimai.baidu.com/pb/b6d6751cd442333e728785b6e7a2375938'
                 }],
                 preview: false,
                 previewUrl: ''
@@ -123,7 +123,7 @@
 
 ## 头像框上传
 
-::: demo 可以通过设置accept过滤可选文件类型，showFileList设置为false，可完全自定义文件文列表交互。
+::: demo 可以通过设置accept过滤可选文件类型，show-file-list设置为false，可完全自定义文件文列表交互。
 
 ```html
 
@@ -131,11 +131,11 @@
     <x-upload
         class="upload-demo-list"
         action="https://jsonplaceholder.typicode.com/posts/"
-        listType="picture"
+        :list-type="'picture'"
         :accept="accept"
-        :showFileList="false"
-        :fileList="list2"
-        :onSuccess="handleSuccess"
+        :show-file-list="false"
+        :file-list="list2"
+        :on-success="handleSuccess"
     >
         <img :src="url">
         <i v-show="!url" class="x-icon x-icon-image upload-empty-icon"></i>
@@ -198,7 +198,7 @@
 
 ## 手动上传
 
-::: demo 选择多个文件，手动触发上传，通过beforeUpload验证文件是否合乎要求。
+::: demo 选择多个文件，手动触发上传，通过before-upload验证文件是否合乎要求,通过具名slot指定触发上传动作的按钮。
 
 ```html
 
@@ -207,9 +207,9 @@
         class="upload-demo-list"
         action="https://jsonplaceholder.typicode.com/posts/"
         ref="uploader"
-        :autoUpload="false"
-        :fileList="list3"
-        :beforeUpload="beforeAvatarUpload"
+        :auto-upload="false"
+        :file-list="list3"
+        :before-upload="beforeUpload"
     >
         <x-button slot="trigger" type="default">选取文件</x-button>
         <x-button type="primary" @click="handleSubmit">点击上传</x-button>
@@ -228,15 +228,15 @@
             handleSubmit() {
                 this.$refs.uploader.submit();
             },
-            beforeAvatarUpload(file) {
+            beforeUpload(file) {
                 const isType = ['image/jpeg','image/png'].indexOf(file.type) !== -1;
                 const isLt2M = file.size / 1024 / 1024 < 2;
 
                 if (!isType) {
-                    this.$Dialog.alert('上传头像图片只能是 JPG 或 PNG 格式!');
+                    this.$Dialog.alert('上传图片只能是 JPG 或 PNG 格式!');
                 }
                 if (!isLt2M) {
-                    this.$Dialog.alert('上传头像图片大小不能超过 2MB!');
+                    this.$Dialog.alert('上传图片大小不能超过 2MB!');
                 }
                 return isType && isLt2M;
             },
@@ -259,23 +259,29 @@
 |accept|String|无|接受上传的文件类型，用于在选取文件时过滤文件类型，建议写具体类型例如'image/gif,image/jpeg,image/jpg',以防'image/*'通配符调起文件框慢的问题|可选|无|
 |data|Object|无|随文件一起上传的参数|可选|无|
 |multiple|Boolean|false|是否支持多选文件|可选|无|
-|showFileList|Boolean|true|是否显示上传文件列表|可选|无|
-|listType|String|text|显示上传文件列表的类型|可选|text/ picture|
-|fileList|Array|[]|上传的文件列表|可选|无|
-|autoUpload|Boolean|true|选择文件后是否自动开始上传|可选|无|
-|beforeUpload|Function|无|上传文件之前的钩子，参数为上传的文件，若返回 false 或者返回 Promise 且被 reject，则停止上传。|可选|file|
-|onPreview|Function|无|点击已上传的文件链接时的钩子, 可以通过 file.response 拿到服务端返回数据|可选|file|
-|onChange|Function|无|文件列表发生变化时的钩子, 添加文件、上传成功和上传失败时都会被调用|可选|file, fileList|
-|onProgress|Function|无|文件上传过程中的钩子, 事件对象会返回上传进度|可选|event, file, fileList|
-|onSuccess|Function|无|文件上传成功时的钩子, 返回服务端数据|可选|response, file, fileList|
-|onError|Function|无|文件上传失败时的钩子, 返回错误|可选|err, file, fileList|
-|onRemove|Function|无|文件列表移除文件时的钩子|可选|file, fileList|
+|show-file-list|Boolean|true|是否显示上传文件列表|可选|无|
+|list-type|String|text|显示上传文件列表的类型|可选|text/ picture|
+|file-list|Array|[]|上传的文件列表|可选|无|
+|auto-upload|Boolean|true|选择文件后是否自动开始上传|可选|无|
+|before-upload|Function|无|上传文件之前的钩子，参数为上传的文件，若返回 false 或者返回 Promise 且被 reject，则停止上传。|可选|file|
+|on-preview|Function|无|点击已上传的文件链接时的钩子, 可以通过 file.response 拿到服务端返回数据|可选|file|
+|on-change|Function|无|文件列表发生变化时的钩子, 添加文件、上传成功和上传失败时都会被调用|可选|file, fileList|
+|on-progress|Function|无|文件上传过程中的钩子, 事件对象会返回上传进度|可选|event, file, fileList|
+|on-success|Function|无|文件上传成功时的钩子, 返回服务端数据|可选|response, file, fileList|
+|on-error|Function|无|文件上传失败时的钩子, 返回错误|可选|err, file, fileList|
+|on-remove|Function|无|文件列表移除文件时的钩子|可选|file, fileList|
 
 ##  Methods
 | 名字 |描述 | 参数 |调用方式|
 |-----|-----|----|----|
 |abort|取消文件上传请求|（ file: fileList 中的 file 对象 ）|通过ref调用|
 |submit|开始上传文件（用于手动上传）|无|通过ref调用|
+
+##  Slot
+| 名字 |描述|
+|-----|-----|
+|tip|上传文案描述|
+|trigger|上传动作触发按钮指定，若不设置则默认slot传入部分均可触发上传|
 
 </template>
 <script>
@@ -284,14 +290,14 @@
             return {
                 list1: [{
                     name: 'xcui-logo.png',
-                    url: 'http://img.waimai.baidu.com/pb/b6d6751cd442333e728785b6e7a2375938'
+                    url: 'https://img.waimai.baidu.com/pb/b6d6751cd442333e728785b6e7a2375938'
                 }, {
                     name: '497236c9d6616b4182ae6c4ef06c8710f0.png',
-                    url: 'http://img.waimai.baidu.com/pb/497236c9d6616b4182ae6c4ef06c8710f0'
+                    url: 'https://img.waimai.baidu.com/pb/497236c9d6616b4182ae6c4ef06c8710f0'
                 }],
                 list2: [{
                     name: 'xcui-logo.png',
-                    url: 'http://img.waimai.baidu.com/pb/b6d6751cd442333e728785b6e7a2375938'
+                    url: 'https://img.waimai.baidu.com/pb/b6d6751cd442333e728785b6e7a2375938'
                 }],
                 list3: [],
                 url: '',
@@ -301,7 +307,7 @@
             };
         },
         methods: {
-            beforeAvatarUpload(file) {
+            beforeUpload(file) {
                 const isType = ['image/jpeg','image/png'].indexOf(file.type) !== -1;
                 const isLt2M = file.size / 1024 / 1024 < 2;
 

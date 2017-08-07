@@ -1,6 +1,5 @@
 <script>
     import UploadList from './upload-list';
-    import IframeUpload from './iframe-upload';
     import FormDataUpload from './formData-upload';
 
     const noop = function () {
@@ -12,7 +11,6 @@
 
         components: {
             UploadList,
-            IframeUpload,
             FormDataUpload
         },
         props: {
