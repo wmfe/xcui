@@ -35,7 +35,7 @@
 
 <script>
 import XButton from '../../button';
-import getScrollBarSize from '../../../utils/getScrollBarSize';
+import getScrollBarSize from 'xcui/src/utils/getScrollBarSize';
 
 export default {
     name: 'XModal',

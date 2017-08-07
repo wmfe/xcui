@@ -129,10 +129,10 @@
 <script>
 import { formatDate, parseDate } from '../util';
 import XInput from '../../../input';
-import TimePicker from './time';
-import YearTable from '../basic/year-table';
-import MonthTable from '../basic/month-table';
-import DateTable from '../basic/date-table';
+import TimePicker from './time.vue';
+import YearTable from '../basic/year-table.vue';
+import MonthTable from '../basic/month-table.vue';
+import DateTable from '../basic/date-table.vue';
 import Config from '../config';
 
 export default {

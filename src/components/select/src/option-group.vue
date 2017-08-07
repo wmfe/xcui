@@ -12,8 +12,8 @@
 </template>
 
 <script>
-    import Emitter from '../../../utils/mixins/emitter';
-    
+    import Emitter from 'xcui/src/utils/mixins/emitter';
+
     export default {
         mixins: [Emitter],
         name: 'xOptionGroup',

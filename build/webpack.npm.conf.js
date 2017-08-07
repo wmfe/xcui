@@ -1,58 +1,34 @@
-/**
- * @file webpack.npm.conf.js
- */
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var baseConfig = require('./webpack.npm.base.conf');
-var themeUrl = require('../package.json').theme;
-var theme  = require(path.join(__dirname, '../',themeUrl));
-var merge = require('webpack-merge');
+var path = require('path')
+var utils = require('./utils')
+var webpack = require('webpack')
+var config = require('../config')
+var merge = require('webpack-merge')
+var baseWebpackConfig = require('./webpack.npm.base.conf')
 var banner = require('./banner');
 
-var SOURCE_MAP = false;
+var env = config.build.env
 
-function generateExtractLoaders(loaders) {
-    return loaders.map(function (loader) {
-        if (loader === 'less') {
-            return loader + '-loader?{"modifyVars":'+ JSON.stringify(theme)+'}'
-        }
-        return loader + '-loader' + (SOURCE_MAP ? '?sourceMap' : '');
-    }).join('!');
-}
-
-module.exports = merge(baseConfig, {
-    entry: {
-        'xcui': './src/components/index.js'
+var webpackConfig = merge(baseWebpackConfig, {
+    module: {
+        rules: utils.styleLoaders({
+            sourceMap: config.build.productionSourceMap,
+            extract: true
+        })
     },
-    output: {
-        filename: '[name].js'
-    },
-    chunkFilename: '[id].[chunkhash].js',
-    devtool: SOURCE_MAP ? 'source-map' : false,
-    vue: {
-        loaders: {
-            js: 'babel',
-            css: ExtractTextPlugin.extract('vue-style-loader', generateExtractLoaders(['css'])),
-            less: ExtractTextPlugin.extract('vue-style-loader', generateExtractLoaders(['css', 'less']))
-        }
-    },
-    plugins: (baseConfig.plugins || []).concat([
+    devtool: config.build.productionSourceMap ? '#source-map' : false,
+    plugins: [
+        // http://vuejs.github.io/vue-loader/en/workflow/production.html
         new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
+            'process.env': env
         }),
-        new webpack.BannerPlugin(banner),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false
-        //     }
-        // }),
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new ExtractTextPlugin('xcui.css')
-    ])
-});
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
+        }),
+        // webpack 3 scope hoisting
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        new webpack.BannerPlugin(banner)
+    ]
+})
 
-
-
+module.exports = webpackConfig

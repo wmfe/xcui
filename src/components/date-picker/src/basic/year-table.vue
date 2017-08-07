@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { hasClass } from '../../../../utils/dom';
+import { hasClass } from 'xcui/src/utils/dom';
 
 export default {
     props: {

@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { hasClass } from '../../../../utils/dom';
+import { hasClass } from 'xcui/src/utils/dom';
 import Config from '../config';
 
 export default {

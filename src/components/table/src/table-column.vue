@@ -4,7 +4,6 @@
 const SINGLE_LINE_CLASS_NAME = 'x-table-td-single-line';
 export default {
     name: 'XTableColumn',
-
     props: {
         title: {
             type: String
@@ -17,6 +16,12 @@ export default {
         },
         width: {
             type: String
+        },
+        fixed: {
+            type: String,
+            default() {
+                return '';
+            }
         },
         className: {
             type: String,
@@ -46,16 +51,14 @@ export default {
         this.table = origin;
         let isSubColumn = parent !== origin;
         const slots = this.$scopedSlots;
-
         if (this.type) {
             this.table.rowKey = this.prop;
         }
-
         let tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
-
         let column = {
             title: this.title,
             type: this.type || 'normal',
+            fixed: this.fixed || '',
             prop: this.prop,
             width: this.width,
             className: tdClassName,
@@ -70,18 +73,23 @@ export default {
                 : ({dataItem, columnItem}) => {
                     // 直接返回内容
                     return dataItem[columnItem.prop];
+                },
+            headerRender: slots['column-header-slot']
+                ? args => {
+                    return slots['column-header-slot'](args);
+                }
+                : () => {
+                    return this.title;
                 }
         };
         this.columnConfig = column;
         let columnIndex;
-
         if (!isSubColumn) {
             columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
         }
         else {
             columnIndex = [].indexOf.call(parent.$el.children, this.$el);
         }
-
         this.insertColumn(this.table, column, columnIndex, isSubColumn ? parent.columnConfig : null);
     },
     watch: {
@@ -96,6 +104,9 @@ export default {
         },
         width(val) {
             this.updateColumn('width');
+        },
+        fixed(val) {
+            this.updateColumn('fixed');
         },
         className(val) {
             let tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
