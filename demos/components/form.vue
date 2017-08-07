@@ -6,7 +6,7 @@
 
 表单可以进行水平、垂直和行内排列。
 
-## 表单域 
+## 表单域
 
 表单里面的每一项被称为表单域，包括复选框、单选框等元素。
 
@@ -149,7 +149,7 @@
                     <x-input placeholder="输入名称" v-model="form3.name"></x-input>
                 </x-form-item>
             </x-col>
-            
+
         </x-row>
         <x-row>
             <x-col :span="12">
@@ -169,7 +169,7 @@
                     </x-checkbox-group>
                 </x-form-item>
             </x-col>
-            
+
         </x-row>
         <x-row>
             <x-col :span="12">
@@ -279,7 +279,7 @@
 
 <tpl>
     <x-form ref="form5" :model="form5" :rules="rules5" label-width="80px" style="width:440px">
-        <x-form-item label="商户名称" prop="name">
+        <x-form-item label="商户名称" prop="name" :required="aaa">
             <x-input v-model="form5.name"></x-input>
         </x-form-item>
         <x-form-item label="所在区域" prop="region">
@@ -311,14 +311,14 @@
                 <x-checkbox value="供应商">供应商</x-checkbox>
             </x-checkbox-group>
         </x-form-item>
-        
+
         <x-form-item label="特殊资源" prop="resource">
             <x-radio-group v-model="form5.resource">
                 <x-radio label="1">自有物流</x-radio>
                 <x-radio label="2">自营</x-radio>
             </x-radio-group>
         </x-form-item>
-        
+
         <x-form-item label="商户描述" prop="desc">
             <x-textarea placeholder="请输入内容" v-model="form5.desc"  :autosize="{minRows: 3}"></x-textarea>
         </x-form-item>
@@ -328,6 +328,7 @@
             <x-button @click="resetForm('form5')">重置</x-button>
         </x-form-item>
     </x-form>
+    <button @click="aaa = !aaa">switch</button>
 </tpl>
 
 <script>
@@ -456,7 +457,7 @@
 
 <tpl>
     <x-form ref="form7" :model="form7" label-width="80px" style="width:440px">
-        <x-form-item 
+        <x-form-item
             v-for="(name, index) in form7.names"
             :label="'乘客' + (index + 1)"
             :key="name.key"
@@ -535,12 +536,12 @@
 
 ## Form-Item Slot
 
-| 名字 | 描述 | 
+| 名字 | 描述 |
 |---|---|
 | - | Form-Item内容|
 |label|标签文本内容|
 
-    
+
 </template>
 
 <script>
@@ -599,7 +600,7 @@
                 },
                 rules5: {
                     name: [
-                        {required: true, message: '请输入商户名称', trigger: 'blur'},
+                        { message: '请输入商户名称', trigger: 'blur'},
                         {min: 3, max: 5, message: '长度在3到5个字符', trigger: 'blur'}
                     ],
                     region: [
@@ -642,7 +643,8 @@
                     password: [
                         {required: true, message: '请输入密码', trigger: 'blur'}
                     ]
-                }
+                },
+                aaa: true
             };
         },
         methods: {
