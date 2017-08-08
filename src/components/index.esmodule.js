@@ -102,6 +102,7 @@ const install = (Vue) => {
 };
 
 const xcui = {
+    Alert,
     DatePicker,
     TimePicker,
     TimeSelect,
