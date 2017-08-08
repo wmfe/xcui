@@ -946,7 +946,6 @@
         <x-table
             :data="sourceData"
             :initial-selected-value-list="selectedValueList"
-            @selection-change="onUpdateSelectedValueList"
             bordered
         >
             <x-table-column
@@ -998,7 +997,6 @@
             >
             </x-table-column>
         </x-table>
-        <p>选中项： {{selectedValueList}}</p>
     </div>
 </tpl>
 <script>
@@ -1036,7 +1034,6 @@
                     }
                 ],
                 selectedValueList: ['小明'],
-                selectedValue: '小明'
             };
         },
         methods: {
@@ -1045,14 +1042,6 @@
                     return 'feStyle';
                 }
                 return '';
-            },
-            onUpdateSelectedValueList(valueList, dataList) {
-                this.selectedValueList = valueList;
-                console.log(dataList);
-            },
-            onUpdateSelectedValue(value, data) {
-                this.selectedValue = value;
-                console.log(data);
             }
         }
     };
@@ -1224,11 +1213,6 @@
             };
         },
         methods: {
-            //改变表头元素绑定的数据
-            changeColumn() {
-                let order = this.order + 1;
-                this.columsMap[order] ? this.order++ : this.order = 0;
-            },
             tableRowClassName(row, index) {
                 if (index === 0) {
                     return 'feStyle';
