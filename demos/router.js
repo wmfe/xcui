@@ -41,6 +41,7 @@ const Steps = () => import('./components/steps');
 const Collapse = () => import('./components/collapse');
 const Upload = () => import('./components/upload');
 const Dropdown = () => import('./components/dropdown');
+const Alert = () => import('./components/alert');
 
 const router = new VueRouter({
     routes: [{
@@ -152,6 +153,9 @@ const router = new VueRouter({
             }, {
                 path: '/component/dropdown',
                 component: Dropdown
+            }, {
+                path: '/component/alert',
+                component: Alert
             }
         ]
     }]
