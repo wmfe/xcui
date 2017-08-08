@@ -1035,14 +1035,6 @@
                 ],
                 selectedValueList: ['小明'],
             };
-        },
-        methods: {
-            tableRowClassName(row, index) {
-                if (index === 0) {
-                    return 'feStyle';
-                }
-                return '';
-            }
         }
     };
 </script>
