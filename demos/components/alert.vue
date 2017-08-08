@@ -47,6 +47,7 @@ export default {
 </script>
 
 ```
+:::
 
 ## 带图标的警告提示
 
