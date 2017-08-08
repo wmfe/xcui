@@ -142,7 +142,9 @@ const xcui = {
     Collapse,
     CollapseItem,
     Upload,
-    DropDown
+    DropDown,
+    DropDownMenu,
+    DropDownItem
 };
 
 export default xcui;

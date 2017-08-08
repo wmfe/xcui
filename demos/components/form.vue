@@ -279,7 +279,7 @@
 
 <tpl>
     <x-form ref="form5" :model="form5" :rules="rules5" label-width="80px" style="width:440px">
-        <x-form-item label="商户名称" prop="name" :required="aaa">
+        <x-form-item label="商户名称" prop="name">
             <x-input v-model="form5.name"></x-input>
         </x-form-item>
         <x-form-item label="所在区域" prop="region">
@@ -328,7 +328,6 @@
             <x-button @click="resetForm('form5')">重置</x-button>
         </x-form-item>
     </x-form>
-    <button @click="aaa = !aaa">switch</button>
 </tpl>
 
 <script>
@@ -600,7 +599,7 @@
                 },
                 rules5: {
                     name: [
-                        { message: '请输入商户名称', trigger: 'blur'},
+                        {required: true, message: '请输入商户名称', trigger: 'blur'},
                         {min: 3, max: 5, message: '长度在3到5个字符', trigger: 'blur'}
                     ],
                     region: [
@@ -643,8 +642,7 @@
                     password: [
                         {required: true, message: '请输入密码', trigger: 'blur'}
                     ]
-                },
-                aaa: true
+                }
             };
         },
         methods: {
