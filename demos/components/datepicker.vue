@@ -99,7 +99,7 @@
             </x-date-picker>
         </x-col>
         <x-col span="6" offset="3">
-            <p>选择月</p>   
+            <p>选择月</p>
             <x-date-picker v-model="model4" placeholder="请选择月" type="month">
             </x-date-picker>
         </x-col>
@@ -144,6 +144,45 @@
 
 :::
 
+
+## 日期范围：限定最多可选的日期范围（如最多只能选一个月）
+
+
+::: demo 通过设置`pickerOptions`的`dateLimit`选项来控制范围。`dateLimit`为`object`格式，可支持的选项有`year`, `month`, `day`, `hour`, `minute`, `second`。如同时设置2种以上选项时，日期范围会被累加，如1年2个月。当用户的选择超过限定范围时，会自动选择最大范围（以开始时间计算）。配合日期限制有一个对应的钩子事件`@over-limit`,可用于错误提示。
+
+```html
+<tpl>
+    <div style="width: 240px">
+        <x-date-picker type="daterange" v-model="model7" placeholder="选择日期范围" :pickerOptions="pickerOption3" @over-limit="handleOverLimit">
+        </x-date-picker>
+    </div>
+</tpl>
+
+<script>
+    export default {
+       data() {
+           return {
+               model7: '',
+               pickerOption3: {
+                  dateLimit: {
+                      month: 1
+                  }
+               }
+           }
+       },
+       methods: {
+           handleOverLimit(startDate, endDate, limitEndDate) {
+                this.$Message.warning('选择时间超过限定最大时间（最大可选1个月）');
+           }
+       }
+    }
+</script>
+
+```
+
+:::
+
+
 ## 日期范围： 带快捷选项
 
 ::: demo 与单日期一样，可以使用`pickerOptions`的`shortcuts`属性增加快捷选项。
@@ -152,7 +191,7 @@
 
 <tpl>
     <div style="width: 240px">
-        <x-date-picker type="daterange" v-model="model7" placeholder="选择日期范围" :picker-options="pickerOptions3">
+        <x-date-picker type="daterange" v-model="model8" placeholder="选择日期范围" :picker-options="pickerOption4">
         </x-date-picker>
     </div>
 </tpl>
@@ -161,8 +200,8 @@
     export default {
         data() {
             return {
-                model7: '',
-                pickerOptions3: {
+                model8: '',
+                pickerOption4: {
                     shortcuts: [{
                         text: '最近一周',
                         onClick(picker) {
@@ -225,6 +264,7 @@
 |shortcuts|object[]|设置快捷选项，用法参考demo或下表|无||
 |disabledDate|Function|设置禁用日期，参数为当前日期，要求返回Boolean|||
 |firstDayOfWeek|Number|周起始日|7|1到7|
+|dateLimit|object|最大可选范围|无|{year:number, month: number, day: number, hour:number, minute:number, second: number}|
 
 ## Shortcuts
 
@@ -237,6 +277,7 @@
 |事件名|说明|返回值|设置属性|
 |---|---|---|---|
 |change|文本框值改变时触发|格式化后的值|`@change`|
+|over-limit|设置了`pickeroption`的`dateLimit`选项后，选择范围超过限定范围时触发|startDate/\* 用户选择的开始时间 \*/, endDate/\* 用户选择的结束时间 \*/, limitEndDate /\* 计算出的最大结束时间 \*/|`@over-limit`|
 
 
 
@@ -279,7 +320,13 @@ export default {
             model5: '',
             model6: '',
             model7: '',
-            pickerOptions3: {
+            model8: '',
+            pickerOption3: {
+               dateLimit: {
+                   month: 1
+               }
+            },
+            pickerOption4: {
                 shortcuts: [{
                     text: '最近一周',
                     onClick(picker) {
@@ -307,6 +354,11 @@ export default {
                 }]
             }
         };
+    },
+    methods: {
+        handleOverLimit(startDate, endDate, limitEndDate) {
+             this.$Message.warning('选择时间超过限定最大时间（最大可选1个月）');
+        }
     }
 };
 

@@ -65,6 +65,9 @@
 
                     <li class="sidebar-title">Notice 提示</li>
                     <li class="sidebar-item">
+                         <router-link to="/component/alert">Alert 警告提示</router-link>
+                    </li>
+                    <li class="sidebar-item">
                          <router-link to="/component/message">Message 信息提示</router-link>
                     </li>
                     <li class="sidebar-item">
@@ -104,6 +107,9 @@
                         <router-link to="/component/pagination">Pagination 分页</router-link>
                     </li>
                     <li class="sidebar-item">
+                        <router-link to="/component/dropdown">Dropdown 下拉菜单</router-link>
+                    </li>
+                    <li class="sidebar-item">
                         <router-link to="/component/steps">Steps 步骤条</router-link>
                     </li>
                     <li class="sidebar-title">Others 其他</li>
@@ -115,6 +121,9 @@
                     </li>
                     <li class="sidebar-item">
                         <router-link to="/component/collapse">Collapse 折叠面板</router-link>
+                    </li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/upload">Upload 上传</router-link>
                     </li>
                 </ul>
             </x-col>

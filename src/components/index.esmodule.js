@@ -1,11 +1,12 @@
 /**
  * @file index.js
  */
+import Alert from './alert';
 import DatePicker from './date-picker';
 import TimePicker from './time-picker';
 import TimeSelect from './time-select';
 import Input from './input';
-import InputNumber from './inputNumber';
+import InputNumber from './input-number';
 import Textarea from './textarea';
 import Checkbox from './checkbox';
 import CheckboxGroup from './checkbox-group';
@@ -42,11 +43,16 @@ import TableColumn from './table-column';
 import Steps, { StepsItem } from './steps';
 import Collapse from './collapse';
 import CollapseItem from './collapse-item';
+import Upload from './upload';
+import DropDown from './dropdown';
+import DropDownItem from './dropdown-item';
+import DropDownMenu from './dropdown-menu';
 
 const install = (Vue) => {
     if (install.installed) {
         return;
     }
+    Vue.component(Alert.name, Alert);
     Vue.component(DatePicker.name, DatePicker);
     Vue.component(TimePicker.name, TimePicker);
     Vue.component(TimeSelect.name, TimeSelect);
@@ -84,6 +90,10 @@ const install = (Vue) => {
     Vue.component(StepsItem.name, StepsItem);
     Vue.component(Collapse.name, Collapse);
     Vue.component(CollapseItem.name, CollapseItem);
+    Vue.component(Upload.name, Upload);
+    Vue.component(DropDown.name, DropDown);
+    Vue.component(DropDownItem.name, DropDownItem);
+    Vue.component(DropDownMenu.name, DropDownMenu);
     Vue.use(Message);
     Vue.use(Notice);
     Vue.use(Dialog);
@@ -92,6 +102,7 @@ const install = (Vue) => {
 };
 
 const xcui = {
+    Alert,
     DatePicker,
     TimePicker,
     TimeSelect,
@@ -132,7 +143,11 @@ const xcui = {
     TableColumn,
     install,
     Collapse,
-    CollapseItem
+    CollapseItem,
+    Upload,
+    DropDown,
+    DropDownMenu,
+    DropDownItem
 };
 
 export default xcui;
