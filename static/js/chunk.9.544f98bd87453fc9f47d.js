@@ -646,7 +646,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("</")]), _vm._v("script")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v(">")])]), _vm._v("\n\n")]), _vm._v(" "), _c('h2', [_vm._v("带图标的警告提示")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("带图标的警告提示")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
     slot: "source"
   }, [_c('x-alert', {
     attrs: {
@@ -858,7 +858,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("</")]), _vm._v("template")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v(">")])]), _vm._v("\n\n")])])])], 1)]), _vm._v(" "), _c('h2', [_vm._v("带有辅助性文字和图标")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
+  }, [_vm._v(">")])]), _vm._v("\n\n")])])]), _vm._v(" "), _c('h2', [_vm._v("带有辅助性文字和图标")]), _vm._v(" "), _c('xcui-demo', [_c('div', {
     slot: "source"
   }, [_c('x-alert', {
     attrs: {
