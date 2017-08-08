@@ -1,6 +1,7 @@
 /**
  * @file index.js
  */
+import Alert from './alert';
 import DatePicker from './date-picker';
 import TimePicker from './time-picker';
 import TimeSelect from './time-select';
@@ -51,6 +52,7 @@ const install = (Vue) => {
     if (install.installed) {
         return;
     }
+    Vue.component(Alert.name, Alert);
     Vue.component(DatePicker.name, DatePicker);
     Vue.component(TimePicker.name, TimePicker);
     Vue.component(TimeSelect.name, TimeSelect);

@@ -65,6 +65,9 @@
 
                     <li class="sidebar-title">Notice 提示</li>
                     <li class="sidebar-item">
+                         <router-link to="/component/alert">Alert 警告提示</router-link>
+                    </li>
+                    <li class="sidebar-item">
                          <router-link to="/component/message">Message 信息提示</router-link>
                     </li>
                     <li class="sidebar-item">
