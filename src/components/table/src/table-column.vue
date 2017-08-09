@@ -86,12 +86,14 @@ export default {
         };
         this.columnConfig = column;
         let columnIndex;
+
         if (!this.isSubColumn) {
             columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
         }
         else {
             columnIndex = [].indexOf.call(parent.$el.children, this.$el);
         }
+
         this.insertColumn(this.table, column, columnIndex, this.isSubColumn ? parent.columnConfig : null);
     },
     watch: {
@@ -149,7 +151,7 @@ export default {
         removeColumn() {
             let target = this.getTarget();
             let parent = !this.isSubColumn ? this.table.columns : target.parent.children;
-            parent.splice(target.curOrder, 1);      
+            parent.splice(target.curOrder, 1);
         },
         //获取父列及当前列位置
         getTarget(){
