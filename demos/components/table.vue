@@ -1041,12 +1041,11 @@
 ```
 :::
 
-
 ## Table Props
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|
 |data|Array|[]|表格数据|必选|
-|height|Number|-|表格的高度|可选|
+|height|Number|-|表格的最大高度|可选|
 |bordered|Boolean|false|是否带边框|可选|
 |striped|Boolean|false|是否带斑马纹|可选|
 |empty-tip|String|暂无数据|没有表格数据的提示文案|可选|
