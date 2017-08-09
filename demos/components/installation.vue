@@ -15,9 +15,9 @@ npm install xcui
 
 ```html
     <!-- 引入样式 -->
-    <link rel="stylesheet" href="https://unpkg.com/xcui/dist/xcui.css">
+    <link rel="stylesheet" href="https://unpkg.com/xcui/lib/xcui.css">
     <!-- 引入组件库 -->
-    <script type="text/javascript" src="https://unpkg.com/xcui/dist/xcui.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/xcui/lib/xcui.umd.js"></script>
 
 ```
 
