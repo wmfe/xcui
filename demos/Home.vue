@@ -129,7 +129,9 @@
             </x-col>
             <x-col :xs="16" :sm="16" :md="16" :lg="18" id="page-content-wrapper" class="x-demo">
                 <div class="x-demo-inner">
-                    <router-view></router-view>
+                    <transition name="x-page">
+                         <router-view></router-view>
+                    </transition>
                 </div>
             </x-col>
         </x-row>
