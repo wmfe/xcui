@@ -33367,7 +33367,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "x-demo-inner"
-  }, [_c('router-view')], 1)])], 1)], 1)
+  }, [_c('transition', {
+    attrs: {
+      "name": "x-page"
+    }
+  }, [_c('router-view')], 1)], 1)])], 1)], 1)
 },staticRenderFns: []}
 
 /***/ }),
@@ -33586,11 +33590,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "logo-text"
-  }, [_vm._v("XCUI")])])], 1), _vm._v(" "), _c('transition', {
-    attrs: {
-      "name": "slide-left"
-    }
-  }, [_c('router-view')], 1), _vm._v(" "), _vm._m(0)], 1)
+  }, [_vm._v("XCUI")])])], 1), _vm._v(" "), _c('router-view'), _vm._v(" "), _vm._m(0)], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('footer', [_c('div', {
     staticClass: "footer-main"
