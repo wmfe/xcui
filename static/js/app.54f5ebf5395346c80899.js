@@ -1872,7 +1872,7 @@ exports.default = {
 
                     if (_this.type === 'daterange' || _this.type === 'datetimerange') {
                         var options = _this.pickerOptions;
-                        if (options.dateLimit) {
+                        if (options && options.dateLimit) {
                             var startDate = date[0];
                             if (Object.prototype.toString.call(startDate) === '[object Date]') {
                                 var limitEndDate = new Date(startDate.getTime());
