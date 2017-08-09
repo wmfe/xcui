@@ -432,7 +432,7 @@ export default {
 
                     if (this.type === 'daterange' || this.type === 'datetimerange') {
                         const options = this.pickerOptions;
-                        if (options.dateLimit) {
+                        if (options && options.dateLimit) {
                             // handle endDate with dateLimit
                             const startDate = date[0];
                             if (Object.prototype.toString.call(startDate) === '[object Date]') {
