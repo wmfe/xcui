@@ -60,7 +60,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("=")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v("\"")]), _vm._v("https://unpkg.com/xcui/dist/xcui.css"), _c('span', {
+  }, [_vm._v("\"")]), _vm._v("https://unpkg.com/xcui/lib/xcui.css"), _c('span', {
     staticClass: "token punctuation"
   }, [_vm._v("\"")])]), _c('span', {
     staticClass: "token punctuation"
@@ -93,7 +93,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("=")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v("\"")]), _vm._v("https://unpkg.com/xcui/dist/xcui.js"), _c('span', {
+  }, [_vm._v("\"")]), _vm._v("https://unpkg.com/xcui/lib/xcui.umd.js"), _c('span', {
     staticClass: "token punctuation"
   }, [_vm._v("\"")])]), _c('span', {
     staticClass: "token punctuation"
