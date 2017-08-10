@@ -5544,7 +5544,7 @@ module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGlu
 
 module.exports = {
 	"name": "xcui",
-	"version": "2.1.2",
+	"version": "2.1.3",
 	"main": "lib/xcui.common.js",
 	"engines": {
 		"node": ">=5.10.0",
