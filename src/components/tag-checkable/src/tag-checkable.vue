@@ -12,6 +12,10 @@
         props: {
             color: String,
             checked: false,
+            disabled: {
+                type: Boolean,
+                default: false
+            },
             tagKey: String,
             name: String
         },
@@ -40,6 +44,9 @@
                 if (this.isPresetColor(this.color)) {
                     ret.push(`x-tag-${this.color}`);
                 }
+                if (this.disabled) {
+                    ret.push('x-tag-disabled');
+                }
                 return ret.join(' ');
             }
         },
@@ -48,6 +55,9 @@
                 return /^(pink|red|yellow|orange|cyan|green|blue|purple)(-inverse)?$/.test(color);
             },
             handleChange(e) {
+                if (this.disabled) {
+                    return;
+                }
                 this.internalChecked = !this.internalChecked;
                 this.$emit('change', this, this.internalChecked);
             }
