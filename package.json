@@ -94,6 +94,6 @@
         "webpack-hot-middleware": "^2.18.2",
         "webpack-merge": "^4.1.0",
         "webpack-node-externals": "^1.6.0",
-        "xcui-demo-loader": "^0.1.8"
+        "xcui-demo-loader": "^0.1.9"
     }
 }

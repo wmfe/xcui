@@ -4,7 +4,7 @@
 ## 通过npm安装
 
 ```bash
-npm install xcui
+npm install xcui --save
 ```
 
 ## CDN
