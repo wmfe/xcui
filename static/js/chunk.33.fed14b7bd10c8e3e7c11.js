@@ -403,7 +403,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "token punctuation"
   }, [_vm._v("</")]), _vm._v("html")]), _c('span', {
     staticClass: "token punctuation"
-  }, [_vm._v(">")])]), _vm._v("\n")])])
+  }, [_vm._v(">")])]), _vm._v("\n")]), _vm._v(" "), _c('h2', [_vm._v("命令行脚手架")]), _vm._v(" "), _c('p', [_vm._v("使用脚手架快速搭建工程项目。首先需要安装"), _c('code', [_vm._v("vue-cli")]), _vm._v(":")]), _vm._v(" "), _c('pre', [_vm._v("$ "), _c('span', {
+    staticClass: "token function"
+  }, [_vm._v("npm")]), _vm._v(" "), _c('span', {
+    staticClass: "token function"
+  }, [_vm._v("install")]), _vm._v(" -g vue-cli\n")]), _vm._v(" "), _c('p', [_c('strong', [_vm._v("最简单的页面")]), _vm._v(": 一个html，搭载了"), _c('code', [_vm._v("vue")]), _vm._v("和"), _c('code', [_vm._v("xcui")]), _vm._v("。")]), _vm._v(" "), _c('pre', [_vm._v("$ vue init xcui-templates/simple myproject\n")]), _vm._v(" "), _c('p', [_c('strong', [_vm._v("集成webpack和vue-loader")]), _vm._v(": 一个简单的使用Webpack + vue-loader配置的脚手架，可以快速上手。")]), _vm._v(" "), _c('pre', [_vm._v("$ vue init xcui-templates/webpack-simple myproject\n")]), _vm._v(" "), _c('p', [_c('strong', [_vm._v("全功能webpack")]), _vm._v(": 集成了webpack + vue-loader + hot-reload + linting + testing的全功能项目脚手架。")]), _vm._v(" "), _c('pre', [_vm._v("$ vue init xcui-templates/webpack myproject\n")])])
 }]}
 
 /***/ })

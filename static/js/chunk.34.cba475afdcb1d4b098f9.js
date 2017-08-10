@@ -27,7 +27,11 @@ module.exports = Component.exports
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _vm._m(0)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("安装")]), _vm._v(" "), _c('h2', [_vm._v("通过npm安装")]), _vm._v(" "), _c('pre', [_vm._v("npm install xcui\n")]), _vm._v(" "), _c('h2', [_vm._v("CDN")]), _vm._v(" "), _c('p', [_vm._v("通过"), _c('a', {
+  return _c('div', [_c('h1', [_vm._v("安装")]), _vm._v(" "), _c('h2', [_vm._v("通过npm安装")]), _vm._v(" "), _c('pre', [_c('span', {
+    staticClass: "token function"
+  }, [_vm._v("npm")]), _vm._v(" "), _c('span', {
+    staticClass: "token function"
+  }, [_vm._v("install")]), _vm._v(" xcui --save\n")]), _vm._v(" "), _c('h2', [_vm._v("CDN")]), _vm._v(" "), _c('p', [_vm._v("通过"), _c('a', {
     attrs: {
       "href": "https://unpkg.com/xcui/"
     }

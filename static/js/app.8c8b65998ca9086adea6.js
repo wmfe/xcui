@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "static/js/chunk." + chunkId + "." + {"0":"74a09f77a872cce2b009","1":"a2535c164b7dc1e0d0c1","2":"35fcd6691056bb18fd45","3":"87a6c7a9d361fb10080d","4":"9031bd0a52429502cd16","5":"fdeba0b892d9c3319137","6":"ca1392027763fbe2ec50","7":"2292f37499c6e43c33a7","8":"3ebe9fc0cf9c18ab6bee","9":"544f98bd87453fc9f47d","10":"75a5956d5f731fc59830","11":"8ebe7155c8b696e5ca2d","12":"8375233277f44c76050b","13":"ecc4218c226f5ccd20b5","14":"2ef8b47949eb33f28c66","15":"c27c48396e9404251a24","16":"adcd0bd7b3c39a740d7e","17":"487b713ec95aa600bcf9","18":"75a69b3d3c4a368598df","19":"bef6049bc196dcc28fdb","20":"97eb7f174286bdfa7e16","21":"f5d09b88219c7c2c46d3","22":"9bae0f3231e48126bd08","23":"4fc6c0fad4a38e22c08b","24":"e334f820130d37ed31a7","25":"c015f350ebc62c06703a","26":"954ad9273c94182ea971","27":"3796972a9584fedfd610","28":"9ec7a38006a62f959f86","29":"34dc15a4f05c10388d3f","30":"cd0061b4da5ed06a1c65","31":"5640fb98d5b7a2ef2525","32":"80aee12957f83ea5741b","33":"57847dac57fb30fb8ddd","34":"d8a4e3b17bc8df414b9d"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "static/js/chunk." + chunkId + "." + {"0":"74a09f77a872cce2b009","1":"a2535c164b7dc1e0d0c1","2":"35fcd6691056bb18fd45","3":"87a6c7a9d361fb10080d","4":"9031bd0a52429502cd16","5":"fdeba0b892d9c3319137","6":"ca1392027763fbe2ec50","7":"2292f37499c6e43c33a7","8":"3ebe9fc0cf9c18ab6bee","9":"544f98bd87453fc9f47d","10":"75a5956d5f731fc59830","11":"8ebe7155c8b696e5ca2d","12":"8375233277f44c76050b","13":"ecc4218c226f5ccd20b5","14":"2ef8b47949eb33f28c66","15":"c27c48396e9404251a24","16":"adcd0bd7b3c39a740d7e","17":"487b713ec95aa600bcf9","18":"75a69b3d3c4a368598df","19":"bef6049bc196dcc28fdb","20":"97eb7f174286bdfa7e16","21":"f5d09b88219c7c2c46d3","22":"9bae0f3231e48126bd08","23":"4fc6c0fad4a38e22c08b","24":"e334f820130d37ed31a7","25":"c015f350ebc62c06703a","26":"954ad9273c94182ea971","27":"3796972a9584fedfd610","28":"9ec7a38006a62f959f86","29":"34dc15a4f05c10388d3f","30":"cd0061b4da5ed06a1c65","31":"5640fb98d5b7a2ef2525","32":"80aee12957f83ea5741b","33":"fed14b7bd10c8e3e7c11","34":"cba475afdcb1d4b098f9"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -5638,7 +5638,7 @@ module.exports = {
 		"webpack-hot-middleware": "^2.18.2",
 		"webpack-merge": "^4.1.0",
 		"webpack-node-externals": "^1.6.0",
-		"xcui-demo-loader": "^0.1.8"
+		"xcui-demo-loader": "^0.1.9"
 	}
 };
 
@@ -33435,7 +33435,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "src": _vm.logoUrl,
       "width": "200"
     }
-  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('h2', [_vm._v("XCUI的目标是：")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('h2', [_vm._v("组件展示")]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('h2', [_vm._v("版本支持")]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('h2', [_vm._v("安装")]), _vm._v(" "), _vm._m(4), _vm._v(" "), _c('pre', [_vm._v("npm install xcui\n")]), _vm._v(" "), _c('h2', [_vm._v("快速上手")]), _vm._v(" "), _vm._m(5), _vm._v(" "), _c('p', [_vm._v("在页面根实例中引入：")]), _vm._v(" "), _vm._m(6), _vm._v(" "), _c('p', [_vm._v("或者：")]), _vm._v(" "), _vm._m(7), _vm._v(" "), _c('p', [_vm._v("在页面中声明标签，即可使用。")]), _vm._v(" "), _vm._m(8), _vm._v(" "), _vm._m(9), _vm._v(" "), _c('h2', [_vm._v("开发")]), _vm._v(" "), _c('h3', [_vm._v("Clone the doc repo")]), _vm._v(" "), _vm._m(10), _vm._v(" "), _c('h3', [_vm._v("安装依赖")]), _vm._v(" "), _c('pre', [_vm._v("$ npm i\n")]), _vm._v(" "), _c('h3', [_vm._v("Run dev server")]), _vm._v(" "), _c('pre', [_vm._v("$ npm run dev\n")]), _vm._v(" "), _c('h3', [_vm._v("Build components")]), _vm._v(" "), _c('pre', [_vm._v("$ npm run build\n")])])
+  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('h2', [_vm._v("XCUI的目标是：")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('h2', [_vm._v("组件展示")]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('h2', [_vm._v("版本支持")]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('h2', [_vm._v("安装")]), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5), _vm._v(" "), _c('h2', [_vm._v("快速上手")]), _vm._v(" "), _vm._m(6), _vm._v(" "), _c('p', [_vm._v("在页面根实例中引入：")]), _vm._v(" "), _vm._m(7), _vm._v(" "), _c('p', [_vm._v("或者：")]), _vm._v(" "), _vm._m(8), _vm._v(" "), _c('p', [_vm._v("在页面中声明标签，即可使用。")]), _vm._v(" "), _vm._m(9), _vm._v(" "), _vm._m(10), _vm._v(" "), _c('h2', [_vm._v("开发")]), _vm._v(" "), _c('h3', [_vm._v("Clone the doc repo")]), _vm._v(" "), _vm._m(11), _vm._v(" "), _c('h3', [_vm._v("安装依赖")]), _vm._v(" "), _c('pre', [_vm._v("$ npm i\n")]), _vm._v(" "), _c('h3', [_vm._v("Run dev server")]), _vm._v(" "), _c('pre', [_vm._v("$ npm run dev\n")]), _vm._v(" "), _c('h3', [_vm._v("Build components")]), _vm._v(" "), _c('pre', [_vm._v("$ npm run build\n")])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', [_vm._v("XCUI 是基于"), _c('code', [_vm._v("Vue2.0")]), _vm._v("的"), _c('strong', [_vm._v("桌面端组件库")]), _vm._v("。")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -33454,6 +33454,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": "https://github.com/wmfe/xcui/releases"
     }
   }, [_vm._v("这里")]), _vm._v("下载打包好的版本：")])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('pre', [_c('span', {
+    staticClass: "token function"
+  }, [_vm._v("npm")]), _vm._v(" "), _c('span', {
+    staticClass: "token function"
+  }, [_vm._v("install")]), _vm._v(" xcui --save\n")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', [_c('code', [_vm._v("xcui")]), _vm._v("使用"), _c('code', [_vm._v("umd")]), _vm._v("方式打包，支持各种模块加载器。")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
