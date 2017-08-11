@@ -105,7 +105,7 @@
 
 :::
 
-        
+
 
 ## Props
 
@@ -130,6 +130,7 @@
 </template>
 
 <script>
+import('#/pagination.less');
 export default {
     name: 'xcui-pagination-demo',
     data() {

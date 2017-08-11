@@ -152,6 +152,7 @@
 </template>
 
 <script>
+    import('#/input.less');
     export default {
         data() {
             return {

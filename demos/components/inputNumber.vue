@@ -127,6 +127,7 @@
 
 </template>
 <script>
+    import('#/input-number.less');
     export default {
         data() {
             return {

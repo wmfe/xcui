@@ -1,3 +1,7 @@
+@charset "UTF-8";
+@import "../theme/default";
+@import "../mixins/index";
+
 @radio-prefix-cls: ~"@{xcui-prefix}-radio";
 
 .keyframes(radio; {
@@ -53,11 +57,11 @@
             border-radius: 50%;
             .transition(~"all .3s ease-in");
         }
-        
+
         .@{radio-prefix-cls}-cbx {
             .radio-cbx;
         }
-        
+
         .@{radio-prefix-cls}-input {
             opacity: 0;
             outline: none;
@@ -92,7 +96,7 @@
             }
             &.is-checked{
                 .@{radio-prefix-cls}-cbx {
-                    
+
                 }
             }
             + .@{radio-prefix-cls}-text {
@@ -113,5 +117,5 @@
         text-align: left;
         top: 0;
     }
-    
+
 }

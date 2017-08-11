@@ -285,6 +285,7 @@
 
 </template>
 <script>
+    import('#/upload.less');
     export default {
         data() {
             return {

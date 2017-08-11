@@ -145,7 +145,7 @@
 
 <tpl>
     <x-popover confirm
-        placement="top" 
+        placement="top"
         title="确定要删除这些数据吗？"
         :on-ok="ok"
         :on-cancel="cancel">
@@ -230,7 +230,7 @@
 :::
 
 
-  
+
 
 ## Props
 
@@ -261,6 +261,7 @@
 
 </template>
 <script>
+import('#/popover.less');
 export default {
     data() {
         return {

@@ -179,6 +179,7 @@ this.$Message.destroy();
 </template>
 
 <script>
+    import('#/message.less');
     export default {
         data() {
             return {

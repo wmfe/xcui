@@ -97,6 +97,7 @@
 
 </template>
 <script>
+    import('#/switch.less');
     export default {
         data() {
             return {

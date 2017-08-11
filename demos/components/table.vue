@@ -1073,6 +1073,7 @@
 
 </template>
 <script>
+    import('#/table.less');
     export default {
         data() {
             return {

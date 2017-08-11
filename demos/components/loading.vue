@@ -135,6 +135,7 @@
 </template>
 
 <script>
+import('#/loading.less');
 import imgPara from '../assets/short-paragraph.png';
 
 export default {

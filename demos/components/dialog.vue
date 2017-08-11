@@ -155,6 +155,7 @@
 </template>
 
 <script>
+    import('#/dialog.less');
     export default {
         methods: {
             dialog1() {

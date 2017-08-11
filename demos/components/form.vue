@@ -544,6 +544,7 @@
 </template>
 
 <script>
+    import('#/form.less');
     export default {
         data() {
             const validatePass = (rule, value, callback) => {

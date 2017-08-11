@@ -5,11 +5,12 @@ var config = require('../config');
 var babelCore = require('babel-core');
 var fileSave = require('file-save');
 
-console.log(chalk.cyan.bold('building for utils...'))
+console.log(chalk.cyan.bold('Building for utils...'))
 
 var utilPath = path.resolve(__dirname, '../src/utils');
 
 var files = read(utilPath);
+var number = 0;
 var names = files.map(function(entry) {
     return path.basename(entry, '.js');
 })
@@ -42,5 +43,9 @@ function buildFile(file, name) {
         }
         var outputPath = file.replace(/src/, 'lib')
         fileSave(outputPath).write(result.code);
+        ++number;
+        if (number === files.length) {
+            console.log(chalk.cyan.bold('Build utils done. \n'));
+        }
     })
 }
