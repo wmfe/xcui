@@ -125,6 +125,7 @@ export default {
         :name="tag.name"
         :checked="tag.checked"
         @change="change1">{{tag.name}}</x-tag-checkable>
+    <x-tag-checkable disabled>禁用标签</x-tag-checkable>
     <p style="margin-top: 15px;">选中的标签：{{selectedTagNames.length > 0 ? selectedTagNames : ''}}</p>
     <p style="margin-top: 15px;">选中的标签值：{{selectedTagKeys.length > 0 ? selectedTagKeys : ''}}</p>
 </tpl>
@@ -212,6 +213,7 @@ export default {
 |-----|-----|-----|-----|----|----|
 |color|String|无|颜色，可设为预设值或色值|可选|pink/red/orange/green/cyan/blue/purple, 加上`-inverse`设为反色|
 |name|String|false|是否可关闭|可选|true, false|
+|disabled|Boolean|false|是否禁用|可选|true, false|
 |tag-key|String, Number|无|tag的标识|可选||
 |checked|Boolean|false|是否默认选中|否|true,false|
 

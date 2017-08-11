@@ -56,7 +56,7 @@ export default {
         handleClose(e) {
             if (this.onClose) {
                 this.onClose(e, this);
-            } 
+            }
             if (e.defaultPrevented) {
                 return;
             }
