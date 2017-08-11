@@ -141,6 +141,9 @@
 <script>
 import('#/row.less');
 import('#/col.less');
+import('#/button.less');
+import('#/input.less');
+
 const version = require('../package.json').version;
 
 export default {
