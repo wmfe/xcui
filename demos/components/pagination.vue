@@ -131,6 +131,8 @@
 
 <script>
 import('#/pagination.less');
+import('#/button.less');
+import('#/select.less');
 export default {
     name: 'xcui-pagination-demo',
     data() {

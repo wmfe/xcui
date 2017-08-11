@@ -180,6 +180,7 @@ this.$Message.destroy();
 
 <script>
     import('#/message.less');
+    import('#/button.less');
     export default {
         data() {
             return {

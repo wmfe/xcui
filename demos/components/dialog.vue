@@ -156,6 +156,7 @@
 
 <script>
     import('#/dialog.less');
+    import('#/button.less');
     export default {
         methods: {
             dialog1() {

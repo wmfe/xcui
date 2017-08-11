@@ -76,7 +76,7 @@
         </x-form-item>
         <x-form-item prop="remember">
             <x-checkbox v-model="form2.remember">保持登录状态</x-checkbox>
-            <x-button type="link" style="margin-left:150px">忘记密码？</x-button>
+            <x-button type="link" style="margin-left:100px">忘记密码？</x-button>
         </x-form-item>
         <x-form-item>
             <x-button type="primary" @click="submitForm('form2')">登录</x-button>
@@ -545,6 +545,16 @@
 
 <script>
     import('#/form.less');
+    import('#/button.less');
+    import('#/input.less');
+    import('#/radio.less');
+    import('#/radio-button.less');
+    import('#/checkbox.less');
+    import('#/select.less');
+    import('#/date-picker.less');
+    import('#/switch.less');
+    import('#/suggestion.less');
+    import('#/textarea.less');
     export default {
         data() {
             const validatePass = (rule, value, callback) => {

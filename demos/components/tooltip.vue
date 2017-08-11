@@ -186,6 +186,8 @@
 
 <script>
 import('#/tooltip.less');
+import('#/button.less');
+import('#/input.less');
 export default {
 
 }

@@ -262,6 +262,8 @@
 </template>
 <script>
 import('#/popover.less');
+import('#/button.less');
+import('#/input.less');
 export default {
     data() {
         return {

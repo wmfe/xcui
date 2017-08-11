@@ -336,45 +336,46 @@
         }
     };
 </script>
-<style>
-    .upload-demo-list {
-        width: 360px;
-    }
-    .x-icon-plus-round, .x-icon-image {
-        font-size: 32px;
-    }
+<style lang="less">
+    .demo-upload {
+        .upload-demo-list {
+            width: 360px;
+        }
+        .x-icon-plus-round, .x-icon-image {
+            font-size: 32px;
+        }
 
-    .x-icon-image {
-        color: #fff;
-    }
+        .x-icon-image {
+            color: #fff;
+        }
 
-    .x-icon-plus-round, .upload-empty-icon {
-        color: #777;
-    }
+        .x-icon-plus-round, .upload-empty-icon {
+            color: #777;
+        }
 
-    .x-upload-img-container {
-        text-align: center;
-        margin-top: 100px;
-        position: relative;
-    }
+        .x-upload-img-container {
+            text-align: center;
+            margin-top: 100px;
+            position: relative;
+        }
 
-    .x-modal-mask {
-        cursor: pointer;
-    }
+        .x-modal-mask {
+            cursor: pointer;
+        }
 
-    .upload-demo-mask {
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: block;
-        width: 100%;
-        height: 100%;
-        transition: opacity .3s;
-        opacity: 0;
-        background-color: rgba(0, 0, 0, 0.5);
+        .upload-demo-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            transition: opacity .3s;
+            opacity: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .x-upload-trigger:hover .upload-demo-mask{
+             opacity: 1;
+         }
     }
-    .x-upload-trigger:hover .upload-demo-mask{
-         opacity: 1;
-     }
-
 </style>
