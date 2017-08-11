@@ -1380,7 +1380,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "change": _vm.change1
       }
     }, [_vm._v(_vm._s(tag.name))])
-  }), _vm._v(" "), _c('p', {
+  }), _vm._v(" "), _c('x-tag-checkable', {
+    attrs: {
+      "disabled": ""
+    }
+  }, [_vm._v("禁用标签")]), _vm._v(" "), _c('p', {
     staticStyle: {
       "margin-top": "15px"
     }
@@ -1489,6 +1493,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("}")]), _c('span', {
     staticClass: "token punctuation"
   }, [_vm._v("}")]), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("</")]), _vm._v("x-tag-checkable")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("\n    "), _c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token tag"
+  }, [_c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v("<")]), _vm._v("x-tag-checkable")]), _vm._v(" "), _c('span', {
+    staticClass: "token attr-name"
+  }, [_vm._v("disabled")]), _c('span', {
+    staticClass: "token punctuation"
+  }, [_vm._v(">")])]), _vm._v("禁用标签"), _c('span', {
     staticClass: "token tag"
   }, [_c('span', {
     staticClass: "token tag"
@@ -2202,7 +2224,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('table', {
     staticClass: "markdown-table"
-  }, [_c('thead', [_c('tr', [_c('th', [_vm._v("名字")]), _vm._v(" "), _c('th', [_vm._v("类型")]), _vm._v(" "), _c('th', [_vm._v("默认")]), _vm._v(" "), _c('th', [_vm._v("描述")]), _vm._v(" "), _c('th', [_vm._v("是否必选")]), _vm._v(" "), _c('th', [_vm._v("可选值")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("color")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("无")]), _vm._v(" "), _c('td', [_vm._v("颜色，可设为预设值或色值")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td', [_vm._v("pink/red/orange/green/cyan/blue/purple, 加上"), _c('code', [_vm._v("-inverse")]), _vm._v("设为反色")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("name")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("false")]), _vm._v(" "), _c('td', [_vm._v("是否可关闭")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td', [_vm._v("true, false")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("tag-key")]), _vm._v(" "), _c('td', [_vm._v("String, Number")]), _vm._v(" "), _c('td', [_vm._v("无")]), _vm._v(" "), _c('td', [_vm._v("tag的标识")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td')]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("checked")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("false")]), _vm._v(" "), _c('td', [_vm._v("是否默认选中")]), _vm._v(" "), _c('td', [_vm._v("否")]), _vm._v(" "), _c('td', [_vm._v("true,false")])])])])
+  }, [_c('thead', [_c('tr', [_c('th', [_vm._v("名字")]), _vm._v(" "), _c('th', [_vm._v("类型")]), _vm._v(" "), _c('th', [_vm._v("默认")]), _vm._v(" "), _c('th', [_vm._v("描述")]), _vm._v(" "), _c('th', [_vm._v("是否必选")]), _vm._v(" "), _c('th', [_vm._v("可选值")])])]), _vm._v(" "), _c('tbody', [_c('tr', [_c('td', [_vm._v("color")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("无")]), _vm._v(" "), _c('td', [_vm._v("颜色，可设为预设值或色值")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td', [_vm._v("pink/red/orange/green/cyan/blue/purple, 加上"), _c('code', [_vm._v("-inverse")]), _vm._v("设为反色")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("name")]), _vm._v(" "), _c('td', [_vm._v("String")]), _vm._v(" "), _c('td', [_vm._v("false")]), _vm._v(" "), _c('td', [_vm._v("是否可关闭")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td', [_vm._v("true, false")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("disabled")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("false")]), _vm._v(" "), _c('td', [_vm._v("是否禁用")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td', [_vm._v("true, false")])]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("tag-key")]), _vm._v(" "), _c('td', [_vm._v("String, Number")]), _vm._v(" "), _c('td', [_vm._v("无")]), _vm._v(" "), _c('td', [_vm._v("tag的标识")]), _vm._v(" "), _c('td', [_vm._v("可选")]), _vm._v(" "), _c('td')]), _vm._v(" "), _c('tr', [_c('td', [_vm._v("checked")]), _vm._v(" "), _c('td', [_vm._v("Boolean")]), _vm._v(" "), _c('td', [_vm._v("false")]), _vm._v(" "), _c('td', [_vm._v("是否默认选中")]), _vm._v(" "), _c('td', [_vm._v("否")]), _vm._v(" "), _c('td', [_vm._v("true,false")])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('table', {
     staticClass: "markdown-table"

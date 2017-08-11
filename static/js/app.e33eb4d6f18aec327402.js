@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "static/js/chunk." + chunkId + "." + {"0":"74a09f77a872cce2b009","1":"a2535c164b7dc1e0d0c1","2":"35fcd6691056bb18fd45","3":"87a6c7a9d361fb10080d","4":"9031bd0a52429502cd16","5":"fdeba0b892d9c3319137","6":"ca1392027763fbe2ec50","7":"2292f37499c6e43c33a7","8":"3ebe9fc0cf9c18ab6bee","9":"544f98bd87453fc9f47d","10":"75a5956d5f731fc59830","11":"8ebe7155c8b696e5ca2d","12":"8375233277f44c76050b","13":"ecc4218c226f5ccd20b5","14":"2ef8b47949eb33f28c66","15":"c27c48396e9404251a24","16":"adcd0bd7b3c39a740d7e","17":"487b713ec95aa600bcf9","18":"75a69b3d3c4a368598df","19":"bef6049bc196dcc28fdb","20":"97eb7f174286bdfa7e16","21":"f5d09b88219c7c2c46d3","22":"9bae0f3231e48126bd08","23":"4fc6c0fad4a38e22c08b","24":"e334f820130d37ed31a7","25":"c015f350ebc62c06703a","26":"954ad9273c94182ea971","27":"3796972a9584fedfd610","28":"9ec7a38006a62f959f86","29":"34dc15a4f05c10388d3f","30":"cd0061b4da5ed06a1c65","31":"5640fb98d5b7a2ef2525","32":"80aee12957f83ea5741b","33":"fed14b7bd10c8e3e7c11","34":"cba475afdcb1d4b098f9"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "static/js/chunk." + chunkId + "." + {"0":"74a09f77a872cce2b009","1":"a2535c164b7dc1e0d0c1","2":"35fcd6691056bb18fd45","3":"87a6c7a9d361fb10080d","4":"9031bd0a52429502cd16","5":"fdeba0b892d9c3319137","6":"ca1392027763fbe2ec50","7":"2292f37499c6e43c33a7","8":"3ebe9fc0cf9c18ab6bee","9":"544f98bd87453fc9f47d","10":"75a5956d5f731fc59830","11":"8ebe7155c8b696e5ca2d","12":"8375233277f44c76050b","13":"ecc4218c226f5ccd20b5","14":"2ef8b47949eb33f28c66","15":"cde7706ad8eca2eaef6b","16":"adcd0bd7b3c39a740d7e","17":"487b713ec95aa600bcf9","18":"75a69b3d3c4a368598df","19":"bef6049bc196dcc28fdb","20":"97eb7f174286bdfa7e16","21":"f5d09b88219c7c2c46d3","22":"9bae0f3231e48126bd08","23":"4fc6c0fad4a38e22c08b","24":"e334f820130d37ed31a7","25":"c015f350ebc62c06703a","26":"954ad9273c94182ea971","27":"3796972a9584fedfd610","28":"9ec7a38006a62f959f86","29":"34dc15a4f05c10388d3f","30":"cd0061b4da5ed06a1c65","31":"5640fb98d5b7a2ef2525","32":"80aee12957f83ea5741b","33":"fed14b7bd10c8e3e7c11","34":"cba475afdcb1d4b098f9"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -27038,6 +27038,10 @@ exports.default = {
     props: {
         color: String,
         checked: false,
+        disabled: {
+            type: Boolean,
+            default: false
+        },
         tagKey: String,
         name: String
     },
@@ -27067,6 +27071,9 @@ exports.default = {
             if (this.isPresetColor(this.color)) {
                 ret.push('x-tag-' + this.color);
             }
+            if (this.disabled) {
+                ret.push('x-tag-disabled');
+            }
             return ret.join(' ');
         }
     },
@@ -27076,6 +27083,9 @@ exports.default = {
             );
         },
         handleChange: function handleChange(e) {
+            if (this.disabled) {
+                return;
+            }
             this.internalChecked = !this.internalChecked;
             this.$emit('change', this, this.internalChecked);
         }
