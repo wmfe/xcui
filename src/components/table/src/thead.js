@@ -1,5 +1,5 @@
 
-import Checkbox from '../../checkbox';
+import Checkbox from 'xcui/src/components/checkbox';
 
 export default {
     props: {
