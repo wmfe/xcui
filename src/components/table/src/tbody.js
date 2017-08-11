@@ -1,3 +1,4 @@
+import Checkbox from '../../checkbox';
 
 export default {
     props: {
@@ -16,6 +17,10 @@ export default {
         selectedValue: {
             type: [String, Number]
         }
+    },
+
+    components: {
+        'x-checkbox': Checkbox
     },
 
     methods: {
