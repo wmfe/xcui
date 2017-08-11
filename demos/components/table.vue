@@ -1073,6 +1073,8 @@
 
 </template>
 <script>
+    import('#/tooltip.less');
+    import('#/tag.less');
     import('#/table.less');
     export default {
         data() {
