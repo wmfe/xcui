@@ -243,6 +243,7 @@
 </template>
 
 <script>
+    import('#/date-picker.less');
     export default {
         data() {
             return {

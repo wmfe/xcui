@@ -162,10 +162,11 @@
 |---|---|---|---|
 |change|多选框值改变时触发|当前事件`event`|`@change`|
 
-    
+
 
 </template>
 <script>
+    import('#/checkbox.less');
     export default {
         data() {
             return {

@@ -139,6 +139,8 @@
 </template>
 
 <script>
+import('#/row.less');
+import('#/col.less');
 const version = require('../package.json').version;
 
 export default {

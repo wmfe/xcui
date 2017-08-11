@@ -1,5 +1,8 @@
-@loading-prefix-cls: ~"@{xcui-prefix}-loading";
+@charset "UTF-8";
+@import "../theme/default";
+@import "../mixins/index";
 
+@loading-prefix-cls: ~"@{xcui-prefix}-loading";
 
 .@{loading-prefix-cls} {
     &-mask {
@@ -18,7 +21,7 @@
         max-width: 100%;
         vertical-align: middle;
     }
-    
+
     &-fade-enter, &-fade-leave-active {
        opacity: 0;
     }
@@ -29,7 +32,7 @@
             margin-top: -25px;
         }
     }
-    
+
     &-spinner {
         top: 50%;
         margin-top: -21px;

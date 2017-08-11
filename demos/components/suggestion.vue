@@ -119,6 +119,7 @@
 </template>
 
 <script>
+  import('#/suggestion.less');
   export default {
       data() {
           return {
@@ -183,7 +184,7 @@
                   {text: v + v, value: 2},
                   {text: v + v + v, value: 3},
                   {text: v + v + v + v, value: 4}
-              ];  
+              ];
           }
       },
       mounted() {

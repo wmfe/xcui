@@ -11,14 +11,14 @@
 
 <tpl>
     <div style="width: 180px">
-         <x-time-select v-model="model1" 
+         <x-time-select v-model="model1"
             :picker-options="{
                 start: '08:30',
                 step: '00:15',
                 end: '18:30'
                 }" placeholder="请选择时间"></x-time-select>
     </div>
-   
+
 </tpl>
 
 <script>
@@ -48,7 +48,7 @@
                 selectableRange: '18:30:00 - 23:30:00'
             }" placeholder="请选择任意时间"></x-time-picker>
     </div>
-    
+
 </tpl>
 
 <script>
@@ -104,7 +104,7 @@
 
 :::
 
-## 任意时间范围 
+## 任意时间范围
 
 ::: demo 通过设置`is-range`属性为`true`即可选择时间范围
 
@@ -163,6 +163,7 @@
 </template>
 
 <script>
+    import('#/date-picker.less');
     export default {
         data() {
             return {

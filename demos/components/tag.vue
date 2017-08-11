@@ -228,6 +228,7 @@ export default {
 </template>
 
 <script>
+import('#/tag.less');
 export default {
     data() {
         return {
