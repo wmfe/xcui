@@ -42,6 +42,8 @@ import TableColumn from './table-column';
 import Steps, { StepsItem } from './steps';
 import Collapse from './collapse';
 import CollapseItem from './collapse-item';
+import MultiTreeSelect from './multi-tree-select';
+import SingleTreeSelect from './single-tree-select';
 
 const install = (Vue) => {
     if (install.installed) {
@@ -84,6 +86,8 @@ const install = (Vue) => {
     Vue.component(StepsItem.name, StepsItem);
     Vue.component(Collapse.name, Collapse);
     Vue.component(CollapseItem.name, CollapseItem);
+    Vue.component(MultiTreeSelect.name, MultiTreeSelect);
+    Vue.component(SingleTreeSelect.name, SingleTreeSelect);
     Vue.use(Message);
     Vue.use(Notice);
     Vue.use(Dialog);
@@ -132,6 +136,8 @@ const xcui = {
     TableColumn,
     install,
     Collapse,
+    MultiTreeSelect,
+    SingleTreeSelect,
     CollapseItem
 };
 
