@@ -155,6 +155,7 @@
 </template>
 
 <script>
+    import('#/modal.less');
     import('#/dialog.less');
     import('#/button.less');
     export default {
