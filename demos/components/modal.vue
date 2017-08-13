@@ -184,8 +184,8 @@ Vue.use(XCUI)
 
 </template>
 <script>
-import('#/modal.less');
-import('#/button.less');
+require('#/modal.less');
+require('#/button.less');
 export default {
     data() {
         return {

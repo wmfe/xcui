@@ -127,7 +127,7 @@
 
 </template>
 <script>
-    import('#/textarea.less');
+    require('#/textarea.less');
     export default {
         data() {
             return {

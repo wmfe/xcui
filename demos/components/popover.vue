@@ -261,9 +261,9 @@
 
 </template>
 <script>
-import('#/popover.less');
-import('#/button.less');
-import('#/input.less');
+require('#/popover.less');
+require('#/button.less');
+require('#/input.less');
 export default {
     data() {
         return {

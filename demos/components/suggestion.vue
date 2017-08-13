@@ -119,7 +119,7 @@
 </template>
 
 <script>
-  import('#/suggestion.less');
+  require('#/suggestion.less');
   export default {
       data() {
           return {

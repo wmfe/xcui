@@ -163,7 +163,7 @@
 </template>
 
 <script>
-    import('#/date-picker.less');
+    require('#/date-picker.less');
     export default {
         data() {
             return {

@@ -207,7 +207,7 @@
 </template>
 
 <script>
-    import('#/collapse.less');
+    require('#/collapse.less');
     export default {
         data() {
             return {

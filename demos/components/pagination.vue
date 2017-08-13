@@ -130,9 +130,10 @@
 </template>
 
 <script>
-import('#/pagination.less');
-import('#/button.less');
-import('#/select.less');
+require('#/button.less');
+require('#/select.less');
+require('#/pagination.less');
+
 export default {
     name: 'xcui-pagination-demo',
     data() {

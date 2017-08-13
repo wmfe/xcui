@@ -139,13 +139,12 @@
 </template>
 
 <script>
-import('#/row.less');
-import('#/col.less');
-// preload button & input which used frequently
-import('#/button.less');
-import('#/input.less');
-// table need preload (calc styles)
-import('#/table.less');
+require('#/row.less');
+require('#/col.less');
+require('#/message.less');
+// loading & table need import first to calc styles
+require('#/loading.less');
+require('#/table.less');
 
 const version = require('../package.json').version;
 

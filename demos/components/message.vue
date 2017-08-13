@@ -179,8 +179,8 @@ this.$Message.destroy();
 </template>
 
 <script>
-    import('#/message.less');
-    import('#/button.less');
+    require('#/message.less');
+    require('#/button.less');
     export default {
         data() {
             return {

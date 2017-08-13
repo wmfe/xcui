@@ -152,7 +152,7 @@
 </template>
 
 <script>
-    import('#/button.less');
+    require('#/button.less');
     export default {
         data() {
             return {
