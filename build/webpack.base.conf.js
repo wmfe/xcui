@@ -9,7 +9,7 @@ function resolve(dir) {
 
 module.exports = {
     entry: {
-        app: './demos/main.js'
+        app: process.env.NODE_ENV === 'production' ? './demos/main.build.js' : './demos/main.js'
     },
     output: {
         path: config.build.assetsRoot,

@@ -276,9 +276,9 @@
 </template>
 
 <script>
-require('#/dropdown.less');
-require('#/button.less');
-require('#/message.less');
+import '#/dropdown.less';
+import '#/button.less';
+import '#/message.less';
 export default {
     data() {
         return {

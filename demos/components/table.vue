@@ -1073,9 +1073,9 @@
 
 </template>
 <script>
-    require('#/tooltip.less');
-    require('#/tag.less');
-    require('#/table.less');
+    import '#/tooltip.less';
+    import '#/tag.less';
+    import '#/table.less';
     export default {
         data() {
             return {

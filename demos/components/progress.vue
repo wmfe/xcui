@@ -76,7 +76,7 @@
 </template>
 
 <script>
-require('#/progress.less');
+import '#/progress.less';
 </script>
 
 <style>

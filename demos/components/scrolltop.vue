@@ -45,7 +45,7 @@
 
 </template>
 <script>
-require('#/scrolltop.less');
+import '#/scrolltop.less';
 export default {
     data() {
         return {

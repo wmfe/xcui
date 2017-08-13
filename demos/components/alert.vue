@@ -123,7 +123,7 @@ export default {
 </template>
 
 <script>
-require('#/alert.less');
+import '#/alert.less';
 
 export default {
     methods: {

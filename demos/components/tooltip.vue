@@ -185,9 +185,9 @@
 </template>
 
 <script>
-require('#/tooltip.less');
-require('#/button.less');
-require('#/input.less');
+import '#/tooltip.less';
+import '#/button.less';
+import '#/input.less';
 export default {
 
 }

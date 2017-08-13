@@ -155,9 +155,9 @@
 </template>
 
 <script>
-    require('#/modal.less');
-    require('#/dialog.less');
-    require('#/button.less');
+    import '#/modal.less';
+    import '#/dialog.less';
+    import '#/button.less';
     export default {
         methods: {
             dialog1() {

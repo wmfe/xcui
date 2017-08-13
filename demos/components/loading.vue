@@ -136,7 +136,7 @@
 
 <script>
 import imgPara from '../assets/short-paragraph.png';
-require('#/loading.less');
+import '#/loading.less';
 
 
 export default {

@@ -363,7 +363,7 @@
 </template>
 
 <script>
-    require('#/select.less');
+    import '#/select.less';
     export default{
         data() {
             return {

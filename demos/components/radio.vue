@@ -143,8 +143,8 @@
 
 </template>
 <script>
-    require('#/radio.less');
-    require('#/radio-button.less');
+    import '#/radio.less';
+    import '#/radio-button.less';
     export default {
         data() {
             return {

@@ -285,8 +285,8 @@
 
 </template>
 <script>
-    require('#/dialog.less');
-    require('#/upload.less');
+    import '#/dialog.less';
+    import '#/upload.less';
     export default {
         data() {
             return {
