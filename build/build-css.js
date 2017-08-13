@@ -18,7 +18,8 @@ console.log(chalk.cyan.bold('Building for CSS...'));
 
 var files = fs.readdirSync(styleComponentsPath).filter(function (file) {
     // ignore directory & index.less
-    return !(fs.statSync(path.join(styleComponentsPath, file)).isDirectory() || /index\.less$/.test(file));
+    return !(fs.statSync(path.join(styleComponentsPath, file)).isDirectory()
+        || /(index|empty)\.less$/.test(file));
 });
 
 var number = 0;

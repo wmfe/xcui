@@ -176,7 +176,7 @@
 </template>
 
 <script>
-    require('#/steps.less');
+    import '#/steps.less';
     export default {
         data() {
             return {

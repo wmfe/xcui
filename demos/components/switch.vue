@@ -97,7 +97,7 @@
 
 </template>
 <script>
-    require('#/switch.less');
+    import '#/switch.less';
     export default {
         data() {
             return {

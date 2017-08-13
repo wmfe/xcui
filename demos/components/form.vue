@@ -544,18 +544,18 @@
 </template>
 
 <script>
-    require('#/form.less');
-    require('#/button.less');
-    require('#/input.less');
-    require('#/radio.less');
-    require('#/radio-group.less');
-    require('#/radio-button.less');
-    require('#/checkbox.less');
-    require('#/select.less');
-    require('#/date-picker.less');
-    require('#/switch.less');
-    require('#/suggestion.less');
-    require('#/textarea.less');
+    import '#/form.less';
+    import '#/button.less';
+    import '#/input.less';
+    import '#/radio.less';
+    import '#/radio-group.less';
+    import '#/radio-button.less';
+    import '#/checkbox.less';
+    import '#/select.less';
+    import '#/date-picker.less';
+    import '#/switch.less';
+    import '#/suggestion.less';
+    import '#/textarea.less';
     export default {
         data() {
             const validatePass = (rule, value, callback) => {

@@ -46,8 +46,8 @@ Vue.use(xcui);
 或者：
 
 ```javascript
-var Vue = require('vue');
-var xcui = require('xcui').default;
+var Vue = import 'vue');
+var xcui = import 'xcui').default;
 Vue.use(xcui);
 ```
 

@@ -22,7 +22,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     devtool: config.build.productionSourceMap ? '#source-map' : false,
     output: {
         path: config.build.assetsRoot,
-        publicPath: env.NODE_ENV === '"production"' ? '/xcui/' : '/',
+        publicPath: process.env.SITE === 'local' ? '/' : '/xcui/',
         filename: utils.assetsPath('js/[name].[chunkhash].js'),
         chunkFilename: utils.assetsPath('js/chunk.[id].[chunkhash].js')
     },
@@ -89,6 +89,9 @@ var webpackConfig = merge(baseWebpackConfig, {
         }]),
         new UglifyJSPlugin({
             sourceMap: true
+        }),
+        new webpack.NormalModuleReplacementPlugin(/^#\/(.*)\.less$/, function(resource) {
+            resource.request = '#/empty.less';
         }),
         // webpack 3 scope hoisting
         new webpack.optimize.ModuleConcatenationPlugin()

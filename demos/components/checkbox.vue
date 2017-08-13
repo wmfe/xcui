@@ -166,7 +166,7 @@
 
 </template>
 <script>
-    require('#/checkbox.less');
+    import '#/checkbox.less';
     export default {
         data() {
             return {

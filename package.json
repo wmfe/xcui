@@ -29,6 +29,7 @@
     "scripts": {
         "dev": "node build/dev-server.js",
         "site": "rimraf site && node build/build-site.js",
+        "site:local": "rimraf site && cross-env SITE=local node build/build-site.js",
         "build": "npm run build:lib && npm run site",
         "build:lib": "rimraf lib && npm run build:bundle && npm run build:components && npm run build:utils && npm run build:css",
         "build:components": "node build/build-components.js",
