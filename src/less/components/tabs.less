@@ -1,0 +1,177 @@
+@charset "UTF-8";
+@import "../theme/default";
+
+@tabs-prefix-cls: ~"@{xcui-prefix}-tabs";
+
+.@{tabs-prefix-cls} {
+    &-header {
+        position: relative;
+        padding: 0;
+        border-bottom: 1px solid @gray-ddd;
+    }
+    &-nav-wrap {
+        overflow: hidden;
+        margin-bottom: -1px;
+        position: relative;
+        box-sizing: border-box;
+        &.is-scrollable {
+            padding: 0 15px;
+        }
+    }
+    &-active-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background-color: #46c3c1;
+        z-index: 1;
+        transition: transform .3s cubic-bezier(.645,.045,.355,1);
+        list-style: none;
+    }
+    &-nav-scroll {
+        overflow: hidden;
+    }
+    &-nav {
+        position: relative;
+        transition: transform .3s;
+        float: left;
+        white-space: nowrap;
+    }
+    &-nav-prev,
+    &-nav-next {
+        position: absolute;
+        cursor: pointer;
+        line-height: 44px;
+        font-size: 12px;
+        color: #8391a5;
+        padding: 0 4px;
+        &.is-disabled {
+            cursor: not-allowed;
+        }
+    }
+    &-nav-prev {
+        left: 0;
+    }
+    &-nav-next {
+        right: 0;
+    }
+    &-nav-extra {
+        float: right;
+        margin-left: 5px;
+    }
+    &-body {
+        padding-top: 15px;
+        overflow: auto;
+    }
+    &-nav-item {
+        padding: 0 16px;
+        height: 42px;
+        box-sizing: border-box;
+        line-height: 42px;
+        cursor: pointer;
+        display: inline-block;
+        list-style: none;
+        font-size: 14px;
+        color: #8391a5;
+        &.is-disabled {
+            pointer-events: none;
+            cursor: default;
+            color: #ccc;
+        }
+        &.is-active {
+            color: #46c3c1;
+        }
+        &.is-closable {
+            .x-tabs-nav-close {
+                margin-left: 8px;
+            }
+        }
+    }
+}
+
+.@{tabs-prefix-cls}-card {
+    .@{tabs-prefix-cls}-nav-item {
+        border: 1px solid transparent;
+        transition: all .3s cubic-bezier(.645,.045,.355,1);
+        &.is-active {
+            border: 1px solid @gray-ddd;
+            border-bottom-color: #fff;
+            border-radius: 4px 4px 0 0;
+        }
+    }
+}
+.@{tabs-prefix-cls}-left {
+    overflow: hidden;
+    &.@{tabs-prefix-cls}-card {
+        .@{tabs-prefix-cls}-nav-item {
+            border: 1px solid transparent;
+            transition: all .3s cubic-bezier(.645,.045,.355,1);
+            &.is-active {
+                border: 1px solid @gray-ddd;
+                border-right-color: #fff;
+                border-radius: 4px 0 0 4px;
+            }
+        }
+    }
+    .@{tabs-prefix-cls}-header {
+        float: left;
+        border-right: 1px solid @gray-ddd;
+        border-bottom: none;
+        height: 100%;
+    }
+    .@{tabs-prefix-cls}-body {
+        height: 100%;
+        overflow: auto;
+        padding-left: 15px;
+        padding-top: 0;
+    }
+    .@{tabs-prefix-cls}-nav-wrap {
+        height: 100%;
+        margin-bottom: 0px;
+        margin-right: -1px;
+        &.is-scrollable {
+            padding: 15px 0;
+        }
+    }
+    .@{tabs-prefix-cls}-nav-scroll{
+        height: 100%;
+    }
+    .@{tabs-prefix-cls}-nav-item {
+        display: block;
+    }
+    .@{tabs-prefix-cls}-active-bar {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 3px;
+        background-color: #46c3c1;
+        z-index: 1;
+        transition: transform .3s cubic-bezier(.645,.045,.355,1);
+        list-style: none;
+    }
+    .@{tabs-prefix-cls}-nav-prev,
+    .@{tabs-prefix-cls}-nav-next {
+        position: absolute;
+        cursor: pointer;
+        line-height: 20px;
+        font-size: 12px;
+        color: #8391a5;
+        padding: 4 0px;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        &.is-disabled {
+            cursor: not-allowed;
+        }
+    }
+    .@{tabs-prefix-cls}-nav-prev {
+        top: 0;
+    }
+    .@{tabs-prefix-cls}-nav-next {
+        bottom: 0;
+    }
+    .@{tabs-prefix-cls}-nav-extra {
+        float: left;
+        margin: 0;
+    }
+}
