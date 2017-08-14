@@ -1,0 +1,62 @@
+@charset "UTF-8";
+@import "../theme/default";
+@alert-prefix-cls: ~"@{xcui-prefix}-alert";
+
+
+.@{alert-prefix-cls} {
+    display: table;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: @body-bg;
+    color: @white;
+    border-radius: 4px;
+    padding: 8px 16px;
+
+    &-info {
+        background-color: @brand-info;
+    }
+    &-success {
+        background-color: @brand-success;
+    }
+    &-warning {
+        background-color: @brand-warning;
+    }
+    &-error {
+        background-color: @brand-danger;
+    }
+    &-icon {
+        font-size: 16px;
+        width: 16px;
+        display: table-cell;
+        color: @white;
+        vertical-align: middle;
+        &-large {
+            font-size: 30px;
+            width: 30px;
+        }
+    }
+    &-close-btn {
+        position: absolute;
+        top: 10px;
+        right: 16px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    &-close-text {
+        font-style: normal;
+        font-size: 13px;
+        top: 12px;
+    }
+    &-container {
+        padding: 4px 8px;
+        display: table-cell;
+    }
+    &-title {
+        font-size: 13px;
+    }
+    &-description {
+        margin-top: 10px;
+        font-size: 12px;
+    }
+}

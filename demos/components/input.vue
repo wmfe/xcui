@@ -152,6 +152,8 @@
 </template>
 
 <script>
+    import '#/select.less';
+    import '#/input.less';
     export default {
         data() {
             return {

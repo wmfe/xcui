@@ -38,18 +38,19 @@ export default {
     },
     data() {
         return {
-            columnOrder: 0
+            // 保存当前列元素位置，例如[1,2,3]表示该列在第二列的第三子列的第四子列
+            orderQueue: []
         };
     },
     mounted() {
-        // this.$options.render = h => h('div', this.$slots.default);
+        this.$options.render = h => h('div', this.$slots.default);
         let parent = this.$parent;
         let origin = this.$parent;
         while (origin && origin.$options.name !== 'XTable') {
             origin = origin.$parent;
         }
         this.table = origin;
-        let isSubColumn = parent !== origin;
+        this.isSubColumn = parent !== origin;
         const slots = this.$scopedSlots;
         if (this.type) {
             this.table.rowKey = this.prop;
@@ -64,6 +65,7 @@ export default {
             className: tdClassName,
             singleLine: this.singleLine,
             children: [],
+            orderQueue: this.orderQueue,
             // tbody 中每个 td 内的 render 方法
             render: slots.default
                 // 如果 <x-table-column> 内有 template，按照 template 内的来渲染
@@ -84,13 +86,13 @@ export default {
         };
         this.columnConfig = column;
         let columnIndex;
-        if (!isSubColumn) {
+        if (!this.isSubColumn) {
             columnIndex = [].indexOf.call(parent.$refs.hiddenColumns.children, this.$el);
         }
         else {
             columnIndex = [].indexOf.call(parent.$el.children, this.$el);
         }
-        this.insertColumn(this.table, column, columnIndex, isSubColumn ? parent.columnConfig : null);
+        this.insertColumn(this.table, column, columnIndex, this.isSubColumn ? parent.columnConfig : null);
     },
     watch: {
         title(val) {
@@ -119,28 +121,47 @@ export default {
     methods: {
         insertColumn(table, column, index, parent) {
             let array = table.columns;
-            if (parent) {
+            if (parent && parent !== null) {
                 array = parent.children;
                 if (!array) {
                     array = parent.children = [];
                 }
+                this.orderQueue.push(...parent.orderQueue);
             }
             if (typeof index !== 'undefined') {
                 array.splice(index, 0, column);
-                this.columnOrder = index;
+                this.orderQueue.push(index)
             }
             else {
-                this.columnOrder = array.push(column) - 1;
+                this.orderQueue.push(array.push(column) - 1)
             }
         },
+        //动态更新列属性时触发更新
         updateColumn(name, customVal) {
             let value = customVal || this[name];
+            let target = this.getTarget();
+            let parent = !this.isSubColumn ? target.parent : target.parent.children[target.curOrder];
             if (value) {
-                this.$set(this.table.columns[this.columnOrder], name, value);
+                this.$set(parent, name, value);
             }
         },
+        //该列被动态删除时触发
         removeColumn() {
-            this.table.columns.splice(this.columnOrder, 1);
+            let target = this.getTarget();
+            let parent = !this.isSubColumn ? this.table.columns : target.parent.children;
+            parent.splice(target.curOrder, 1);      
+        },
+        //获取父列及当前列位置
+        getTarget(){
+            let target = {}
+            target.curOrder = this.orderQueue[this.orderQueue.length - 1];
+            let parent = this.table.columns[this.orderQueue[0]];
+            for (var i = 1; i < this.orderQueue.length - 1 ; i++) {
+                let item = this.orderQueue[i];
+                parent = parent.children[item];
+            }
+            target.parent = parent;
+            return target;
         }
     },
     destroyed() {

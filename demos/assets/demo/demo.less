@@ -103,10 +103,41 @@ footer {
     background:#fff;
 }
 
+.x-page-enter,.x-page-enter-active {
+    -webkit-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease
+}
+
+.x-page-enter,.x-page-leave-to {
+    opacity: 0
+}
+
+// .x-page-enter {
+//     -webkit-transform: translateX(-30px);
+//     -ms-transform: translateX(-30px);
+//     transform: translateX(-30px)
+// }
+
+.x-page-leave,.x-page-leave-active {
+    -webkit-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease
+}
+
+// .x-page-leave-to {
+//     -webkit-transform: translateX(30px);
+//     -ms-transform: translateX(30px);
+//     transform: translateX(30px)
+// }
+
 .x-demo {
     color: rgba(0, 0, 0, .65);
   .x-demo-inner {
     padding-right: 40px;
+    &>div>ul>li {
+        margin-bottom: 1em;
+    }
   }
   h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
@@ -157,12 +188,6 @@ footer {
             text-align: left
         }
     }
-    ul {
-        li{
-            margin-bottom: 1em;
-        }
-    }
-
 }
 
 /* Sidebar Styles */

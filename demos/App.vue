@@ -6,9 +6,7 @@
             <span class="logo-text">XCUI</span>
           </router-link>
       </header>
-      <transition name="slide-left">
-          <router-view></router-view>
-      </transition>
+      <router-view></router-view>
       <footer>
           <div class="footer-main">
               <span>@2016~2017, wmfe</span>

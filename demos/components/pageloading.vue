@@ -25,6 +25,68 @@
 
 :::
 
+
+## 路由中的应用示例
+
+ 在应用入口点处使用路由钩子来应用`pageloading`效果：下面例子中使用了[async-components](https://vuejs.org/v2/guide/components.html#Async-Components)。
+
+```javascript
+// main.js
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import xcui from 'xcui';
+import App from './App';
+
+Vue.use(xcui);
+Vue.use(VueRouter);
+new Vue(App).$mount('#app');
+```
+
+```javascript
+// App.vue
+import router from './router';
+export default {
+    router: router,
+    mounted() {
+        router.beforeEach((to, from, next) => {
+            this.$PageLoading.start();
+            next();
+        });
+
+        router.afterEach((to, from, next) => {
+            this.$PageLoading.done();
+            window.scrollTo(0, 0);
+        });
+    }
+};
+```
+
+```javascript
+// router.js
+import VueRouter from 'vue-router';
+import Home from './Home';
+import Homecontent from './components/homeContent';
+
+// 异步组件, 在webpack中会自动拆分为chunk。
+const Installation = () => import('./components/installation');
+
+const router = new VueRouter({
+    routes: [{
+        path: '/',
+        component: Home,
+        children: [
+            {
+                path: '/home',
+                component: Homecontent
+            }, {
+                path: '/intro/installation',
+                component: Installation
+            }
+        ]
+    }]
+});
+```
+
 ## API
 
 ```javascript
@@ -55,6 +117,8 @@ this.$PageLoading.config({
 
 
 <script>
+    import '#/pageloading.less';
+    import '#/button.less';
     export default {
         methods: {
             start() {

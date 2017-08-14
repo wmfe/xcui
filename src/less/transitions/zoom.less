@@ -7,7 +7,7 @@
     }
 }
 
-// tag 
+// tag
 .zoom-motion(x-tag-zoom, xZoom, @animation-duration-base);
 
 // modal
@@ -18,6 +18,9 @@
 
 // popover
 .zoom-motion(x-popover-zoom, xZoomFast, @animation-duration-base);
+
+// alert
+.zoom-motion(x-alert-zoom, xAlertZoom, @animation-duration-base);
 
 
 @keyframes xZoomIn {
@@ -88,5 +91,29 @@
     opacity: 0;
     .scale(.7);
   }
+}
+
+// alert
+
+@keyframes xAlertZoomIn {
+    0% {
+        opacity: 0;
+        .scaleY(0.7);
+    }
+    100% {
+        opacity: 1;
+        .scaleY(1);
+    }
+}
+
+@keyframes xAlertZoomOut {
+    0% {
+        opacity: 1;
+        .scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        .scaleY(0.7);
+    }
 }
 

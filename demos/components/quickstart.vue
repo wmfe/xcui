@@ -35,4 +35,31 @@
 </body>
 </html>
 ```
+
+## 命令行脚手架
+
+使用脚手架快速搭建工程项目。首先需要安装`vue-cli`:
+
+```bash
+$ npm install -g vue-cli
+```
+
+**最简单的页面**: 一个html，搭载了`vue`和`xcui`。
+
+```bash
+$ vue init xcui-templates/simple myproject
+```
+
+**集成webpack和vue-loader**: 一个简单的使用Webpack + vue-loader配置的脚手架，可以快速上手。
+
+```bash
+$ vue init xcui-templates/webpack-simple myproject
+```
+
+**全功能webpack**: 集成了webpack + vue-loader + hot-reload + linting + testing的全功能项目脚手架。
+
+```bash
+$ vue init xcui-templates/webpack myproject
+```
+
 </template>

@@ -1,3 +1,4 @@
+import Checkbox from 'xcui/src/components/checkbox';
 
 export default {
     props: {
@@ -16,6 +17,10 @@ export default {
         selectedValue: {
             type: [String, Number]
         }
+    },
+
+    components: {
+        'x-checkbox': Checkbox
     },
 
     methods: {
@@ -52,10 +57,26 @@ export default {
         },
         onMouseleaveTR(index) {
             this.$emit('removeHoverRow', index);
+        },
+        //取出多级列数组的叶子节点对数据进行渲染
+        doFlattenColumns(allColumns) {
+            const result = [];
+            if (allColumns && allColumns.length > 0) {
+                allColumns.forEach((column) => {
+                    if (column.children && column.children.length > 0) {
+                        result.push.apply(result, this.doFlattenColumns(column.children));
+                    }
+                    else {
+                        result.push(column);
+                    }
+                });
+            }
+            return result;
         }
     },
 
     render() {
+        let dataColumns = this.doFlattenColumns(this.columns);
         return (
             <tbody>
                 {
@@ -66,7 +87,7 @@ export default {
                             onMouseleave={this.onMouseleaveTR.bind(this, dataIndex)}
                         >
                             {
-                                this.columns.map(columnItem => {
+                                dataColumns.map(columnItem => {
                                     let currentUniqueValue = dataItem[columnItem.prop];
                                     switch (columnItem.type) {
                                         case 'selection':

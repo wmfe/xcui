@@ -26,7 +26,7 @@ XCUI 是基于`Vue2.0`的**桌面端组件库**。
 通过`npm`安装，或在[这里](https://github.com/wmfe/xcui/releases)下载打包好的版本：
 
 ```bash
-npm install xcui
+npm install xcui --save
 ```
 
 
@@ -46,8 +46,8 @@ Vue.use(xcui);
 或者：
 
 ```javascript
-var Vue = require('vue');
-var xcui = require('xcui').default;
+var Vue = import 'vue');
+var xcui = import 'xcui').default;
 Vue.use(xcui);
 ```
 

@@ -8,6 +8,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 var env = config.build.env
 
@@ -21,7 +22,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     devtool: config.build.productionSourceMap ? '#source-map' : false,
     output: {
         path: config.build.assetsRoot,
-        publicPath: env.NODE_ENV === '"production"' ? '/xcui/' : '/',
+        publicPath: process.env.SITE === 'local' ? '/' : '/xcui/',
         filename: utils.assetsPath('js/[name].[chunkhash].js'),
         chunkFilename: utils.assetsPath('js/chunk.[id].[chunkhash].js')
     },
@@ -30,6 +31,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         new webpack.DefinePlugin({
             'process.env': env
         }),
+
         // extract css into its own file
         new ExtractTextPlugin({
             filename: utils.assetsPath('css/[name].[contenthash].css')
@@ -59,12 +61,38 @@ var webpackConfig = merge(baseWebpackConfig, {
             // necessary to consistently work with multiple chunks via CommonsChunkPlugin
             chunksSortMode: 'dependency'
         }),
+        // split vendor js into its own file
+        new webpack.optimize.CommonsChunkPlugin({
+          name: 'vendor',
+          minChunks: function (module, count) {
+            // any required modules inside node_modules are extracted to vendor
+            return (
+              module.resource &&
+              /\.js$/.test(module.resource) &&
+              module.resource.indexOf(
+                path.join(__dirname, '../node_modules')
+              ) === 0
+            )
+          }
+        }),
+        // extract webpack runtime and module manifest to its own file in order to
+        // prevent vendor hash from being updated whenever app bundle is updated
+        new webpack.optimize.CommonsChunkPlugin({
+          name: 'manifest',
+          chunks: ['vendor']
+        }),
         // copy custom static assets
         new CopyWebpackPlugin([{
             from: path.resolve(__dirname, '../static'),
             to: config.build.assetsSubDirectory,
             ignore: ['.*']
         }]),
+        new UglifyJSPlugin({
+            sourceMap: true
+        }),
+        new webpack.NormalModuleReplacementPlugin(/^#\/(.*)\.less$/, function(resource) {
+            resource.request = '#/empty.less';
+        }),
         // webpack 3 scope hoisting
         new webpack.optimize.ModuleConcatenationPlugin()
     ]

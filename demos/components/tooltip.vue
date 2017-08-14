@@ -184,6 +184,16 @@
 
 </template>
 
+<script>
+import '#/tooltip.less';
+import '#/button.less';
+import '#/input.less';
+export default {
+
+}
+</script>
+
+
 <style lang="less">
     .demo-tooltip {
         .box {

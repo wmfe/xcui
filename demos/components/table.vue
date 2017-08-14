@@ -937,11 +937,115 @@
 ```
 :::
 
+## 多级表头
+
+::: demo 当表头需要分组，可以通过对表头多层嵌套实现
+```html
+<tpl>
+    <div>
+        <x-table
+            :data="sourceData"
+            :initial-selected-value-list="selectedValueList"
+            bordered
+        >
+            <x-table-column
+                type="selection"
+                prop="name"
+                width="50px"
+            >
+            </x-table-column>
+            <x-table-column
+                title="姓名"
+                prop="name"
+            >
+            </x-table-column>
+            <x-table-column
+                title="职业"
+                prop="job"
+            >
+
+                <x-table-column
+                    title="之前职业"
+                    prop="job"
+                >
+                    <x-table-column
+                        title="兼职"
+                        prop="exjob"
+                    >
+                    </x-table-column>
+                    <x-table-column
+                        title="实习"
+                        prop="partjob"
+                    >
+                    </x-table-column>
+                    <x-table-column
+                        title="全职"
+                        prop="alljob"
+                    >
+                    </x-table-column>
+
+                </x-table-column>
+                <x-table-column
+                    title="当前职业"
+                    prop="job"
+                >
+                </x-table-column>
+            </x-table-column>
+            <x-table-column
+                title="地址"
+                prop="address"
+            >
+            </x-table-column>
+        </x-table>
+    </div>
+</tpl>
+<script>
+    export default {
+        data() {
+            return {
+                sourceData: [
+                    {
+                        name: '李雷',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: '前端开发工程师',
+                        birth: '1994-03-11',
+                        gender: '男',
+                        exjob: '配送员',
+                        partjob: '产品经理',
+                        alljob: '鼓励师'
+                    }, {
+                        name: '韩梅梅',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: '架构师',
+                        birth: '1996-09-27',
+                        gender: '女',
+                        exjob: '配送员',
+                        partjob: '产品经理',
+                        alljob: '鼓励师'
+                    }, {
+                        name: '小明',
+                        address: '北京市海淀区新建宫门路17号',
+                        job: 'UI设计师',
+                        birth: '1992-05-20',
+                        gender: '男',
+                        exjob: '配送员',
+                        partjob: '产品经理',
+                        alljob: '鼓励师'
+                    }
+                ],
+                selectedValueList: ['小明'],
+            };
+        }
+    };
+</script>
+```
+:::
+
 ## Table Props
 | 名字 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|
 |data|Array|[]|表格数据|必选|
-|height|Number|-|表格的高度|可选|
+|height|Number|-|表格的最大高度|可选|
 |bordered|Boolean|false|是否带边框|可选|
 |striped|Boolean|false|是否带斑马纹|可选|
 |empty-tip|String|暂无数据|没有表格数据的提示文案|可选|
@@ -969,6 +1073,9 @@
 
 </template>
 <script>
+    import '#/tooltip.less';
+    import '#/tag.less';
+    import '#/table.less';
     export default {
         data() {
             return {
@@ -978,19 +1085,28 @@
                         address: '北京市海淀区新建宫门路17号',
                         job: '前端开发工程师',
                         birth: '1994-03-11',
-                        gender: '男'
+                        gender: '男',
+                        exjob: '配送员',
+                        partjob: '产品经理',
+                        alljob: '鼓励师'
                     }, {
                         name: '韩梅梅',
                         address: '北京市海淀区新建宫门路17号',
                         job: '架构师',
                         birth: '1996-09-27',
-                        gender: '女'
+                        gender: '女',
+                        exjob: '配送员',
+                        partjob: '产品经理',
+                        alljob: '鼓励师'
                     }, {
                         name: '小明',
                         address: '北京市海淀区新建宫门路17号',
                         job: 'UI设计师',
                         birth: '1992-05-20',
-                        gender: '男'
+                        gender: '男',
+                        exjob: '配送员',
+                        partjob: '产品经理',
+                        alljob: '鼓励师'
                     }
                 ],
                 sourceData1: [

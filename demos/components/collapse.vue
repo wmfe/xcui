@@ -3,7 +3,7 @@
 
 ## 概述
 
-点击面板，实现内容区域的展示和隐藏  
+点击面板，实现内容区域的展示和隐藏
 
 ## 基础模式
 
@@ -35,7 +35,7 @@
     <p style="margin-top: 15px;">
         当前展开的面板值数组： {{opens1}}
     </p>
-   
+
 <script>
     export default {
         data() {
@@ -85,7 +85,7 @@
             </div>
         </x-collapse-item>
     </x-collapse>
-   
+
 <script>
     export default {
         data() {
@@ -145,7 +145,7 @@
             </div>
         </x-collapse-item>
     </x-collapse>
-   
+
 <script>
     export default {
         data() {
@@ -158,10 +158,10 @@
 </script>
 <style>
     .title-right{
-        float: right;      
+        float: right;
     }
     .title-left{
-        padding-right: 300px;        
+        padding-right: 300px;
     }
     .eg-class{
         width: 80%;
@@ -207,6 +207,7 @@
 </template>
 
 <script>
+    import '#/collapse.less';
     export default {
         data() {
             return {
@@ -222,10 +223,10 @@
 </script>
 <style>
     .title-right{
-        float: right;      
+        float: right;
     }
     .title-left{
-        padding-right: 300px;        
+        padding-right: 300px;
     }
     .eg-class{
         width: 80%;

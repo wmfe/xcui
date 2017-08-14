@@ -183,6 +183,7 @@
                 rowKey: '',
                 tableWidth: null,
                 headerHeight: '',
+                bodyHeight: '',
                 scrollbarHeight: '',
                 selectedValueList: this.initialSelectedValueList,
                 selectedValue: this.initialSelectedValue
@@ -221,6 +222,26 @@
                 }
                 return '';
             },
+            tableStyle() {
+                let style = {};
+                // 无数据时 默认高度300px
+                if (this.data.length === 0) {
+                    style = {
+                        'height': 300 + this.headerHeight + 'px'
+                    };
+                    return style;
+                }
+                if (this.height) {
+                    style = {
+                        'height': this.bodyHeight + this.headerHeight < +this.height ? this.bodyHeight + this.headerHeight + 'px': +this.height + 'px'
+                    };
+                    return style;
+                }
+                style = {
+                    'height': this.bodyHeight + this.headerHeight + 'px'
+                };
+                return style;
+            },
             fixedBodyStyle() {
                     let style = {}
                     if (this.height) {
@@ -243,26 +264,6 @@
                     return this.columns[columnsLen - 1].width;
                 }
                 return '';
-            },
-            tableStyle() {
-                let style = {};
-                // 无数据时 默认高度300px
-                if (this.data.length === 0) {
-                    style = {
-                        'height': 300 + this.headerHeight + 'px'
-                    };
-                    return style;
-                }
-                if (this.height) {
-                    style = {
-                        'height': +this.height + 'px'
-                    };
-                    return style;
-                }
-                style = {
-                    'height': this.bodyHeight + this.headerHeight + 'px'
-                };
-                return style;
             },
             fixedLeftTableStyle() {
                 let style = {};
@@ -300,6 +301,20 @@
             },
             rightFixedColumns() {
                 return this.columns.filter((column) => column.fixed === 'right');
+            }
+        },
+        watch: {
+            data() {
+                this.$nextTick(() => {
+                    this.bodyHeight = this.$refs.bodyWrapper.offsetHeight;
+                    this.scrollbarHeight = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
+                });
+            },
+            initialSelectedValue(value) {
+                this.selectedValue = value;
+            },
+            initialSelectedValueList(value) {
+                this.selectedValueList = value;
             }
         },
         mounted() {

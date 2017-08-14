@@ -10,7 +10,7 @@
 
 ```html
 
-<tpl>    
+<tpl>
     <div style="width: 300px;">
         <x-progress :percentage="0"></x-progress>
         <x-progress :percentage="70"></x-progress>
@@ -75,6 +75,8 @@
 
 </template>
 
+<script>
+import '#/progress.less';
 </script>
 
 <style>

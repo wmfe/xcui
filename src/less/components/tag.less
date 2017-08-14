@@ -1,3 +1,6 @@
+@charset "UTF-8";
+@import "../theme/default";
+
 @tag-prefix-cls: ~"@{xcui-prefix}-tag";
 
 .@{tag-prefix-cls} {
@@ -37,7 +40,7 @@
             border: 1px solid @brand-primary;
         }
     }
-    
+
     &-has-color {
         color: @white;
         border: transparent;
@@ -45,7 +48,12 @@
             color: @white;
         }
     }
-    
+
+    &-disabled {
+        cursor: @cursor-disabled;
+        color: @disabled-color;
+    }
+
     &-pink {
         color: #f5317f;
         background: #fdd8e7;
@@ -144,4 +152,3 @@
 }
 
 
-    

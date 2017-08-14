@@ -173,6 +173,8 @@ this.$Notice.config({
 </template>
 
 <script>
+    import '#/notice.less';
+    import '#/button.less';
     export default {
         methods: {
             notice0() {

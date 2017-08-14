@@ -39,6 +39,9 @@ const Form = () => import('./components/form');
 const Table = () => import('./components/table');
 const Steps = () => import('./components/steps');
 const Collapse = () => import('./components/collapse');
+const Upload = () => import('./components/upload');
+const Dropdown = () => import('./components/dropdown');
+const Alert = () => import('./components/alert');
 const MultiTreeSelect = () => import('./components/multi-tree-select');
 const SingleTreeSelect = () => import('./components/single-tree-select');
 
@@ -147,11 +150,20 @@ const router = new VueRouter({
                 path: '/component/collapse',
                 component: Collapse
             }, {
+                path: '/component/upload',
+                component: Upload
+            }, {
+                path: '/component/dropdown',
+                component: Dropdown
+            }, {
                 path: '/component/single-tree-select',
                 component: SingleTreeSelect
             }, {
                 path: '/component/multi-tree-select',
                 component: MultiTreeSelect
+            }, {
+                path: '/component/alert',
+                component: Alert
             }
         ]
     }]
