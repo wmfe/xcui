@@ -309,6 +309,12 @@
                     this.bodyHeight = this.$refs.bodyWrapper.offsetHeight;
                     this.scrollbarHeight = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
                 });
+            },
+            initialSelectedValue(value) {
+                this.selectedValue = value;
+            },
+            initialSelectedValueList(value) {
+                this.selectedValueList = value;
             }
         },
         mounted() {
