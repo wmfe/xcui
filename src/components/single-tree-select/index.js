@@ -1,3 +1,3 @@
-import TreeSelect from './src/tree-select.vue';
+import SingleTreeSelect from './src/single-tree-select.vue';
 
-export default TreeSelect;
+export default SingleTreeSelect;

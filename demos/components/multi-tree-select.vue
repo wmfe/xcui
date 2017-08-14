@@ -79,7 +79,7 @@
 | INDEX | Array|[[ITEM.key, ITEM.key, ...], [ITEM.key, ITEM.key, ...], ...]                   | 选项key的二维数组， 第一维数组的索引按fields数组顺序。     |
 | KEY | Object|{ field[0]:[ITEM.key, ITEM.key, ...], field[1]: [ITEM.key, ITEM.key, ...], ...}                  | 以fields字段为key所组成的对象，key对应的值为对应层级所选的ITEM.key列表    |
 | LAST | Array| [ITEM.key, ITEM.key, ...]                | 最后一级选项ITEM.key的总列表     |
-| DETAIL | Array|{selected: LAST, everySelected: INDEX, isAllSelected: Boolean, isAllNoneSelected: Boolean}              | 分别按LAST,INDEX结构的所选项、是否全选和 是否全未选 所组成的对象     |
+| DETAIL | Array|{selected: LAST, indexSelected: INDEX, isAllSelected: Boolean, isAllNoneSelected: Boolean}              | 分别按LAST,INDEX结构的所选项、是否全选和 是否全未选 所组成的对象     |
 
 ## Data Type示例
 
@@ -135,7 +135,7 @@
 // 提供更多的数据信息
 {
     selected: LAST, // LAST结构的已选择项
-    everySelected: INDEX, // INDEX结构的已选择项
+    indexSelected: INDEX, // INDEX结构的已选择项
     isAllSelected: false, // 是否全选
     isAllNoneSelected: false // 是否全未选
 }

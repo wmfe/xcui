@@ -1,7 +1,7 @@
 <template>
-    <div class="x-tree-select">
+    <div class="x-tree-select x-multi-tree-select">
         <div class="x-tree-select-input-wrap" @click="showDropDown = !showDropDown">
-            <i class="x-icon x-tree-select-input-icon x-icon-android-close" @click="clearAll"></i>
+            <i v-if="allowClear" class="x-icon x-tree-select-input-icon x-icon-android-close" @click="clearAll"></i>
             <div class="x-tree-select-input" v-if="selected.length > 0 ">
                 已选：
                 <template v-for="(value, key) in selectedTips">
@@ -146,6 +146,10 @@ export default {
             type: Boolean,
             default: true
         },
+        allowClear: {
+            type: Boolean,
+            default: true
+        },
         defaultSelectedData: {
             type: [Array, Object],
             default() {
@@ -235,7 +239,7 @@ export default {
                     list: tree,
                 };
 
-                var start = {
+                let start = {
                     [this.keyName]: 'start',
                     selected: 0,
                     hoverKey: 'root',
@@ -533,7 +537,7 @@ export default {
                 const levelSelected = this.getLevelSelected();
                 const allSelectedItems = {
                     selected: seletedItems, // 已选的根节点 key
-                    everyLevelSelected: levelSelected, // 每一级的已选数据
+                    indexSelected: levelSelected, // 每一级的已选数据
                     isAllSelected: this.allSelected, // 是否全选
                     isAllNoneSelected: this.allNonSelected, // 是否全不选
                 };

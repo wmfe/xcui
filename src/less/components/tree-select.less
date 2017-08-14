@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-
-
 .@{xcui-prefix}-tree-select {
     display: inline-block; // width: 100%;
     vertical-align: middle;
@@ -67,6 +65,7 @@
             padding: 0px;
             .@{xcui-prefix}-tree-select-item-li, .@{xcui-prefix}-tree-select-item-search {
                 list-style: none;
+                cursor: pointer;
                 padding: 5px 5px 5px 8px;
                 margin-bottom: 0;
                 line-height: 1;
@@ -97,24 +96,25 @@
             line-height: @input-height-small;
         }
     }
-    .x-tree-select-checkbox {
-        .x-checkbox-item {
+    &-checkbox {
+        .@{xcui-prefix}-checkbox-item {
             top: 2px;
             * {
                 height: 16px;
                 width: 16px;
             }
-            .x-checkbox-background {
+            .@{xcui-prefix}-checkbox-background {
                 transition: none;
             }
-            .x-checkbox-cbx {
+            .@{xcui-prefix}-checkbox-cbx {
                 transition: none;
             }
             &.is-checked, &.is-indeterminate {
-                .x-checkbox-background {
+                .@{xcui-prefix}-checkbox-background {
                     transition: none;
+                    animation: initial;
                 }
-                .x-checkbox-cbx {
+                .@{xcui-prefix}-checkbox-cbx {
                     transition: none;
                     height: 5px;
                     width: 10px;
