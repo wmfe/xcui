@@ -38,8 +38,6 @@ export default {
     },
     data() {
         return {
-            // 保存当前列元素位置，例如[1,2,3]表示该列在第二列的第三子列的第四子列
-            orderQueue: []
         };
     },
     mounted() {
@@ -65,7 +63,6 @@ export default {
             className: tdClassName,
             singleLine: this.singleLine,
             children: [],
-            orderQueue: this.orderQueue,
             // tbody 中每个 td 内的 render 方法
             render: slots.default
                 // 如果 <x-table-column> 内有 template，按照 template 内的来渲染
@@ -126,42 +123,24 @@ export default {
                 if (!array) {
                     array = parent.children = [];
                 }
-                this.orderQueue.push(...parent.orderQueue);
             }
             if (typeof index !== 'undefined') {
                 array.splice(index, 0, column);
-                this.orderQueue.push(index)
             }
             else {
-                this.orderQueue.push(array.push(column) - 1)
+                array.push(column);
             }
         },
         //动态更新列属性时触发更新
         updateColumn(name, customVal) {
             let value = customVal || this[name];
-            let target = this.getTarget();
-            let parent = !this.isSubColumn ? target.parent : target.parent.children[target.curOrder];
-            if (value) {
-                this.$set(parent, name, value);
-            }
+            this.columnConfig[name] = value;
         },
         //该列被动态删除时触发
         removeColumn() {
-            let target = this.getTarget();
-            let parent = !this.isSubColumn ? this.table.columns : target.parent.children;
-            parent.splice(target.curOrder, 1);      
-        },
-        //获取父列及当前列位置
-        getTarget(){
-            let target = {}
-            target.curOrder = this.orderQueue[this.orderQueue.length - 1];
-            let parent = this.table.columns[this.orderQueue[0]];
-            for (var i = 1; i < this.orderQueue.length - 1 ; i++) {
-                let item = this.orderQueue[i];
-                parent = parent.children[item];
-            }
-            target.parent = parent;
-            return target;
+            let parent = !this.isSubColumn ? this.table.columns : this.$parent.columnConfig.children;
+            let curIndex = parent.indexOf(this.columnConfig);
+            parent.splice(curIndex, 1); 
         }
     },
     destroyed() {
