@@ -171,3 +171,8 @@ export function setStyle(element, styleName, value) {
     }
   }
 };
+
+/* istanbul ignore next */
+export function isAppendableDOM(element) {
+    return element && typeof element === 'object' && (element.nodeType === 1 || element.nodeType === 11);
+}

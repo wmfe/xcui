@@ -133,9 +133,16 @@ this.$Notice.warning(config);
 
 // 错误通知
 this.$Notice.error(config);
+
+// 举例
+this.$Notice.info({
+    title: 'title',
+    content: 'content',
+    //...
+})
 ```
 
-### Config options
+### Config API
 
 | 参数 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|
@@ -145,6 +152,8 @@ this.$Notice.error(config);
 |onClose|Function|无|关闭后的回调函数|可选|
 |uuid|String|自动生成|当前通知的唯一标识|可选|
 
+
+### 全局配置
 
 另外提供了全局配置、全局关闭某个通知和全局销毁的方法：
 
@@ -169,6 +178,7 @@ this.$Notice.config({
 |-----|-----|-----|-----|
 |top| 通知组件距离顶端的距离，单位像素| Number | 24|
 |duration |   默认自动关闭的延时，单位毫秒 | Number | 4500|
+|insertTo|DOMElement|document.body|message的dom元素插入位置|可选|
 
 </template>
 
