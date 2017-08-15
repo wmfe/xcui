@@ -174,7 +174,7 @@ this.$Message.destroy();
 |-----|-----|-----|-----|
 |top|Number|24|提示信息距离页面顶端的距离，单位为像素|
 |duration|Number|3000|自动关闭延时，单位: 毫秒, 默认3000毫秒后自动关闭。设置0则不会自动关闭|
-
+|insertTo|DOMElement|document.body|message的dom元素插入位置|
 
 </template>
 
