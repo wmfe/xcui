@@ -47,6 +47,8 @@ import Upload from './upload';
 import DropDown from './dropdown';
 import DropDownItem from './dropdown-item';
 import DropDownMenu from './dropdown-menu';
+import Tabs from './tabs';
+import TabPane from './tab-pane';
 
 const install = (Vue) => {
     if (install.installed) {
@@ -97,6 +99,8 @@ const install = (Vue) => {
     Vue.component(DropDown.name, DropDown);
     Vue.component(DropDownItem.name, DropDownItem);
     Vue.component(DropDownMenu.name, DropDownMenu);
+    Vue.component(Tabs.name, Tabs);
+    Vue.component(TabPane.name, TabPane);
     Vue.use(Message);
     Vue.use(Notice);
     Vue.use(Dialog);
@@ -150,7 +154,9 @@ const xcui = {
     Upload,
     DropDown,
     DropDownMenu,
-    DropDownItem
+    DropDownItem,
+    Tabs,
+    TabPane
 };
 
 export default xcui;

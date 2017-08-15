@@ -107,6 +107,9 @@
                         <router-link to="/component/pagination">Pagination 分页</router-link>
                     </li>
                     <li class="sidebar-item">
+                        <router-link to="/component/tabs">Tabs 标签页</router-link>
+                    </li>
+                    <li class="sidebar-item">
                         <router-link to="/component/dropdown">Dropdown 下拉菜单</router-link>
                     </li>
                     <li class="sidebar-item">
