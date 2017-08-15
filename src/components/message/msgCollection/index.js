@@ -15,7 +15,6 @@ MsgCollection.newInstance = (Vue, properties, insertTo) => {
     div.innerHTML = `<msg-collection${props}></msg-collection>`;
 
     let insertDom = isAppendableDOM(insertTo) ? insertTo : document.body;
-    debugger;
     insertDom.appendChild(div);
 
     const msgCollection = new Vue({
