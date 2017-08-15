@@ -179,6 +179,9 @@
         },
         methods: {
             onClickTab(data, index, $event) {
+                if (data.disabled) {
+                    return;
+                }
                 this.upDateActiveTab(index);
                 this.$emit('tab-click', data);
             },

@@ -23,9 +23,9 @@
         bottom: 0;
         left: 0;
         height: 3px;
-        background-color: #46c3c1;
+        background-color: @lightseagreen-6;
         z-index: 1;
-        transition: transform .3s cubic-bezier(.645,.045,.355,1);
+        transition: transform .3s @ease-in-out;
         list-style: none;
     }
     &-nav-scroll {
@@ -43,10 +43,9 @@
         cursor: pointer;
         line-height: 44px;
         font-size: 12px;
-        color: #8391a5;
         padding: 0 4px;
         &.is-disabled {
-            cursor: not-allowed;
+            cursor: @cursor-disabled;
         }
     }
     &-nav-prev {
@@ -72,14 +71,15 @@
         display: inline-block;
         list-style: none;
         font-size: 14px;
-        color: #8391a5;
+        &:hover {
+            color: @gray-darker;
+        }
         &.is-disabled {
-            pointer-events: none;
-            cursor: default;
-            color: #ccc;
+            cursor: @cursor-disabled;
+            color: @disabled-color;
         }
         &.is-active {
-            color: #46c3c1;
+            color: @lightseagreen-6;
         }
         &.is-closable {
             .x-tabs-nav-close {
@@ -92,10 +92,10 @@
 .@{tabs-prefix-cls}-card {
     .@{tabs-prefix-cls}-nav-item {
         border: 1px solid transparent;
-        transition: all .3s cubic-bezier(.645,.045,.355,1);
+        transition: all .3s @ease-in-out;
         &.is-active {
             border: 1px solid @gray-ddd;
-            border-bottom-color: #fff;
+            border-bottom-color: @body-bg;
             border-radius: 4px 4px 0 0;
         }
     }
@@ -105,10 +105,10 @@
     &.@{tabs-prefix-cls}-card {
         .@{tabs-prefix-cls}-nav-item {
             border: 1px solid transparent;
-            transition: all .3s cubic-bezier(.645,.045,.355,1);
+            transition: all .3s @ease-in-out;
             &.is-active {
                 border: 1px solid @gray-ddd;
-                border-right-color: #fff;
+                border-right-color: @body-bg;
                 border-radius: 4px 0 0 4px;
             }
         }
@@ -144,9 +144,9 @@
         top: 0;
         right: 0;
         width: 3px;
-        background-color: #46c3c1;
+        background-color: @lightseagreen-6;
         z-index: 1;
-        transition: transform .3s cubic-bezier(.645,.045,.355,1);
+        transition: transform .3s @ease-in-out;
         list-style: none;
     }
     .@{tabs-prefix-cls}-nav-prev,
@@ -155,13 +155,12 @@
         cursor: pointer;
         line-height: 20px;
         font-size: 12px;
-        color: #8391a5;
         padding: 4 0px;
         width: 100%;
         box-sizing: border-box;
         text-align: center;
         &.is-disabled {
-            cursor: not-allowed;
+            cursor: @cursor-disabled;
         }
     }
     .@{tabs-prefix-cls}-nav-prev {
