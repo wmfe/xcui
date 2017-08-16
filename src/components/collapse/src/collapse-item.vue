@@ -5,18 +5,25 @@
             <x-icon :name="isOpen ? iconUpName : iconDownName" size="14"></x-icon>
             <slot name="titleRight"></slot>
         </div>
-        <div class="x-collapse-item-wrap" :style="{height: contentHeight}" ref="content">
-            <div class="x-collapse-item-content">
-                <slot></slot>
+        <collapse-transition>
+            <div class="x-collapse-item-wrap" v-show="isOpen">
+                <div class="x-collapse-item-content">
+                    <slot></slot>
+                </div>
             </div>
-        </div>
+        </collapse-transition>
     </div>
 </template>
 <script>
     import Emitter from 'xcui/src/utils/mixins/emitter';
+    import CollapseTransition from 'xcui/src/utils/collapse-transition';
+
     export default {
         name: 'x-collapse-item',
         componentName: 'x-collapse-item',
+        components: {
+            CollapseTransition
+        },
         props: {
             id: {
                 type: [String, Number],
@@ -32,32 +39,15 @@
             }
         },
         mixins: [Emitter],
-        data() {
-            return {
-                orginHeight: 'auto',
-                isReady: false
-            };
-        },
         computed: {
             isOpen() {
                 return this.$parent.openItems.indexOf(this.id) > -1;
-            },
-            contentHeight() {
-                if (this.isReady) {
-                    return this.isOpen ? this.orginHeight : 0;
-                }
             }
         },
         methods: {
             clickHeader: function () {
                 this.dispatch('x-collapse', 'itemClick', this.id);
             }
-        },
-        mounted() {
-            this.$nextTick(() => {
-                this.isReady = true;
-                this.orginHeight = window.getComputedStyle(this.$refs.content, null).height;
-            });
         }
     };
 </script>
