@@ -120,19 +120,7 @@ export default {
     },
     watch: {
         value(val) {
-            this.show = val;
-            if (this.scrollable) {
-                return;
-            }
-            if (val) {
-                document.body.style.overflow = 'hidden';
-                this.scrollBarWidth = getScrollBarSize();
-            }
-            else {
-                document.body.style.overflow = 'auto';
-                this.scrollBarWidth = 0;
-            }
-            document.body.style.paddingRight = `${this.scrollBarWidth}px`;
+            this.handleVisible(val);
         },
         show(val) {
             this.$emit('input', val);
@@ -149,6 +137,21 @@ export default {
     methods: {
         close(e) {
             this.show = false;
+        },
+        handleVisible(val) {
+           this.show = val;
+           if (this.scrollable) {
+               return;
+           }
+           if (val) {
+               document.body.style.overflow = 'hidden';
+               this.scrollBarWidth = getScrollBarSize();
+           }
+           else {
+               document.body.style.overflow = 'auto';
+               this.scrollBarWidth = 0;
+           }
+           document.body.style.paddingRight = `${this.scrollBarWidth}px`;
         },
         handleWrapperClick(e) {
             if (e.target === this.$refs.modalWrapper) {
@@ -172,6 +175,9 @@ export default {
                 this.close();
             }
         }
+    },
+    mounted() {
+        this.value && this.handleVisible(this.value);
     }
 };
 </script>
