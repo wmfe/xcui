@@ -1,0 +1,27 @@
+@charset "UTF-8";
+@import "../theme/default";
+@breadcrumb-prefix-cls: ~"@{xcui-prefix}-breadcrumb";
+
+
+.@{breadcrumb-prefix-cls} {
+    &-item:last-child &-separator {
+        display: none;
+    }
+    a {
+        cursor: pointer;
+        text-decoration: none;
+        transition: color .2s @ease-in-out;
+        &:hover {
+            color: @brand-primary;
+            text-decoration: none;
+        }
+    }
+    &-item-inner {
+        color: @text-color;
+    }
+    &-separator {
+        color: @gray-ddd;
+        margin: 0 8px;
+    }
+
+}
