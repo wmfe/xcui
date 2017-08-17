@@ -11,8 +11,8 @@
 <tpl>
     <x-breadcrumb>
         <x-breadcrumb-item to="/home">XCUI</x-breadcrumb-item>
-        <x-breadcrumb-item>Components</x-breadcrumb-item>
-        <x-breadcrumb-item to="/component/breadcrumb">Breadcrumb</x-breadcrumb-item>
+        <x-breadcrumb-item to="/component/breadcrumb">Components</x-breadcrumb-item>
+        <x-breadcrumb-item>Breadcrumb</x-breadcrumb-item>
     </x-breadcrumb>
 </tpl>
 ```
@@ -27,8 +27,30 @@
 <tpl>
     <x-breadcrumb separator=">">
         <x-breadcrumb-item to="/home">XCUI</x-breadcrumb-item>
-        <x-breadcrumb-item>Components</x-breadcrumb-item>
-        <x-breadcrumb-item to="/component/breadcrumb">Breadcrumb</x-breadcrumb-item>
+        <x-breadcrumb-item to="/component/breadcrumb">Components</x-breadcrumb-item>
+        <x-breadcrumb-item>Breadcrumb</x-breadcrumb-item>
+    </x-breadcrumb>
+</tpl>
+```
+
+:::
+
+## 自定义图标
+
+::: demo 可自定义每项的内容，比如带有一个图标。
+
+```html
+<tpl>
+    <x-breadcrumb>
+        <x-breadcrumb-item to="/home">
+            <x-icon name="home"></x-icon> XCUI
+        </x-breadcrumb-item>
+        <x-breadcrumb-item to="/component/breadcrumb">
+            <x-icon name="cube"></x-icon> Components
+        </x-breadcrumb-item>
+        <x-breadcrumb-item>
+            <x-icon name="compass"></x-icon> Breadcrumb
+        </x-breadcrumb-item>
     </x-breadcrumb>
 </tpl>
 ```
