@@ -43,6 +43,7 @@ const Upload = () => import('./components/upload');
 const Dropdown = () => import('./components/dropdown');
 const Alert = () => import('./components/alert');
 const Tabs = () => import('./components/tabs');
+const Breadcrumb = () => import('./components/breadcrumb');
 
 const router = new VueRouter({
     routes: [{
@@ -160,6 +161,9 @@ const router = new VueRouter({
             }, {
                 path: '/component/tabs',
                 component: Tabs
+            }, {
+                path: '/component/breadcrumb',
+                component: Breadcrumb
             }
         ]
     }]
