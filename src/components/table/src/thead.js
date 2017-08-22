@@ -91,12 +91,18 @@ export default {
                         <tr>
                             {
                                 columns.map(columnItem => {
+                                    let content = columnItem.headerRender.call(
+                                        this, {
+                                            columnItem
+                                        }
+                                    );
                                     switch (columnItem.type) {
                                         case 'selection':
                                             return (
                                                 <th colspan={ columnItem.colSpan }
-                                                rowspan={ columnItem.rowSpan }
-                                                 class={columnItem.thClassName}
+                                                    rowspan={ columnItem.rowSpan }
+                                                    class={columnItem.thClassName}
+                                                    title={columnItem.singleLine ? content : ''}
                                                 >
                                                     <x-checkbox
                                                         indeterminate={this.selectedStatus === 'partial'}
@@ -107,20 +113,18 @@ export default {
                                             );
                                         case 'radio':
                                             return (
-                                                <th class={columnItem.thClassName}></th>
+                                                <th
+                                                    class={columnItem.thClassName}
+                                                    title={columnItem.singleLine ? content : ''}
+                                                ></th>
                                             );
                                         case 'normal':
                                         default:
-                                            let content = columnItem.headerRender.call(
-                                                this,
-                                                {
-                                                    columnItem
-                                                }
-                                            );
                                             return (
                                                 <th colspan={ columnItem.colSpan }
                                                 rowspan={ columnItem.rowSpan }
                                                 class={columnItem.thClassName}
+                                                title={columnItem.singleLine ? content : ''}
                                                 >
                                                     {content}
                                                 </th>
