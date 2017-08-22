@@ -53,6 +53,7 @@ export default {
         if (this.type) {
             this.table.rowKey = this.prop;
         }
+        let thClassName = this.singleLine ? SINGLE_LINE_CLASS_NAME : '';
         let tdClassName = this.singleLine ? this.className + ' ' + SINGLE_LINE_CLASS_NAME : this.className;
         let column = {
             title: this.title,
@@ -60,6 +61,7 @@ export default {
             fixed: this.fixed || '',
             prop: this.prop,
             width: this.width,
+            thClassName: thClassName,
             className: tdClassName,
             singleLine: this.singleLine,
             children: [],
@@ -140,7 +142,7 @@ export default {
         removeColumn() {
             let parent = !this.isSubColumn ? this.table.columns : this.$parent.columnConfig.children;
             let curIndex = parent.indexOf(this.columnConfig);
-            parent.splice(curIndex, 1); 
+            parent.splice(curIndex, 1);
         }
     },
     destroyed() {
