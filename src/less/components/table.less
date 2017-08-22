@@ -35,9 +35,7 @@
         text-align: left;
     }
     th {
-        padding: 0 15px;
-        white-space: nowrap;
-        overflow: hidden;
+        padding: 5px 15px;
         text-align: left;
     }
     &-striped {
@@ -52,13 +50,14 @@
         transition: all .3s ease;
     }
     td {
-        padding: 0 15px;
+        padding: 5px 15px;
         word-break: break-all;
     }
     td, th {
         height: 40px;
         vertical-align: middle;
         border-bottom: 1px solid @gray-ddd;
+        box-sizing: border-box;
     }
     &-bordered {
         border: 1px solid @gray-ddd;
