@@ -1,7 +1,9 @@
 import MsgCollection from './msgCollection.vue';
+import { isAppendableDOM } from 'xcui/src/utils/dom';
+
 const camelcaseToHyphen = str => str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 
-MsgCollection.newInstance = (Vue, properties) => {
+MsgCollection.newInstance = (Vue, properties, insertTo) => {
     const _props = properties || {};
 
     let props = '';
@@ -11,7 +13,9 @@ MsgCollection.newInstance = (Vue, properties) => {
 
     const div = document.createElement('div');
     div.innerHTML = `<msg-collection${props}></msg-collection>`;
-    document.body.appendChild(div);
+
+    let insertDom = isAppendableDOM(insertTo) ? insertTo : document.body;
+    insertDom.appendChild(div);
 
     const msgCollection = new Vue({
         el: div,
@@ -28,7 +32,7 @@ MsgCollection.newInstance = (Vue, properties) => {
         },
         component: msgCollection,
         destroy() {
-            document.body.removeChild(div);
+            insertDom.removeChild(div);
         }
     };
 };

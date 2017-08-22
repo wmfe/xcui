@@ -11,7 +11,7 @@
 
 ## 配置选项
 
-::: demo 基本使用。通过填入必填值v-model、initData(所有值)、 fields(读取字段名)、fieldTexts(读取字段中文名)，以及相关可选值，可以动态查看DEMO返回值及其格式。相关模板代码实时生成于TextArea框。
+::: demo 通过填入必填值及相关可选值，可以动态查看DEMO返回值及其格式。相关模板代码实时生成于TextArea框。
 
 ```html
 

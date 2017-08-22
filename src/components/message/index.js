@@ -17,6 +17,7 @@ const xMessage = {
         let top;
         let messageInstance;
         let uuid = 1;
+        let insertDom;
 
         function getMessageInstance() {
             messageInstance = messageInstance || MsgCollection.newInstance(Vue, {
@@ -24,7 +25,7 @@ const xMessage = {
                 styles: {
                     top: `${top}px`
                 }
-            });
+            }, insertDom);
 
             return messageInstance;
         }
@@ -74,6 +75,9 @@ const xMessage = {
                 }
                 if (options.duration) {
                     defaultDuration = options.duration;
+                }
+                if (options.insertTo) {
+                    insertDom = options.insertTo;
                 }
             },
             destroy() {
