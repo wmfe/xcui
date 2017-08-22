@@ -47,6 +47,8 @@ import Upload from './upload';
 import DropDown from './dropdown';
 import DropDownItem from './dropdown-item';
 import DropDownMenu from './dropdown-menu';
+import MultiTreeSelect from './multi-tree-select';
+import SingleTreeSelect from './single-tree-select';
 import Tabs from './tabs';
 import TabPane from './tab-pane';
 import Breadcrumb from './breadcrumb';
@@ -100,6 +102,8 @@ const install = (Vue) => {
     Vue.component(Upload.name, Upload);
     Vue.component(DropDown.name, DropDown);
     Vue.component(DropDownItem.name, DropDownItem);
+    Vue.component(MultiTreeSelect.name, MultiTreeSelect);
+    Vue.component(SingleTreeSelect.name, SingleTreeSelect);
     Vue.component(DropDownMenu.name, DropDownMenu);
     Vue.component(Tabs.name, Tabs);
     Vue.component(TabPane.name, TabPane);
@@ -158,6 +162,8 @@ const xcui = {
     Upload,
     DropDown,
     DropDownMenu,
+    MultiTreeSelect,
+    SingleTreeSelect,
     DropDownItem,
     Tabs,
     TabPane,

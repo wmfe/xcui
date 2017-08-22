@@ -48,6 +48,12 @@
                         <router-link to="/component/select">Select 选择器</router-link>
                     </li>
                     <li class="sidebar-item">
+                        <router-link to="/component/single-tree-select">SingleTreeSelect 单选选择器</router-link>
+                    </li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/multi-tree-select">MultiTreeSelect 多选选择器</router-link>
+                    </li>
+                    <li class="sidebar-item">
                         <router-link to="/component/switch">Switch 开关</router-link>
                     </li>
                     <li class="sidebar-item">
