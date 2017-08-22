@@ -1,12 +1,12 @@
 <template>
     <div class="x-tree-select x-multi-tree-select">
         <div class="x-tree-select-input-wrap" @click="showDropDown = !showDropDown">
-            <i v-if="allowClear" class="x-icon x-tree-select-input-icon x-icon-android-close" @click="clearAll"></i>
-            <div class="x-tree-select-input" v-if="selected.length > 0 ">
+            <i v-if="allowClear" class="x-icon x-tree-select-input-icon x-icon-android-close" @click.stop="clearAll"></i>
+            <div class="x-tree-select-input" v-if="hasSelected ">
                 已选：
                 <template v-for="(value, key) in selectedTips">
                     <template v-if="value > 0">
-                        <span v-text="fieldTexts[key - 1]"></span>
+                        <span v-text="fieldTexts[key-1 ]"></span>
                         <span class="x-tree-select-input-count">
                             <span v-text="value"></span>个
                         </span>
@@ -53,7 +53,6 @@
 
 <script>
 import vCheckbox from './tree-select-checkbox.vue';
-import xInput from '../../input';
 import { concatMultiList, filterList, travelUp, travelDown } from './util.js';
 import mixin from './mixin.js';
 const CHECKBOX_UNCHECKED = 0;
@@ -67,14 +66,14 @@ const EVERY_LEVEL_KEY = 'KEY';
 const LAST_LEVEL = 'LAST';
 const ALL_LEVEL = 'DETAIL';
 
-var exposeDataEventTimer = null;
+let exposeDataEventTimer = null;
 
 // 对比一列数据的 selected 状态，来得出结果作为其 parent 的状态
 const compareWithSibling = (list) => {
     if (list) {
-        var keys = Object.keys(list);
+        let keys = Object.keys(list);
         if (keys.length > 1) {// 有很多项
-            var firstKeySelectStatus = list[keys[0]].selected;// 取出第一项
+            let firstKeySelectStatus = list[keys[0]].selected;// 取出第一项
             if (keys.some(key => {// 发现有跟第一项不一样的值
                 return list[key].selected !== firstKeySelectStatus;
             })) {
@@ -177,8 +176,8 @@ export default {
             levelData: [// 用于 界面视图 展示的数据源
                 // { key, list:[] }
             ],
-            selected: [], // user selected id set
-            selectedTips: {},
+            hasSelected: false,
+            selectedTips: [],
         };
     },
     computed: {
@@ -219,7 +218,10 @@ export default {
         },
         init(data) {
             if(this.defaultSelectedDataType === LAST_LEVEL) {
-                _defaultSelectedData = this.defaultSelectedData.slice(0);// 拷贝一份用于`rawData2Tree`里逐个比对删除
+                if(this.defaultSelectedData instanceof Array)
+                    _defaultSelectedData = this.defaultSelectedData.concat();// 拷贝一份用于`rawData2Tree`里逐个比对删除
+                else
+                    throw Error('当defaultSelectedDataType为LAST时，defaultSelectedData 必须为数组！');
             } else if(this.defaultSelectedDataType === EVERY_LEVEL_KEY  || this.defaultSelectedDataType === EVERY_LEVEL_INDEX){
                 let keys = Object.keys(this.defaultSelectedData);
                 for(let i = 0, len = keys.length; i < len; i++) {
@@ -290,14 +292,15 @@ export default {
                     }
                     return CHECKBOX_UNCHECKED;
                 case EVERY_LEVEL_INDEX:
-                    const index = _defaultSelectedData[branchDepth].indexOf(key);
+                    const indexBranchList = _defaultSelectedData[branchDepth] || [];
+                    const index = indexBranchList.indexOf(key);
                     if(index > -1) {
                         _defaultSelectedData[branchDepth].splice(index, 1);
                         return CHECKBOX_CHECKED;
                     }
                     return compareWithSibling(list);
                 case EVERY_LEVEL_KEY:
-                    const branchList = _defaultSelectedData[this.fields[branchDepth]];
+                    const branchList = _defaultSelectedData[this.fields[branchDepth]] || [];
                     const keyIndex = branchList.indexOf(key);
                     if(keyIndex > -1) {
                         branchList.splice(keyIndex, 1);
@@ -442,35 +445,12 @@ export default {
             }
             return true;
         },
-
-        // 文字描述选中结果
-        getSelected() {
-            let data = this.treeRoot;
-            let ret = {
-                // 0:0,
-                // 1:0,
-                // 2:0,
-                // 3:0,
-            };
-            // 初始化结果集
-            this.fieldTexts.forEach((text, index) => {
-                ret[index + 1] = 0;
-            });
-            let selected = [];
-
-            this.collectSelected(data, ret, selected);
-
-            this.selected = selected;
-            this.selectedTips = ret;
-            this.exposeSelectedData(selected);
-        },
-
         // 递归遍历各选中节点
-        collectSelected(data, ret, leafs) {
-            let list = data.list;
+        collectSelected(list, ret, leafs) {
             if (list) {
-                Object.keys(list).forEach((key) => {
-                    let item = list[key];
+                const keys = Object.keys(list);
+                for(let j = 0, len = keys.length; j < len; j++) {
+                    let item = list[keys[j]];
                     if (item.selected !== CHECKBOX_UNCHECKED) {// 只遍历 1 、 2
                         if (item.selected === CHECKBOX_CHECKED) {
                             ret[item.branchDepth]++;
@@ -478,44 +458,60 @@ export default {
                                 leafs.push(item[this.keyName]);
                             }
                         }
-                        this.collectSelected(item, ret, leafs);
+                        item.list && this.collectSelected(item.list, ret, leafs);
                     }
-                });
+                }
             }
         },
-        getLevelSelected(type) { // type 可选{INDEX, KEY}
-            type = type || 'INDEX';
+        recurCallSelected(levelData, levelSelectedData, tips, leafs) {
+            const keys = Object.keys(levelData);
+            for(let i = 0, len = keys.length; i < len; i++) {
+                let item = levelData[keys[i]];
+                if(item.branchDepth === 0) {
+                    item.list && this.recurCallSelected(item.list, levelSelectedData, tips, leafs);
+                }
+                if (item.selected === CHECKBOX_CHECKED) {
+                    levelSelectedData && levelSelectedData[item.branchDepth-1].push(item[this.keyName]);
+
+                    tips[item.branchDepth]++;
+                    if (item.branchDepth === this.fieldsLen) {// 收集末端节点
+                        leafs.push(item[this.keyName]);
+                    }
+                    item.list && this.recurCallSelected(item.list, null, tips, leafs);
+                } else if (item.selected === CHECKBOX_INDETERMINATE) {
+                    item.list && this.recurCallSelected(item.list, levelSelectedData, tips, leafs);
+                }
+            }
+        },
+        getLevelSelected() { // type 可选{INDEX, KEY}
             const me = this;
-            let keyMap = {};
-            let levelSelectedData = type !== 'INDEX' ? {} : [];
+            let levelSelectedData = [];
+            let leafs = [];
+            let tips = [
+                0
+                // 1:0,
+                // 2:0,
+                // 3:0,
+            ];
             let levelData = this.levelData[1] && this.levelData[1].list;
             for (let i = 0, len = this.fieldsLen; i < len; i++) {
-                if(type === 'KEY') {
-                    keyMap[i] = this.fields[i];
-                } else {
-                    keyMap[i] = i;
-                }
-                levelSelectedData[keyMap[i]] = [];
+                tips[i+1] = 0;
+                levelSelectedData[i] = [];
             }
-            levelData && callback(levelData);
-            function callback(list) {
-                for (let id in list) {
-                    let item = list[id];
-                    if(item.branchDepth === 0) {
-                        item.list && callback(item.list);
-                    }
-                    if (item.selected === CHECKBOX_CHECKED) {
-                        levelSelectedData[keyMap[item.branchDepth-1]].push(item[me.keyName]);
-                    } else if (item.selected === CHECKBOX_INDETERMINATE) {
-                        item.list && callback(item.list);
-                    }
-                }
-            }
-            return levelSelectedData;
+            levelData && this.recurCallSelected(levelData, levelSelectedData, tips, leafs);
+            return {levelSelectedData, leafs, tips};
+        },
+        getKeyLevelSelected(levelArr) {
+            let levelDataMap = {};
+            levelArr.map((level, index) => {
+                levelDataMap[this.fields[index]] = level;
+            });
+            return levelDataMap;
         },
         // 清空按钮
         clearAll() {
             this.checkItem(this.treeRoot, this.treeRoot, 0, CHECKBOX_UNCHECKED);
+            this.showDropDown = false;
         },
         prevLevelIsHoverAll(levelIndex) {
             let prevLevel = this.levelData[levelIndex - 1];
@@ -530,25 +526,27 @@ export default {
             }
         },
         // 向外通过事件暴露选择结果
-        exposeSelectedData(seletedItems) {
-            clearTimeout(exposeDataEventTimer);
+        getSelected() {
+            exposeDataEventTimer || clearTimeout(exposeDataEventTimer);
             // debounce: 避免由于多个 props 改变，触发 refresh 后向外频繁抛出事件
             exposeDataEventTimer = setTimeout(() => {
-                const levelSelected = this.getLevelSelected();
+                const {levelSelectedData , leafs, tips} = this.getLevelSelected();
+                this.selectedTips = tips;
+                this.hasSelected = leafs.length > 0;
                 const allSelectedItems = {
-                    selected: seletedItems, // 已选的根节点 key
-                    indexSelected: levelSelected, // 每一级的已选数据
+                    selected: leafs, // 已选的根节点 key
+                    indexSelected: levelSelectedData, // 每一级的已选数据
                     isAllSelected: this.allSelected, // 是否全选
                     isAllNoneSelected: this.allNonSelected, // 是否全不选
                 };
                 this.$emit(Event_Select_With_Path, allSelectedItems);
                 switch(this.selectedDataType) {
                     case EVERY_LEVEL_INDEX:
-                        this.$emit(Event_Select_Value, levelSelected); break;
+                        this.$emit(Event_Select_Value, levelSelectedData); break;
                     case EVERY_LEVEL_KEY:
-                        this.$emit(Event_Select_Value, this.getLevelSelected('KEY')); break;
+                        this.$emit(Event_Select_Value, this.getKeyLevelSelected(levelSelectedData)); break;
                     case LAST_LEVEL:
-                        this.$emit(Event_Select_Value, seletedItems); break;
+                        this.$emit(Event_Select_Value, leafs); break;
                     case ALL_LEVEL:
                         this.$emit(Event_Select_Value, allSelectedItems); break;
                 }

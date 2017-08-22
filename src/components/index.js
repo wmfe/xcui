@@ -47,6 +47,8 @@ import Upload from './upload';
 import DropDown from './dropdown';
 import DropDownItem from './dropdown-item';
 import DropDownMenu from './dropdown-menu';
+import MultiTreeSelect from './multi-tree-select';
+import SingleTreeSelect from './single-tree-select';
 
 const install = (Vue) => {
     if (install.installed) {
@@ -96,7 +98,8 @@ const install = (Vue) => {
     Vue.component(Upload.name, Upload);
     Vue.component(DropDown.name, DropDown);
     Vue.component(DropDownItem.name, DropDownItem);
-    Vue.component(DropDownMenu.name, DropDownMenu);
+    Vue.component(MultiTreeSelect.name, MultiTreeSelect);
+    Vue.component(SingleTreeSelect.name, SingleTreeSelect);
     Vue.use(Message);
     Vue.use(Notice);
     Vue.use(Dialog);
@@ -150,6 +153,8 @@ const xcui = {
     Upload,
     DropDown,
     DropDownMenu,
+    MultiTreeSelect,
+    SingleTreeSelect,
     DropDownItem
 };
 

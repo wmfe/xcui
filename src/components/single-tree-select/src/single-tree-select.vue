@@ -275,7 +275,6 @@ export default {
         // 勾选一普通项
         checkItem(item, levelIndex) {
             if (!this.isLastIndex(levelIndex)) return;
-            // this.setSelected(item);
             this.$emit(Event_Value, {
                 [this.keyName]: item[this.keyName],
                 [this.textName]: item[this.textName],
@@ -302,10 +301,6 @@ export default {
         },
         // 清空按钮
         clearAll() {
-            // this.setSelected({
-            //     [this.keyName]: '',
-            //     [this.textName]: ''
-            // });
             this.$emit(Event_Value, {
                 [this.keyName]: '',
                 [this.textName]: ''
@@ -376,13 +371,16 @@ export default {
                     [this.keyName]: '',
                     [this.textName]: '',
                 };
-                if(selectedItem) {
-                    selected = {
-                        [this.keyName]: selectedItem[this.keyName],
-                        [this.textName]: selectedItem[this.textName],
-                    };
+                if(selectedItem && path.length !== 0) {
+                    let lastItem = path[path.length - 1];
+                    if(selectedItem[this.keyName] !== lastItem[this.keyName]
+                    || selectedItem[this.textName] !== lastItem[this.textName]) { // 如果手动设置值有误，重新emit正确的值
+                        this.$emit(Event_Value, lastItem);
+                        return;
+                    } else {
+                        selected = selectedItem;
+                    }
                 }
-                // this.$emit(Event_Value, selected);
                 this.$emit(Event_Select_With_Path, {
                     selected: selected,
                     path: path, // 被选中的末端子叶的上级路径

@@ -37,10 +37,10 @@ const HAVE_TRIGGER_TYPES = [
     'timerange',
     'datetimerange'
 ];
-const DATE_FORMATTER = function(value, format) {
+const DATE_FORMATTER = function (value, format) {
     return formatDate(value, format);
 };
-const DATE_PARSER = function(text, format) {
+const DATE_PARSER = function (text, format) {
     return parseDate(text, format);
 };
 
@@ -412,8 +412,8 @@ export default {
                     }
 
                     for (const option in options) {
-                        if (options.hasOwnProperty(option) &&
-                            option !== 'selectableRange') {
+                        if (options.hasOwnProperty(option)
+                            && option !== 'selectableRange') {
                             this.picker[option] = options[option];
                         }
                     }
@@ -429,7 +429,6 @@ export default {
 
                 this.picker.$on('dodestroy', this.doDestroy);
                 this.picker.$on('pick', (date, visible = false) => {
-
                     if (this.type === 'daterange' || this.type === 'datetimerange') {
                         const options = this.pickerOptions;
                         if (options && options.dateLimit) {
@@ -524,7 +523,7 @@ export default {
             }
         },
 
-        RANGE_FORMATTER: function(value, format) {
+        RANGE_FORMATTER: function (value, format) {
             if (Array.isArray(value) && value.length === 2) {
                 const start = value[0];
                 const end = value[1];
@@ -535,7 +534,7 @@ export default {
             }
             return '';
         },
-        RANGE_PARSER: function(text, format) {
+        RANGE_PARSER: function (text, format) {
             const array = text.split(this.rangeSeparator);
             if (array.length === 2) {
                 const range1 = array[0];

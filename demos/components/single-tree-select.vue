@@ -1,39 +1,119 @@
 <template  lang="md">
 # SingleTreeSelect 树形单选选择器
 
-高阶组件。树形选择组件，支持同级、跨级模糊搜索。
+树形选择组件（单选）。
 
-##
+支持同级、跨级模糊搜索。
 
-::: demo 基本使用。
+多选树形选择器请查看[MultiTreeSelect](/#/component/multi-tree-select)
+
+## 配置选项
+
+::: demo 通过填入必填项及相关非必填项，可以动态查看DEMO返回值。相关模板代码实时生成于TextArea框。**通过初始化v-model绑定值可以设置默认值。**如果需要单选所选的各级路径信息，可使用`@change`返回值。
 
 ```html
 
 <tpl>
     <div>
         <x-single-tree-select
+        ref="singletreeselect"
         v-model="selectedData"
         :init-data="conf.initData"
         :fields="conf.fields"
-        :default-selected-data="conf.defaultSelectedData"
         :field-texts="conf.fieldTexts"
-        @change="selectedMulti"
+        :allow-search="allowSearch"
+        :allow-clear="allowClear"
+        :levelDepth="levelDepth"
+        @change="onChange"
         ></x-single-tree-select>
     </div>
 </tpl>
 
-<script>
-    export default {
-        data() {
-            conf: {
-                fields: [ "category_list", "sub_category" ],
-                fieldTexts: [ "一级", "二级" ],
-                initData: initData // 见页面底部initData
-            },
-            selectedData: {}
-        }
-    }
-</script>
+<div class="xcui-single-tree-select-ctrl">
+
+<div class="title-label"><span>必选值：</span></div>
+<x-row class="row">
+    <x-col :span="6" class="ctrl-label">v-model返回值<x-tooltip content="v-model绑定的返回值">
+          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+    </x-tooltip>:</x-col>
+    <x-col :span="17">{{selectedData}}</x-col>
+</x-row>
+<x-row class="row">
+    <x-col :span="6" class="ctrl-label">initData<x-tooltip content="传入的初始值">
+          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+    </x-tooltip>:</x-col>
+    <x-col :span="17"><x-button @click="modalShow = true">配置initData</x-button></x-col>
+</x-row>
+<x-row class="row">
+    <x-col :span="6" class="ctrl-label">fields<x-tooltip content="初始数据嵌套的各层级列表字段名">
+          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+    </x-tooltip>:</x-col>
+    <x-col :span="17">{{JSON.stringify(conf.fields)}}</x-col>
+</x-row>
+<x-row class="row">
+    <x-col :span="6" class="ctrl-label">fieldTexts<x-tooltip content="fields 各字段对应的中文名">
+          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+    </x-tooltip>:</x-col>
+    <x-col :span="17">{{JSON.stringify(conf.fieldTexts)}}</x-col>
+</x-row>
+
+<div class="title-label"><span>可选值：</span></div>
+<x-row class="row" :class="{'is-default': allowSearch}">
+    <x-col :span="6" class="ctrl-label">allowSearch<x-tooltip content="是否显示跨级模糊搜索框">
+          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+    </x-tooltip>: </x-col>
+    <x-col :span="17"><x-checkbox v-model="allowSearch">{{allowSearch}}</x-checkbox></x-col>
+</x-row>
+<x-row class="row" :class="{'is-default': allowClear}">
+    <x-col :span="6" class="ctrl-label">allowClear<x-tooltip content="是否显示清除按钮">
+          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+    </x-tooltip>: </x-col>
+    <x-col :span="17"><x-checkbox v-model="allowClear">{{allowClear}}</x-checkbox></x-col>
+</x-row>
+<x-row class="row" :class="{'is-default': levelDepth === conf.fields.length}">
+    <x-col :span="6"  class="ctrl-label">levelDepth<x-tooltip content="控制展示数据的层数">
+          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+    </x-tooltip>: </x-col>
+    <x-col :span="17"><x-input-number v-model="levelDepth" size="small" :min="1" :max="conf.fields.length"></x-input-number></x-col>
+</x-row>
+<x-row class="row" :class="{'is-default': !hasOnchangeFunc}">
+    <x-col :span="6"  class="ctrl-label">@change事件: </x-col>
+    <x-col :span="17"><x-checkbox v-model="hasOnchangeFunc">{{hasOnchangeFunc?'有': '无'}}</x-checkbox></x-col>
+</x-row>
+<x-row class="row">
+    <x-col :span="6"  class="ctrl-label">代码生成: </x-col>
+    <x-col :span="17"><x-textarea v-model="textAreaCode" :readonly="true" :autosize="true"></x-textarea></x-col>
+</x-row>
+<x-modal v-model="modalShow"
+title="配置initData"
+size="large"
+:on-ok="onOk">
+    <x-row class="row">
+        <x-col :span="4"  class="ctrl-label">initData层级数: </x-col>
+        <x-col :span="17"><x-input-number v-model="genLevelDepth" size="small" :min="1" :max="4"></x-input-number></x-col>
+    </x-row>
+    <x-row class="row">
+        <x-col :span="4" class="ctrl-label">fields:</x-col>
+        <x-col :span="17">{{JSON.stringify(generateConf.fields)}}</x-col>
+    </x-row>
+    <x-row class="row">
+        <x-col :span="4" class="ctrl-label">fieldTexts:</x-col>
+        <x-col :span="17">{{JSON.stringify(generateConf.fieldTexts)}}</x-col>
+    </x-row>
+    <x-row class="row">
+        <x-col :span="4" class="ctrl-label">keyName:</x-col>
+        <x-col :span="17">key</x-col>
+    </x-row>
+    <x-row class="row">
+        <x-col :span="4" class="ctrl-label">textName:</x-col>
+        <x-col :span="17">text</x-col>
+    </x-row>
+    <x-row class="row">
+        <x-col :span="4"  class="ctrl-label">示例initData: </x-col>
+        <x-col :span="17"><x-textarea v-model="modalInitData" :readonly="true" :autosize="{minRows: 6, maxRows: 16}"></x-textarea></x-col>
+    </x-row>
+</x-modal>
+</div>
 ```
 
 :::
@@ -57,7 +137,7 @@
 |事件名|说明|返回值|设置属性|
 |---|---|---|---|
 |change|选中值改变时触发|选中的最后一级，以及其路径{selected: ITEM, path:[ITEM, ITEM...]}|`@change`|
-|inited|当组件重新初始化完成后触发（initData，fields，fieldTexts，defaultSelectedData的变化会触发重新初始化）|-|`@inited`|
+|inited|当组件重新初始化完成后触发（initData，fields，fieldTexts的变化会触发重新初始化）|-|`@inited`|
 
 
 
@@ -73,42 +153,155 @@
 |----------|--|-------------------------------------|------------------|
 | ITEM     | Object|{[keyName]:key, [textName]:text} | 组件中的一个选项 |
 
-
+### initData
+```javascript
+{
+    "level_1": [
+        {
+            "key": "1_2", "text": "测试一级2",
+            "level_2": [
+                { "key": "2_5", "text": "测试二级5" },
+                { "key": "2_6", "text": "测试二级6" },
+                { "key": "2_7", "text": "测试二级7" },
+                { "key": "2_8", "text": "测试二级8" }
+            ]
+        },
+        {
+            "key": "1_3", "text": "测试一级3",
+            "level_2": [
+                { "key": "2_9", "text": "测试二级9" },
+                { "key": "2_10", "text": "测试二级10" },
+                { "key": "2_11", "text": "测试二级11" },
+                { "key": "2_12", "text": "测试二级12" }
+            ]
+        }
+    ]
+}
+```
 </template>
 <script>
-import testData from '../test-data/tree-select.json';
+import '#/single-tree-select.less';
+import '#/button.less';
+import '#/radio.less';
+import '#/radio-group.less';
+import '#/radio-button.less';
+import '#/checkbox.less';
+import '#/textarea.less';
+import '#/tooltip.less';
+import '#/input-number.less';
+import '#/notice.less';
+import '#/modal.less';
+import generateConfig from  '../helpers/generate-conf.js';
+
 export default {
     data() {
         return {
-            conf: {
-                fields: [ "category_list", "sub_category" ],
-                fieldTexts: [ "一级", "二级" ],
-                defaultSelectedData: {key: '11'},
-                initData: testData
-            },
-            selectedData: {key: '11'}
+            conf: generateConfig(2),
+            allowSearch: true,
+            allowClear: true,
+            levelDepth: 2,
+            textAreaCode: '',
+            hasOnchangeFunc: false,
+            modalShow: false,
+
+            genLevelDepth: 1,
+            needDefaultData: false,
+            modalInitData: '',
+            selectedData: {}
         };
     },
     watch: {
-        selectedData: {
-            deep: true,
-            handler(val) {
-                console.log('selectedData', val);
-            }
+        demoCode(val) {
+            this.textAreaCode = val;
+        },
+        "generateConf.initData": function(val) {
+            this.modalInitData = JSON.stringify(val);
+        }
+    },
+    computed: {
+        demoCode() {
+            const levelDepthText = this.levelDepth === this.conf.fields.length ? `:levelDepth="${this.levelDepth}"`:'';
+            const allowSearchText = !this.allowSearch ? `\n:allow-search="${this.allowSearch}"`:'';
+            const allowClearText = !this.allowClear ? `\n:allow-clear="${this.allowClear}"`:'';
+            let code = `<x-single-tree-select
+    v-model="selectedData"
+    :init-data="initData"
+    :fields='${JSON.stringify(this.conf.fields)}'
+    :field-texts='${JSON.stringify(this.conf.fieldTexts)}'`
+    + `${allowSearchText}${allowClearText}${this.hasOnchangeFunc ?'\n@change="onChange"':''}`
+    +`\n></x-single-tree-select>`;
+            return code;
+        },
+        generateConf() {
+            return generateConfig(this.genLevelDepth);
         }
     },
     methods: {
-        selectedMulti(obj) {
-            console.log(`selected:`, obj);
+        onChange(obj) {
+            if(this.hasOnchangeFunc) {
+                this.$Notice.open({
+                    title: '触发了@change事件',
+                    desc: `返回值为: ${JSON.stringify(obj)}`
+                });
+            }
+        },
+        onOk() {
+            this.$set(this, 'conf', this.generateConf);
+            this.levelDepth = this.generateConf.fields.length;
         }
     },
     mounted() {
-        console.log('testData', testData);
-        window.se = (obj) => {
-            this.$set(this, 'selectedData', obj)
+        this.textAreaCode = this.demoCode;
+        this.modalInitData = JSON.stringify(this.generateConf.initData);
+        this.levelDepth = this.conf.fields.length;
+
+        let expentBtn = document.getElementsByClassName('expand-control')[0];
+        if(expentBtn) {
+            expentBtn.innerHTML = '';
+            expentBtn.style.padding = '0';
+            expentBtn.style.border = 'none';
         }
     }
 };
 </script>
-<style>
+<style lang="less">
+.xcui-single-tree-select-ctrl {
+    .is-default {
+        color: #999;
+    }
+    margin-top: 10px;
+    .row {
+        min-height: 30px;
+        line-height: 30px;
+        vertical-align: middle;
+    }
+    .title-label {
+        padding: 10px 0;
+        &:before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: #eee;
+            position: relative;
+            top: 10px;
+            left: 0;
+        }
+        span {
+            display: inline-block;
+            background: #fff;
+            padding: 0 18px 0 18px;
+            position: relative;
+            margin-left: 30px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    }
+    .ctrl-label {
+        font-size: 14px;
+        text-align: right;
+        margin-right: 12px;
+        vertical-align: middle;
+    }
+}
 </style>
