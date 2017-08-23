@@ -5,11 +5,7 @@
 
 支持同级、跨级模糊搜索。
 
-<<<<<<< HEAD
 多选树形选择器请查看[MultiTreeSelect](#/component/multi-tree-select)
-=======
-多选树形选择器请查看[MultiTreeSelect](/#/component/multi-tree-select)
->>>>>>> 0088d7c9dce452edb1a6d1dc8d6750326493524f
 
 ## 配置选项
 
