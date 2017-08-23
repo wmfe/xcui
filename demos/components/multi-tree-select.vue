@@ -7,7 +7,11 @@
 
 支持多种格式的返回值及默认值。
 
+<<<<<<< HEAD
+单选树形选择器请查看[SingleTreeSelect](#/component/single-tree-select)
+=======
 单选树形选择器请查看[SingleTreeSelect](/#/component/single-tree-select)
+>>>>>>> 0088d7c9dce452edb1a6d1dc8d6750326493524f
 
 ## 配置选项
 
@@ -310,7 +314,7 @@ export default {
             const selectedDataTypeText = this.selectedDataType === 'INDEX' ? '': `\nselected-data-type="${this.selectedDataType}"`;
             const defaultSelectedDataTypeText = this.defaultSelectedDataType === 'LAST' ? '': `\ndefault-selected-data-type="${this.defaultSelectedDataType}"`;
             const selectAllText = this.defaultSelectAll ? `\n:default-select-all="${this.defaultSelectAll}"` : '';
-            const levelDepthText = this.levelDepth === this.conf.fields.length ? `:levelDepth="${this.levelDepth}"`:'';
+            const levelDepthText = this.levelDepth !== this.conf.fields.length ? `\n:levelDepth="${this.levelDepth}"`:'';
             const allowSearchText = !this.allowSearch ? `\n:allow-search="${this.allowSearch}"`:'';
             const defaultSelectedDataText = this.needDefaultData ? `\n:default-selected-data='${JSON.stringify(this.conf.defaultSelectedData[this.defaultSelectedDataType])}'`:'';
             let code = `<x-multi-tree-select
@@ -319,7 +323,7 @@ export default {
     :fields='${JSON.stringify(this.conf.fields)}'
     :field-texts='${JSON.stringify(this.conf.fieldTexts)}'${defaultSelectedDataText}`
     +`${selectedDataTypeText}${!this.defaultSelectAll ? defaultSelectedDataTypeText: ''}${selectAllText}`
-    + `${allowSearchText}${this.hasOnchangeFunc ?'\n@change="onChange"':''}`
+    + `${allowSearchText}${levelDepthText}${this.hasOnchangeFunc ?'\n@change="onChange"':''}`
     +`\n></x-multi-tree-select>`;
             return code;
         },
