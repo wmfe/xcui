@@ -213,14 +213,13 @@
                 return dataMap;
             },
             bodyStyle() {
-                let style = {};
+                let style = {
+                    'top': +this.headerHeight + 'px'
+                };
                 if (this.height) {
-                    style = {
-                        'max-height': (+this.height - this.headerHeight) + 'px'
-                    };
-                    return style;
+                    style['max-height'] = (+this.height - this.headerHeight) + 'px';
                 }
-                return '';
+                return style;
             },
             tableStyle() {
                 let style = {};
@@ -243,14 +242,13 @@
                 return style;
             },
             fixedBodyStyle() {
-                    let style = {}
+                    let style = {
+                        'top': +this.headerHeight + 'px'
+                    };
                     if (this.height) {
-                        style = {
-                            'max-height': (+this.height - this.headerHeight - this.scrollbarHeight) + 'px'
-                        };
-                        return style;
+                        style['max-height'] = (+this.height - this.headerHeight - this.scrollbarHeight) + 'px';
                     }
-                    return '';
+                    return style;
             },
             fixedLeftWidth() {
                 if (this.columns.length > 0 && this.columns[0].width) {
@@ -310,6 +308,11 @@
                     this.scrollbarHeight = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
                 });
             },
+            columns() {
+                this.$nextTick(() => {
+                    this.headerHeight = this.$refs.headerWrapper.offsetHeight;
+                });
+            },
             initialSelectedValue(value) {
                 this.selectedValue = value;
             },
@@ -322,13 +325,6 @@
                 this.headerHeight = this.$refs.headerWrapper.offsetHeight;
                 this.bodyHeight = this.$refs.bodyWrapper.offsetHeight;
                 this.scrollbarHeight = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
-                this.$refs.bodyWrapper.style.top = +this.headerHeight + 'px';
-                if (this.$refs.fixedBodyWrapper) {
-                    this.$refs.fixedBodyWrapper.style.top = +this.headerHeight + 'px';
-                }
-                if (this.$refs.rightFixedBodyWrapper) {
-                    this.$refs.rightFixedBodyWrapper.style.top = +this.headerHeight + 'px';
-                }
             });
             this.bindEvents();
         },

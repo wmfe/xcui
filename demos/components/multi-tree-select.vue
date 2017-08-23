@@ -7,7 +7,11 @@
 
 支持多种格式的返回值及默认值。
 
+<<<<<<< HEAD
 单选树形选择器请查看[SingleTreeSelect](#/component/single-tree-select)
+=======
+单选树形选择器请查看[SingleTreeSelect](/#/component/single-tree-select)
+>>>>>>> 0088d7c9dce452edb1a6d1dc8d6750326493524f
 
 ## 配置选项
 
