@@ -5,7 +5,7 @@
 
 支持同级、跨级模糊搜索。
 
-多选树形选择器请查看[MultiTreeSelect](/#/component/multi-tree-select)
+多选树形选择器请查看[MultiTreeSelect](#/component/multi-tree-select)
 
 ## 配置选项
 
@@ -220,7 +220,7 @@ export default {
     },
     computed: {
         demoCode() {
-            const levelDepthText = this.levelDepth === this.conf.fields.length ? `:levelDepth="${this.levelDepth}"`:'';
+            const levelDepthText = this.levelDepth !== this.conf.fields.length ? `\n:levelDepth="${this.levelDepth}"`:'';
             const allowSearchText = !this.allowSearch ? `\n:allow-search="${this.allowSearch}"`:'';
             const allowClearText = !this.allowClear ? `\n:allow-clear="${this.allowClear}"`:'';
             let code = `<x-single-tree-select
@@ -228,7 +228,7 @@ export default {
     :init-data="initData"
     :fields='${JSON.stringify(this.conf.fields)}'
     :field-texts='${JSON.stringify(this.conf.fieldTexts)}'`
-    + `${allowSearchText}${allowClearText}${this.hasOnchangeFunc ?'\n@change="onChange"':''}`
+    + `${allowSearchText}${allowClearText}${levelDepthText}${this.hasOnchangeFunc ?'\n@change="onChange"':''}`
     +`\n></x-single-tree-select>`;
             return code;
         },
