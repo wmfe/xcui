@@ -1,8 +1,8 @@
 <template>
     <div class="x-tree-select x-multi-tree-select">
         <div class="x-tree-select-input-wrap" @click="showDropDown = !showDropDown">
-            <i v-if="allowClear" class="x-icon x-tree-select-input-icon x-icon-android-close" @click.stop="clearAll"></i>
-            <div class="x-tree-select-input" v-if="hasSelected ">
+            <i v-if="allowClear && !disabled" class="x-icon x-tree-select-input-icon x-icon-android-close" @click.stop="clearAll"></i>
+            <div class="x-tree-select-input" v-if="hasSelected " :class="{'is-disabled' : disabled}">
                 已选：
                 <template v-for="(value, key) in selectedTips">
                     <template v-if="value > 0">
@@ -13,12 +13,12 @@
                     </template>
                 </template>
             </div>
-            <div  class="x-tree-select-input" v-else>
+            <div  class="x-tree-select-input" :class="{'is-disabled' : disabled}" v-else>
                 <span>请选择</span>
             </div>
         </div>
 
-        <div class="x-tree-select-item-wrap" v-show="showDropDown">
+        <div class="x-tree-select-item-wrap" v-show="showDropDown && !disabled">
             <slot name="header"></slot>
             <div class="x-tree-select-item-level">
                 <div class="x-tree-select-item" v-for="(level, levelIndex) in levelData" :key="levelIndex">
@@ -148,6 +148,10 @@ export default {
         allowClear: {
             type: Boolean,
             default: true
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         },
         defaultSelectedData: {
             type: [Array, Object],
