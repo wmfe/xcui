@@ -23,7 +23,8 @@
         :field-texts="conf.fieldTexts"
         :allow-search="allowSearch"
         :allow-clear="allowClear"
-        :levelDepth="levelDepth"
+        :level-depth="levelDepth"
+        :disabled="disabled"
         @change="onChange"
         ></x-single-tree-select>
     </div>
@@ -58,6 +59,12 @@
 </x-row>
 
 <div class="title-label"><span>可选值：</span></div>
+<x-row class="row" :class="{'is-default': !disabled}">
+    <x-col :span="6" class="ctrl-label">disabled<x-tooltip content="是否显示禁用">
+          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+    </x-tooltip>: </x-col>
+    <x-col :span="17"><x-checkbox v-model="disabled">{{disabled}}</x-checkbox></x-col>
+</x-row>
 <x-row class="row" :class="{'is-default': allowSearch}">
     <x-col :span="6" class="ctrl-label">allowSearch<x-tooltip content="是否显示跨级模糊搜索框">
           <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
@@ -74,7 +81,7 @@
     <x-col :span="6"  class="ctrl-label">levelDepth<x-tooltip content="控制展示数据的层数">
           <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
     </x-tooltip>: </x-col>
-    <x-col :span="17"><x-input-number v-model="levelDepth" size="small" :min="1" :max="conf.fields.length"></x-input-number></x-col>
+    <x-col :span="17"><x-input-number v-model="levelDepth" size="small" :min="0" :max="conf.fields.length"></x-input-number></x-col>
 </x-row>
 <x-row class="row" :class="{'is-default': !hasOnchangeFunc}">
     <x-col :span="6"  class="ctrl-label">@change事件: </x-col>
@@ -128,6 +135,7 @@ size="large"
 | fieldTexts          | Array  | -|fields 各字段对应的中文名  |必选||
 | allowSearch | Boolean  |true|是否显示跨级模糊搜索框|可选||
 | allowClear | Boolean  |true|是否显示清除选项按钮|可选||
+| disabled | Boolean  |false|是否禁用|可选||
 | keyName             | String | key  | 初始数据中选项的`标识`字段对应的键名 |可选||
 | textName             | String |  text | 初始数据中选项的`名称`字段对应的键名 |可选||
 | levelDepth             | Number |  fields.length | initData允许传入多级数据，通过此字段可以动态控制切换，以展示部分层级数据 |可选||
@@ -199,6 +207,7 @@ export default {
             conf: generateConfig(2),
             allowSearch: true,
             allowClear: true,
+            disabled: false,
             levelDepth: 2,
             textAreaCode: '',
             hasOnchangeFunc: false,
@@ -220,15 +229,16 @@ export default {
     },
     computed: {
         demoCode() {
-            const levelDepthText = this.levelDepth !== this.conf.fields.length ? `\n:levelDepth="${this.levelDepth}"`:'';
+            const levelDepthText = this.levelDepth !== this.conf.fields.length ? `\n:level-depth="${this.levelDepth}"`:'';
             const allowSearchText = !this.allowSearch ? `\n:allow-search="${this.allowSearch}"`:'';
             const allowClearText = !this.allowClear ? `\n:allow-clear="${this.allowClear}"`:'';
+            const disabledText = this.disabled ? `\n:disabled="${this.disabled}"` : '';
             let code = `<x-single-tree-select
     v-model="selectedData"
     :init-data="initData"
     :fields='${JSON.stringify(this.conf.fields)}'
     :field-texts='${JSON.stringify(this.conf.fieldTexts)}'`
-    + `${allowSearchText}${allowClearText}${levelDepthText}${this.hasOnchangeFunc ?'\n@change="onChange"':''}`
+    + `${allowSearchText}${allowClearText}${disabledText}${levelDepthText}${this.hasOnchangeFunc ?'\n@change="onChange"':''}`
     +`\n></x-single-tree-select>`;
             return code;
         },
