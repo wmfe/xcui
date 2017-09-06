@@ -81,7 +81,7 @@
     <x-col :span="6"  class="ctrl-label">levelDepth<x-tooltip content="控制展示数据的层数">
           <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
     </x-tooltip>: </x-col>
-    <x-col :span="17"><x-input-number v-model="levelDepth" size="small" :min="0" :max="conf.fields.length"></x-input-number></x-col>
+    <x-col :span="17"><x-input-number v-model="levelDepth" size="small" :min="1" :max="conf.fields.length"></x-input-number></x-col>
 </x-row>
 <x-row class="row" :class="{'is-default': !hasOnchangeFunc}">
     <x-col :span="6"  class="ctrl-label">@change事件: </x-col>
