@@ -23,6 +23,7 @@
         :field-texts="conf.fieldTexts"
         :allow-search="allowSearch"
         :allow-clear="allowClear"
+        :show-path-text="showPathText"
         :level-depth="levelDepth"
         :disabled="disabled"
         @change="onChange"
@@ -76,6 +77,12 @@
           <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
     </x-tooltip>: </x-col>
     <x-col :span="17"><x-checkbox v-model="allowClear">{{allowClear}}</x-checkbox></x-col>
+</x-row>
+<x-row class="row" :class="{'is-default': !showPathText}">
+    <x-col :span="6" class="ctrl-label">showPathText<x-tooltip content="是否显示路径文案">
+          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+    </x-tooltip>: </x-col>
+    <x-col :span="17"><x-checkbox v-model="showPathText">{{showPathText}}</x-checkbox></x-col>
 </x-row>
 <x-row class="row" :class="{'is-default': levelDepth === conf.fields.length}">
     <x-col :span="6"  class="ctrl-label">levelDepth<x-tooltip content="控制展示数据的层数">
@@ -135,6 +142,7 @@ size="large"
 | fieldTexts          | Array  | -|fields 各字段对应的中文名  |必选||
 | allowSearch | Boolean  |true|是否显示跨级模糊搜索框|可选||
 | allowClear | Boolean  |true|是否显示清除选项按钮|可选||
+| showPathText | Boolean  |false|选择框内文案是否显示为路径。为true时，如选择为1_1→2_2，显示为测试一级1/测试二级2；false时，显示为：“已选：测试二级2”|可选||
 | disabled | Boolean  |false|是否禁用|可选||
 | keyName             | String | key  | 初始数据中选项的`标识`字段对应的键名 |可选||
 | textName             | String |  text | 初始数据中选项的`名称`字段对应的键名 |可选||
@@ -208,6 +216,7 @@ export default {
             allowSearch: true,
             allowClear: true,
             disabled: false,
+            showPathText: false,
             levelDepth: 2,
             textAreaCode: '',
             hasOnchangeFunc: false,
@@ -216,7 +225,7 @@ export default {
             genLevelDepth: 1,
             needDefaultData: false,
             modalInitData: '',
-            selectedData: {}
+            selectedData: {key: '2_3'}
         };
     },
     watch: {

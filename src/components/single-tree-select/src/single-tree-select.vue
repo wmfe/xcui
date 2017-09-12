@@ -345,7 +345,8 @@ export default {
                     }
                 }, keyName);
             } else {
-                travelDown(this.levelData[1], (item, subItem) => {
+                const travelData = this.levelData.length >= 1 ? this.levelData[1] : {};
+                travelDown(travelData, (item, subItem) => {
                     if(subItem.branchDepth === this.fieldsLen) {
                         if(subItem[keyName] === checkedItem[keyName]) {
                             hasCheckedItem = true;
@@ -399,7 +400,7 @@ export default {
         },
 
     },
-    mounted() {
+    created() {
         let refreshTimer = null;
         this.$on('refresh', () => {
             clearTimeout(refreshTimer);
