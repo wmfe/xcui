@@ -2,9 +2,8 @@
     <div class="x-tree-select x-single-tree-select">
         <div class="x-tree-select-input-wrap" @click="showDropDown = !showDropDown">
             <i  v-if="allowClear && !disabled" class="x-icon x-tree-select-input-icon x-icon-android-close" @click.stop="clearAll"></i>
-            <div class="x-tree-select-input" v-if="selected[keyName]!== '' " :class="{'is-disabled' : disabled}">
-                已选：
-                <span v-text="selected[textName]" :title="selectedPathStr"></span>
+            <div class="x-tree-select-input" v-if="!!selected[keyName]" :class="{'is-disabled' : disabled}">
+                <span v-text="inputText" :title="selectedPathStr"></span>
             </div>
             <div  class="x-tree-select-input"  :class="{'is-disabled' : disabled}" v-else>
                 <span>请选择</span>
@@ -117,6 +116,10 @@ export default {
             type: Boolean,
             default: false
         },
+        showPathText: {
+            type: Boolean,
+            default: false
+        },
         allowSearch: {
             type: Boolean,
             default: true
@@ -142,6 +145,9 @@ export default {
             } else {
                 return this.fields.length;
             }
+        },
+        inputText() {
+            return this.showPathText ? this.selectedPath.map(item => item[this.textName]).join('/') : `已选：${this.selected[this.textName]}`;
         },
         selectedPathStr() {
             if (this.selectedPath.length) {
