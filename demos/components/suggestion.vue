@@ -109,6 +109,7 @@
 |suggestions|Array|[]|输入建议的数据源|必选||
 |inputCallback|Function|无|输入时的回调函数, 可用于触发远程请求|可选||
 |allowClear|Boolean|true|是否允许出现清除图标|可选|true, false|
+|matchCase|Boolean|false|提示建议是否严格匹配输入内容大小写|可选|true, false|
 
 ## Events
 
@@ -142,7 +143,7 @@
               state2: {},
               sug2: [
                   {
-                      text: 'AA北京',
+                      text: '北京',
                       value: '131'
                   },
                   {

@@ -80,7 +80,11 @@
             allowClear: {
                 type: Boolean,
                 default: true
-            }
+            },
+            matchCase: {
+                type: Boolean,
+                default: false,
+            },
         },
         computed: {
             sugVisible() {
@@ -238,9 +242,10 @@
                 }
             },
             getLocalSug() {
-                let word = this.dataText.toLowerCase();
+                let word = this.matchCase ? this.dataText : this.dataText.toLowerCase();
                 this.list = this.localList.filter((item) => {
-                    return word ? item.text.toLowerCase().indexOf(word) > -1 : true;
+                    let itemText = this.matchCase ? item.text : item.text.toLowerCase();
+                    return word ? itemText.indexOf(word) > -1 : true;
                 });
             },
             setItem(item) {
