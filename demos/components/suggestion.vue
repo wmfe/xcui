@@ -142,7 +142,7 @@
               state2: {},
               sug2: [
                   {
-                      text: '北京',
+                      text: 'AA北京',
                       value: '131'
                   },
                   {

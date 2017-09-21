@@ -238,9 +238,9 @@
                 }
             },
             getLocalSug() {
-                let word = this.dataText;
+                let word = this.dataText.toLowerCase();
                 this.list = this.localList.filter((item) => {
-                    return word ? item.text.indexOf(word) > -1 : true;
+                    return word ? item.text.toLowerCase().indexOf(word) > -1 : true;
                 });
             },
             setItem(item) {
