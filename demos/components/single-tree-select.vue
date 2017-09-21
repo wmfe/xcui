@@ -95,8 +95,12 @@
     <x-col :span="17"><x-checkbox v-model="hasOnchangeFunc">{{hasOnchangeFunc?'有': '无'}}</x-checkbox></x-col>
 </x-row>
 <x-row class="row">
-    <x-col :span="6"  class="ctrl-label">代码生成: </x-col>
+    <x-col :span="6"  class="ctrl-label">模板代码生成: </x-col>
     <x-col :span="17"><x-textarea v-model="textAreaCode" :readonly="true" :autosize="true"></x-textarea></x-col>
+</x-row>
+<x-row class="row">
+    <x-col :span="6"  class="ctrl-label">JS代码生成: </x-col>
+    <x-col :span="17"><x-textarea v-model="textAreaJsCode" :readonly="true" :autosize="true"></x-textarea></x-col>
 </x-row>
 <x-modal v-model="modalShow"
 title="配置initData"
@@ -219,6 +223,7 @@ export default {
             showPathText: false,
             levelDepth: 2,
             textAreaCode: '',
+            textAreaJsCode: '',
             hasOnchangeFunc: false,
             modalShow: false,
 
@@ -232,6 +237,9 @@ export default {
         demoCode(val) {
             this.textAreaCode = val;
         },
+        jsCode(val) {
+            this.textAreaJsCode = val;
+        },
         "generateConf.initData": function(val) {
             this.modalInitData = JSON.stringify(val);
         }
@@ -244,11 +252,19 @@ export default {
             const disabledText = this.disabled ? `\n:disabled="${this.disabled}"` : '';
             let code = `<x-single-tree-select
     v-model="selectedData"
-    :init-data="initData"
-    :fields='${JSON.stringify(this.conf.fields)}'
-    :field-texts='${JSON.stringify(this.conf.fieldTexts)}'`
+    :init-data="treeConf.initData"
+    :fields='treeConf.fields'
+    :field-texts='treeConf.fieldTexts'`
     + `${allowSearchText}${allowClearText}${disabledText}${levelDepthText}${this.hasOnchangeFunc ?'\n@change="onChange"':''}`
     +`\n></x-single-tree-select>`;
+            return code;
+        },
+        jsCode() {
+           let code = `treeConf: {
+    initData: {/*初始化代码*/},
+    fields: ${JSON.stringify(this.conf.fields)},
+    fieldTexts: ${JSON.stringify(this.conf.fieldTexts)}
+}`;
             return code;
         },
         generateConf() {
@@ -271,6 +287,7 @@ export default {
     },
     mounted() {
         this.textAreaCode = this.demoCode;
+        this.textAreaJsCode = this.jsCode;
         this.modalInitData = JSON.stringify(this.generateConf.initData);
         this.levelDepth = this.conf.fields.length;
 
