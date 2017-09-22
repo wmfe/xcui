@@ -85,6 +85,10 @@
                 type: Boolean,
                 default: false,
             },
+            matchInput: {
+                type: Boolean,
+                default: true,
+            },
         },
         computed: {
             sugVisible() {
@@ -242,11 +246,16 @@
                 }
             },
             getLocalSug() {
-                let word = this.matchCase ? this.dataText : this.dataText.toLowerCase();
-                this.list = this.localList.filter((item) => {
-                    let itemText = this.matchCase ? item.text : item.text.toLowerCase();
-                    return word ? itemText.indexOf(word) > -1 : true;
-                });
+                if(this.matchInput) {
+                    let word = this.matchCase ? this.dataText : this.dataText.toLowerCase();
+                    this.list = this.localList.filter((item) => {
+                        let itemText = this.matchCase ? item.text : item.text.toLowerCase();
+                        return word ? itemText.indexOf(word) > -1 : true;
+                    });
+                }
+                else {
+                    this.list = this.localList;
+                }
             },
             setItem(item) {
                 this.dataValue = item.value;
