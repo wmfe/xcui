@@ -23,7 +23,9 @@
         :field-texts="conf.fieldTexts"
         :allow-search="allowSearch"
         :allow-clear="allowClear"
-        :levelDepth="levelDepth"
+        :show-path-text="showPathText"
+        :level-depth="levelDepth"
+        :disabled="disabled"
         @change="onChange"
         ></x-single-tree-select>
     </div>
@@ -58,6 +60,12 @@
 </x-row>
 
 <div class="title-label"><span>可选值：</span></div>
+<x-row class="row" :class="{'is-default': !disabled}">
+    <x-col :span="6" class="ctrl-label">disabled<x-tooltip content="是否显示禁用">
+          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+    </x-tooltip>: </x-col>
+    <x-col :span="17"><x-checkbox v-model="disabled">{{disabled}}</x-checkbox></x-col>
+</x-row>
 <x-row class="row" :class="{'is-default': allowSearch}">
     <x-col :span="6" class="ctrl-label">allowSearch<x-tooltip content="是否显示跨级模糊搜索框">
           <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
@@ -70,6 +78,12 @@
     </x-tooltip>: </x-col>
     <x-col :span="17"><x-checkbox v-model="allowClear">{{allowClear}}</x-checkbox></x-col>
 </x-row>
+<x-row class="row" :class="{'is-default': !showPathText}">
+    <x-col :span="6" class="ctrl-label">showPathText<x-tooltip content="是否显示路径文案">
+          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+    </x-tooltip>: </x-col>
+    <x-col :span="17"><x-checkbox v-model="showPathText">{{showPathText}}</x-checkbox></x-col>
+</x-row>
 <x-row class="row" :class="{'is-default': levelDepth === conf.fields.length}">
     <x-col :span="6"  class="ctrl-label">levelDepth<x-tooltip content="控制展示数据的层数">
           <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
@@ -81,8 +95,12 @@
     <x-col :span="17"><x-checkbox v-model="hasOnchangeFunc">{{hasOnchangeFunc?'有': '无'}}</x-checkbox></x-col>
 </x-row>
 <x-row class="row">
-    <x-col :span="6"  class="ctrl-label">代码生成: </x-col>
+    <x-col :span="6"  class="ctrl-label">模板代码生成: </x-col>
     <x-col :span="17"><x-textarea v-model="textAreaCode" :readonly="true" :autosize="true"></x-textarea></x-col>
+</x-row>
+<x-row class="row">
+    <x-col :span="6"  class="ctrl-label">JS代码生成: </x-col>
+    <x-col :span="17"><x-textarea v-model="textAreaJsCode" :readonly="true" :autosize="true"></x-textarea></x-col>
 </x-row>
 <x-modal v-model="modalShow"
 title="配置initData"
@@ -128,6 +146,8 @@ size="large"
 | fieldTexts          | Array  | -|fields 各字段对应的中文名  |必选||
 | allowSearch | Boolean  |true|是否显示跨级模糊搜索框|可选||
 | allowClear | Boolean  |true|是否显示清除选项按钮|可选||
+| showPathText | Boolean  |false|选择框内文案是否显示为路径。为true时，如选择为1_1→2_2，显示为测试一级1/测试二级2；false时，显示为：“已选：测试二级2”|可选||
+| disabled | Boolean  |false|是否禁用|可选||
 | keyName             | String | key  | 初始数据中选项的`标识`字段对应的键名 |可选||
 | textName             | String |  text | 初始数据中选项的`名称`字段对应的键名 |可选||
 | levelDepth             | Number |  fields.length | initData允许传入多级数据，通过此字段可以动态控制切换，以展示部分层级数据 |可选||
@@ -199,20 +219,26 @@ export default {
             conf: generateConfig(2),
             allowSearch: true,
             allowClear: true,
+            disabled: false,
+            showPathText: false,
             levelDepth: 2,
             textAreaCode: '',
+            textAreaJsCode: '',
             hasOnchangeFunc: false,
             modalShow: false,
 
             genLevelDepth: 1,
             needDefaultData: false,
             modalInitData: '',
-            selectedData: {}
+            selectedData: {key: '2_3'}
         };
     },
     watch: {
         demoCode(val) {
             this.textAreaCode = val;
+        },
+        jsCode(val) {
+            this.textAreaJsCode = val;
         },
         "generateConf.initData": function(val) {
             this.modalInitData = JSON.stringify(val);
@@ -220,16 +246,25 @@ export default {
     },
     computed: {
         demoCode() {
-            const levelDepthText = this.levelDepth !== this.conf.fields.length ? `\n:levelDepth="${this.levelDepth}"`:'';
+            const levelDepthText = this.levelDepth !== this.conf.fields.length ? `\n:level-depth="${this.levelDepth}"`:'';
             const allowSearchText = !this.allowSearch ? `\n:allow-search="${this.allowSearch}"`:'';
             const allowClearText = !this.allowClear ? `\n:allow-clear="${this.allowClear}"`:'';
+            const disabledText = this.disabled ? `\n:disabled="${this.disabled}"` : '';
             let code = `<x-single-tree-select
     v-model="selectedData"
-    :init-data="initData"
-    :fields='${JSON.stringify(this.conf.fields)}'
-    :field-texts='${JSON.stringify(this.conf.fieldTexts)}'`
-    + `${allowSearchText}${allowClearText}${levelDepthText}${this.hasOnchangeFunc ?'\n@change="onChange"':''}`
+    :init-data="treeConf.initData"
+    :fields='treeConf.fields'
+    :field-texts='treeConf.fieldTexts'`
+    + `${allowSearchText}${allowClearText}${disabledText}${levelDepthText}${this.hasOnchangeFunc ?'\n@change="onChange"':''}`
     +`\n></x-single-tree-select>`;
+            return code;
+        },
+        jsCode() {
+           let code = `treeConf: {
+    initData: {/*初始化代码*/},
+    fields: ${JSON.stringify(this.conf.fields)},
+    fieldTexts: ${JSON.stringify(this.conf.fieldTexts)}
+}`;
             return code;
         },
         generateConf() {
@@ -252,6 +287,7 @@ export default {
     },
     mounted() {
         this.textAreaCode = this.demoCode;
+        this.textAreaJsCode = this.jsCode;
         this.modalInitData = JSON.stringify(this.generateConf.initData);
         this.levelDepth = this.conf.fields.length;
 

@@ -28,7 +28,8 @@
         :selected-data-type="selectedDataType"
         :default-selected-data-type="defaultSelectedDataType"
         :allow-search="allowSearch"
-        :levelDepth="levelDepth"
+        :level-depth="levelDepth"
+        :disabled="disabled"
         @change="onChange"
         ></x-multi-tree-select>
     </div>
@@ -97,6 +98,12 @@
     </x-tooltip>: </x-col>
     <x-col :span="17"><x-checkbox v-model="defaultSelectAll">{{defaultSelectAll}}</x-checkbox></x-col>
 </x-row>
+<x-row class="row" :class="{'is-default': !disabled}">
+    <x-col :span="6" class="ctrl-label">disabled<x-tooltip content="是否显示禁用">
+          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+    </x-tooltip>: </x-col>
+    <x-col :span="17"><x-checkbox v-model="disabled">{{disabled}}</x-checkbox></x-col>
+</x-row>
 <x-row class="row" :class="{'is-default': allowSearch}">
     <x-col :span="6" class="ctrl-label">allowSearch<x-tooltip content="是否显示跨级模糊搜索框">
           <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
@@ -114,8 +121,12 @@
     <x-col :span="17"><x-checkbox v-model="hasOnchangeFunc">{{hasOnchangeFunc?'有': '无'}}</x-checkbox></x-col>
 </x-row>
 <x-row class="row">
-    <x-col :span="6"  class="ctrl-label">代码生成: </x-col>
+    <x-col :span="6"  class="ctrl-label">模板代码生成: </x-col>
     <x-col :span="17"><x-textarea v-model="textAreaCode" :readonly="true" :autosize="true"></x-textarea></x-col>
+</x-row>
+<x-row class="row">
+    <x-col :span="6"  class="ctrl-label">JS代码生成: </x-col>
+    <x-col :span="17"><x-textarea v-model="textAreaJsCode" :readonly="true" :autosize="true"></x-textarea></x-col>
 </x-row>
 <x-modal v-model="modalShow"
 title="配置initData"
@@ -165,6 +176,7 @@ size="large"
 |defaultSelectedDataType|String|LAST|确定接受defaultSelectedData的数据Data Type。|可选|INDEX/KEY/LAST|
 | defaultSelectAll | Boolean  |true|初始化是否全选。设置为`true`时，defaultSelectedData无效|可选||
 | allowSearch | Boolean  |true|是否显示跨级模糊搜索框|可选||
+| disabled | Boolean  |false|是否禁用|可选||
 | keyName             | String | key  | 初始数据中选项的`标识`字段对应的键名 |可选||
 | textName             | String |  text | 初始数据中选项的`名称`字段对应的键名 |可选||
 | levelDepth             | Number |  fields.length | initData允许传入多级数据，通过此字段可以动态控制切换，以展示部分层级数据 |可选||
@@ -277,8 +289,10 @@ export default {
             defaultSelectedDataType: 'LAST',
             defaultSelectAll: false,
             allowSearch: true,
+            disabled: false,
             levelDepth: 2,
             textAreaCode: '',
+            textAreaJsCode: '',
             hasOnchangeFunc: false,
             modalShow: false,
 
@@ -301,6 +315,9 @@ export default {
         demoCode(val) {
             this.textAreaCode = val;
         },
+         jsCode(val) {
+            this.textAreaJsCode = val;
+        },
         "generateConf.initData": function(val) {
             this.modalInitData = JSON.stringify(val);
         }
@@ -310,17 +327,26 @@ export default {
             const selectedDataTypeText = this.selectedDataType === 'INDEX' ? '': `\nselected-data-type="${this.selectedDataType}"`;
             const defaultSelectedDataTypeText = this.defaultSelectedDataType === 'LAST' ? '': `\ndefault-selected-data-type="${this.defaultSelectedDataType}"`;
             const selectAllText = this.defaultSelectAll ? `\n:default-select-all="${this.defaultSelectAll}"` : '';
-            const levelDepthText = this.levelDepth !== this.conf.fields.length ? `\n:levelDepth="${this.levelDepth}"`:'';
+            const disabledText = this.disabled ? `\n:disabled="${this.disabled}"` : '';
+            const levelDepthText = this.levelDepth !== this.conf.fields.length ? `\n:level-depth="${this.levelDepth}"`:'';
             const allowSearchText = !this.allowSearch ? `\n:allow-search="${this.allowSearch}"`:'';
             const defaultSelectedDataText = this.needDefaultData ? `\n:default-selected-data='${JSON.stringify(this.conf.defaultSelectedData[this.defaultSelectedDataType])}'`:'';
             let code = `<x-multi-tree-select
     v-model="selectedData"
-    :init-data="initData"
-    :fields='${JSON.stringify(this.conf.fields)}'
-    :field-texts='${JSON.stringify(this.conf.fieldTexts)}'${defaultSelectedDataText}`
+    :init-data="treeConf.initData"
+    :fields='treeConf.fields'
+    :field-texts='treeConf.fieldTexts'${defaultSelectedDataText}`
     +`${selectedDataTypeText}${!this.defaultSelectAll ? defaultSelectedDataTypeText: ''}${selectAllText}`
-    + `${allowSearchText}${levelDepthText}${this.hasOnchangeFunc ?'\n@change="onChange"':''}`
+    + `${allowSearchText}${disabledText}${levelDepthText}${this.hasOnchangeFunc ?'\n@change="onChange"':''}`
     +`\n></x-multi-tree-select>`;
+            return code;
+        },
+        jsCode() {
+            let code = `treeConf: {
+    initData: {/*初始化代码*/},
+    fields: ${JSON.stringify(this.conf.fields)},
+    fieldTexts: ${JSON.stringify(this.conf.fieldTexts)}
+}`;
             return code;
         },
         computedDefaultData() {
@@ -346,6 +372,7 @@ export default {
     },
     mounted() {
         this.textAreaCode = this.demoCode;
+        this.textAreaJsCode = this.jsCode;
         this.modalInitData = JSON.stringify(this.generateConf.initData);
         this.levelDepth = this.conf.fields.length;
 
