@@ -35,6 +35,8 @@
                     :selected-value="selectedValue"
                     @changeCheckbox="onChangeCheckbox"
                     @changeRadio="onChangeRadio"
+                    @setHoverRow="setHoverRow"
+                    @removeHoverRow="removeHoverRow"
                 />
             </table>
         </div>
@@ -70,6 +72,8 @@
                         :selected-value="selectedValue"
                         @changeCheckbox="onChangeCheckbox"
                         @changeRadio="onChangeRadio"
+                        @setHoverRow="setHoverRow"
+                        @removeHoverRow="removeHoverRow"
                     />
                 </table>
             </div>
@@ -106,6 +110,8 @@
                         :selected-value="selectedValue"
                         @changeCheckbox="onChangeCheckbox"
                         @changeRadio="onChangeRadio"
+                        @setHoverRow="setHoverRow"
+                        @removeHoverRow="removeHoverRow"
                     />
                 </table>
             </div>
@@ -358,6 +364,20 @@
                     this.selectedValue,
                     this.dataMap[this.selectedValue]
                 );
+            },
+            setHoverRow(index) {
+                this.$el.querySelectorAll('tbody').forEach((tbody, trIndex) => {
+                    if(tbody.children.length > index) {
+                        tbody.children[index].classList.add('hover-row');
+                    }
+                });
+            },
+            removeHoverRow(index) {
+                this.$el.querySelectorAll('tbody').forEach((tbody, trIndex) => {
+                    if(tbody.children.length > index) {
+                        tbody.children[index].classList.remove('hover-row');
+                    }
+                });
             },
         }
     };
