@@ -276,11 +276,12 @@
         },
         mounted() {
             this.$nextTick(() => {
-                this.headerHeight = this.$refs.headerWrapper.offsetHeight;
-                this.scrollbarBottomH = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
-                this.scrollbarRightW = this.$refs.bodyWrapper.offsetWidth - this.$refs.bodyWrapper.clientWidth;
+                this.computeEleSize();
             });
             this.bindEvents();
+        },
+        destroyed() {
+            window.removeEventListener('resize', this.computeEleSize);
         },
 
         methods: {
@@ -298,6 +299,12 @@
                         refs.rightFixedBodyWrapper.scrollTop = refs.bodyWrapper.scrollTop;
                     };
                 });
+                window.addEventListener('resize', this.computeEleSize);
+            },
+            computeEleSize() {
+                this.headerHeight = this.$refs.headerWrapper.offsetHeight;
+                this.scrollbarBottomH = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
+                this.scrollbarRightW = this.$refs.bodyWrapper.offsetWidth - this.$refs.bodyWrapper.clientWidth;
             },
             getDataList(valueList) {
                 return valueList.map(value => {
