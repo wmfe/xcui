@@ -40,7 +40,7 @@
                 />
             </table>
         </div>
-        <div class="x-table-fixed" :style="fixedLeftTableStyle" v-show="fixedNum.length > 0 && scrollbarXH > 0">
+        <div :class="{'x-table-fixed': true, 'x-table-scroll-position-left': scrollXLeft === 0}" :style="fixedLeftTableStyle" v-show="fixedNum.length > 0 && scrollbarXH > 0">
             <div class="x-table-fixed-header-wrapper" ref="fixedHeaderWrapper">
                 <table>
                     <colgroup>
@@ -78,7 +78,7 @@
                 </table>
             </div>
         </div>
-        <div class="x-table-fixed-right" :style="fixedRightTableStyle" v-show="rightFixedColumns.length > 0 && scrollbarXH > 0">
+        <div :class="{'x-table-fixed-right': true, 'x-table-scroll-position-right': scrollXRight === 0}" :style="fixedRightTableStyle" v-show="rightFixedColumns.length > 0 && scrollbarXH > 0">
             <div class="x-table-fixed-right-header-wrapper" ref="rightFixedHeaderWrapper">
                 <table>
                     <colgroup>
@@ -185,6 +185,8 @@
                 headerHeight: '',
                 scrollbarXH: 0,
                 scrollbarYW: 0,
+                scrollXLeft: 0,
+                scrollXRight: 1,
                 selectedValueList: this.initialSelectedValueList,
                 selectedValue: this.initialSelectedValue
             };
@@ -297,6 +299,7 @@
                 this.$refs.bodyWrapper.addEventListener('scroll', () => {
                     if (headerWrapper) {
                         headerWrapper.scrollLeft = refs.bodyWrapper.scrollLeft;
+                        this.updateScrollXPosition();
                     }
                     if (refs.fixedBodyWrapper) {
                         refs.fixedBodyWrapper.scrollTop = refs.bodyWrapper.scrollTop;
@@ -311,12 +314,20 @@
                 this.headerHeight = this.$refs.headerWrapper.offsetHeight;
                 this.scrollbarXH = this.getScrollBarXHeight();
                 this.scrollbarYW = this.getScrollbarYWidth();
+                this.updateScrollXPosition();
             },
             getScrollBarXHeight() {
                 return this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
             },
             getScrollbarYWidth() {
                 return this.$refs.bodyWrapper.offsetWidth - this.$refs.bodyWrapper.clientWidth;
+            },
+            updateScrollXPosition() {
+                this.scrollXLeft = this.$refs.bodyWrapper.scrollLeft;
+                this.scrollXRight = this.getScrollXRight();
+            },
+            getScrollXRight() {
+                return this.$refs.bodyWrapper.scrollWidth - (this.$refs.bodyWrapper.scrollLeft + this.$refs.bodyWrapper.clientWidth);
             },
             getDataList(valueList) {
                 return valueList.map(value => {
