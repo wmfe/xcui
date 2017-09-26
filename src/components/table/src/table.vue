@@ -186,7 +186,7 @@
                 scrollbarXH: 0,
                 scrollbarYW: 0,
                 scrollXLeft: 0,
-                scrollXRight: 1,
+                scrollXRight: 0,
                 selectedValueList: this.initialSelectedValueList,
                 selectedValue: this.initialSelectedValue
             };
