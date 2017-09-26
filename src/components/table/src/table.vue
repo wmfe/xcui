@@ -38,7 +38,7 @@
                 />
             </table>
         </div>
-        <div class="x-table-fixed" :style="fixedLeftTableStyle" v-show="fixedNum.length > 0">
+        <div class="x-table-fixed" :style="fixedLeftTableStyle" v-show="fixedNum.length > 0 && scrollbarXH > 0">
             <div class="x-table-fixed-header-wrapper" ref="fixedHeaderWrapper">
                 <table>
                     <colgroup>
@@ -74,7 +74,7 @@
                 </table>
             </div>
         </div>
-        <div class="x-table-fixed-right" :style="fixedRightTableStyle" v-show="rightFixedColumns.length > 0">
+        <div class="x-table-fixed-right" :style="fixedRightTableStyle" v-show="rightFixedColumns.length > 0 && scrollbarXH > 0">
             <div class="x-table-fixed-right-header-wrapper" ref="rightFixedHeaderWrapper">
                 <table>
                     <colgroup>
@@ -177,8 +177,8 @@
                 rowKey: '',
                 tableWidth: null,
                 headerHeight: '',
-                scrollbarBottomH: '',
-                scrollbarRightW: '',
+                scrollbarXH: 0,
+                scrollbarYW: 0,
                 selectedValueList: this.initialSelectedValueList,
                 selectedValue: this.initialSelectedValue
             };
@@ -216,7 +216,7 @@
             fixedBodyStyle() {
                 let style = {};
                 if (this.height) {
-                    style['max-height'] = (+this.height - this.headerHeight - this.scrollbarBottomH) + 'px';
+                    style['max-height'] = (+this.height - this.headerHeight - this.scrollbarXH) + 'px';
                 }
                 return style;
             },
@@ -244,7 +244,7 @@
                     'width': this.fixedRightWidth,
                 };
                 if (this.height) {
-                    style['right'] = this.scrollbarRightW + 'px';
+                    style['right'] = this.scrollbarYW + 'px';
                 }
                 return style;
             },
@@ -258,13 +258,13 @@
         watch: {
             data() {
                 this.$nextTick(() => {
-                    this.scrollbarBottomH = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
+                    this.scrollbarXH = this.getScrollBarXHeight();
                 });
             },
             columns() {
                 this.$nextTick(() => {
                     this.headerHeight = this.$refs.headerWrapper.offsetHeight;
-                    this.scrollbarRightW = this.$refs.bodyWrapper.offsetWidth - this.$refs.bodyWrapper.clientWidth;
+                    this.scrollbarYW = this.getScrollbarYWidth();
                 });
             },
             initialSelectedValue(value) {
@@ -276,12 +276,12 @@
         },
         mounted() {
             this.$nextTick(() => {
-                this.computeEleSize();
+                this.resize();
             });
             this.bindEvents();
         },
         destroyed() {
-            window.removeEventListener('resize', this.computeEleSize);
+            window.removeEventListener('resize', this.resize);
         },
 
         methods: {
@@ -299,12 +299,18 @@
                         refs.rightFixedBodyWrapper.scrollTop = refs.bodyWrapper.scrollTop;
                     };
                 });
-                window.addEventListener('resize', this.computeEleSize);
+                window.addEventListener('resize', this.resize);
             },
-            computeEleSize() {
+            resize() {
                 this.headerHeight = this.$refs.headerWrapper.offsetHeight;
-                this.scrollbarBottomH = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
-                this.scrollbarRightW = this.$refs.bodyWrapper.offsetWidth - this.$refs.bodyWrapper.clientWidth;
+                this.scrollbarXH = this.getScrollBarXHeight();
+                this.scrollbarYW = this.getScrollbarYWidth();
+            },
+            getScrollBarXHeight() {
+                return this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
+            },
+            getScrollbarYWidth() {
+                return this.$refs.bodyWrapper.offsetWidth - this.$refs.bodyWrapper.clientWidth;
             },
             getDataList(valueList) {
                 return valueList.map(value => {
