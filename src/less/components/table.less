@@ -84,8 +84,6 @@
     }
     &-body-wrapper {
       width: 100%;
-      position: absolute;
-      left: 0;
       overflow: auto;
     }
     &-fixed {
@@ -108,14 +106,9 @@
         z-index: 4;
     }
     &-fixed-header-wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
       z-index: 1;
     }
     &-fixed-body-wrapper {
-      position: absolute;
-      left: 0;
       overflow: hidden;
     }
 
@@ -139,15 +132,12 @@
         z-index: 4;
     }
     &-fixed-right-header-wrapper {
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 1;
+        float: right;
+        z-index: 1;
     }
     &-fixed-right-body-wrapper {
-      position: absolute;
-      right: 0;
-      overflow: hidden;
+        float: right;
+        overflow: hidden;
     }
     &-hidden{
         display: none;

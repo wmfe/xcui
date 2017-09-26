@@ -1,5 +1,5 @@
 <template>
-    <div class="x-table" :style="tableStyle" :class="{
+    <div class="x-table" :class="{
             'x-table-bordered': bordered,
             'x-table-striped': striped
             }">
@@ -207,42 +207,18 @@
                 return dataMap;
             },
             bodyStyle() {
-                let style = {
-                    'top': +this.headerHeight + 'px'
-                };
+                let style = {};
                 if (this.height) {
                     style['max-height'] = (+this.height - this.headerHeight) + 'px';
                 }
                 return style;
             },
-            tableStyle() {
-                let style = {};
-                // 无数据时 默认高度300px
-                if (this.data.length === 0) {
-                    style = {
-                        'height': 300 + this.headerHeight + 'px'
-                    };
-                    return style;
-                }
-                if (this.height) {
-                    style = {
-                        'height': this.bodyHeight + this.headerHeight < +this.height ? this.bodyHeight + this.headerHeight + 'px': +this.height + 'px'
-                    };
-                    return style;
-                }
-                style = {
-                    'height': this.bodyHeight + this.headerHeight + 'px'
-                };
-                return style;
-            },
             fixedBodyStyle() {
-                    let style = {
-                        'top': +this.headerHeight + 'px'
-                    };
-                    if (this.height) {
-                        style['max-height'] = (+this.height - this.headerHeight - this.scrollbarHeight) + 'px';
-                    }
-                    return style;
+                let style = {};
+                if (this.height) {
+                    style['max-height'] = (+this.height - this.headerHeight - this.scrollbarHeight) + 'px';
+                }
+                return style;
             },
             fixedLeftWidth() {
                 if (this.columns.length > 0 && this.columns[0].width) {
@@ -258,34 +234,18 @@
                 return '';
             },
             fixedLeftTableStyle() {
-                let style = {};
-                if (this.height) {
-                    style = {
-                        'width': this.fixedLeftWidth,
-                        'height': +this.height - this.scrollbarHeight + 'px'
-                    };
-                    return style;
-                }
-                style = {
+                let style = {
                     'width': this.fixedLeftWidth,
-                    'height': this.bodyHeight + this.headerHeight - this.scrollbarHeight + 'px'
                 };
                 return style;
             },
             fixedRightTableStyle() {
-                let style = {};
-                if (this.height) {
-                    style = {
-                        'width': this.fixedRightWidth,
-                        'height': +this.height - this.scrollbarHeight + 'px',
-                        'right': this.scrollbarHeight + 'px'
-                    };
-                    return style;
-                }
-                style = {
+                let style = {
                     'width': this.fixedRightWidth,
-                    'height': this.bodyHeight + this.headerHeight - this.scrollbarHeight + 'px'
                 };
+                if (this.height) {
+                    style['right'] = this.scrollbarHeight + 'px';
+                }
                 return style;
             },
             fixedNum() {
