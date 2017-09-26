@@ -177,8 +177,8 @@
                 rowKey: '',
                 tableWidth: null,
                 headerHeight: '',
-                bodyHeight: '',
-                scrollbarHeight: '',
+                scrollbarBottomH: '',
+                scrollbarRightW: '',
                 selectedValueList: this.initialSelectedValueList,
                 selectedValue: this.initialSelectedValue
             };
@@ -216,7 +216,7 @@
             fixedBodyStyle() {
                 let style = {};
                 if (this.height) {
-                    style['max-height'] = (+this.height - this.headerHeight - this.scrollbarHeight) + 'px';
+                    style['max-height'] = (+this.height - this.headerHeight - this.scrollbarBottomH) + 'px';
                 }
                 return style;
             },
@@ -244,7 +244,7 @@
                     'width': this.fixedRightWidth,
                 };
                 if (this.height) {
-                    style['right'] = this.scrollbarHeight + 'px';
+                    style['right'] = this.scrollbarRightW + 'px';
                 }
                 return style;
             },
@@ -258,13 +258,13 @@
         watch: {
             data() {
                 this.$nextTick(() => {
-                    this.bodyHeight = this.$refs.bodyWrapper.offsetHeight;
-                    this.scrollbarHeight = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
+                    this.scrollbarBottomH = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
                 });
             },
             columns() {
                 this.$nextTick(() => {
                     this.headerHeight = this.$refs.headerWrapper.offsetHeight;
+                    this.scrollbarRightW = this.$refs.bodyWrapper.offsetWidth - this.$refs.bodyWrapper.clientWidth;
                 });
             },
             initialSelectedValue(value) {
@@ -277,8 +277,8 @@
         mounted() {
             this.$nextTick(() => {
                 this.headerHeight = this.$refs.headerWrapper.offsetHeight;
-                this.bodyHeight = this.$refs.bodyWrapper.offsetHeight;
-                this.scrollbarHeight = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
+                this.scrollbarBottomH = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
+                this.scrollbarRightW = this.$refs.bodyWrapper.offsetWidth - this.$refs.bodyWrapper.clientWidth;
             });
             this.bindEvents();
         },
