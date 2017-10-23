@@ -1,5 +1,5 @@
 <template>
-    <div class="x-table" :style="tableStyle" :class="{
+    <div class="x-table" :class="{
             'x-table-bordered': bordered,
             'x-table-striped': striped
             }">
@@ -40,7 +40,7 @@
                 />
             </table>
         </div>
-        <div class="x-table-fixed" :style="fixedLeftTableStyle" v-show="fixedNum.length > 0">
+        <div :class="{'x-table-fixed': true, 'x-table-scroll-position-left': scrollXLeft === 0}" :style="fixedLeftTableStyle" v-show="fixedNum.length > 0 && scrollbarXH > 0">
             <div class="x-table-fixed-header-wrapper" ref="fixedHeaderWrapper">
                 <table>
                     <colgroup>
@@ -78,7 +78,7 @@
                 </table>
             </div>
         </div>
-        <div class="x-table-fixed-right" :style="fixedRightTableStyle" v-show="rightFixedColumns.length > 0">
+        <div :class="{'x-table-fixed-right': true, 'x-table-scroll-position-right': scrollXRight === 0}" :style="fixedRightTableStyle" v-show="rightFixedColumns.length > 0 && scrollbarXH > 0">
             <div class="x-table-fixed-right-header-wrapper" ref="rightFixedHeaderWrapper">
                 <table>
                     <colgroup>
@@ -183,8 +183,10 @@
                 rowKey: '',
                 tableWidth: null,
                 headerHeight: '',
-                bodyHeight: '',
-                scrollbarHeight: '',
+                scrollbarXH: 0,
+                scrollbarYW: 0,
+                scrollXLeft: 0,
+                scrollXRight: 0,
                 selectedValueList: this.initialSelectedValueList,
                 selectedValue: this.initialSelectedValue
             };
@@ -213,42 +215,18 @@
                 return dataMap;
             },
             bodyStyle() {
-                let style = {
-                    'top': +this.headerHeight + 'px'
-                };
+                let style = {};
                 if (this.height) {
                     style['max-height'] = (+this.height - this.headerHeight) + 'px';
                 }
                 return style;
             },
-            tableStyle() {
-                let style = {};
-                // 无数据时 默认高度300px
-                if (this.data.length === 0) {
-                    style = {
-                        'height': 300 + this.headerHeight + 'px'
-                    };
-                    return style;
-                }
-                if (this.height) {
-                    style = {
-                        'height': this.bodyHeight + this.headerHeight < +this.height ? this.bodyHeight + this.headerHeight + 'px': +this.height + 'px'
-                    };
-                    return style;
-                }
-                style = {
-                    'height': this.bodyHeight + this.headerHeight + 'px'
-                };
-                return style;
-            },
             fixedBodyStyle() {
-                    let style = {
-                        'top': +this.headerHeight + 'px'
-                    };
-                    if (this.height) {
-                        style['max-height'] = (+this.height - this.headerHeight - this.scrollbarHeight) + 'px';
-                    }
-                    return style;
+                let style = {};
+                if (this.height) {
+                    style['max-height'] = (+this.height - this.headerHeight - this.scrollbarXH) + 'px';
+                }
+                return style;
             },
             fixedLeftWidth() {
                 if (this.columns.length > 0 && this.columns[0].width) {
@@ -264,34 +242,18 @@
                 return '';
             },
             fixedLeftTableStyle() {
-                let style = {};
-                if (this.height) {
-                    style = {
-                        'width': this.fixedLeftWidth,
-                        'height': +this.height - this.scrollbarHeight + 'px'
-                    };
-                    return style;
-                }
-                style = {
+                let style = {
                     'width': this.fixedLeftWidth,
-                    'height': this.bodyHeight + this.headerHeight - this.scrollbarHeight + 'px'
                 };
                 return style;
             },
             fixedRightTableStyle() {
-                let style = {};
-                if (this.height) {
-                    style = {
-                        'width': this.fixedRightWidth,
-                        'height': +this.height - this.scrollbarHeight + 'px',
-                        'right': this.scrollbarHeight + 'px'
-                    };
-                    return style;
-                }
-                style = {
+                let style = {
                     'width': this.fixedRightWidth,
-                    'height': this.bodyHeight + this.headerHeight - this.scrollbarHeight + 'px'
                 };
+                if (this.height) {
+                    style['right'] = this.scrollbarYW + 'px';
+                }
                 return style;
             },
             fixedNum() {
@@ -304,13 +266,13 @@
         watch: {
             data() {
                 this.$nextTick(() => {
-                    this.bodyHeight = this.$refs.bodyWrapper.offsetHeight;
-                    this.scrollbarHeight = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
+                    this.scrollbarXH = this.getScrollBarXHeight();
                 });
             },
             columns() {
                 this.$nextTick(() => {
                     this.headerHeight = this.$refs.headerWrapper.offsetHeight;
+                    this.scrollbarYW = this.getScrollbarYWidth();
                 });
             },
             initialSelectedValue(value) {
@@ -322,11 +284,12 @@
         },
         mounted() {
             this.$nextTick(() => {
-                this.headerHeight = this.$refs.headerWrapper.offsetHeight;
-                this.bodyHeight = this.$refs.bodyWrapper.offsetHeight;
-                this.scrollbarHeight = this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
+                this.resize();
             });
             this.bindEvents();
+        },
+        destroyed() {
+            window.removeEventListener('resize', this.resize);
         },
 
         methods: {
@@ -336,6 +299,7 @@
                 this.$refs.bodyWrapper.addEventListener('scroll', () => {
                     if (headerWrapper) {
                         headerWrapper.scrollLeft = refs.bodyWrapper.scrollLeft;
+                        this.updateScrollXPosition();
                     }
                     if (refs.fixedBodyWrapper) {
                         refs.fixedBodyWrapper.scrollTop = refs.bodyWrapper.scrollTop;
@@ -344,6 +308,26 @@
                         refs.rightFixedBodyWrapper.scrollTop = refs.bodyWrapper.scrollTop;
                     };
                 });
+                window.addEventListener('resize', this.resize);
+            },
+            resize() {
+                this.headerHeight = this.$refs.headerWrapper.offsetHeight;
+                this.scrollbarXH = this.getScrollBarXHeight();
+                this.scrollbarYW = this.getScrollbarYWidth();
+                this.updateScrollXPosition();
+            },
+            getScrollBarXHeight() {
+                return this.$refs.bodyWrapper.offsetHeight - this.$refs.bodyWrapper.clientHeight;
+            },
+            getScrollbarYWidth() {
+                return this.$refs.bodyWrapper.offsetWidth - this.$refs.bodyWrapper.clientWidth;
+            },
+            updateScrollXPosition() {
+                this.scrollXLeft = this.$refs.bodyWrapper.scrollLeft;
+                this.scrollXRight = this.getScrollXRight();
+            },
+            getScrollXRight() {
+                return this.$refs.bodyWrapper.scrollWidth - (this.$refs.bodyWrapper.scrollLeft + this.$refs.bodyWrapper.clientWidth);
             },
             getDataList(valueList) {
                 return valueList.map(value => {
@@ -393,15 +377,19 @@
                 );
             },
             setHoverRow(index) {
-                this.$el.querySelectorAll('tbody').forEach((trItem, trIndex) => {
-                    trItem.children[index].classList.add('hover-row');
+                this.$el.querySelectorAll('tbody').forEach((tbody, trIndex) => {
+                    if(tbody.children.length > index) {
+                        tbody.children[index].classList.add('hover-row');
+                    }
                 });
             },
             removeHoverRow(index) {
-                this.$el.querySelectorAll('tbody').forEach((trItem, trIndex) => {
-                    trItem.children[index].classList.remove('hover-row');
+                this.$el.querySelectorAll('tbody').forEach((tbody, trIndex) => {
+                    if(tbody.children.length > index) {
+                        tbody.children[index].classList.remove('hover-row');
+                    }
                 });
-            }
+            },
         }
     };
 </script>
