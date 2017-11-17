@@ -364,13 +364,6 @@
             this.showSlot = this.$slots.extra !== undefined;
             this.$nextTick(() => {
                 this.headerHeight = this.$refs.nav.offsetHeight;
-                this.$refs.tabs.forEach((item, index) => {
-                    if (this.tabPosition === 'left') {
-                        this.navWidthList.push(item.clientHeight);
-                    } else {
-                        this.navWidthList.push(item.clientWidth);
-                    }
-                });
                 if (!this.activeName) {
                     this.upDateActiveTab(0);
                 } else {
