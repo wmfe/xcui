@@ -13,7 +13,7 @@
 <tpl>
     <x-button type="primary" @click="modal1 = true">点击展示弹窗</x-button>
     <x-modal v-model="modal1" title="基础弹窗">
-      <p>展示一段信息</p> 
+      <p>展示一段信息</p>
     </x-modal>
 </tpl>
 
@@ -46,7 +46,7 @@
             <x-icon name="help-circled"></x-icon>
             <span>确认要执行全部操作吗？</span>
         </div>
-        <p>执行后会将任务下发给所有同学！</p>   
+        <p>执行后会将任务下发给所有同学！</p>
         <div slot="footer" style="text-align:right">
             <x-button type="primary" @click="exec" size="large" :loading="isLoading">
             {{isLoading ? '执行中...' : '确认执行'}}</x-button>
@@ -184,6 +184,8 @@ Vue.use(XCUI)
 
 </template>
 <script>
+import '#/modal.less';
+import '#/button.less';
 export default {
     data() {
         return {

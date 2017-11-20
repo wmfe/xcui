@@ -117,6 +117,8 @@ this.$PageLoading.config({
 
 
 <script>
+    import '#/pageloading.less';
+    import '#/button.less';
     export default {
         methods: {
             start() {

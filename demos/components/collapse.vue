@@ -220,6 +220,7 @@
 </template>
 
 <script>
+    import '#/collapse.less';
     export default {
         data() {
             return {

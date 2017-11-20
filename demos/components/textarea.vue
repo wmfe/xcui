@@ -74,7 +74,7 @@
         </x-col>
         <x-col :span="8">
             <x-textarea placeholder="请输入内容" v-model="input4" :autosize="{minRows: 2, maxRows: 4}"></x-textarea>
-            <p>设置最小行数为2，最大行数为4</p>   
+            <p>设置最小行数为2，最大行数为4</p>
         </x-col>
     </x-row>
 </tpl>
@@ -127,6 +127,7 @@
 
 </template>
 <script>
+    import '#/textarea.less';
     export default {
         data() {
             return {
@@ -138,5 +139,5 @@
                 input5: ''
             };
         }
-    };   
+    };
 </script>

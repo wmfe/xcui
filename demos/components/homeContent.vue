@@ -51,6 +51,13 @@ var xcui = require('xcui').default;
 Vue.use(xcui);
 ```
 
+或者按需引入(更多请查看 [按需引入详细步骤](#/intro/quickstart#引入XCUI)):
+
+```javascript
+import Vue from 'vue'
+import {Button, MultiTreeSelect} from 'xcui'
+```
+
 在页面中声明标签，即可使用。
 
 > **说明**

@@ -1,5 +1,9 @@
+@charset "UTF-8";
+@import "../theme/default";
+@import "../mixins/index";
+
 @switch-prefix-cls: x-switch;
-@keyframes switch-ripple {
+@keyframes x-switch-ripple {
     0% {
         opacity: .5;
         .scale(0);
@@ -76,7 +80,7 @@
         }
         &.is-checked {
             &+ .@{switch-prefix-cls}-background {
-                background-color: rgba(70, 195, 193, 0.4); 
+                background-color: rgba(70, 195, 193, 0.4);
                 > .@{switch-prefix-cls}-cbx {
                     background-color: #46c3c1;
                     left: 100%;
@@ -91,7 +95,7 @@
                 &+ .@{switch-prefix-cls}-background {
                     > .@{switch-prefix-cls}-cbx {
                         &:before {
-                            animation: switch-ripple .4s ease .1s 1 normal forwards;
+                            animation: x-switch-ripple .4s ease .1s 1 normal forwards;
                         }
                     }
                 }

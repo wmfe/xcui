@@ -109,6 +109,8 @@
 |suggestions|Array|[]|输入建议的数据源|必选||
 |inputCallback|Function|无|输入时的回调函数, 可用于触发远程请求|可选||
 |allowClear|Boolean|true|是否允许出现清除图标|可选|true, false|
+|matchInput|Boolean|true|是否根据输入在客户端匹配建议列表|可选|true, false|
+|matchCase|Boolean|false|是否严格匹配输入大小写，matchInput为true时有效|可选|true, false|
 
 ## Events
 
@@ -119,6 +121,7 @@
 </template>
 
 <script>
+  import '#/suggestion.less';
   export default {
       data() {
           return {
@@ -183,7 +186,7 @@
                   {text: v + v, value: 2},
                   {text: v + v + v, value: 3},
                   {text: v + v + v + v, value: 4}
-              ];  
+              ];
           }
       },
       mounted() {

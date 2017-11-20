@@ -8,7 +8,7 @@ var webpack = require('webpack')
 var config = require('../config')
 var webpackConfig = require('./webpack.site.conf')
 
-var spinner = ora('building for site...')
+var spinner = ora('Building for site...')
 spinner.start()
 
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), function(err) {
@@ -24,6 +24,6 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), function
             chunkModules: false
         }) + '\n\n')
 
-        console.log(chalk.cyan('  Build complete.\n'))
+        console.log(chalk.cyan.bold('  Build complete.\n'))
     })
 })

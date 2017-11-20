@@ -13,7 +13,7 @@ var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 var allInOneConfig = merge(baseWebpackConfig, {
     entry: {
-        'xcui': './src/components/index.js'
+        'xcui': './src/components/index.build.js'
     },
     output: {
         libraryTarget: 'umd'
@@ -57,9 +57,7 @@ var cjsConfig = merge(baseWebpackConfig, {
     externals: config.build.externals
 })
 
-
-
-console.log(chalk.cyan.bold('building for bundles...'))
+console.log(chalk.cyan.bold('Building for bundles...'))
 
 webpack(allInOneConfig, function(err, stats) {
     if (err) throw err

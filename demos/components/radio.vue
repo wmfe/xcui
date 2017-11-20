@@ -74,7 +74,7 @@
         <x-radio label="2">备选项2</x-radio>
         <x-radio label="3">备选项3</x-radio>
     </x-radio-group>
-    <p style="margin-top:15px;">选中的值：{{checked3}}</p>   
+    <p style="margin-top:15px;">选中的值：{{checked3}}</p>
 </tpl>
 
 <script>
@@ -140,9 +140,11 @@
 |---|---|---|---|
 |change|`v-model`绑定值改变时触发|选中的Radio label值|`@change`|
 
-    
+
 </template>
 <script>
+    import '#/radio.less';
+    import '#/radio-button.less';
     export default {
         data() {
             return {

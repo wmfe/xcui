@@ -17,6 +17,7 @@ const xNotice = {
         let top = 24;
         let noticeInstance;
         let uuid = 1;
+        let insertDom;
 
         function getNoticeInstance() {
             noticeInstance = noticeInstance || MsgCollection.newInstance(Vue, {
@@ -25,7 +26,7 @@ const xNotice = {
                     top: `${top}px`,
                     right: 0
                 }
-            });
+            }, insertDom);
 
             return noticeInstance;
         }
@@ -84,6 +85,9 @@ const xNotice = {
                 }
                 if (options.duration || options.duration === 0) {
                     defaultDuration = options.duration;
+                }
+                if (options.insertTo) {
+                    insertDom = options.insertTo;
                 }
             },
             close(name) {

@@ -1,3 +1,6 @@
+@charset "UTF-8";
+@import "../theme/default";
+
 @tooltip-prefix-cls: ~"@{xcui-prefix}-tooltip";
 @arrow-prefix-cls: ~"@{xcui-prefix}-popper-arrow";
 
@@ -23,7 +26,7 @@
         &:after {
             content: " ";
             border-width: @tooltip-arrow-size;
-        }   
+        }
     }
 
     &[x-placement^=top] {

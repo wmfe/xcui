@@ -1,5 +1,5 @@
 
-import Checkbox from '../../checkbox';
+import Checkbox from 'xcui/src/components/checkbox';
 
 export default {
     props: {
@@ -21,7 +21,7 @@ export default {
         },
         convertToRows(originColumns) {
             let maxLevel = 1;
-            //对所有嵌套列数据标记列层级与子列跨度
+            // 对所有嵌套列数据标记列层级与子列跨度
             const traverse = (column, parent) => {
                 if (parent) {
                     column.level = parent.level + 1;
@@ -53,7 +53,7 @@ export default {
             }
 
             const allColumns = this.getAllColumns(originColumns);
-            //按列的层级排列表头数组
+            // 按列的层级排列表头数组
             allColumns.forEach((column) => {
                 if (!column.children || column.children.length === 0) {
                     column.rowSpan = maxLevel - column.level + 1;
@@ -66,7 +66,7 @@ export default {
 
             return rows;
         },
-        //取出所有嵌套列数据
+        // 取出所有嵌套列数据
         getAllColumns(columns) {
             const result = [];
             columns.forEach((column) => {
@@ -91,11 +91,18 @@ export default {
                         <tr>
                             {
                                 columns.map(columnItem => {
+                                    let content = columnItem.headerRender.call(
+                                        this, {
+                                            columnItem
+                                        }
+                                    );
                                     switch (columnItem.type) {
                                         case 'selection':
                                             return (
                                                 <th colspan={ columnItem.colSpan }
-                                                rowspan={ columnItem.rowSpan }
+                                                    rowspan={ columnItem.rowSpan }
+                                                    class={columnItem.thClassName}
+                                                    title={columnItem.singleLine ? content : ''}
                                                 >
                                                     <x-checkbox
                                                         indeterminate={this.selectedStatus === 'partial'}
@@ -106,19 +113,18 @@ export default {
                                             );
                                         case 'radio':
                                             return (
-                                                <th></th>
+                                                <th
+                                                    class={columnItem.thClassName}
+                                                    title={columnItem.singleLine ? content : ''}
+                                                ></th>
                                             );
                                         case 'normal':
                                         default:
-                                            let content = columnItem.headerRender.call(
-                                                this,
-                                                {
-                                                    columnItem
-                                                }
-                                            );
                                             return (
                                                 <th colspan={ columnItem.colSpan }
                                                 rowspan={ columnItem.rowSpan }
+                                                class={columnItem.thClassName}
+                                                title={columnItem.singleLine ? content : ''}
                                                 >
                                                     {content}
                                                 </th>

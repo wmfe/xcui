@@ -363,6 +363,7 @@
 </template>
 
 <script>
+    import '#/select.less';
     export default{
         data() {
             return {

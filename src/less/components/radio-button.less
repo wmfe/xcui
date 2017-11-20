@@ -1,6 +1,9 @@
+@charset "UTF-8";
+@import "../theme/default";
+
 @radio-button-prefix-cls: ~"@{xcui-prefix}-radio-button";
 @radio-button-text-prefix-cls: ~"@{radio-button-prefix-cls}-text";
-    
+
 .@{xcui-prefix}-radio-input {
     opacity: 0;
     outline: none;
@@ -38,9 +41,6 @@
     &:last-child .@{radio-button-text-prefix-cls} {
         border-radius: 0 4px 4px 0;
     }
-    &:not(:first-child) .@{radio-button-text-prefix-cls} {
-        margin-left: -4px;
-    }
 
     &-text {
         display: inline-block;
@@ -75,7 +75,7 @@
             }
         }
     }
-    
+
     &-large {
         .@{radio-button-text-prefix-cls} {
             padding: 11px 19px;

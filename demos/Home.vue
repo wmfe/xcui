@@ -48,6 +48,12 @@
                         <router-link to="/component/select">Select 选择器</router-link>
                     </li>
                     <li class="sidebar-item">
+                        <router-link to="/component/single-tree-select">SingleTreeSelect 单选选择器</router-link>
+                    </li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/multi-tree-select">MultiTreeSelect 多选选择器</router-link>
+                    </li>
+                    <li class="sidebar-item">
                         <router-link to="/component/switch">Switch 开关</router-link>
                     </li>
                     <li class="sidebar-item">
@@ -107,6 +113,12 @@
                         <router-link to="/component/pagination">Pagination 分页</router-link>
                     </li>
                     <li class="sidebar-item">
+                        <router-link to="/component/tabs">Tabs 标签页</router-link>
+                    </li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/breadcrumb">Breadcrumb 面包屑</router-link>
+                    </li>
+                    <li class="sidebar-item">
                         <router-link to="/component/dropdown">Dropdown 下拉菜单</router-link>
                     </li>
                     <li class="sidebar-item">
@@ -129,9 +141,7 @@
             </x-col>
             <x-col :xs="16" :sm="16" :md="16" :lg="18" id="page-content-wrapper" class="x-demo">
                 <div class="x-demo-inner">
-                    <transition name="x-page">
-                         <router-view></router-view>
-                    </transition>
+                    <router-view></router-view>
                 </div>
             </x-col>
         </x-row>
@@ -157,7 +167,3 @@ export default {
 };
 
 </script>
-
-<style lang="less">
-@import './assets/demo/demo.less';
-</style>

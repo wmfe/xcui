@@ -14,6 +14,7 @@
 </template>
 <script>
     import Emitter from 'xcui/src/utils/mixins/emitter';
+
     export default {
         name: 'x-collapse-item',
         componentName: 'x-collapse-item',
@@ -33,10 +34,10 @@
         },
         mixins: [Emitter],
         data() {
-            return {
-                orginHeight: 'auto',
-                isReady: false
-            };
+              return {
+                  orginHeight: 'auto',
+                  isReady: false
+              };
         },
         computed: {
             isOpen() {
@@ -62,7 +63,6 @@
                 // 创建观察者对象
                 let observer = new MutationObserver((mutations) => {
                   mutations.forEach((mutation) => {
-                    console.log(mutation.type);
                     this.getContentHeight()
                   });
                 });

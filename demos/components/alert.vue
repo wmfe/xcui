@@ -123,6 +123,8 @@ export default {
 </template>
 
 <script>
+import '#/alert.less';
+
 export default {
     methods: {
         handleClose() {

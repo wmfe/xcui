@@ -42,6 +42,10 @@ const Collapse = () => import('./components/collapse');
 const Upload = () => import('./components/upload');
 const Dropdown = () => import('./components/dropdown');
 const Alert = () => import('./components/alert');
+const MultiTreeSelect = () => import('./components/multi-tree-select');
+const SingleTreeSelect = () => import('./components/single-tree-select');
+const Tabs = () => import('./components/tabs');
+const Breadcrumb = () => import('./components/breadcrumb');
 
 const router = new VueRouter({
     routes: [{
@@ -154,8 +158,20 @@ const router = new VueRouter({
                 path: '/component/dropdown',
                 component: Dropdown
             }, {
+                path: '/component/single-tree-select',
+                component: SingleTreeSelect
+            }, {
+                path: '/component/multi-tree-select',
+                component: MultiTreeSelect
+            }, {
                 path: '/component/alert',
                 component: Alert
+            }, {
+                path: '/component/tabs',
+                component: Tabs
+            }, {
+                path: '/component/breadcrumb',
+                component: Breadcrumb
             }
         ]
     }]
