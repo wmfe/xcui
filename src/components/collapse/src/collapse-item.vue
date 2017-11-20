@@ -51,12 +51,41 @@
         methods: {
             clickHeader: function () {
                 this.dispatch('x-collapse', 'itemClick', this.id);
+            },
+            observeSolt: function() {
+                // Firefox和Chrome早期版本中带有前缀
+                let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
+
+                // 选择目标节点
+                let targets = this.$refs.content
+
+                // 创建观察者对象
+                let observer = new MutationObserver((mutations) => {
+                  mutations.forEach((mutation) => {
+                    console.log(mutation.type);
+                    this.getContentHeight()
+                  });
+                });
+
+                // 配置观察选项:
+                let config = {attributes: true, childList: true, characterData: true, subtree: true}
+
+                // 传入目标节点和观察选项
+                observer.observe(targets, config);
+            },
+            getContentHeight() {
+                let temp = window.getComputedStyle(this.$refs.content, null).height;
+                let tempNumber = parseFloat(temp);
+                this.orginHeight = tempNumber ? tempNumber + 32 + 'px' : '0'
             }
         },
         mounted() {
             this.$nextTick(() => {
                 this.isReady = true;
-                this.orginHeight = window.getComputedStyle(this.$refs.content, null).height;
+                setTimeout(() => {
+                    this.getContentHeight()
+                    this.observeSolt()
+                }, 0)
             });
         }
     };

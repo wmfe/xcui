@@ -3,11 +3,11 @@
 
 ## 概述
 
-点击面板，实现内容区域的展示和隐藏  
+点击面板，实现内容区域的展示和隐藏
 
 ## 基础模式
 
-::: demo 以面板组的方式出现，常用于多项类似操作。通过v-model绑定数组，可以设置默认展开的项，并且也可以获取当前展开面板的id数组。
+::: demo 以面板组的方式出现，常用于多项类似操作。通过v-model绑定数组，可以设置默认展开的项，并且也可以获取当前展开面板的id数组。支持异步渲染面板数据，参考代码中asyncText使用。
 
 ```html
 
@@ -15,8 +15,7 @@
     <x-collapse v-model="opens1">
         <x-collapse-item id="1">
             <span slot="titleRight">This is panel header 1</span>
-            <div class="eg-class">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <div class="eg-class">{{asyncText}}
             </div>
         </x-collapse-item>
         <x-collapse-item id="2">
@@ -24,24 +23,38 @@
             <div class="eg-class">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </div>
+            <div class="eg-class">
+                2L culpa qui officia deserunt mollit anim id est laborum.
+            </div>
+            <div class="eg-class">
+                2L culpa qui officia deserunt mollit anim id est laborum.
+            </div>
         </x-collapse-item>
         <x-collapse-item id="3">
             <span slot="titleRight">This is panel header 3</span>
             <div class="eg-class">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor m.
             </div>
         </x-collapse-item>
     </x-collapse>
     <p style="margin-top: 15px;">
         当前展开的面板值数组： {{opens1}}
     </p>
-   
+
 <script>
     export default {
         data() {
             return {
-                opens1: ['1', '2']，
+                opens1: ['1', '2'].
+                asyncText: null //异步数据
             };
+        },
+        mounted() {
+            this.$nextTick(() => {
+                setTimeout(()=> {
+                    this.asyncText = 'asyncText come inasyncText come inasyncText come inasyncText come inasyncText come inasyncText come inasyncText come inasyncText come inasyncText come ina inasyncText come inasyncText come inasyncText come inasyncText come ininasyncText come inasyncText come ininasyncText come inasyncText come ininasyncText come inasyncText come ininasyncText come inasyncText come ininasyncText come inasyncText come ininasyncText come inasyncText come in'
+                }, 1000)
+            })
         }
     };
 </script>
@@ -85,7 +98,7 @@
             </div>
         </x-collapse-item>
     </x-collapse>
-   
+
 <script>
     export default {
         data() {
@@ -123,7 +136,7 @@
                 <x-icon name="outlet" size="16"></x-icon>
             </span>
             <div class="eg-class">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                {Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident, sunt in culpa qui officia deserunt mollit anim id est laborum.}
             </div>
         </x-collapse-item>
         <x-collapse-item id="2">
@@ -145,7 +158,7 @@
             </div>
         </x-collapse-item>
     </x-collapse>
-   
+
 <script>
     export default {
         data() {
@@ -158,10 +171,10 @@
 </script>
 <style>
     .title-right{
-        float: right;      
+        float: right;
     }
     .title-left{
-        padding-right: 300px;        
+        padding-right: 300px;
     }
     .eg-class{
         width: 80%;
@@ -212,20 +225,28 @@
             return {
                 opens1: ['1', '2'],
                 opens: ['1'],
-                openOnlyOne: true
+                openOnlyOne: true,
+                asyncText: null
             };
         },
         methods: {
+        },
+        mounted() {
+            this.$nextTick(() => {
+                setTimeout(()=> {
+                    this.asyncText = 'asyncText come inasyncText come inasyncText come inasyncText come inasyncText come inasyncText come inasyncText come inasyncText come inasyncText come ina inasyncText come inasyncText come inasyncText come inasyncText come ininasyncText come inasyncText come ininasyncText come inasyncText come ininasyncText come inasyncText come ininasyncText come inasyncText come ininasyncText come inasyncText come ininasyncText come inasyncText come in'
+                }, 1000)
+            })
         }
     };
 
 </script>
 <style>
     .title-right{
-        float: right;      
+        float: right;
     }
     .title-left{
-        padding-right: 300px;        
+        padding-right: 300px;
     }
     .eg-class{
         width: 80%;
