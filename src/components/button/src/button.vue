@@ -1,5 +1,5 @@
 <template>
-    <button :class="cls" :disabled="disabled" @click="handleClick" 
+    <button :type="nativeType" :class="cls" :disabled="disabled" @click="handleClick"
     @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
         <i class="x-icon x-icon-load-c x-icon-addon-spin" v-if="loading"></i>
         <i :class="'x-icon x-icon-' + icon" v-if="icon && !loading"></i>
@@ -13,6 +13,10 @@
             type: {
                 type: String,
                 default: ''
+            },
+            nativeType: {
+                type: String,
+                default: 'button'
             },
             size: {
                 type: String,

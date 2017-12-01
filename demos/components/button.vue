@@ -140,6 +140,7 @@
 |-----|-----|-----|-----|----|----|----|
 |size|String|无|尺寸|可选|small, large|
 |type|String|无|类型|可选|primary, info, success, warning, danger, dashed, link|
+|nativeType|String|button|原生type|否|button, submit, reset|
 |loading|Boolean|false|是否加载中状态|可选|true , false|
 |disabled|Boolean|false|是否禁用|可选|true , false|
 |icon|String|无|图标名，具体见icon组件名|可选||
