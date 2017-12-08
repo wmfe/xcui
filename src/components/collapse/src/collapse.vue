@@ -16,7 +16,7 @@
             },
             value: {
                 type: [Array, String, Number],
-                default: []
+                default: () => []
             }
         },
         mixins: [Emitter],
