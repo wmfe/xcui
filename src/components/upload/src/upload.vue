@@ -96,13 +96,21 @@
                 if (type === 'rawFile') {
                     file = this.getFile(file);
                 }
-
-                this.abort(file);
-
                 let fileList = this.uploadFiles;
-                fileList.splice(fileList.indexOf(file), 1);
-                this.onRemove(file, fileList);
-                this.onChange(file, fileList);
+
+                let removeResult = this.onRemove(file, fileList);
+                if (removeResult && removeResult.then) {
+                    removeResult.then(()=>{
+                        this.abort(file);
+                        fileList.splice(fileList.indexOf(file), 1);
+                        this.onChange(file, fileList);
+                    },()=>{})
+                }else {
+                    this.abort(file);
+                    fileList.splice(fileList.indexOf(file), 1);
+                    this.onChange(file, fileList);
+                }
+
             },
             handleStart(rawFile) {
                 rawFile.uid = Date.now() + this.fileIndex++;

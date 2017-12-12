@@ -12,6 +12,7 @@
     }
     &-picture {
         overflow: hidden;
+        position: relative;
     }
     &-picture, &-list-picture .list-item{
         width: 150px;
@@ -113,16 +114,16 @@
             -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
         }
+    }
 
-        .x-upload-list-img {
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-            -ms-transform: translateY(-50%);
-            vertical-align: top;
-            max-width: 100%;
-        }
-
+    &-picture img, .x-upload-list-img{
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        vertical-align: top;
+        max-width: 100%;
     }
 
 
