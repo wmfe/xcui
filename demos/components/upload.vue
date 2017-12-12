@@ -48,7 +48,7 @@
 
 ## 图片列表
 
-::: demo 通过listType设置list样式，通过on-preview（点击已上传的文件链接时的钩子），可以自定义预览交互。
+::: demo 通过listType设置list样式，通过on-preview（点击已上传的文件链接时的钩子），可以自定义预览交互,on-remove支持返回promise做删除前校验。
 
 ```html
 
@@ -59,6 +59,7 @@
         :file-list="list2"
         :list-type="'picture'"
         :on-preview="handlePreview"
+        :on-remove="handleRemove"
     >
         <i class="x-icon x-icon-plus-round"></i>
     </x-upload>
@@ -92,6 +93,15 @@
             },
             handleClose(){
                 this.preview = false;
+            },
+            handleRemove(file){
+                return new Promise((resolve,reject)=>{
+                    this.$Dialog.confirm('确认','是否要删除该文件？',()=>{
+                        resolve();
+                    },()=>{
+                        reject();
+                    });
+                });
             }
         }
     };
@@ -269,7 +279,7 @@
 |on-progress|Function|无|文件上传过程中的钩子, 事件对象会返回上传进度|可选|event, file, fileList|
 |on-success|Function|无|文件上传成功时的钩子, 返回服务端数据|可选|response, file, fileList|
 |on-error|Function|无|文件上传失败时的钩子, 返回错误|可选|err, file, fileList|
-|on-remove|Function|无|文件列表移除文件时的钩子|可选|file, fileList|
+|on-remove|Function|无|文件列表移除文件时的钩子，支持返回promise做删除前确认|可选|file, fileList|
 
 ##  Methods
 | 名字 |描述 | 参数 |调用方式|
@@ -285,7 +295,8 @@
 
 </template>
 <script>
-    import '#/dialog.less';
+    import '#/modal.less';
+    import '#/button.less';
     import '#/upload.less';
     export default {
         data() {
@@ -333,7 +344,16 @@
             },
             handleSuccess(response,file,fileList) {
                 this.url = file.url;
-            }
+            },
+            handleRemove(file){
+                return new Promise((resolve,reject)=>{
+                    this.$Dialog.confirm('确认','是否要删除该文件？',()=>{
+                        resolve();
+                    },()=>{
+                        reject();
+                    });
+                });
+            },
         }
     };
 </script>

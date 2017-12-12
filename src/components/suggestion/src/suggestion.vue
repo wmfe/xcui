@@ -40,7 +40,9 @@
                 dataValue: '',
                 isFocus: false,
                 icon: '',
-                iconClick: function () {}
+                iconClick: function () {},
+                namesList: [],
+                timeout: null
             };
         },
         props: {
@@ -89,6 +91,10 @@
                 type: Boolean,
                 default: true,
             },
+            wait: {
+                type: Number,
+                default: 500
+            }
         },
         computed: {
             sugVisible() {
@@ -99,9 +105,10 @@
         },
 
         watch: {
-            suggestions() {
+            suggestions(val) {
                 this.arrangeLocalList();
                 this.getLocalSug();
+                this.namesList = this.getNamesList(val);
             },
             allowClear(val) {
                 if (val) {
@@ -115,12 +122,6 @@
             sugVisible(val) {
                 this.broadcast('xSuggestionDropdown', 'visible',
                     [val, this.$refs.xInput.$refs.input.offsetWidth]);
-            },
-            dataText(val) {
-                if (val === '') {
-                    this.dataValue = '';
-                    this.emitChange();
-                }
             },
             value(val) {
                 if (!val) {
@@ -141,15 +142,23 @@
                     };
                 }
             },
+            getNamesList(list) {
+                return list.map(item => {
+                    return typeof item == 'object' ? item.text : item;
+                });
+            },
             handleChange() {
+                if (this.namesList.indexOf(this.dataText) == -1) {
+                    this.dataValue = '';
+                }
                 this.emitChange();
                 this.getLocalSug();
-                this.inputCallback && this.inputCallback();
+                this.inputCallback && this.debounce(this.inputCallback,this.wait);
             },
             handleFocus() {
                 this.isFocus = true;
                 this.getLocalSug();
-                this.inputCallback && this.inputCallback();
+                this.inputCallback && this.debounce(this.inputCallback,this.wait);
             },
             handleBlur() {
                 setTimeout(() => {
@@ -262,7 +271,6 @@
                 this.dataText = item.text;
                 this.$nextTick(() => {
                     this.clearList();
-                    this.emitChange();
                 });
             },
             logError(msg) {
@@ -274,6 +282,7 @@
             clearText() {
                 // watch for clear
                 this.dataText = '';
+                this.dataValue = '';
             },
             emitChange() {
                 this.$emit('input', {
@@ -284,6 +293,16 @@
                     text: this.dataText,
                     value: this.dataValue
                 });
+            },
+            debounce(func, wait){
+                if (this.timeout) clearTimeout(this.timeout);
+                this.timeout = this.delay(func, wait);
+            },
+            delay(func, wait){
+                return setTimeout(() => {
+                    this.timeout = null;
+                    return func();
+                }, wait);
             }
         },
         created() {
@@ -296,6 +315,7 @@
                 this.setItem(item);
             });
             this.arrangeLocalList();
+            this.namesList = this.getNamesList(this.suggestions);
         }
     };
 </script>

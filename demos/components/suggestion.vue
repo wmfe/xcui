@@ -70,7 +70,7 @@
 ```html
 
 <tpl>
-    <x-suggestion v-model="state3" placeholder="请随意输入" :suggestions="sug3" :input-callback="request"></x-suggestion>
+    <x-suggestion v-model="state3" placeholder="请随意输入" :suggestions="sug3" :input-callback="request" @change="handleChange"></x-suggestion>
     <p style="margin-top:15px;">选中的值：{{state3}}</p>
 </tpl>
 
@@ -91,6 +91,9 @@
                     {text: v + v + v, value: 3},
                     {text: v + v + v + v, value: 4}
                 ];
+            },
+            handleChange() {
+
             }
         }
     }
@@ -108,6 +111,7 @@
 |disabled|Boolean|false|是否禁用|可选||
 |suggestions|Array|[]|输入建议的数据源|必选||
 |inputCallback|Function|无|输入时的回调函数, 可用于触发远程请求|可选||
+|wait|Number|500|触发远程请求时的防抖动延迟时间|可选||
 |allowClear|Boolean|true|是否允许出现清除图标|可选|true, false|
 |matchInput|Boolean|true|是否根据输入在客户端匹配建议列表|可选|true, false|
 |matchCase|Boolean|false|是否严格匹配输入大小写，matchInput为true时有效|可选|true, false|
@@ -173,13 +177,14 @@
                   }
               ],
               state3: {},
-              sug3: []
+              sug3: [],
           };
       },
       watch: {
       },
       methods: {
           request() {
+//              console.log('request');
               const v = this.state3.text;
               this.sug3 = !v ? [] : [
                   {text: v, value: 1},
@@ -187,6 +192,9 @@
                   {text: v + v + v, value: 3},
                   {text: v + v + v + v, value: 4}
               ];
+          },
+          handleChange(val){
+//              console.log('change',val)
           }
       },
       mounted() {
