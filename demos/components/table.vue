@@ -1224,13 +1224,14 @@
         }
     };
 </script>
-<style type="text/css">
+<style lang="less">
+    @import "../../src/less/theme/default.less";
     .x-table .nameStyle {
-        background-color: #6BCFCD;
+        background-color: @brand-primary;
         color: #fff;
     }
     .x-table .feStyle {
-        background-color: #6BCFCD;
+        background-color: @brand-primary;
         color: #fff;
     }
 </style>
