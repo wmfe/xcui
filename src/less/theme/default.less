@@ -8,11 +8,25 @@
 
 // color
 // 应用于组件的默认高亮色值上，或一些传达信息的组件、交互反馈上。
-@brand-primary: @lightseagreen-6; //  品牌主色
+// @brand-primary: @lightseagreen-6; //  品牌主色
+@brand-primary: #5166B9;
 @brand-success: @green-6; //  绿色 ： 代表成功、通过、安全
 @brand-info: @blue-6; //  蓝色 ： 代表专业
 @brand-warning: @yellow-6; //  黄色 ： 代表提醒
 @brand-danger: @red-6; //  红色 ： 代表热情、警示
+
+// 主色的衍生色
+
+@primary-1: color(~`colorPalette("@{brand-primary}", 1)`);
+@primary-2: color(~`colorPalette("@{brand-primary}", 2)`);
+@primary-3: color(~`colorPalette("@{brand-primary}", 3)`);
+@primary-4: color(~`colorPalette("@{brand-primary}", 4)`);
+@primary-5: color(~`colorPalette("@{brand-primary}", 5)`);
+@primary-6: @brand-primary;
+@primary-7: color(~`colorPalette("@{brand-primary}", 7)`);
+@primary-8: color(~`colorPalette("@{brand-primary}", 8)`);
+@primary-9: color(~`colorPalette("@{brand-primary}", 9)`);
+@primary-10: color(~`colorPalette("@{brand-primary}", 10)`);
 
 // gray
 // 灰色应用于常见的字体色值设定，组件禁用、置灰色值设定等等
@@ -236,7 +250,7 @@
 
 @checkbox-text-disabled: @disabled-color;
 
-@checkbox-border-color: lighten(@brand-primary, 20%);
+@checkbox-border-color: @primary-5;
 
 @checkbox-boxshadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
@@ -287,7 +301,7 @@
 
 @drop-down-boxshadow: 0 1px 6px rgba(0,0,0,.2);
 
-@drop-down-hover-bg: rgba(70, 195, 193, 0.15);
+@drop-down-hover-bg: @primary-1;
 
 @drop-down-selected-bg: @gray-lighter;
 
@@ -300,6 +314,12 @@
 @select-group-color: #999;
 
 @select-group-height: 30px;
+
+// switch
+
+@switch-bg-color: @primary-3;
+@switch-shadow-color: fade(@brand-primary, 30%);
+
 
 // datepicker
 

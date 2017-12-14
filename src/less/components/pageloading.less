@@ -12,6 +12,12 @@
         left: 0;
         width: 100%;
         height: 2px;
+        &-error{
+            background: @brand-danger !important;
+        }
+        &-active {
+            background: @brand-primary;
+        }
     }
 
     .peg{
@@ -24,5 +30,11 @@
         -webkit-transform: rotate(3deg) translate(0px, -4px);
         -ms-transform: rotate(3deg) translate(0px, -4px);
         transform: rotate(3deg) translate(0px, -4px);
+        &-error {
+            box-shadow: 0 0 10px @brand-danger, 0 0 5px @brand-danger !important;
+        }
+        &-active {
+            boxShadow: 0 0 10px @brand-primary, 0 0 5px @brand-primary;
+        }
     }
 }

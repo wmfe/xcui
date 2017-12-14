@@ -1,5 +1,6 @@
 @import "./prism.less";
 @import "./markdown.less";
+@import "../../../src/less/theme/default.less";
 
 body {
   font-weight: 400;
@@ -31,7 +32,7 @@ header{
         }
         &-text {
             position: absolute;
-            color: #46c3c1;
+            color: @brand-primary;
             margin-left: 15px;
         }
     }
@@ -199,8 +200,8 @@ footer {
     overflow-x: hidden!important;
     border-right: 1px solid #eee;
     .router-link-active {
-        color: #46c3c1;
-        border-right: 3px solid #46c3c1
+        color: @brand-primary;
+        border-right: 3px solid @brand-primary
     }
     li {
         text-indent: 20px;
@@ -219,7 +220,7 @@ footer {
         }
         &.sidebar-item {
             &:hover {
-                background: rgba(190, 239, 239, 0.15);
+                background: @primary-1;
                 cursor: pointer;
             }
             a {
@@ -237,9 +238,9 @@ footer {
                 text-decoration: none;
             }
             &.v-link-active {
-                border-left:2px solid #46c3c1;
+                border-left:2px solid @brand-primary;
                 background: #fff;
-                color:#46c3c1;
+                color:@brand-primary;
             }
         }
     }
@@ -248,11 +249,11 @@ footer {
         font-size: 18px;
         line-height: 60px;
         a {
-            color: #46c3c1;
+            color: @brand-primary;
             background:#fff;
             :hover {
                 color: #fff;
-                background: #46c3c1;
+                background: @brand-primary;
             }
         }
 
