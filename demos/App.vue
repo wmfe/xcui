@@ -29,15 +29,9 @@
 </template>
 
 <script>
-    import logoUrl from './assets/xcui-logo.svg';
     import router from './router';
     export default {
         router: router,
-        data() {
-            return {
-                logoUrl: logoUrl
-            };
-        },
         mounted() {
             router.beforeEach((to, from, next) => {
                 this.$PageLoading.start();
