@@ -12,6 +12,9 @@
                     <li class="sidebar-item">
                         <router-link to="/intro/quickstart">快速上手</router-link>
                     </li>
+                    <li class="sidebar-item">
+                        <router-link to="/intro/customtheme">定制主题</router-link>
+                    </li>
                     <!-- <li class="sidebar-divider"></li> -->
                     <li class="sidebar-part-title">组件</li>
                     <li class="sidebar-title">Basic 基础</li>

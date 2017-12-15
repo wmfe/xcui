@@ -9,6 +9,7 @@ import Homecontent from './components/homeContent';
 
 const Installation = () => import('./components/installation');
 const Quickstart = () => import('./components/quickstart');
+const CustomTheme = () => import('./components/customTheme');
 const Layout = () => import('./components/layout');
 const Pagination = () => import('./components/pagination');
 const Loading = () => import('./components/loading');
@@ -59,6 +60,9 @@ const router = new VueRouter({
                 path: '/intro/installation',
                 component: Installation
             }, {
+                path: '/intro/customtheme',
+                component: CustomTheme
+            },{
                 path: '/intro/quickstart',
                 component: Quickstart
             }, {
