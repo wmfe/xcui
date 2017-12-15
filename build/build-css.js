@@ -12,7 +12,8 @@ var styleComponentsPath = path.resolve(__dirname, '../src/less/components');
 var libPath = path.resolve(__dirname, '../lib/css');
 var fontPath = path.resolve(__dirname, '../src/less/iconfont/fonts');
 var fontOutputPath = path.join(libPath, './fonts');
-
+var lessPath = path.resolve(__dirname, '../src/less');
+var lessOutputPath = path.resolve(__dirname, '../lib/less');
 
 console.log(chalk.cyan.bold('Building for CSS...'));
 
@@ -31,7 +32,7 @@ for (var i = 0, length = files.length; i < length; i++) {
 
 function buildFile(file) {
     var filePath = path.join(styleComponentsPath, file);
-    fs.readFile(filePath, 'utf8', function(err, data) {
+    fs.readFile(filePath, 'utf8', function (err, data) {
         // console.log(data);
         less.render(data, {
             paths: [stylePath, styleComponentsPath],
@@ -47,9 +48,24 @@ function buildFile(file) {
                 addWhiteSpace(outputFileName, 25)));
             if (index === files.length) {
                 copyFonts();
+                copyLess();
             }
-        })
-    })
+        });
+    });
+}
+
+function copyLess() {
+    console.log(chalk.cyan.bold('Copying Less...\n'));
+
+    // copy less
+    ncp(lessPath, lessOutputPath, function (err) {
+        if (err) {
+            console.error('Copy Less error!');
+            console.log(err);
+            process.exit(1);
+        }
+        console.log(chalk.cyan.bold(`Build CSS complete. Total count: ${files.length}\n`));
+    });
 }
 
 function copyFonts() {
@@ -62,8 +78,8 @@ function copyFonts() {
             console.log(err);
             process.exit(1);
         }
-        console.log(chalk.cyan.bold(`Build CSS complete. Total count: ${files.length}\n`));
-    })
+        console.log(chalk.cyan.bold('Copy Fonts complete. \n'));
+    });
 }
 
 function addWhiteSpace(str, number) {

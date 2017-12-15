@@ -136,6 +136,7 @@
 
 <script>
 import imgPara from '../assets/short-paragraph.png';
+import '#/button.less';
 import '#/loading.less';
 
 

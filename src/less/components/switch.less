@@ -80,9 +80,9 @@
         }
         &.is-checked {
             &+ .@{switch-prefix-cls}-background {
-                background-color: rgba(70, 195, 193, 0.4);
+                background-color: @switch-bg-color;
                 > .@{switch-prefix-cls}-cbx {
-                    background-color: #46c3c1;
+                    background-color: @brand-primary;
                     left: 100%;
                     margin-left: -22px;
                 }
@@ -128,7 +128,7 @@
         transition: all .3s ease-in-out;
         cursor: pointer;
         &:before {
-            background-color: rgba(70, 195, 193, 0.3);;
+            background-color: @switch-shadow-color;;
             border-radius: 50%;
             content: '';
             display: block;

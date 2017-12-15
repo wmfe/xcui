@@ -97,7 +97,6 @@ npm i babel-plugin-import-fix -D
   "plugins": ["import-fix"]
 }
 ```
-*`babel-plugin-import-fix`默认支持XCUI、antd、element-ui、material-ui和d3*
 
 #### **3. 按需引入对应组件**
 
