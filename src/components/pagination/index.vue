@@ -47,7 +47,7 @@
                         </x-button>
                         <x-button
                             @click="next"
-                            :disabled="currentPageNum == totalPageCount"
+                            :disabled="currentPageNum == totalPageCount || totalPageCount === 0"
                             icon="chevron-right">
                             </x-button>
                     </x-button-group>
