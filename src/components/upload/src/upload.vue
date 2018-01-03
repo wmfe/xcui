@@ -67,6 +67,14 @@
             onError: {
                 type: Function,
                 default: noop
+            },
+            hideUploadBtn: {
+                type: Boolean,
+                default: false,
+            },
+            hideRemoveBtn: {
+                type: Boolean,
+                default: false,
             }
         },
 
@@ -184,7 +192,9 @@
                 props: {
                     listType: this.listType,
                     fileList: this.uploadFiles,
+                    disabled: this.disabled,
                     handlePreview: this.onPreview,
+                    hideRemoveBtn: this.hideRemoveBtn
                 },
                 on: {
                     remove: this.handleRemove
@@ -209,7 +219,8 @@
                     onProgress: this.handleProgress,
                     onSuccess: this.handleSuccess,
                     onError: this.handleError,
-                    onRemove: this.handleRemove
+                    onRemove: this.handleRemove,
+                    hideUploadBtn: this.hideUploadBtn,
                 },
                 ref: 'uploader'
             };
@@ -221,7 +232,7 @@
                 <div class='x-upload'>
                     { this.listType === 'picture' ? uploadList : ''}
                     { this.$slots.trigger ? [uploader,this.$slots.default] : uploader }
-                    { this.$slots.tip}
+                    { !this.hideUploadBtn ? this.$slots.tip : ''}
                     { this.listType === 'text' ? uploadList : ''}
                 </div>
             );

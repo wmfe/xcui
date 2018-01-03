@@ -49,7 +49,8 @@
             <button
               type="button"
               @click="prevYear"
-              class="x-picker-panel-icon-btn x-date-picker-prev-btn x-icon x-icon-chevron-d-left">
+              v-show="currentView === 'year'"
+              class="x-picker-panel-icon-btn x-date-picker-prev-btn x-icon x-icon-chevron-left">
             </button>
             <button
               type="button"
@@ -68,7 +69,8 @@
             <button
               type="button"
               @click="nextYear"
-              class="x-picker-panel-icon-btn x-date-picker-next-btn x-icon x-icon-chevron-d-right">
+              v-show="currentView === 'year'"
+              class="x-picker-panel-icon-btn x-date-picker-next-btn x-icon x-icon-chevron-right">
             </button>
             <button
               type="button"

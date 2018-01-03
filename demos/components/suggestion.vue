@@ -114,7 +114,9 @@
 |wait|Number|500|触发远程请求时的防抖动延迟时间|可选||
 |allowClear|Boolean|true|是否允许出现清除图标|可选|true, false|
 |matchInput|Boolean|true|是否根据输入在客户端匹配建议列表|可选|true, false|
+|matchInputTime|Number|300|是否根据输入在客户端匹配建议列表的延迟时间|可选||
 |matchCase|Boolean|false|是否严格匹配输入大小写，matchInput为true时有效|可选|true, false|
+|localCache|Boolean|true|是否在组件内设置缓存池，localCache为true时有效|可选|true, false|
 
 ## Events
 
@@ -184,7 +186,6 @@
       },
       methods: {
           request() {
-//              console.log('request');
               const v = this.state3.text;
               this.sug3 = !v ? [] : [
                   {text: v, value: 1},

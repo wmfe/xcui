@@ -280,6 +280,8 @@
 |on-success|Function|无|文件上传成功时的钩子, 返回服务端数据|可选|response, file, fileList|
 |on-error|Function|无|文件上传失败时的钩子, 返回错误|可选|err, file, fileList|
 |on-remove|Function|无|文件列表移除文件时的钩子，支持返回promise做删除前确认|可选|file, fileList|
+|hide-upload-btn|Boolean|false|是否显示上传按钮|可选|true, false|
+|hide-remove-btn|Boolean|false|是否显示删除按钮|可选|true, false|
 
 ##  Methods
 | 名字 |描述 | 参数 |调用方式|
