@@ -32,7 +32,7 @@
                 ></i>
                 <i
                     :class="['x-icon', listType === 'text' ? 'x-icon-close-round' : 'x-icon-trash-a']"
-                    v-show="file.status === 'success'"
+                    v-show="file.status === 'success' && !hideRemoveBtn"
                     @click="$emit('remove', file)"
                 ></i>
             </span>
@@ -56,7 +56,8 @@
                 type: Array,
                 default: []
             },
-            handlePreview: Function
+            handlePreview: Function,
+            hideRemoveBtn: Boolean,
         },
         methods: {
             handleClickItem(file) {

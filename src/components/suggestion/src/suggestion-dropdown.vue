@@ -2,10 +2,12 @@
     <transition name="x-slide-up" @after-leave="doDestroy">
         <div class="x-suggestion-dropdown"
             v-show="showPopper"
-            :style="{width: dropdownWidth}">
+            :style="{width: dropdownWidth}"
+        >
             <ul class="x-suggestion-list" ref="sugList">
-                <li v-for="(item,index) in suggestions" class="x-suggestion-item" :class="{'active' : $parent.currentIndex==index}" @click="setItem(item)">
-                    {{item.text}}
+                <li v-for="(item,index) in list" class="x-suggestion-item" :class="{'active' : $parent.currentIndex==index}" @click="setItem(item)">
+                    {{item.nomatch ? '未匹配:' : item.text}}
+                    <span v-if="item.nomatch" class="x-suggestion-nomatch">{{item.text}}</span>
                 </li>
             </ul>
         </div>
@@ -40,19 +42,9 @@
         data() {
             return {
                 showPopper: false,
-                dropdownWidth: null
+                dropdownWidth: null,
+                list: [],
             };
-        },
-        methods: {
-            setItem(item) {
-                this.dispatch('xSuggestion', 'item-click', item);
-            }
-        },
-        created() {
-            this.$on('visible', (val, inputWidth) => {
-                this.dropdownWidth = inputWidth + 'px';
-                this.showPopper = val;
-            });
         },
         mounted() {
             this.referenceElm = this.$parent.$refs.xInput.$refs.input;
@@ -62,6 +54,20 @@
             this.$nextTick(() => {
                 this.updatePopper();
             });
+        },
+        methods: {
+            setItem(item) {
+                this.dispatch('xSuggestion', 'item-click', item);
+            },
+            handleShow(flag, inputWidth) {
+                this.showPopper = flag;
+                this.dropdownWidth = inputWidth + 'px';
+            }
+        },
+        watch: {
+            suggestions(val) {
+                this.list = val;
+            }
         }
     };
 </script>

@@ -83,7 +83,7 @@
               <button
                 type="button"
                 @click="prevYear"
-                class="x-picker-panel-icon-btn x-icon x-icon-chevron-d-left"></button>
+                class="x-picker-panel-icon-btn x-icon x-icon-chevron-left"></button>
               <button
                 type="button"
                 @click="prevMonth"
@@ -109,7 +109,7 @@
               <button
                 type="button"
                 @click="nextYear"
-                class="x-picker-panel-icon-btn x-icon x-icon-chevron-d-right"></button>
+                class="x-picker-panel-icon-btn x-icon x-icon-chevron-right"></button>
               <button
                 type="button"
                 @click="nextMonth"
