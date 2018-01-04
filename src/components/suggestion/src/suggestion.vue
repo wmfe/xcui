@@ -83,7 +83,7 @@ export default {
     },
     matchInputTime: {
       type: Number,
-      default: 300,
+      default: 500,
     },
     // 延迟请求等待时间
     wait: {
@@ -149,10 +149,9 @@ export default {
     },
     handleBlur() {
       this.isFocus = false;
-      if (!this.inputValue) {
-        this.handleInLocalSug();
-        this.handleEmit();
-      }
+
+      this.handleInLocalSug();
+      this.handleEmit();
     },
     clearText() {
       this.inputText = "";
@@ -238,6 +237,7 @@ export default {
         let ct = !this.matchCase ? item.text.toLowerCase() : item.text;
         return cw ? ct.indexOf(cw) > -1 : true;
       });
+      this.handleInLocalSug();
       if (tmpList.length > 0) {
         this.list = tmpList;
       } else {
@@ -252,6 +252,8 @@ export default {
       if (this.list.length > 0 && this.isFocus) {
         this.handleShowMenu(true);
       }
+
+      this.handleAutoMatch();
     },
     handleInLocalSug() {
       let word = this.inputText;
@@ -328,7 +330,10 @@ export default {
       }
     },
     inputText(val) {
-      if (this.inputCallback) {
+      if (!this.inputCallback) {
+        this.handleEmit();
+        this.handleLocalSug();
+      } else {
         clearTimeout(this.timer);
         if (this.localCache && this.valueMap[val] && val !== "") {
           this.localList = this.valueMap[val];
@@ -338,11 +343,8 @@ export default {
             this.inputCallback();
           }, this.wait);
         }
-      } else {
-        this.handleLocalSug();
+        this.handleEmit();
       }
-      this.handleEmit();
-      this.handleAutoMatch();
       if (val === "") {
         this.clearList();
       }
