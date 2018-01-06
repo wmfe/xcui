@@ -336,6 +336,7 @@
 |disabled|Boolean|false|是否禁用选择器|可选|true, false|
 |multiple|Boolean|false|是否开启多选|可选|true, false|
 |multipleLimit|Number|0|开启多选时最多允许选择的项目数，为0即不限制||
+|hasSelectAll|Boolean|false|是否加入“全部”选项，仅在`multiple=true`情况下有效|可选|true, false|
 |allowClear|Boolean|false|是否显示清除按钮|可选|true, false|
 
 ## Select Events
