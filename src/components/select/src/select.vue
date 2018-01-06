@@ -23,6 +23,7 @@
         <transition name="x-slide-up" @after-leave="doDestroy">
             <x-select-dropdown ref="popper" v-show="isOpen">
                 <ul ref="list" class="x-select-list">
+                    <select-all v-if="hasSelectAll && multiple" key="all" label="全部"></select-all>
                     <slot></slot>
                 </ul>
             </x-select-dropdown>
@@ -35,6 +36,7 @@
     import xInput from '../../input';
     import xSelectDropdown from './select-dropdown.vue';
     import xOption from './option.vue';
+    import selectAll from './select-all';
 
     export default {
         name: 'xSelect',
@@ -42,6 +44,7 @@
         components: {
             xInput,
             xSelectDropdown,
+            selectAll,
             xOption
         },
         directives: {
@@ -62,6 +65,10 @@
             },
             // 多选
             multiple: {
+                type: Boolean,
+                default: false
+            },
+            hasSelectAll: {
                 type: Boolean,
                 default: false
             },
@@ -119,19 +126,20 @@
                 }
                 else {
                     let optionIndex = -1;
-                    for (let i = 0, len = this.value.length; i < len; i++) {
-                        if (this.value[i] === option.value) {
+                    let newValue = this.value.concat();
+                    for (let i = 0, len = newValue.length; i < len; i++) {
+                        if (newValue[i] === option.value) {
                             optionIndex = i;
                             break;
                         }
                     }
 
                     if (optionIndex > -1) {
-                        this.value.splice(optionIndex, 1);
+                        newValue.splice(optionIndex, 1);
+                    } else if (this.multipleLimit <= 0 || newValue.length < this.multipleLimit) {
+                        newValue.push(option.value);
                     }
-                    else if (this.multipleLimit <= 0 || this.value.length < this.multipleLimit) {
-                        this.value.push(option.value);
-                    }
+                    this.$emit('input', newValue);
                 }
             },
             handleEnter() {
