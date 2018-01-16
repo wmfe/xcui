@@ -6,7 +6,7 @@
                 <span v-text="inputText" :title="selectedPathStr"></span>
             </div>
             <div  class="x-tree-select-input"  :class="{'is-disabled' : disabled}" v-else>
-                <span>请选择</span>
+                <span class="no-select">请选择</span>
             </div>
         </div>
 

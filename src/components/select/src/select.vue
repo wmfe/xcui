@@ -23,7 +23,9 @@
         <transition name="x-slide-up" @after-leave="doDestroy">
             <x-select-dropdown ref="popper" v-show="isOpen">
                 <ul ref="list" class="x-select-list">
-                    <select-all v-if="hasSelectAll && multiple" key="all" label="全部"></select-all>
+                    <select-all :style="{'font-weight': 'bold'}"
+                    v-if="hasSelectAll && multiple && options.length !== 0 && !allOptionsDisabled"
+                    key="all" label="全部"></select-all>
                     <slot></slot>
                 </ul>
             </x-select-dropdown>

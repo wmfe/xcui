@@ -2,7 +2,7 @@
     <div class="x-tree-select x-multi-tree-select">
         <div class="x-tree-select-input-wrap" @click="showDropDown = !showDropDown">
             <i v-if="allowClear && !disabled" class="x-icon x-tree-select-input-icon x-icon-android-close" @click.stop="clearAll"></i>
-            <div class="x-tree-select-input" v-if="hasSelected " :class="{'is-disabled' : disabled}">
+            <div class="x-tree-select-input" v-if="hasSelected" :class="{'is-disabled' : disabled}">
                 已选：
                 <template v-for="(value, key) in selectedTips">
                     <template v-if="value > 0">
@@ -13,8 +13,8 @@
                     </template>
                 </template>
             </div>
-            <div  class="x-tree-select-input" :class="{'is-disabled' : disabled}" v-else>
-                <span>请选择</span>
+            <div class="x-tree-select-input" :class="{'is-disabled' : disabled}" v-else>
+                <span class="no-select">请选择</span>
             </div>
         </div>
 
