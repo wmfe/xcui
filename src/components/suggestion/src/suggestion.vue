@@ -4,16 +4,16 @@
             ref="xInput"
             :disabled="disabled"
             :placeholder="placeholder"
-						:icon="icon"
+		    :icon="icon"
             :icon-click="iconClick"
             v-model="inputText"
             @focus="handleFocus"
-						@blur="handleBlur"
+			@blur="handleBlur"
             @keydown.up.native.prevent="changeCurrent(-1)"
             @keydown.down.native.prevent="changeCurrent(1)"
             @keyup.enter.stop.native="handleEnter()"
 				></x-input>
-        <x-suggestion-dropdown 
+        <x-suggestion-dropdown
 					ref="popper"
 					:suggestions="list"
 				></x-suggestion-dropdown>
@@ -224,7 +224,7 @@ export default {
         typeof sugs[0] === "string"
       ) {
         this.localList = this.convert2standard(sugs);
-      } else if (this.inputCallback && this.inputText === "") {
+      } else if (this.inputCallback && this.inputText === "" && !sugs.length) {
         this.localList = [];
       } else {
         this.localList = sugs;
@@ -240,7 +240,11 @@ export default {
       this.handleInLocalSug();
       if (tmpList.length > 0) {
         this.list = tmpList;
-      } else {
+      }
+      else if (!tmpList.length && !word) {
+        this.list = this.localList;
+      }
+      else {
         this.list = this.inputText ? [{
           text: word,
           value: '',
@@ -360,7 +364,7 @@ export default {
         this.inputValue = "";
         return;
       }
-      this.inputText = val.text || "";
+      this.inputText = val.text.trim() || "";
       this.inputValue = val.value || "";
     }
   }
