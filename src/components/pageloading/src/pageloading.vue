@@ -36,7 +36,7 @@
             },
             color: {
                 type: String,
-                default: '#46c3c1'
+                default: ''
             }
         },
         methods: {
@@ -118,12 +118,8 @@
                 let progress = this.render(!started);
                 let bar = progress.querySelector(this.barSelector);
                 let peg = progress.querySelector(this.pegSelector);
-                this.css(bar, {
-                    background: this.errorColor
-                });
-                this.css(peg, {
-                    boxShadow: `0 0 10px ${this.errorColor}, 0 0 5px ${this.errorColor}`
-                });
+                this.addClass(bar, 'bar-error');
+                this.addClass(peg, 'peg-error');
                 return this.inc(0.3 + 0.5 * Math.random()).set(1);
             },
             queue: (() => {
@@ -163,13 +159,21 @@
                 this.css(bar, {
                     transition: 'transform 0 linear',
                     transform: 'translate3d(' + perc + '%,0,0)',
-                    background: color
                 });
+                this.addClass(bar, 'bar-active');
 
                 let peg = progress.querySelector(this.pegSelector);
-                this.css(peg, {
-                    boxShadow: `0 0 10px ${color}, 0 0 5px ${color}`
-                });
+
+                if(color) {
+                    this.css(bar, {
+                        background: color
+                    });
+                    this.css(peg, {
+                        boxShadow: `0 0 10px ${color}, 0 0 5px ${color}`
+                    });
+                }
+
+                this.addClass(peg, 'peg-active');
 
                 if (parent !== document.body) {
                     this.addClass(parent, 'x-pageloading-custom-parent');

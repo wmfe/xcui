@@ -105,7 +105,7 @@
 
 ## API
 
-###  **this.$Dialog.$alert(content, onOk)**
+###  **this.$Dialog.alert(content, onOk)**
 
 | 参数 | 类型 | 默认 | 描述 | 是否必选 |
 |-----|-----|-----|-----|----|

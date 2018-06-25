@@ -10,6 +10,9 @@
     vertical-align: middle;
     &-input {
         .input;
+        .no-select {
+            color: @gray-ccc;
+        }
         &.is-disabled {
             background-color: #f7f7f7;
             opacity: 1;
@@ -20,7 +23,7 @@
             cursor: pointer;
         }
         &-count {
-            color: @lightseagreen-6;
+            color: @brand-primary;
             & + &{
                 margin-left: 3px;
             }
@@ -62,6 +65,7 @@
     &-item {
         &-level {
             overflow: hidden;
+            display: flex;
         }
         &:nth-child(1) {
             display: none; // 隐藏第一列虚拟列

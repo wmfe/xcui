@@ -2,6 +2,7 @@
     <div
         :class="['x-upload-trigger','x-upload-'+listType]"
         @click="handleClick"
+        v-show="!hideUploadBtn"
     >
         <slot></slot>
         <input
@@ -45,7 +46,8 @@
             onProgress: Function,
             onSuccess: Function,
             onError: Function,
-            onRemove: Function
+            onRemove: Function,
+            hideUploadBtn: Boolean,
         },
 
         methods: {

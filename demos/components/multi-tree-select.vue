@@ -40,25 +40,25 @@
 <div class="title-label"><span>必选值：</span></div>
 <x-row class="row">
     <x-col :span="6" class="ctrl-label">v-model返回值<x-tooltip content="v-model绑定的返回值">
-          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+          <x-icon name="help-circled" size="16"></x-icon>
     </x-tooltip>:</x-col>
     <x-col :span="17">{{selectedData}}</x-col>
 </x-row>
 <x-row class="row">
     <x-col :span="6" class="ctrl-label">initData<x-tooltip content="传入的初始值">
-          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+          <x-icon name="help-circled" size="16"></x-icon>
     </x-tooltip>:</x-col>
     <x-col :span="17"><x-button @click="modalShow = true">配置initData</x-button></x-col>
 </x-row>
 <x-row class="row">
     <x-col :span="6" class="ctrl-label">fields<x-tooltip content="初始数据嵌套的各层级列表字段名">
-          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+          <x-icon name="help-circled" size="16"></x-icon>
     </x-tooltip>:</x-col>
     <x-col :span="17">{{JSON.stringify(conf.fields)}}</x-col>
 </x-row>
 <x-row class="row">
     <x-col :span="6" class="ctrl-label">fieldTexts<x-tooltip content="fields 各字段对应的中文名">
-          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+          <x-icon name="help-circled" size="16"></x-icon>
     </x-tooltip>:</x-col>
     <x-col :span="17">{{JSON.stringify(conf.fieldTexts)}}</x-col>
 </x-row>
@@ -66,7 +66,7 @@
 <div class="title-label"><span>可选值：</span></div>
 <x-row class="row" :class="{'is-default': selectedDataType === 'INDEX'}">
     <x-col :span="6"  class="ctrl-label">selectedDataType<x-tooltip content="确定v-model的数据Data Type。不填默认为INDEX">
-          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+          <x-icon name="help-circled" size="16"></x-icon>
     </x-tooltip>:</x-col>
     <x-col :span="17"><x-radio-group v-model="selectedDataType">
         <x-radio label="INDEX">INDEX类型</x-radio>
@@ -77,14 +77,14 @@
 </x-row>
 <x-row class="row" :class="{'is-default': !needDefaultData}">
     <x-col :span="6" class="ctrl-label">有defaultSelectedData<x-tooltip content="初始默认值">
-          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+          <x-icon name="help-circled" size="16"></x-icon>
     </x-tooltip>:</x-col>
     <x-col :span="17"><x-checkbox v-model="needDefaultData"></x-checkbox>
     <span :style="{'word-wrap': 'break-word'}" v-show="needDefaultData">{{JSON.stringify(conf.defaultSelectedData[defaultSelectedDataType])}}</span></x-col>
 </x-row>
 <x-row class="row" :class="{'is-default': defaultSelectedDataType === 'LAST'}">
     <x-col :span="6"  class="ctrl-label">defaultSelectedDataType<x-tooltip content="确定接受defaultSelectedData的数据Data Type。不填默认为LAST">
-          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+          <x-icon name="help-circled" size="16"></x-icon>
     </x-tooltip>: </x-col>
     <x-col :span="17"><x-radio-group v-model="defaultSelectedDataType">
         <x-radio label="INDEX" :disabled="defaultSelectAll">INDEX类型</x-radio>
@@ -94,25 +94,25 @@
 </x-row>
 <x-row class="row" :class="{'is-default': !defaultSelectAll}">
     <x-col :span="6"  class="ctrl-label">defaultSelectAll<x-tooltip content="初始化时是否全选">
-          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+          <x-icon name="help-circled" size="16"></x-icon>
     </x-tooltip>: </x-col>
     <x-col :span="17"><x-checkbox v-model="defaultSelectAll">{{defaultSelectAll}}</x-checkbox></x-col>
 </x-row>
 <x-row class="row" :class="{'is-default': !disabled}">
     <x-col :span="6" class="ctrl-label">disabled<x-tooltip content="是否显示禁用">
-          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+          <x-icon name="help-circled" size="16"></x-icon>
     </x-tooltip>: </x-col>
     <x-col :span="17"><x-checkbox v-model="disabled">{{disabled}}</x-checkbox></x-col>
 </x-row>
 <x-row class="row" :class="{'is-default': allowSearch}">
     <x-col :span="6" class="ctrl-label">allowSearch<x-tooltip content="是否显示跨级模糊搜索框">
-          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+          <x-icon name="help-circled" size="16"></x-icon>
     </x-tooltip>: </x-col>
     <x-col :span="17"><x-checkbox v-model="allowSearch">{{allowSearch}}</x-checkbox></x-col>
 </x-row>
 <x-row class="row" :class="{'is-default': levelDepth === conf.fields.length}">
     <x-col :span="6"  class="ctrl-label">levelDepth<x-tooltip content="控制展示数据的层数">
-          <x-icon name="help-circled" size="16" color="#46C3C1"></x-icon>
+          <x-icon name="help-circled" size="16"></x-icon>
     </x-tooltip>: </x-col>
     <x-col :span="17"><x-input-number v-model="levelDepth" size="small" :min="1" :max="conf.fields.length"></x-input-number></x-col>
 </x-row>
@@ -385,8 +385,13 @@ export default {
     }
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
+@import "../../src/less/theme/default.less";
+
 .xcui-multi-tree-select-ctrl {
+    .x-icon {
+        color: @brand-primary;
+    }
     .is-default {
         color: #999;
     }

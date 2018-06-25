@@ -16,7 +16,7 @@ const XPageLoading = {
                 data() {
                     return {
                         speed: 350,
-                        color: '#46c3c1'
+                        color: ''
                     };
                 },
                 methods: {

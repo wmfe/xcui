@@ -94,7 +94,7 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 ```
 :::
 
-## flex布局 
+## flex布局
 
 ::: demo 使用`row-flex`定义`flex`布局，其子元素根据不同的值 `start`,`center`,`end`,`space-between`,`space-around`，分别定义其在父节点里面的排版方式。
 
@@ -138,7 +138,7 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
 </tpl>
 ```
 
-::: 
+:::
 
 
 
@@ -202,11 +202,11 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
         <x-col :xs="{ span: 5, offset: 1 }" :lg="{ span: 6, offset: 2 }"><div class="bg">col</div></x-col>
     </x-row>
 </tpl>
-```       
+```
 
 :::
 
-    
+
 ## Props
 
 ### Row Props
@@ -240,6 +240,7 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
     };
 </script>
 <style lang="less">
+    @import "../../src/less/theme/default.less";
     .demo-layout {
         .x-row {
             margin-bottom: 10px;
@@ -250,11 +251,11 @@ XCUI的栅格系统有`row(行组件)`和`col(列组件)`两个概念。具体�
             text-align: center;
             font-size: 14px;
             margin: 0 auto;
-            background: #46c3c1;
+            background: @brand-primary;
             &.light {
                 opacity: 0.7;
             }
         }
     }
-    
+
 </style>
