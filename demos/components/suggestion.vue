@@ -195,7 +195,6 @@
               ];
           },
           handleChange(val){
-//              console.log('change',val)
           }
       },
       mounted() {

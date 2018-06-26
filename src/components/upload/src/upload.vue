@@ -90,11 +90,7 @@
                 immediate: true,
                 deep: true,
                 handler(val){
-                    this.uploadFiles = val.map(item => {
-                        item.uid = item.uid || (Date.now() + this.fileIndex++);
-                        item.status = 'success';
-                        return item;
-                    });
+                    this.copyFileList(val)
                 }
             }
         },
@@ -152,9 +148,12 @@
                 let file = this.getFile(rawFile);
                 file.status = 'success';
                 file.response = res;
+                let arr = this.uploadFiles;
 
-                this.onSuccess(res, file, this.uploadFiles);
-                this.onChange(file, this.uploadFiles);
+                this.copyFileList(this.fileList);
+
+                this.onSuccess(res, file, arr);
+                this.onChange(file, arr);
             },
             handleError(err, rawFile) {
                 let file = this.getFile(rawFile);
@@ -185,6 +184,13 @@
                 });
                 return file;
             },
+            copyFileList(val) {
+                this.uploadFiles = val.map(item => {
+                    item.uid = item.uid || (Date.now() + this.fileIndex++);
+                    item.status = 'success';
+                    return item;
+                });
+            }
         },
 
         render(h) {
