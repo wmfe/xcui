@@ -186,7 +186,6 @@
       },
       methods: {
           request() {
-//              console.log('request');
               const v = this.state3.text;
               this.sug3 = !v ? [] : [
                   {text: v, value: 1},
@@ -196,7 +195,6 @@
               ];
           },
           handleChange(val){
-//              console.log('change',val)
           }
       },
       mounted() {
