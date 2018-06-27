@@ -1,6 +1,6 @@
 {
   "name": "xcui",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "main": "lib/xcui.common.js",
   "engines": {
     "node": ">=5.10.0",
