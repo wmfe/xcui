@@ -78,10 +78,10 @@ Vue.use(xcui);
 
 ## 按需引入
 
-第一步：需要安装`babel-plugin-import-fix`, 如已经安装，请忽略：
+第一步：需要安装`babel-plugin-component`, 如已经安装，请忽略：
 
 ```bash
-npm i babel-plugin-import-fix -D
+npm i babel-plugin-component -D
 ```
 
 
@@ -89,17 +89,21 @@ npm i babel-plugin-import-fix -D
 
 ```
 {
-  "presets": [
-    ["env", { "modules": false }]
-  ],
-  "plugins": [["import-fix",
-    [{
-      "libraryName": "xcui",
-      "libraryPath": "xcui/lib/${name}.js",
-      "namePolicy": "dash",
-      "cssPath": ["xcui/lib/less/components/common.less", "xcui/lib/less/components/${name}.less"]
-    }]
-  ]]
+  "presets": [["env", { "modules": false }]],
+  "plugins": [
+    [
+      "component",
+      {
+        "libraryName": "xcui",
+        "styleLibrary": {
+          "name": "less",
+          "base": false,
+          "path": "components/[module].less"
+        },
+        "ext": ".less"
+      }
+    ]
+  ]
 }
 ```
 
@@ -117,6 +121,122 @@ import { Button } from 'xcui'
 var button = require('xcui/lib/button.js')
 require('xcui/lib/less/components/common.less')
 require('xcui/lib/less/components/button.less')
+```
+
+完整组件列表和引入方式
+
+```js
+import Vue from 'vue'
+import {
+  Alert,
+  DatePicker,
+  TimePicker,
+  TimeSelect,
+  Input,
+  InputNumber,
+  Textarea,
+  Checkbox,
+  CheckboxGroup,
+  Radio,
+  RadioButton,
+  RadioGroup,
+  Loading,
+  Message,
+  Notice,
+  Modal,
+  Dialog,
+  PageLoading,
+  Pagination,
+  Popover,
+  Progress,
+  Select,
+  Option,
+  OptionGroup,
+  Suggestion,
+  Tag,
+  TagCheckable,
+  Tooltip,
+  ScrollTop,
+  Button,
+  ButtonGroup,
+  Row,
+  Col,
+  Icon,
+  Switch,
+  Form,
+  FormItem,
+  Table,
+  TableColumn,
+  Collapse,
+  CollapseItem,
+  Upload,
+  DropDown,
+  DropDownItem,
+  DropDownMenu,
+  MultiTreeSelect,
+  SingleTreeSelect,
+  Tabs,
+  TabPane,
+  Breadcrumb,
+  BreadcrumbItem,
+} from 'xcui'
+
+Vue.component(Alert.name, Alert);
+Vue.component(DatePicker.name, DatePicker);
+Vue.component(TimePicker.name, TimePicker);
+Vue.component(TimeSelect.name, TimeSelect);
+Vue.component(InputNumber.name, InputNumber);
+Vue.component(Modal.name, Modal);
+Vue.component(Pagination.name, Pagination);
+Vue.component(Popover.name, Popover);
+Vue.component(Progress.name, Progress);
+Vue.component(Select.name, Select);
+Vue.component(Option.name, Option);
+Vue.component(OptionGroup.name, OptionGroup);
+Vue.component(Suggestion.name, Suggestion);
+Vue.component(Tag.name, Tag);
+Vue.component(TagCheckable.name, TagCheckable);
+Vue.component(Tooltip.name, Tooltip);
+Vue.component(ScrollTop.name, ScrollTop);
+Vue.component(Button.name, Button);
+Vue.component(ButtonGroup.name, ButtonGroup);
+Vue.component(Icon.name, Icon);
+Vue.component(Row.name, Row);
+Vue.component(Col.name, Col);
+Vue.component(Input.name, Input);
+Vue.component(Textarea.name, Textarea);
+Vue.component(Checkbox.name, Checkbox);
+Vue.component(CheckboxGroup.name, CheckboxGroup);
+Vue.component(Radio.name, Radio);
+Vue.component(RadioGroup.name, RadioGroup);
+Vue.component(RadioButton.name, RadioButton);
+Vue.component(Switch.name, Switch);
+Vue.component(Form.name, Form);
+Vue.component(FormItem.name, FormItem);
+Vue.component(Table.name, Table);
+Vue.component(TableColumn.name, TableColumn);
+Vue.component(Steps.name, Steps);
+Vue.component(StepsItem.name, StepsItem);
+Vue.component(Collapse.name, Collapse);
+Vue.component(CollapseItem.name, CollapseItem);
+Vue.component(DropDown.name, DropDown);
+Vue.component(DropDownItem.name, DropDownItem);
+Vue.component(DropDownMenu.name, DropDownMenu);
+Vue.component(Upload.name, Upload);
+Vue.component(DropDown.name, DropDown);
+Vue.component(DropDownItem.name, DropDownItem);
+Vue.component(MultiTreeSelect.name, MultiTreeSelect);
+Vue.component(SingleTreeSelect.name, SingleTreeSelect);
+Vue.component(DropDownMenu.name, DropDownMenu);
+Vue.component(Tabs.name, Tabs);
+Vue.component(TabPane.name, TabPane);
+Vue.component(Breadcrumb.name, Breadcrumb);
+Vue.component(BreadcrumbItem.name, BreadcrumbItem);
+Vue.use(Message);
+Vue.use(Notice);
+Vue.use(Dialog);
+Vue.use(Loading);
+Vue.use(PageLoading);
 ```
 
 

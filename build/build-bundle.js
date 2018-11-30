@@ -13,7 +13,7 @@ var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 var allInOneConfig = merge(baseWebpackConfig, {
     entry: {
-        'xcui': './src/components/index.build.js'
+        'index': './src/components/index.build.js'
     },
     output: {
         libraryTarget: 'umd'
