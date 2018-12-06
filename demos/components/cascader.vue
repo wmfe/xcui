@@ -10,7 +10,7 @@
 ```html
 
 <tpl>
-    <div style="width: 180px; margin-left: 700px;">
+    <div style="width: 180px;">
         <x-cascader
           v-model="model1"
           placeholder="请选择"
