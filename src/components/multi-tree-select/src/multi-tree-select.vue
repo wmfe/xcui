@@ -17,37 +17,38 @@
                 <span class="no-select">请选择</span>
             </div>
         </div>
-
-        <div class="x-tree-select-item-wrap" v-show="showDropDown && !disabled">
-            <slot name="header"></slot>
-            <div class="x-tree-select-item-level">
-                <div class="x-tree-select-item" v-for="(level, levelIndex) in levelData" :key="levelIndex">
-                    <template v-if="levelIndex >= 0">
-                        <ul>
-                            <li class="x-tree-select-item-search" v-if="allowSearch">
-                                <i class="x-icon x-tree-select-input-icon x-tree-select-item-input-icon x-icon-android-close" @click="clearSug( level )"></i>
-                                <input class="x-input x-input-small"
-                                    type="text"
-                                    :placeholder="'搜索' + fieldTexts[level.branchDepth]"
-                                     v-model="level.sugText">
-                            </li>
-
-                            <li @click="checkItemAll(level, level, levelIndex)" v-if="(level.sugText||'').trim() ==='' " class="checkbox-all x-tree-select-item-li" :class="{'active': level.hoverKey === 'all'}" @mouseenter="hoverForAll( level, levelIndex)">
-                                <v-checkbox :val.sync="level.selected">{{'全部' + fieldTexts[level.branchDepth]}}</v-checkbox>
-                                <i v-if="!hideSubListArrow(levelIndex)" class="x-icon x-icon-chevron-right x-tree-select-right-icon"></i>
-                            </li>
-                            <template v-if="showListView( level )">
-                                <li v-for="item in filterList(level.list, ([level.sugText]+'').trim() )" :key="item[keyName]" class="x-tree-select-item-li" :class="{'active': level.hoverKey === item[keyName]}" @click="checkItem(level, item, levelIndex)" @mouseenter="hover( item, levelIndex)">
-                                    <v-checkbox :val.sync="item.selected">{{item[textName]}}</v-checkbox>
-                                    <i v-if="levelIndex !== fieldsLen " class="x-icon x-icon-chevron-right x-tree-select-right-icon"></i>
+        <transition name="x-slide-up">
+            <div class="x-tree-select-item-wrap" v-show="showDropDown && !disabled">
+                <slot name="header"></slot>
+                <div class="x-tree-select-item-level">
+                    <div class="x-tree-select-item" v-for="(level, levelIndex) in levelData" :key="levelIndex">
+                        <template v-if="levelIndex >= 0">
+                            <ul>
+                                <li class="x-tree-select-item-search" v-if="allowSearch">
+                                    <i class="x-icon x-tree-select-input-icon x-tree-select-item-input-icon x-icon-android-close" @click="clearSug( level )"></i>
+                                    <input class="x-input"
+                                        type="text"
+                                        :placeholder="'搜索' + fieldTexts[level.branchDepth]"
+                                        v-model="level.sugText">
                                 </li>
-                            </template>
-                        </ul>
-                    </template>
+
+                                <li @click="checkItemAll(level, level, levelIndex)" v-if="(level.sugText||'').trim() ==='' " class="checkbox-all x-tree-select-item-li" :class="{'active': level.hoverKey === 'all'}" @mouseenter="hoverForAll( level, levelIndex)">
+                                    <v-checkbox :val.sync="level.selected">{{'全部' + fieldTexts[level.branchDepth]}}</v-checkbox>
+                                    <i v-if="!hideSubListArrow(levelIndex)" class="x-icon x-icon-chevron-right x-tree-select-right-icon"></i>
+                                </li>
+                                <template v-if="showListView( level )">
+                                    <li v-for="item in filterList(level.list, ([level.sugText]+'').trim() )" :key="item[keyName]" class="x-tree-select-item-li" :class="{'active': level.hoverKey === item[keyName]}" @click="checkItem(level, item, levelIndex)" @mouseenter="hover( item, levelIndex)">
+                                        <v-checkbox :val.sync="item.selected">{{item[textName]}}</v-checkbox>
+                                        <i v-if="levelIndex !== fieldsLen " class="x-icon x-icon-chevron-right x-tree-select-right-icon"></i>
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
+                    </div>
                 </div>
+                <slot name="footer"></slot>
             </div>
-            <slot name="footer"></slot>
-        </div>
+        </transition>
     </div>
 </template>
 

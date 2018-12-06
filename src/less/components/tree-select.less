@@ -56,13 +56,16 @@
 
     &-item-wrap {
         position: absolute;
-        border: 1px solid #ddd;
-        border-radius: 5px;
+        box-shadow: @drop-down-boxshadow;
+        border: 1px solid @border-color-base;
+        border-radius: 2px;
+        background-color: @body-bg;
         z-index: 999;
-        background: #fff;
         margin: 5px 0;
     }
     &-item {
+        border-left: 1px solid @border-color-base;
+        margin-left: -1px;
         &-level {
             overflow: hidden;
             display: flex;
@@ -70,7 +73,6 @@
         &:nth-child(1) {
             display: none; // 隐藏第一列虚拟列
         }
-        padding: 15px;
         display: inline-block;
         float: left; // min-width: 180px;
         max-height: 300px;
@@ -78,16 +80,32 @@
         ul {
             margin: 0;
             padding: 0px;
-            .@{xcui-prefix}-tree-select-item-li, .@{xcui-prefix}-tree-select-item-search {
+            .@{xcui-prefix}-tree-select-item-search {
                 list-style: none;
                 cursor: pointer;
-                padding: 5px 5px 5px 8px;
+                padding: 10px;
                 margin-bottom: 0;
-                line-height: 1;
                 display: flex;
                 width: 150px;
                 &.active {
                     background: @lightseagreen-1;
+                }
+                &.checkbox-all {
+                    font-weight: bold;
+                }
+            }
+            .@{xcui-prefix}-tree-select-item-li {
+                list-style: none;
+                cursor: pointer;
+                padding: 0 10px;
+                margin-bottom: 0;
+                display: flex;
+                width: 150px;
+                &.active {
+                    background: @lightseagreen-1;
+                    color: @brand-primary;
+                    background: @drop-down-hover-bg;
+                    font-weight: 500;
                 }
                 &.checkbox-all {
                     font-weight: bold;
@@ -106,14 +124,15 @@
             height: @input-height-small;
             width: @input-height-small;
             font-size: (@input-height-small / 2);
-            top: 5px;
-            right: 5px;
+            top: 12px;
+            right: 10px;
             line-height: @input-height-small;
         }
     }
     &-checkbox.@{xcui-prefix}-checkbox {
         .@{xcui-prefix}-checkbox-item {
-            top: 2px;
+            height: 36px;
+            line-height: 36px;
             * {
                 height: 16px;
                 width: 16px;
@@ -142,7 +161,7 @@
         }
     }
      &-right-icon {
-         line-height: 19px;
+         line-height: 36px;
          margin-left: 4px;
      }
 }

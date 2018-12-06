@@ -53,6 +53,7 @@ import Tabs from './tabs';
 import TabPane from './tab-pane';
 import Breadcrumb from './breadcrumb';
 import BreadcrumbItem from './breadcrumb-item';
+import Cascader from './cascader';
 
 const install = (Vue) => {
     if (install.installed) {
@@ -109,6 +110,7 @@ const install = (Vue) => {
     Vue.component(TabPane.name, TabPane);
     Vue.component(Breadcrumb.name, Breadcrumb);
     Vue.component(BreadcrumbItem.name, BreadcrumbItem);
+    Vue.component(Cascader.name, Cascader);
     Vue.use(Message);
     Vue.use(Notice);
     Vue.use(Dialog);
@@ -168,7 +170,8 @@ const xcui = {
     Tabs,
     TabPane,
     Breadcrumb,
-    BreadcrumbItem
+    BreadcrumbItem,
+    Cascader
 };
 
 export default xcui;

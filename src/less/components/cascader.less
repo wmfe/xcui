@@ -1,0 +1,111 @@
+@charset "UTF-8";
+@import "../theme/default";
+@import "./input";
+@cascader-prefix-cls: ~"@{xcui-prefix}-cascader";
+
+.@{cascader-prefix-cls} {
+  position: relative;
+  display: flex;
+  .x-btn {
+    margin-right: 5px;
+  }
+  .@{xcui-prefix}-input {
+    &[readonly] {
+      background-color: @body-bg;
+    }
+    &[disabled] {
+      background-color: @input-bg-disabled;
+    }
+  }
+  .@{cascader-prefix-cls}-menu-wrapper {
+    z-index: 1000;
+    background: #fff;
+    position: absolute;
+    top: 40px;
+    box-sizing: border-box;
+    .@{cascader-prefix-cls}-menu {
+      padding: 10px;
+      position: absolute;
+      box-shadow: @drop-down-boxshadow;
+      top: -1px;
+      left: 100%;
+      border: 1px solid @border-color-base;
+      border-radius: 2px;
+      box-sizing: border-box;
+      background-color: @body-bg;
+      min-height: 200px;
+      .@{cascader-prefix-cls}-menu-item-active {
+        color: @brand-primary;
+        background: @drop-down-hover-bg;
+        font-weight: 500;
+      }
+      .@{cascader-prefix-cls}-loading {
+        text-align: center;
+        margin-top: 10px;
+        .@{cascader-prefix-cls}-loading-icon {
+          color: @brand-primary;
+        }
+      }
+      .@{cascader-prefix-cls}-empty {
+        text-align: center;
+      }
+    }
+    .@{cascader-prefix-cls}-empty {
+      font-size: 14px;
+      padding: 8px 30px 8px 10px;
+      color: #48576a;
+      text-align: center;
+      background: #fff;
+      min-width: 160px;
+      box-shadow: @drop-down-boxshadow;
+      border: 1px solid @border-color-base;
+      border-radius: 2px;
+      box-sizing: border-box;
+    }
+    .@{cascader-prefix-cls}-empty-list {
+      font-size: 14px;
+      padding: 15px;
+      color: #48576a;
+      text-align: center;
+      background: #fff;
+      box-sizing: border-box;
+    }
+    .@{cascader-prefix-cls}-menu-list {
+      margin: 0 -10px;
+      display: inline-block;
+      vertical-align: top;
+      max-height: 204px;
+      overflow: auto;
+      background-color: #fff;
+      box-sizing: border-box;
+      padding: 0;
+      min-width: 130px;
+      .@{cascader-prefix-cls}-menu-item {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        padding: 8px 10px 8px 10px;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 36px;
+        line-height: 1.5;
+        box-sizing: border-box;
+        cursor: pointer;
+        &:hover {
+          background: @drop-down-hover-bg;
+        }
+        .@{cascader-prefix-cls}-menu-item-text {
+          flex: 1;
+        }
+        .@{cascader-prefix-cls}-menu-item-check {
+          color: @brand-primary;
+        }
+        .x-icon-checkmark {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
