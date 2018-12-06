@@ -9,44 +9,45 @@
                 <span class="no-select">请选择</span>
             </div>
         </div>
+        <transition name="x-slide-up">
+            <div class="x-tree-select-item-wrap" v-show="showDropDown && !disabled">
+                <slot name="header"></slot>
+                <div class="x-tree-select-item-level">
+                    <div class="x-tree-select-item" v-for="(level, levelIndex) in levelData" :key="levelIndex">
+                        <template v-if="levelIndex >= 0">
+                            <ul>
+                                <li class="x-tree-select-item-search" v-if="allowSearch">
+                                    <i class="x-icon x-tree-select-input-icon x-tree-select-item-input-icon x-icon-android-close" @click="clearSug( level )"></i>
+                                    <input class="x-input"
+                                        type="text"
+                                        :placeholder="'搜索' + fieldTexts[level.branchDepth]"
+                                        v-model="level.sugText">
+                                </li>
 
-        <div class="x-tree-select-item-wrap" v-show="showDropDown && !disabled">
-            <slot name="header"></slot>
-            <div class="x-tree-select-item-level">
-                <div class="x-tree-select-item" v-for="(level, levelIndex) in levelData" :key="levelIndex">
-                    <template v-if="levelIndex >= 0">
-                        <ul>
-                            <li class="x-tree-select-item-search" v-if="allowSearch">
-                                <i class="x-icon x-tree-select-input-icon x-tree-select-item-input-icon x-icon-android-close" @click="clearSug( level )"></i>
-                                <input class="x-input x-input-small"
-                                    type="text"
-                                    :placeholder="'搜索' + fieldTexts[level.branchDepth]"
-                                     v-model="level.sugText">
-                            </li>
-
-                            <li v-if="!isLastIndex( levelIndex ) && (level.sugText||'').trim() ==='' " class="checkbox-all x-tree-select-item-li" :class="{'active': level.hoverKey === 'all'}" @mouseenter="hoverForAll( level, levelIndex)">
-                                <span class="x-single-tree-select-item-text" v-text=" '全部' + fieldTexts[level.branchDepth]"></span>
-                                <i v-if="!isLastIndex( levelIndex )" class="x-icon x-icon-chevron-right x-tree-select-right-icon"></i>
-                            </li>
-
-                            <template v-if="showListView( level )">
-                                <li v-for="item in filterList(level.list, ([level.sugText]+'').trim())" :key="item[keyName]" :class="{
-                                    'active': level.hoverKey === item[keyName],
-                                    'lastLevel': isLastIndex( levelIndex )
-                                }" @click="checkItem(item, levelIndex)" @mouseenter="hover( item, levelIndex)" class=" x-tree-select-item-li">
-                                    <span class="x-single-tree-select-item-text" v-text="item[textName]"></span>
+                                <li v-if="!isLastIndex( levelIndex ) && (level.sugText||'').trim() ==='' " class="checkbox-all x-tree-select-item-li" :class="{'active': level.hoverKey === 'all'}" @mouseenter="hoverForAll( level, levelIndex)">
+                                    <span class="x-single-tree-select-item-text" v-text=" '全部' + fieldTexts[level.branchDepth]"></span>
                                     <i v-if="!isLastIndex( levelIndex )" class="x-icon x-icon-chevron-right x-tree-select-right-icon"></i>
                                 </li>
-                                <li v-if="level.sugText !== '' && level.list.length < 1">
-                                    无搜索结果
-                                </li>
-                            </template>
-                        </ul>
-                    </template>
+
+                                <template v-if="showListView( level )">
+                                    <li v-for="item in filterList(level.list, ([level.sugText]+'').trim())" :key="item[keyName]" :class="{
+                                        'active': level.hoverKey === item[keyName],
+                                        'lastLevel': isLastIndex( levelIndex )
+                                    }" @click="checkItem(item, levelIndex)" @mouseenter="hover( item, levelIndex)" class=" x-tree-select-item-li">
+                                        <span class="x-single-tree-select-item-text" v-text="item[textName]"></span>
+                                        <i v-if="!isLastIndex( levelIndex )" class="x-icon x-icon-chevron-right x-tree-select-right-icon"></i>
+                                    </li>
+                                    <li v-if="level.sugText !== '' && level.list.length < 1">
+                                        无搜索结果
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
+                    </div>
                 </div>
+                <slot name="footer"></slot>
             </div>
-            <slot name="footer"></slot>
-        </div>
+        </transition>
 
     </div>
 </template>

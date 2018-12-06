@@ -4,11 +4,11 @@
             ref="xInput"
             :disabled="disabled"
             :placeholder="placeholder"
-		    :icon="icon"
+		        :icon="icon"
             :icon-click="iconClick"
             v-model="inputText"
             @focus="handleFocus"
-			@blur="handleBlur"
+			      @blur="handleBlur"
             @keydown.up.native.prevent="changeCurrent(-1)"
             @keydown.down.native.prevent="changeCurrent(1)"
             @keyup.enter.stop.native="handleEnter()"
@@ -156,6 +156,8 @@ export default {
     clearText() {
       this.inputText = "";
       this.inputValue = "";
+      this.localList = [];
+      this.list = [];
     },
     clearList() {
       this.currentIndex = -1;
@@ -364,7 +366,7 @@ export default {
         this.inputValue = "";
         return;
       }
-      this.inputText = val.text.trim() || "";
+      this.inputText = val.text ? val.text.trim() : "";
       this.inputValue = val.value || "";
     }
   }

@@ -26,7 +26,7 @@
                     </li>
                     <li class="sidebar-item">
                         <router-link to="/component/button">Button 按钮</router-link>
-                    </li class="sidebar-item">
+                    </li>
 
                     <li class="sidebar-title">Form 表单</li>
                     <li class="sidebar-item">
@@ -42,13 +42,16 @@
                         <router-link to="/component/radio">Radio 单选框</router-link>
                     </li>
                     <li class="sidebar-item">
-                         <router-link to="/component/input-number">InputNumber 计数器</router-link>
+                        <router-link to="/component/input-number">InputNumber 计数器</router-link>
                     </li>
                     <li class="sidebar-item">
                         <router-link to="/component/suggestion">Suggestion 输入建议</router-link>
                     </li>
                     <li class="sidebar-item">
                         <router-link to="/component/select">Select 选择器</router-link>
+                    </li>
+                    <li class="sidebar-item">
+                        <router-link to="/component/cascader">Cascader 级联选择器</router-link>
                     </li>
                     <li class="sidebar-item">
                         <router-link to="/component/single-tree-select">SingleTreeSelect 单选选择器</router-link>
@@ -74,19 +77,19 @@
 
                     <li class="sidebar-title">Notice 提示</li>
                     <li class="sidebar-item">
-                         <router-link to="/component/alert">Alert 警告提示</router-link>
+                        <router-link to="/component/alert">Alert 警告提示</router-link>
                     </li>
                     <li class="sidebar-item">
-                         <router-link to="/component/message">Message 信息提示</router-link>
+                        <router-link to="/component/message">Message 信息提示</router-link>
                     </li>
                     <li class="sidebar-item">
-                         <router-link to="/component/notice">Notice 通知提示</router-link>
+                        <router-link to="/component/notice">Notice 通知提示</router-link>
                     </li>
                     <li class="sidebar-item">
-                         <router-link to="/component/modal">Modal 对话框</router-link>
+                        <router-link to="/component/modal">Modal 对话框</router-link>
                     </li>
                     <li class="sidebar-item">
-                         <router-link to="/component/dialog">Dialog 快捷对话框</router-link>
+                        <router-link to="/component/dialog">Dialog 快捷对话框</router-link>
                     </li>
                     <li class="sidebar-item">
                         <router-link to="/component/popover">Popover 工具提示</router-link>
@@ -97,7 +100,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                         <router-link to="/component/loading">Loading 加载中提示</router-link>
+                        <router-link to="/component/loading">Loading 加载中提示</router-link>
                     </li>
                     <li class="sidebar-title">Data 数据展示</li>
                     <li class="sidebar-item">
@@ -148,7 +151,7 @@
                 </div>
             </x-col>
         </x-row>
-  </div>
+    </div>
 </template>
 
 <script>
