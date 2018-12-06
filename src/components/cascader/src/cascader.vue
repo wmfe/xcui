@@ -14,7 +14,12 @@
       @focus="handleFocus"
     ></x-input>
     <transition name="x-slide-up">
-      <div class="x-cascader-menu-wrapper" v-if="show">
+      <div
+        class="x-cascader-menu-wrapper" 
+        ref="cascaderMenuWrapper" 
+        v-if="show"
+        :style="{left: left}"
+      >
         <cascader-menu
           v-if="localList.length > 0"
           :currentVal="currentVal"
@@ -30,6 +35,7 @@
           :loadData="loadData"
           @getValue="getValue"
           @saveCache="saveCache"
+          @showMenu="handleShowMenu"
         ></cascader-menu>
         <div
           class="x-cascader-empty" 
@@ -113,6 +119,7 @@ export default {
       pointer: 0,
       cacheMap: {},
       focus: false,
+      left: '0px',
     };
   },
   mounted() {
@@ -167,6 +174,15 @@ export default {
       this.inputText = '';
       this.show = false;
     },
+    handleShowMenu(pointer) {
+      const el = this.$refs.cascaderMenuWrapper;
+      const clientWidth = document.body.clientWidth;
+      const wrapWidth = el.getBoundingClientRect().left + (pointer + 2) * 132;
+      const left = clientWidth - wrapWidth;
+      if (left < 0) {
+        this.left = `${left}px`;
+      }
+    },
   },
   watch: {
     initData(val) {
@@ -179,6 +195,11 @@ export default {
     currentVal(val) {
       this.$emit('input', val);
     },
+    show(val) {
+      if (!this.currentVal.text && !this.currentVal.value) {
+        this.left = '0px';
+      }
+    }
   },
 };
 </script>

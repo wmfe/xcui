@@ -10,7 +10,7 @@
 ```html
 
 <tpl>
-    <div style="width: 180px;">
+    <div style="width: 180px; margin-left: 700px;">
         <x-cascader
           v-model="model1"
           placeholder="请选择"
@@ -392,7 +392,7 @@
 |separator|String|/|数据展示的分隔符|否|任意字符串|
 |keyArray|Array|`[{text: 'text', value: 'value', children: 'children'}]`|每一层数据的参数名称，需配置每一层级的参数，如果全部层级的参数相同则只配置第一层即可|否|详情见示例|
 |filterable|Boolean|false|是否支持筛选|否|true, false|
-|loadData|Function|无|异步请求的处理函数。其中包含两个参数第一个参数为包含当前选中值的和一个当前层级索引的对象；第二个参数为一个回掉函数，用于数据获取后的处理|否|详情见示例|
+|loadData|Function|无|异步请求的处理函数。其中包含两个参数，第一个参数为包含当前选中值的和一个当前层级索引的对象；第二个参数为一个回调函数，用于数据获取后的处理|否|详情见示例|
 |localCache|Boolean|true|配合异步请求，是否支持数据缓存|否|true, false|
 
 ## Events

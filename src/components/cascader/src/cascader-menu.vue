@@ -48,6 +48,7 @@
       :loadData="loadData"
       @getValue="getValue"
       @saveCache="saveCache"
+      @showMenu="handleShowMenu"
     ></x-cascader-menu>
   </div>
 </template>
@@ -146,6 +147,9 @@ export default {
     saveCache(val) {
       this.$emit('saveCache', val);
     },
+    handleShowMenu(val) {
+      this.$emit('showMenu', val);
+    },
     handleLocalSug(val) {
       if (!val) {
         this.localList = this.currentData;
@@ -228,6 +232,7 @@ export default {
           this.show = false;
           return;
         }
+        this.$emit('showMenu', this.pointer);
         this.show = true;
         this.curFocus = focus;
         this.childData = data[defaultKey.children];

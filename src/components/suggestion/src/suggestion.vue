@@ -156,6 +156,8 @@ export default {
     clearText() {
       this.inputText = "";
       this.inputValue = "";
+      this.localList = [];
+      this.list = [];
     },
     clearList() {
       this.currentIndex = -1;
@@ -364,7 +366,7 @@ export default {
         this.inputValue = "";
         return;
       }
-      this.inputText = val.text.trim() || "";
+      this.inputText = val.text ? val.text.trim() : "";
       this.inputValue = val.value || "";
     }
   }
